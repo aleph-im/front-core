@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  storybook:
+    build:
+      context: .
+      args:
+        - FONTAWESOME_NPM_AUTH_TOKEN=${FONTAWESOME_NPM_AUTH_TOKEN}
+    ports:
+      - 6006:80
+    network_mode: bridge
