@@ -1,3 +1,5 @@
+import { FlattenSimpleInterpolation } from "styled-components"
+
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type TypoSize = Record<TypoSizeKind, number>
 
@@ -16,6 +18,7 @@ export type Gradient = {
   deg: number
   fn: string
 }
+
 export type ThemeGradient = {
   [k: string]: Gradient
 
@@ -46,6 +49,35 @@ export type ThemeColor = {
   contentBackground: string
   foreground: string
   text: string
+}
+
+export type ThemeGlowCss = FlattenSimpleInterpolation | undefined
+
+export type ThemeGlow = {
+  [k: string]: ThemeGlowCss
+
+  main0: ThemeGlowCss
+  main1: ThemeGlowCss
+  main2: ThemeGlowCss
+
+  extra0: ThemeGlowCss
+  extra1: ThemeGlowCss
+}
+
+export type ThemeGlassCss = ThemeGlowCss
+
+export type ThemeGlass = {
+  [k: string]: ThemeGlassCss
+
+  main0: ThemeGlassCss
+  main1: ThemeGlassCss
+  main2: ThemeGlassCss
+
+  base0: ThemeGlassCss
+  base1: ThemeGlassCss
+  base2: ThemeGlassCss
+
+  colored: ThemeGlassCss
 }
 
 export type ThemeFont = {
@@ -81,6 +113,15 @@ export type ThemeIcon = {
   }
 }
 
+export type ThemeEffect = {
+  glow: {
+    max: ThemeGlow
+    min: Partial<ThemeGlow>
+    hover: Partial<ThemeGlow>
+  }
+  glass: ThemeGlass
+}
+
 export interface CoreTheme {
   name: string
   // palette: Record<string, string[]>
@@ -90,6 +131,6 @@ export interface CoreTheme {
   icon: ThemeIcon
   button: ThemeButton
   gradient: ThemeGradient
-  effect: any
+  effect: ThemeEffect
 }
 

@@ -7,7 +7,7 @@ const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => 
   const { theme, color, size, variant, kind } = props
   const mainColor = theme.color[color] || color
   const [g0, g1] = theme.gradient[color]?.colors || [color, color]
-  const glowMin = theme.effect.glow.min[color]
+  const glowMinCss = theme.effect.glow.max[color]
 
   if (kind === 'flat') {
     switch (variant) {
@@ -50,7 +50,7 @@ const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => 
           color: ${theme.color.background};
           background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
 
-          ${glowMin}
+          ${glowMinCss}
 
           &::after {
             display: none;
@@ -188,6 +188,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
         content: '';
         position: absolute;
         top: 0;
+        left: 0;
         height: 100%;
         width: 100%;
         box-sizing: border-box;

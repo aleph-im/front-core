@@ -1,6 +1,6 @@
 
 import { addDecorator, addParameters } from "@storybook/react";
-import { ThemeProvider, ThemeContext } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { themes as theming } from '@storybook/theming';
 import { withThemes } from '@react-theming/storybook-addon';
 
@@ -42,10 +42,12 @@ function getThemeColors(theme) {
 // All stories expect a theme arg
 export const argTypes = {
   size: { control: { type: 'inline-radio' } },
-  color: { control: { 
-    type: 'color',
-    presetColors: Object.entries(themes.alephDark.color).map(([title, color]) => ({ title, color }))
-   } },
+  color: {
+    control: {
+      type: 'color',
+      presetColors: Object.entries(themes.alephDark.color).map(([title, color]) => ({ title, color }))
+    }
+  },
 };
 
 // The default value of the theme arg to all stories
@@ -92,7 +94,8 @@ addParameters({
   }
 })
 
-const themingDecorator = withThemes(ThemeProvider, themeList, { onThemeSwitch });
+const publicThemes = themeList.filter(t => t.name.indexOf('aleph') === -1)
+const themingDecorator = withThemes(ThemeProvider, publicThemes, { onThemeSwitch });
 const globalCssDecorator = (story) => <><GlobalStyle />{story()}</>
 
 addDecorator(globalCssDecorator);
