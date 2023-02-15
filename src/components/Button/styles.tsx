@@ -7,7 +7,7 @@ const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => 
   const { theme, color, size, variant, kind } = props
   const mainColor = theme.color[color] || color
   const [g0, g1] = theme.gradient[color]?.colors || [color, color]
-  const glowMinCss = theme.effect.glow.max[color]
+  const glowMinCss = theme.effect.glow.min[color]
 
   if (kind === 'flat') {
     switch (variant) {
