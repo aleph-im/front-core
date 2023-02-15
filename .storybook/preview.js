@@ -81,8 +81,9 @@ addParameters({
   },
   backgrounds: { disable: true },
   darkMode: {
+    current: 'dark',
     // Override the default dark theme
-    dark: {
+    dark: { 
       ...theming.dark,
       ...getThemeColors(themes.alephDark)
     },
@@ -91,6 +92,16 @@ addParameters({
       ...theming.normal,
       ...getThemeColors(themes.alephLight)
     }
+  },
+  docs: {
+    // https://storybook.js.org/docs/react/writing-docs/docs-page#inline-stories-vs-iframe-stories
+    inlineStories: false,
+    // https://github.com/storybookjs/storybook/issues/8112#issuecomment-1292728430
+    iframeHeight: 500,
+    theme: { 
+      ...theming.dark,
+      ...getThemeColors(themes.alephDark)
+    },
   }
 })
 
