@@ -23,6 +23,7 @@ const defaultParams = {
 const Circle = styled.div`
   width: 192px;
   height: 192px;
+  font-size: 192px;
   border-radius: 50%;
   margin: 10px 24px;
   display: inline-block;

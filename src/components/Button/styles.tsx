@@ -1,13 +1,14 @@
 import styled, { css, DefaultTheme, FlattenSimpleInterpolation } from "styled-components"
+import { getGlowMinCss } from "../../styles"
 import { StyledButtonProps } from "./types"
 
-const colorGradient = (color: string) => `linear-gradient(0deg, ${color}, ${color})`
-
 const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
-  const { theme, color, size, variant, kind } = props
+  const { theme, color, variant, kind } = props
   const mainColor = theme.color[color] || color
   const [g0, g1] = theme.gradient[color]?.colors || [color, color]
-  const glowMinCss = theme.effect.glow.min[color]
+
+  // @todo: Fix this
+  const glowMinCss = getGlowMinCss(color, { width: 192, height: 192 })
 
   if (kind === 'flat') {
     switch (variant) {
@@ -164,7 +165,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-weight: 700;
+      font-weight: ${theme.button.font.weight};
+      font-family: ${theme.button.font.family};
+      font-style: ${theme.button.font.style};
       margin: 0;
       padding: 8px 22px;
       width: auto;
@@ -227,12 +230,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
         switch (size) {
           case 'regular': {
             return css`
-              font-size: ${theme.button.size.regular - (variant !== 'text-only' ? 0 : 0.25)}rem;
+              font-size: ${theme.button.font.size.regular - (variant !== 'text-only' ? 0 : 0.25)}rem;
             `
           }
           case 'big': {
             return css`
-              font-size: ${theme.button.size.big - (variant !== 'text-only' ? 0 : 0.375)}rem;
+              font-size: ${theme.button.font.size.big - (variant !== 'text-only' ? 0 : 0.375)}rem;
             `
           }
         }

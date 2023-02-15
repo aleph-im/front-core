@@ -97,9 +97,14 @@ export type ThemeFont = {
 }
 
 export type ThemeButton = {
-  size: {
-    regular: number
-    big: number
+  font: {
+    family: string
+    weight: number
+    style: string
+    size: {
+      regular: number
+      big: number
+    }
   }
 }
 

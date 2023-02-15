@@ -1,4 +1,5 @@
-import { css, DefaultTheme, FlattenSimpleInterpolation } from "styled-components"
+import { DefaultTheme } from "styled-components"
+import { getGlowHoverCss, getGlowMaxCss, getGlowMinCss } from "../styles"
 import { ThemeButton, ThemeColor, ThemeEffect, ThemeFont, ThemeGlow, ThemeGradient, ThemeIcon, ThemeTypo } from "./styles"
 
 const round = (n: number, precission: number) => {
@@ -59,180 +60,6 @@ const gradient: ThemeGradient = {
     stops: [0, 100],
     deg: 90,
     fn: 'linear-gradient(90deg, #F17E4C 0%, #98203D 90.62%)'
-  }
-}
-
-// width: 192px;
-// height: 192px;
-/* box-shadow: 
-  inset 0px -82px 68px -64px #4462904D,
-  inset 0px 7px 11px -4px #FFFFFFB2,
-  inset 0px 1px 40px 0px #DEEFFF33,
-  inset 0px 4px 18px 0px #92D2D24D,
-  0px -18px 70px 26px #0054FF1C,
-  24px 40px 92px 44px #0066FF4D; */
-
-// @note: Divided each px size by 192 to calculate factors
-function glowBoxShadow({ w, h, c }: { w: number, h: number, c: string[] }) {
-  const r = Math.max(w, h)
-  const s = Math.min(w, h)
-
-  return css`
-    box-shadow: 
-      inset 0px -82px 68px -64px #4462904D,
-      inset 0px 7px 11px -4px #FFFFFFB2,
-      inset 0px 1px 40px 0px #DEEFFF33,
-      inset 0px 4px 18px 0px #92D2D24D,
-      0 ${h * -0.09375}px ${r * 0.36458}px ${s * 0.13541}px ${c[0]},
-      ${w * 0.125}px ${h * 0.20833}px ${r * 0.47916}px ${s * 0.22916}px ${c[1]};
-  `
-}
-
-function getGlowMaxCss(color: keyof ThemeGlow): FlattenSimpleInterpolation | undefined {
-  switch (color) {
-    case 'main0':
-      return css`
-        /* GLOW-MAX/blue */
-        box-shadow: 
-          inset 0px -82px 68px -64px #4462904D,
-          inset 0px 7px 11px -4px #FFFFFF,
-          inset 0px 39px 56px -36px #FFFFFF80,
-          inset 0px 1px 40px 0px #DEEFFF33,
-          inset 0px 4px 18px 0px #92D2D24D,
-          inset 0px 98px 100px -48px #00D1FF2E,
-          0px -18px 60px 26px #0054FF4F,
-          24px 40px 122px 44px #0066FF99;
-      `
-    case 'main1':
-      return css`
-        /* GLOW-MAX/green */
-        box-shadow: 
-          inset 0px -82px 68px -64px #4462904D,
-          inset 0px 7px 11px -4px #FFFFFF,
-          inset 0px 39px 56px -36px #FFFFFF80,
-          inset 0px 1px 40px 0px #DEFFF533,
-          inset 0px 4px 18px 0px #92D2AF4D,
-          inset 0px 98px 100px -48px #00FFBD2E,
-          0px -18px 60px 26px #00FFBD61,
-          34px 60px 122px 44px #00FFBD47;
-      `
-    case 'main2':
-      return css`
-        /* GLOW-MAX/orange */
-        box-shadow: 
-          inset 0px -82px 68px -64px #FFCC494D,
-          inset 0px 7px 11px -4px #FFFFFF,
-          inset 0px 39px 56px -36px #FFFFFF80,
-          inset 0px 1px 40px 0px #FFEEDE33,
-          inset 0px 4px 18px 0px #D2C4924D,
-          inset 0px 98px 100px -48px #FFF5002E,
-          0px -18px 60px 26px #FFC70061,
-          34px 60px 122px 44px #FF990047;
-      `
-    case 'extra0':
-      return css`
-        /* GLOW-MAX/purple */
-        box-shadow:
-          inset 0px -82px 68px -64px #6044904D,
-          inset 0px 7px 11px -4px #FFFFFF,
-          inset 0px 39px 56px -36px #FFFFFF80,
-          inset 0px 1px 40px 0px #E3DEFF33,
-          inset 0px 4px 18px 0px #9A92D24D,
-          inset 0px 98px 100px -48px #CAAFFC4D,
-          0px -11px 60px 26px #9C41FFB2,
-          49px 65px 124px -22px #9C41FF4D;
-      `
-    case 'extra1':
-      return css`
-        /* GLOW-MAX/red */
-        box-shadow:
-          inset 0px -82px 68px -64px #9044444D,
-          inset 0px 7px 11px -4px #FFFFFF,
-          inset 0px 39px 56px -36px #FFFFFF80,
-          inset 0px 1px 40px 0px #FFF2DE33,
-          inset 0px 4px 18px 0px #D2B5924D,
-          inset 0px 98px 100px -48px #FCC6AF4D,
-          0px -11px 60px 26px #F66262B2,
-          49px 65px 124px -22px #FF41B34D;
-      `
-  }
-}
-
-function getGlowMinCss(color: Partial<keyof ThemeGlow>): FlattenSimpleInterpolation | undefined {
-  switch (color) {
-    case 'main0':
-      return css`
-        /* GLOW-MIN/blue */
-        box-shadow:
-          0px -82px 68px -64px #4462904D inset,
-          0px 7px 11px -4px #FFFFFFB2 inset,
-          0px 1px 40px 0px #DEEFFF33 inset,
-          0px 4px 18px 0px #92D2D24D inset,
-          0px -18px 70px 26px #0054FF1C,
-          24px 40px 92px 44px #0066FF4D;
-      `
-    case 'main1':
-      return css`
-        /* GLOW-MIN/green */
-        box-shadow:
-          0px -82px 68px -64px #4462904D inset,
-          0px 7px 11px -4px #FFFFFF inset,
-          0px 4px 18px 0px #92D2AF4D inset,
-          0px 98px 100px -48px #00FFBD1A inset,
-          0px -18px 50px 26px #00FFBD2E,
-          34px 60px 102px 44px #00FFBD2E;
-      `
-    case 'main2':
-      return css`
-        /* GLOW-MIN/orange */
-        box-shadow:
-          0px -82px 68px -64px #FFCC4933 inset,
-          0px 7px 11px -4px #FFFFFF inset,
-          0px 1px 40px 0px #FFEEDE33 inset,
-          0px 4px 18px 0px #D2C4924D inset,
-          0px 38px 70px -48px #FFF50014 inset,
-          0px -18px 60px 26px #FFC7002E,
-          34px 60px 122px 44px #FF99002E;
-      `
-  }
-}
-
-function getGlowHoverCss(color: Partial<keyof ThemeGlow>): FlattenSimpleInterpolation | undefined {
-  switch (color) {
-    case 'main0':
-      return css`
-        /* GLOW-hover/blue */
-        box-shadow:
-          0px -82px 68px -64px #4462904D inset,
-          0px 7px 11px -4px #FFFFFFB2 inset,
-          0px 1px 40px 0px #DEEFFF33 inset,
-          0px 4px 18px 0px #92D2D24D inset,
-          0px -18px 70px 26px #0054FF36,
-          24px 40px 92px 44px #0066FF66;
-      `
-    case 'main1':
-      return css`
-        /* GLOW-hover/green */
-        box-shadow:
-          0px -82px 68px -64px #4462904D inset,
-          0px 7px 11px -4px #FFFFFF inset,
-          0px 4px 18px 0px #92D2AF4D inset,
-          0px 98px 100px -48px #00FFBD1A inset,
-          0px -18px 50px 26px #00FFBD47,
-          34px 60px 102px 44px #00FFBD47;
-      `
-    case 'main2':
-      return css`
-        /* GLOW-hover/orange */
-        box-shadow:
-          0px -82px 68px -64px #FFCC4933 inset,
-          0px 7px 11px -4px #FFFFFF inset,
-          0px 1px 40px 0px #FFEEDE33 inset,
-          0px 4px 18px 0px #D2C4924D inset,
-          0px 38px 70px -48px #FFF50014 inset,
-          0px -18px 60px 26px #FFC70047,
-          34px 60px 122px 44px #FF990047;
-      `
   }
 }
 
@@ -359,9 +186,14 @@ const icon: ThemeIcon = {
 }
 
 const button: ThemeButton = {
-  size: {
-    regular: pxToRem(18),
-    big: pxToRem(24),
+  font: {
+    family: font.family.head,
+    style: 'normal',
+    weight: 700,
+    size: {
+      regular: pxToRem(18),
+      big: pxToRem(24),
+    }
   }
 }
 
