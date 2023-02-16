@@ -98,7 +98,7 @@ const effect: ThemeEffect = {
 }
 
 const font: ThemeFont = {
-  url: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;1,400;1,700&family=Source+Code+Pro:wght@400;700&family=Rubik:ital,wght@0,500;1,800&display=swap',
+  url: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;1,400;1,700&family=Source+Code+Pro:wght@400;700&family=Rubik:ital,wght@0,500;1,600;1,800&display=swap',
   family: {
     head: '\'Rubik\', sans-serif',
     body: '\'Public Sans\', sans-serif',
@@ -116,6 +116,7 @@ const font: ThemeFont = {
 }
 
 const commonHeaderFont = {
+  tag: true,
   family: font.family.head,
   style: 'italic',
   weight: 800
@@ -154,31 +155,50 @@ const typo: ThemeTypo = {
     ...commonHeaderFont,
     size: pxToRem(128),
   },
+  nav: {
+    tag: true,
+    family: font.family.head,
+    style: 'normal',
+    weight: 500,
+    size: font.size.md,
+  },
+  info: {
+    tag: false,
+    family: font.family.head,
+    style: 'italic',
+    weight: 800,
+    size: pxToRem(10),
+  },
   body: {
+    tag: true,
     family: font.family.body,
     style: 'normal',
     weight: 400,
     size: font.size.sm,
   },
-  body2: {
+  body1: {
+    tag: false,
     family: font.family.body,
     style: 'italic',
     weight: 400,
     size: font.size.sm,
   },
-  body3: {
+  body2: {
+    tag: false,
     family: font.family.body,
     style: 'italic',
     weight: 700,
     size: font.size.sm,
   },
   code: {
+    tag: true,
     family: font.family.code,
     style: 'normal',
     weight: 400,
     size: font.size.sm,
   },
-  code2: {
+  code1: {
+    tag: false,
     family: font.family.code,
     style: 'normal',
     weight: 700,

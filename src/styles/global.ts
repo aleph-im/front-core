@@ -1,5 +1,5 @@
 import { createGlobalStyle, css, DefaultTheme } from "styled-components";
-import { ThemeEffect, TypoKind } from "../themes/styles";
+import { ThemeEffect } from "../themes/styles";
 import { getBackgroundColorCss, getBackgroundGradientCss, getThemeDarkEffectCss, getThemeGlassEffectCss, getThemeGlowEffectCss, getTypoCss } from "./utils";
 
 export const GlobalStyle = createGlobalStyle`
@@ -28,7 +28,7 @@ function colorClasses(theme: DefaultTheme) {
 
     /* GRADIENTS */
     ${Object.keys(theme.gradient).map(color => css`
-      .bgg-${color} { ${getBackgroundGradientCss(color)} }
+      .gr-${color} { ${getBackgroundGradientCss(color)} }
     `)}
   `
 }
@@ -36,12 +36,19 @@ function colorClasses(theme: DefaultTheme) {
 function typoClasses(theme: DefaultTheme) {
   return css`
     /* TYPOS */
-    ${Object.keys(theme.typo).map(typo => css`
-      .typ-${typo} ${typo.length === 2 || ['header', 'body', 'code'].includes(typo) ? `, ${typo}` : ''} { 
-        ${getTypoCss(typo as TypoKind)} 
+    ${Object.entries(theme.typo).map(([k, v]) => css`
+      .tp-${k} ${v.tag ? `, ${k}` : ''} { 
+        ${getTypoCss(k)} 
         margin-top: 20px;
         margin-bottom: 20px;
         line-height: 1.16em
+      }
+    `)}
+
+     /* FONT-SIZE */
+     ${Object.entries(theme.font.size).map(([k, v]) => css`
+      .fs-${k} { 
+        font-size: ${v}rem;
       }
     `)}
   `
