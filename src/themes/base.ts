@@ -1,6 +1,6 @@
 import { DefaultTheme } from "styled-components"
-import { getGlowHoverCss, getGlowMaxCss, getGlowMinCss } from "../styles"
-import { ThemeButton, ThemeColor, ThemeEffect, ThemeFont, ThemeGlow, ThemeGradient, ThemeIcon, ThemeTypo } from "./styles"
+import { getDarkEffectCss, getGlassEffectCss, getGlowHoverEffectCss, getGlowMaxEffectCss, getGlowMinEffectCss } from "../styles"
+import { ThemeButton, ThemeColor, ThemeEffect, ThemeFont, ThemeGlowEffect, ThemeGradient, ThemeIcon, ThemeTypo } from "./styles"
 
 const round = (n: number, precission: number) => {
   const m = 10 ** precission
@@ -64,26 +64,37 @@ const gradient: ThemeGradient = {
 }
 
 const effect: ThemeEffect = {
-  glass: {} as any,
   glow: {
     max: {
-      main0: getGlowMaxCss('main0'),
-      main1: getGlowMaxCss('main1'),
-      main2: getGlowMaxCss('main2'),
-      extra0: getGlowMaxCss('extra0'),
-      extra1: getGlowMaxCss('extra1'),
+      main0: getGlowMaxEffectCss('main0'),
+      main1: getGlowMaxEffectCss('main1'),
+      main2: getGlowMaxEffectCss('main2'),
+      extra0: getGlowMaxEffectCss('extra0'),
+      extra1: getGlowMaxEffectCss('extra1'),
     },
     min: {
-      main0: getGlowMinCss('main0'),
-      main1: getGlowMinCss('main1'),
-      main2: getGlowMinCss('main2'),
+      main0: getGlowMinEffectCss('main0'),
+      main1: getGlowMinEffectCss('main1'),
+      main2: getGlowMinEffectCss('main2'),
     },
     hover: {
-      main0: getGlowHoverCss('main0'),
-      main1: getGlowHoverCss('main1'),
-      main2: getGlowHoverCss('main2'),
+      main0: getGlowHoverEffectCss('main0'),
+      main1: getGlowHoverEffectCss('main1'),
+      main2: getGlowHoverEffectCss('main2'),
     }
-  }
+  },
+  glass: {
+    main0: getGlassEffectCss('main0'),
+    main1: getGlassEffectCss('main1'),
+    main2: getGlassEffectCss('main2'),
+    base0: getGlassEffectCss('base0'),
+    base1: getGlassEffectCss('base1'),
+    base2: getGlassEffectCss('base2'),
+    colored0: getGlassEffectCss('colored0'),
+  },
+  dark: {
+    main0: getDarkEffectCss('main0'),
+  },
 }
 
 const font: ThemeFont = {

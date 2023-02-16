@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme, FlattenSimpleInterpolation } from "styled-components"
-import { getGlowMinCss } from "../../styles"
+import { getGlowMinEffectCss } from "../../styles"
 import { StyledButtonProps } from "./types"
 
 const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
@@ -8,7 +8,7 @@ const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => 
   const [g0, g1] = theme.gradient[color]?.colors || [color, color]
 
   // @todo: Fix this
-  const glowMinCss = getGlowMinCss(color, { width: 192, height: 192 })
+  const glowMinCss = getGlowMinEffectCss(color, { width: 192, height: 192 })
 
   if (kind === 'flat') {
     switch (variant) {

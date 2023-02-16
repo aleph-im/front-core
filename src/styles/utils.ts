@@ -29,9 +29,21 @@ export function getTypoCss(typo: keyof ThemeTypo) {
   `
 }
 
-export function getThemeGlowCss(type: keyof ThemeEffect['glow'], color: string) {
+export function getThemeGlowEffectCss(type: keyof ThemeEffect['glow'], color: string) {
   return css`
     ${theme.effect.glow[type][color]}
+  `
+}
+
+export function getThemeGlassEffectCss(color: string) {
+  return css`
+    ${theme.effect.glass[color]}
+  `
+}
+
+export function getThemeDarkEffectCss(color: string) {
+  return css`
+    ${theme.effect.dark[color]}
   `
 }
 

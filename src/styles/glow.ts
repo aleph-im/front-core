@@ -1,10 +1,10 @@
 import { css, FlattenSimpleInterpolation } from "styled-components"
-import { ThemeGlow } from "../themes/styles"
+import { ThemeGlowEffect } from "../themes/styles"
 
 export type GlowOpts = { width?: number, height?: number, offset?: boolean }
 
 
-function calculateShadowPos(bs: Record<string, number[]>, opts?: GlowOpts): Record<string, string> {
+export function calculateBoxShadowPossition(bs: Record<string, number[]>, opts?: GlowOpts): Record<string, string> {
   const bss: Record<string, string> = {}
 
   if (opts?.width !== undefined || opts?.height !== undefined) {
@@ -32,7 +32,7 @@ function calculateShadowPos(bs: Record<string, number[]>, opts?: GlowOpts): Reco
 
 }
 
-export function getGlowMaxCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
+export function getGlowMaxEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 39px 56px -36px
@@ -54,7 +54,7 @@ export function getGlowMaxCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenS
     sc3: [0.2552, 0.3385, 0.6458, -0.1146],
   }
 
-  const bss = calculateShadowPos(bs, opts)
+  const bss = calculateBoxShadowPossition(bs, opts)
 
   switch (color) {
     case 'main0':
@@ -125,7 +125,7 @@ export function getGlowMaxCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenS
   }
 }
 
-export function getGlowMinCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
+export function getGlowMinEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 1px 40px 0px
@@ -145,7 +145,7 @@ export function getGlowMinCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenS
     sc3: [0, 0.1979, 0.3646, -0.25],
   }
 
-  const bss = calculateShadowPos(bs, opts)
+  const bss = calculateBoxShadowPossition(bs, opts)
 
   switch (color) {
     case 'main0':
@@ -185,7 +185,7 @@ export function getGlowMinCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenS
   }
 }
 
-export function getGlowHoverCss(color: keyof ThemeGlow, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
+export function getGlowHoverEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 1px 40px 0px
@@ -205,7 +205,7 @@ export function getGlowHoverCss(color: keyof ThemeGlow, opts?: GlowOpts): Flatte
     sc3: [0, 0.1979, 0.3646, -0.25],
   }
 
-  const bss = calculateShadowPos(bs, opts)
+  const bss = calculateBoxShadowPossition(bs, opts)
 
   switch (color) {
     case 'main0':

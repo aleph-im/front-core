@@ -1,4 +1,4 @@
-import { FlattenSimpleInterpolation } from "styled-components"
+import { FlattenInterpolation, FlattenSimpleInterpolation } from "styled-components"
 
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type TypoSize = Record<TypoSizeKind, number>
@@ -51,33 +51,39 @@ export type ThemeColor = {
   text: string
 }
 
-export type ThemeGlowCss = FlattenSimpleInterpolation | undefined
+export type ThemeGlowEffectCss = FlattenSimpleInterpolation | FlattenInterpolation<any> | undefined
 
-export type ThemeGlow = {
-  [k: string]: ThemeGlowCss
+export type ThemeGlowEffect = {
+  [k: string]: ThemeGlowEffectCss
 
-  main0: ThemeGlowCss
-  main1: ThemeGlowCss
-  main2: ThemeGlowCss
+  main0: ThemeGlowEffectCss
+  main1: ThemeGlowEffectCss
+  main2: ThemeGlowEffectCss
 
-  extra0: ThemeGlowCss
-  extra1: ThemeGlowCss
+  extra0: ThemeGlowEffectCss
+  extra1: ThemeGlowEffectCss
 }
 
-export type ThemeGlassCss = ThemeGlowCss
+export type ThemeGlassEffectCss = ThemeGlowEffectCss
 
-export type ThemeGlass = {
-  [k: string]: ThemeGlassCss
+export type ThemeGlassEffect = {
+  [k: string]: ThemeGlassEffectCss
 
-  main0: ThemeGlassCss
-  main1: ThemeGlassCss
-  main2: ThemeGlassCss
+  main0: ThemeGlassEffectCss
+  main1: ThemeGlassEffectCss
+  main2: ThemeGlassEffectCss
 
-  base0: ThemeGlassCss
-  base1: ThemeGlassCss
-  base2: ThemeGlassCss
+  base0: ThemeGlassEffectCss
+  base1: ThemeGlassEffectCss
+  base2: ThemeGlassEffectCss
+}
 
-  colored: ThemeGlassCss
+export type ThemeDarkEffectCss = ThemeGlassEffectCss
+
+export type ThemeDarkEffect = {
+  [k: string]: ThemeDarkEffectCss
+
+  main0: ThemeDarkEffectCss
 }
 
 export type ThemeFont = {
@@ -120,11 +126,12 @@ export type ThemeIcon = {
 
 export type ThemeEffect = {
   glow: {
-    max: ThemeGlow
-    min: Partial<ThemeGlow>
-    hover: Partial<ThemeGlow>
+    max: ThemeGlowEffect
+    min: Partial<ThemeGlowEffect>
+    hover: Partial<ThemeGlowEffect>
   }
-  glass: ThemeGlass
+  glass: ThemeGlassEffect
+  dark: ThemeDarkEffect
 }
 
 export interface CoreTheme {
