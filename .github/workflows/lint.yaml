@@ -21,7 +21,12 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        env:
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+        run: |
+          npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+          npm config set "//npm.fontawesome.com/:_authToken" FONTAWESOME_NPM_AUTH_TOKEN
+          npm ci
 
       - name: Run linter
         run: npm run lint
