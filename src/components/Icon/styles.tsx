@@ -1,13 +1,15 @@
-import styled, { css } from "styled-components"
-import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
-import { IconSize } from "./types"
-
+import styled, { css } from 'styled-components'
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome'
+import { IconSize } from './types'
 
 export interface StyledIconProps extends FontAwesomeIconProps {
   $iconSize: IconSize
 }
 
-export const StyledIcon = styled(FontAwesomeIcon) <StyledIconProps>`
+export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
   ${({ $iconSize, theme }) => {
     switch ($iconSize) {
       case 'xs': {

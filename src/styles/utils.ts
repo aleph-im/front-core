@@ -1,7 +1,11 @@
-import { css } from "styled-components";
-import theme from "../themes/base";
-import { ThemeColor, ThemeEffect, ThemeGradient, ThemeTypo } from "../themes/styles";
-
+import { css } from 'styled-components'
+import theme from '../themes/base'
+import {
+  ThemeColor,
+  ThemeEffect,
+  ThemeGradient,
+  ThemeTypo,
+} from '../themes/styles'
 
 export function getBackgroundColorCss(color: keyof ThemeColor) {
   return css`
@@ -29,7 +33,10 @@ export function getTypoCss(typo: keyof ThemeTypo) {
   `
 }
 
-export function getThemeGlowEffectCss(type: keyof ThemeEffect['glow'], color: string) {
+export function getThemeGlowEffectCss(
+  type: keyof ThemeEffect['glow'],
+  color: string,
+) {
   return css`
     ${theme.effect.glow[type][color]}
   `
@@ -47,4 +54,5 @@ export function getThemeDarkEffectCss(color: string) {
   `
 }
 
-export const colorGradient = (color: string) => `linear-gradient(0deg, ${color}, ${color})`
+export const colorGradient = (color: string) =>
+  `linear-gradient(0deg, ${color}, ${color})`

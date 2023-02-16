@@ -1,8 +1,14 @@
-import styled, { css, DefaultTheme, FlattenSimpleInterpolation } from "styled-components"
-import { getGlowMinEffectCss } from "../../styles"
-import { StyledButtonProps } from "./types"
+import styled, {
+  css,
+  DefaultTheme,
+  FlattenSimpleInterpolation,
+} from 'styled-components'
+import { getGlowMinEffectCss } from '../../styles'
+import { StyledButtonProps } from './types'
 
-const defaultVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
+const defaultVariants = (
+  props: StyledButtonProps & { theme: DefaultTheme },
+) => {
   const { theme, color, variant, kind } = props
   const mainColor = theme.color[color] || color
   const [g0, g1] = theme.gradient[color]?.colors || [color, color]
@@ -110,23 +116,27 @@ const focusVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
   `
 }
 
-const hoverVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
-  return css`
-  `
+const hoverVariants = () => {
+  return css``
 }
 
-const activeVariants = (props: StyledButtonProps & { theme: DefaultTheme }, defaultVariantsCss?: FlattenSimpleInterpolation) => {
+const activeVariants = (
+  props: StyledButtonProps & { theme: DefaultTheme },
+  defaultVariantsCss?: FlattenSimpleInterpolation,
+) => {
   const { variant } = props
 
   return css`
     ${defaultVariantsCss}
-    ${(variant === 'tertiary') ? `background-image: none;` : ''}
+    ${variant === 'tertiary' ? `background-image: none;` : ''}
     box-shadow: none;
     backdrop-filter: none;
   `
 }
 
-const disableVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
+const disableVariants = (
+  props: StyledButtonProps & { theme: DefaultTheme },
+) => {
   const { theme } = props
 
   return css`
@@ -147,12 +157,12 @@ const disableVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => 
 
 export const StyledButton = styled.button<StyledButtonProps>`
   ${(props) => {
-    const { theme, color, size, variant, kind } = props
+    const { theme, color, size, variant } = props
     const mainColor = theme.color[color] || color
 
     const defaultVariantsCss = defaultVariants(props)
     const focusVariantsCss = focusVariants(props)
-    const hoverVariantsCss = hoverVariants(props)
+    const hoverVariantsCss = hoverVariants()
     const activeVariantsCss = activeVariants(props, defaultVariantsCss)
     const disableVariantsCss = disableVariants(props)
 
@@ -183,7 +193,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       background-color: transparent;
       outline: 0;
       color: ${theme.color.text};
-      transform: transale3d(0,0,0); 
+      transform: transale3d(0, 0, 0);
 
       /* BORDER */
       &::after {
@@ -195,13 +205,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
         height: 100%;
         width: 100%;
         box-sizing: border-box;
-        background-color: ${mainColor}; 
+        background-color: ${mainColor};
         z-index: 1;
         padding: 1px;
         border-radius: 30px;
-        mask: 
-          linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
         -webkit-mask-composite: xor;
       }
@@ -213,13 +221,15 @@ export const StyledButton = styled.button<StyledButtonProps>`
         ${focusVariantsCss}
       }
 
-      &:hover, &._hover {
+      &:hover,
+      &._hover {
         ${hoverVariantsCss}
       }
 
-      &:active, &._active {
+      &:active,
+      &._active {
         ${activeVariantsCss}
-      } 
+      }
 
       &[disabled] {
         ${disableVariantsCss}
@@ -230,12 +240,14 @@ export const StyledButton = styled.button<StyledButtonProps>`
         switch (size) {
           case 'regular': {
             return css`
-              font-size: ${theme.button.font.size.regular - (variant !== 'text-only' ? 0 : 0.25)}rem;
+              font-size: ${theme.button.font.size.regular -
+              (variant !== 'text-only' ? 0 : 0.25)}rem;
             `
           }
           case 'big': {
             return css`
-              font-size: ${theme.button.font.size.big - (variant !== 'text-only' ? 0 : 0.375)}rem;
+              font-size: ${theme.button.font.size.big -
+              (variant !== 'text-only' ? 0 : 0.375)}rem;
             `
           }
         }

@@ -11,11 +11,6 @@ export const themes = {
 }
 
 // @note: sorted list for storybook UI
-export const themeList = [
-  dark,
-  light,
-  alephDark,
-  alephLight,
-]
+export const themeList = [dark, light, alephDark, alephLight]
 
 export { CoreTheme } from './styles'

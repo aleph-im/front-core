@@ -1,11 +1,11 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
-import Icon from "./cmp";
-import { IconProps } from "./types";
+import Icon from './cmp'
+import { IconProps } from './types'
 
 export default {
-  title: "Components/UI/Icon",
+  title: 'Components/UI/Icon',
   component: Icon,
   decorators: [withDesign],
   argTypes: {
@@ -14,14 +14,13 @@ export default {
       control: { type: 'inline-radio' },
     },
   },
-
-} as ComponentMeta<typeof Icon>;
+} as ComponentMeta<typeof Icon>
 
 const defaultArgs: Partial<IconProps> = {
   name: 'bitcoin',
   prefix: 'fab',
   color: '#f7931a',
-  size: 'lg'
+  size: 'lg',
 }
 
 const defaultParams = {
@@ -33,12 +32,12 @@ const defaultParams = {
 
 // ---
 
-const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />;
+const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
 Default.args = {
   ...defaultArgs,
-};
+}
 Default.parameters = {
   ...defaultParams,
 }

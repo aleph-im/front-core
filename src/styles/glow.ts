@@ -1,10 +1,12 @@
-import { css, FlattenSimpleInterpolation } from "styled-components"
-import { ThemeGlowEffect } from "../themes/styles"
+import { css, FlattenSimpleInterpolation } from 'styled-components'
+import { ThemeGlowEffect } from '../themes/styles'
 
-export type GlowOpts = { width?: number, height?: number, offset?: boolean }
+export type GlowOpts = { width?: number; height?: number; offset?: boolean }
 
-
-export function calculateBoxShadowPossition(bs: Record<string, number[]>, opts?: GlowOpts): Record<string, string> {
+export function calculateBoxShadowPossition(
+  bs: Record<string, number[]>,
+  opts?: GlowOpts,
+): Record<string, string> {
   const bss: Record<string, string> = {}
 
   if (opts?.width !== undefined || opts?.height !== undefined) {
@@ -15,7 +17,9 @@ export function calculateBoxShadowPossition(bs: Record<string, number[]>, opts?:
 
     if (opts?.offset === true) {
       for (const [k, v] of Object.entries(bs)) {
-        bss[k] = `calc(${v[0]}em + ${w * v[0]}px) calc(${v[1]}em + ${h * v[1]}px) calc(${v[2]}em + ${r * v[2]}px) calc(${v[3]}em + ${s * v[3]}px)`
+        bss[k] = `calc(${v[0]}em + ${w * v[0]}px) calc(${v[1]}em + ${
+          h * v[1]
+        }px) calc(${v[2]}em + ${r * v[2]}px) calc(${v[3]}em + ${s * v[3]}px)`
       }
     } else {
       for (const [k, v] of Object.entries(bs)) {
@@ -29,10 +33,12 @@ export function calculateBoxShadowPossition(bs: Record<string, number[]>, opts?:
   }
 
   return bss
-
 }
 
-export function getGlowMaxEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
+export function getGlowMaxEffectCss(
+  color: keyof ThemeGlowEffect,
+  opts?: GlowOpts,
+): FlattenSimpleInterpolation | undefined {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 39px 56px -36px
@@ -60,72 +66,50 @@ export function getGlowMaxEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpt
     case 'main0':
       return css`
         /* GLOW-MAX/blue */
-        box-shadow: 
-          inset ${bss.s1} #4462904D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFFFFF80,
-          inset ${bss.s4} #DEEFFF33,
-          inset ${bss.s5} #92D2D24D,
-          inset ${bss.s6} #00D1FF2E,
-          ${bss.sc1} #0054FF4F,
-          ${bss.sc2} #0066FF99;
+        box-shadow: inset ${bss.s1} #4462904d, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffffff80, inset ${bss.s4} #deefff33,
+          inset ${bss.s5} #92d2d24d, inset ${bss.s6} #00d1ff2e,
+          ${bss.sc1} #0054ff4f, ${bss.sc2} #0066ff99;
       `
     case 'main1':
       return css`
         /* GLOW-MAX/green */
-        box-shadow: 
-          inset ${bss.s1} #4462904D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFFFFF80,
-          inset ${bss.s4} #DEFFF533,
-          inset ${bss.s5} #92D2AF4D,
-          inset ${bss.s6} #00FFBD2E,
-          ${bss.sc1} #00FFBD61,
-          ${bss.sc2} #00FFBD47;
+        box-shadow: inset ${bss.s1} #4462904d, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffffff80, inset ${bss.s4} #defff533,
+          inset ${bss.s5} #92d2af4d, inset ${bss.s6} #00ffbd2e,
+          ${bss.sc1} #00ffbd61, ${bss.sc2} #00ffbd47;
       `
     case 'main2':
       return css`
         /* GLOW-MAX/orange */
-        box-shadow: 
-          inset ${bss.s1} #FFCC494D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFFFFF80,
-          inset ${bss.s4} #FFEEDE33,
-          inset ${bss.s5} #D2C4924D,
-          inset ${bss.s6} #FFF5002E,
-          ${bss.sc1} #FFC70061,
-          ${bss.sc2} #FF990047;
+        box-shadow: inset ${bss.s1} #ffcc494d, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffffff80, inset ${bss.s4} #ffeede33,
+          inset ${bss.s5} #d2c4924d, inset ${bss.s6} #fff5002e,
+          ${bss.sc1} #ffc70061, ${bss.sc2} #ff990047;
       `
     case 'extra0':
       return css`
         /* GLOW-MAX/purple */
-        box-shadow:
-          inset ${bss.s1} #6044904D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFFFFF80,
-          inset ${bss.s4} #E3DEFF33,
-          inset ${bss.s5} #9A92D24D,
-          inset ${bss.s6} #CAAFFC4D,
-          ${bss.sc1} #9C41FFB2,
-          ${bss.sc3} #9C41FF4D;
+        box-shadow: inset ${bss.s1} #6044904d, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffffff80, inset ${bss.s4} #e3deff33,
+          inset ${bss.s5} #9a92d24d, inset ${bss.s6} #caaffc4d,
+          ${bss.sc1} #9c41ffb2, ${bss.sc3} #9c41ff4d;
       `
     case 'extra1':
       return css`
         /* GLOW-MAX/red */
-        box-shadow:
-          inset ${bss.s1} #9044444D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFFFFF80,
-          inset ${bss.s4} #FFF2DE33,
-          inset ${bss.s5} #D2B5924D,
-          inset ${bss.s6} #FCC6AF4D,
-          ${bss.sc1} #F66262B2,
-          ${bss.sc3} #FF41B34D;
+        box-shadow: inset ${bss.s1} #9044444d, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffffff80, inset ${bss.s4} #fff2de33,
+          inset ${bss.s5} #d2b5924d, inset ${bss.s6} #fcc6af4d,
+          ${bss.sc1} #f66262b2, ${bss.sc3} #ff41b34d;
       `
   }
 }
 
-export function getGlowMinEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
+export function getGlowMinEffectCss(
+  color: keyof ThemeGlowEffect,
+  opts?: GlowOpts,
+): FlattenSimpleInterpolation | undefined {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 1px 40px 0px
@@ -151,41 +135,31 @@ export function getGlowMinEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpt
     case 'main0':
       return css`
         /* GLOW-MIN/blue */
-        box-shadow:
-          inset ${bss.s1} #4462904D,
-          inset ${bss.s2} #FFFFFFB2,
-          inset ${bss.s3} #DEEFFF33,
-          inset ${bss.s4} #92D2D24D,
-          ${bss.sc1} #0054FF1C,
-          ${bss.sc2} #0066FF4D;
+        box-shadow: inset ${bss.s1} #4462904d, inset ${bss.s2} #ffffffb2,
+          inset ${bss.s3} #deefff33, inset ${bss.s4} #92d2d24d,
+          ${bss.sc1} #0054ff1c, ${bss.sc2} #0066ff4d;
       `
     case 'main1':
       return css`
         /* GLOW-MIN/green */
-        box-shadow:
-          inset ${bss.s1} #4462904D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s4} #92D2AF4D,
-          inset ${bss.s5} #00FFBD1A,
-          ${bss.sc1} #00FFBD2E,
-          ${bss.sc2} #00FFBD2E;
+        box-shadow: inset ${bss.s1} #4462904d, inset ${bss.s2} #ffffff,
+          inset ${bss.s4} #92d2af4d, inset ${bss.s5} #00ffbd1a,
+          ${bss.sc1} #00ffbd2e, ${bss.sc2} #00ffbd2e;
       `
     case 'main2':
       return css`
         /* GLOW-MIN/orange */
-        box-shadow:
-          inset ${bss.s1} #FFCC4933,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFEEDE33,
-          inset ${bss.s4} #D2C4924D,
-          inset ${bss.sc3} #FFF50014,
-          ${bss.sc1} #FFC7002E,
-          ${bss.sc2} #FF99002E;
+        box-shadow: inset ${bss.s1} #ffcc4933, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffeede33, inset ${bss.s4} #d2c4924d,
+          inset ${bss.sc3} #fff50014, ${bss.sc1} #ffc7002e, ${bss.sc2} #ff99002e;
       `
   }
 }
 
-export function getGlowHoverEffectCss(color: keyof ThemeGlowEffect, opts?: GlowOpts): FlattenSimpleInterpolation | undefined {
+export function getGlowHoverEffectCss(
+  color: keyof ThemeGlowEffect,
+  opts?: GlowOpts,
+): FlattenSimpleInterpolation | undefined {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 1px 40px 0px
@@ -211,36 +185,23 @@ export function getGlowHoverEffectCss(color: keyof ThemeGlowEffect, opts?: GlowO
     case 'main0':
       return css`
         /* GLOW-hover/blue */
-        box-shadow:
-          inset ${bss.s1} #4462904D,
-          inset ${bss.s2} #FFFFFFB2,
-          inset ${bss.s3} #DEEFFF33,
-          inset ${bss.s4} #92D2D24D,
-          ${bss.sc1} #0054FF36,
-          ${bss.sc2} #0066FF66;
+        box-shadow: inset ${bss.s1} #4462904d, inset ${bss.s2} #ffffffb2,
+          inset ${bss.s3} #deefff33, inset ${bss.s4} #92d2d24d,
+          ${bss.sc1} #0054ff36, ${bss.sc2} #0066ff66;
       `
     case 'main1':
       return css`
         /* GLOW-hover/green */
-        box-shadow:
-          inset ${bss.s1} #4462904D,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s4} #92D2AF4D,
-          inset ${bss.s5} #00FFBD1A,
-          ${bss.sc1} #00FFBD47,
-          ${bss.sc2} #00FFBD47;
+        box-shadow: inset ${bss.s1} #4462904d, inset ${bss.s2} #ffffff,
+          inset ${bss.s4} #92d2af4d, inset ${bss.s5} #00ffbd1a,
+          ${bss.sc1} #00ffbd47, ${bss.sc2} #00ffbd47;
       `
     case 'main2':
       return css`
         /* GLOW-hover/orange */
-        box-shadow:
-          inset ${bss.s1} #FFCC4933,
-          inset ${bss.s2} #FFFFFF,
-          inset ${bss.s3} #FFEEDE33,
-          inset ${bss.s4} #D2C4924D,
-          inset ${bss.sc3} #FFF50014,
-          ${bss.sc1} #FFC70047,
-          ${bss.sc2} #FF990047;
+        box-shadow: inset ${bss.s1} #ffcc4933, inset ${bss.s2} #ffffff,
+          inset ${bss.s3} #ffeede33, inset ${bss.s4} #d2c4924d,
+          inset ${bss.sc3} #fff50014, ${bss.sc1} #ffc70047, ${bss.sc2} #ff990047;
       `
   }
 }
