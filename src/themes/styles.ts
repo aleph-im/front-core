@@ -3,14 +3,14 @@ import { FlattenInterpolation, FlattenSimpleInterpolation } from "styled-compone
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type TypoSize = Record<TypoSizeKind, number>
 
-export type TypoKind = 'header' | 'body' | 'body2' | 'body3' | 'code' | 'code2' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7'
 export type Typo = {
-  size: number,
+  tag: boolean
+  size: number
   family: string
   weight: number
   style: string
 }
-export type ThemeTypo = Record<TypoKind, Typo>
+export type ThemeTypo = Record<string, Typo>
 
 export type Gradient = {
   colors: string[]

@@ -12,9 +12,11 @@ export const StoryBookHeader = styled.h1`
 `
 
 export const StoryBookSubheader = styled.h2`
+  display: inline-block;
   font-family: 'Rubik';
   font-style: italic;
   font-weight: 600;
   font-size: 48px;
   line-height: 57px;
+  border-bottom: 2px solid white;
 `

@@ -47,38 +47,38 @@ const ColorsTemplate: ComponentStory<any> = (args) => {
       </div>
       <div>
         <h3>Gradient-main</h3>
-        <Circle className="bgg-main0"></Circle>
-        <Circle className="bgg-main1"></Circle>
-        <Circle className="bgg-main2"></Circle>
+        <Circle className="gr-main0"></Circle>
+        <Circle className="gr-main1"></Circle>
+        <Circle className="gr-main2"></Circle>
       </div>
       <div>
         <h3>Gradient-extra</h3>
-        <Circle className="bgg-extra0"></Circle>
-        <Circle className="bgg-extra1"></Circle>
+        <Circle className="gr-extra0"></Circle>
+        <Circle className="gr-extra1"></Circle>
       </div>
       <h1>Effects</h1>
       <div>
         <h3>Glow-MAX</h3>
-        <Circle className="bgg-main0 fx-glow-max-main0"></Circle>
-        <Circle className="bgg-main1 fx-glow-max-main1"></Circle>
-        <Circle className="bgg-main2 fx-glow-max-main2"></Circle>
+        <Circle className="gr-main0 fx-glow-max-main0"></Circle>
+        <Circle className="gr-main1 fx-glow-max-main1"></Circle>
+        <Circle className="gr-main2 fx-glow-max-main2"></Circle>
       </div>
       <div>
         <h3>Glow-MAX-extras</h3>
-        <Circle className="bgg-extra0 fx-glow-max-extra0"></Circle>
-        <Circle className="bgg-extra1 fx-glow-max-extra1"></Circle>
+        <Circle className="gr-extra0 fx-glow-max-extra0"></Circle>
+        <Circle className="gr-extra1 fx-glow-max-extra1"></Circle>
       </div>
       <div>
         <h3>Glow-MIN</h3>
-        <Circle className="bgg-main0 fx-glow-min-main0"></Circle>
-        <Circle className="bgg-main1 fx-glow-min-main1"></Circle>
-        <Circle className="bgg-main2 fx-glow-min-main2"></Circle>
+        <Circle className="gr-main0 fx-glow-min-main0"></Circle>
+        <Circle className="gr-main1 fx-glow-min-main1"></Circle>
+        <Circle className="gr-main2 fx-glow-min-main2"></Circle>
       </div>
       <div>
         <h3>Glow-hover</h3>
-        <Circle className="bgg-main0 fx-glow-hover-main0"></Circle>
-        <Circle className="bgg-main1 fx-glow-hover-main1"></Circle>
-        <Circle className="bgg-main2 fx-glow-hover-main2"></Circle>
+        <Circle className="gr-main0 fx-glow-hover-main0"></Circle>
+        <Circle className="gr-main1 fx-glow-hover-main1"></Circle>
+        <Circle className="gr-main2 fx-glow-hover-main2"></Circle>
       </div>
       <div>
         <h3>Glass</h3>
