@@ -8,7 +8,8 @@
   "scripts": {
     "build": "npm run rollup",
     "build-storybook": "build-storybook",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint:fix": "eslint ./src --fix --ext .ts,.tsx",
     "rollup": "rollup -c",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
