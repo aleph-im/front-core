@@ -1,2 +1,2 @@
-export { Row, Col } from "./cmp"
-export type { RowProps, ColProps } from "./types"
+export { Row, Col } from './cmp'
+export type { RowProps, ColProps } from './types'

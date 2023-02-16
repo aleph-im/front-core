@@ -16,10 +16,9 @@ export type ButtonProps = {
   disabled?: boolean
 }
 
-export type  StyledButtonProps = {
+export type StyledButtonProps = {
   variant: ButtonVariant
   kind: ButtonKind
   size: ButtonSize
   color: string
 }
-

@@ -1,15 +1,14 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export default {
-  title: "Design/Atoms/Colors",
+  title: 'Design/Atoms/Colors',
   decorators: [withDesign],
-} as ComponentMeta<any>;
+} as ComponentMeta<any>
 
-const defaultArgs: Partial<any> = {
-}
+const defaultArgs: Partial<any> = {}
 
 const defaultParams = {
   design: {
@@ -18,7 +17,7 @@ const defaultParams = {
   },
 }
 
-// --- 
+// ---
 
 const Circle = styled.div`
   width: 160px;
@@ -29,14 +28,17 @@ const Circle = styled.div`
   display: inline-block;
 `
 
-const ColorsTemplate: ComponentStory<any> = (args) => {
+const ColorsTemplate: ComponentStory<any> = () => {
   return (
     <>
       <h1>Colors</h1>
       <div>
         <h3>Base</h3>
         <Circle className="bg-base0"></Circle>
-        <Circle className="bg-base1" style={{ border: '1px solid #FFFFFF' }}></Circle>
+        <Circle
+          className="bg-base1"
+          style={{ border: '1px solid #FFFFFF' }}
+        ></Circle>
         <Circle className="bg-base2"></Circle>
       </div>
       <div>
@@ -99,13 +101,13 @@ const ColorsTemplate: ComponentStory<any> = (args) => {
       </div>
     </>
   )
-};
+}
 
 export const Colors = ColorsTemplate.bind({})
 Colors.args = {
-  ...defaultArgs
-};
+  ...defaultArgs,
+}
 Colors.parameters = {
   ...defaultParams,
-  controls: { include: [], hideNoControlsWarning: true }
+  controls: { include: [], hideNoControlsWarning: true },
 }

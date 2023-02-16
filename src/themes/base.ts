@@ -1,10 +1,24 @@
-import { DefaultTheme } from "styled-components"
-import { getDarkEffectCss, getGlassEffectCss, getGlowHoverEffectCss, getGlowMaxEffectCss, getGlowMinEffectCss } from "../styles"
-import { ThemeButton, ThemeColor, ThemeEffect, ThemeFont, ThemeGlowEffect, ThemeGradient, ThemeIcon, ThemeTypo } from "./styles"
+import { DefaultTheme } from 'styled-components'
+import {
+  getDarkEffectCss,
+  getGlassEffectCss,
+  getGlowHoverEffectCss,
+  getGlowMaxEffectCss,
+  getGlowMinEffectCss,
+} from '../styles'
+import {
+  ThemeButton,
+  ThemeColor,
+  ThemeEffect,
+  ThemeFont,
+  ThemeGradient,
+  ThemeIcon,
+  ThemeTypo,
+} from './styles'
 
 const round = (n: number, precission: number) => {
   const m = 10 ** precission
-  return Math.round((n * m) + Number.EPSILON) / m
+  return Math.round(n * m + Number.EPSILON) / m
 }
 
 const pxToRem = (px: number, base: number = 16) => {
@@ -27,7 +41,7 @@ const color: ThemeColor = {
   background: '#141327',
   contentBackground: '#141327',
   foreground: '#141327',
-  text: '#FFFFFF'
+  text: '#FFFFFF',
 }
 
 const gradient: ThemeGradient = {
@@ -35,32 +49,32 @@ const gradient: ThemeGradient = {
     colors: ['#00D1FF', '#0054FF'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #00D1FF 0%, #0054FF 100%)'
+    fn: 'linear-gradient(90deg, #00D1FF 0%, #0054FF 100%)',
   },
   main1: {
     colors: ['#EEFF9C', '#00FFBD'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #EEFF9C 0%, #00FFBD 100%)'
+    fn: 'linear-gradient(90deg, #EEFF9C 0%, #00FFBD 100%)',
   },
   main2: {
     colors: ['#FFE814', '#FBAE18'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #FFE814 0%, #FBAE18 100%)'
+    fn: 'linear-gradient(90deg, #FFE814 0%, #FBAE18 100%)',
   },
   extra0: {
     colors: ['#9B41FF', '#0054FF'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #9B41FF 0%, #0054FF 100%)'
+    fn: 'linear-gradient(90deg, #9B41FF 0%, #0054FF 100%)',
   },
   extra1: {
     colors: ['#F17E4C', '#98203D'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #F17E4C 0%, #98203D 90.62%)'
-  }
+    fn: 'linear-gradient(90deg, #F17E4C 0%, #98203D 90.62%)',
+  },
 }
 
 const effect: ThemeEffect = {
@@ -81,7 +95,7 @@ const effect: ThemeEffect = {
       main0: getGlowHoverEffectCss('main0'),
       main1: getGlowHoverEffectCss('main1'),
       main2: getGlowHoverEffectCss('main2'),
-    }
+    },
   },
   glass: {
     main0: getGlassEffectCss('main0'),
@@ -100,9 +114,9 @@ const effect: ThemeEffect = {
 const font: ThemeFont = {
   url: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;1,400;1,700&family=Source+Code+Pro:wght@400;700&family=Rubik:ital,wght@0,500;1,600;1,800&display=swap',
   family: {
-    head: '\'Rubik\', sans-serif',
-    body: '\'Public Sans\', sans-serif',
-    code: '\'Source Code Pro\', monospace',
+    head: "'Rubik', sans-serif",
+    body: "'Public Sans', sans-serif",
+    code: "'Source Code Pro', monospace",
   },
   size: {
     // ---------
@@ -112,14 +126,14 @@ const font: ThemeFont = {
     sm: pxToRem(16),
     xs: pxToRem(10),
     // ---------
-  }
+  },
 }
 
 const commonHeaderFont = {
   tag: true,
   family: font.family.head,
   style: 'italic',
-  weight: 800
+  weight: 800,
 }
 
 const typo: ThemeTypo = {
@@ -213,7 +227,7 @@ const icon: ThemeIcon = {
     md: pxToRem(14),
     sm: pxToRem(12),
     xs: pxToRem(8),
-  }
+  },
 }
 
 const button: ThemeButton = {
@@ -224,8 +238,8 @@ const button: ThemeButton = {
     size: {
       regular: pxToRem(18),
       big: pxToRem(24),
-    }
-  }
+    },
+  },
 }
 
 const theme: DefaultTheme = {

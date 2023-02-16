@@ -1,10 +1,13 @@
-import { css, FlattenInterpolation } from "styled-components"
-import { ThemeDarkEffect, ThemeGlassEffect } from "../themes/styles"
+import { css, FlattenInterpolation } from 'styled-components'
+import { ThemeDarkEffect, ThemeGlassEffect } from '../themes/styles'
 import { calculateBoxShadowPossition } from './glow'
 
-export type GlassOpts = { width?: number, height?: number, offset?: boolean }
+export type GlassOpts = { width?: number; height?: number; offset?: boolean }
 
-export function getGlassEffectCss(color: keyof ThemeGlassEffect, opts?: GlassOpts): FlattenInterpolation<any> | undefined {
+export function getGlassEffectCss(
+  color: keyof ThemeGlassEffect,
+  opts?: GlassOpts,
+): FlattenInterpolation<any> | undefined {
   return css`
     ${({ theme }) => {
       if (color === 'main0' || color === 'main1' || color === 'main2') {
@@ -21,7 +24,7 @@ export function getGlassEffectCss(color: keyof ThemeGlassEffect, opts?: GlassOpt
           s3: [0, 0.2031, 0.2917, -0.1875],
           s4: [0, 0.0052, 0.2083, 0],
           s5: [0, 0.0208, 0.0938, 0],
-          s6: [0, 0.5104, 0.5208, -0.25]
+          s6: [0, 0.5104, 0.5208, -0.25],
         }
 
         const bss = calculateBoxShadowPossition(bs, opts)
@@ -65,6 +68,13 @@ export function getGlassEffectCss(color: keyof ThemeGlassEffect, opts?: GlassOpt
             `
         }
       } else {
+        const bs = {
+          s1: [0, 0.0052, 0.2083, 0],
+          s2: [0, 0.0208, 0.0938, 0],
+        }
+        const bss = calculateBoxShadowPossition(bs, opts)
+        const c = theme.gradient.main0.colors
+
         switch (color) {
           case 'base0':
             return `
@@ -80,13 +90,6 @@ export function getGlassEffectCss(color: keyof ThemeGlassEffect, opts?: GlassOpt
                 linear-gradient(90.96deg, #1D1C3780 54.81%, #1D1C3700 103.58%);
             `
           case 'base2':
-            const bs = {
-              s1: [0, 0.0052, 0.2083, 0],
-              s2: [0, 0.0208, 0.0938, 0]
-            }
-
-            const bss = calculateBoxShadowPossition(bs, opts)
-
             return `
               background: ${theme.color.main0}03;
               box-shadow: 
@@ -94,8 +97,6 @@ export function getGlassEffectCss(color: keyof ThemeGlassEffect, opts?: GlassOpt
                 inset ${bss.s2} #5E9DD705;
             `
           case 'colored0':
-            const c = theme.gradient.main0.colors
-
             return `
               border: 1px solid #FFFFFF1A;
               background: 
@@ -110,9 +111,12 @@ export function getGlassEffectCss(color: keyof ThemeGlassEffect, opts?: GlassOpt
   `
 }
 
-export function getDarkEffectCss(color: keyof ThemeDarkEffect, opts?: GlassOpts): FlattenInterpolation<any> | undefined {
+export function getDarkEffectCss(
+  color: keyof ThemeDarkEffect,
+  opts?: GlassOpts,
+): FlattenInterpolation<any> | undefined {
   const bs = {
-    s1: [0, 0.0052, 0.2604, 0]
+    s1: [0, 0.0052, 0.2604, 0],
   }
 
   const bss = calculateBoxShadowPossition(bs, opts)

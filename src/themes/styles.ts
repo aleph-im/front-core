@@ -1,4 +1,7 @@
-import { FlattenInterpolation, FlattenSimpleInterpolation } from "styled-components"
+import {
+  FlattenInterpolation,
+  FlattenSimpleInterpolation,
+} from 'styled-components'
 
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type TypoSize = Record<TypoSizeKind, number>
@@ -51,7 +54,10 @@ export type ThemeColor = {
   text: string
 }
 
-export type ThemeGlowEffectCss = FlattenSimpleInterpolation | FlattenInterpolation<any> | undefined
+export type ThemeGlowEffectCss =
+  | FlattenSimpleInterpolation
+  | FlattenInterpolation<any>
+  | undefined
 
 export type ThemeGlowEffect = {
   [k: string]: ThemeGlowEffectCss
@@ -138,11 +144,10 @@ export interface CoreTheme {
   name: string
   // palette: Record<string, string[]>
   font: ThemeFont
-  color: ThemeColor,
+  color: ThemeColor
   typo: ThemeTypo
   icon: ThemeIcon
   button: ThemeButton
   gradient: ThemeGradient
   effect: ThemeEffect
 }
-

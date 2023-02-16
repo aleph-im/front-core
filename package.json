@@ -6,12 +6,15 @@
     "access": "public"
   },
   "scripts": {
-    "start": "npm run storybook",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "rollup": "rollup -c",
     "build": "npm run rollup",
+    "build-storybook": "build-storybook",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint:fix": "eslint ./src --fix --ext .ts,.tsx",
+    "prettier": "prettier --write ./src/**/*.{ts,tsx}",
+    "rollup": "rollup -c",
+    "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -36,7 +39,13 @@
     "@storybook/testing-library": "^0.0.11",
     "@types/react": "^18.0.9",
     "@types/styled-components": "^5.1.25",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
     "babel-loader": "^8.2.5",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
     "polished": "^4.2.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

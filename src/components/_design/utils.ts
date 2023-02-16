@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StoryBookHeader = styled.h1`
   display: inline-block;
@@ -7,7 +7,7 @@ export const StoryBookHeader = styled.h1`
   font-weight: 800;
   font-size: 132px;
   line-height: 155px;
-  color: #FFFFFF;
+  color: #ffffff;
   border-bottom: 2px solid white;
 `
 

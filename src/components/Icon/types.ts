@@ -1,5 +1,5 @@
 import { IconName } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
 
 export type IconPrefix = 'fas' | 'far' | 'fab'
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
