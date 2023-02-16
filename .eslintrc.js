@@ -21,5 +21,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-inferrable-types': 0,
+  },
 }
