@@ -169,6 +169,13 @@ const typo: ThemeTypo = {
     ...commonHeaderFont,
     size: pxToRem(128),
   },
+  logo: {
+    tag: false,
+    family: font.family.head,
+    style: 'italic',
+    weight: 600,
+    size: font.size.md,
+  },
   nav: {
     tag: true,
     family: font.family.head,
