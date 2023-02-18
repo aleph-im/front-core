@@ -3,7 +3,7 @@ import { ObjectId } from "./img"
 export type ObjectImgProps = {
   id: ObjectId,
   size: number | string
-  color: string
+  color?: string
   color2?: string
 }
 
@@ -12,6 +12,6 @@ export type StyledObjectImgProps = {
 }
 
 export type StyledObjectImgSvgProps = {
-  color: string
+  color?: string
   color2?: string
 }

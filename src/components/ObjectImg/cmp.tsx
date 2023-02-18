@@ -19,7 +19,7 @@ export const ObjectImg = ({
 
   return (
     <StyledObjectImgWrap size={size}>
-      <Obj color={mainColor} color2={bgColor}/>
+      <Obj color={mainColor} color2={bgColor} />
     </StyledObjectImgWrap>
   )
 }

@@ -24,7 +24,7 @@ const defaultArgs: Partial<ObjectImgProps> = {
 const defaultParams = {
   design: {
     type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=1%3A741&t=jFufZWoGIyZ8Gzf5-0',
+    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=2%3A1226&t=XeMPIFw7c4dnGQr1-0',
   },
 }
 
