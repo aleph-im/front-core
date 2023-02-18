@@ -21,13 +21,14 @@ export const GlobalStyle = createGlobalStyle`
 
       p {
         color: ${theme.color.text}b3;
+        line-height: 1.625rem
       }
-
-      ${sizingClasses(theme)}
 
       ${colorClasses(theme)}
       ${typoClasses(theme)}
       ${effectClasses(theme)}
+
+      ${sizingClasses(theme)}
     `
   }}
 `
@@ -45,6 +46,21 @@ function sizingClasses(theme: DefaultTheme) {
     .pb-0, .py-0 { padding-bottom: 0; }
     .pl-0, .px-0 { padding-left: 0; }
     .pr-0, .px-0 { padding-right: 0; }
+
+    ${Object.entries(theme.font.size).map(([k, v]) => `
+      .m-${k} { margin: ${v}rem; }
+      .mt-${k}, .my-${k} { margin-top: ${v}rem; }
+      .mb-${k}, .my-${k} { margin-bottom: ${v}rem; }
+      .ml-${k}, .mx-${k} { margin-left: ${v}rem; }
+      .mr-${k}, .mx-${k} { margin-right: ${v}rem; }
+  
+      .p-${k} { padding: ${v}rem; }
+      .pt-${k}, .py-${k} { padding-top: ${v}rem; }
+      .pb-${k}, .py-${k} { padding-bottom: ${v}rem; }
+      .pl-${k}, .px-${k} { padding-left: ${v}rem; }
+      .pr-${k}, .px-${k} { padding-right: ${v}rem; }
+      `
+    ).join('\n')}
   `
 }
 
