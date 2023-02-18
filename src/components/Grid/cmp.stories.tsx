@@ -11,6 +11,7 @@ export default {
   decorators: [withDesign],
   argTypes: {
     count: { control: { type: 'range', min: 1, max: 16, step: 1 } },
+    gap: { control: { type: 'text' } },
   },
 } as ComponentMeta<typeof Row>
 
@@ -79,3 +80,7 @@ export const Default = Template.bind({})
 Default.args = {
   ...defaultArgs,
 }
+Default.parameters = {
+  controls: { exclude: ['color', 'size'] }
+}
+

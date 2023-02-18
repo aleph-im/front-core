@@ -194,6 +194,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
       outline: 0;
       color: ${theme.color.text};
       transform: transale3d(0, 0, 0);
+      margin-right: 10px;
+
+      & > svg {
+        margin-left: 10px;
+      }
+
 
       /* BORDER */
       &::after {

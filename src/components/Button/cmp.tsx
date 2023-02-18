@@ -12,6 +12,8 @@ export const Button = ({
   active,
   focus,
   disabled,
+  className,
+  onClick,
 }: ButtonProps) => {
   // @note: Storybook testing purposes
   const classes = useMemo(() => {
@@ -19,8 +21,8 @@ export const Button = ({
       hover ? '_hover' : '',
       active ? '_active' : '',
       focus ? '_focus' : '',
-    ].join(' ')
-  }, [hover, active, focus])
+    ].join(' ') + (className || '')
+  }, [hover, active, focus, className])
 
   return (
     <StyledButton
@@ -30,6 +32,7 @@ export const Button = ({
         size,
         color,
         disabled,
+        onClick,
         className: classes,
       }}
     >

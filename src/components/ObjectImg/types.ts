@@ -1,8 +1,16 @@
-import { ObjectId } from "./img"
+export type ObjectId =
+  | 'Object1'
+  | 'Object2'
+  | 'Object3'
+  | 'Object4'
+  | 'Object5'
+  | 'Object6'
+  | 'Object7'
+  | 'Object8'
 
 export type ObjectImgProps = {
   id: ObjectId,
-  size: number | string
+  size?: number | string
   color?: string
   color2?: string
 }

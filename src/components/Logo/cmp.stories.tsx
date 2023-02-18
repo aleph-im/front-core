@@ -32,10 +32,48 @@ const defaultParams = {
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />
 
-export const Default = Template.bind({})
-Default.args = {
+// ---
+
+export const OnlyIcon = Template.bind({})
+OnlyIcon.args = {
   ...defaultArgs,
+  label: false
 }
-Default.parameters = {
+OnlyIcon.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const WithLabel = Template.bind({})
+WithLabel.args = {
+  ...defaultArgs,
+  label: true
+}
+WithLabel.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const WithColor = Template.bind({})
+WithColor.args = {
+  ...defaultArgs,
+  label: true,
+  color: 'main0',
+}
+WithColor.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const CustomSize = Template.bind({})
+CustomSize.args = {
+  ...defaultArgs,
+  label: true,
+  size: '2rem'
+}
+CustomSize.parameters = {
   ...defaultParams,
 }
