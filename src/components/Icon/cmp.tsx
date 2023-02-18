@@ -1,6 +1,6 @@
 import React from 'react'
 import { library, findIconDefinition } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/pro-solid-svg-icons'
+import { fass } from '@fortawesome/sharp-solid-svg-icons'
 import { far } from '@fortawesome/pro-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
@@ -8,11 +8,11 @@ import { IconProps } from './types'
 import { StyledIcon } from './styles'
 
 // @todo: Think about it as we are including all the icons on the final bundle
-library.add(far, fas, fab)
+library.add(far, fab, fass)
 
 export const Icon = ({
   name,
-  prefix = 'fas',
+  prefix = 'fass',
   size = 'md',
   ...rest
 }: IconProps) => {
