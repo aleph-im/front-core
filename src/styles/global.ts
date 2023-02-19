@@ -15,7 +15,10 @@ export const GlobalStyle = createGlobalStyle`
       @import '${theme.font.url}';
 
       body {
-        font-family: ${theme.font.family.body};
+        font-family: ${theme.typo.body.family};
+        font-style: ${theme.typo.body.style};
+        font-weight: ${theme.typo.body.weight};
+        font-size: ${theme.typo.body.size}rem;
         color: ${theme.color.text};
       }
 
@@ -60,7 +63,7 @@ function sizingClasses(theme: DefaultTheme) {
       .pl-${k}, .px-${k} { padding-left: ${v}rem; }
       .pr-${k}, .px-${k} { padding-right: ${v}rem; }
       `
-    ).join('\n')}
+  ).join('\n')}
   `
 }
 
@@ -69,19 +72,19 @@ function colorClasses(theme: DefaultTheme) {
     /* COLORS */
     ${Object.keys(theme.color).map(
     (color) => css`
-        .bg-${color} {
-          ${getBackgroundColorCss(color)}
-        }
-      `,
+      .bg-${color} {
+        ${getBackgroundColorCss(color)}
+      }
+    `,
   )}
 
     /* GRADIENTS */
     ${Object.keys(theme.gradient).map(
     (color) => css`
-        .gr-${color} {
-          ${getBackgroundGradientCss(color)}
-        }
-      `,
+      .gr-${color} {
+        ${getBackgroundGradientCss(color)}
+      }
+    `,
   )}
   `
 }
@@ -91,22 +94,22 @@ function typoClasses(theme: DefaultTheme) {
     /* TYPOS */
     ${Object.entries(theme.typo).map(
     ([k, v]) => css`
-        .tp-${k} ${v.tag ? `, ${k}` : ''} {
-          ${getTypoCss(k)}
-          margin-top: 20px;
-          margin-bottom: 20px;
-          line-height: 1.16em;
-        }
-      `,
+      .tp-${k} ${v.tag ? `, ${k}` : ''} {
+        ${getTypoCss(k as any)}
+        margin-top: 20px;
+        margin-bottom: 20px;
+        line-height: 1.16em;
+      }
+    `,
   )}
 
     /* FONT-SIZE */
      ${Object.entries(theme.font.size).map(
     ([k, v]) => css`
-        .fs-${k} {
-          font-size: ${v}rem;
-        }
-      `,
+      .fs-${k} {
+        font-size: ${v}rem;
+      }
+    `,
   )}
   `
 }

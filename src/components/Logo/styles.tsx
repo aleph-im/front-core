@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { StyledLogoProps } from './types'
 
 export const StyledLogoWrap = styled.span<StyledLogoProps>`
-  ${({ theme, size, color }) => {
+  ${({ size }) => {
     const s = !Number.isNaN(Number(size)) ? `${size}px` : size
 
     return css`
@@ -13,15 +13,12 @@ export const StyledLogoWrap = styled.span<StyledLogoProps>`
       background-color: transparent;
 
       & > span {
-        color: ${color};
-        font-family: ${theme.typo.logo.family};
-        font-style: ${theme.typo.logo.style};
-        font-weight: ${theme.typo.logo.weight};
+        padding-left: 2%;
         font-size: ${s};
         line-height: 1em;
         margin-top: 0;
         margin-bottom: 0;
-        margin-left: 2%;
+        /* margin-left: 2%; */
       }
 
       & > svg {

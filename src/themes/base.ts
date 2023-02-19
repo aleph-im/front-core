@@ -163,6 +163,7 @@ const typo: ThemeTypo = {
   },
   h7: {
     ...commonHeaderFont,
+    tag: false,
     size: pxToRem(24),
   },
   header: {
@@ -191,7 +192,7 @@ const typo: ThemeTypo = {
     size: pxToRem(10),
   },
   body: {
-    tag: true,
+    tag: false,
     family: font.family.body,
     style: 'normal',
     weight: 400,

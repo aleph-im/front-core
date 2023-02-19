@@ -28,6 +28,7 @@ const defaultParams = {
     type: 'figma',
     url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=2%3A1599&t=XeMPIFw7c4dnGQr1-0',
   },
+  controls: { exclude: ['color', 'size'] },
 }
 
 // ---
@@ -42,7 +43,6 @@ Default.args = {
 }
 Default.parameters = {
   ...defaultParams,
-  controls: { exclude: ['color', 'size'] },
 }
 
 // ---
@@ -56,7 +56,6 @@ Custom.args = {
 }
 Custom.parameters = {
   ...defaultParams,
-  controls: { exclude: ['color', 'size'] },
 }
 
 // ---
@@ -95,7 +94,6 @@ Transcluded.args = {
 }
 Transcluded.parameters = {
   ...defaultParams,
-  controls: { exclude: ['color', 'size'] },
 }
 
 // ---
@@ -112,5 +110,4 @@ Article.args = {
 }
 Article.parameters = {
   ...defaultParams,
-  controls: { exclude: ['color', 'size'] },
 }

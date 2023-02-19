@@ -6,6 +6,23 @@ import {
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type TypoSize = Record<TypoSizeKind, number>
 
+export type TypoKind =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'h7'
+  | 'header'
+  | 'logo'
+  | 'nav'
+  | 'info'
+  | 'body'
+  | 'body1'
+  | 'body2'
+  | 'code'
+  | 'code1'
 export type Typo = {
   tag: boolean
   size: number
@@ -13,7 +30,7 @@ export type Typo = {
   weight: number
   style: string
 }
-export type ThemeTypo = Record<string, Typo>
+export type ThemeTypo = Record<TypoKind, Typo>
 
 export type Gradient = {
   colors: string[]

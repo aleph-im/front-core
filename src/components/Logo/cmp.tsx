@@ -3,6 +3,7 @@ import { useTheme } from 'styled-components'
 import { StyledLogoWrap } from './styles'
 import { LogoProps } from './types'
 import LogoSvg from './img/logo'
+import TextGradient from '../TextGradient'
 
 export const Logo = ({
   label = true,
@@ -10,12 +11,14 @@ export const Logo = ({
   color = 'text',
 }: LogoProps) => {
   const theme = useTheme()
-  color = theme.color[color] || color
+
+  const logoGradient = theme.gradient[color]?.colors[0]
+  const logoColor = logoGradient || theme.color[color] || color
 
   return (
-    <StyledLogoWrap {...{ size, color }}>
-      <LogoSvg color={color} />
-      {label && (<span>Aleph.im</span>)}
+    <StyledLogoWrap size={size}>
+      <LogoSvg color={logoColor} />
+      {label && (<TextGradient type='logo' color={color}>Aleph.im</TextGradient>)}
     </StyledLogoWrap>
   )
 }
