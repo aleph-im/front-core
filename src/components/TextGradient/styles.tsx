@@ -3,7 +3,7 @@ import { StyledTextGradientProps } from './types';
 
 export const StyledTextGradientWrap = styled.span<StyledTextGradientProps>`
   ${({ theme, color, size, typo }) => {
-    const fontSizeCss = size !== undefined ? (`font-size: ${!Number.isNaN(Number(size)) ? `${size}px` : size};`) : '';
+    const fontSizeCss = size ? (`font-size: ${!Number.isNaN(Number(size)) ? `${size}px` : size};`) : '';
 
     const gradient = theme.gradient[color]?.fn
     color = theme.color[color] || color

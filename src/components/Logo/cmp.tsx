@@ -7,8 +7,8 @@ import TextGradient from '../TextGradient'
 
 export const Logo = ({
   label = true,
-  size = 140,
   color = 'text',
+  size,
 }: LogoProps) => {
   const theme = useTheme()
 
@@ -16,7 +16,7 @@ export const Logo = ({
   const logoColor = logoGradient || theme.color[color] || color
 
   return (
-    <StyledLogoWrap size={size}>
+    <StyledLogoWrap size={size} label={label}>
       <LogoSvg color={logoColor} />
       {label && (<TextGradient type='logo' color={color}>Aleph.im</TextGradient>)}
     </StyledLogoWrap>

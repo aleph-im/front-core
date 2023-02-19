@@ -37,12 +37,16 @@ const defaultVariants = (
       }
       case 'text-only': {
         return css`
+          padding-left: 0;
+          padding-right: 0;
+          border-radius: 0;
+
           /* TRANSFORM BORDER INTO UNDERSCORE */
           &::after {
             display: block;
             mask: none;
             height: 1px;
-            padding: 0 22px;
+            padding: 0;
             background-clip: content-box;
             top: 100%;
             margin-top: -8px;
@@ -86,13 +90,16 @@ const defaultVariants = (
         return css`
           color: ${theme.color.text};
           background-color: transparent;
+          padding-left: 0;
+          padding-right: 0;
+          border-radius: 0;
 
           /* TRANSFORM BORDER INTO UNDERSCORE */
           &::after {
             display: block;
             mask: none;
             height: 1px;
-            padding: 0 22px;
+            padding: 0;
             background-clip: content-box;
             top: 100%;
             margin-top: -8px;
@@ -194,13 +201,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       outline: 0;
       color: ${theme.color.text};
       transform: transale3d(0, 0, 0);
-      margin-right: 10px;
-
-      & > svg {
-        margin-left: 10px;
-      }
-
-
+      text-decoration: none !important;
+      
       /* BORDER */
       &::after {
         display: none;

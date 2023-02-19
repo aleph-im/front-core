@@ -4,21 +4,21 @@ import { BulletItemKind, BulletListSize } from './types'
 
 export const StyledBulletList = styled.ul`
   list-style: none;
+  margin: 0;
+  padding: 0;
 `
 
 export const StyledBulletItem = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 `
-
 
 export interface StyledBulletItemIconWrapProps {
   kind: BulletItemKind
   size?: BulletListSize
 }
-
 
 export const StyledBulletItemIconWrap = styled.div<StyledBulletItemIconWrapProps>`
   ${(props) => {
@@ -32,6 +32,7 @@ export const StyledBulletItemIconWrap = styled.div<StyledBulletItemIconWrapProps
       box-sizing: border-box;
       width: ${fontSize};
       height: ${fontSize};
+      font-size: ${fontSize};
       flex: 0 0 auto;
       margin-right: 1rem;
       border-radius: 50%;
@@ -48,7 +49,7 @@ export const StyledBulletItemIconWrap = styled.div<StyledBulletItemIconWrapProps
         return css`
           ${commonCss}
           background-image: ${theme.gradient.main0.fn};
-          box-shadow: 24px 40px 92px 44px rgba(0, 102, 255, 0.3), 0px -18px 70px 26px rgba(0, 84, 255, 0.11), inset 0px 4px 18px rgba(146, 210, 210, 0.3), inset 0px 1px 40px rgba(222, 239, 255, 0.2), inset 0px 7px 11px -4px rgba(255, 255, 255, 0.7), inset 0px -82px 68px -64px rgba(68, 98, 144, 0.3);
+          ${theme.effect.glow.min.main0};
         `
       case 'error':
         return css`

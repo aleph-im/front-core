@@ -5,6 +5,7 @@ import {
   getGlowHoverEffectCss,
   getGlowMaxEffectCss,
   getGlowMinEffectCss,
+  pxToRem,
 } from '../styles'
 import {
   ThemeButton,
@@ -15,15 +16,6 @@ import {
   ThemeIcon,
   ThemeTypo,
 } from './styles'
-
-const round = (n: number, precission: number) => {
-  const m = 10 ** precission
-  return Math.round(n * m + Number.EPSILON) / m
-}
-
-const pxToRem = (px: number, base: number = 16) => {
-  return round(Number(px / base), 3)
-}
 
 const color: ThemeColor = {
   base0: '#FFFFFF',
@@ -120,11 +112,13 @@ const font: ThemeFont = {
   },
   size: {
     // ---------
+    xxl: pxToRem(48),
     xl: pxToRem(28),
     lg: pxToRem(24),
     md: pxToRem(18),
     sm: pxToRem(16),
     xs: pxToRem(10),
+    xxs: pxToRem(8),
     // ---------
   },
 }
@@ -134,6 +128,7 @@ const commonHeaderFont = {
   family: font.family.head,
   style: 'italic',
   weight: 800,
+  lineHeight: 1.18
 }
 
 const typo: ThemeTypo = {
@@ -175,7 +170,8 @@ const typo: ThemeTypo = {
     family: font.family.head,
     style: 'italic',
     weight: 600,
-    size: font.size.md,
+    size: pxToRem(24),
+    lineHeight: 1.666
   },
   nav: {
     tag: true,
@@ -183,6 +179,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 500,
     size: font.size.md,
+    lineHeight: 1.666
   },
   info: {
     tag: false,
@@ -190,6 +187,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 800,
     size: pxToRem(10),
+    lineHeight: 1.666
   },
   body: {
     tag: false,
@@ -197,6 +195,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 400,
     size: font.size.sm,
+    lineHeight: 1.666
   },
   body1: {
     tag: false,
@@ -204,6 +203,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 400,
     size: font.size.sm,
+    lineHeight: 1.666
   },
   body2: {
     tag: false,
@@ -211,6 +211,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 700,
     size: font.size.sm,
+    lineHeight: 1.666
   },
   code: {
     tag: true,
@@ -218,6 +219,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 400,
     size: font.size.sm,
+    lineHeight: 1.666
   },
   code1: {
     tag: false,
@@ -225,6 +227,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 700,
     size: font.size.sm,
+    lineHeight: 1.666
   },
 }
 

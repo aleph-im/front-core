@@ -70,25 +70,23 @@ Transcluded.args = {
     <><p className='m-0'>Transcluded card content</p></>
   ),
   footer: (
-    <div style={{ marginLeft: '-22px' }}>
+    <div>
       <Button
         className='mx-0'
         variant="text-only"
         kind="neon"
         size="regular"
         color="main1"
-        label={<>Button 1<Icon name='arrow-right' /></>}
         onClick={() => alert('1')}
-      />
+      >Button 1<Icon name='arrow-right' className='ml-xs' /></Button>
       <Button
         className='mx-0 my-xs'
         variant="text-only"
         kind="neon"
         size="regular"
         color="main2"
-        label={<>Button 2<Icon name='arrow-right' /></>}
         onClick={() => alert('2')}
-      />
+      >Button 2<Icon name='arrow-right' className='ml-xs' /></Button>
     </div>
   )
 }

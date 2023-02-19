@@ -14,7 +14,7 @@ export type CardProps = {
   buttonHref: string
   buttonOnClick: () => void
 
-  header?: JSX.Element
-  content?: JSX.Element
-  footer?: JSX.Element
+  header?: React.ReactNode
+  content?: React.ReactNode
+  footer?: React.ReactNode
 }

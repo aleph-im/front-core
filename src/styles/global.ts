@@ -15,6 +15,8 @@ export const GlobalStyle = createGlobalStyle`
       @import '${theme.font.url}';
 
       body {
+        margin: 0;
+        padding: 0;
         font-family: ${theme.typo.body.family};
         font-style: ${theme.typo.body.style};
         font-weight: ${theme.typo.body.weight};
@@ -27,16 +29,30 @@ export const GlobalStyle = createGlobalStyle`
         line-height: 1.625rem
       }
 
+      section {
+        padding: ${theme.font.size.xxl}rem ${theme.font.size.lg}rem;
+      }
+
+      ${displayClasses(theme)}
       ${colorClasses(theme)}
       ${typoClasses(theme)}
       ${effectClasses(theme)}
-
-      ${sizingClasses(theme)}
+      ${marginPaddingClasses(theme)}
     `
   }}
 `
 
-function sizingClasses(theme: DefaultTheme) {
+function displayClasses(theme: DefaultTheme) {
+  return css`
+    .d-block { display: block; }
+    .d-flex { display: flex; }
+    .d-iblock { display: inline-block; }
+    .d-iflex { display: inline-flex; }
+    .d-none { display: none; }
+  `
+}
+
+function marginPaddingClasses(theme: DefaultTheme) {
   return css`
     .m-0 { margin: 0; }
     .mt-0, .my-0 { margin-top: 0; }
@@ -96,9 +112,9 @@ function typoClasses(theme: DefaultTheme) {
     ([k, v]) => css`
       .tp-${k} ${v.tag ? `, ${k}` : ''} {
         ${getTypoCss(k as any)}
-        margin-top: 20px;
-        margin-bottom: 20px;
-        line-height: 1.16em;
+        display: block;
+        margin-top: 0;
+        margin-bottom: ${theme.font.size.lg}rem;
       }
     `,
   )}

@@ -9,7 +9,7 @@ export const BulletItem = ({ kind, size, title, text }: BulletItemProps) => {
         <StyledBulletItemIcon  {...{ kind, $size: size }} />
       </StyledBulletItemIconWrap>
       <div>
-        <span className='tp-h7'>{title}</span>
+        <span className='tp-h7 m-0'>{title}</span>
         {text && (<p className='m-0'>{text}</p>)}
       </div>
     </StyledBulletItem>

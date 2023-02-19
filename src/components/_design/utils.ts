@@ -9,6 +9,7 @@ export const StoryBookHeader = styled.h1`
   line-height: 155px;
   color: #ffffff;
   border-bottom: 2px solid white;
+  margin-bottom: 74px;
 `
 
 export const StoryBookSubheader = styled.h2`
@@ -19,4 +20,5 @@ export const StoryBookSubheader = styled.h2`
   font-size: 48px;
   line-height: 57px;
   border-bottom: 2px solid white;
+  margin-bottom: 74px;
 `

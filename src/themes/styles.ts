@@ -29,6 +29,7 @@ export type Typo = {
   family: string
   weight: number
   style: string
+  lineHeight: number 
 }
 export type ThemeTypo = Record<TypoKind, Typo>
 
@@ -112,11 +113,13 @@ export type ThemeDarkEffect = {
 export type ThemeFont = {
   url: string
   size: {
+    xxl: number
     xl: number
     lg: number
     md: number
     sm: number
     xs: number
+    xxs: number
   }
   family: {
     head: string

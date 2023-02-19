@@ -4,7 +4,7 @@ export type BulletListSize = 'regular' | 'big'
 export type BulletListProps = {
   items: BulletItemProps[]
   children?: React.ReactNode[]
-  size: BulletListSize
+  size?: BulletListSize
 }
 
 export type BulletItemProps = {

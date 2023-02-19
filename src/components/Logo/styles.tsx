@@ -2,29 +2,27 @@ import styled, { css } from 'styled-components'
 import { StyledLogoProps } from './types'
 
 export const StyledLogoWrap = styled.span<StyledLogoProps>`
-  ${({ size }) => {
-    const s = !Number.isNaN(Number(size)) ? `${size}px` : size
+  ${({ theme, size, label }) => {
+    const logoSize = size ? (!Number.isNaN(Number(size)) ? `${size}px` : size) : `${theme.typo.logo.size}rem`;
 
     return css`
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      height: ${s};
+      height: ${logoSize};
       background-color: transparent;
+      font-size: ${logoSize};
 
       & > span {
-        padding-left: 2%;
-        font-size: ${s};
-        line-height: 1em;
+        font-size: 1em;
+        line-height: normal;
         margin-top: 0;
         margin-bottom: 0;
-        /* margin-left: 2%; */
       }
 
       & > svg {
         box-sizing: border-box;
-        padding-top: 2%;
-        padding-bottom: 2%;
+        padding: ${label ? '0.1em' : '0'};
       }
     `
   }}

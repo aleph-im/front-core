@@ -2,7 +2,7 @@ type Column = {
   selector: <T>(row: T) => string | number
   label: string
   sortable?: boolean
-  cell?: <T>(row: T) => JSX.Element
+  cell?: <T>(row: T) => React.ReactNode
 }
 
 export type TableProps = {

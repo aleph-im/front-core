@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Button from '../Button'
 import Icon from '../Icon'
 import ObjectImg from '../ObjectImg'
@@ -36,8 +36,10 @@ export const Card = ({
           )
           : (
             <>
-              <span className='tp-info'>{titleInfo}</span>
-              <StyledCardHeader className='tp-h6'>{title}</StyledCardHeader>
+              <div className='my-xxs'>
+                <span className='tp-info m-0'>{titleInfo}</span>
+                <StyledCardHeader className='tp-h6'>{title}</StyledCardHeader>
+              </div>
               <p className='m-0'>{text}</p>
             </>
           )
@@ -50,9 +52,10 @@ export const Card = ({
             kind="neon"
             size="regular"
             color={buttonColor}
-            label={<>{buttonLabel}{buttonVariant === 'text-only' && <Icon name='arrow-right' />}</>}
             onClick={buttonOnClick}
-             />
+          >
+            {buttonLabel}{buttonVariant === 'text-only' && <Icon name='arrow-right' className='ml-xs' />}
+          </Button>
         )
         }
       </StyledCardFooterWrap>

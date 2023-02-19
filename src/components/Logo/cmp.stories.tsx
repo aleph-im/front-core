@@ -16,7 +16,7 @@ export default {
 } as ComponentMeta<typeof Logo>
 
 const defaultArgs: Partial<LogoProps> = {
-  size: '100px'
+  size: undefined
 }
 
 const defaultParams = {
@@ -61,6 +61,7 @@ WithColor.args = {
   ...defaultArgs,
   label: true,
   color: 'main0',
+  size: '100px'
 }
 WithColor.parameters = {
   ...defaultParams,
@@ -72,7 +73,7 @@ export const CustomSize = Template.bind({})
 CustomSize.args = {
   ...defaultArgs,
   label: true,
-  size: '2rem'
+  size: '4rem'
 }
 CustomSize.parameters = {
   ...defaultParams,

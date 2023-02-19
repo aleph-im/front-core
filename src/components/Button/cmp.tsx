@@ -7,13 +7,13 @@ export const Button = ({
   kind = 'flat',
   size = 'regular',
   color = 'main2',
-  label,
+  as = 'button',
+  children,
   hover,
   active,
   focus,
-  disabled,
   className,
-  onClick,
+  ...rest
 }: ButtonProps) => {
   // @note: Storybook testing purposes
   const classes = useMemo(() => {
@@ -26,17 +26,18 @@ export const Button = ({
 
   return (
     <StyledButton
+      role="button"
       {...{
+        as,
         variant,
         kind,
         size,
         color,
-        disabled,
-        onClick,
         className: classes,
+        ...rest
       }}
     >
-      {label}
+      {children}
     </StyledButton>
   )
 }

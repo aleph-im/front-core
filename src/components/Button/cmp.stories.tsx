@@ -16,7 +16,8 @@ export default {
 } as ComponentMeta<typeof Button>
 
 const defaultArgs: Partial<ButtonProps> = {
-  label: 'Text',
+  as: 'button',
+  children: 'Text',
   color: 'main2',
   variant: 'primary',
   kind: 'flat',

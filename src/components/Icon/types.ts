@@ -8,4 +8,5 @@ export interface IconProps extends Omit<FontAwesomeIconProps, 'icon' | 'size'> {
   name: IconName
   size?: IconSize
   prefix?: IconPrefix
+  // className?: string
 }
