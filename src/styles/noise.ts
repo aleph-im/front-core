@@ -17,6 +17,7 @@ export function getNoiseEffectCss(color?: keyof ThemeColor, opacity?: number) {
       z-index: -1;
       opacity: ${opacity || 1};
       mask-image: ${SVGMask};
+      border-radius: inherit;
       -webkit-mask-image: ${SVGMask};
       background-image: linear-gradient(
         to bottom,
