@@ -14,7 +14,8 @@
     "rollup": "rollup -c",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -46,6 +47,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
     "polished": "^4.2.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
