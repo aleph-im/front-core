@@ -229,6 +229,14 @@ const typo: ThemeTypo = {
     size: font.size.sm,
     lineHeight: 1.666
   },
+  form: {
+    tag: false,
+    family: font.family.body,
+    style: 'normal',
+    weight: 400,
+    size: font.size.lg,
+    lineHeight: 1.167
+  }
 }
 
 const icon: ThemeIcon = {

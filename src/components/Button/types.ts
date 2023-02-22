@@ -11,7 +11,6 @@ export type ButtonProps<T = any> = AnchorHTMLAttributes<T> & ButtonHTMLAttribute
   kind: ButtonKind
   size: ButtonSize
   color: string
-  onClick?: () => void
 
   // Force states
   hover?: boolean

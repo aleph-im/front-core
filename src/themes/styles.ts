@@ -23,6 +23,7 @@ export type TypoKind =
   | 'body2'
   | 'code'
   | 'code1'
+  | 'form'
 export type Typo = {
   tag: boolean
   size: number
