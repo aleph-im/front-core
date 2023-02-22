@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { ForwardedRef, forwardRef, useMemo } from 'react'
 import { StyledButton } from './styles'
 import { ButtonProps } from './types'
 
-export const Button = ({
+export const Button = forwardRef(({
   variant = 'primary',
   kind = 'flat',
   size = 'regular',
@@ -14,7 +14,7 @@ export const Button = ({
   focus,
   className,
   ...rest
-}: ButtonProps) => {
+}: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
   // @note: Storybook testing purposes
   const classes = useMemo(() => {
     return [
@@ -28,6 +28,7 @@ export const Button = ({
     <StyledButton
       role="button"
       {...{
+        ref,
         as,
         variant,
         kind,
@@ -40,6 +41,8 @@ export const Button = ({
       {children}
     </StyledButton>
   )
-}
+})
+
+Button.displayName = 'Button'
 
 export default Button
