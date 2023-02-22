@@ -15,7 +15,7 @@ export default {
   // },
 } as ComponentMeta<typeof Button>
 
-const defaultArgs: Partial<ButtonProps> = {
+const defaultArgs: Partial<ButtonProps<any>> = {
   as: 'button',
   children: 'Text',
   color: 'main2',
