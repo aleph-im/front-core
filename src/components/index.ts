@@ -1,4 +1,9 @@
+export { BulletItem, BulletList} from './BulletList'
 export { default as Button } from './Button'
-export { default as ObjectImg } from './ObjectImg'
+export { default as Card } from './Card'
 export { Row, Col } from './Grid'
-
+export { default as Icon } from './Icon'
+export { default as Logo } from './Logo'
+export { default as ObjectImg } from './ObjectImg'
+export { default as Table } from './Table'
+export { default as TextGradient } from './TextGradient'
