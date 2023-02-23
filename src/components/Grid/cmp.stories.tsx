@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 import { Row, Col } from './cmp'
-import { defaultCount, RowProps } from './types'
+import { RowProps } from './types'
 
 export default {
   title: 'Components/UI/Grid',
@@ -16,7 +16,7 @@ export default {
 } as ComponentMeta<typeof Row>
 
 const defaultArgs: Partial<RowProps> = {
-  count: defaultCount,
+  count: 12,
   gap: '1rem',
 }
 
@@ -45,7 +45,7 @@ const Template: ComponentStory<typeof Row> = (args) => (
 
     <h1>Regular span blocks (size=1)</h1>
     <Row {...args}>
-      {Array.from({ length: args.count || defaultCount }, (_, i) => i + 1).map(
+      {Array.from({ length: args.count || 12 }, (_, i) => i + 1).map(
         (i) => (
           <Col span={1} key={i}>
             <div style={colStyle}>{i}</div>

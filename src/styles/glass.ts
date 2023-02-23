@@ -1,5 +1,5 @@
 import { css, FlattenInterpolation } from 'styled-components'
-import { ThemeDarkEffect, ThemeGlassEffect } from '../themes/styles'
+import { ThemeDarkEffect, ThemeGlassEffect } from '../themes/types'
 import { calculateBoxShadowPossition } from './glow'
 
 export type GlassOpts = { width?: number; height?: number; offset?: boolean }

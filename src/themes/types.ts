@@ -3,6 +3,9 @@ import {
   FlattenSimpleInterpolation,
 } from 'styled-components'
 
+export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type ThemeBreakpoint = Record<BreakpointId, number>
+
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type TypoSize = Record<TypoSizeKind, number>
 
@@ -171,4 +174,5 @@ export interface CoreTheme {
   button: ThemeButton
   gradient: ThemeGradient
   effect: ThemeEffect
+  breakpoint: ThemeBreakpoint
 }

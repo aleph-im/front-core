@@ -1,9 +1,9 @@
 import React from 'react'
-import { RowProps, ColProps, defaultCount } from './types'
+import { RowProps, ColProps } from './types'
 import { StyledRow, StyledCol } from './styles'
 
 export const Row = ({
-  count = defaultCount,
+  count = 12,
   gap = '1rem',
   children,
   ...rest
@@ -13,7 +13,12 @@ export const Row = ({
   )
 }
 
-export const Col = ({ span = 1, offset = 0, children, ...rest }: ColProps) => {
+export const Col = ({
+  span = 1,
+  offset = 0,
+  children,
+  ...rest
+}: ColProps) => {
   return (
     <StyledCol {...{ span, offset, ...rest }}>{children && children}</StyledCol>
   )

@@ -10,4 +10,12 @@ export type ColProps = {
   children?: React.ReactNode
 }
 
-export const defaultCount = 12
+export type StyledRowProps = {
+  count: number
+  gap: string | number
+}
+
+export type StyledColProps = {
+  span: number
+  offset: number
+}

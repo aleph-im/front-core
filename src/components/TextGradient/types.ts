@@ -1,4 +1,4 @@
-import { Typo, TypoKind } from "../../themes/styles"
+import { Typo, TypoKind } from "../../themes/types"
 
 export type TextGradientProps = {
   children: React.ReactNode

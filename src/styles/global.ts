@@ -1,5 +1,5 @@
 import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
-import { ThemeEffect } from '../themes/styles'
+import { ThemeEffect } from '../themes/types'
 import {
   getBackgroundColorCss,
   getBackgroundGradientCss,

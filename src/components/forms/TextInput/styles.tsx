@@ -9,7 +9,7 @@ export const StyledTextInput = styled.div`
 `
 
 export const StyledTextInputField = styled.input<ButtonProps>`
-  ${({ theme, button }) => {
+  ${({ theme }) => {
     return css`
       box-sizing: border-box;
       justify-content: space-between;
@@ -33,7 +33,7 @@ export const StyledTextInputField = styled.input<ButtonProps>`
 `
 
 export const StyledTextInputWrap = styled.div<ButtonProps>`
-  ${({ theme, button, buttonStyle }) => {
+  ${({ theme, buttonStyle }) => {
     return css`
       display: flex;
       align-items: stretch;
