@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { StyledTabsHeader, StyledTabsItem, StyledTabLabel } from "./styles";
+import {
+  StyledTabsHeader,
+  StyledTabsItem,
+  StyledTabLabel,
+  StyledSelectedTab,
+} from './styles'
 import { TabsProps } from "./types";
-import TextGradient from "../TextGradient";
 
 const noop = () => null
 
@@ -24,7 +28,7 @@ const Tabs = ({
           const getTabLabel = () => {
             if (tab.label !== undefined) {
               return (
-                <StyledTabLabel className="tp-info">
+                <StyledTabLabel>
                   {tab.label}
                 </StyledTabLabel>
               )
@@ -51,9 +55,9 @@ const Tabs = ({
                 role="tab"
                 aria-selected="true"
               >
-                <TextGradient color="main0" type="body">
+                <StyledSelectedTab color="main0" type="body">
                   {tab.name}
-                </TextGradient>
+                </StyledSelectedTab>
                 {getTabLabel()}
               </StyledTabsItem>
             )

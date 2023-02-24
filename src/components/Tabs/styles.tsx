@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import TextGradient from '../TextGradient'
 import { StyledTabItemProps } from './types'
 
 export const StyledTabsHeader = styled.div`
@@ -29,21 +30,24 @@ export const StyledTabsItem = styled.div<StyledTabItemProps>`
         bottom: 0;
         left: 0;
       }
-
-      // Unsetting TextGradient styles
-      span {
-        font-weight: bold;
-        margin: 0;
-        line-height: unset;
-      }
     `
   }}
+`
+
+export const StyledSelectedTab = styled(TextGradient)`
+  font-weight: bold;
+  margin: 0;
+  line-height: unset;
 `
 
 export const StyledTabLabel = styled.div`
   ${ ({ theme }) => css`
     transform: translate(5px, -10px);
     color: ${theme.color.base0};
+    font-size: ${theme.typo.info.size}rem;
+    font-weight: ${theme.typo.info.weight};
+    font-family: ${theme.typo.info.family};
+    font-style: ${theme.typo.info.style};
   ` 
   }
 `
