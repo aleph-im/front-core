@@ -65,6 +65,7 @@ const defaultParams = {
     type: 'figma',
     url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=174%3A6044&t=TVHylrq00voSyAB6-1',
   },
+  controls: { exclude: ['color', 'size'] }
 }
 
 // ---

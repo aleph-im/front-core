@@ -23,7 +23,9 @@ const Navbar = ({
   return (
     <StyledNavbarWrapper>
       <StyledHeadingWrapper isOpen={isOpen}>
-        {withLogo && <Logo label={withLabel} />}
+        <div>
+          {withLogo && <Logo label={withLabel} />}
+        </div>
 
         <StyledBurgerIconWrapper>
           <Button
