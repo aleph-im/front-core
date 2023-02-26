@@ -42,7 +42,7 @@ const ResponsiveTemplate: ComponentStory<any> = (args) => {
     <div>
       <StoryBookHeader>Responsive Styles</StoryBookHeader>
       <div>
-        <StoryBookSubheader>Responsive margins</StoryBookSubheader>
+        <StoryBookSubheader>Margins</StoryBookSubheader>
         <Wrapper>
           <Container>
             <Item className="tp-h7 p-0 m-xl m-lg-xs m-md-sm m-sm-md m-xs-lg m-0-xl">from xl to 0</Item>
@@ -53,7 +53,7 @@ const ResponsiveTemplate: ComponentStory<any> = (args) => {
         </Wrapper>
       </div>
       <div>
-        <StoryBookSubheader>Responsive margins</StoryBookSubheader>
+        <StoryBookSubheader>Paddings</StoryBookSubheader>
         <Wrapper>
           <Container>
             <Item className="tp-h7 m-0 p-xl p-lg-xs p-md-sm p-sm-md p-xs-lg p-0-xl">from xl to 0</Item>
