@@ -22,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         font-style: ${theme.typo.body.style};
         font-weight: ${theme.typo.body.weight};
         font-size: ${theme.typo.body.size}rem;
+        background-color: ${theme.color.background};
         color: ${theme.color.text};
       }
 
