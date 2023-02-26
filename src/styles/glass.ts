@@ -73,6 +73,7 @@ export function getGlassEffectCss(
           s2: [0, 0.0208, 0.0938, 0],
         }
         const bss = calculateBoxShadowPossition(bs, opts)
+
         const c = theme.gradient.main0.colors
 
         switch (color) {
@@ -115,14 +116,15 @@ export function getDarkEffectCss(
   color: keyof ThemeDarkEffect,
   opts?: GlassOpts,
 ): FlattenInterpolation<any> | undefined {
-  const bs = {
-    s1: [0, 0.0052, 0.2604, 0],
-  }
-
-  const bss = calculateBoxShadowPossition(bs, opts)
-
   return css`
     ${({ theme }) => {
+
+      const bs = {
+        s1: [0, 0.0052, 0.2604, 0],
+      }
+
+      const bss = calculateBoxShadowPossition(bs, opts)
+
       return `
         background-color: ${theme.color.main0}03;
         box-shadow: ${bss.s1} #00000080;

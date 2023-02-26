@@ -1,12 +1,12 @@
 export type LogoProps = {
   size?: number | string
   color?: string
-  label?: boolean
+  text?: boolean | string
 }
 
 export type StyledLogoProps = {
   size?: number | string
-  label?: boolean
+  text?: boolean | string
 }
 
 export type StyledLogoSvgProps = {

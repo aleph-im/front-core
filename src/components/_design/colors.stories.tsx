@@ -28,7 +28,7 @@ const Circle = styled.div`
   display: inline-block;
 `
 
-const ColorsTemplate: ComponentStory<any> = () => {
+const ColorsTemplate: ComponentStory<any> = (args) => {
   return (
     <>
       <h1>Colors</h1>

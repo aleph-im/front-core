@@ -6,7 +6,7 @@ import LogoSvg from './img/logo'
 import TextGradient from '../TextGradient'
 
 export const Logo = ({
-  label = true,
+  text = 'Aleph.im',
   color = 'text',
   size,
 }: LogoProps) => {
@@ -14,11 +14,12 @@ export const Logo = ({
 
   const logoGradient = theme.gradient[color]?.colors[0]
   const logoColor = logoGradient || theme.color[color] || color
+  text = typeof text === 'boolean' ? text && 'Aleph.im' : text
 
   return (
-    <StyledLogoWrap size={size} label={label}>
+    <StyledLogoWrap size={size} text={text}>
       <LogoSvg color={logoColor} />
-      {label && (<TextGradient type='logo' color={color}>Aleph.im</TextGradient>)}
+      {text && (<TextGradient type='logo' color={color}>{text}</TextGradient>)}
     </StyledLogoWrap>
   )
 }

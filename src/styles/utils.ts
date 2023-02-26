@@ -1,11 +1,14 @@
 import { css, SimpleInterpolation } from 'styled-components'
 import {
   BreakpointId,
+  CoreTheme,
   ThemeColor,
   ThemeEffect,
   ThemeGradient,
   ThemeTypo,
 } from '../themes/types'
+
+// Util FNs
 
 export const round = (n: number, precission: number) => {
   const m = 10 ** precission
@@ -15,6 +18,16 @@ export const round = (n: number, precission: number) => {
 export const pxToRem = (px: number, base: number = 16) => {
   return round(Number(px / base), 3)
 }
+
+export const getThemeGlowEffect = (theme: CoreTheme, type: keyof ThemeEffect['glow'], color: string) => theme.effect.glow[type][color]
+
+export const getThemeGlassEffect = (theme: CoreTheme, color: string) => theme.effect.glass[color]
+
+export const getThemeDarkEffect = (theme: CoreTheme, color: string) => theme.effect.dark[color]
+
+export const getColorGradient = (color: string) => `linear-gradient(0deg, ${color}, ${color})`
+
+// CSS
 
 export function getBackgroundColorCss(color: keyof ThemeColor) {
   return css`
@@ -42,30 +55,6 @@ export function getTypoCss(typo: keyof ThemeTypo) {
     }}
   `
 }
-
-export function getThemeGlowEffectCss(
-  type: keyof ThemeEffect['glow'],
-  color: string,
-) {
-  return css`
-    ${({ theme }) => theme.effect.glow[type][color]}
-  `
-}
-
-export function getThemeGlassEffectCss(color: string) {
-  return css`
-    ${({ theme }) => theme.effect.glass[color]}
-  `
-}
-
-export function getThemeDarkEffectCss(color: string) {
-  return css`
-    ${({ theme }) => theme.effect.dark[color]}
-  `
-}
-
-export const colorGradient = (color: string) =>
-  `linear-gradient(0deg, ${color}, ${color})`
 
 export function getResponsiveCss(breakpoint: BreakpointId, styles: string | SimpleInterpolation, offset: number = 1) {
   return css`

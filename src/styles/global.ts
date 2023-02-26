@@ -3,9 +3,9 @@ import { ThemeEffect } from '../themes/types'
 import {
   getBackgroundColorCss,
   getBackgroundGradientCss,
-  getThemeDarkEffectCss,
-  getThemeGlassEffectCss,
-  getThemeGlowEffectCss,
+  getThemeDarkEffect,
+  getThemeGlassEffect,
+  getThemeGlowEffect,
   getTypoCss,
 } from './utils'
 
@@ -137,10 +137,7 @@ function effectClasses(theme: DefaultTheme) {
     Object.keys(theme.effect.glow[glowType as keyof ThemeEffect['glow']]).map(
       (glowColor) => css`
           .fx-glow-${glowType}-${glowColor} {
-            ${getThemeGlowEffectCss(
-        glowType as keyof ThemeEffect['glow'],
-        glowColor,
-      )}
+            ${getThemeGlowEffect(theme, glowType as keyof ThemeEffect['glow'], glowColor)}
           }
         `,
     ),
@@ -150,7 +147,7 @@ function effectClasses(theme: DefaultTheme) {
     ${Object.keys(theme.effect.glass).map(
     (glassColor) => css`
         .fx-glass-${glassColor} {
-          ${getThemeGlassEffectCss(glassColor)}
+          ${getThemeGlassEffect(theme, glassColor)}
         }
       `,
   )}
@@ -159,7 +156,7 @@ function effectClasses(theme: DefaultTheme) {
     ${Object.keys(theme.effect.dark).map(
     (darkColor) => css`
         .fx-dark-${darkColor} {
-          ${getThemeDarkEffectCss(darkColor)}
+          ${getThemeDarkEffect(theme, darkColor)}
         }
       `,
   )}

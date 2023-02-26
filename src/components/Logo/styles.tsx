@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { StyledLogoProps } from './types'
 
 export const StyledLogoWrap = styled.span<StyledLogoProps>`
-  ${({ theme, size, label }) => {
+  ${({ theme, size, text }) => {
     const logoSize = size ? (!Number.isNaN(Number(size)) ? `${size}px` : size) : `${theme.typo.logo.size}rem`;
 
     return css`
@@ -22,7 +22,7 @@ export const StyledLogoWrap = styled.span<StyledLogoProps>`
 
       & > svg {
         box-sizing: border-box;
-        padding: ${label ? '0.1em' : '0'};
+        padding: ${text ? '0.1em' : '0'};
       }
     `
   }}

@@ -12,6 +12,7 @@ export default {
   decorators: [withDesign],
   argTypes: {
     size: { control: 'text' },
+    text: { control: 'text' },
   }
 } as ComponentMeta<typeof Logo>
 
@@ -37,7 +38,7 @@ const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />
 export const OnlyIcon = Template.bind({})
 OnlyIcon.args = {
   ...defaultArgs,
-  label: false
+  text: ''
 }
 OnlyIcon.parameters = {
   ...defaultParams,
@@ -45,12 +46,11 @@ OnlyIcon.parameters = {
 
 // ---
 
-export const WithLabel = Template.bind({})
-WithLabel.args = {
+export const WithText = Template.bind({})
+WithText.args = {
   ...defaultArgs,
-  label: true
 }
-WithLabel.parameters = {
+WithText.parameters = {
   ...defaultParams,
 }
 
@@ -59,7 +59,6 @@ WithLabel.parameters = {
 export const WithColor = Template.bind({})
 WithColor.args = {
   ...defaultArgs,
-  label: true,
   color: 'main0',
   size: '100px'
 }
@@ -72,7 +71,6 @@ WithColor.parameters = {
 export const CustomSize = Template.bind({})
 CustomSize.args = {
   ...defaultArgs,
-  label: true,
   size: '4rem'
 }
 CustomSize.parameters = {
