@@ -1,5 +1,4 @@
 import { css, SimpleInterpolation } from 'styled-components'
-import theme from '../themes/base'
 import {
   BreakpointId,
   ThemeColor,
@@ -49,19 +48,19 @@ export function getThemeGlowEffectCss(
   color: string,
 ) {
   return css`
-    ${theme.effect.glow[type][color]}
+    ${({ theme }) => theme.effect.glow[type][color]}
   `
 }
 
 export function getThemeGlassEffectCss(color: string) {
   return css`
-    ${theme.effect.glass[color]}
+    ${({ theme }) => theme.effect.glass[color]}
   `
 }
 
 export function getThemeDarkEffectCss(color: string) {
   return css`
-    ${theme.effect.dark[color]}
+    ${({ theme }) => theme.effect.dark[color]}
   `
 }
 
@@ -70,7 +69,7 @@ export const colorGradient = (color: string) =>
 
 export function getResponsiveCss(breakpoint: BreakpointId, styles: string | SimpleInterpolation, offset: number = 1) {
   return css`
-    ${({ theme }) => css`
+    ${({ theme }) => `
       @media (min-width: ${theme.breakpoint[breakpoint] + pxToRem(offset)}rem) {
         ${styles}
       }

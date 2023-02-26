@@ -1,5 +1,5 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components'
-import { ThemeGlowEffect } from '../themes/types'
+import { ThemeGlowEffect } from '../themes/types';
 
 export type GlowOpts = { width?: number; height?: number; offset?: boolean }
 

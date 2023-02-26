@@ -1,12 +1,12 @@
 import { DefaultTheme } from 'styled-components'
 import {
-  getDarkEffectCss,
-  getGlassEffectCss,
+  pxToRem,
+} from '../styles/utils'
+import {
   getGlowHoverEffectCss,
   getGlowMaxEffectCss,
   getGlowMinEffectCss,
-  pxToRem,
-} from '../styles'
+} from '../styles/glow'
 import {
   ThemeBreakpoint,
   ThemeButton,
@@ -17,6 +17,7 @@ import {
   ThemeIcon,
   ThemeTypo,
 } from './types'
+import { getDarkEffectCss, getGlassEffectCss } from '../styles/glass'
 
 const breakpoint: ThemeBreakpoint = {
   xl: pxToRem(1200),
