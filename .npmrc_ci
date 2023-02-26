@@ -1,0 +1,6 @@
+always-auth = true
+@fortawesome:registry=https://npm.fontawesome.com/
+@aleph-front:registry=https://registry.npmjs.org/
+
+//npm.fontawesome.com/:_authToken=${FONTAWESOME_NPM_AUTH_TOKEN}
+//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}

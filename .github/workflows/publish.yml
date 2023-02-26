@@ -20,23 +20,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install deps and build
-        uses: actions/setup-node@v3
-        run: |
-          npm config set "@fortawesome:registry" https://npm.fontawesome.com/
-          npm config set "//npm.fontawesome.com/:_authToken" FONTAWESOME_NPM_AUTH_TOKEN
-          npm ci
-          npm run build
-        env:
-          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
-
-      - name: "Publish package"
+      - name: "Setup node"
         uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
           scope: '@aleph-front'
-        run: |
-          npm publish --ignore-scripts --access public
+
+      - name: "Prepare npmrc"
+        run: envsubst  < .npmrc_ci > .npmrc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN}}
+
+      - name: "Install deps"
+        run: npm ci
+
+      - name: "Build"
+        run: npm run build
+
+      - name: "Publish package"
+        run: npm publish --ignore-scripts --access public
