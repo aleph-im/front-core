@@ -58,7 +58,7 @@ export function getTypoCss(typo: keyof ThemeTypo) {
 
 export function getResponsiveCss(breakpoint: BreakpointId, styles: string | SimpleInterpolation, offset: number = 1) {
   return css`
-    ${({ theme }) => `
+    ${({ theme }) => css`
       @media (min-width: ${theme.breakpoint[breakpoint] + pxToRem(offset)}rem) {
         ${styles}
       }

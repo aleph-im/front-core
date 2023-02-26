@@ -1,8 +1,9 @@
 import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
-import { ThemeEffect } from '../themes/types'
+import { BreakpointId, ThemeEffect } from '../themes/types'
 import {
   getBackgroundColorCss,
   getBackgroundGradientCss,
+  getResponsiveCss,
   getThemeDarkEffect,
   getThemeGlassEffect,
   getThemeGlowEffect,
@@ -33,53 +34,71 @@ export const GlobalStyle = createGlobalStyle`
         padding: ${theme.font.size.xxl}rem ${theme.font.size.lg}rem;
       }
 
-      ${displayClasses(theme)}
       ${colorClasses(theme)}
       ${typoClasses(theme)}
       ${effectClasses(theme)}
       ${marginPaddingClasses(theme)}
+      ${displayClasses(theme)}
     `
   }}
 `
 
 function displayClasses(theme: DefaultTheme) {
+  const breakpointId = Object.entries(theme.breakpoint).sort(([, av], [, bv]) => av - bv).map(([k]) => k as BreakpointId)
+
+  function getClasses(bp: string) {
+    bp = bp ? `-${bp}` : ''
+
+    return css`
+      .d-block${bp} { display: block; }
+      .d-flex${bp} { display: flex; }
+      .d-iblock${bp} { display: inline-block; }
+      .d-iflex${bp} { display: inline-flex; }
+      .d-none${bp} { display: none; }
+    `
+  }
+
+  const defaultCss = getClasses('')
+  const responsiveCss = breakpointId.map(bp => getResponsiveCss(bp, getClasses(bp)))
+
   return css`
-    .d-block { display: block; }
-    .d-flex { display: flex; }
-    .d-iblock { display: inline-block; }
-    .d-iflex { display: inline-flex; }
-    .d-none { display: none; }
-  `
+     ${defaultCss}
+     ${responsiveCss}
+   `
+
 }
 
 function marginPaddingClasses(theme: DefaultTheme) {
-  return css`
-    .m-0 { margin: 0; }
-    .mt-0, .my-0 { margin-top: 0; }
-    .mb-0, .my-0 { margin-bottom: 0; }
-    .ml-0, .mx-0 { margin-left: 0; }
-    .mr-0, .mx-0 { margin-right: 0; }
+  const breakpointId = Object.entries(theme.breakpoint).sort(([, av], [, bv]) => av - bv).map(([k]) => k as BreakpointId)
+  const sizes = [[0, 0], ...Object.entries(theme.font.size)].sort(([, av], [, bv]) => av - bv).map(([k, v]) => [k as string, (v ? `${v}rem` : '0') as string])
 
-    .p-0 { padding: 0; }
-    .pt-0, .py-0 { padding-top: 0; }
-    .pb-0, .py-0 { padding-bottom: 0; }
-    .pl-0, .px-0 { padding-left: 0; }
-    .pr-0, .px-0 { padding-right: 0; }
+  function getClasses(bp: string, k: string, v: string) {
+    bp = bp ? `-${bp}` : ''
 
-    ${Object.entries(theme.font.size).map(([k, v]) => `
-      .m-${k} { margin: ${v}rem; }
-      .mt-${k}, .my-${k} { margin-top: ${v}rem; }
-      .mb-${k}, .my-${k} { margin-bottom: ${v}rem; }
-      .ml-${k}, .mx-${k} { margin-left: ${v}rem; }
-      .mr-${k}, .mx-${k} { margin-right: ${v}rem; }
+    return css`
+      .m-${k}${bp} { margin: ${v}; }
+      .mt-${k}${bp}, .my-${k}${bp} { margin-top: ${v}; }
+      .mb-${k}${bp}, .my-${k}${bp} { margin-bottom: ${v}; }
+      .ml-${k}${bp}, .mx-${k}${bp} { margin-left: ${v}; }
+      .mr-${k}${bp}, .mx-${k}${bp} { margin-right: ${v}; }
   
-      .p-${k} { padding: ${v}rem; }
-      .pt-${k}, .py-${k} { padding-top: ${v}rem; }
-      .pb-${k}, .py-${k} { padding-bottom: ${v}rem; }
-      .pl-${k}, .px-${k} { padding-left: ${v}rem; }
-      .pr-${k}, .px-${k} { padding-right: ${v}rem; }
-      `
-  ).join('\n')}
+      .p-${k}${bp} { padding: ${v}; }
+      .pt-${k}${bp}, .py-${k}${bp} { padding-top: ${v}; }
+      .pb-${k}${bp}, .py-${k}${bp} { padding-bottom: ${v}; }
+      .pl-${k}${bp}, .px-${k}${bp} { padding-left: ${v}; }
+      .pr-${k}${bp}, .px-${k}${bp} { padding-right: ${v}; }
+    `
+  }
+
+  const defaultCss = sizes.map(([k, v]) => getClasses('', k, v))
+
+  const responsiveCss = breakpointId.map(bp => getResponsiveCss(bp,
+    sizes.map(([k, v]) => getClasses(bp, k, v))
+  ))
+
+  return css`
+    ${defaultCss}
+    ${responsiveCss}
   `
 }
 
@@ -92,17 +111,19 @@ function colorClasses(theme: DefaultTheme) {
         ${getBackgroundColorCss(color)}
       }
     `,
-  )}
+  )
+    }
 
     /* GRADIENTS */
     ${Object.keys(theme.gradient).map(
-    (color) => css`
+      (color) => css`
       .gr-${color} {
         ${getBackgroundGradientCss(color)}
       }
     `,
-  )}
-  `
+    )
+    }
+    `
 }
 
 function typoClasses(theme: DefaultTheme) {
@@ -117,17 +138,19 @@ function typoClasses(theme: DefaultTheme) {
         margin-bottom: ${theme.font.size.lg}rem;
       }
     `,
-  )}
+  )
+    }
 
     /* FONT-SIZE */
      ${Object.entries(theme.font.size).map(
-    ([k, v]) => css`
+      ([k, v]) => css`
       .fs-${k} {
         font-size: ${v}rem;
       }
     `,
-  )}
-  `
+    )
+    }
+    `
 }
 
 function effectClasses(theme: DefaultTheme) {
@@ -141,26 +164,29 @@ function effectClasses(theme: DefaultTheme) {
           }
         `,
     ),
-  )}
+  )
+    }
 
     /* GLASS */
     ${Object.keys(theme.effect.glass).map(
-    (glassColor) => css`
+      (glassColor) => css`
         .fx-glass-${glassColor} {
           ${getThemeGlassEffect(theme, glassColor)}
         }
       `,
-  )}
+    )
+    }
 
     /* GLASS */
     ${Object.keys(theme.effect.dark).map(
-    (darkColor) => css`
+      (darkColor) => css`
         .fx-dark-${darkColor} {
           ${getThemeDarkEffect(theme, darkColor)}
         }
       `,
-  )}
-  `
+    )
+    }
+    `
 }
 
 export default GlobalStyle

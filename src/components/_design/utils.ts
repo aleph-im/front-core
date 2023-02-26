@@ -21,4 +21,5 @@ export const StoryBookSubheader = styled.h2`
   line-height: 57px;
   border-bottom: 2px solid white;
   margin-bottom: 74px;
+  margin-top: 24px;
 `

@@ -2,6 +2,8 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
+import styled from 'styled-components'
+import theme from '../../themes/base'
 
 export default {
   title: 'Design/Atoms/Responsive',
@@ -20,13 +22,70 @@ const defaultParams = {
 // ---
 
 const ResponsiveTemplate: ComponentStory<any> = (args) => {
+  const Wrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+  `
+
+  const Container = styled.div`
+    display: block;
+    overflow: hidden;
+    background-color: #cccccc33;
+    margin: 1rem;
+  `
+
+  const Item = styled.span`
+    background-color: #fabada88;
+  `
+
   return (
     <div>
       <StoryBookHeader>Responsive Styles</StoryBookHeader>
       <div>
-        <StoryBookSubheader>Margins</StoryBookSubheader>
-        <span className="tp-h7">margin xs</span>
-        <span className="tp-h7">H7 - Rubik - headers</span>
+        <StoryBookSubheader>Responsive margins</StoryBookSubheader>
+        <Wrapper>
+          <Container>
+            <Item className="tp-h7 p-0 m-xl m-lg-xs m-md-sm m-sm-md m-xs-lg m-0-xl">from xl to 0</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 p-0 m-0 m-xs-xs m-sm-sm m-md-md m-lg-lg m-xl-xl">from 0 to xl</Item>
+          </Container>
+        </Wrapper>
+      </div>
+      <div>
+        <StoryBookSubheader>Responsive margins</StoryBookSubheader>
+        <Wrapper>
+          <Container>
+            <Item className="tp-h7 m-0 p-xl p-lg-xs p-md-sm p-sm-md p-xs-lg p-0-xl">from xl to 0</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 m-0 p-0 p-xs-xs p-sm-sm p-md-md p-lg-lg p-xl-xl">from 0 to xl</Item>
+          </Container>
+        </Wrapper>
+      </div>
+      <div>
+        <StoryBookSubheader>Display</StoryBookSubheader>
+        <Wrapper>
+          <Container>
+            <Item className="tp-h7 m-0 d-block d-none-xs">visible 0</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 m-0 d-none d-block-xs d-none-sm">visible xs</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 m-0 d-none d-block-sm d-none-md">visible sm</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 m-0 d-none d-block-md d-none-lg">visible md</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 m-0 d-none d-block-lg d-none-xl">visible lg</Item>
+          </Container>
+          <Container>
+            <Item className="tp-h7 m-0 d-none d-block-xl">visible xl</Item>
+          </Container>
+        </Wrapper>
+
       </div>
     </div>
   )
@@ -39,5 +98,4 @@ Responsive.args = {
 Responsive.parameters = {
   ...defaultParams,
   controls: { include: [], hideNoControlsWarning: true },
-
 }
