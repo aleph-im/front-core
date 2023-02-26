@@ -3,7 +3,7 @@ import {
   FlattenSimpleInterpolation,
 } from 'styled-components'
 
-export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export type ThemeBreakpoint = Record<BreakpointId, number>
 
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -33,7 +33,7 @@ export type Typo = {
   family: string
   weight: number
   style: string
-  lineHeight: number 
+  lineHeight: number
 }
 export type ThemeTypo = Record<TypoKind, Typo>
 
