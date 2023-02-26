@@ -39,6 +39,9 @@ jobs:
         run: npm run build
 
       - name: "Publish package"
-        run: npm publish
+        run: |
+          npm config set "@aleph-front:registry" https://registry.npmjs.org/
+          npm config set "//registry.npmjs.org/:_authToken" NPM_TOKEN
+          npm publish --ignore-scripts --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
