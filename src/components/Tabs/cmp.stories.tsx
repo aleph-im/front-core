@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 import Tabs from './cmp'
-import { TabsProps } from './types'
+import { TabsProps, TabType } from './types'
 
 export default {
   title: 'Components/UI/Tabs',
@@ -21,7 +21,7 @@ const defaultArgs: Partial<TabsProps> = {
 }
 
 
-const tabs = [
+const tabs: TabType[] = [
   {
     name: 'General',
     component: (
@@ -48,6 +48,8 @@ const tabs = [
         </p>
       </div>
     ),
+    label: '(3)',
+    labelPosition: 'bottom',
   },
   {
     name: 'Billing',

@@ -19,11 +19,13 @@ const defaultParams = {
   controls: { exclude: ['color', 'size'] },
 }
 
+/* eslint-disable react/jsx-key */
 const navLinks = [
   <a href="#">Home</a>,
   <a href="#">Services</a>,
   <a href="#">Cloud Storage</a>,
 ]
+/* eslint-enable react/jsx-key */
 
 // ---
 
