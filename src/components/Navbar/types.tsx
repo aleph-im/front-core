@@ -1,14 +1,14 @@
-import Button from '../Button'
-
 export type NavbarProps = {
   withLabel?: boolean
   withLogo?: boolean
   navLinks?: React.ReactNode[]
   navButtons?: React.ReactNode[]
+
+  className?: string
 }
 
 export type ResponsiveNavBarProps = {
-    isOpen?: boolean
+  isOpen?: boolean
 }
 
 export type NavlinkProps = {

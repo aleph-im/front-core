@@ -37,10 +37,9 @@ const navButtons = [
 ]
 /* eslint-enable react/jsx-key */
 
-
 const Template: ComponentStory<typeof Navbar> = (args) => (
   <>
-    <Navbar {...args} navLinks={navLinks} navButtons={navButtons}  />
+    <Navbar {...args} navLinks={navLinks} navButtons={navButtons} />
 
     <h1>A random title</h1>
 

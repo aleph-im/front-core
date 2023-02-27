@@ -3,13 +3,8 @@ import { NavlinkProps, ResponsiveNavBarProps } from './types'
 import { getResponsiveCss } from '../../styles'
 
 // Main container
-export const StyledNavbarWrapper = styled.div.attrs(props => {
-  return {
-    ...props,
-    className: `${props.className || ''} px-xs-xs px-sm-sm px-md-md px-lg-lg px-xl-xl px-xxl-xxl`
-  }
-})`
-    ${({ theme }) => {
+export const StyledNavbarWrapper = styled.div`
+  ${({ theme }) => {
     return css`
       position: sticky;
       top: 0;
@@ -32,8 +27,6 @@ export const StyledHeadingWrapper = styled.div<ResponsiveNavBarProps>`
       align-items: center;
       justify-content: space-between;
       height: 80px;
-      padding-left: 0;
-      padding-right: 25px;
       background-color: ${isOpen ? '#07071366' : theme.color.base1};
 
       ${getResponsiveCss('md', css`
