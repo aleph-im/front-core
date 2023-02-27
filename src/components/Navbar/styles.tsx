@@ -3,38 +3,43 @@ import { NavlinkProps, ResponsiveNavBarProps } from './types'
 import { getResponsiveCss } from '../../styles'
 
 // Main container
-export const StyledNavbarWrapper = styled.div`
+export const StyledNavbarWrapper = styled.div.attrs(props => {
+  return {
+    ...props,
+    className: `${props.className || ''} px-xs-xs px-sm-sm px-md-md px-lg-lg px-xl-xl px-xxl-xxl`
+  }
+})`
     ${({ theme }) => {
-        return css`
-          position: sticky;
-          top: 0;
-          background-color: ${theme.color.base1};
+    return css`
+      position: sticky;
+      top: 0;
+      background-color: ${theme.color.base1};
 
-          ${getResponsiveCss('md', css`
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-            `
-          )}
-        `
-    }}
+      ${getResponsiveCss('md', css`
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      `)}
+    `
+  }}
 `
-
 
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingWrapper = styled.div<ResponsiveNavBarProps>`
-  ${({ theme, isOpen}) => {
+  ${({ theme, isOpen }) => {
     return css`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 25px;
+      height: 80px;
+      padding-left: 0;
+      padding-right: 25px;
       background-color: ${isOpen ? '#07071366' : theme.color.base1};
 
       ${getResponsiveCss('md', css`
           background-color: ${theme.color.base1};
         `,
-      )}
+    )}
     `
   }}
 `
@@ -48,7 +53,7 @@ export const StyledBurgerIconWrapper = styled.div`
       ${getResponsiveCss('md', css`
           display: none;
         `
-      )}
+    )}
     `
   }}
 `
@@ -66,7 +71,7 @@ export const StyledNavWrapper = styled.nav<ResponsiveNavBarProps>`
           align-items: center;
           padding: 0;
         `,
-      )}
+    )}
     `
   }}
 `
@@ -74,7 +79,7 @@ export const StyledNavWrapper = styled.nav<ResponsiveNavBarProps>`
 // A <ul> element, wrapping the links (text and buttons)
 export const StyledNavlinks = styled.ul`
     ${() => {
-        return css`
+    return css`
           display: list-item;
           list-style: none;
           padding: 0 25px;
@@ -93,9 +98,9 @@ export const StyledNavlinks = styled.ul`
                 margin-top: 0;
               }
             `,
-          )}
+    )}
         `
-    }}
+  }}
 `
 
 // A <li> element, wrapping the links (text only), separated by a slash
@@ -116,18 +121,18 @@ export const StyledNavlink = styled.li<NavlinkProps>`
           margin: 0;
 
           ${withSlash
-            ? css`
+        ? css`
                 &:not(:last-child)::after {
                   content: '/';
                   display: inline-block;
                   padding: 0 1rem;
                 }
               `
-            : css`
+        : css`
                 padding: 0 1rem;
               `}
         `,
-      )}
+    )}
     `
   }}
 `
