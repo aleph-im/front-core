@@ -3,21 +3,14 @@ import {
   pxToRem,
 } from '../styles/utils'
 import {
-  getGlowHoverEffectCss,
-  getGlowMaxEffectCss,
-  getGlowMinEffectCss,
-} from '../styles/glow'
-import {
   ThemeBreakpoint,
   ThemeButton,
   ThemeColor,
-  ThemeEffect,
   ThemeFont,
   ThemeGradient,
   ThemeIcon,
   ThemeTypo,
 } from './types'
-import { getDarkEffectCss, getGlassEffectCss } from '../styles/glass'
 
 // const breakpoint: ThemeBreakpoint = {
 //   xxl: pxToRem(1400),
@@ -86,40 +79,6 @@ const gradient: ThemeGradient = {
     stops: [0, 100],
     deg: 90,
     fn: 'linear-gradient(90deg, #F17E4C 0%, #98203D 90.62%)',
-  },
-}
-
-const effect: ThemeEffect = {
-  glow: {
-    max: {
-      main0: getGlowMaxEffectCss('main0'),
-      main1: getGlowMaxEffectCss('main1'),
-      main2: getGlowMaxEffectCss('main2'),
-      extra0: getGlowMaxEffectCss('extra0'),
-      extra1: getGlowMaxEffectCss('extra1'),
-    },
-    min: {
-      main0: getGlowMinEffectCss('main0'),
-      main1: getGlowMinEffectCss('main1'),
-      main2: getGlowMinEffectCss('main2'),
-    },
-    hover: {
-      main0: getGlowHoverEffectCss('main0'),
-      main1: getGlowHoverEffectCss('main1'),
-      main2: getGlowHoverEffectCss('main2'),
-    },
-  },
-  glass: {
-    main0: getGlassEffectCss('main0'),
-    main1: getGlassEffectCss('main1'),
-    main2: getGlassEffectCss('main2'),
-    base0: getGlassEffectCss('base0'),
-    base1: getGlassEffectCss('base1'),
-    base2: getGlassEffectCss('base2'),
-    colored0: getGlassEffectCss('colored0'),
-  },
-  dark: {
-    main0: getDarkEffectCss('main0'),
   },
 }
 
@@ -289,7 +248,6 @@ const theme: DefaultTheme = {
   icon,
   button,
   gradient,
-  effect,
   breakpoint,
 }
 

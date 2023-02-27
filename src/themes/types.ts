@@ -1,8 +1,3 @@
-import {
-  FlattenInterpolation,
-  FlattenSimpleInterpolation,
-} from 'styled-components'
-
 export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export type ThemeBreakpoint = Record<BreakpointId, number>
 
@@ -76,44 +71,6 @@ export type ThemeColor = {
   text: string
 }
 
-export type ThemeGlowEffectCss =
-  | FlattenSimpleInterpolation
-  | FlattenInterpolation<any>
-  | undefined
-
-export type ThemeGlowEffect = {
-  [k: string]: ThemeGlowEffectCss
-
-  main0: ThemeGlowEffectCss
-  main1: ThemeGlowEffectCss
-  main2: ThemeGlowEffectCss
-
-  extra0: ThemeGlowEffectCss
-  extra1: ThemeGlowEffectCss
-}
-
-export type ThemeGlassEffectCss = ThemeGlowEffectCss
-
-export type ThemeGlassEffect = {
-  [k: string]: ThemeGlassEffectCss
-
-  main0: ThemeGlassEffectCss
-  main1: ThemeGlassEffectCss
-  main2: ThemeGlassEffectCss
-
-  base0: ThemeGlassEffectCss
-  base1: ThemeGlassEffectCss
-  base2: ThemeGlassEffectCss
-}
-
-export type ThemeDarkEffectCss = ThemeGlassEffectCss
-
-export type ThemeDarkEffect = {
-  [k: string]: ThemeDarkEffectCss
-
-  main0: ThemeDarkEffectCss
-}
-
 export type ThemeFont = {
   url: string
   size: {
@@ -153,17 +110,6 @@ export type ThemeIcon = {
     xs: number
   }
 }
-
-export type ThemeEffect = {
-  glow: {
-    max: ThemeGlowEffect
-    min: Partial<ThemeGlowEffect>
-    hover: Partial<ThemeGlowEffect>
-  }
-  glass: ThemeGlassEffect
-  dark: ThemeDarkEffect
-}
-
 export interface CoreTheme {
   name: string
   // palette: Record<string, string[]>
@@ -173,6 +119,5 @@ export interface CoreTheme {
   icon: ThemeIcon
   button: ThemeButton
   gradient: ThemeGradient
-  effect: ThemeEffect
   breakpoint: ThemeBreakpoint
 }

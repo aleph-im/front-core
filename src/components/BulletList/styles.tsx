@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { getGlowMinEffectCss } from '../../styles'
 import Icon, { IconProps } from '../Icon'
 import { BulletItemKind, BulletListSize } from './types'
 
@@ -49,7 +50,7 @@ export const StyledBulletItemIconWrap = styled.div<StyledBulletItemIconWrapProps
         return css`
           ${commonCss}
           background-image: ${theme.gradient.main0.fn};
-          ${theme.effect.glow.min.main0};
+          ${getGlowMinEffectCss('main0')};
         `
       case 'error':
         return css`

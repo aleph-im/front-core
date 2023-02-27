@@ -1,13 +1,12 @@
-import { css, FlattenInterpolation } from 'styled-components'
-import { ThemeDarkEffect, ThemeGlassEffect } from '../themes/types'
+import { css } from 'styled-components'
 import { calculateBoxShadowPossition } from './glow'
 
 export type GlassOpts = { width?: number; height?: number; offset?: boolean }
 
 export function getGlassEffectCss(
-  color: keyof ThemeGlassEffect,
+  color: string,
   opts?: GlassOpts,
-): FlattenInterpolation<any> | undefined {
+) {
   return css`
     ${({ theme }) => {
       if (color === 'main0' || color === 'main1' || color === 'main2') {
@@ -34,7 +33,7 @@ export function getGlassEffectCss(
 
         switch (color) {
           case 'main0':
-            return `
+            return css`
               ${bg}
               box-shadow: 
                 inset ${bss.s1} #494DA966,
@@ -45,7 +44,7 @@ export function getGlassEffectCss(
                 inset ${bss.s6} #00D1FF2E;
             `
           case 'main1':
-            return `
+            return css`
               ${bg}
               box-shadow:
                 inset ${bss.s1} #4462904D,
@@ -56,7 +55,7 @@ export function getGlassEffectCss(
                 inset ${bss.s6} #00FFBD2E;
             `
           case 'main2':
-            return `
+            return css`
               ${bg}
               box-shadow:
                 inset ${bss.s1} #FF5C0017,
@@ -78,7 +77,7 @@ export function getGlassEffectCss(
 
         switch (color) {
           case 'base0':
-            return `
+            return css`
               border: 1px solid #FFFFFF1A;
               background-image:
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
@@ -86,19 +85,19 @@ export function getGlassEffectCss(
                 linear-gradient(0deg, ${theme.color.background}, ${theme.color.background});
             `
           case 'base1':
-            return `
+            return css`
               background-image:
                 linear-gradient(90.96deg, #1D1C3780 54.81%, #1D1C3700 103.58%);
             `
           case 'base2':
-            return `
+            return css`
               background: ${theme.color.main0}03;
               box-shadow: 
                 inset ${bss.s1} #DEEFFF05,
                 inset ${bss.s2} #5E9DD705;
             `
           case 'colored0':
-            return `
+            return css`
               border: 1px solid #FFFFFF1A;
               background: 
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
@@ -113,19 +112,18 @@ export function getGlassEffectCss(
 }
 
 export function getDarkEffectCss(
-  color: keyof ThemeDarkEffect,
+  color: string,
   opts?: GlassOpts,
-): FlattenInterpolation<any> | undefined {
+) {
   return css`
     ${({ theme }) => {
-
       const bs = {
         s1: [0, 0.0052, 0.2604, 0],
       }
 
       const bss = calculateBoxShadowPossition(bs, opts)
 
-      return `
+      return css`
         background-color: ${theme.color.main0}03;
         box-shadow: ${bss.s1} #00000080;
       `

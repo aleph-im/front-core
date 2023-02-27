@@ -1,12 +1,11 @@
 import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
-import { BreakpointId, ThemeEffect } from '../themes/types'
+import { BreakpointId } from '../themes/types'
+import { getDarkEffectCss, getGlassEffectCss } from './glass'
+import { getGlowHoverEffectCss, getGlowMaxEffectCss, getGlowMinEffectCss } from './glow'
 import {
   getBackgroundColorCss,
   getBackgroundGradientCss,
   getResponsiveCss,
-  getThemeDarkEffect,
-  getThemeGlassEffect,
-  getThemeGlowEffect,
   getTypoCss,
 } from './utils'
 
@@ -159,39 +158,48 @@ function typoClasses(theme: DefaultTheme) {
 }
 
 function effectClasses(theme: DefaultTheme) {
+  const glowColors = ['main0', 'main1', 'main2']
+  const glowMaxColors = ['main0', 'main1', 'main2', 'extra0', 'extra1']
+  const glassColors = ['main0', 'main1', 'main2', 'base0', 'base1', 'base2', 'colored0']
+  const darkColors = ['main0']
+
+  const glowHoverCss = glowColors.flatMap((color) => css`
+    .fx-glow-hover-${color} {
+      ${getGlowHoverEffectCss(color)}
+    }
+  `)
+
+  const glowMinCss = glowColors.flatMap((color) => css`
+    .fx-glow-min-${color} {
+      ${getGlowMinEffectCss(color)}
+    }
+  `)
+
+  const glowMaxCss = glowMaxColors.flatMap((color) => css`
+    .fx-glow-max-${color} {
+      ${getGlowMaxEffectCss(color)}
+    }
+  `)
+
+  const glassCss = glassColors.flatMap((color) => css`
+    .fx-glass-${color} {
+      ${getGlassEffectCss(color)}
+    }
+  `)
+
+  const darkCss = darkColors.flatMap((color) => css`
+    .fx-dark-${color} {
+      ${getDarkEffectCss(color)}
+    }
+  `)
+
   return css`
-    /* GLOW */
-    ${Object.keys(theme.effect.glow).flatMap((glowType) =>
-    Object.keys(theme.effect.glow[glowType as keyof ThemeEffect['glow']]).map(
-      (glowColor) => css`
-          .fx-glow-${glowType}-${glowColor} {
-            ${getThemeGlowEffect(theme, glowType as keyof ThemeEffect['glow'], glowColor)}
-          }
-        `,
-    ),
-  )
-    }
-
-    /* GLASS */
-    ${Object.keys(theme.effect.glass).map(
-      (glassColor) => css`
-        .fx-glass-${glassColor} {
-          ${getThemeGlassEffect(theme, glassColor)}
-        }
-      `,
-    )
-    }
-
-    /* GLASS */
-    ${Object.keys(theme.effect.dark).map(
-      (darkColor) => css`
-        .fx-dark-${darkColor} {
-          ${getThemeDarkEffect(theme, darkColor)}
-        }
-      `,
-    )
-    }
-    `
+    ${glowHoverCss}
+    ${glowMinCss}
+    ${glowMaxCss}
+    ${glassCss}
+    ${darkCss}
+  `
 }
 
 export default GlobalStyle
