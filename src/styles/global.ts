@@ -26,6 +26,10 @@ export const GlobalStyle = createGlobalStyle`
         color: ${theme.color.text};
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
       p {
         color: ${theme.color.text}b3;
         line-height: 1.625rem
