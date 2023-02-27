@@ -22,8 +22,7 @@ export const StyledLogoWrap = styled.span<StyledLogoProps>`
 
       & > svg {
         box-sizing: border-box;
-        padding: ${text ? '0.1em' : '0'};
-        padding-left: 0;
+        font-size: ${text ? '0.8em' : '1em'};
       }
     `
   }}
