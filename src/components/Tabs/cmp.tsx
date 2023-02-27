@@ -28,7 +28,7 @@ const Tabs = ({
           const getTabLabel = () => {
             if (tab.label !== undefined) {
               return (
-                <StyledTabLabel>
+                <StyledTabLabel labelPosition={tab.labelPosition}>
                   {tab.label}
                 </StyledTabLabel>
               )

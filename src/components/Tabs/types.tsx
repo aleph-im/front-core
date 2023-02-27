@@ -1,9 +1,13 @@
+export type TabLabelProps = {
+  labelPosition?: 'top' | 'bottom'
+}
+
 export type TabType = {
   name: string
   component: JSX.Element
   disabled?: boolean
   label?: string
-}
+} & TabLabelProps
 
 export type TabsProps = {
   tabs: TabType[]
