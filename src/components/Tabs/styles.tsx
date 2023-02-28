@@ -16,8 +16,6 @@ export const StyledTabsItem = styled.div<StyledTabItemProps>`
       ${ !isSelected && 'cursor: pointer;' }
       color: ${isDisabled ? theme.color.base0 + '66' : theme.color.base0};
       display: flex;
-      line-height: 1rem;
-      height: 1rem;
       user-select: none;
 
       &::after {
@@ -36,7 +34,6 @@ export const StyledTabsItem = styled.div<StyledTabItemProps>`
 
 export const StyledSelectedTab = styled(TextGradient)`
   font-weight: bold;
-  margin: 0;
   line-height: unset;
 `
 
