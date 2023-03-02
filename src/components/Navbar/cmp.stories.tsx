@@ -31,7 +31,7 @@ const navLinks = [
   <a href="#">Team</a>,
 ]
 const navButtons = [
-  <Button as="a" variant="secondary" color="main0" kind="neon" size="regular">
+  <Button as="button" variant="secondary" color="main0" kind="neon" size="regular">
     Whitepaper
   </Button>
 ]

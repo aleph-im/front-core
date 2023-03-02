@@ -2,6 +2,7 @@ import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
 import { BreakpointId } from '../themes/types'
 import { getDarkEffectCss, getGlassEffectCss } from './glass'
 import { getGlowHoverEffectCss, getGlowMaxEffectCss, getGlowMinEffectCss } from './glow'
+import { colorFilled, getGradientNoiseEffectCss, getPlainNoiseEffectCss, gradientFilled } from './noise'
 import {
   getBackgroundColorCss,
   getBackgroundGradientCss,
@@ -162,6 +163,9 @@ function effectClasses(theme: DefaultTheme) {
   const glowMaxColors = ['main0', 'main1', 'main2', 'extra0', 'extra1']
   const glassColors = ['main0', 'main1', 'main2', 'base0', 'base1', 'base2', 'colored0']
   const darkColors = ['main0']
+  const noisePlainColors = Object.keys(colorFilled)
+  const noiseGradientColors = Object.keys(gradientFilled)
+
 
   const glowHoverCss = glowColors.flatMap((color) => css`
     .fx-glow-hover-${color} {
@@ -193,12 +197,26 @@ function effectClasses(theme: DefaultTheme) {
     }
   `)
 
+  const noisePlainCss = noisePlainColors.map((color) => css`
+    .fx-noise-${color} {
+      ${getPlainNoiseEffectCss(color)}
+    }
+  `)
+
+  const noiseGradientCss = noiseGradientColors.map((color) => css`
+    .fx-noise-${color} {
+      ${getGradientNoiseEffectCss(color)}
+    }
+  `)
+
   return css`
     ${glowHoverCss}
     ${glowMinCss}
     ${glowMaxCss}
     ${glassCss}
     ${darkCss}
+    ${noisePlainCss}
+    ${noiseGradientCss}
   `
 }
 

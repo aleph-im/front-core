@@ -28,6 +28,12 @@ const Circle = styled.div`
   display: inline-block;
 `
 
+const Rect = styled.div`
+  width: 624px;
+  height: 173px;
+  margin: 10px 12px;
+`
+
 const ColorsTemplate: ComponentStory<any> = (args) => {
   return (
     <>
@@ -98,6 +104,18 @@ const ColorsTemplate: ComponentStory<any> = (args) => {
       <div>
         <h3>dark-hover</h3>
         <Circle className="fx-dark-main0"></Circle>
+      </div>
+      <div>
+        <h3>Noise (plain)</h3>
+        <Rect className="fx-noise-base"></Rect>
+        <Rect className="fx-noise-dark"></Rect>
+        <Rect className="fx-noise-light"></Rect>
+      </div>
+      <div>
+        <h3>Noise (gradient)</h3>
+        <Circle className="fx-noise-main0"></Circle>
+        <Circle className="fx-noise-main1"></Circle>
+        <Circle className="fx-noise-main2"></Circle>
       </div>
     </>
   )
