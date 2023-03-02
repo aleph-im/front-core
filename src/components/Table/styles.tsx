@@ -2,16 +2,12 @@ import styled, { css } from 'styled-components'
 import { StyledTableProps } from './types'
 
 export const StyledTable = styled.table<StyledTableProps>`
-  ${({ bordered = false }) => css`
+  ${({ border }) => {
+  const hasBorder = border !== 'none'
+  return css`
     width: 100%;
-
-    ${bordered
-      ? css`
-          border-collapse: separate;
-        `
-      : css`
-          border-collapse: collapse;
-        `}
+    border-collapse: collapse;
+    border-spacing: 0 10px;
 
     thead {
       text-transform: uppercase;
@@ -22,9 +18,9 @@ export const StyledTable = styled.table<StyledTableProps>`
       text-align: left;
       padding: 15px 0;
 
-      ${bordered &&
+      ${hasBorder &&
       css`
-        border-bottom: 1px solid #ffffff22;
+        border-bottom: 1px ${border} #ffffff22;
       `}
     }
 
@@ -33,10 +29,11 @@ export const StyledTable = styled.table<StyledTableProps>`
     }
 
     tr {
-      ${bordered &&
+      ${hasBorder &&
       css`
-        border-bottom: 1px solid #ffffff22;
+        border-bottom: 1px ${border} #ffffff22;
       `}
     }
   `}
+}
 `

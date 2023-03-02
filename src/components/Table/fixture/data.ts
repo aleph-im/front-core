@@ -24,17 +24,6 @@ export const data = [
     gender: 'female',
   },
   {
-    name: 'Edward Smith',
-    age: 35,
-    job: 'DevOps Engineer',
-    pets: {
-      dogs: 1,
-      cats: 0,
-      turtles: 0,
-    },
-    gender: 'undisclosed',
-  },
-  {
     name: 'Emily Smith',
     age: 28,
     job: 'Product Manager',
