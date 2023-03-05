@@ -1,6 +1,6 @@
 import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
 import { BreakpointId } from '../themes/types'
-import { getDarkEffectCss, getGlassEffectCss } from './glass'
+import { getDarkEffectCss, getGlassEffectBorderCss, getGlassEffectCss } from './glass'
 import { getGlowHoverEffectCss, getGlowMaxEffectCss, getGlowMinEffectCss } from './glow'
 import { colorFilled, getGradientNoiseEffectCss, getNoiseSvgMaskCss, getPlainNoiseEffectCss, gradientFilled } from './noise'
 import {
@@ -194,6 +194,10 @@ function effectClasses(theme: DefaultTheme) {
   const glassCss = glassColors.flatMap((color) => css`
     .fx-glass-${color} {
       ${getGlassEffectCss(color)}
+    }
+
+    .fx-glass-border-${color} {
+      ${getGlassEffectBorderCss(color)}
     }
   `)
 
