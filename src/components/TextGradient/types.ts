@@ -6,10 +6,12 @@ export type TextGradientProps = {
   color?: string
   type?: TypoKind
   className?: string
+  as?: TypoKind | 'span'
 }
 
 export type StyledTextGradientProps = {
   size?: number | string
   color: string
   typo: Typo
+  as: TypoKind | 'span'
 }
