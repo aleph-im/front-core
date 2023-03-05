@@ -5,7 +5,7 @@ export type ButtonKind = 'neon' | 'flat'
 export type ButtonSize = 'regular' | 'big'
 export type ButtonTag = 'button' | 'a'
 
-export type ButtonProps<T = any> = AnchorHTMLAttributes<T> & ButtonHTMLAttributes<T> & {
+export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
   variant: ButtonVariant
   kind: ButtonKind

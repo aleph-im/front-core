@@ -10,7 +10,7 @@ export type ButtonProps = {
   buttonStyle?: 'wrapped' | 'stuck'
 }
 
-export type TextInputProps<T = any> = InputHTMLAttributes<T> & {
+export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string
   label?: string
   placeholder?: string

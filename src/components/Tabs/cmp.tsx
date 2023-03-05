@@ -12,7 +12,8 @@ const noop = () => null
 const Tabs = ({
   tabs,
   defaultSelected = 0,
-  onTabChange = noop
+  onTabChange = noop,
+  ...rest
 }: TabsProps) => {
   const safeDefault = (tabs[defaultSelected] && !tabs[defaultSelected].disabled) ? defaultSelected : 0
   const [selected, setSelected] = useState<number>(safeDefault)
@@ -23,7 +24,7 @@ const Tabs = ({
 
   return (
     <>
-      <StyledTabsHeader role="tablist">
+      <StyledTabsHeader role="tablist" {...rest}>
         {tabs.map((tab, i) => {
           const getTabLabel = () => {
             if (tab.label !== undefined) {
@@ -72,7 +73,7 @@ const Tabs = ({
               {tab.name} {getTabLabel()}
             </StyledTabsItem>
           )
-         })}
+        })}
       </StyledTabsHeader>
       <div role="tabpanel">
         {tabs[selected].component}

@@ -2,9 +2,9 @@ import React from 'react'
 import { BulletListProps, BulletItemProps } from './types'
 import { StyledBulletList, StyledBulletItemIcon, StyledBulletItem, StyledBulletItemIconWrap } from './styles'
 
-export const BulletItem = ({ kind, size, title, text }: BulletItemProps) => {
+export const BulletItem = ({ kind, size, title, text, ...rest }: BulletItemProps) => {
   return (
-    <StyledBulletItem>
+    <StyledBulletItem {...rest}>
       <StyledBulletItemIconWrap {...{ kind, size }}>
         <StyledBulletItemIcon  {...{ kind, $size: size }} />
       </StyledBulletItemIconWrap>
@@ -20,9 +20,10 @@ export const BulletList = ({
   size = 'big',
   items,
   children,
+  ...rest
 }: BulletListProps) => {
   return (
-    <StyledBulletList>
+    <StyledBulletList {...rest}>
       {(children ? children : (
         items.map((item, i) => <BulletItem key={i} {...item} size={size} />)
       ))}

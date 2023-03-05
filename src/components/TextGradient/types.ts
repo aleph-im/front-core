@@ -1,6 +1,7 @@
+import { HTMLAttributes } from "react"
 import { Typo, TypoKind } from "../../themes/types"
 
-export type TextGradientProps = {
+export type TextGradientProps = HTMLAttributes<HTMLElement> & {
   children: React.ReactNode
   size?: number | string
   color?: string

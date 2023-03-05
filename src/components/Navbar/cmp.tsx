@@ -23,7 +23,7 @@ const Navbar = ({
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
   return (
-    <StyledNavbarWrapper {...{ ...rest }}>
+    <StyledNavbarWrapper {...rest}>
       <StyledHeadingWrapper isOpen={isOpen}>
         {withLogo && <Logo text={withLabel} />}
 

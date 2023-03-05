@@ -18,11 +18,12 @@ export const Card = ({
   buttonOnClick,
   header,
   content,
-  footer
+  footer,
+  ...rest
 }: CardProps) => {
 
   return (
-    <StyledCardWrap>
+    <StyledCardWrap {...rest}>
       <StyledCardHeaderWrap>
         {header || (variant === 'block' ? <ObjectImg id={headerImg as ObjectId} /> : <img src={headerImg} />)}
       </StyledCardHeaderWrap>
