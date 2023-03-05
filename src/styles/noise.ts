@@ -26,7 +26,7 @@ export function getPlainNoiseEffectCss(color: string, skipMask = true) {
     position: relative;
     background-color: ${colorFilled[color].backgroundColor};
     border-radius: inherit;
-    z-index: -1;
+    z-index: 0;
 
     &::after {
       content: '';
