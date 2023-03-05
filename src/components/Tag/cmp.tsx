@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledTag } from './styles'
 import { TagProps } from './types'
 
-export const TagBlock = ({ children, ...rest }: TagProps) => {
+export const Tag = ({ children, ...rest }: TagProps) => {
   return (
     <StyledTag {...rest}>
       {children}
@@ -10,4 +10,4 @@ export const TagBlock = ({ children, ...rest }: TagProps) => {
   )
 }
 
-export default TagBlock
+export default Tag
