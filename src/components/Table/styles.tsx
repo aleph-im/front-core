@@ -3,37 +3,38 @@ import { StyledTableProps } from './types'
 
 export const StyledTable = styled.table<StyledTableProps>`
   ${({ border }) => {
-  const hasBorder = border !== 'none'
-  return css`
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0 10px;
+    const hasBorder = border !== 'none'
 
-    thead {
-      text-transform: uppercase;
-    }
+    return css`
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0 10px;
 
-    td,
-    th {
-      text-align: left;
-      padding: 15px 0;
+      thead {
+        text-transform: uppercase;
+      }
 
-      ${hasBorder &&
+      td,
+      th {
+        text-align: left;
+        padding: 15px 0;
+
+        ${hasBorder &&
       css`
-        border-bottom: 1px ${border} #ffffff22;
-      `}
-    }
+          border-bottom: 1px ${border} #ffffff22;
+        `}
+      }
 
-    th.sortable {
-      cursor: pointer;
-    }
+      th.sortable {
+        cursor: pointer;
+      }
 
-    tr {
-      ${hasBorder &&
+      tr {
+        ${hasBorder &&
       css`
-        border-bottom: 1px ${border} #ffffff22;
-      `}
-    }
-  `}
-}
+          border-bottom: 1px ${border} #ffffff22;
+        `}
+      }
+    `}
+  }
 `

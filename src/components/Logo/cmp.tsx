@@ -9,6 +9,7 @@ export const Logo = ({
   text = 'Aleph.im',
   color = 'text',
   size,
+  ...rest
 }: LogoProps) => {
   const theme = useTheme()
 
@@ -17,7 +18,7 @@ export const Logo = ({
   text = typeof text === 'boolean' ? text && 'Aleph.im' : text
 
   return (
-    <StyledLogoWrap size={size} text={text}>
+    <StyledLogoWrap {...{ size, text, ...rest }}>
       <LogoSvg color={logoColor} />
       {text && (<TextGradient type='logo' color={color}>{text}</TextGradient>)}
     </StyledLogoWrap>

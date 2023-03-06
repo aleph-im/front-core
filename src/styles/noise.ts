@@ -13,18 +13,23 @@ export const colorFilled: Record<string, UniformNoiseEffect> = {
   light: { dotsColor: '#2a293e', backgroundColor: '#19182f' },
 }
 
-const SVGMask = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' viewBox='0 0 700 700' width='700' height='700' opacity='1'%3E%3Cdefs%3E%3Cfilter id='nnnoise-filter' x='-20%25' y='-20%25' width='140%25' height='140%25' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='linearRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='15' stitchTiles='stitch' result='turbulence'%3E%3C/feTurbulence%3E%3CfeSpecularLighting surfaceScale='8' specularConstant='1.2' specularExponent='20' lighting-color='%23ffffff' x='0%25' y='0%25' width='100%25' height='100%25' in='turbulence' result='specularLighting'%3E%3CfeDistantLight azimuth='3' elevation='130'%3E%3C/feDistantLight%3E%3C/feSpecularLighting%3E%3C/filter%3E%3C/defs%3E%3Crect width='700' height='700' fill='%2300000000'%3E%3C/rect%3E%3Crect width='700' height='700' fill='%23ffffff' filter='url(%23nnnoise-filter)'%3E%3C/rect%3E%3C/svg%3E")`
+export function getNoiseSvgMaskCss() {
+  return css`
+    mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBoZWlnaHQ9ImF1dG8iPgogIDxmaWx0ZXIgaWQ9ImZub2lzZSIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSIgZmlsdGVyVW5pdHM9Im9iamVjdEJvdW5kaW5nQm94IgogICAgcHJpbWl0aXZlVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvckludGVycG9sYXRpb25GaWx0ZXJzPSJsaW5lYXJSR0IiPgogICAgPGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjE1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIgogICAgICByZXN1bHQ9InR1cmJ1bGVuY2UiPiA8L2ZlVHVyYnVsZW5jZT4KICAgIDxmZVNwZWN1bGFyTGlnaHRpbmcgc3VyZmFjZVNjYWxlPSI4IiBzcGVjdWxhckNvbnN0YW50PSIxLjIiIHNwZWN1bGFyRXhwb25lbnQ9IjIwIiBsaWdodGluZ0NvbG9yPSIjZmZmZmZmIiB4PSIwJSIKICAgICAgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGluPSJ0dXJidWxlbmNlIiByZXN1bHQ9InNwZWN1bGFyTGlnaHRpbmciPgogICAgICA8ZmVEaXN0YW50TGlnaHQgYXppbXV0aD0iMyIgZWxldmF0aW9uPSIxMzAiPjwvZmVEaXN0YW50TGlnaHQ+CiAgICA8L2ZlU3BlY3VsYXJMaWdodGluZz4KICA8L2ZpbHRlcj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzAwMDAwMDAwIj48L3JlY3Q+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmZmZmYiIGZpbHRlcj0idXJsKCNmbm9pc2UpIj4gPC9yZWN0Pgo8L3N2Zz4=");
+  `
+}
 
-export function getPlainNoiseEffectCss(color: string) {
+export function getPlainNoiseEffectCss(color: string, skipMask = true) {
+  const svgCss = skipMask ? '' : getNoiseSvgMaskCss()
+
   return css`
     position: relative;
     background-color: ${colorFilled[color].backgroundColor};
-    z-index: -1;
+    z-index: 0;
 
     &::after {
       content: '';
       background-color: ${colorFilled[color].dotsColor};
-      mask-image: ${SVGMask};
       position: absolute;
       top: 0;
       left: 0;
@@ -32,13 +37,16 @@ export function getPlainNoiseEffectCss(color: string) {
       height: 100%;
       border-radius: inherit;
       z-index: -1;
+      ${svgCss};
     }
   `
 }
 
-export function getGradientNoiseEffectCss(color: string) {
+export function getGradientNoiseEffectCss(color: string, skipMask = true) {
+  const svgCss = skipMask ? '' : getNoiseSvgMaskCss()
+
   return css`
-    mask-image: ${SVGMask};
     background-image: ${gradientFilled[color]};
+    ${svgCss};
   `
 }

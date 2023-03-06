@@ -9,7 +9,10 @@ export const StyledTextGradientWrap = styled.span<StyledTextGradientProps>`
     color = theme.color[color] || color
     const backgroundColorCss = gradient ? `background-image: ${gradient};` : `background-color: ${color};`
 
-    const paddingLeftCss = typo.style === 'italic' ? 'padding-left: 0.1em;' : ''
+    const paddingLeftCss = typo.style === 'italic' ? `
+      padding-left: 0.1em;
+      margin-left: -0.1em;
+    ` : ''
 
     return css`
       background-clip: text;

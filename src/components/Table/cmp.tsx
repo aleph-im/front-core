@@ -9,7 +9,7 @@ const toggleSort = (sort: SortDirection): SortDirection => {
   return sort === 'asc' ? 'desc' : 'asc'
 }
 
-const Table = ({ columns, data, border="none", oddRowNoise=false }: TableProps & StyledTableProps) => {
+const Table = ({ columns, data, border = "none", oddRowNoise = false, ...rest }: TableProps & StyledTableProps) => {
   const isSortedColumn = (column: string) => sortedColumn.column === column
   const [sortedColumn, setSortedColumn] = React.useState({
     column: '',
@@ -20,26 +20,26 @@ const Table = ({ columns, data, border="none", oddRowNoise=false }: TableProps &
       !sortedColumn.column
         ? data
         : data.sort((a, b) => {
-            const column = columns.find(
-              ({ label }) => label === sortedColumn.column,
-            )
-            if (!column) return 0
+          const column = columns.find(
+            ({ label }) => label === sortedColumn.column,
+          )
+          if (!column) return 0
 
-            const A = column.selector(a)
-            const B = column.selector(b)
-            if (A < B) {
-              return sortedColumn.direction === 'asc' ? -1 : 1
-            } else if (A > B) {
-              return sortedColumn.direction === 'asc' ? 1 : -1
-            } else {
-              return 0
-            }
-          }),
+          const A = column.selector(a)
+          const B = column.selector(b)
+          if (A < B) {
+            return sortedColumn.direction === 'asc' ? -1 : 1
+          } else if (A > B) {
+            return sortedColumn.direction === 'asc' ? 1 : -1
+          } else {
+            return 0
+          }
+        }),
     [data, sortedColumn],
   )
 
   return (
-    <StyledTable border={border}>
+    <StyledTable {...{ border, ...rest }}>
       <thead>
         <tr>
           {columns.map(({ sortable, label }, i) => (
@@ -68,8 +68,8 @@ const Table = ({ columns, data, border="none", oddRowNoise=false }: TableProps &
                       !isSortedColumn(label)
                         ? 'sort'
                         : sortedColumn.direction === 'asc'
-                        ? 'sort-up'
-                        : 'sort-down'
+                          ? 'sort-up'
+                          : 'sort-down'
                     }
                   />
                 </div>

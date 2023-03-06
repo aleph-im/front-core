@@ -90,12 +90,17 @@ const ColorsTemplate: ComponentStory<any> = (args) => {
       </div>
       <div>
         <h3>Glass</h3>
-        <Circle className="fx-glass-main0"></Circle>
-        <Circle className="fx-glass-main1"></Circle>
-        <Circle className="fx-glass-main2"></Circle>
-        <Circle className="fx-glass-base0"></Circle>
-        <Circle className="fx-glass-base1"></Circle>
-        <Circle className="fx-glass-base2"></Circle>
+        <div>
+          <Circle className="fx-glass-main0"></Circle>
+          <Circle className="fx-glass-main1"></Circle>
+          <Circle className="fx-glass-main2"></Circle>
+        </div>
+        <div>
+          <Circle className="fx-glass-base0 fx-glass-border-base0"></Circle>
+          <Circle className="fx-glass-base0 fx-glass-border-base1"></Circle>
+          <Circle className="fx-glass-base1"></Circle>
+          <Circle className="fx-glass-base2"></Circle>
+        </div>
       </div>
       <div>
         <h3>Glass-colored</h3>

@@ -6,9 +6,11 @@ import { TextGradientProps } from './types'
 export const TextGradient = ({
   color = 'main0',
   type = 'header',
+  as,
   size,
   children,
-  className
+  className,
+  ...rest
 }: TextGradientProps) => {
   const theme = useTheme()
   const tagConfig = theme.typo[type]
@@ -16,11 +18,12 @@ export const TextGradient = ({
 
   return (
     <StyledTextGradientWrap
-      as={tagConfig.tag ? type : 'span'}
+      as={as || (tagConfig.tag ? type : 'span')}
       className={classes}
       color={color}
       size={size}
       typo={tagConfig}
+      {...rest}
     >
       {children}
     </StyledTextGradientWrap>

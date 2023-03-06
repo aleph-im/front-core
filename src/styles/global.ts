@@ -1,8 +1,8 @@
 import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
 import { BreakpointId } from '../themes/types'
-import { getDarkEffectCss, getGlassEffectCss } from './glass'
+import { getDarkEffectCss, getGlassEffectBorderCss, getGlassEffectCss } from './glass'
 import { getGlowHoverEffectCss, getGlowMaxEffectCss, getGlowMinEffectCss } from './glow'
-import { colorFilled, getGradientNoiseEffectCss, getPlainNoiseEffectCss, gradientFilled } from './noise'
+import { colorFilled, getGradientNoiseEffectCss, getNoiseSvgMaskCss, getPlainNoiseEffectCss, gradientFilled } from './noise'
 import {
   getBackgroundColorCss,
   getBackgroundGradientCss,
@@ -12,6 +12,13 @@ import {
 
 export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
+
+    const colorCss = colorClasses(theme)
+    const typoCss = typoClasses(theme)
+    const effectCss = effectClasses(theme)
+    const marginPaddingCss = marginPaddingClasses(theme)
+    const displayCss = displayClasses(theme)
+
     return css`
       @import '${theme.font.url}';
 
@@ -39,11 +46,11 @@ export const GlobalStyle = createGlobalStyle`
         padding: ${theme.font.size.xxl}rem ${theme.font.size.lg}rem;
       }
 
-      ${colorClasses(theme)}
-      ${typoClasses(theme)}
-      ${effectClasses(theme)}
-      ${marginPaddingClasses(theme)}
-      ${displayClasses(theme)}
+      ${colorCss}
+      ${typoCss}
+      ${effectCss}
+      ${marginPaddingCss}
+      ${displayCss}
     `
   }}
 `
@@ -166,7 +173,6 @@ function effectClasses(theme: DefaultTheme) {
   const noisePlainColors = Object.keys(colorFilled)
   const noiseGradientColors = Object.keys(gradientFilled)
 
-
   const glowHoverCss = glowColors.flatMap((color) => css`
     .fx-glow-hover-${color} {
       ${getGlowHoverEffectCss(color)}
@@ -189,6 +195,10 @@ function effectClasses(theme: DefaultTheme) {
     .fx-glass-${color} {
       ${getGlassEffectCss(color)}
     }
+
+    .fx-glass-border-${color} {
+      ${getGlassEffectBorderCss(color)}
+    }
   `)
 
   const darkCss = darkColors.flatMap((color) => css`
@@ -197,13 +207,19 @@ function effectClasses(theme: DefaultTheme) {
     }
   `)
 
-  const noisePlainCss = noisePlainColors.map((color) => css`
+  const noiseSvg = css`
+    ${[...noisePlainColors.map(x => `.fx-noise-${x}::after`), ...noiseGradientColors.map(x => `.fx-noise-${x}`)].join(', ')} {
+      ${getNoiseSvgMaskCss()}
+    }
+  `
+
+  const noisePlainCss = noisePlainColors.flatMap((color) => css`
     .fx-noise-${color} {
       ${getPlainNoiseEffectCss(color)}
     }
   `)
 
-  const noiseGradientCss = noiseGradientColors.map((color) => css`
+  const noiseGradientCss = noiseGradientColors.flatMap((color) => css`
     .fx-noise-${color} {
       ${getGradientNoiseEffectCss(color)}
     }
@@ -215,9 +231,8 @@ function effectClasses(theme: DefaultTheme) {
     ${glowMaxCss}
     ${glassCss}
     ${darkCss}
+    ${noiseSvg}
     ${noisePlainCss}
     ${noiseGradientCss}
   `
 }
-
-export default GlobalStyle

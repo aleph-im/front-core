@@ -78,7 +78,6 @@ export function getGlassEffectCss(
         switch (color) {
           case 'base0':
             return css`
-              border: 1px solid #FFFFFF1A;
               background-image:
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(84.86deg, #2260FF0C 65.23%, #1859FF00 99.89%),
@@ -98,7 +97,6 @@ export function getGlassEffectCss(
             `
           case 'colored0':
             return css`
-              border: 1px solid #FFFFFF1A;
               background: 
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(342.74deg, #2D113A66 22.13%, #43125900 67.01%),
@@ -109,6 +107,29 @@ export function getGlassEffectCss(
       }
     }}
   `
+}
+
+export function getGlassEffectBorderCss(
+  color: string,
+) {
+  return css`
+    ${({ theme }) => {
+      switch (color) {
+        case 'base0':
+          return css`
+            border: 1px solid #FFFFFF1A;
+          `
+        case 'base1':
+          return css`
+            border: 1px solid #FFFFFF66;
+          `
+        case 'colored0':
+        default:
+          return css`
+            border: 1px solid #FFFFFF1A;
+          `
+      }
+    }}`
 }
 
 export function getDarkEffectCss(
@@ -127,6 +148,7 @@ export function getDarkEffectCss(
         background-color: ${theme.color.main0}03;
         box-shadow: ${bss.s1} #00000080;
       `
-    }}
-  `
+    }
+    }
+`
 }

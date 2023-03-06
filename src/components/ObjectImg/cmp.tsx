@@ -8,7 +8,8 @@ export const ObjectImg = ({
   id,
   size = 100,
   color = 'base0',
-  color2
+  color2,
+  ...rest
 }: ObjectImgProps) => {
   const theme = useTheme()
 
@@ -18,9 +19,9 @@ export const ObjectImg = ({
   const Obj = (objs as Record<string, FunctionComponent<StyledObjectImgSvgProps>>)[id]
 
   return (
-    <StyledObjectImgWrap size={size}>
+    <StyledObjectImgWrap {...{ size, ...rest }}>
       <Obj color={mainColor} color2={bgColor} />
-    </StyledObjectImgWrap>
+    </StyledObjectImgWrap >
   )
 }
 
