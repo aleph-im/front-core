@@ -19,7 +19,6 @@ export function getPlainNoiseEffectCss(color: string) {
   return css`
     position: relative;
     background-color: ${colorFilled[color].backgroundColor};
-    border-radius: inherit;
     z-index: -1;
 
     &::after {
@@ -41,6 +40,5 @@ export function getGradientNoiseEffectCss(color: string) {
   return css`
     mask-image: ${SVGMask};
     background-image: ${gradientFilled[color]};
-    border-radius: inherit;
   `
 }
