@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { StyledTextGradientWrap } from './styles'
+import { StyledTextGradientContainer } from './styles'
 import { TextGradientProps } from './types'
 
 export const TextGradient = ({
@@ -17,7 +17,7 @@ export const TextGradient = ({
   const classes = className || `tp-${type}`
 
   return (
-    <StyledTextGradientWrap
+    <StyledTextGradientContainer
       as={as || (tagConfig.tag ? type : 'span')}
       className={classes}
       color={color}
@@ -26,7 +26,7 @@ export const TextGradient = ({
       {...rest}
     >
       {children}
-    </StyledTextGradientWrap>
+    </StyledTextGradientContainer>
   )
 }
 

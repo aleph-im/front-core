@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from 'styled-components'
-import { StyledLogoWrap } from './styles'
+import { StyledLogoContainer } from './styles'
 import { LogoProps } from './types'
 import LogoSvg from './img/logo'
 import TextGradient from '../TextGradient'
@@ -18,10 +18,10 @@ export const Logo = ({
   text = typeof text === 'boolean' ? text && 'Aleph.im' : text
 
   return (
-    <StyledLogoWrap {...{ size, text, ...rest }}>
+    <StyledLogoContainer {...{ size, text, ...rest }}>
       <LogoSvg color={logoColor} />
       {text && (<TextGradient type='logo' color={color}>{text}</TextGradient>)}
-    </StyledLogoWrap>
+    </StyledLogoContainer>
   )
 }
 

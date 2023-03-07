@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { StyledTextGradientProps } from './types';
 
-export const StyledTextGradientWrap = styled.span<StyledTextGradientProps>`
+export const StyledTextGradientContainer = styled.span<StyledTextGradientProps>`
   ${({ theme, color, size, typo }) => {
     const fontSizeCss = size ? (`font-size: ${!Number.isNaN(Number(size)) ? `${size}px` : size};`) : '';
 

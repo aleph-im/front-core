@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { StyledObjectImgProps } from './types'
 
-export const StyledObjectImgWrap = styled.div<StyledObjectImgProps>`
+export const StyledObjectImgContainer = styled.div<StyledObjectImgProps>`
   ${({ size }) => {
     const s = !Number.isNaN(Number(size)) ? `${size}px` : size
 

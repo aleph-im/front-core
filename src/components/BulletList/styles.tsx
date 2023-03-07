@@ -16,12 +16,12 @@ export const StyledBulletItem = styled.li`
   margin-bottom: 1rem;
 `
 
-export interface StyledBulletItemIconWrapProps {
+export interface StyledBulletItemIconContainerProps {
   kind: BulletItemKind
   size?: BulletListSize
 }
 
-export const StyledBulletItemIconWrap = styled.div<StyledBulletItemIconWrapProps>`
+export const StyledBulletItemIconContainer = styled.div<StyledBulletItemIconContainerProps>`
   ${(props) => {
     const { theme, kind } = props
     const fontSize = props.size === 'big' ? '2.25rem' : '1.5rem'

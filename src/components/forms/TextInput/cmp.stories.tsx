@@ -54,13 +54,13 @@ WithButton.parameters = {
 
 // ---
 
-export const WithButtonWrapped = Template.bind({})
-WithButtonWrapped.args = {
+export const WithButtonContainer = Template.bind({})
+WithButtonContainer.args = {
   ...defaultArgs,
   button: <Button variant='primary' kind='neon' size='regular' color='main0'>Click</Button>,
   buttonStyle: 'wrapped'
 }
-WithButtonWrapped.parameters = {
+WithButtonContainer.parameters = {
   ...defaultParams,
 }
 

@@ -19,7 +19,8 @@ export const StyledTextInputField = styled.input<ButtonProps>`
       background: transparent;
       color: ${theme.color.text};
       color: ${theme.color.text};
-      padding: 7px 32px;
+      padding: 0.5rem 2rem;
+      min-height: 2.75em;
       width: 100%;
       ${getTypoCss('form')}
 
@@ -32,11 +33,11 @@ export const StyledTextInputField = styled.input<ButtonProps>`
   }}
 `
 
-export const StyledTextInputWrap = styled.div<ButtonProps>`
+export const StyledTextInputContainer = styled.div<ButtonProps>`
   ${({ theme, buttonStyle }) => {
     return css`
       display: flex;
-      align-items: stretch;
+      align-items: center;
       background: ${theme.color.text}0F;
       box-shadow: 0px 4px 24px #00000040;
       border: 1px solid transparent;
@@ -49,6 +50,7 @@ export const StyledTextInputWrap = styled.div<ButtonProps>`
       & > button,
       & > a {
         flex: 1 0 auto;
+        align-self: stretch;
 
         ${() => {
         switch (buttonStyle) {

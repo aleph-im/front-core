@@ -213,8 +213,8 @@ const typo: ThemeTypo = {
     family: font.family.body,
     style: 'normal',
     weight: 400,
-    size: font.size.lg,
-    lineHeight: 1.167
+    size: font.size.sm,
+    lineHeight: 1.666
   }
 }
 

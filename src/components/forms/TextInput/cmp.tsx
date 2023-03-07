@@ -1,6 +1,6 @@
 import React, { ForwardedRef, forwardRef, useCallback, useMemo, useState } from 'react'
 import Icon from '../../Icon'
-import { StyledTextInput, StyledTextInputLabel, StyledTextInputInfo, StyledTextInputField, StyledTextInputWrap } from './styles'
+import { StyledTextInput, StyledTextInputLabel, StyledTextInputInfo, StyledTextInputField, StyledTextInputContainer as StyledTextInputContainer } from './styles'
 import { TextInputProps } from './types'
 
 export const TextInput = forwardRef(({
@@ -26,7 +26,7 @@ export const TextInput = forwardRef(({
   return (
     <StyledTextInput>
       {label && <StyledTextInputLabel>{label}</StyledTextInputLabel>}
-      <StyledTextInputWrap {...{ button, buttonStyle, className: isFocusClass }}>
+      <StyledTextInputContainer {...{ button, buttonStyle, className: isFocusClass }}>
         <StyledTextInputField
           {...{
             ref,
@@ -39,7 +39,7 @@ export const TextInput = forwardRef(({
             ...rest,
           }} />
         {button}
-      </StyledTextInputWrap>
+      </StyledTextInputContainer>
       {error && <StyledTextInputInfo error={error}>
         <Icon name={error.type === 'warn' ? 'bomb' : 'warning'} className='mr-xxs' />
         {error.message}

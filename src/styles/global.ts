@@ -25,12 +25,9 @@ export const GlobalStyle = createGlobalStyle`
       body {
         margin: 0;
         padding: 0;
-        font-family: ${theme.typo.body.family};
-        font-style: ${theme.typo.body.style};
-        font-weight: ${theme.typo.body.weight};
-        font-size: ${theme.typo.body.size}rem;
         background-color: ${theme.color.background};
         color: ${theme.color.text};
+        ${getTypoCss('body')}
       }
 
       * {
@@ -44,6 +41,10 @@ export const GlobalStyle = createGlobalStyle`
 
       section {
         padding: ${theme.font.size.xxl}rem ${theme.font.size.lg}rem;
+      }
+
+      input {
+        ${getTypoCss('body')}
       }
 
       ${colorCss}
@@ -145,7 +146,6 @@ function typoClasses(theme: DefaultTheme) {
     ([k, v]) => css`
       .tp-${k} ${v.tag ? `, ${k}` : ''} {
         ${getTypoCss(k as any)}
-        display: block;
         margin-top: 0;
         margin-bottom: ${theme.font.size.lg}rem;
       }

@@ -3,7 +3,7 @@ import { NavlinkProps, ResponsiveNavBarProps } from './types'
 import { getResponsiveCss } from '../../styles'
 
 // Main container
-export const StyledNavbarWrapper = styled.div`
+export const StyledNavbarContainer = styled.div`
   ${({ theme }) => {
     return css`
       position: sticky;
@@ -20,7 +20,7 @@ export const StyledNavbarWrapper = styled.div`
 `
 
 // A wrapper for the logo and burger icon (heading in mobile)
-export const StyledHeadingWrapper = styled.div<ResponsiveNavBarProps>`
+export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
   ${({ theme, isOpen }) => {
     return css`
       display: flex;
@@ -38,7 +38,7 @@ export const StyledHeadingWrapper = styled.div<ResponsiveNavBarProps>`
 `
 
 // A wrapper for the burger icon, that is hidden on desktop
-export const StyledBurgerIconWrapper = styled.div`
+export const StyledBurgerIconContainer = styled.div`
   ${() => {
     return css`
       display: block;
@@ -52,7 +52,7 @@ export const StyledBurgerIconWrapper = styled.div`
 `
 
 // A <nav> element, wrapping the links (text and buttons)
-export const StyledNavWrapper = styled.nav<ResponsiveNavBarProps>`
+export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
   ${({ isOpen }) => {
     return css`
       display: ${isOpen ? 'block' : 'none'};

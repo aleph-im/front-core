@@ -1,13 +1,13 @@
 import React from 'react'
 import { BulletListProps, BulletItemProps } from './types'
-import { StyledBulletList, StyledBulletItemIcon, StyledBulletItem, StyledBulletItemIconWrap } from './styles'
+import { StyledBulletList, StyledBulletItemIcon, StyledBulletItem, StyledBulletItemIconContainer } from './styles'
 
 export const BulletItem = ({ kind, size, title, text, ...rest }: BulletItemProps) => {
   return (
     <StyledBulletItem {...rest}>
-      <StyledBulletItemIconWrap {...{ kind, size }}>
+      <StyledBulletItemIconContainer {...{ kind, size }}>
         <StyledBulletItemIcon  {...{ kind, $size: size }} />
-      </StyledBulletItemIconWrap>
+      </StyledBulletItemIconContainer>
       <div>
         <span className='tp-h7 m-0'>{title}</span>
         {text && (<p className='m-0'>{text}</p>)}

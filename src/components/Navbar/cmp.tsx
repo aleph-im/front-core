@@ -3,12 +3,12 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Logo from '../Logo';
 import {
-  StyledBurgerIconWrapper,
-  StyledHeadingWrapper,
-  StyledNavbarWrapper,
+  StyledBurgerIconContainer,
+  StyledHeadingContainer,
+  StyledNavbarContainer,
   StyledNavlinks,
   StyledNavlink,
-  StyledNavWrapper,
+  StyledNavContainer,
 } from './styles'
 import { NavbarProps } from './types';
 
@@ -23,11 +23,11 @@ const Navbar = ({
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
   return (
-    <StyledNavbarWrapper {...rest}>
-      <StyledHeadingWrapper isOpen={isOpen}>
+    <StyledNavbarContainer {...rest}>
+      <StyledHeadingContainer isOpen={isOpen}>
         {withLogo && <Logo text={withLabel} />}
 
-        <StyledBurgerIconWrapper>
+        <StyledBurgerIconContainer>
           <Button
             color={'main0'}
             variant={'secondary'}
@@ -37,10 +37,10 @@ const Navbar = ({
           >
             <Icon name="bars" />
           </Button>
-        </StyledBurgerIconWrapper>
-      </StyledHeadingWrapper>
+        </StyledBurgerIconContainer>
+      </StyledHeadingContainer>
 
-      <StyledNavWrapper isOpen={isOpen}>
+      <StyledNavContainer isOpen={isOpen}>
         {navLinks && (
           <StyledNavlinks>
             {navLinks.map((el, index) => (
@@ -58,8 +58,8 @@ const Navbar = ({
             ))}
           </StyledNavlinks>
         )}
-      </StyledNavWrapper>
-    </StyledNavbarWrapper>
+      </StyledNavContainer>
+    </StyledNavbarContainer>
   )
 };
 

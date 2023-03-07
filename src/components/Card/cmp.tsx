@@ -3,7 +3,7 @@ import Button from '../Button'
 import Icon from '../Icon'
 import ObjectImg from '../ObjectImg'
 import { ObjectId } from '../ObjectImg/types'
-import { StyledCardContentWrap, StyledCardFooterWrap, StyledCardHeader, StyledCardHeaderWrap, StyledCardWrap } from './styles'
+import { StyledCardContentContainer, StyledCardFooterContainer, StyledCardHeader, StyledCardHeaderContainer, StyledCardContainer } from './styles'
 import { CardProps } from './types'
 
 export const Card = ({
@@ -23,11 +23,11 @@ export const Card = ({
 }: CardProps) => {
 
   return (
-    <StyledCardWrap {...rest}>
-      <StyledCardHeaderWrap>
+    <StyledCardContainer {...rest}>
+      <StyledCardHeaderContainer>
         {header || (variant === 'block' ? <ObjectImg id={headerImg as ObjectId} /> : <img src={headerImg} />)}
-      </StyledCardHeaderWrap>
-      <StyledCardContentWrap {...{ variant }}>
+      </StyledCardHeaderContainer>
+      <StyledCardContentContainer {...{ variant }}>
         {content || (variant === 'block'
           ? (
             <>
@@ -45,8 +45,8 @@ export const Card = ({
             </>
           )
         )}
-      </StyledCardContentWrap>
-      <StyledCardFooterWrap {...{ buttonVariant }} >
+      </StyledCardContentContainer>
+      <StyledCardFooterContainer {...{ buttonVariant }} >
         {footer || (
           <Button
             variant={buttonVariant}
@@ -59,8 +59,8 @@ export const Card = ({
           </Button>
         )
         }
-      </StyledCardFooterWrap>
-    </StyledCardWrap>
+      </StyledCardFooterContainer>
+    </StyledCardContainer>
   )
 }
 

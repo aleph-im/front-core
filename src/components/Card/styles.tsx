@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { ButtonVariant } from '../Button/types'
 import { CardVariant } from './types'
 
-export const StyledCardWrap = styled.div`
+export const StyledCardContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
@@ -14,7 +14,7 @@ export const StyledCardHeader = styled.header`
   }
 `
 
-export const StyledCardHeaderWrap = styled.div`
+export const StyledCardHeaderContainer = styled.div`
   padding: 0 10px;
 
   & > img {
@@ -23,7 +23,7 @@ export const StyledCardHeaderWrap = styled.div`
   }
 `
 
-export const StyledCardContentWrap = styled.div<{ variant: CardVariant }>`
+export const StyledCardContentContainer = styled.div<{ variant: CardVariant }>`
   ${({ variant }) => {
     return css`
       margin-top: ${variant === 'article' ? 0 : '24px'};
@@ -33,7 +33,7 @@ export const StyledCardContentWrap = styled.div<{ variant: CardVariant }>`
   }}
 `
 
-export const StyledCardFooterWrap = styled.div<{ buttonVariant: ButtonVariant }>`
+export const StyledCardFooterContainer = styled.div<{ buttonVariant: ButtonVariant }>`
   ${({ buttonVariant }) => {
 
     const buttonOffsetCss = buttonVariant === 'text-only' ? `

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { useTheme } from 'styled-components'
-import { StyledObjectImgWrap } from './styles'
+import { StyledObjectImgContainer } from './styles'
 import { ObjectImgProps, StyledObjectImgSvgProps } from './types'
 import * as objs from './img/index'
 
@@ -19,9 +19,9 @@ export const ObjectImg = ({
   const Obj = (objs as Record<string, FunctionComponent<StyledObjectImgSvgProps>>)[id]
 
   return (
-    <StyledObjectImgWrap {...{ size, ...rest }}>
+    <StyledObjectImgContainer {...{ size, ...rest }}>
       <Obj color={mainColor} color2={bgColor} />
-    </StyledObjectImgWrap >
+    </StyledObjectImgContainer >
   )
 }
 
