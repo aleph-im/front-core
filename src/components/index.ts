@@ -1,5 +1,6 @@
 export { BulletItem, BulletList} from './BulletList'
 export { default as Button } from './Button'
+export { default as Breadcrumb } from './Breadcrumb' 
 export { default as Card } from './Card'
 export { Row, Col } from './Grid'
 export { default as Icon } from './Icon'
