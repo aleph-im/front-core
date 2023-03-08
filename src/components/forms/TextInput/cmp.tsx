@@ -1,6 +1,7 @@
 import React, { ForwardedRef, forwardRef, useCallback, useMemo, useState } from 'react'
 import FormError from '../FormError'
-import { StyledTextInput, StyledLabel, StyledTextInputField, StyledTextInputContainer as StyledTextInputContainer } from './styles'
+import { StyledFormLabel, StyledTextInputWrapper } from '../styles.forms'
+import { StyledTextInputField, StyledTextInputContainer as StyledTextInputContainer } from './styles'
 import { TextInputProps } from './types'
 
 export const TextInput = forwardRef(({
@@ -24,8 +25,8 @@ export const TextInput = forwardRef(({
   const classes = useMemo(() => isFocusClass + (className || ''), [isFocusClass, className])
 
   return (
-    <StyledTextInput>
-      {label && <StyledLabel>{label}</StyledLabel>}
+    <StyledTextInputWrapper>
+      {label && <StyledFormLabel>{label}</StyledFormLabel>}
       <StyledTextInputContainer {...{ button, buttonStyle, className: isFocusClass }}>
         <StyledTextInputField
           {...{
@@ -41,7 +42,7 @@ export const TextInput = forwardRef(({
         {button}
       </StyledTextInputContainer>
       {error && <FormError error={error} />}
-    </StyledTextInput>
+    </StyledTextInputWrapper>
   )
 })
 

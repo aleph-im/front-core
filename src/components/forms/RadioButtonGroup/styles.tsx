@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { addClasses } from '../../../utils'
 import { RadioButtonGroupDirection } from './types'
 
 export const StyledRadioButtonGroupContainer = styled.div`
@@ -7,8 +6,6 @@ export const StyledRadioButtonGroupContainer = styled.div`
   width: 100%;
   max-width: 100%;
 `
-
-export const StyledLabel = styled.label.attrs(addClasses('d-block tp-body mb-lg'))``
 
 export const StyledRadioButtonContainer = styled.div<{ direction: RadioButtonGroupDirection }>`
    ${({ theme, direction }) => {

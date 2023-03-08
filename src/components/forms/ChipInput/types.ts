@@ -2,6 +2,7 @@ import { InputHTMLAttributes } from "react";
 
 export type ChipInputProps = InputHTMLAttributes<HTMLInputElement> & {
   placeholder?: string;
+  label?: string;
   onAdd?: (tag: string) => void;
   onRemove?: (tag: string) => void;
 }

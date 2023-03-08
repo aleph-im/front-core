@@ -1,13 +1,6 @@
 import styled, { css } from 'styled-components'
 import { getTypoCss } from '../../../styles'
-import { addClasses } from '../../../utils'
-import { ButtonProps, FormError } from './types'
-
-export const StyledTextInput = styled.div`
-  display: inline-block;
-  max-width: 100%;
-  min-width: 200px;
-`
+import { ButtonProps } from './types'
 
 export const StyledTextInputField = styled.input<ButtonProps>`
   ${({ theme }) => {
@@ -75,28 +68,5 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
       }
       }
     `
-  }}
-`
-
-export const StyledLabel = styled.label.attrs(addClasses('d-block tp-body mb-lg'))``
-
-export const StyledTextInputInfo = styled.span <{ error: FormError }>`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 0.75rem;
-
-  ${getTypoCss('body')}
-
-  ${({ error }) => {
-    if (error.type === 'warn') {
-      return css`
-        color: #FFD179;
-      `
-    } else {
-      return css`
-        color: #D92446;
-      `
-    }
   }}
 `

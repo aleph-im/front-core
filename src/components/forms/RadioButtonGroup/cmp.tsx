@@ -1,6 +1,7 @@
 import React from 'react'
 import FormError from '../FormError'
-import { StyledLabel, StyledRadioButtonGroupContainer, StyledRadioButtonContainer } from './styles'
+import { StyledFormLabel } from '../styles.forms'
+import { StyledRadioButtonGroupContainer, StyledRadioButtonContainer } from './styles'
 import { RadioButtonGroupProps } from './types'
 
 export const RadioButtonGroup = ({
@@ -12,7 +13,7 @@ export const RadioButtonGroup = ({
 }: RadioButtonGroupProps) => {
   return (
     <StyledRadioButtonGroupContainer {...{ direction, ...rest }}>
-      {label && <StyledLabel>{label}</StyledLabel>}
+      {label && <StyledFormLabel>{label}</StyledFormLabel>}
       <StyledRadioButtonContainer direction={direction}>
         {children}
       </StyledRadioButtonContainer>
