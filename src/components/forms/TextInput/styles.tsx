@@ -3,7 +3,7 @@ import { getTypoCss } from '../../../styles'
 import { ButtonProps, FormError } from './types'
 
 export const StyledTextInput = styled.div`
-  display: inline-block;
+  display: block;
   max-width: 100%;
   min-width: 200px;
 `
