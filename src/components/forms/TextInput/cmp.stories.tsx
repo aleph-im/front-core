@@ -7,7 +7,7 @@ import Button from '../../Button'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/UI/TextInput',
+  title: 'Components/UI/forms/TextInput',
   component: TextInput,
   decorators: [withDesign],
 } as ComponentMeta<typeof TextInput>

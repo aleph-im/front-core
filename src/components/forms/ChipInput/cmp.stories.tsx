@@ -7,7 +7,7 @@ import { ChipInputProps } from './types'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/UI/ChipInput',
+  title: 'Components/UI/forms/ChipInput',
   component: ChipInput,
   decorators: [withDesign],
 } as ComponentMeta<typeof ChipInput>

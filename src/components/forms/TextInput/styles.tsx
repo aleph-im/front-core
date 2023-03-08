@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { getTypoCss } from '../../../styles'
+import { addClasses } from '../../../utils'
 import { ButtonProps, FormError } from './types'
 
 export const StyledTextInput = styled.div`
@@ -77,11 +78,7 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
   }}
 `
 
-export const StyledTextInputLabel = styled.label`
-  display: block;
-  margin-bottom: 0.75rem;
-  ${getTypoCss('body')}
-`
+export const StyledLabel = styled.label.attrs(addClasses('d-block tp-body mb-lg'))``
 
 export const StyledTextInputInfo = styled.span <{ error: FormError }>`
   display: flex;

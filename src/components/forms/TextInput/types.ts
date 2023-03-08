@@ -1,9 +1,5 @@
 import { InputHTMLAttributes, ReactNode } from "react"
-
-export type FormError = {
-  message: string
-  type?: 'warn' | 'error'
-}
+import { FormErrorInfo } from "../FormError/types"
 
 export type ButtonProps = {
   button?: ReactNode
@@ -15,7 +11,7 @@ export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string
   placeholder?: string
   defaultValue?: string
-  error?: FormError
+  error?: FormErrorInfo
 
   // Force states
   focus?: boolean
