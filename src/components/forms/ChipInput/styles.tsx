@@ -39,7 +39,7 @@ export const StyledChip = styled.span`
   }}
 `
 
-export const StyledChipLabel = styled.span`
+export const StyledChipTag = styled.span`
   margin-right: 0.25rem;
   overflow: hidden;
   white-space: nowrap;

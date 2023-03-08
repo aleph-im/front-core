@@ -1,7 +1,8 @@
 import React, { useState, useCallback, forwardRef, ForwardedRef } from 'react'
 import { useElementHeight, useForwardRef } from '../../../hooks'
 import Icon from '../../Icon'
-import { StyledChip, StyledChipContainer, StyledChipLabel, StyledChipRemoveButton, StyledContainer, StyledInput } from './styles'
+import { StyledTextInputLabel, StyledTextInputWrapper } from '../styles.forms'
+import { StyledChip, StyledChipContainer, StyledChipTag, StyledChipRemoveButton, StyledContainer, StyledInput } from './styles'
 import { ChipInputProps, ChipItemProps } from './types'
 
 const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
@@ -9,7 +10,7 @@ const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
 
   return (
     <StyledChip key={tag}>
-      <StyledChipLabel>{tag}</StyledChipLabel>
+      <StyledChipTag>{tag}</StyledChipTag>
       <StyledChipRemoveButton onClick={handleRemove}>
         <Icon name='xmark' />
       </StyledChipRemoveButton>
@@ -19,6 +20,7 @@ const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
 
 export const ChipInput = forwardRef(({
   placeholder = 'Filter',
+  label,
   onAdd,
   onRemove
 }: ChipInputProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -58,20 +60,28 @@ export const ChipInput = forwardRef(({
   }, [inputValue, tags, setTags, setInputValue, onAdd, onRemove, handleRemoveTag])
 
   return (
-    <StyledContainer ref={containerRef} isBig={isBig}>
-      <StyledChipContainer isBig={isBig}>
-        {tags.map((tag) => <ChipItem key={tag} {...{ tag, isBig, onRemove: handleRemoveTag }} />)}
-      </StyledChipContainer>
-      <StyledInput
-        ref={inputRef}
-        type="text"
-        placeholder={placeholder}
-        value={inputValue}
-        onChange={handleInputChange}
-        onKeyDown={handleInputKeyDown}
-        isBig={isBig}
-      />
-    </StyledContainer>
+    <StyledTextInputWrapper>
+      {label && <StyledTextInputLabel>{label}</StyledTextInputLabel>}
+      <StyledContainer ref={containerRef} isBig={isBig}>
+        <StyledChipContainer isBig={isBig}>
+          {tags.map((tag) => (
+            <ChipItem
+              key={tag}
+              {...{ tag, isBig, onRemove: handleRemoveTag }}
+            />
+          ))}
+        </StyledChipContainer>
+        <StyledInput
+          ref={inputRef}
+          type="text"
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleInputKeyDown}
+          isBig={isBig}
+        />
+      </StyledContainer>
+    </StyledTextInputWrapper>
   )
 })
 

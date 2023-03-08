@@ -1,6 +1,7 @@
 import React, { ForwardedRef, forwardRef, useCallback, useMemo, useState } from 'react'
 import Icon from '../../Icon'
-import { StyledTextInput, StyledTextInputLabel, StyledTextInputInfo, StyledTextInputField, StyledTextInputContainer as StyledTextInputContainer } from './styles'
+import { StyledTextInputLabel, StyledTextInputWrapper } from '../styles.forms'
+import { StyledTextInputInfo, StyledTextInputField, StyledTextInputContainer as StyledTextInputContainer } from './styles'
 import { TextInputProps } from './types'
 
 export const TextInput = forwardRef(({
@@ -24,7 +25,7 @@ export const TextInput = forwardRef(({
   const classes = useMemo(() => isFocusClass + (className || ''), [isFocusClass, className])
 
   return (
-    <StyledTextInput>
+    <StyledTextInputWrapper>
       {label && <StyledTextInputLabel>{label}</StyledTextInputLabel>}
       <StyledTextInputContainer {...{ button, buttonStyle, className: isFocusClass }}>
         <StyledTextInputField
@@ -44,7 +45,7 @@ export const TextInput = forwardRef(({
         <Icon name={error.type === 'warn' ? 'bomb' : 'warning'} className='mr-xxs' />
         {error.message}
       </StyledTextInputInfo>}
-    </StyledTextInput>
+    </StyledTextInputWrapper>
   )
 })
 

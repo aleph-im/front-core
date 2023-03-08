@@ -2,12 +2,6 @@ import styled, { css } from 'styled-components'
 import { getTypoCss } from '../../../styles'
 import { ButtonProps, FormError } from './types'
 
-export const StyledTextInput = styled.div`
-  display: block;
-  max-width: 100%;
-  min-width: 200px;
-`
-
 export const StyledTextInputField = styled.input<ButtonProps>`
   ${({ theme }) => {
     return css`
@@ -75,12 +69,6 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
       }
     `
   }}
-`
-
-export const StyledTextInputLabel = styled.label`
-  display: block;
-  margin-bottom: 0.75rem;
-  ${getTypoCss('body')}
 `
 
 export const StyledTextInputInfo = styled.span <{ error: FormError }>`
