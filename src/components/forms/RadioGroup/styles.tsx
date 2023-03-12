@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components'
-import { RadioButtonGroupDirection } from './types'
+import { RadioGroupDirection } from './types'
 
-export const StyledRadioButtonGroupContainer = styled.div`
+export const StyledRadioGroupContainer = styled.div`
   display: block;
   width: 100%;
   max-width: 100%;
 `
 
-export const StyledRadioButtonContainer = styled.div<{ direction: RadioButtonGroupDirection }>`
+export const StyledRadioContainer = styled.div<{ direction: RadioGroupDirection }>`
    ${({ theme, direction }) => {
     const isRow = direction === 'row'
 

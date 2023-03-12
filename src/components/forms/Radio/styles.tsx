@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const StyledRadioButtonContainer = styled.div`
+export const StyledRadioContainer = styled.div`
   display: flex;
   align-items: center;
 `
@@ -15,7 +15,7 @@ export const StyledInputContainer = styled.div`
   height: 2rem;
   margin-right: 1.125rem;
   border-radius: 50%;
-  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 24px #00000040;
 `
 
 export const StyledInput = styled.input`
@@ -39,6 +39,7 @@ export const StyledInput = styled.input`
 
       &:disabled {
         border-color: #FFFFFF0F;
+        cursor: not-allowed;
       }
 
       &:checked:disabled {
@@ -66,6 +67,7 @@ export const StyledInputDot = styled.span`
 
       ${StyledInput}:disabled + & {
         background-color: #FFFFFF0F;
+        cursor: not-allowed;
       }
 
       ${StyledInput}:checked:disabled + & {
