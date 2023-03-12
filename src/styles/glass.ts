@@ -113,7 +113,7 @@ export function getGlassEffectBorderCss(
   color: string,
 ) {
   return css`
-    ${({ theme }) => {
+    ${() => {
       switch (color) {
         case 'base0':
           return css`

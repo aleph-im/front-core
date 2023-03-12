@@ -3,7 +3,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
 import styled from 'styled-components'
-import theme from '../../themes/base'
 
 export default {
   title: 'Design/Atoms/Responsive',
@@ -21,7 +20,7 @@ const defaultParams = {
 
 // ---
 
-const ResponsiveTemplate: ComponentStory<any> = (args) => {
+const ResponsiveTemplate: ComponentStory<any> = () => {
   const Wrapper = styled.div`
     display: flex;
     flex-wrap: wrap;

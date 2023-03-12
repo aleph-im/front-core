@@ -34,7 +34,7 @@ const Rect = styled.div`
   margin: 10px 12px;
 `
 
-const ColorsTemplate: ComponentStory<any> = (args) => {
+const ColorsTemplate: ComponentStory<any> = () => {
   return (
     <>
       <h1>Colors</h1>

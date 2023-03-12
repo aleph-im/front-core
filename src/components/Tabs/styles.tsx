@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import TextGradient from '../TextGradient'
-import { StyledTabItemProps, TabLabelProps, TabType } from './types'
+import { StyledTabItemProps, TabLabelProps } from './types'
 
 export const StyledTabsHeader = styled.div`
   display: flex;

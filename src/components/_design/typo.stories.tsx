@@ -19,7 +19,7 @@ const defaultParams = {
 
 // ---
 
-const TypographyTemplate: ComponentStory<any> = (args) => {
+const TypographyTemplate: ComponentStory<any> = () => {
   return (
     <div>
       <StoryBookHeader>Typography</StoryBookHeader>

@@ -165,7 +165,7 @@ function typoClasses(theme: DefaultTheme) {
     `
 }
 
-function effectClasses(theme: DefaultTheme) {
+function effectClasses() {
   const glowColors = ['main0', 'main1', 'main2']
   const glowMaxColors = ['main0', 'main1', 'main2', 'extra0', 'extra1']
   const glassColors = ['main0', 'main1', 'main2', 'base0', 'base1', 'base2', 'colored0']

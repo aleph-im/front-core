@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '../../../Button'
 import { StyledInfoBox } from './styles'
 import { InfoBoxProps } from './types'
 
