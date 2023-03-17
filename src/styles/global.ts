@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
 
     const colorCss = colorClasses(theme)
     const typoCss = typoClasses(theme)
-    const effectCss = effectClasses(theme)
+    const effectCss = effectClasses()
     const marginPaddingCss = marginPaddingClasses(theme)
     const displayCss = displayClasses(theme)
 
@@ -83,30 +83,39 @@ function displayClasses(theme: DefaultTheme) {
 
 function marginPaddingClasses(theme: DefaultTheme) {
   const breakpointId = Object.entries(theme.breakpoint).sort(([, av], [, bv]) => av - bv).map(([k]) => k as BreakpointId)
-  const sizes = [[0, 0], ...Object.entries(theme.font.size)].sort(([, av], [, bv]) => av - bv).map(([k, v]) => [k as string, (v ? `${v}rem` : '0') as string])
+  const sizes = [[0, 0], ...Object.entries(theme.font.size)].sort(([, av], [, bv]) => av - bv).map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
 
-  function getClasses(bp: string, k: string, v: string) {
+  function getClasses(bp: string, neg: boolean, k: string, v: string) {
+    if (neg && k === '0') return css``
+
+    const n = neg ? '-' : ''
     bp = bp ? `-${bp}` : ''
 
     return css`
-      .m-${k}${bp} { margin: ${v}; }
-      .mt-${k}${bp}, .my-${k}${bp} { margin-top: ${v}; }
-      .mb-${k}${bp}, .my-${k}${bp} { margin-bottom: ${v}; }
-      .ml-${k}${bp}, .mx-${k}${bp} { margin-left: ${v}; }
-      .mr-${k}${bp}, .mx-${k}${bp} { margin-right: ${v}; }
+      .${n}m-${k}${bp} { margin: ${n}${v}; }
+      .${n}mt-${k}${bp}, .${n}my-${k}${bp} { margin-top: ${n}${v}; }
+      .${n}mb-${k}${bp}, .${n}my-${k}${bp} { margin-bottom: ${n}${v}; }
+      .${n}ml-${k}${bp}, .${n}mx-${k}${bp} { margin-left: ${n}${v}; }
+      .${n}mr-${k}${bp}, .${n}mx-${k}${bp} { margin-right: ${n}${v}; }
   
-      .p-${k}${bp} { padding: ${v}; }
-      .pt-${k}${bp}, .py-${k}${bp} { padding-top: ${v}; }
-      .pb-${k}${bp}, .py-${k}${bp} { padding-bottom: ${v}; }
-      .pl-${k}${bp}, .px-${k}${bp} { padding-left: ${v}; }
-      .pr-${k}${bp}, .px-${k}${bp} { padding-right: ${v}; }
+      .${n}p-${k}${bp} { padding: ${n}${v}; }
+      .${n}pt-${k}${bp}, .${n}py-${k}${bp} { padding-top: ${n}${v}; }
+      .${n}pb-${k}${bp}, .${n}py-${k}${bp} { padding-bottom: ${n}${v}; }
+      .${n}pl-${k}${bp}, .${n}px-${k}${bp} { padding-left: ${n}${v}; }
+      .${n}pr-${k}${bp}, .${n}px-${k}${bp} { padding-right: ${n}${v}; }
     `
   }
 
-  const defaultCss = sizes.map(([k, v]) => getClasses('', k, v))
+  const defaultCss = sizes.flatMap(([k, v]) => [
+    getClasses('', false, k, v),
+    getClasses('', true, k, v)
+  ])
 
   const responsiveCss = breakpointId.map(bp => getResponsiveCss(bp,
-    sizes.map(([k, v]) => getClasses(bp, k, v))
+    sizes.flatMap(([k, v]) => [
+      getClasses(bp, false, k, v),
+      getClasses(bp, true, k, v)
+    ])
   ))
 
   return css`
