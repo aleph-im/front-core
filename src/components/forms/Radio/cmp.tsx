@@ -1,5 +1,4 @@
-import React, { forwardRef, ForwardedRef, useCallback, ChangeEvent } from 'react'
-import { usePseudoRandomId } from '../../../hooks'
+import React, { forwardRef, ForwardedRef, useCallback, ChangeEvent, useId } from 'react'
 import { useRadioGroup } from '../RadioGroup/context'
 import { StyledRadioContainer, StyledInput, StyledLabel, StyledInputContainer, StyledInputDot } from './styles'
 import { RadioProps } from './types'
@@ -14,7 +13,7 @@ export const Radio = forwardRef(({
   className,
   ...rest
 }: RadioProps, ref: ForwardedRef<HTMLInputElement>) => {
-  id = usePseudoRandomId(id, 'radio')
+  id = useId()
 
   const group = useRadioGroup()
 

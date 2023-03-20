@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
-import { usePseudoRandomId } from '../../../hooks'
+import React, { ChangeEvent, useId, useState } from 'react'
 import FormError from '../FormError'
 import { StyledFormLabel } from '../styles.forms'
 import { RadioGroupContext } from './context'
@@ -19,7 +18,7 @@ export const RadioGroup = ({
 }: RadioGroupProps) => {
   const [groupValue, setGroupValue] = useState(defaultValue || value)
 
-  const groupName = usePseudoRandomId(name, 'radio-group')
+  const groupName = useId(name, 'radio-group')
 
   const contextValue = React.useMemo(
     () => ({

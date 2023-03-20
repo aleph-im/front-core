@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
-import { usePseudoRandomId } from '../../../hooks'
+import React, { ChangeEvent, useId, useState } from 'react'
 import FormError from '../FormError'
 import { StyledFormLabel } from '../styles.forms'
 import { CheckboxGroupContext } from './context'
@@ -19,7 +18,7 @@ export const CheckboxGroup = ({
 }: CheckboxGroupProps) => {
   const [groupValue, setGroupValue] = useState(new Set(defaultValue || value || []))
 
-  const randomName = usePseudoRandomId(name, 'checkbox-group')
+  const randomName = useId()
   const groupName = name ? randomName : undefined
 
   const contextValue = React.useMemo(

@@ -1,5 +1,4 @@
-import React, { forwardRef, ForwardedRef, useCallback, ChangeEvent } from 'react'
-import { usePseudoRandomId } from '../../../hooks'
+import React, { forwardRef, ForwardedRef, useCallback, ChangeEvent, useId } from 'react'
 import { useCheckboxGroup } from '../CheckboxGroup/context'
 import { StyledCheckboxContainer, StyledInput, StyledLabel, StyledInputContainer, StyledCheckIcon } from './styles'
 import { CheckboxProps } from './types'
@@ -14,7 +13,7 @@ export const Checkbox = forwardRef(({
   onChange: onChangeProp,
   ...rest
 }: CheckboxProps, ref: ForwardedRef<HTMLInputElement>) => {
-  id = usePseudoRandomId(id, 'checkbox')
+  id = useId()
 
   const group = useCheckboxGroup()
 
