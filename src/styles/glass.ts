@@ -29,7 +29,12 @@ export function getGlassEffectCss(
         const bss = calculateBoxShadowPossition(bs, opts)
 
         const c = theme.gradient[color].colors
-        const bg = `background-image: linear-gradient(90deg, ${c[0]}03 0%, ${c[1]}03 100%);`
+        const bg = `
+          background-clip: border-box;
+          background-origin: border-box;
+          background-position: 0 0;
+          background-image: linear-gradient(90deg, ${c[0]}03 0%, ${c[1]}03 100%);
+        `
 
         switch (color) {
           case 'main0':
@@ -74,10 +79,16 @@ export function getGlassEffectCss(
         const bss = calculateBoxShadowPossition(bs, opts)
 
         const c = theme.gradient.main0.colors
+        const bg = `
+          background-clip: border-box;
+          background-origin: border-box;
+          background-position: 0 0;
+        `
 
         switch (color) {
           case 'base0':
             return css`
+              ${bg}
               background-image:
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(84.86deg, #2260FF0C 65.23%, #1859FF00 99.89%),
@@ -85,11 +96,13 @@ export function getGlassEffectCss(
             `
           case 'base1':
             return css`
+              ${bg}
               background-image:
                 linear-gradient(90.96deg, #1D1C3780 54.81%, #1D1C3700 103.58%);
             `
           case 'base2':
             return css`
+              ${bg}
               background: ${theme.color.main0}03;
               box-shadow: 
                 inset ${bss.s1} #DEEFFF05,
@@ -97,6 +110,7 @@ export function getGlassEffectCss(
             `
           case 'colored0':
             return css`
+              ${bg}
               background: 
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(342.74deg, #2D113A66 22.13%, #43125900 67.01%),
@@ -145,6 +159,7 @@ export function getDarkEffectCss(
       const bss = calculateBoxShadowPossition(bs, opts)
 
       return css`
+        background-clip: padding-box;
         background-color: ${theme.color.main0}03;
         box-shadow: ${bss.s1} #00000080;
       `

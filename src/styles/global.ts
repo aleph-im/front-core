@@ -43,8 +43,13 @@ export const GlobalStyle = createGlobalStyle`
         padding: ${theme.font.size.xxl}rem ${theme.font.size.lg}rem;
       }
 
-      input {
-        ${getTypoCss('body')}
+      form, input, textarea {
+        ${getTypoCss('form')}
+      }
+      
+      h1, h2, h3, h4, h5, h6, h7, header {
+        margin-top: 0;
+        margin-bottom: ${theme.font.size.lg}rem;
       }
 
       ${colorCss}
@@ -127,51 +132,37 @@ function marginPaddingClasses(theme: DefaultTheme) {
 function colorClasses(theme: DefaultTheme) {
   return css`
     /* COLORS */
-    ${Object.keys(theme.color).map(
-    (color) => css`
+    ${Object.keys(theme.color).map((color) => css`
       .bg-${color} {
         ${getBackgroundColorCss(color)}
       }
-    `,
-  )
-    }
+    `)}
 
     /* GRADIENTS */
-    ${Object.keys(theme.gradient).map(
-      (color) => css`
+    ${Object.keys(theme.gradient).map((color) => css`
       .gr-${color} {
         ${getBackgroundGradientCss(color)}
       }
-    `,
-    )
-    }
-    `
+    `)}
+  `
 }
 
 function typoClasses(theme: DefaultTheme) {
   return css`
     /* TYPOS */
-    ${Object.entries(theme.typo).map(
-    ([k, v]) => css`
+    ${Object.entries(theme.typo).map(([k, v]) => css`
       .tp-${k} ${v.tag ? `, ${k}` : ''} {
         ${getTypoCss(k as any)}
-        margin-top: 0;
-        margin-bottom: ${theme.font.size.lg}rem;
       }
-    `,
-  )
-    }
+    `)}
 
     /* FONT-SIZE */
-     ${Object.entries(theme.font.size).map(
-      ([k, v]) => css`
+    ${Object.entries(theme.font.size).map(([k, v]) => css`
       .fs-${k} {
         font-size: ${v}rem;
       }
-    `,
-    )
-    }
-    `
+    `)}
+  `
 }
 
 function effectClasses() {

@@ -1,20 +1,18 @@
 import React, { ForwardedRef, forwardRef, useCallback, useMemo, useState } from 'react'
 import FormError from '../FormError'
 import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
-import { StyledTextInputField, StyledTextInputContainer } from './styles'
-import { TextInputProps } from './types'
+import { StyledTextAreaField } from './styles'
+import { TextAreaProps } from './types'
 
-export const TextInput = forwardRef(({
+export const TextArea = forwardRef(({
   name,
   label,
   className,
   focus,
   error,
-  button,
-  buttonStyle = 'wrapped',
   placeholder = name,
   ...rest
-}: TextInputProps, ref: ForwardedRef<HTMLInputElement>) => {
+}: TextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
   const [isFocus, setIsFocus] = useState(focus)
   const handleFocus = useCallback(() => setIsFocus(true), [setIsFocus])
   const handleBlur = useCallback(() => setIsFocus(false), [setIsFocus])
@@ -27,25 +25,20 @@ export const TextInput = forwardRef(({
   return (
     <StyledInputWrapper>
       {label && <StyledFormLabel>{label}</StyledFormLabel>}
-      <StyledTextInputContainer {...{ button, buttonStyle, className: isFocusClass }}>
-        <StyledTextInputField
-          {...{
-            ref,
-            button,
-            buttonStyle,
-            placeholder,
-            className: classes,
-            onFocus: handleFocus,
-            onBlur: handleBlur,
-            ...rest,
-          }} />
-        {button}
-      </StyledTextInputContainer>
+      <StyledTextAreaField
+        {...{
+          ref,
+          placeholder,
+          className: classes,
+          onFocus: handleFocus,
+          onBlur: handleBlur,
+          ...rest,
+        }} />
       {error && <FormError error={error} />}
     </StyledInputWrapper>
   )
 })
 
-TextInput.displayName = 'TextInput'
+TextArea.displayName = 'TextArea'
 
-export default TextInput
+export default TextArea

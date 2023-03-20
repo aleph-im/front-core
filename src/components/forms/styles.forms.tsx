@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { addClasses } from "../../utils"
 
-export const StyledTextInputWrapper = styled.div`
+export const StyledInputWrapper = styled.div`
   max-width: 100%;
   min-width: 200px;
 `

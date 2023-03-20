@@ -169,7 +169,7 @@ const typo: ThemeTypo = {
     lineHeight: 1.666
   },
   body: {
-    tag: false,
+    tag: true,
     family: font.family.body,
     style: 'normal',
     weight: 400,
@@ -209,7 +209,7 @@ const typo: ThemeTypo = {
     lineHeight: 1.666
   },
   form: {
-    tag: false,
+    tag: true,
     family: font.family.body,
     style: 'normal',
     weight: 400,

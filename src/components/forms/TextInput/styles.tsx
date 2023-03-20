@@ -12,7 +12,6 @@ export const StyledTextInputField = styled.input<ButtonProps>`
       border: 0;
       background: transparent;
       color: ${theme.color.text};
-      color: ${theme.color.text};
       padding: 0.5rem 2rem;
       min-height: 2.75em;
       width: 100%;

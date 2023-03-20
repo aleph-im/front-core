@@ -1,7 +1,7 @@
 import React, { useState, useCallback, forwardRef, ForwardedRef } from 'react'
 import { useElementHeight, useForwardRef } from '../../../hooks'
 import Icon from '../../Icon'
-import { StyledFormLabel, StyledTextInputWrapper } from '../styles.forms'
+import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
 import { StyledChip, StyledChipContainer, StyledChipTag, StyledChipRemoveButton, StyledContainer, StyledInput } from './styles'
 import { ChipInputProps, ChipItemProps } from './types'
 
@@ -60,7 +60,7 @@ export const ChipInput = forwardRef(({
   }, [inputValue, tags, setTags, setInputValue, onAdd, onRemove, handleRemoveTag])
 
   return (
-    <StyledTextInputWrapper>
+    <StyledInputWrapper>
       {label && <StyledFormLabel>{label}</StyledFormLabel>}
       <StyledContainer ref={containerRef} isBig={isBig}>
         <StyledChipContainer isBig={isBig}>
@@ -81,7 +81,7 @@ export const ChipInput = forwardRef(({
           isBig={isBig}
         />
       </StyledContainer>
-    </StyledTextInputWrapper>
+    </StyledInputWrapper>
   )
 })
 
