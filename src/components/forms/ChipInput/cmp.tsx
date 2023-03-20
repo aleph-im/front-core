@@ -21,11 +21,14 @@ const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
 export const ChipInput = forwardRef(({
   placeholder = 'Filter',
   label,
+  defaultValue,
+  value,
   onAdd,
-  onRemove
+  onRemove,
+  onChange
 }: ChipInputProps, ref: ForwardedRef<HTMLInputElement>) => {
   const [inputValue, setInputValue] = useState('')
-  const [tags, setTags] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>(defaultValue || value || [])
 
   const reff = useForwardRef(ref)
   const [containerRef, containerHeight] = useElementHeight<HTMLDivElement>([tags])
@@ -39,7 +42,9 @@ export const ChipInput = forwardRef(({
   const handleRemoveTag = useCallback((tagToRemove: string) => {
     const updatedTags = tags.filter((tag) => tag !== tagToRemove)
     setTags(updatedTags)
-  }, [tags, setTags])
+    onRemove && onRemove(tagToRemove)
+    onChange && onChange(updatedTags)
+  }, [tags, setTags, onRemove, onChange])
 
   const handleInputKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     const value = inputValue.trim()
@@ -49,13 +54,13 @@ export const ChipInput = forwardRef(({
       setTags(newTags)
       setInputValue('')
       onAdd && onAdd(value)
+      onChange && onChange(newTags)
       return
     }
 
     if (event.key === 'Backspace' && value === '') {
       const lastTag = tags[tags.length - 1]
       handleRemoveTag(lastTag)
-      onRemove && onRemove(lastTag)
     }
   }, [inputValue, tags, setTags, setInputValue, onAdd, onRemove, handleRemoveTag])
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 import TextInput from './cmp'
@@ -15,6 +15,7 @@ export default {
 const defaultArgs: Partial<TextInputProps> = {
   name: 'text-input',
   placeholder: 'Placeholder',
+  value: ''
 }
 
 const defaultParams = {
@@ -29,7 +30,21 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: ComponentStory<typeof TextInput> = (args) => <TextInput {...args} />
+const Template: ComponentStory<typeof TextInput> = (args) => {
+  const [value, setValue] = useState<string>(args.value as string)
+
+  return (
+    <>
+      <TextInput
+        {...args}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <h6 className='my-md'>value:</h6>
+      <pre>{value}</pre>
+    </>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {
@@ -37,7 +52,7 @@ Default.args = {
 }
 Default.parameters = {
   ...defaultParams,
-  controls: { exclude: ['buttonStyle'] },
+  controls: { exclude: [...defaultParams.controls.exclude, 'buttonStyle'] },
 }
 
 // ---
@@ -87,7 +102,7 @@ WithError.args = {
 }
 WithError.parameters = {
   ...defaultParams,
-  controls: { exclude: ['button', 'buttonStyle'] },
+  controls: { exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'] },
 }
 
 
@@ -101,5 +116,5 @@ WithWarning.args = {
 }
 WithWarning.parameters = {
   ...defaultParams,
-  controls: { exclude: ['button', 'buttonStyle'] },
+  controls: { exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'] },
 }

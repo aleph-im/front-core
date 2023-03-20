@@ -58,8 +58,8 @@ const Template: ComponentStory<typeof Radio> = (args) => {
             className="mb-md"
           />)
       })}
-
-      <pre>selected: {JSON.stringify(selectedOption)}</pre>
+      <h6 className='my-md'>value:</h6>
+      <pre>{JSON.stringify(selectedOption, null, 2)}</pre>
     </>
   )
 }

@@ -13,14 +13,12 @@ export const TextArea = forwardRef(({
   placeholder = name,
   ...rest
 }: TextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>) => {
-  const [isFocus, setIsFocus] = useState(focus)
-  const handleFocus = useCallback(() => setIsFocus(true), [setIsFocus])
-  const handleBlur = useCallback(() => setIsFocus(false), [setIsFocus])
-
-  const isFocusClass = useMemo(() => isFocus || focus ? '_focus' : '', [isFocus, focus])
-
   // @note: Storybook testing purposes
-  const classes = useMemo(() => isFocusClass + (className || ''), [isFocusClass, className])
+  const classes = useMemo(() => {
+    return [
+      focus ? '_focus' : '',
+    ].join(' ') + (className || '')
+  }, [focus, className])
 
   return (
     <StyledInputWrapper>
@@ -30,10 +28,9 @@ export const TextArea = forwardRef(({
           ref,
           placeholder,
           className: classes,
-          onFocus: handleFocus,
-          onBlur: handleBlur,
           ...rest,
-        }} />
+        }}
+      />
       {error && <FormError error={error} />}
     </StyledInputWrapper>
   )

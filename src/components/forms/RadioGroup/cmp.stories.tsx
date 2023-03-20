@@ -19,7 +19,7 @@ const defaultArgs: Partial<RadioGroupProps> = {
   error: undefined,
   direction: 'row',
   name: 'group-1',
-  defaultValue: '2',
+  value: '2',
 }
 
 const defaultParams = {
@@ -39,7 +39,7 @@ const Template: ComponentStory<typeof RadioGroup> = (args) => {
     ['3', 'Option 3']
   ]
 
-  const [selectedId, setSelectedId] = useState<string>(args.defaultValue as string)
+  const [selectedId, setSelectedId] = useState<string>(args.value as string)
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const id = event.target.value
@@ -66,10 +66,8 @@ const Template: ComponentStory<typeof RadioGroup> = (args) => {
             />)
         })}
       </RadioGroup>
-
-      <pre className='mt-md'>
-        selected {JSON.stringify(selectedOption)}
-      </pre>
+      <h6 className='my-md'>value:</h6>
+      <pre>{JSON.stringify(selectedOption, null, 2)}</pre>
     </>
   )
 }

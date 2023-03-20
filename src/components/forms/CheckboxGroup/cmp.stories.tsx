@@ -18,7 +18,7 @@ const defaultArgs: Partial<CheckboxGroupProps> = {
   label: 'Select an option',
   error: undefined,
   direction: 'row',
-  defaultValue: ['1', '2'],
+  value: ['1', '2'],
 }
 
 const defaultParams = {
@@ -38,7 +38,7 @@ const Template: ComponentStory<typeof CheckboxGroup> = (args) => {
     ['3', 'Option 3']
   ]
 
-  const [selectedIds, setSelectedIds] = useState<Set<CheckboxGroupValue>>(new Set(args.defaultValue as string[]))
+  const [selectedIds, setSelectedIds] = useState<Set<CheckboxGroupValue>>(new Set(args.value as string[]))
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>, groupValue: CheckboxGroupValue[]) => {
     setSelectedIds(new Set(groupValue))
@@ -63,10 +63,8 @@ const Template: ComponentStory<typeof CheckboxGroup> = (args) => {
             />)
         })}
       </CheckboxGroup>
-
-      <pre className='mt-md'>
-        selected {JSON.stringify(selectedOption)}
-      </pre>
+      <h6 className='my-md'>value:</h6>
+      <pre>{JSON.stringify(selectedOption, null, 2)}</pre>
     </>
   )
 }

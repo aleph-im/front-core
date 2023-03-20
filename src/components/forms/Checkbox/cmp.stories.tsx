@@ -62,8 +62,8 @@ const Template: ComponentStory<typeof Checkbox> = (args) => {
             className="mb-md"
           />)
       })}
-
-      <pre>selected: {JSON.stringify(selectedOptions)}</pre>
+      <h6 className='my-md'>value:</h6>
+      <pre>{JSON.stringify(selectedOptions, null, 2)}</pre>
     </>
   )
 }
