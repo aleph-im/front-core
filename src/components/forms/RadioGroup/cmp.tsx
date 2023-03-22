@@ -17,8 +17,8 @@ export const RadioGroup = ({
   ...rest
 }: RadioGroupProps) => {
   const [groupValue, setGroupValue] = useState(defaultValue || value)
-
-  const groupName = useId(name, 'radio-group')
+  const id = useId()
+  const groupName = name || id
 
   const contextValue = React.useMemo(
     () => ({
