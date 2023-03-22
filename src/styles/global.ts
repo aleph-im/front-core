@@ -87,10 +87,15 @@ function displayClasses(theme: DefaultTheme) {
 }
 
 function marginPaddingClasses(theme: DefaultTheme) {
-  const breakpointId = Object.entries(theme.breakpoint).sort(([, av], [, bv]) => av - bv).map(([k]) => k as BreakpointId)
-  const sizes = [[0, 0], ...Object.entries(theme.font.size)].sort(([, av], [, bv]) => av - bv).map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
+  const breakpointId = Object.entries(theme.breakpoint)
+    .sort(([, av], [, bv]) => av - bv)
+    .map(([k]) => k as BreakpointId)
 
-  function getClasses(bp: string, neg: boolean, k: string, v: string) {
+  const sizes = [[0, 0], ...Object.entries(theme.font.size)]
+    .sort(([, av], [, bv]) => av - bv)
+    .map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
+
+  function getClasses(k: string, v: string, neg: boolean = false, bp: string = '') {
     if (neg && k === '0') return css``
 
     const n = neg ? '-' : ''
@@ -111,16 +116,22 @@ function marginPaddingClasses(theme: DefaultTheme) {
     `
   }
 
-  const defaultCss = sizes.flatMap(([k, v]) => [
-    getClasses('', false, k, v),
-    getClasses('', true, k, v)
-  ])
+  const defaultCss = [
+    ...sizes.flatMap(([k, v]) => [
+      getClasses(k, v, false, ''),
+      getClasses(k, v, true, ''),
+    ]),
+    getClasses('auto', 'auto', false, '')
+  ]
 
   const responsiveCss = breakpointId.map(bp => getResponsiveCss(bp,
-    sizes.flatMap(([k, v]) => [
-      getClasses(bp, false, k, v),
-      getClasses(bp, true, k, v)
-    ])
+    [
+      ...sizes.flatMap(([k, v]) => [
+        getClasses(k, v, false, bp),
+        getClasses(k, v, true, bp)
+      ]),
+      getClasses('auto', 'auto', false, bp)
+    ]
   ))
 
   return css`
