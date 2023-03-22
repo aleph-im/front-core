@@ -32,8 +32,7 @@ const Template: ComponentStory<typeof Select> = (args) => {
 
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set(args.value as string | string[]))
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLSelectElement>, value: string | string[]) => {
-    console.log('CHANGE', value)
+  const handleChange = useCallback((e: ChangeEvent<HTMLSelectElement>, value: string | string[]) => {
     setSelectedIds(new Set(value))
   }, [setSelectedIds])
 
@@ -73,7 +72,6 @@ Multiselect.args = {
 Multiselect.parameters = {
   ...defaultParams,
 }
-
 
 // ---
 

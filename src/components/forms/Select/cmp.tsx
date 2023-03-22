@@ -33,7 +33,6 @@ export const Select = forwardRef(({
           value: selectedValue,
           onChange: handleChange,
           multiple,
-          size: 6,
           ...rest,
         }}
       >

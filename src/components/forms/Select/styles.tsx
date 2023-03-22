@@ -12,19 +12,29 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       appearance: none;
       outline: 0;
       background-color: ${theme.color.text}0F;
+      color: ${theme.color.text};
       box-shadow: 0px 4px 24px #00000040;
       border: 1px solid transparent;
       border-radius: 30px;
       padding: 0.5rem 2rem;
-      color: ${theme.color.text};
+      padding-right: 4rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       
-      /* Remove default arrow */
-      background-image: url(...);
+      /* icon */
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxNiAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCA5LjQzNzVMOC42ODc1IDguNzE4NzVMMTQuNjg3NSAyLjcxODc1TDE1LjQwNjIgMkwxNCAwLjU5Mzc1TDEzLjI4MTIgMS4zMTI1TDggNi41OTM3NUwyLjY4NzUgMS4zMTI1TDIgMC41OTM3NUwwLjU2MjUgMkwxLjI4MTI1IDIuNzE4NzVMNy4yODEyNSA4LjcxODc1TDggOS40Mzc1WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4K");
+      background-repeat: no-repeat;
+      background-position: center right -2.5rem;
+      background-origin: content-box;
+
+
+      /* Remove default arrow IE*/
       &::-ms-expand {
         display: none;
       }
 
       &[multiple] {
+        background-image: none;
         padding: 0;
         overflow-y: auto;
       }
@@ -32,12 +42,13 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
   }}
 `
 
-export const StyledOption = styled.option.attrs(addClasses('tp-form'))`
+export const StyledOption = styled.option`
   ${({ theme }) => {
     return css`
       appearance: none;
       outline: 0;
       background-color: ${theme.color.text}0F;
+      cursor: pointer;
       
       border-bottom: 1px solid #ffffff1a;
       padding: 0.875rem;
@@ -60,5 +71,3 @@ export const StyledOption = styled.option.attrs(addClasses('tp-form'))`
     `
   }}
 `
-
-0.875
