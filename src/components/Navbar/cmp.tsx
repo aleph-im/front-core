@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Button from '../Button';
-import Icon from '../Icon';
-import Logo from '../Logo';
+import React, { useState } from 'react'
+import Button from '../Button'
+import Icon from '../Icon'
+import Logo from '../Logo'
 import {
   StyledBurgerIconContainer,
   StyledHeadingContainer,
@@ -10,7 +10,7 @@ import {
   StyledNavlink,
   StyledNavContainer,
 } from './styles'
-import { NavbarProps } from './types';
+import { NavbarProps } from './types'
 
 const Navbar = ({
   withLabel = true,
@@ -19,8 +19,8 @@ const Navbar = ({
   navButtons = [],
   ...rest
 }: NavbarProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleIsOpen = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleIsOpen = () => setIsOpen(!isOpen)
 
   return (
     <StyledNavbarContainer {...rest}>
@@ -61,6 +61,6 @@ const Navbar = ({
       </StyledNavContainer>
     </StyledNavbarContainer>
   )
-};
+}
 
 export default Navbar

@@ -1,8 +1,8 @@
-import React, { ChangeEventHandler, useContext } from "react";
-import { CheckboxGroupValue } from "./types";
+import React, { ChangeEventHandler, useContext } from "react"
+import { CheckboxGroupValue } from "./types"
 
 export type CheckboxGroupContextValue = {
-  name?: string;
+  name?: string
   value: CheckboxGroupValue[]
   valueSet: Set<CheckboxGroupValue>
   onChange: ChangeEventHandler<HTMLInputElement>

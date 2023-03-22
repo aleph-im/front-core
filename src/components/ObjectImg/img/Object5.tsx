@@ -1,5 +1,5 @@
-import React from "react";
-import { StyledObjectImgSvgProps } from "../types";
+import React from "react"
+import { StyledObjectImgSvgProps } from "../types"
 
 export const Object5 = ({ color = '#ffffff', color2 = 'transparent' }: StyledObjectImgSvgProps) => {
   return (

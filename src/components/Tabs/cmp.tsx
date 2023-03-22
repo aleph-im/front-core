@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   StyledTabsHeader,
   StyledTabsItem,
   StyledTabLabel,
   StyledSelectedTab,
 } from './styles'
-import { TabsProps } from "./types";
+import { TabsProps } from "./types"
 
 const noop = () => null
 
@@ -82,4 +82,4 @@ const Tabs = ({
   )
 }
 
-export default Tabs;
+export default Tabs

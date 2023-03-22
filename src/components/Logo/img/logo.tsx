@@ -1,5 +1,5 @@
-import React from "react";
-import { StyledLogoSvgProps } from "../types";
+import React from "react"
+import { StyledLogoSvgProps } from "../types"
 
 export const LogoSvg = ({ color = '#ffffff' }: StyledLogoSvgProps) => {
   return (

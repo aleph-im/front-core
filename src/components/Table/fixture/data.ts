@@ -36,7 +36,11 @@ export const data = [
   },
 ]
 
-export type Pets = { dogs: number; cats: number; turtles: number }
+export type Pets = {
+  dogs: number
+  cats: number
+  turtles: number
+}
 
 export type Gender = 'male' | 'female' | 'undisclosed'
 

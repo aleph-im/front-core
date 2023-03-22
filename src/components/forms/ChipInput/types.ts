@@ -1,10 +1,10 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react"
 
 export type ChipInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
-  placeholder?: string;
-  label?: string;
-  onAdd?: (tag: string) => void;
-  onRemove?: (tag: string) => void;
+  placeholder?: string
+  label?: string
+  onAdd?: (tag: string) => void
+  onRemove?: (tag: string) => void
   defaultValue?: string[]
   value?: string[]
   onChange?: (value: string[]) => void
@@ -12,5 +12,5 @@ export type ChipInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChan
 
 export type ChipItemProps = {
   tag: string
-  onRemove: (tag: string) => void;
+  onRemove: (tag: string) => void
 }

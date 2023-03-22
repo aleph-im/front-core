@@ -1,7 +1,7 @@
-import React, { ChangeEventHandler, useContext } from "react";
+import React, { ChangeEventHandler, useContext } from "react"
 
 export type RadioGroupContextValue = {
-  name: string;
+  name: string
   value: string | ReadonlyArray<string> | number | undefined
   onChange: ChangeEventHandler<HTMLInputElement>
 }
