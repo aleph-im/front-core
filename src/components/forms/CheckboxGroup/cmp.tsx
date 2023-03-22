@@ -34,8 +34,6 @@ export const CheckboxGroup = ({
           ? groupValue.add(value)
           : groupValue.delete(value)
 
-        console.log(groupValue)
-
         const newValue = new Set(groupValue)
         setGroupValue(newValue)
         groupOnChange && groupOnChange(e, Array.from(newValue))

@@ -8,7 +8,6 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       display: block;
       width: 100%;
       max-width: 100%;
-
       appearance: none;
       outline: 0;
       background-color: ${theme.color.text}0F;
@@ -27,7 +26,6 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       background-position: center right -2.5rem;
       background-origin: content-box;
 
-
       /* Remove default arrow IE*/
       &::-ms-expand {
         display: none;
@@ -37,6 +35,10 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
         background-image: none;
         padding: 0;
         overflow-y: auto;
+      }
+
+      &:focus {
+        border-color: ${theme.color.text};
       }
     `
   }}
@@ -49,13 +51,13 @@ export const StyledOption = styled.option`
       outline: 0;
       background-color: ${theme.color.text}0F;
       cursor: pointer;
-      
       border-bottom: 1px solid #ffffff1a;
       padding: 0.875rem;
       min-height: 2.75em;
       width: 100%;
       color: ${theme.color.text};
-
+      font-weight: 700;
+      
       ${StyledSelect}[multiple] & {
         text-align: center;
       }
@@ -67,6 +69,7 @@ export const StyledOption = styled.option`
       &:checked {
         box-shadow: 0px -18px 40px 7px rgba(0, 84, 255, 0.11);
         ${getBackgroundGradientCss('main0')}
+        color: ${theme.color.base2};
       }
     `
   }}

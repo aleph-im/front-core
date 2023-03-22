@@ -13,7 +13,8 @@ export const Checkbox = forwardRef(({
   onChange: onChangeProp,
   ...rest
 }: CheckboxProps, ref: ForwardedRef<HTMLInputElement>) => {
-  id = useId()
+  const rndId = useId()
+  id = id || rndId
 
   const group = useCheckboxGroup()
 

@@ -13,7 +13,8 @@ export const Radio = forwardRef(({
   className,
   ...rest
 }: RadioProps, ref: ForwardedRef<HTMLInputElement>) => {
-  id = useId()
+  const rndId = useId()
+  id = id || rndId
 
   const group = useRadioGroup()
 

@@ -12,7 +12,7 @@ export const Select = forwardRef(({
   multiple,
   ...rest
 }: SelectProps, ref: ForwardedRef<HTMLSelectElement>) => {
-  const [selectedValue, setSelectedValue] = useState<string | string[]>(value || '')
+  const [selectedValue, setSelectedValue] = useState<string | string[]>(value || options[0]?.value || '')
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newValue = multiple

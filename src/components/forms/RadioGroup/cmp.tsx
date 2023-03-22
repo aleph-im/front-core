@@ -6,6 +6,7 @@ import { StyledRadioGroupContainer, StyledRadioContainer } from './styles'
 import { RadioGroupProps } from './types'
 
 export const RadioGroup = ({
+  id,
   name,
   value,
   defaultValue,
@@ -16,8 +17,10 @@ export const RadioGroup = ({
   error,
   ...rest
 }: RadioGroupProps) => {
+  const rndId = useId()
+  id = id || rndId
+  
   const [groupValue, setGroupValue] = useState(defaultValue || value)
-  const id = useId()
   const groupName = name || id
 
   const contextValue = React.useMemo(

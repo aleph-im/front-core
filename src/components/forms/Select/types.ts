@@ -7,6 +7,7 @@ export type SelectOption = {
 }
 
 export type SelectProps = Omit<InputHTMLAttributes<HTMLSelectElement>,  'onChange'> & {
+  name?: string
   options: SelectOption[]
   multiple?: boolean
   value?: string | string[]
