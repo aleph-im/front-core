@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { getTypoCss } from '../../../styles';
+import { addClasses } from '../../../utils';
 import { StyledTextInputContainer } from '../TextInput/styles';
 
 export const StyledContainer = styled(StyledTextInputContainer) <{ isBig: boolean }>`
@@ -66,7 +66,7 @@ export const StyledChipRemoveButton = styled.button`
   }}
 `
 
-export const StyledInput = styled.input<{ isBig: boolean }>`
+export const StyledInput = styled.input.attrs(addClasses('tp-form'))<{ isBig: boolean }>`
   ${({ theme, isBig }) => {
     return css`
       flex: 1 1 auto;
@@ -76,7 +76,6 @@ export const StyledInput = styled.input<{ isBig: boolean }>`
       outline: none;
       color: ${theme.color.text};
       background-color: transparent;
-      ${getTypoCss('form')}
 
       &::placeholder {
         text-transform: capitalize;

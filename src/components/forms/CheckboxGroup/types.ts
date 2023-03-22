@@ -12,6 +12,7 @@ export type CheckboxGroupProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'on
 
   direction: CheckboxGroupDirection
   children: ReactNode
+  
   label?: string
   error?: FormErrorInfo
 }

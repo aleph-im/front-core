@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import { getTypoCss } from '../../../styles'
+import { addClasses } from '../../../utils'
 import { ButtonProps } from './types'
 
-export const StyledTextInputField = styled.input<ButtonProps>`
+export const StyledTextInputField = styled.input.attrs(addClasses('tp-form'))<ButtonProps>`
   ${({ theme }) => {
     return css`
       box-sizing: border-box;
@@ -15,7 +15,6 @@ export const StyledTextInputField = styled.input<ButtonProps>`
       padding: 0.5rem 2rem;
       min-height: 2.75em;
       width: 100%;
-      ${getTypoCss('form')}
 
       &::placeholder {
         text-transform: capitalize;

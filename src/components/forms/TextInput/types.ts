@@ -8,11 +8,12 @@ export type ButtonProps = {
 
 export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string
-  label?: string
   placeholder?: string
   defaultValue?: string
+  
+  label?: string
   error?: FormErrorInfo
-
+  
   // Force states
   focus?: boolean
   disabled?: boolean
