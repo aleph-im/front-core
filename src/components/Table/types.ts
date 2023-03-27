@@ -12,6 +12,7 @@ type Column = {
 export type TableProps = {
   columns: Column[]
   data: object[]
+  keySelector: <T>(row: T) => string | number
 }
 
 export type StyledTableProps = {

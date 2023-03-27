@@ -2,6 +2,7 @@ import React from 'react'
 import { StyledTable } from './styles'
 import { TableProps, StyledTableProps } from './types'
 import Icon from '../Icon'
+import TextGradient from '../TextGradient'
 
 type SortDirection = 'asc' | 'desc'
 
@@ -9,17 +10,23 @@ const toggleSort = (sort: SortDirection): SortDirection => {
   return sort === 'asc' ? 'desc' : 'asc'
 }
 
-export const Table = ({ columns, data, border = "none", oddRowNoise = false, ...rest }: TableProps & StyledTableProps) => {
+
+export const Table = ({ columns, data, border = "none", oddRowNoise = false, keySelector, ...rest }: TableProps & StyledTableProps) => {
   const isSortedColumn = (column: string) => sortedColumn.column === column
   const [sortedColumn, setSortedColumn] = React.useState({
     column: '',
     direction: 'asc',
   })
-  const sortedData = React.useMemo(
-    () =>
-      !sortedColumn.column
-        ? data
-        : data.sort((a, b) => {
+
+  const keyedData = React.useMemo(() => data.map((row) => ({
+    ...row,
+    key: keySelector ? keySelector(row) : crypto.randomUUID()
+  })), [data])
+
+  const sortedData = React.useMemo(() => {
+    return !sortedColumn.column
+      ? keyedData
+      : keyedData.sort((a, b) => {
           const column = columns.find(
             ({ label }) => label === sortedColumn.column,
           )
@@ -34,9 +41,8 @@ export const Table = ({ columns, data, border = "none", oddRowNoise = false, ...
           } else {
             return 0
           }
-        }),
-    [data, sortedColumn],
-  )
+        })
+  }, [keyedData, sortedColumn])
 
   return (
     <StyledTable {...{ border, ...rest }}>
@@ -68,8 +74,8 @@ export const Table = ({ columns, data, border = "none", oddRowNoise = false, ...
                       !isSortedColumn(label)
                         ? 'sort'
                         : sortedColumn.direction === 'asc'
-                          ? 'sort-up'
-                          : 'sort-down'
+                        ? 'sort-up'
+                        : 'sort-down'
                     }
                   />
                 </div>
@@ -81,9 +87,18 @@ export const Table = ({ columns, data, border = "none", oddRowNoise = false, ...
       </thead>
       <tbody>
         {sortedData.map((row, index) => (
-          <tr key={index} className={(oddRowNoise && index % 2 === 0) ? "fx-noise-light" : ""}>
+          <tr
+            key={row.key}
+            className={oddRowNoise && index % 2 === 0 ? 'fx-noise-light' : ''}
+          >
             {columns.map(({ selector, cell }, j) => (
-              <td key={j}>{cell ? cell(row) : selector(row)}</td>
+              <td key={j}>
+                {cell ? (
+                  cell(row)
+                ) : (
+                  selector(row)
+                )}
+              </td>
             ))}
           </tr>
         ))}

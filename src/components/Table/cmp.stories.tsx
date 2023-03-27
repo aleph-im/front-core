@@ -20,7 +20,7 @@ export default {
   }
 } as ComponentMeta<typeof Table>
 
-const defaultArgs: Partial<StyledTableProps> = {
+const defaultArgs: Partial<StyledTableProps & TableProps> = {
   border: 'dashed',
   oddRowNoise: true,
 }
