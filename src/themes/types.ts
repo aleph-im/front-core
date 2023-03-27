@@ -103,6 +103,7 @@ export type ThemeButton = {
 
 export type ThemeIcon = {
   size: {
+    xxl: number
     xl: number
     lg: number
     md: number

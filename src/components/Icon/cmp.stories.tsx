@@ -10,7 +10,7 @@ export default {
   decorators: [withDesign],
   argTypes: {
     size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
       control: { type: 'inline-radio' },
     },
   },

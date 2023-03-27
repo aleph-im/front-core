@@ -220,6 +220,7 @@ const typo: ThemeTypo = {
 
 const icon: ThemeIcon = {
   size: {
+    xxl: pxToRem(36),
     xl: pxToRem(24),
     lg: pxToRem(16),
     md: pxToRem(14),
