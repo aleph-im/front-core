@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom';
 import NotificationCard from '../NotificationCard';
 import { AddNotificationInfo, NotificationContext, NotificationInfo } from './context'
-import { StyledContainer } from './styles';
+import { StyledClearButton, StyledClearIcon, StyledContainer } from './styles';
 import { NotificationProps } from './types'
 
 export const Notification = ({
@@ -57,6 +57,11 @@ export const Notification = ({
     timeoutIdRef.current = setTimeout(disposeNotifications, ms)
   }, [notifications, stopTimeout, firstTimestamp, timeoutIdRef.current, timeout, disposeNotifications])
 
+  const clearAll = useCallback(() => {
+    stopTimeout()
+    setNotifications([])
+  }, [stopTimeout, setNotifications])
+
   useEffect(() => {
     resetTimeout()
     return stopTimeout
@@ -75,10 +80,11 @@ export const Notification = ({
               <NotificationCard
                 key={noti.id}
                 onClose={() => contextValue.remove(noti.id)}
-                className="mb-sm mx-sm"
+                className="mt-sm"
                 {...noti}
               />
             ))}
+            {notifications.length > 2 && <StyledClearButton onClick={clearAll}>Clear all <StyledClearIcon /></StyledClearButton>}
           </StyledContainer>
         )
         , document.body)
