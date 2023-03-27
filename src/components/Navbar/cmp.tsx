@@ -1,32 +1,27 @@
-import React, { useState } from 'react'
+
+import React, { useCallback, useState } from 'react'
 import Button from '../Button'
 import Icon from '../Icon'
-import Logo from '../Logo'
 import {
   StyledBurgerIconContainer,
   StyledHeadingContainer,
   StyledNavbarContainer,
-  StyledNavlinks,
-  StyledNavlink,
   StyledNavContainer,
 } from './styles'
 import { NavbarProps } from './types'
 
 const Navbar = ({
-  withLabel = true,
-  withLogo = true,
-  navLinks = [],
-  navButtons = [],
+  logo,
+  children,
   ...rest
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const toggleIsOpen = () => setIsOpen(!isOpen)
+  const toggleIsOpen = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen])
 
   return (
     <StyledNavbarContainer {...rest}>
       <StyledHeadingContainer isOpen={isOpen}>
-        {withLogo && <Logo text={withLabel} />}
-
+        {logo}
         <StyledBurgerIconContainer>
           <Button
             color={'main0'}
@@ -39,25 +34,8 @@ const Navbar = ({
           </Button>
         </StyledBurgerIconContainer>
       </StyledHeadingContainer>
-
       <StyledNavContainer isOpen={isOpen}>
-        {navLinks && (
-          <StyledNavlinks>
-            {navLinks.map((el, index) => (
-              <StyledNavlink key={index} withSlash>
-                {el}
-              </StyledNavlink>
-            ))}
-          </StyledNavlinks>
-        )}
-
-        {navButtons && (
-          <StyledNavlinks>
-            {navButtons.map((el, index) => (
-              <StyledNavlink key={index}>{el}</StyledNavlink>
-            ))}
-          </StyledNavlinks>
-        )}
+        {children}
       </StyledNavContainer>
     </StyledNavbarContainer>
   )

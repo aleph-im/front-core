@@ -1,16 +1,10 @@
-export type NavbarProps = {
-  withLabel?: boolean
-  withLogo?: boolean
-  navLinks?: React.ReactNode[]
-  navButtons?: React.ReactNode[]
+import { ReactNode } from "react"
 
-  className?: string
+export type NavbarProps = {
+  logo?: ReactNode
+  children?: ReactNode[]
 }
 
 export type ResponsiveNavBarProps = {
   isOpen?: boolean
-}
-
-export type NavlinkProps = {
-  withSlash?: boolean
 }

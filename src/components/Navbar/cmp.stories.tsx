@@ -4,16 +4,18 @@ import { withDesign } from 'storybook-addon-designs'
 import Navbar from './cmp'
 import { NavbarProps } from './types'
 import Button from '../Button'
+import NavbarLink from '../NavbarLink'
+import NavbarLinkList from '../NavbarLinkList'
+import Logo from '../Logo'
 
 export default {
   title: 'Components/UI/Navbar',
   component: Navbar,
+  subcomponents: { NavbarLink },
   decorators: [withDesign],
 } as ComponentMeta<typeof Navbar>
 
 const defaultArgs: Partial<NavbarProps> = {
-  withLabel: true,
-  withLogo: true,
 }
 
 // ---
@@ -39,7 +41,16 @@ const navButtons = [
 
 const Template: ComponentStory<typeof Navbar> = (args) => (
   <>
-    <Navbar {...args} navLinks={navLinks} navButtons={navButtons} />
+    <Navbar {...args} logo = {
+      <Logo size={'2rem'}/>
+    }>
+      <NavbarLinkList >
+        {navLinks.map((link, i) => (<NavbarLink key={i} withSlash={false}>{link}</NavbarLink>))}
+      </NavbarLinkList>
+      <NavbarLinkList>
+        {navButtons.map((link, i) => (<NavbarLink key={i}>{link}</NavbarLink>))}
+      </NavbarLinkList>
+    </Navbar>
 
     <h1>A random title</h1>
 

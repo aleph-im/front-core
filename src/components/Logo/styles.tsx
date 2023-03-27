@@ -23,7 +23,7 @@ export const StyledLogoContainer = styled.span<StyledLogoProps>`
       & > svg {
         box-sizing: border-box;
         font-size: ${text ? '0.8em' : '1em'};
-        ${text ? 'margin-right: 0.1em;' : ''};
+        ${text ? 'margin-right: 0.2em;' : ''};
       }
     `
   }}

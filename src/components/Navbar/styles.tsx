@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { NavlinkProps, ResponsiveNavBarProps } from './types'
+import { ResponsiveNavBarProps } from './types'
 import { getResponsiveCss } from '../../styles'
 
 // Main container
@@ -63,67 +63,6 @@ export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
           display: flex;
           align-items: center;
           padding: 0;
-        `,
-    )}
-    `
-  }}
-`
-
-// A <ul> element, wrapping the links (text and buttons)
-export const StyledNavlinks = styled.ul`
-    ${() => {
-    return css`
-          display: list-item;
-          list-style: none;
-          padding: 0 25px;
-          margin: 0;
-
-          &::first-child {
-            margin-top: 25px;
-          }
-
-          ${getResponsiveCss('md', css`
-              display: flex;
-              align-items: center;
-              padding: 0;
-
-              &::first-child {
-                margin-top: 0;
-              }
-            `,
-    )}
-        `
-  }}
-`
-
-// A <li> element, wrapping the links (text only), separated by a slash
-export const StyledNavlink = styled.li<NavlinkProps>`
-  ${({ withSlash }) => {
-    return css`
-      font-weight: 400;
-      margin: 10px 0;
-      padding: 0;
-
-      a,
-      span {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      ${getResponsiveCss('md', css`
-          margin: 0;
-
-          ${withSlash
-        ? css`
-                &:not(:last-child)::after {
-                  content: '/';
-                  display: inline-block;
-                  padding: 0 1rem;
-                }
-              `
-        : css`
-                padding: 0 1rem;
-              `}
         `,
     )}
     `
