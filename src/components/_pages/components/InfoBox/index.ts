@@ -1,2 +1,2 @@
-export { default } from './cmp'
+export { default, InfoBox } from './cmp'
 export { InfoBoxProps } from './types'

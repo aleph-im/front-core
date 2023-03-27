@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledNavlinks, StyledNavlink } from './styles'
 import { BreadcrumbProps } from './types'
 
-const Breadcrumb = ({ navLinks, ...rest }: BreadcrumbProps) => {
+export const Breadcrumb = ({ navLinks, ...rest }: BreadcrumbProps) => {
   return (
     <nav {...rest}>
       {navLinks && (

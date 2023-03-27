@@ -1,2 +1,2 @@
-export { default } from './cmp'
+export { default, FormError } from './cmp'
 export { FormErrorProps } from './types'

@@ -1,2 +1,2 @@
-export { default } from './cmp'
+export { default, CheckboxGroup } from './cmp'
 export { CheckboxGroupProps } from './types'

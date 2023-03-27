@@ -10,7 +10,7 @@ import {
 } from './styles'
 import { NavbarProps } from './types'
 
-const Navbar = ({
+export const Navbar = ({
   logo,
   children,
   ...rest

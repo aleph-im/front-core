@@ -9,7 +9,7 @@ import { TabsProps } from "./types"
 
 const noop = () => null
 
-const Tabs = ({
+export const Tabs = ({
   tabs,
   defaultSelected = 0,
   onTabChange = noop,

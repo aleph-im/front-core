@@ -9,7 +9,7 @@ const toggleSort = (sort: SortDirection): SortDirection => {
   return sort === 'asc' ? 'desc' : 'asc'
 }
 
-const Table = ({ columns, data, border = "none", oddRowNoise = false, ...rest }: TableProps & StyledTableProps) => {
+export const Table = ({ columns, data, border = "none", oddRowNoise = false, ...rest }: TableProps & StyledTableProps) => {
   const isSortedColumn = (column: string) => sortedColumn.column === column
   const [sortedColumn, setSortedColumn] = React.useState({
     column: '',

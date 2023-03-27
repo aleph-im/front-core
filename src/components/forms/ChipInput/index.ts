@@ -1,2 +1,2 @@
-export { default } from './cmp'
+export { default, ChipInput } from './cmp'
 export { ChipInputProps } from './types'
