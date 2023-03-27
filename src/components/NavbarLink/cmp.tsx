@@ -7,7 +7,7 @@ export const NavbarLink = ({
   ...rest
 }: NavbarLinkProps) => {
   return (
-    <StyledNavlink withSlash {...rest}>
+    <StyledNavlink {...rest}>
       {children}
     </StyledNavlink>
   )

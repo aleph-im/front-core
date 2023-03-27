@@ -17,31 +17,28 @@ export const StyledNavlink = styled.li<NavbarLinkProps>`
       }
 
       ${getResponsiveCss('md', css`
-          margin: 0;
-
-      
-
-      ${withSlash
-        ? css`
-            &:not(:last-child)::after {
-              content: '/';
-              display: inline-block;
+        margin: 0;
+        ${withSlash
+          ? css`
+              &:not(:last-child)::after {
+                content: '/';
+                display: inline-block;
+                padding: 0 1rem;
+              }
+            `
+          : css`
               padding: 0 1rem;
-            }
-          `
-        : css`
-            padding: 0 1rem;
-            
-            &:first-child {
-              padding-left: 0;
-            }
+              
+              &:first-child {
+                padding-left: 0;
+              }
 
-            &:last-child {
-              padding-right: 0;
-            }
-          `}
-        `,
-    )}
+              &:last-child {
+                padding-right: 0;
+              }
+            `}
+          `,
+      )}
     `
   }}
 `
