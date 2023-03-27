@@ -1,7 +1,7 @@
-import React from "react"
+import { ReactNode } from "react"
 
 export type InfoBoxProps = {
   title: string
-  children: React.ReactNode
+  children: ReactNode
   link?: string
 }

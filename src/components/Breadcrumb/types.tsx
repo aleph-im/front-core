@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export type BreadcrumbProps = {
-  navLinks: React.ReactNode[]
+  navLinks: ReactNode[]
 }

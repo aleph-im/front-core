@@ -1,9 +1,11 @@
+import { ReactNode } from "react"
+
 export type BulletItemKind = 'check' | 'check2' | 'error'
 export type BulletListSize = 'regular' | 'big'
 
 export type BulletListProps = {
   items: BulletItemProps[]
-  children?: React.ReactNode[]
+  children?: ReactNode
   size?: BulletListSize
 }
 

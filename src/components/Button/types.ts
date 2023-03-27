@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react"
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react"
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'text-only'
 export type ButtonKind = 'neon' | 'flat'
@@ -6,7 +6,7 @@ export type ButtonSize = 'regular' | 'big'
 export type ButtonTag = 'button' | 'a'
 
 export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: React.ReactNode
+  children: ReactNode
   variant: ButtonVariant
   kind: ButtonKind
   size: ButtonSize

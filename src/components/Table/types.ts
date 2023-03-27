@@ -1,10 +1,12 @@
+import { ReactNode } from "react"
+
 export type BorderType = 'none' | 'dashed' | 'solid'
 
 type Column = {
   selector: <T>(row: T) => string | number
   label: string
   sortable?: boolean
-  cell?: <T>(row: T) => React.ReactNode
+  cell?: <T>(row: T) => ReactNode
 }
 
 export type TableProps = {

@@ -1,3 +1,4 @@
+import { ReactNode } from "react"
 import { ButtonVariant } from "../Button/types"
 
 export type CardVariant = 'block' | 'article'
@@ -14,7 +15,7 @@ export type CardProps = {
   buttonHref: string
   buttonOnClick: () => void
 
-  header?: React.ReactNode
-  content?: React.ReactNode
-  footer?: React.ReactNode
+  header?: ReactNode
+  content?: ReactNode
+  footer?: ReactNode
 }
