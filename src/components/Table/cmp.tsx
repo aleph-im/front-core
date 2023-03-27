@@ -2,7 +2,6 @@ import React from 'react'
 import { StyledTable } from './styles'
 import { TableProps, StyledTableProps } from './types'
 import Icon from '../Icon'
-import TextGradient from '../TextGradient'
 
 type SortDirection = 'asc' | 'desc'
 
