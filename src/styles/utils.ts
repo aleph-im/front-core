@@ -1,4 +1,4 @@
-import { css, SimpleInterpolation } from 'styled-components'
+import { css, DefaultTheme, FlattenInterpolation, FlattenSimpleInterpolation, SimpleInterpolation, ThemeProps } from 'styled-components'
 import {
   BreakpointId,
   ThemeColor,
@@ -48,8 +48,13 @@ export function getTypoCss(typo: keyof ThemeTypo) {
   `
 }
 
-export function getResponsiveCss(breakpoint: BreakpointId, styles: string | SimpleInterpolation, offset: number = 1) {
-  return css`
+export function getResponsiveCss(
+  breakpoint: BreakpointId | undefined,
+  styles: string | SimpleInterpolation | FlattenSimpleInterpolation | FlattenInterpolation<ThemeProps<DefaultTheme>>,
+  offset: number = 1) {
+  return !breakpoint
+    ? css`${styles}`
+    : css`
     ${({ theme }) => css`
       @media (min-width: ${theme.breakpoint[breakpoint] + pxToRem(offset)}rem) {
         ${styles}
