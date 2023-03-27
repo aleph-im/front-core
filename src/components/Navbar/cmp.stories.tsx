@@ -45,7 +45,7 @@ const Template: ComponentStory<typeof Navbar> = (args) => (
       <Logo size={'2rem'}/>
     }>
       <NavbarLinkList >
-        {navLinks.map((link, i) => (<NavbarLink key={i} withSlash={false}>{link}</NavbarLink>))}
+        {navLinks.map((link, i) => (<NavbarLink key={i} withSlash>{link}</NavbarLink>))}
       </NavbarLinkList>
       <NavbarLinkList>
         {navButtons.map((link, i) => (<NavbarLink key={i}>{link}</NavbarLink>))}

@@ -3,14 +3,14 @@ import { getResponsiveCss } from '../../styles'
 import { addClasses } from '../../utils'
 
 // A <ul> element, wrapping the links (text and buttons)
-export const StyledNavlinkList = styled.ul.attrs(addClasses('px-xl'))`
+export const StyledNavlinkList = styled.ul.attrs(addClasses('p-0 m-0 mr-xl mt-xl mt-0-md'))`
   display: list-item;
   list-style: none;
-  padding: 0 25px;
-  margin: 0;
-
-  &:first-child {
-    margin-top: 25px;
+  max-width: 100%;
+  flex: 0 1 auto;
+  
+  &:last-child {
+    margin-right: 0;
   }
 
   ${getResponsiveCss('md', css`
