@@ -9,17 +9,14 @@ export const TextGradient = ({
   as,
   size,
   children,
-  className,
   ...rest
 }: TextGradientProps) => {
   const theme = useTheme()
   const tagConfig = theme.typo[type]
-  const classes = className || `tp-${type}`
 
   return (
     <StyledTextGradientContainer
       as={as || (tagConfig.tag ? type : 'span')}
-      className={classes}
       color={color}
       size={size}
       typo={tagConfig}

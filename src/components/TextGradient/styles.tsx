@@ -1,7 +1,10 @@
 import styled, { css } from 'styled-components'
-import { StyledTextGradientProps } from './types';
+import { addClasses } from '../../utils';
+import { StyledTextGradientProps, TextGradientProps } from './types';
 
-export const StyledTextGradientContainer = styled.span<StyledTextGradientProps>`
+export const StyledTextGradientContainer = styled.span.attrs<TextGradientProps>(props => {
+  return addClasses(`tp-${props.type}`)(props)
+}) <StyledTextGradientProps>`
   ${({ theme, color, size, typo }) => {
     const fontSizeCss = size ? (`font-size: ${!Number.isNaN(Number(size)) ? `${size}px` : size};`) : '';
 
