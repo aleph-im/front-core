@@ -43,7 +43,7 @@ export const Dropdown = forwardRef(({
 
   useClickOutside(ref, onClick)
 
-  const contextValue = React.useMemo(
+  const contextValue = useMemo(
     () => {
       function onChange(newValueSet: Set<string>) {
         newValueSet = new Set(newValueSet)

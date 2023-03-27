@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { StyledTable } from './styles'
 import { TableProps, StyledTableProps } from './types'
 import Icon from '../Icon'
@@ -15,7 +15,7 @@ export const Table = ({ columns, data, border = "none", oddRowNoise = false, ...
     column: '',
     direction: 'asc',
   })
-  const sortedData = React.useMemo(
+  const sortedData = useMemo(
     () =>
       !sortedColumn.column
         ? data

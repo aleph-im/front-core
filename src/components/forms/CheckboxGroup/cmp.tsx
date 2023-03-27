@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useId, useState } from 'react'
+import React, { ChangeEvent, useId, useMemo, useState } from 'react'
 import FormError from '../FormError'
 import { StyledFormLabel } from '../styles.forms'
 import { CheckboxGroupContext } from './context'
@@ -21,7 +21,7 @@ export const CheckboxGroup = ({
   const randomName = useId()
   const groupName = name ? randomName : undefined
 
-  const contextValue = React.useMemo(
+  const contextValue = useMemo(
     () => ({
       name: groupName,
       value: Array.from(groupValue),
