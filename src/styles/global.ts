@@ -62,9 +62,9 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 function displayClasses(theme: DefaultTheme) {
-  const breakpointId = Object.entries(theme.breakpoint).sort(([, av], [, bv]) => av - bv).map(([k]) => k as BreakpointId)
+  const breakpointId = getSortedResponsiveBreakpoints(theme)
 
-  function getClasses(bp: string) {
+  function getClasses(bp: string = '') {
     bp = bp ? `-${bp}` : ''
 
     return css`
@@ -77,7 +77,7 @@ function displayClasses(theme: DefaultTheme) {
   }
 
   const defaultCss = getClasses('')
-  const responsiveCss = breakpointId.map(bp => getResponsiveCss(bp, getClasses(bp)))
+  const responsiveCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getClasses(bp)))
 
   return css`
      ${defaultCss}
@@ -87,9 +87,7 @@ function displayClasses(theme: DefaultTheme) {
 }
 
 function marginPaddingClasses(theme: DefaultTheme) {
-  const breakpointId = Object.entries(theme.breakpoint)
-    .sort(([, av], [, bv]) => av - bv)
-    .map(([k]) => k as BreakpointId)
+  const breakpointId = getSortedResponsiveBreakpoints(theme)
 
   const sizes = [[0, 0], ...Object.entries(theme.font.size)]
     .sort(([, av], [, bv]) => av - bv)
@@ -116,26 +114,19 @@ function marginPaddingClasses(theme: DefaultTheme) {
     `
   }
 
-  const defaultCss = [
-    ...sizes.flatMap(([k, v]) => [
-      getClasses(k, v, false, ''),
-      getClasses(k, v, true, ''),
-    ]),
-    getClasses('auto', 'auto', false, '')
-  ]
-
-  const responsiveCss = breakpointId.map(bp => getResponsiveCss(bp,
-    [
+  function getCss(bp?: BreakpointId) {
+    return [
       ...sizes.flatMap(([k, v]) => [
         getClasses(k, v, false, bp),
         getClasses(k, v, true, bp)
       ]),
       getClasses('auto', 'auto', false, bp)
     ]
-  ))
+  }
+
+  const responsiveCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getCss(bp)))
 
   return css`
-    ${defaultCss}
     ${responsiveCss}
   `
 }
@@ -159,20 +150,41 @@ function colorClasses(theme: DefaultTheme) {
 }
 
 function typoClasses(theme: DefaultTheme) {
-  return css`
-    /* TYPOS */
-    ${Object.entries(theme.typo).map(([k, v]) => css`
-      .tp-${k} ${v.tag ? `, ${k}` : ''} {
+  const breakpointId = getSortedResponsiveBreakpoints(theme)
+
+  const typos = Object.entries(theme.typo)
+    .sort(([, av], [, bv]) => av.size - bv.size)
+
+  const fontSizes = Object.entries(theme.font.size)
+    .sort(([, av], [, bv]) => av - bv)
+
+  function getTypoClasses(bp: string = '') {
+    bp = bp ? `-${bp}` : ''
+    return typos.map(([k, v]) => css`
+      .tp-${k}${bp} ${v.tag ? `, ${k}` : ''} {
         ${getTypoCss(k as any)}
       }
-    `)}
+    `)
+  }
 
-    /* FONT-SIZE */
-    ${Object.entries(theme.font.size).map(([k, v]) => css`
-      .fs-${k} {
+  function getFontSizesClasses(bp: string = '') {
+    bp = bp ? `-${bp}` : ''
+    return fontSizes.map(([k, v]) => css`
+      .fs-${k}${bp} {
         font-size: ${v}rem;
       }
-    `)}
+    `)
+  }
+
+  const responsiveTypoCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getTypoClasses(bp)))
+  const responsiveFontSizesCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getFontSizesClasses(bp)))
+
+  return css`
+    /* TYPOS */
+    ${responsiveTypoCss}
+
+    /* FONT-SIZE */
+    ${responsiveFontSizesCss}
   `
 }
 
@@ -246,4 +258,10 @@ function effectClasses() {
     ${noisePlainCss}
     ${noiseGradientCss}
   `
+}
+
+function getSortedResponsiveBreakpoints(theme: DefaultTheme): BreakpointId[] {
+  return Object.entries(theme.breakpoint)
+    .sort(([, av], [, bv]) => av - bv)
+    .map(([k]) => k as BreakpointId)
 }
