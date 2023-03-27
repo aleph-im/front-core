@@ -1,5 +1,4 @@
 import React from 'react'
-import Icon from '../Icon'
 import { StyledContentContainer, StyledFooterContainer, StyledHeaderContainer, StyledContainer, StyledHeaderIcon, StyledHeaderCloseIcon } from './styles'
 import { NotificationCardProps } from './types'
 
@@ -11,9 +10,9 @@ export const NotificationCard = ({
   header,
   content,
   footer,
+  onClose,
   ...rest
 }: NotificationCardProps) => {
-
   return (
     <StyledContainer {...{ variant, ...rest }}>
       <StyledHeaderContainer>
@@ -23,7 +22,7 @@ export const NotificationCard = ({
             <span className='tp-h7'>{title}</span>
           </>
         )}
-        <StyledHeaderCloseIcon />
+        <StyledHeaderCloseIcon onClick={onClose} />
       </StyledHeaderContainer>
       <StyledContentContainer {...{ variant }}>
         {content || text}
