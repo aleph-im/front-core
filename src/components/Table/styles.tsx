@@ -16,6 +16,14 @@ export const StyledTable = styled.table<StyledTableProps>`
 
       td,
       th {
+        &:first-child{
+          padding-left: 15px;
+        }
+
+        &:last-child{
+          padding-right: 15px;
+        }
+
         text-align: left;
         padding: 15px 0;
 
