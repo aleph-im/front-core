@@ -21,6 +21,7 @@ export const StyledContainer = styled.div.attrs<NotificationVariantProps>(props 
       display: inline-flex;
       flex-direction: column;
       align-items: flex-start;
+      gap: 1rem;
       width: 500px;
       border-radius: 24px;
 
@@ -31,8 +32,7 @@ export const StyledContainer = styled.div.attrs<NotificationVariantProps>(props 
   }}
 `
 
-export const StyledHeaderContainer = styled.div.attrs(addClasses('mb-sm pr-xl'))`
-  position: relative;
+export const StyledHeaderContainer = styled.div.attrs(addClasses('tp-h7'))`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -54,16 +54,22 @@ export const StyledHeaderIcon = styled(Icon).attrs<NotificationVariantProps, Ico
 }) <NotificationVariantProps>``
 
 
-export const StyledHeaderCloseIcon = styled(Icon).attrs(() => {
+export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
   return {
+    ...props,
     name: 'multiply',
     size: 'xl'
   }
 })`
-  position: absolute;
   top: 0;
   right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.375rem;
   cursor: pointer;
+  margin-left: auto;
+  align-self: flex-start;
+  flex: 0 0 auto;
 `
 
 export const StyledContentContainer = styled.div.attrs(addClasses('tp-body1 fs-md mb-sm')) <NotificationVariantProps>``

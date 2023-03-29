@@ -8,6 +8,7 @@ export const useForwardRef = <T,>(
 
   useEffect(() => {
     if (!ref) return
+    if (ref === targetRef) return
 
     if (typeof ref === 'function') {
       ref(targetRef.current)

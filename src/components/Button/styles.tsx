@@ -214,7 +214,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
         width: 100%;
         box-sizing: border-box;
         background-color: ${mainColor};
-        z-index: 1;
+        z-index: -1;
         padding: 1px;
         border-radius: 30px;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);

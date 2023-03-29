@@ -19,7 +19,7 @@ export const NotificationCard = ({
         {header || (
           <>
             <StyledHeaderIcon variant={variant} />
-            <span className='tp-h7'>{title}</span>
+            {title}
           </>
         )}
         <StyledHeaderCloseIcon onClick={onClose} />

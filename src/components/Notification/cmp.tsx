@@ -73,8 +73,8 @@ export const Notification = ({
       {createPortal(
         (
           <StyledContainer
-            onMouseEnter={stopTimeout}
-            onMouseLeave={resetTimeout}
+            onMouseOver={stopTimeout}
+            onMouseOut={resetTimeout}
           >
             {notifications.sort().map(noti => (
               <NotificationCard
