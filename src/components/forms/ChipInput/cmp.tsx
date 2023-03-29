@@ -1,5 +1,5 @@
 import React, { useState, useCallback, forwardRef, ForwardedRef } from 'react'
-import { useElementHeight, useForwardRef } from '../../../hooks'
+import { useElementSize, useForwardRef } from '../../../hooks'
 import Icon from '../../Icon'
 import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
 import { StyledChip, StyledChipContainer, StyledChipTag, StyledChipRemoveButton, StyledContainer, StyledInput } from './styles'
@@ -31,9 +31,12 @@ export const ChipInput = forwardRef(({
   const [tags, setTags] = useState<string[]>(defaultValue || value || [])
 
   const reff = useForwardRef(ref)
-  const [containerRef, containerHeight] = useElementHeight<HTMLDivElement>([tags])
-  const [inputRef, inputHeight] = useElementHeight([], reff)
-  const isBig = containerHeight >= inputHeight*2
+  const [containerRef, containerSize] = useElementSize<HTMLDivElement>([tags])
+  const [inputRef, inputSize] = useElementSize([], reff)
+
+  const containerHeight = containerSize?.height || 0
+  const inputHeight = inputSize?.height || 0
+  const isBig = containerHeight >= inputHeight * 2
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
