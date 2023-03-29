@@ -5,7 +5,7 @@ import {
   StyledTabLabel,
   StyledSelectedTab,
 } from './styles'
-import { TabsProps } from "./types"
+import { StyledTabType, TabsProps } from "./types"
 
 const noop = () => null
 
@@ -13,8 +13,9 @@ export const Tabs = ({
   tabs,
   defaultSelected = 0,
   onTabChange = noop,
+  align = 'center',
   ...rest
-}: TabsProps) => {
+}: TabsProps & StyledTabType) => {
   const safeDefault = (tabs[defaultSelected] && !tabs[defaultSelected].disabled) ? defaultSelected : 0
   const [selected, setSelected] = useState<number>(safeDefault)
   const handleClick = (i: number) => {
@@ -24,7 +25,7 @@ export const Tabs = ({
 
   return (
     <>
-      <StyledTabsHeader role="tablist" {...rest}>
+      <StyledTabsHeader align={align} role="tablist" {...rest}>
         {tabs.map((tab, i) => {
           const getTabLabel = () => {
             if (tab.label !== undefined) {

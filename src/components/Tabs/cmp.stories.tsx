@@ -2,22 +2,25 @@ import React, {useState} from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 import Tabs from './cmp'
-import { TabsProps, TabType } from './types'
+import { StyledTabType, TabsProps, TabType } from './types'
 
 export default {
   title: 'Components/UI/Tabs',
   component: Tabs,
   decorators: [withDesign],
   argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'inline-radio' },
-    },
-  },
+    align: {
+      control: {
+        type: 'select',
+        options: ['left', 'center', 'right'],
+      },
+    }
+  }
 } as ComponentMeta<typeof Tabs>
 
-const defaultArgs: Partial<TabsProps> = {
-  defaultSelected: 2
+const defaultArgs: Partial<TabsProps & StyledTabType> = {
+  defaultSelected: 2,
+  align: 'center',
 }
 
 

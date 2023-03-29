@@ -2,6 +2,10 @@ export type TabLabelProps = {
   labelPosition?: 'top' | 'bottom'
 }
 
+export type StyledTabType = {
+  align?: 'left' | 'center' | 'right'
+}
+
 export type TabType = {
   name: string
   component: JSX.Element

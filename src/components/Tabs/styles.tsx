@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components'
 import TextGradient from '../TextGradient'
-import { StyledTabItemProps, TabLabelProps } from './types'
+import { StyledTabItemProps, StyledTabType, TabLabelProps } from './types'
 
-export const StyledTabsHeader = styled.div`
-  display: flex;
-  justify-content: center;
+export const StyledTabsHeader = styled.div<StyledTabType>`
+  ${({ align }) => css`
+    display: flex;
+    justify-content: ${align};
+  `}
 `
 
 export const StyledTabsItem = styled.div<StyledTabItemProps>`
