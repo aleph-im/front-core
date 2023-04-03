@@ -8,7 +8,7 @@ export const StyledContainer = styled.div.attrs(addClasses('p-sm'))`
   flex-direction: column; 
   justify-content: flex-start;
   align-items: flex-end;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   max-height: 100%;
