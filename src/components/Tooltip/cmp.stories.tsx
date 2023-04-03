@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { RefObject, useCallback, useRef, useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 
@@ -27,26 +27,41 @@ const defaultParams = {
 
 // ---
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: ComponentStory<typeof Tooltip> = (args) => <Tooltip {...args} />
-
-const Template2: ComponentStory<typeof Tooltip> = (args) => {
-  const StyledContainer = styled.div`
+const StyledContainer = styled.div`
   position: absolute;
   top: 200px;
   left: 200px;
 `
-  const StyledBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 8rem;
-    height: 8rem;
-    background-color: #ffffff1A;
-    cursor: help;
-  `
 
+const StyledBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  height: 8rem;
+  background-color: #ffffff1A;
+  cursor: help;
+`
+
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+const Template: ComponentStory<typeof Tooltip> = (args) => {
+  const targetRef: RefObject<HTMLDivElement> = useRef(null)
+  const [open, setOpen] = useState(false)
+  const handleClick = useCallback(() => setOpen(!open), [open, setOpen])
+  const handleClose = useCallback(() => setOpen(false), [setOpen])
+
+  return (
+    <StyledContainer>
+      <StyledBox ref={targetRef}>Target</StyledBox>
+      <Tooltip {...args} open={open} targetRef={targetRef} onClose={handleClose} />
+      <button onClick={handleClick} className="mt-xl">Open tooltip</button>
+    </StyledContainer>
+  )
+}
+
+const Template2: ComponentStory<typeof Tooltip> = (args) => {
   return (
     <StyledContainer>
       <Tooltip {...args}>
@@ -56,11 +71,11 @@ const Template2: ComponentStory<typeof Tooltip> = (args) => {
   )
 }
 
-export const Default = Template.bind({})
-Default.args = {
+export const Button = Template.bind({})
+Button.args = {
   ...defaultArgs,
 }
-Default.parameters = {
+Button.parameters = {
   ...defaultParams,
 }
 

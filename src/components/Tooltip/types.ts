@@ -8,14 +8,20 @@ export type TooltipPositionType =
 export type TooltipPosition = { x: number, y: number }
 
 export type TooltipProps = {
-  children: ReactNode & { ref?: RefObject<any> }
-
   my: TooltipPositionType
   at: TooltipPositionType
   margin?: TooltipPosition
   offset?: TooltipPosition
 
-  isOpen?: boolean
+  open?: boolean
   header?: ReactNode
   content?: ReactNode
-}
+
+  onClose?: () => void
+} & ({
+  children: ReactNode & { ref?: RefObject<any> }
+  targetRef?: RefObject<any>
+} | {
+  children?: ReactNode & { ref?: RefObject<any> }
+  targetRef: RefObject<any>
+})

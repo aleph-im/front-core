@@ -4,6 +4,8 @@ import { StyledContentContainer, StyledHeaderContainer, StyledContainer, StyledH
 import { TooltipPosition, TooltipProps } from './types'
 
 export const Tooltip = ({
+  open: openProp,
+  targetRef: targetRefProp,
   children,
   header,
   content,
@@ -11,27 +13,37 @@ export const Tooltip = ({
   at = 'top-center',
   margin = { x: 5, y: 5 },
   offset = { x: 0, y: 0 },
+  onClose,
   ...rest
 }: TooltipProps) => {
-  const targetRef = useRef<any>()
+  const targetRef = targetRefProp || useRef<any>()
   const tooltipRef = useRef<any>()
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(openProp || false)
 
-  const [targetBounds] = useBounds('mouseover', targetRef, [])
+  console.log(isOpen, openProp)
+  const [targetBounds] = useBounds('mouseover', targetRef, [targetRef])
   const [tooltipBounds] = useBounds('mouseover', tooltipRef, [isOpen])
 
   const [isHoverTarget] = useHover(targetRef)
   const [isHoverTooltip] = useHover(tooltipRef)
 
   useEffect(() => {
+    if (openProp === undefined) return
+    if (openProp === isOpen) return
+    setIsOpen(openProp)
+  }, [openProp, isOpen, setIsOpen])
+
+  useEffect(() => {
+    if (openProp !== undefined) return
     const open = isHoverTarget || isHoverTooltip
     setIsOpen(open)
-  }, [isHoverTarget, isHoverTooltip, setIsOpen])
+  }, [openProp, isHoverTarget, isHoverTooltip, setIsOpen])
 
   const handleClose = useCallback(() => {
     setIsOpen(false)
-  }, [])
+    onClose && onClose()
+  }, [setIsOpen, onClose])
 
   const position: TooltipPosition = useMemo(() => {
     const [myPosY, myPosX] = my.split('-')
@@ -64,7 +76,7 @@ export const Tooltip = ({
           {content}
         </StyledContentContainer>
       </StyledContainer>
-      <span style={{ display: 'inline-block' }} ref={targetRef}>{children}</span>
+      {children && <span style={{ display: 'inline-block' }} ref={targetRef}>{children}</span>}
     </>
   )
 }
