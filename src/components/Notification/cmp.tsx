@@ -9,6 +9,7 @@ export const Notification = ({
   max = 10,
   timeout = 2000,
   children,
+  containerRef = document.body
 }: NotificationProps) => {
   const [notifications, setNotifications] = useState<NotificationInfo[]>([])
   const timeoutIdRef = useRef<NodeJS.Timeout | undefined>()
@@ -87,7 +88,7 @@ export const Notification = ({
             {notifications.length > 2 && <StyledClearButton onClick={clearAll}>Clear all <StyledClearIcon /></StyledClearButton>}
           </StyledContainer>
         )
-        , document.body)
+        , containerRef)
       }
     </NotificationContext.Provider>
   )

@@ -4,4 +4,5 @@ export type NotificationProps = {
   max: number
   timeout: number
   children: ReactNode
+  containerRef?: Element | DocumentFragment
 }
