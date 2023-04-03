@@ -21,7 +21,6 @@ export const Tooltip = ({
 
   const [isOpen, setIsOpen] = useState(openProp || false)
 
-  console.log(isOpen, openProp)
   const [targetBounds] = useBounds('mouseover', targetRef, [targetRef])
   const [tooltipBounds] = useBounds('mouseover', tooltipRef, [isOpen])
 
