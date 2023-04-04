@@ -13,6 +13,7 @@ export type TextGradientProps = HTMLAttributes<HTMLElement> & {
 export type StyledTextGradientProps = {
   size?: number | string
   color: string
+  type: TypoKind
   typo: Typo
   as: TypoKind | 'span'
 }

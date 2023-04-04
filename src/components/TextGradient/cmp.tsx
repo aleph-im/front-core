@@ -13,6 +13,7 @@ export const TextGradient = ({
 }: TextGradientProps) => {
   const theme = useTheme()
   const tagConfig = theme.typo[type]
+  console.log(tagConfig)
 
   return (
     <StyledTextGradientContainer
@@ -20,6 +21,7 @@ export const TextGradient = ({
       color={color}
       size={size}
       typo={tagConfig}
+      type={type}
       {...rest}
     >
       {children}
