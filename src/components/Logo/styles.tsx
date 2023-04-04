@@ -9,7 +9,6 @@ export const StyledLogoContainer = styled.span<StyledLogoProps>`
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      height: ${logoSize};
       background-color: transparent;
       font-size: ${logoSize};
 
