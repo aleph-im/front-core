@@ -13,6 +13,7 @@ import { NavbarProps } from './types'
 export const Navbar = ({
   logo,
   children,
+  height,
   ...rest
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,7 +21,7 @@ export const Navbar = ({
 
   return (
     <StyledNavbarContainer {...rest}>
-      <StyledHeadingContainer isOpen={isOpen}>
+      <StyledHeadingContainer isOpen={isOpen} height={height}>
         {logo}
         <StyledBurgerIconContainer>
           <Button

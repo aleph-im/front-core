@@ -21,12 +21,12 @@ export const StyledNavbarContainer = styled.div`
 
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
-  ${({ theme, isOpen }) => {
+  ${({ theme, isOpen, height = '100px' }) => {
     return css`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 80px;
+      height: ${height};
       background-color: ${isOpen ? '#07071366' : theme.color.base1};
 
       ${getResponsiveCss('md', css`
