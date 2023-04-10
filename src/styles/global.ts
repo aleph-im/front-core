@@ -160,7 +160,7 @@ function typoClasses(theme: DefaultTheme) {
   function getTypoClasses(bp: string = '') {
     bp = bp ? `-${bp}` : ''
     return typos.map(([k, v]) => css`
-      .tp-${k}${bp} ${v.tag ? `, ${k}` : ''} {
+      .tp-${k}${bp} ${v.tag && !bp ? `, ${k}` : ''} {
         ${getTypoCss(k as any)}
       }
     `)
