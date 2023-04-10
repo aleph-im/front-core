@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     const effectCss = effectClasses()
     const marginPaddingCss = marginPaddingClasses(theme)
     const displayCss = displayClasses(theme)
+    const flexCss = flexClasses(theme)
 
     return css`
       @import '${theme.font.url}';
@@ -56,6 +57,7 @@ export const GlobalStyle = createGlobalStyle`
       ${effectCss}
       ${marginPaddingCss}
       ${displayCss}
+      ${flexCss}
     `
   }}
 `
@@ -75,22 +77,68 @@ function displayClasses(theme: DefaultTheme) {
     `
   }
 
-  const defaultCss = getClasses('')
   const responsiveCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getClasses(bp)))
 
   return css`
-     ${defaultCss}
      ${responsiveCss}
    `
-
 }
+
+function flexClasses(theme: DefaultTheme) {
+  const breakpointId = getSortedResponsiveBreakpoints(theme)
+  const fontSizes = getSortedFontSizes(theme)
+
+  function getCommonClasses(bp: string = '') {
+    bp = bp ? `-${bp}` : ''
+
+    return css`
+      .flex-1${bp} { flex: 1 1 0%; }
+      .flex-auto${bp} { flex: 1 1 auto; }
+      .flex-initial${bp} { flex: 0 1 auto; }
+      .flex-none${bp} { flex: none; }
+
+      .flex-row${bp} { flex-direction: row; }
+      .flex-row-reverse${bp} { flex-direction: row-reverse; }
+      .flex-col${bp} { flex-direction: column; }
+      .flex-col-reverse${bp} { flex-direction: column-reverse; }
+
+      .order-first${bp} { order: -999; }
+      .order-none${bp}{ order: 0; }
+      .order-1${bp} { order: 1; }
+      .order-2${bp} { order: 2; }
+      .order-3${bp} { order: 3; }
+      .order-4${bp} { order: 4; }
+      .order-last${bp} { order: 999; }
+    `
+  }
+
+  function getGapClasses(k: string, v: string, bp: string = '') {
+    bp = bp ? `-${bp}` : ''
+
+    return css`
+      .gap-${k}${bp} { gap: ${v}; }
+      .gap-y-${k}${bp} { column-gap: ${v}; }
+      .gap-x-${k}${bp} { row-gap: ${v}; }
+    `
+  }
+
+  function getGapCss(bp?: BreakpointId) {
+    return fontSizes.map(([k, v]) => getGapClasses(k, v, bp))
+  }
+
+  const responsiveCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getCommonClasses(bp)))
+  const responsiveGapCss = [undefined, ...breakpointId].map(bp => getResponsiveCss(bp, getGapCss(bp)))
+
+  return css`
+     ${responsiveCss}
+     ${responsiveGapCss}
+   `
+}
+
 
 function marginPaddingClasses(theme: DefaultTheme) {
   const breakpointId = getSortedResponsiveBreakpoints(theme)
-
-  const sizes = [[0, 0], ...Object.entries(theme.font.size)]
-    .sort(([, av], [, bv]) => av - bv)
-    .map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
+  const fontSizes = getSortedFontSizes(theme)
 
   function getClasses(k: string, v: string, neg: boolean = false, bp: string = '') {
     if (neg && k === '0') return css``
@@ -115,7 +163,7 @@ function marginPaddingClasses(theme: DefaultTheme) {
 
   function getCss(bp?: BreakpointId) {
     return [
-      ...sizes.flatMap(([k, v]) => [
+      ...fontSizes.flatMap(([k, v]) => [
         getClasses(k, v, false, bp),
         getClasses(k, v, true, bp)
       ]),
@@ -263,4 +311,10 @@ function getSortedResponsiveBreakpoints(theme: DefaultTheme): BreakpointId[] {
   return Object.entries(theme.breakpoint)
     .sort(([, av], [, bv]) => av - bv)
     .map(([k]) => k as BreakpointId)
+}
+
+function getSortedFontSizes(theme: DefaultTheme): [string, string][] {
+  return [[0, 0], ...Object.entries(theme.font.size)]
+    .sort(([, av], [, bv]) => av - bv)
+    .map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
 }
