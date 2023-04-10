@@ -107,6 +107,7 @@ export function getGlassEffectCss(
               box-shadow: 
                 inset ${bss.s1} #DEEFFF05,
                 inset ${bss.s2} #5E9DD705;
+              backdrop-filter: blur(50px);
             `
           case 'colored0':
             return css`

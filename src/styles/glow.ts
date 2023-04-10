@@ -6,6 +6,10 @@ export function calculateBoxShadowPossition(
   bs: Record<string, number[]>,
   opts?: GlowOpts,
 ): Record<string, string> {
+  opts = opts || {}
+  opts.height = opts.height || 192
+  opts.width = opts.width || 192
+  
   const bss: Record<string, string> = {}
 
   if (opts?.width !== undefined || opts?.height !== undefined) {

@@ -7,6 +7,7 @@ import Button from '../Button'
 import NavbarLink from '../NavbarLink'
 import NavbarLinkList from '../NavbarLinkList'
 import Logo from '../Logo'
+import Icon from '../Icon'
 
 export default {
   title: 'Components/UI/Navbar',
@@ -41,23 +42,36 @@ const navButtons = [
 
 const Template: ComponentStory<typeof Navbar> = (args) => (
   <>
-    <Navbar {...args} logo = {
-      <Logo size={'2rem'}/>
-    }>
-      <NavbarLinkList >
-        {navLinks.map((link, i) => (<NavbarLink key={i} withSlash>{link}</NavbarLink>))}
+    <Navbar {...args}
+      logo={
+        <Logo />
+      }
+      mobileTopContent={
+        <NavbarLinkList onlyMobile mobileDirection='row'>
+          <Button
+            color={'main0'}
+            variant={'secondary'}
+            kind={'neon'}
+            size={'regular'}
+          >
+            <Icon name="comet" />
+          </Button>
+        </NavbarLinkList>
+      }
+    >
+      <NavbarLinkList withSlash collapsible="lg">
+        {navLinks.map((link, i) => (<NavbarLink key={i} >{link}</NavbarLink>))}
       </NavbarLinkList>
-      <NavbarLinkList>
+      <NavbarLinkList mobileDirection='row'>
         {navButtons.map((link, i) => (<NavbarLink key={i}>{link}</NavbarLink>))}
       </NavbarLinkList>
     </Navbar>
 
     <h1>A random title</h1>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit aperiam qui, optio laboriosam animi labore repudiandae incidunt excepturi sint tempore accusamus.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit aperiam qui, optio laboriosam animi labore repudiandae incidunt excepturi sint tempore accusamus.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit aperiam qui, optio laboriosam animi labore repudiandae incidunt excepturi sint tempore accusamus.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit aperiam qui, optio laboriosam animi labore repudiandae incidunt excepturi sint tempore accusamus.</p>
+    {Array.from({ length: 200 }, (_, i) => (
+      <p key={i}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit aperiam qui, optio laboriosam animi labore repudiandae incidunt excepturi sint tempore accusamus.</p>
+    ))}
   </>
 )
 

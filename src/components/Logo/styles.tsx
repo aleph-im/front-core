@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components'
 import { StyledLogoProps } from './types'
 
 export const StyledLogoContainer = styled.span<StyledLogoProps>`
-  ${({ theme, size, text }) => {
-    const logoSize = size ? (!Number.isNaN(Number(size)) ? `${size}px` : size) : `${theme.typo.logo.size}rem`;
+  ${({ size, text }) => {
+    const logoSize = size ? (!Number.isNaN(Number(size)) ? `${size}px` : size) : `1em`;
 
     return css`
       display: inline-flex;

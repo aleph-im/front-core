@@ -91,6 +91,7 @@ const font: ThemeFont = {
   },
   size: {
     // ---------
+    xl3: pxToRem(62),
     xxl: pxToRem(48),
     xl: pxToRem(28),
     lg: pxToRem(24),
@@ -149,7 +150,7 @@ const typo: ThemeTypo = {
     family: font.family.head,
     style: 'italic',
     weight: 600,
-    size: pxToRem(24),
+    size: pxToRem(34),
     lineHeight: 1.666
   },
   nav: {

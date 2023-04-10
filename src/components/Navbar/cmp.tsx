@@ -3,16 +3,18 @@ import React, { useCallback, useState } from 'react'
 import Button from '../Button'
 import Icon from '../Icon'
 import {
-  StyledBurgerIconContainer,
+  StyledMobileTopContainer,
   StyledHeadingContainer,
   StyledNavbarContainer,
   StyledNavContainer,
+  StyledLogoContainer,
 } from './styles'
 import { NavbarProps } from './types'
 
 export const Navbar = ({
   logo,
   children,
+  mobileTopContent,
   height,
   ...rest
 }: NavbarProps) => {
@@ -22,8 +24,7 @@ export const Navbar = ({
   return (
     <StyledNavbarContainer {...rest}>
       <StyledHeadingContainer isOpen={isOpen} height={height}>
-        {logo}
-        <StyledBurgerIconContainer>
+        <StyledMobileTopContainer>
           <Button
             color={'main0'}
             variant={'secondary'}
@@ -33,12 +34,20 @@ export const Navbar = ({
           >
             <Icon name="bars" />
           </Button>
-        </StyledBurgerIconContainer>
+        </StyledMobileTopContainer>
+        {logo && (
+          <StyledLogoContainer>
+            {logo}
+          </StyledLogoContainer>
+        )}
+        <StyledMobileTopContainer>
+          {mobileTopContent}
+        </StyledMobileTopContainer>
       </StyledHeadingContainer>
       <StyledNavContainer isOpen={isOpen}>
         {children}
       </StyledNavContainer>
-    </StyledNavbarContainer>
+    </StyledNavbarContainer >
   )
 }
 

@@ -3,6 +3,7 @@ import { ReactNode } from "react"
 export type NavbarProps = {
   logo?: ReactNode
   children?: ReactNode
+  mobileTopContent?: ReactNode
   height?: string
 }
 

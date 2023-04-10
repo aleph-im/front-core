@@ -1,70 +1,87 @@
 import styled, { css } from 'styled-components'
 import { ResponsiveNavBarProps } from './types'
 import { getResponsiveCss } from '../../styles'
+import { addClasses } from '../../utils'
 
 // Main container
-export const StyledNavbarContainer = styled.div`
+export const StyledNavbarContainer = styled.div.attrs(addClasses('fx-glass-base2 px-xl3-md'))`
   ${({ theme }) => {
     return css`
       position: sticky;
       top: 0;
-      background-color: ${theme.color.base1};
 
       ${getResponsiveCss('md', css`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: ${theme.font.size.xl}rem;
       `)}
     `
   }}
 `
 
 // A wrapper for the logo and burger icon (heading in mobile)
-export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
-  ${({ theme, isOpen, height = '100px' }) => {
+export const StyledHeadingContainer = styled.div.attrs(addClasses('px-lg px-0-md')) <ResponsiveNavBarProps>`
+  ${({ isOpen, height = '100px' }) => {
     return css`
+      flex: 0 0 0px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: ${height};
-      background-color: ${isOpen ? '#07071366' : theme.color.base1};
+      background-color: ${isOpen ? '#07071366' : 'transparent'};
 
       ${getResponsiveCss('md', css`
-          background-color: ${theme.color.base1};
-        `,
-    )}
+        background-color: transparent;
+      `)}
     `
   }}
 `
 
 // A wrapper for the burger icon, that is hidden on desktop
-export const StyledBurgerIconContainer = styled.div`
+export const StyledMobileTopContainer = styled.div`
   ${() => {
     return css`
       display: block;
+      flex: 0 1 0px;
 
       ${getResponsiveCss('md', css`
-          display: none;
-        `
-    )}
+        display: none;
+      `)}
     `
   }}
 `
 
 // A <nav> element, wrapping the links (text and buttons)
-export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
-  ${({ isOpen }) => {
+export const StyledNavContainer = styled.nav.attrs(addClasses('m-0 p-lg p-0-md')) <ResponsiveNavBarProps>`
+  ${({ theme, isOpen }) => {
     return css`
-      display: ${isOpen ? 'block' : 'none'};
-      padding-bottom: 25px;
-      margin: 0;
+      flex: 0 1 0px;
+      display: ${isOpen ? 'flex' : 'none'};
+      flex-direction: column;
+      gap: ${theme.font.size.xl}rem;
 
       ${getResponsiveCss('md', css`
-          display: flex;
-          align-items: center;
-          padding: 0;
-        `,
-    )}
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      `)}
+    `
+  }}
+`
+
+export const StyledLogoContainer = styled.div`
+  ${({ theme }) => {
+    return css`
+      display: inline-flex;
+      justify-content: center;
+      flex: 1 0 0px;
+      font-size: 1.375rem;  // 22px
+
+      ${getResponsiveCss('md', css`
+        display: inline-block;
+        font-size: ${theme.typo.logo.size}rem; // 34px
+      `)}
     `
   }}
 `
