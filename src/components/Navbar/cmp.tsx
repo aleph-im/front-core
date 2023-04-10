@@ -36,7 +36,7 @@ export const Navbar = ({
           </Button>
         </StyledMobileTopContainer>
         {logo && (
-          <StyledLogoContainer>
+          <StyledLogoContainer height={height}>
             {logo}
           </StyledLogoContainer>
         )}

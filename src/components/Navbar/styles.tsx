@@ -44,6 +44,7 @@ export const StyledMobileTopContainer = styled.div`
     return css`
       display: block;
       flex: 0 1 0px;
+      z-index: 1;
 
       ${getResponsiveCss('md', css`
         display: none;
@@ -70,14 +71,14 @@ export const StyledNavContainer = styled.nav.attrs(addClasses('m-0 p-lg p-0-md')
   }}
 `
 
-export const StyledLogoContainer = styled.div`
-  ${({ theme }) => {
+export const StyledLogoContainer = styled.div<ResponsiveNavBarProps>`
+  ${({ theme, height = '100px' }) => {
     return css`
       position: absolute;
-      top:0;
-      left:0;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 100%;
+      height: ${height};
       display: inline-flex;
       justify-content: center;
       align-items: center;
