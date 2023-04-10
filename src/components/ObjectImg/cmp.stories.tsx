@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { withDesign } from 'storybook-addon-designs'
 
 import ObjectImg from './cmp'
-import { ObjectImgProps } from './types'
+import { ObjectId, ObjectImgProps } from './types'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -39,5 +39,34 @@ Default.args = {
   ...defaultArgs,
 }
 Default.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+const Template2: ComponentStory<typeof ObjectImg> = (args) => {
+  const all = Array.from({ length: 19 })
+
+  return (
+    <>
+      {all.map((_, i) => {
+        const id = `Object${i + 1}` as ObjectId
+        return (
+          <div key={id} className="d-flex items-center my-xl" >
+            <span className='mx-lg'>{id}:</span>
+            <ObjectImg {...args} id={id} />
+          </div>
+        )
+      }
+      )}
+    </>
+  )
+}
+
+export const Catalog = Template2.bind({})
+Catalog.args = {
+  ...defaultArgs,
+}
+Catalog.parameters = {
   ...defaultParams,
 }
