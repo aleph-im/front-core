@@ -73,12 +73,19 @@ export const StyledNavContainer = styled.nav.attrs(addClasses('m-0 p-lg p-0-md')
 export const StyledLogoContainer = styled.div`
   ${({ theme }) => {
     return css`
+      position: absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
       display: inline-flex;
       justify-content: center;
-      flex: 1 0 0px;
+      align-items: center;
       font-size: 1.375rem;  // 22px
 
       ${getResponsiveCss('md', css`
+        position: static;
+        height: auto;
         display: inline-block;
         font-size: ${theme.typo.logo.size}rem; // 34px
       `)}

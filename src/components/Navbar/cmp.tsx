@@ -40,9 +40,11 @@ export const Navbar = ({
             {logo}
           </StyledLogoContainer>
         )}
-        <StyledMobileTopContainer>
-          {mobileTopContent}
-        </StyledMobileTopContainer>
+        {mobileTopContent && (
+          <StyledMobileTopContainer>
+            {mobileTopContent}
+          </StyledMobileTopContainer>
+        )}
       </StyledHeadingContainer>
       <StyledNavContainer isOpen={isOpen}>
         {children}
