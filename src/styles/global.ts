@@ -102,6 +102,31 @@ function flexClasses(theme: DefaultTheme) {
       .flex-col${bp} { flex-direction: column; }
       .flex-col-reverse${bp} { flex-direction: column-reverse; }
 
+      .flex-wrap${bp} { flex-wrap: wrap; }
+      .flex-wrap-reverse${bp} { flex-wrap: wrap-reverse; }
+      .flex-nowrap${bp} { flex-wrap: nowrap; }
+
+      .items-start${bp} { align-items: flex-start; }
+      .items-end${bp} { align-items: flex-end; }
+      .items-center${bp} { align-items: center; }
+      .items-baseline${bp} { align-items: baseline; }
+      .items-stretch${bp} { align-items: stretch; }
+
+      .justify-normal${bp} { justify-content: normal; }
+      .justify-start${bp} { justify-content: flex-start; }
+      .justify-end${bp} { justify-content: flex-end; }
+      .justify-center${bp} { justify-content: center; }
+      .justify-between${bp} { justify-content: space-between; }
+      .justify-around${bp} { justify-content: space-around; }
+      .justify-evenly${bp} { justify-content: space-evenly; }
+      .justify-stretch${bp} { justify-content: stretch; }
+
+      .justify-self-auto${bp} { justify-self: auto; }
+      .justify-self-start${bp} { justify-self: start; }
+      .justify-self-end${bp} { justify-self: end; }
+      .justify-self-center${bp} { justify-self: center; }
+      .justify-self-stretch${bp} { justify-self: stretch; }
+
       .order-first${bp} { order: -999; }
       .order-none${bp}{ order: 0; }
       .order-1${bp} { order: 1; }
