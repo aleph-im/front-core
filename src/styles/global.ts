@@ -36,7 +36,6 @@ export const GlobalStyle = createGlobalStyle`
 
       p {
         color: ${theme.color.text}b3;
-        line-height: 1.625rem
       }
 
       section {
