@@ -59,7 +59,7 @@ const Template: ComponentStory<typeof Navbar> = (args) => (
         </NavbarLinkList>
       }
     >
-      <NavbarLinkList withSlash collapsible="lg">
+      <NavbarLinkList withSlash collapsible="xl">
         {navLinks.map((link, i) => (<NavbarLink key={i} >{link}</NavbarLink>))}
       </NavbarLinkList>
       <NavbarLinkList mobileDirection='row'>

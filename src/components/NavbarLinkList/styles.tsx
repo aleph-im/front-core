@@ -62,7 +62,7 @@ export const StyledList = styled.ul.attrs(addClasses('p-0 m-0')) <NavbarLinkList
   }}
 `
 
-export const StyledRestContainer = styled.ul.attrs(addClasses('p-lg m-0')) <NavbarLinkListProps>`
+export const StyledRestContainer = styled.ul.attrs(addClasses('p-lg m-0'))`
   position: absolute;
   top: 130%;
   left: 0;

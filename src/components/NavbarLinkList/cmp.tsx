@@ -9,6 +9,11 @@ import { NavbarLinkListProps } from './types'
 export const NavbarLinkList = ({
   children,
   collapsible,
+  onlyDesktop,
+  onlyMobile,
+  desktopDirection,
+  mobileDirection,
+  withSlash,
   ...rest
 }: NavbarLinkListProps) => {
   const [open, setOpen] = useState(false)
@@ -35,8 +40,18 @@ export const NavbarLinkList = ({
   useClickOutside(handleClose, [buttonRef, containerRef])
 
   return (
-    <StyledContainer isCollapsed={isCollapsed} {...rest}>
-      <StyledList>
+    <StyledContainer {...{
+      onlyDesktop,
+      onlyMobile,
+      isCollapsed,
+      ...rest
+    }}>
+      <StyledList {...{
+        theme,
+        withSlash,
+        mobileDirection,
+        desktopDirection
+      }}>
         {isCollapsed ? (
           children && (children as any[]).slice(0, 1)
         ) : (
