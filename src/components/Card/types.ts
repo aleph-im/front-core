@@ -14,6 +14,7 @@ export type CardProps = {
   buttonVariant: ButtonVariant
   buttonHref: string
   buttonOnClick: () => void
+  buttonDisabled?: boolean
 
   header?: ReactNode
   content?: ReactNode

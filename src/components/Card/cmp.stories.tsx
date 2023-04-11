@@ -21,6 +21,7 @@ const defaultArgs: Partial<CardProps> = {
   buttonLabel: 'See the subject',
   buttonColor: 'main0',
   buttonVariant: 'secondary',
+  buttonDisabled: false
 }
 
 const defaultParams = {

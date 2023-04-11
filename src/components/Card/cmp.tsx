@@ -16,6 +16,7 @@ export const Card = ({
   buttonColor,
   buttonVariant,
   buttonOnClick,
+  buttonDisabled,
   header,
   content,
   footer,
@@ -54,6 +55,7 @@ export const Card = ({
             size="regular"
             color={buttonColor}
             onClick={buttonOnClick}
+            disabled={buttonDisabled}
           >
             {buttonLabel}{buttonVariant === 'text-only' && <Icon name='arrow-right' className='ml-xs' />}
           </Button>
