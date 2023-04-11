@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useTheme } from 'styled-components'
 import { StyledTextGradientContainer } from './styles'
-import { TextGradientProps } from './types'
+import { TextGradientProps, TypeElements } from './types'
+
+const inlineElements = new Set<string>(['span', 'strong'])
 
 export const TextGradient = ({
   color = 'main0',
@@ -13,14 +15,17 @@ export const TextGradient = ({
 }: TextGradientProps) => {
   const theme = useTheme()
   const tagConfig = theme.typo[type]
+  const tag = (as || (tagConfig.tag ? type : 'span')) as TypeElements
+  const isInline = useMemo(() => inlineElements.has(tag), [tag])
 
   return (
     <StyledTextGradientContainer
-      as={as || (tagConfig.tag ? type : 'span')}
+      as={tag}
       color={color}
       size={size}
       typo={tagConfig}
       type={type}
+      $isInline={isInline}
       {...rest}
     >
       {children}

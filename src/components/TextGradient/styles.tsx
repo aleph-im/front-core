@@ -5,7 +5,7 @@ import { StyledTextGradientProps, TextGradientProps } from './types';
 export const StyledTextGradientContainer = styled.span.attrs<TextGradientProps>(props => {
   return addClasses(`tp-${props.type}`)(props)
 }) <StyledTextGradientProps>`
-  ${({ theme, color, size, typo }) => {
+  ${({ theme, color, size, typo, $isInline }) => {
     const fontSizeCss = size ? (`font-size: ${!Number.isNaN(Number(size)) ? `${size}px` : size};`) : '';
 
     const gradient = theme.gradient[color]?.fn
@@ -24,6 +24,7 @@ export const StyledTextGradientContainer = styled.span.attrs<TextGradientProps>(
       -webkit-text-fill-color: transparent;
       ${backgroundColorCss}
       ${paddingLeftCss}
+      ${!$isInline && 'display: table;'}
       
       && {
         ${fontSizeCss}
