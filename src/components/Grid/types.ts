@@ -17,7 +17,7 @@ export type StyledRowProps = {
   xl?: number
   xxl?: number
 
-  gap: string | number
+  gap?: string | number
   smGap?: number
   mdGap?: number
   lgGap?: number
