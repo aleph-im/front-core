@@ -142,8 +142,8 @@ function flexClasses(theme: DefaultTheme) {
 
     return css`
       .gap-${k}${bp} { gap: ${v}; }
-      .gap-y-${k}${bp} { column-gap: ${v}; }
-      .gap-x-${k}${bp} { row-gap: ${v}; }
+      .gap-y-${k}${bp} { row-gap: ${v}; }
+      .gap-x-${k}${bp} { column-gap: ${v}; }
     `
   }
 
