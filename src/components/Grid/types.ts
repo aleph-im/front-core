@@ -18,12 +18,12 @@ export type StyledRowProps = {
   xxl?: number
 
   gap?: string | number
-  xsGap?: number
-  smGap?: number
-  mdGap?: number
-  lgGap?: number
-  xlGap?: number
-  xxlGap?: number
+  xsGap?: string | number
+  smGap?: string | number
+  mdGap?: string | number
+  lgGap?: string | number
+  xlGap?: string | number
+  xxlGap?: string | number
 }
 
 export type StyledColProps = {

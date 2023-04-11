@@ -13,7 +13,7 @@ export type CardProps = {
   buttonColor: string
   buttonVariant: ButtonVariant
   buttonHref: string
-  buttonOnClick: () => void
+  buttonOnClick: (e: MouseEvent) => void
   buttonDisabled?: boolean
 
   header?: ReactNode
