@@ -6,23 +6,24 @@ export const StyledRow = styled.div<StyledRowProps>`
   ${(props) => {
     const {
       count = 12,
-      xs = 1,
-      sm = Math.ceil(count / 8),
-      md = Math.ceil(count / 4),
-      lg = Math.ceil(count / 2),
-      xl = Math.ceil(count / 2),
-      xxl = count,
+      xs = count,
+      sm = xs,
+      md = sm,
+      lg = md,
+      xl = lg,
+      xxl = xl,
       gap = '1rem',
-      smGap = gap,
-      mdGap = gap,
-      lgGap = gap,
-      xlGap = gap,
-      xxlGap = gap
+      xsGap = gap,
+      smGap = xsGap,
+      mdGap = smGap,
+      lgGap = mdGap,
+      xlGap = lgGap,
+      xxlGap = xlGap
     } = props
 
     return css`
       display: grid;
-      grid-gap: ${gap};
+      grid-gap: ${xsGap};
       grid-template-columns: repeat(${xs}, 1fr);
 
       ${getResponsiveCss('sm', css`
@@ -58,22 +59,23 @@ export const StyledCol = styled.div<StyledColProps>`
     const {
       span = 1,
       xs = span,
-      sm = span,
-      md = span,
-      lg = span,
-      xl = span,
-      xxl = span,
+      sm = xs,
+      md = sm,
+      lg = md,
+      xl = lg,
+      xxl = xl,
       offset = 0,
-      smOffset = offset,
-      mdOffset = offset,
-      lgOffset = offset,
-      xlOffset = offset,
-      xxlOffset = offset
+      xsOffset = offset,
+      smOffset = xsOffset,
+      mdOffset = smOffset,
+      lgOffset = mdOffset,
+      xlOffset = lgOffset,
+      xxlOffset = xlOffset
     } = props
 
     if (offset) {
       return css`
-        grid-column: ${offset} / span ${xs};
+        grid-column: ${xsOffset} / span ${xs};
 
         ${getResponsiveCss('sm', css`
           grid-column: ${smOffset} / span ${sm};
