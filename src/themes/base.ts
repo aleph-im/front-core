@@ -91,6 +91,7 @@ const font: ThemeFont = {
   },
   size: {
     // ---------
+    xl4: pxToRem(82),
     xl3: pxToRem(62),
     xxl: pxToRem(48),
     xl: pxToRem(28),

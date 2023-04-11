@@ -74,6 +74,7 @@ export type ThemeColor = {
 export type ThemeFont = {
   url: string
   size: {
+    xl4: number
     xl3: number
     xxl: number
     xl: number

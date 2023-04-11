@@ -227,8 +227,7 @@ function typoClasses(theme: DefaultTheme) {
   const typos = Object.entries(theme.typo)
     .sort(([, av], [, bv]) => av.size - bv.size)
 
-  const fontSizes = Object.entries(theme.font.size)
-    .sort(([, av], [, bv]) => av - bv)
+  const fontSizes = getSortedFontSizes(theme)
 
   function getTypoClasses(bp: string = '') {
     bp = bp ? `-${bp}` : ''
@@ -243,7 +242,7 @@ function typoClasses(theme: DefaultTheme) {
     bp = bp ? `-${bp}` : ''
     return fontSizes.map(([k, v]) => css`
       .fs-${k}${bp} {
-        font-size: ${v}rem;
+        font-size: ${v};
       }
     `)
   }
