@@ -73,54 +73,28 @@ export const StyledCol = styled.div<StyledColProps>`
       xxlOffset = xlOffset
     } = props
 
-    if (offset) {
-      return css`
-        grid-column: ${xsOffset} / span ${xs};
+    return css`
+      grid-column: ${`${xsOffset ? `${xsOffset} / ` : ''} span ${xs}`};
 
-        ${getResponsiveCss('sm', css`
-          grid-column: ${smOffset} / span ${sm};
-        `)}
+      ${getResponsiveCss('sm', css`
+        grid-column: ${`${smOffset ? `${smOffset} / ` : ''} span ${sm}`};
+      `)}
 
-        ${getResponsiveCss('md', css`
-          grid-column: ${mdOffset} / span ${md};
-        `)}
+      ${getResponsiveCss('md', css`
+        grid-column: ${`${mdOffset ? `${mdOffset} / ` : ''} span ${md}`};
+      `)}
 
-        ${getResponsiveCss('lg', css`
-          grid-column: ${lgOffset} / span ${lg};
-        `)}
+      ${getResponsiveCss('lg', css`
+        grid-column: ${`${lgOffset ? `${lgOffset} / ` : ''} span ${lg}`};
+      `)}
 
-        ${getResponsiveCss('xl', css`
-          grid-column: ${xlOffset} / span ${xl};
-        `)}
+      ${getResponsiveCss('xl', css`
+        grid-column: ${`${xlOffset ? `${xlOffset} / ` : ''} span ${xl}`};
+      `)}
 
-        ${getResponsiveCss('xxl', css`
-          grid-column: ${xxlOffset} / span ${xxl};
-        `)}
-      `
-    } else {
-      return css`
-        grid-column: span ${xs};
-
-        ${getResponsiveCss('sm', css`
-          grid-column: span ${sm};
-        `)}
-
-        ${getResponsiveCss('md', css`
-          grid-column: span ${md};
-        `)}
-
-        ${getResponsiveCss('lg', css`
-          grid-column: span ${lg};
-        `)}
-
-        ${getResponsiveCss('xl', css`
-          grid-column: span ${xl};
-        `)}
-
-        ${getResponsiveCss('xxl', css`
-          grid-column: span ${xxl};
-        `)}
-      `
-    }
+      ${getResponsiveCss('xxl', css`
+        grid-column: ${`${xxlOffset ? `${xxlOffset} / ` : ''} span ${xxl}`};
+      `)}
+    `
   }}
 `
