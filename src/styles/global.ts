@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
 
     const colorCss = colorClasses(theme)
-    const functionalCss = functionalClasses(theme)
+    const functionalCss = functionalClasses()
     const typoCss = typoClasses(theme)
     const effectCss = effectClasses()
     const sizingCss = sizingClasses(theme)

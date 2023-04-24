@@ -29,10 +29,12 @@ Default.args = {
   items: [
     { kind: 'check', title: 'bullet-item-1' },
     { kind: 'check', title: 'bullet-item-2', text: 'Lorem ipsum' },
-    { kind: 'check2', title: 'bullet-item-3' },
-    { kind: 'check2', title: 'bullet-item-4', text: 'Lorem ipsum' },
-    { kind: 'error', title: 'bullet-item-5' },
-    { kind: 'error', title: 'bullet-item-6', text: 'Lorem ipsum' },
+    { kind: 'success', title: 'bullet-item-3' },
+    { kind: 'success', title: 'bullet-item-4', text: 'Lorem ipsum' },
+    { kind: 'warning', title: 'bullet-item-5' },
+    { kind: 'warning', title: 'bullet-item-6', text: 'Lorem ipsum' },
+    { kind: 'error', title: 'bullet-item-7' },
+    { kind: 'error', title: 'bullet-item-8', text: 'Lorem ipsum' },
   ]
 }
 Default.parameters = {

@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-export type BulletItemKind = 'check' | 'check2' | 'error'
+export type BulletItemKind = 'check' | 'success' | 'error' | 'warning'
 export type BulletListSize = 'regular' | 'big'
 
 export type BulletListProps = {

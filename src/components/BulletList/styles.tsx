@@ -24,11 +24,7 @@ export interface StyledBulletItemIconContainerProps {
 
 export const StyledBulletItemIconContainer = styled.div.attrs<StyledBulletItemIconContainerProps>(props => {
   const { kind } = props
-  const cls = kind === 'check'
-    ? 'bg-success'
-    : kind === 'error'
-      ? 'bg-error'
-      : ''
+  const cls = kind !== 'check' && kind !== 'warning' ? `bg-${kind}` : ''
 
   return {
     ...addClasses(cls)(props)
@@ -36,35 +32,37 @@ export const StyledBulletItemIconContainer = styled.div.attrs<StyledBulletItemIc
 }) <StyledBulletItemIconContainerProps>`
   ${(props) => {
     const { theme, kind } = props
-    const fontSize = props.size === 'big' ? '2.25rem' : '1.5rem'
+    const fontSize = props.size === 'big' ? 2.25 : 1.5
 
     const commonCss = css`
       display: inline-flex;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      width: ${fontSize};
-      height: ${fontSize};
-      font-size: ${fontSize};
+      width: ${fontSize}rem;
+      height: ${fontSize}rem;
+      font-size: ${fontSize}rem;
       flex: 0 0 auto;
       margin-right: 1rem;
       border-radius: 50%;
+      color: ${theme.color.background};
     `
 
     switch (kind) {
       case 'check':
-        return commonCss
-      case 'check2':
         return css`
           ${commonCss}
           background-image: ${theme.gradient.main0.fn};
-          ${getGlowMinEffectCss('main0')};
+          ${getGlowMinEffectCss('main0', { height: fontSize * 16 })};
         `
-      case 'error':
+      case 'warning':
         return css`
           ${commonCss}
-          color: ${theme.color.background};
+          background-image: ${theme.gradient.main2.fn};
+          ${getGlowMinEffectCss('main2', { height: fontSize * 16 })};
         `
+      default:
+        return commonCss
     }
   }}
 `
