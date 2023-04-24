@@ -6,14 +6,8 @@ import { NotificationCardVariant } from './types'
 type NotificationVariantProps = { variant: NotificationCardVariant }
 
 export const StyledContainer = styled.div.attrs<NotificationVariantProps>(props => {
-  const color = props.variant === 'success'
-    ? 'gr-main1'
-    : props.variant === 'warning'
-      ? 'gr-main2'
-      : 'gr-extra1'
-
   return {
-    ...addClasses('p-lg ' + color)(props),
+    ...addClasses(`p-lg  gr-${props.variant}`)(props),
   }
 })`
   ${({ theme }) => {

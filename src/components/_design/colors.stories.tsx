@@ -122,6 +122,17 @@ const ColorsTemplate: ComponentStory<any> = () => {
         <Circle className="fx-noise-main1"></Circle>
         <Circle className="fx-noise-main2"></Circle>
       </div>
+      <div>
+        <h3>Functional</h3>
+        <Circle className="bg-success"></Circle>
+        <Circle className="bg-warning"></Circle>
+        <Circle className="bg-error"></Circle>
+      </div>
+      <div>
+        <Circle className="gr-success"></Circle>
+        <Circle className="gr-warning"></Circle>
+        <Circle className="gr-error"></Circle>
+      </div>
     </>
   )
 }

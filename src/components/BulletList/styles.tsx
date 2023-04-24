@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { getGlowMinEffectCss } from '../../styles'
+import { addClasses } from '../../utils'
 import Icon, { IconProps } from '../Icon'
 import { BulletItemKind, BulletListSize } from './types'
 
@@ -21,7 +22,18 @@ export interface StyledBulletItemIconContainerProps {
   size?: BulletListSize
 }
 
-export const StyledBulletItemIconContainer = styled.div<StyledBulletItemIconContainerProps>`
+export const StyledBulletItemIconContainer = styled.div.attrs<StyledBulletItemIconContainerProps>(props => {
+  const { kind } = props
+  const cls = kind === 'check'
+    ? 'bg-success'
+    : kind === 'error'
+      ? 'bg-error'
+      : ''
+
+  return {
+    ...addClasses(cls)(props)
+  }
+}) <StyledBulletItemIconContainerProps>`
   ${(props) => {
     const { theme, kind } = props
     const fontSize = props.size === 'big' ? '2.25rem' : '1.5rem'
@@ -41,11 +53,7 @@ export const StyledBulletItemIconContainer = styled.div<StyledBulletItemIconCont
 
     switch (kind) {
       case 'check':
-        return css`
-          ${commonCss}
-          background-color: #7CFF79;
-          box-shadow: inset 3px 3px 9px rgba(255, 255, 255, 0.65), inset 0px 63px 60px rgba(145, 255, 189, 0.63), inset 8.375px 13.4px 46.75px rgba(252, 255, 96, 0.75);
-        `
+        return commonCss
       case 'check2':
         return css`
           ${commonCss}
@@ -56,8 +64,6 @@ export const StyledBulletItemIconContainer = styled.div<StyledBulletItemIconCont
         return css`
           ${commonCss}
           color: ${theme.color.background};
-          background-color: #D92446;
-          box-shadow: inset 0px 1.675px 6px rgba(255, 255, 255, 0.17), inset -4px -1px 9px rgba(139, 99, 255, 0.19);
         `
     }
   }}

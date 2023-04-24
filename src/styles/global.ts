@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
 
     const colorCss = colorClasses(theme)
+    const functionalCss = functionalClasses(theme)
     const typoCss = typoClasses(theme)
     const effectCss = effectClasses()
     const sizingCss = sizingClasses(theme)
@@ -53,6 +54,7 @@ export const GlobalStyle = createGlobalStyle`
       }
 
       ${colorCss}
+      ${functionalCss}
       ${typoCss}
       ${effectCss}
       ${sizingCss}
@@ -229,6 +231,45 @@ function colorClasses(theme: DefaultTheme) {
         ${getBackgroundGradientCss(color)}
       }
     `)}
+  `
+}
+
+function functionalClasses(theme: DefaultTheme) {
+  return css`
+    .bg-success {
+      background: #7CFF79;
+      box-shadow: 
+        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
+        inset 0px 63px 60px rgba(145, 255, 189, 0.63),
+        inset 8.375px 13.4px 46.75px rgba(252, 255, 96, 0.75);
+    }
+
+    .bg-warning {
+      background: #FFD179;
+      box-shadow: 
+        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
+        inset 0px 63px 60px rgba(255, 138, 0, 0.63),
+        inset 8.375px 13.4px 46.75px rgba(255, 135, 83, 0.75);
+    }
+
+    .bg-error {
+      background: #D92446;
+      box-shadow: 
+        inset 0px 1.675px 6px rgba(255, 255, 255, 0.17),
+        inset -4px -1px 9px rgba(139, 99, 255, 0.19);
+    }
+    
+    .gr-success {
+      background: linear-gradient(90deg, #EEFF9E 0%, #3AFFCC 100%);
+    }
+
+    .gr-warning {
+      background: linear-gradient(90deg, #FFF281 0%, #FBAE18 100%);
+    }
+
+    .gr-error {
+      background: linear-gradient(90deg, #FFB393 0%, #FF6161 90.62%);
+    }
   `
 }
 
