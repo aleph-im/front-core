@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     const colorCss = colorClasses(theme)
     const typoCss = typoClasses(theme)
     const effectCss = effectClasses()
-    const marginPaddingCss = marginPaddingClasses(theme)
+    const sizingCss = sizingClasses(theme)
     const displayCss = displayClasses(theme)
     const flexCss = flexClasses(theme)
 
@@ -55,7 +55,7 @@ export const GlobalStyle = createGlobalStyle`
       ${colorCss}
       ${typoCss}
       ${effectCss}
-      ${marginPaddingCss}
+      ${sizingCss}
       ${displayCss}
       ${flexCss}
     `
@@ -161,11 +161,13 @@ function flexClasses(theme: DefaultTheme) {
 }
 
 
-function marginPaddingClasses(theme: DefaultTheme) {
+function sizingClasses(theme: DefaultTheme) {
   const breakpointId = getSortedResponsiveBreakpoints(theme)
   const fontSizes = getSortedFontSizes(theme)
+  const spacingSizes = getSortedSpacingSizes(theme)
 
   function getClasses(k: string, v: string, neg: boolean = false, bp: string = '') {
+    k = k.replace(/\./, '\\.')
     if (neg && k === '0') return css``
 
     const n = neg ? '-' : ''
@@ -183,12 +185,21 @@ function marginPaddingClasses(theme: DefaultTheme) {
       .${n}pb-${k}${bp}, .${n}py-${k}${bp} { padding-bottom: ${n}${v}; }
       .${n}pl-${k}${bp}, .${n}px-${k}${bp} { padding-left: ${n}${v}; }
       .${n}pr-${k}${bp}, .${n}px-${k}${bp} { padding-right: ${n}${v}; }
+
+      ${n === '' && (`
+        .h-${k}${bp} { height: ${v}; }
+        .w-${k}${bp} { width: ${v}; }
+      `)}
     `
   }
 
-  function getCss(bp?: BreakpointId) {
+  function getCss(bp?: BreakpointId,) {
     return [
       ...fontSizes.flatMap(([k, v]) => [
+        getClasses(k, v, false, bp),
+        getClasses(k, v, true, bp)
+      ]),
+      ...spacingSizes.flatMap(([k, v]) => [
         getClasses(k, v, false, bp),
         getClasses(k, v, true, bp)
       ]),
@@ -339,6 +350,12 @@ function getSortedResponsiveBreakpoints(theme: DefaultTheme): BreakpointId[] {
 
 function getSortedFontSizes(theme: DefaultTheme): [string, string][] {
   return [[0, 0], ...Object.entries(theme.font.size)]
+    .sort(([, av], [, bv]) => av - bv)
+    .map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
+}
+
+function getSortedSpacingSizes(theme: DefaultTheme): [string, string][] {
+  return Object.entries(theme.spacing)
     .sort(([, av], [, bv]) => av - bv)
     .map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
 }
