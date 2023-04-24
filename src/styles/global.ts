@@ -234,7 +234,7 @@ function colorClasses(theme: DefaultTheme) {
   `
 }
 
-function functionalClasses(theme: DefaultTheme) {
+function functionalClasses() {
   return css`
     .bg-success {
       background: #7CFF79;
