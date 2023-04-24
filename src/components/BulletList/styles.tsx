@@ -4,13 +4,13 @@ import { addClasses } from '../../utils'
 import Icon, { IconProps } from '../Icon'
 import { BulletItemKind, BulletListSize } from './types'
 
-export const StyledBulletList = styled.ul`
+export const StyledList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
 `
 
-export const StyledBulletItem = styled.li`
+export const StyledItem = styled.li`
   list-style: none;
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@ export interface StyledBulletItemIconContainerProps {
   size?: BulletListSize
 }
 
-export const StyledBulletItemIconContainer = styled.div.attrs<StyledBulletItemIconContainerProps>(props => {
+export const StyledIconContainer = styled.div.attrs<StyledBulletItemIconContainerProps>(props => {
   const { kind } = props
   const cls = kind !== 'check' && kind !== 'warning' ? `bg-${kind}` : ''
 
@@ -72,7 +72,7 @@ export interface StyledBulletItemIconProps {
   $size?: BulletListSize
 }
 
-export const StyledBulletItemIcon = styled(Icon).attrs<StyledBulletItemIconProps, IconProps>((props: any) => {
+export const StyledIcon = styled(Icon).attrs<StyledBulletItemIconProps, IconProps>((props: any) => {
   return {
     ...props,
     name: props.kind === 'error' ? 'minus' : 'check',
@@ -83,6 +83,9 @@ export const StyledBulletItemIcon = styled(Icon).attrs<StyledBulletItemIconProps
   font-size: ${props => props.$size === 'big' ? '1.25rem' : '0.875rem'};
 `
 
-export const StyledBulletItemContent = styled.div`
-
-`
+export const StyledTitle = styled.span.attrs<{ size: string }>(props => {
+  const cls = props.size === 'big' ? 'tp-h7' : 'tp-body2 fs-md'
+  return {
+    ...addClasses(`m-0 ${cls}`)(props),
+  }
+})``

@@ -7,6 +7,7 @@ import {
   getBackgroundColorCss,
   getBackgroundGradientCss,
   getResponsiveCss,
+  getTextColorCss,
   getTypoCss,
 } from './utils'
 
@@ -222,6 +223,13 @@ function colorClasses(theme: DefaultTheme) {
     ${Object.keys(theme.color).map((color) => css`
       .bg-${color} {
         ${getBackgroundColorCss(color)}
+      }
+    `)}
+
+    /* TEXT COLORS */
+    ${Object.keys(theme.color).map((color) => css`
+      .text-${color} {
+        ${getTextColorCss(color)}
       }
     `)}
 

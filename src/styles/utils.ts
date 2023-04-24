@@ -27,6 +27,12 @@ export function getBackgroundColorCss(color: keyof ThemeColor) {
   `
 }
 
+export function getTextColorCss(color: keyof ThemeColor) {
+  return css`
+    color: ${({ theme }) => theme.color[color]};
+  `
+}
+
 export function getBackgroundGradientCss(color: keyof ThemeGradient) {
   return css`
     background-image: ${({ theme }) => theme.gradient[color].fn};
