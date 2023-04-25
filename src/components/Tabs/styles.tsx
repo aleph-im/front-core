@@ -12,7 +12,7 @@ export const StyledTabsHeader = styled.div<StyledTabType>`
 export const StyledTabsItem = styled.div<StyledTabItemProps>`
   ${({ theme, isSelected, isDisabled }) => {
     return css`
-      padding: 15px;
+      padding: 1rem;
       position: relative;
       font-weight: bold;
       ${ !isSelected && 'cursor: pointer;' }
@@ -45,7 +45,7 @@ export const StyledTabLabel = styled.div<TabLabelProps>`
     const offset = theme.typo.info.size * multiplier
 
     return css`
-      transform: translate(5px, ${offset}rem);
+      transform: translate(0.375rem, ${offset}rem);
       color: ${theme.color.base0};
       font-size: ${theme.typo.info.size}rem;
       font-weight: ${theme.typo.info.weight};

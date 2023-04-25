@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import TextInput from './cmp'
 import { TextInputProps } from './types'
 import Button from '../../Button'
@@ -9,20 +8,15 @@ import Button from '../../Button'
 export default {
   title: 'Components/UI/forms/TextInput',
   component: TextInput,
-  decorators: [withDesign],
-} as ComponentMeta<typeof TextInput>
+}
 
 const defaultArgs: Partial<TextInputProps> = {
   name: 'text-input',
   placeholder: 'Placeholder',
-  value: ''
+  value: '',
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=1%3A2798&t=0wKsIxJm3NeUERex-0',
-  },
   controls: { exclude: ['color', 'size', 'name', 'button'] },
 }
 
@@ -30,7 +24,7 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: ComponentStory<typeof TextInput> = (args) => {
+const Template: StoryFn<typeof TextInput> = (args) => {
   const [value, setValue] = useState<string>(args.value as string)
 
   return (
@@ -40,7 +34,7 @@ const Template: ComponentStory<typeof TextInput> = (args) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <h6 className='my-md'>value:</h6>
+      <h6 tw="my-5">value:</h6>
       <pre>{value}</pre>
     </>
   )
@@ -60,8 +54,12 @@ Default.parameters = {
 export const WithButton = Template.bind({})
 WithButton.args = {
   ...defaultArgs,
-  button: <Button variant='primary' kind='neon' size='big' color='main0'>Dynamic text size</Button>,
-  buttonStyle: 'stuck'
+  button: (
+    <Button variant="primary" kind="neon" size="big" color="main0">
+      Dynamic text size
+    </Button>
+  ),
+  buttonStyle: 'stuck',
 }
 WithButton.parameters = {
   ...defaultParams,
@@ -72,8 +70,12 @@ WithButton.parameters = {
 export const WithButtonContainer = Template.bind({})
 WithButtonContainer.args = {
   ...defaultArgs,
-  button: <Button variant='primary' kind='neon' size='regular' color='main0'>Click</Button>,
-  buttonStyle: 'wrapped'
+  button: (
+    <Button variant="primary" kind="neon" size="regular" color="main0">
+      Click
+    </Button>
+  ),
+  buttonStyle: 'wrapped',
 }
 WithButtonContainer.parameters = {
   ...defaultParams,
@@ -84,13 +86,16 @@ WithButtonContainer.parameters = {
 export const WithButtonVariant = Template.bind({})
 WithButtonVariant.args = {
   ...defaultArgs,
-  button: <Button variant='secondary' kind='neon' size='regular' color='main0'>Click</Button>,
-  buttonStyle: 'stuck'
+  button: (
+    <Button variant="secondary" kind="neon" size="regular" color="main0">
+      Click
+    </Button>
+  ),
+  buttonStyle: 'stuck',
 }
 WithButtonVariant.parameters = {
   ...defaultParams,
 }
-
 
 // ---
 
@@ -98,13 +103,14 @@ export const WithError = Template.bind({})
 WithError.args = {
   ...defaultArgs,
   label: 'Label',
-  error: new Error('Error Message')
+  error: new Error('Error Message'),
 }
 WithError.parameters = {
   ...defaultParams,
-  controls: { exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'] },
+  controls: {
+    exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'],
+  },
 }
-
 
 // ---
 
@@ -112,9 +118,11 @@ export const WithWarning = Template.bind({})
 WithWarning.args = {
   ...defaultArgs,
   label: 'Label',
-  error: { message: 'Warning message', type: 'warn' }
+  error: { message: 'Warning message', type: 'warn' },
 }
 WithWarning.parameters = {
   ...defaultParams,
-  controls: { exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'] },
+  controls: {
+    exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'],
+  },
 }

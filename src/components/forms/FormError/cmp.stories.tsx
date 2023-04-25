@@ -1,6 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 
 import FormError from './cmp'
 import { FormErrorProps } from './types'
@@ -8,8 +7,7 @@ import { FormErrorProps } from './types'
 export default {
   title: 'Components/UI/forms/FormError',
   component: FormError,
-  decorators: [withDesign],
-} as ComponentMeta<typeof FormError>
+} 
 
 const defaultArgs: Partial<FormErrorProps> = {
   error: new Error('There was an error'),
@@ -21,7 +19,7 @@ const defaultParams = {
 
 // ---
 
-const Template: ComponentStory<typeof FormError> = (args) => <FormError {...args} />
+const Template: StoryFn<typeof FormError> = (args) => <FormError {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
@@ -29,7 +27,7 @@ Default.args = {
 }
 Default.parameters = {
   ...defaultParams,
-}
+} 
 
 // ---
 

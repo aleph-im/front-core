@@ -1,13 +1,11 @@
 import React, {useState} from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import Tabs from './cmp'
 import { StyledTabType, TabsProps, TabType } from './types'
 
 export default {
   title: 'Components/UI/Tabs',
   component: Tabs,
-  decorators: [withDesign],
   argTypes: {
     align: {
       control: {
@@ -16,7 +14,7 @@ export default {
       },
     }
   }
-} as ComponentMeta<typeof Tabs>
+} 
 
 const defaultArgs: Partial<TabsProps & StyledTabType> = {
   defaultSelected: 2,
@@ -79,7 +77,7 @@ const tabs: TabType[] = [
 
 // ---
 
-const Template: ComponentStory<typeof Tabs> = (args) => {
+const Template: StoryFn<typeof Tabs> = (args) => {
   const [state, setState] = useState<{ prevTab?: number, nextTab?: number }>({
     prevTab: undefined,
     nextTab: undefined,

@@ -1,15 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { createPortal } from 'react-dom';
-import NotificationCard from '../NotificationCard';
-import { AddNotificationInfo, NotificationContext, NotificationInfo } from './context'
-import { StyledClearButton, StyledClearIcon, StyledContainer } from './styles';
+import { createPortal } from 'react-dom'
+import NotificationCard from '../NotificationCard'
+import {
+  AddNotificationInfo,
+  NotificationContext,
+  NotificationInfo,
+} from './context'
+import { StyledClearButton, StyledClearIcon, StyledContainer } from './styles'
 import { NotificationProps } from './types'
 
 export const Notification = ({
   max = 10,
   timeout = 2000,
   children,
-  containerRef = document.body
+  containerRef = document.body,
 }: NotificationProps) => {
   const [notifications, setNotifications] = useState<NotificationInfo[]>([])
   const timeoutIdRef = useRef<NodeJS.Timeout | undefined>()
@@ -29,20 +33,26 @@ export const Notification = ({
         setNotifications([...notifications, notification])
       },
       remove(id: string) {
-        setNotifications(notifications.filter(noti => noti.id !== id))
-      }
+        setNotifications(notifications.filter((noti) => noti.id !== id))
+      },
     }),
     [notifications, setNotifications],
   )
 
   const firstTimestamp = useMemo(
-    () => notifications.reduce((acc, curr) => Math.min(acc, curr.timestamp), Number.MAX_SAFE_INTEGER),
-    [notifications, timeout]
+    () =>
+      notifications.reduce(
+        (acc, curr) => Math.min(acc, curr.timestamp),
+        Number.MAX_SAFE_INTEGER,
+      ),
+    [notifications, timeout],
   )
 
   const disposeNotifications = useCallback(() => {
     timeoutIdRef.current = undefined
-    setNotifications(notifications.filter(noti => Date.now() < (noti.timestamp + timeout)))
+    setNotifications(
+      notifications.filter((noti) => Date.now() < noti.timestamp + timeout),
+    )
   }, [notifications, timeout])
 
   const stopTimeout = useCallback(() => {
@@ -56,7 +66,14 @@ export const Notification = ({
     stopTimeout()
     const ms = Math.max(firstTimestamp + timeout - Date.now(), 0)
     timeoutIdRef.current = setTimeout(disposeNotifications, ms)
-  }, [notifications, stopTimeout, firstTimestamp, timeoutIdRef.current, timeout, disposeNotifications])
+  }, [
+    notifications,
+    stopTimeout,
+    firstTimestamp,
+    timeoutIdRef.current,
+    timeout,
+    disposeNotifications,
+  ])
 
   const clearAll = useCallback(() => {
     stopTimeout()
@@ -72,24 +89,23 @@ export const Notification = ({
     <NotificationContext.Provider value={contextValue}>
       {children}
       {createPortal(
-        (
-          <StyledContainer
-            onMouseOver={stopTimeout}
-            onMouseOut={resetTimeout}
-          >
-            {notifications.sort().map(noti => (
-              <NotificationCard
-                key={noti.id}
-                onClose={() => contextValue.remove(noti.id)}
-                className="mt-sm"
-                {...noti}
-              />
-            ))}
-            {notifications.length > 2 && <StyledClearButton onClick={clearAll}>Clear all <StyledClearIcon /></StyledClearButton>}
-          </StyledContainer>
-        )
-        , containerRef)
-      }
+        <StyledContainer onMouseOver={stopTimeout} onMouseOut={resetTimeout}>
+          {notifications.sort().map((noti) => (
+            <NotificationCard
+              key={noti.id}
+              onClose={() => contextValue.remove(noti.id)}
+              tw="mt-4"
+              {...noti}
+            />
+          ))}
+          {notifications.length > 2 && (
+            <StyledClearButton onClick={clearAll}>
+              Clear all <StyledClearIcon />
+            </StyledClearButton>
+          )}
+        </StyledContainer>,
+        containerRef,
+      )}
     </NotificationContext.Provider>
   )
 }

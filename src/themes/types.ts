@@ -71,8 +71,6 @@ export type ThemeColor = {
   text: string
 }
 
-export type ThemeSpacing = Record<string, number>
-
 export type ThemeFont = {
   url: string
   size: {
@@ -117,8 +115,6 @@ export type ThemeIcon = {
 }
 export interface CoreTheme {
   name: string
-  // palette: Record<string, string[]>
-  spacing: ThemeSpacing
   font: ThemeFont
   color: ThemeColor
   typo: ThemeTypo

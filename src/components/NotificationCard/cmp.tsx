@@ -1,5 +1,12 @@
 import React from 'react'
-import { StyledContentContainer, StyledFooterContainer, StyledHeaderContainer, StyledContainer, StyledHeaderIcon, StyledHeaderCloseIcon } from './styles'
+import {
+  StyledContentContainer,
+  StyledFooterContainer,
+  StyledHeaderContainer,
+  StyledContainer,
+  StyledHeaderIcon,
+  StyledHeaderCloseIcon,
+} from './styles'
 import { NotificationCardProps } from './types'
 
 export const NotificationCard = ({
@@ -27,7 +34,7 @@ export const NotificationCard = ({
       <StyledContentContainer {...{ variant }}>
         {content || text}
       </StyledContentContainer>
-      <StyledFooterContainer {...{ variant }} >
+      <StyledFooterContainer {...{ variant }}>
         {footer || detail}
       </StyledFooterContainer>
     </StyledContainer>

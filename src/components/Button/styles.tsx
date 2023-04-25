@@ -49,7 +49,7 @@ const defaultVariants = (
             padding: 0;
             background-clip: content-box;
             top: 100%;
-            margin-top: -8px;
+            margin-top: -0.5rem;
           }
         `
       }
@@ -102,7 +102,7 @@ const defaultVariants = (
             padding: 0;
             background-clip: content-box;
             top: 100%;
-            margin-top: -8px;
+            margin-top: -0.5rem;
           }
         `
       }
@@ -186,7 +186,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       font-family: ${theme.button.font.family};
       font-style: ${theme.button.font.style};
       margin: 0;
-      padding: 8px 22px;
+      padding: 0.5rem 1.375rem;
       width: auto;
       min-width: 0;
       max-width: 100%;
@@ -195,7 +195,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       white-space: nowrap;
       text-overflow: ellipsis;
       border: none;
-      border-radius: 30px;
+      border-radius: 1.875rem;
       line-height: 1em;
       background-color: transparent;
       outline: 0;
@@ -216,7 +216,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
         background-color: ${mainColor};
         z-index: -1;
         padding: 1px;
-        border-radius: 30px;
+        border-radius: 1.875rem;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
         -webkit-mask-composite: xor;

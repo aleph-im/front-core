@@ -1,6 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import { BulletItem, BulletList } from './cmp'
 import { BulletListProps } from './types'
 
@@ -8,8 +7,7 @@ export default {
   title: 'Components/UI/BulletList',
   component: BulletList,
   subcomponents: { BulletItem },
-  decorators: [withDesign],
-} as ComponentMeta<typeof BulletList>
+} 
 
 const defaultArgs: Partial<BulletListProps> = {
   size: 'big'
@@ -17,7 +15,7 @@ const defaultArgs: Partial<BulletListProps> = {
 
 // ---
 
-const Template: ComponentStory<typeof BulletList> = (args) => (
+const Template: StoryFn<typeof BulletList> = (args) => (
   <>
     <BulletList {...args} />
   </>

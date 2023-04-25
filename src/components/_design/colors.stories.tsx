@@ -1,20 +1,15 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import styled from 'styled-components'
 
 export default {
   title: 'Design/Atoms/Colors',
-  decorators: [withDesign],
-} as ComponentMeta<any>
+}
 
 const defaultArgs: Partial<any> = {}
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=1%3A115&t=OG6V4eRdvQIurCbK-0',
-  },
+  
 }
 
 // ---
@@ -34,7 +29,7 @@ const Rect = styled.div`
   margin: 10px 12px;
 `
 
-const ColorsTemplate: ComponentStory<any> = () => {
+const ColorsTemplate: StoryFn<any> = () => {
   return (
     <>
       <h1>Colors</h1>

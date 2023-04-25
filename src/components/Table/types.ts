@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, TableHTMLAttributes } from "react"
 
 export type BorderType = 'none' | 'dashed' | 'solid'
 
@@ -9,13 +9,12 @@ type Column = {
   cell?: <T>(row: T) => ReactNode
 }
 
-export type TableProps = {
+export type TableProps = TableHTMLAttributes<HTMLTableElement> & {
   columns: Column[]
   data: object[]
   keySelector: <T>(row: T) => string | number
-}
 
-export type StyledTableProps = {
   oddRowNoise?: boolean
-  border: BorderType
-}
+  borderType: BorderType
+} 
+

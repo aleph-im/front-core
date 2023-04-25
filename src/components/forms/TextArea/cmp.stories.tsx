@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import TextArea from './cmp'
 import { TextAreaProps } from './types'
 
@@ -8,20 +7,15 @@ import { TextAreaProps } from './types'
 export default {
   title: 'Components/UI/forms/TextArea',
   component: TextArea,
-  decorators: [withDesign],
-} as ComponentMeta<typeof TextArea>
+}
 
 const defaultArgs: Partial<TextAreaProps> = {
   name: 'text-area',
   placeholder: 'Placeholder',
-  value: ''
+  value: '',
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qNnjyRzhXcmj6nwbL9XP5K/ALEPH-Cloud-Website?node-id=317%3A6973&t=Q7NxYTLQFhG5jH6c-0',
-  },
   controls: { exclude: ['color', 'size', 'name', 'button'] },
 }
 
@@ -29,7 +23,7 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: ComponentStory<typeof TextArea> = (args) => {
+const Template: StoryFn<typeof TextArea> = (args) => {
   const [value, setValue] = useState<string>(args.value as string)
 
   return (
@@ -39,7 +33,7 @@ const Template: ComponentStory<typeof TextArea> = (args) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <h6 className='my-md'>value:</h6>
+      <h6 tw="my-5">value:</h6>
       <pre>{value}</pre>
     </>
   )

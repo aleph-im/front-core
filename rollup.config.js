@@ -36,4 +36,8 @@ export default [
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
   },
+  {
+    input: "./tailwind.config.js",
+    output: [{ file: "dist/tailwind.config.js", format: "cjs" }],
+  },
 ];

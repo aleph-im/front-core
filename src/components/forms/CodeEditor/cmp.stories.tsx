@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import CodeEditor from './cmp'
 import { CodeEditorProps } from './types'
 
@@ -8,18 +7,13 @@ import { CodeEditorProps } from './types'
 export default {
   title: 'Components/UI/forms/CodeEditor',
   component: CodeEditor,
-  decorators: [withDesign],
-} as ComponentMeta<typeof CodeEditor>
+}
 
 const defaultArgs: Partial<CodeEditorProps> = {
   placeholder: 'Placeholder',
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/qNnjyRzhXcmj6nwbL9XP5K/ALEPH-Cloud-Website?node-id=317%3A6973&t=Q7NxYTLQFhG5jH6c-0',
-  },
   controls: { exclude: ['color', 'size', 'name', 'button'] },
 }
 
@@ -27,17 +21,13 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: ComponentStory<typeof CodeEditor> = (args) => {
+const Template: StoryFn<typeof CodeEditor> = (args) => {
   const [value, setValue] = useState<string>(args.value as string)
 
   return (
     <>
-      <CodeEditor
-        {...args}
-        value={value}
-        onChange={(v) => setValue(v || '')}
-      />
-      <h6 className='my-md'>value:</h6>
+      <CodeEditor {...args} value={value} onChange={(v) => setValue(v || '')} />
+      <h6 tw="my-5">value:</h6>
       <pre>{value}</pre>
     </>
   )
@@ -53,7 +43,7 @@ function sayHello() {
 }
 
 sayHello();
-`
+`,
 }
 Default.parameters = {
   ...defaultParams,

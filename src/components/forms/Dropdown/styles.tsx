@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { addClasses } from '../../../utils'
 import Icon from '../../Icon'
+import tw from 'twin.macro'
 
 export const StyledDropdown = styled.div<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => {
@@ -17,13 +17,14 @@ export const StyledDropdown = styled.div<{ isOpen: boolean }>`
       color: ${theme.color.text};
       box-shadow: 0px 4px 24px #00000040;
       border: 1px solid transparent;
-      border-radius: 30px;
+      border-radius: 1.875rem;
       padding: 0.5rem 2rem;
       text-overflow: ellipsis;
       white-space: nowrap;
 
       & {
-        ${isOpen && css`
+        ${isOpen &&
+        css`
           border-color: ${theme.color.text};
         `}
       }
@@ -31,13 +32,12 @@ export const StyledDropdown = styled.div<{ isOpen: boolean }>`
   }}
 `
 
-export const StyledDropdownIcon = styled(Icon).attrs(props => {
+export const StyledDropdownIcon = styled(Icon).attrs(() => {
   return {
-    ...addClasses('ml-auto')(props),
-    name: "chevron-down",
-    size: 'lg'
+    name: 'chevron-down',
+    size: 'lg',
   }
-})``
+})(() => [tw`ml-auto`])
 
 export const StyledDropdownOptionMenu = styled.div<{ isOpen: boolean }>`
   ${({ isOpen }) => {
@@ -48,13 +48,14 @@ export const StyledDropdownOptionMenu = styled.div<{ isOpen: boolean }>`
       top: 100%;
       margin-top: 0.375rem;
       width: 100%;
-      border-radius: 30px;
+      border-radius: 1.875rem;
       overflow: scroll;
       max-height: 20rem;
       backdrop-filter: blur(10px);
 
       & {
-        ${isOpen && css`
+        ${isOpen &&
+        css`
           display: block;
         `}
       }

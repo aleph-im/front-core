@@ -1,27 +1,31 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import Editor, { EditorProps } from "@monaco-editor/react";
+import Editor, { EditorProps } from '@monaco-editor/react'
 import { addClasses } from '../../../utils'
-import { CodeEditorProps } from './types';
+import { CodeEditorProps } from './types'
+import tw from 'twin.macro'
 
-export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(props => {
-  return {
-    ...addClasses('fx-glass-base0 fx-glass-border-base0 p-md tp-form')(props),
-    height: "100%",
-    width: "100%",
-    defaultLanguage: "javascript",
-    theme: 'vs-dark',
-    $theme: props.theme,
-    options: {
-      minimap: { enabled: false },
-      lineNumbers: "off",
-    },
-    wrapperProps: {
-      ...addClasses('p-0')(props),
-    }
-  } as EditorProps
-}) <CodeEditorProps & { $theme?: DefaultTheme }>`
+export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
+  (props) => {
+    return {
+      ...addClasses('fx-glass-base0 fx-glass-border-base0 tp-form')(props),
+      height: '100%',
+      width: '100%',
+      defaultLanguage: 'javascript',
+      theme: 'vs-dark',
+      $theme: props.theme,
+      options: {
+        minimap: { enabled: false },
+        lineNumbers: 'off',
+      },
+      wrapperProps: {
+        style: { padding: 0 },
+      },
+    } as EditorProps
+  },
+)<CodeEditorProps & { $theme?: DefaultTheme }>`
   ${({ $theme }) => css`
-    border-radius: 8px;
+    ${tw`p-5`}
+    border-radius: 0.5rem;
     background: transparent;
     font-size: 1rem;
     height: 100%;
@@ -36,17 +40,19 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(props =>
     }
 
     & .monaco-editor {
-      font-family: -apple-system,BlinkMacSystemFont,Segoe WPC,Segoe UI,HelveticaNeue-Light,system-ui,Ubuntu,Droid Sans,sans-serif;
-      --monaco-monospace-font: "SF Mono",Monaco,Menlo,Consolas,"Ubuntu Mono","Liberation Mono","DejaVu Sans Mono","Courier New",monospace;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe WPC, Segoe UI,
+        HelveticaNeue-Light, system-ui, Ubuntu, Droid Sans, sans-serif;
+      --monaco-monospace-font: 'SF Mono', Monaco, Menlo, Consolas, 'Ubuntu Mono',
+        'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace;
       position: relative;
       overflow: visible;
       -webkit-text-size-adjust: 100%;
-      
+
       &,
       & .monaco-editor-background,
       & .inputarea.ime-input,
       & .margin {
-          background-color: transparent;
+        background-color: transparent;
       }
 
       & .view-overlays .current-line {

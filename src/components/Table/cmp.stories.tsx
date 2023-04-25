@@ -1,27 +1,25 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import Table from './cmp'
 import Icon from '../Icon'
-import { TableProps, StyledTableProps } from './types'
+import { TableProps } from './types'
 import { data, Pets } from './fixture/data'
 
 export default {
   title: 'Components/UI/Table',
   component: Table,
-  decorators: [withDesign],
   argTypes: {
-    border: {
+    borderType: {
       control: {
         type: 'select',
         options: ['none', 'dashed', 'solid'],
       }
     }
   }
-} as ComponentMeta<typeof Table>
+}
 
-const defaultArgs: Partial<StyledTableProps & TableProps> = {
-  border: 'dashed',
+const defaultArgs: Partial<TableProps> = {
+  borderType: 'dashed',
   oddRowNoise: true,
 }
 
@@ -70,16 +68,12 @@ const dataArgs: Partial<TableProps> = {
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=174%3A6044&t=TVHylrq00voSyAB6-1',
-  },
   controls: { exclude: ['color', 'size'] }
 }
 
 // ---
 
-const Template: ComponentStory<typeof Table> = (args) => (
+const Template: StoryFn<typeof Table> = (args) => (
   <Table {...args} {...dataArgs} />
 )
 

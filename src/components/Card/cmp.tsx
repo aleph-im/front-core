@@ -3,7 +3,13 @@ import Button from '../Button'
 import Icon from '../Icon'
 import ObjectImg from '../ObjectImg'
 import { ObjectId } from '../ObjectImg/types'
-import { StyledCardContentContainer, StyledCardFooterContainer, StyledCardHeader, StyledCardHeaderContainer, StyledCardContainer } from './styles'
+import {
+  StyledCardContentContainer,
+  StyledCardFooterContainer,
+  StyledCardHeader,
+  StyledCardHeaderContainer,
+  StyledCardContainer,
+} from './styles'
 import { CardProps } from './types'
 
 export const Card = ({
@@ -22,32 +28,34 @@ export const Card = ({
   footer,
   ...rest
 }: CardProps) => {
-
   return (
     <StyledCardContainer {...rest}>
       <StyledCardHeaderContainer>
-        {header || (variant === 'block' ? <ObjectImg id={headerImg as ObjectId} /> : <img src={headerImg} />)}
+        {header ||
+          (variant === 'block' ? (
+            <ObjectImg id={headerImg as ObjectId} />
+          ) : (
+            <img src={headerImg} />
+          ))}
       </StyledCardHeaderContainer>
       <StyledCardContentContainer {...{ variant }}>
-        {content || (variant === 'block'
-          ? (
+        {content ||
+          (variant === 'block' ? (
             <>
-              <StyledCardHeader className='tp-h7'>{title}</StyledCardHeader>
-              <p className='m-0'>{text}</p>
+              <StyledCardHeader className="tp-h7">{title}</StyledCardHeader>
+              <p>{text}</p>
             </>
-          )
-          : (
+          ) : (
             <>
-              <div className='my-xxs'>
-                <span className='tp-info m-0'>{titleInfo}</span>
-                <StyledCardHeader className='tp-h6'>{title}</StyledCardHeader>
+              <div tw="my-2">
+                <span className="tp-info">{titleInfo}</span>
+                <StyledCardHeader className="tp-h6">{title}</StyledCardHeader>
               </div>
-              <p className='m-0'>{text}</p>
+              <p>{text}</p>
             </>
-          )
-        )}
+          ))}
       </StyledCardContentContainer>
-      <StyledCardFooterContainer {...{ buttonVariant }} >
+      <StyledCardFooterContainer {...{ buttonVariant }}>
         {footer || (
           <Button
             variant={buttonVariant}
@@ -57,10 +65,12 @@ export const Card = ({
             onClick={buttonOnClick}
             disabled={buttonDisabled}
           >
-            {buttonLabel}{buttonVariant === 'text-only' && <Icon name='arrow-right' className='ml-xs' />}
+            {buttonLabel}
+            {buttonVariant === 'text-only' && (
+              <Icon name="arrow-right" tw="ml-2.5" />
+            )}
           </Button>
-        )
-        }
+        )}
       </StyledCardFooterContainer>
     </StyledCardContainer>
   )

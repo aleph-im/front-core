@@ -1,6 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import { Row, Col } from './cmp'
 import { RowProps } from './types'
 
@@ -8,12 +7,11 @@ export default {
   title: 'Components/UI/Grid',
   component: Row,
   subcomponents: { Col },
-  decorators: [withDesign],
   argTypes: {
     count: { control: { type: 'range', min: 1, max: 16, step: 1 } },
     gap: { control: { type: 'text' } },
   },
-} as ComponentMeta<typeof Row>
+} 
 
 const defaultArgs: Partial<RowProps> = {
   count: 12,
@@ -32,7 +30,7 @@ const colStyle = {
   height: '100px',
 }
 
-const Template: ComponentStory<typeof Row> = (args) => (
+const Template: StoryFn<typeof Row> = (args) => (
   <>
     <h1>Regular span blocks (size=3)</h1>
     <Row {...args}>

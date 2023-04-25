@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 
 import Select from './cmp'
 import { SelectProps } from './types'
@@ -9,8 +8,7 @@ import { SelectProps } from './types'
 export default {
   title: 'Components/UI/forms/Select',
   component: Select,
-  decorators: [withDesign],
-} as ComponentMeta<typeof Select>
+}
 
 const defaultArgs: Partial<SelectProps> = {
   label: 'Select an option',
@@ -18,25 +16,32 @@ const defaultArgs: Partial<SelectProps> = {
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=2%3A1599&t=XeMPIFw7c4dnGQr1-0',
-  },
   controls: { exclude: ['color', 'size'] },
 }
 
 // ---
 
-const Template: ComponentStory<typeof Select> = (args) => {
-  const options: [string, string][] = Array.from({ length: 10 }, (_, i) => [`${i}`, `Option ${i}`])
+const Template: StoryFn<typeof Select> = (args) => {
+  const options: [string, string][] = Array.from({ length: 10 }, (_, i) => [
+    `${i}`,
+    `Option ${i}`,
+  ])
 
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set(args.value as string | string[]))
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(
+    new Set(args.value as string | string[]),
+  )
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLSelectElement>, value: string | string[]) => {
-    setSelectedIds(new Set(value))
-  }, [setSelectedIds])
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>, value: string | string[]) => {
+      setSelectedIds(new Set(value))
+    },
+    [setSelectedIds],
+  )
 
-  const selectedOptions = useMemo(() => options.filter(([k]) => selectedIds.has(k)), [options, selectedIds])
+  const selectedOptions = useMemo(
+    () => options.filter(([k]) => selectedIds.has(k)),
+    [options, selectedIds],
+  )
 
   return (
     <>
@@ -44,9 +49,9 @@ const Template: ComponentStory<typeof Select> = (args) => {
         {...args}
         options={options.map(([k, v]) => ({ label: v, value: k }))}
         onChange={handleChange}
-        className="mb-md"
+        tw="mb-5"
       />
-      <h6 className='my-md'>value:</h6>
+      <h6 tw="my-5">value:</h6>
       <pre>{JSON.stringify(selectedOptions, null, 2)}</pre>
     </>
   )

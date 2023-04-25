@@ -1,20 +1,18 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import Icon from './cmp'
 import { IconProps } from './types'
 
 export default {
   title: 'Components/UI/Icon',
   component: Icon,
-  decorators: [withDesign],
   argTypes: {
     size: {
       options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
       control: { type: 'inline-radio' },
     },
   },
-} as ComponentMeta<typeof Icon>
+} 
 
 const defaultArgs: Partial<IconProps> = {
   name: 'bitcoin',
@@ -24,15 +22,11 @@ const defaultArgs: Partial<IconProps> = {
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=1%3A1705&t=jFufZWoGIyZ8Gzf5-0',
-  },
 }
 
 // ---
 
-const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />
+const Template: StoryFn<typeof Icon> = (args) => <Icon {...args} />
 
 export const Default = Template.bind({})
 Default.args = {

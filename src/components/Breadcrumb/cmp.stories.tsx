@@ -1,6 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 
 import Breadcrumb from './cmp'
 import { BreadcrumbProps } from './types'
@@ -10,8 +9,7 @@ import { BreadcrumbProps } from './types'
 export default {
   title: 'Components/UI/Breadcrumb',
   component: Breadcrumb,
-  decorators: [withDesign],
-} as ComponentMeta<typeof Breadcrumb>
+}
 
 const defaultArgs: Partial<BreadcrumbProps> = {}
 
@@ -29,7 +27,7 @@ const navLinks = [
 
 // ---
 
-const Template: ComponentStory<typeof Breadcrumb> = (args) => (
+const Template: StoryFn<typeof Breadcrumb> = (args) => (
     <Breadcrumb {...args} navLinks={navLinks} />
 )
 

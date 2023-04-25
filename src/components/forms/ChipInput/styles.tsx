@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components'
-import { addClasses } from '../../../utils';
-import { StyledTextInputContainer } from '../TextInput/styles';
+import { addClasses } from '../../../utils'
+import { StyledTextInputContainer } from '../TextInput/styles'
 
-export const StyledContainer = styled(StyledTextInputContainer) <{ isBig: boolean }>`
+export const StyledContainer = styled(StyledTextInputContainer)<{
+  isBig: boolean
+}>`
   ${({ isBig }) => {
     return css`
       flex-wrap: wrap;
-      border-radius: ${isBig ? '22px' : '30px'};
+      border-radius: ${isBig ? '1.375rem' : '1.875rem'};
       padding: ${isBig ? '0.5rem' : '0'};
     `
   }}
@@ -17,7 +19,7 @@ export const StyledChipContainer = styled.div<{ isBig: boolean }>`
   flex-wrap: wrap;
   align-items: center;
   align-self: stretch;
-  margin: ${({ isBig }) => isBig ? '0' : '0 0.34375rem'};
+  margin: ${({ isBig }) => (isBig ? '0' : '0 0.34375rem')};
   max-width: 100%;
   overflow: hidden;
 `
@@ -29,7 +31,7 @@ export const StyledChip = styled.span`
       align-items: center;
       background-color: ${theme.color.main0};
       color: ${theme.color.text};
-      border-radius: 30px;
+      border-radius: 1.875rem;
       min-height: 2.0625rem; // 33px
       padding: 0.125rem 1.125rem;
       margin: 0.34375rem 0;
@@ -66,7 +68,9 @@ export const StyledChipRemoveButton = styled.button`
   }}
 `
 
-export const StyledInput = styled.input.attrs(addClasses('tp-form'))<{ isBig: boolean }>`
+export const StyledInput = styled.input.attrs(addClasses('tp-form'))<{
+  isBig: boolean
+}>`
   ${({ theme, isBig }) => {
     return css`
       flex: 1 1 auto;

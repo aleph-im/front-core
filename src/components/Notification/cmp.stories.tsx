@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 
 import Notification from './cmp'
 import { NotificationProps } from './types'
@@ -12,18 +11,13 @@ export default {
   title: 'Components/UI/Notification',
   component: Notification,
   subcomponents: { NotificationCard },
-  decorators: [withDesign],
-} as ComponentMeta<typeof Notification>
+}
 
 const defaultArgs: Partial<NotificationProps> = {
   max: 2,
 }
 
 const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=2%3A1599&t=XeMPIFw7c4dnGQr1-0',
-  },
   controls: { exclude: ['color', 'size'] },
 }
 
@@ -39,16 +33,14 @@ const ConsumerComponent = () => {
       variant: variants[Math.ceil(Math.random() * variants.length)] as any,
       title: 'Title',
       text: 'Content',
-      footer: (new Date()).toISOString()
+      footer: new Date().toISOString(),
     })
   }, [noti])
 
-  return (
-    <button onClick={handleAddNotification}>Add Notification</button>
-  )
+  return <button onClick={handleAddNotification}>Add Notification</button>
 }
 
-const Template: ComponentStory<typeof Notification> = (args) => {
+const Template: StoryFn<typeof Notification> = (args) => {
   return (
     <Notification {...args}>
       <ConsumerComponent />

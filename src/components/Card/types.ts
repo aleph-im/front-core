@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { MouseEventHandler, ReactNode } from "react"
 import { ButtonVariant } from "../Button/types"
 
 export type CardVariant = 'block' | 'article'
@@ -13,7 +13,7 @@ export type CardProps = {
   buttonColor: string
   buttonVariant: ButtonVariant
   buttonHref: string
-  buttonOnClick: (e: MouseEvent) => void
+  buttonOnClick: MouseEventHandler
   buttonDisabled?: boolean
 
   header?: ReactNode

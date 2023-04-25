@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
 import { ButtonProps } from './types'
 
-export const StyledTextInputField = styled.input.attrs(addClasses('tp-form'))<ButtonProps>`
+export const StyledTextInputField = styled.input.attrs(
+  addClasses('tp-form'),
+)<ButtonProps>`
   ${({ theme }) => {
     return css`
       box-sizing: border-box;
@@ -33,7 +35,7 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
       background: ${theme.color.text}0F;
       box-shadow: 0px 4px 24px #00000040;
       border: 1px solid transparent;
-      border-radius: 30px;
+      border-radius: 1.875rem;
 
       &._focus {
         border: 1px solid ${theme.color.text}
@@ -45,26 +47,25 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
         align-self: stretch;
 
         ${() => {
-        switch (buttonStyle) {
-          case 'stuck': {
-            return css`
-              border-top-left-radius: 0;
-              border-bottom-left-radius: 0;
-
-              &::after {
+          switch (buttonStyle) {
+            case 'stuck': {
+              return css`
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
-              }
-            `;
+
+                &::after {
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+                }
+              `
+            }
+            default: {
+              return css`
+                margin: 0.5rem;
+              `
+            }
           }
-          default: {
-            return css`
-              margin: 8px;
-            `;
-          }
-        }
-      }
-      }
+        }}
     `
   }}
 `

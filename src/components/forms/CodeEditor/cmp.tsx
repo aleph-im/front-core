@@ -1,44 +1,61 @@
 import { EditorProps } from '@monaco-editor/react'
-import React, { ForwardedRef, forwardRef, useCallback, useMemo, useState } from 'react'
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 import FormError from '../FormError'
 import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
 import { StyledMonacoEditor } from './styles'
 import { CodeEditorProps } from './types'
 
-export const CodeEditor = forwardRef(({
-  label,
-  className,
-  focus,
-  error,
-  placeholder = '// Write some code here',
-  ...rest
-}: CodeEditorProps, ref: ForwardedRef<EditorProps>) => {
-  const [isFocus, setIsFocus] = useState(focus)
-  const handleFocus = useCallback(() => setIsFocus(true), [setIsFocus])
-  const handleBlur = useCallback(() => setIsFocus(false), [setIsFocus])
+export const CodeEditor = forwardRef(
+  (
+    {
+      label,
+      className,
+      focus,
+      error,
+      placeholder = '// Write some code here',
+      ...rest
+    }: CodeEditorProps,
+    ref: ForwardedRef<EditorProps>,
+  ) => {
+    const [isFocus, setIsFocus] = useState(focus)
+    const handleFocus = useCallback(() => setIsFocus(true), [setIsFocus])
+    const handleBlur = useCallback(() => setIsFocus(false), [setIsFocus])
 
-  const isFocusClass = useMemo(() => isFocus || focus ? '_focus' : '', [isFocus, focus])
+    const isFocusClass = useMemo(
+      () => (isFocus || focus ? '_focus' : ''),
+      [isFocus, focus],
+    )
 
-  // @note: Storybook testing purposes
-  const classes = useMemo(() => isFocusClass + (className || ''), [isFocusClass, className])
+    // @note: Storybook testing purposes
+    const classes = useMemo(
+      () => isFocusClass + (className || ''),
+      [isFocusClass, className],
+    )
 
-  return (
-    <StyledInputWrapper>
-      {label && <StyledFormLabel>{label}</StyledFormLabel>}
-      <StyledMonacoEditor
-        {...{
-          ref,
-          placeholder,
-          className: classes,
-          onFocus: handleFocus,
-          onBlur: handleBlur,
-          ...rest,
-        }}
-      />
-      {error && <FormError error={error} />}
-    </StyledInputWrapper>
-  )
-})
+    return (
+      <StyledInputWrapper>
+        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        <StyledMonacoEditor
+          {...{
+            ref,
+            placeholder,
+            className: classes,
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            ...rest,
+          }}
+        />
+        {error && <FormError error={error} />}
+      </StyledInputWrapper>
+    )
+  },
+)
 
 CodeEditor.displayName = 'CodeEditor'
 

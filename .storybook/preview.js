@@ -1,11 +1,9 @@
 
-import { addDecorator, addParameters } from "@storybook/react";
 import { ThemeProvider } from 'styled-components';
 import { themes as theming } from '@storybook/theming';
-import { withThemes } from '@react-theming/storybook-addon';
 
-import { themes, themeList } from '../src/themes';
-import { GlobalStyle } from '../src/styles';
+import { themes } from '../src/themes';
+import { GlobalStyles } from '../src/styles';
 import logoDark from '../assets/img/aleph-dark.svg';
 import logoLight from '../assets/img/aleph-light.svg';
 
@@ -56,22 +54,7 @@ export const args = {
   color: 'white'
 };
 
-const onThemeSwitch = context => {
-  const { theme } = context;
-  const background = theme.color.background
-
-  return {
-    parameters: {
-      backgrounds: {
-        default: background,
-      },
-      // Pass backgrounds: null to disable background switching at all
-    }
-  }
-};
-
-
-addParameters({
+export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
@@ -83,7 +66,7 @@ addParameters({
   darkMode: {
     current: 'dark',
     // Override the default dark theme
-    dark: { 
+    dark: {
       ...theming.dark,
       ...getThemeColors(themes.alephDark)
     },
@@ -98,16 +81,39 @@ addParameters({
     inlineStories: false,
     // https://github.com/storybookjs/storybook/issues/8112#issuecomment-1292728430
     iframeHeight: 500,
-    theme: { 
+    theme: {
       ...theming.dark,
       ...getThemeColors(themes.alephDark)
     },
   }
-})
+}
 
-const publicThemes = themeList.filter(t => t.name.indexOf('aleph') === -1)
-const themingDecorator = withThemes(ThemeProvider, publicThemes, { onThemeSwitch });
-const globalCssDecorator = (story) => <><GlobalStyle />{story()}</>
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Platform Theme',
+    defaultValue: 'dark',
+    toolbar: {
+      icon: 'paintbrush',
+      items: [
+        { value: 'dark', title: 'Dark' },
+        { value: 'light', title: 'Light' },
+      ],
+    },
+  },
+}
 
-addDecorator(globalCssDecorator);
-addDecorator(themingDecorator);
+// const publicThemes = themeList.filter(t => t.name.indexOf('aleph') === -1)
+
+const themingDecorator = (Story, context) => (
+  <>
+    <ThemeProvider theme={themes[context.globals.theme]}>
+      <GlobalStyles />
+      <Story />
+    </ThemeProvider>
+  </>
+)
+
+export const decorators = [
+  themingDecorator
+]

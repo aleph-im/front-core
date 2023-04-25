@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { StyledTable } from './styles'
-import { TableProps, StyledTableProps } from './types'
+import { TableProps } from './types'
 import Icon from '../Icon'
 
 type SortDirection = 'asc' | 'desc'
@@ -9,18 +9,23 @@ const toggleSort = (sort: SortDirection): SortDirection => {
   return sort === 'asc' ? 'desc' : 'asc'
 }
 
+export const Table = (props: TableProps) => {
+  const { columns, data, oddRowNoise = false, keySelector } = props
 
-export const Table = ({ columns, data, border = "none", oddRowNoise = false, keySelector, ...rest }: TableProps & StyledTableProps) => {
   const isSortedColumn = (column: string) => sortedColumn.column === column
   const [sortedColumn, setSortedColumn] = React.useState({
     column: '',
     direction: 'asc',
   })
 
-  const keyedData = useMemo(() => data.map((row) => ({
-    ...row,
-    key: keySelector ? keySelector(row) : crypto.randomUUID()
-  })), [data])
+  const keyedData = useMemo(
+    () =>
+      data.map((row) => ({
+        ...row,
+        key: keySelector ? keySelector(row) : crypto.randomUUID(),
+      })),
+    [data],
+  )
 
   const sortedData = React.useMemo(() => {
     return !sortedColumn.column
@@ -44,7 +49,7 @@ export const Table = ({ columns, data, border = "none", oddRowNoise = false, key
   }, [keyedData, sortedColumn])
 
   return (
-    <StyledTable {...{ border, ...rest }}>
+    <StyledTable {...props}>
       <thead>
         <tr>
           {columns.map(({ sortable, label }, i) => (
@@ -91,13 +96,7 @@ export const Table = ({ columns, data, border = "none", oddRowNoise = false, key
             className={oddRowNoise && index % 2 === 0 ? 'fx-noise-light' : ''}
           >
             {columns.map(({ selector, cell }, j) => (
-              <td key={j}>
-                {cell ? (
-                  cell(row)
-                ) : (
-                  selector(row)
-                )}
-              </td>
+              <td key={j}>{cell ? cell(row) : selector(row)}</td>
             ))}
           </tr>
         ))}

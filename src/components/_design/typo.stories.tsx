@@ -1,25 +1,18 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
 
 export default {
   title: 'Design/Atoms/Typography',
-  decorators: [withDesign],
-} as ComponentMeta<any>
+}
 
 const defaultArgs: Partial<any> = {}
 
-const defaultParams = {
-  design: {
-    tpe: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=1%3A276&t=OG6V4eRdvQIurCbK-0',
-  },
-}
+const defaultParams = {}
 
 // ---
 
-const TypographyTemplate: ComponentStory<any> = () => {
+const TypographyTemplate: StoryFn<any> = () => {
   return (
     <div>
       <StoryBookHeader>Typography</StoryBookHeader>
@@ -52,8 +45,8 @@ const TypographyTemplate: ComponentStory<any> = () => {
           <p className="tp-body fs-md">
             18 - Base body text - Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Mauris convallis, quam quis vehicula pulvinar, nisl
-            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
-            fermentum semper.
+            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris
+            pretium fermentum semper.
           </p>
           <p className="tp-body fs-sm">
             16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -62,9 +55,9 @@ const TypographyTemplate: ComponentStory<any> = () => {
           </p>
           <p className="tp-body fs-xs">
             10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
-            sem, quis aliquam arcu massa finibus arcu. Mauris pretium fermentum
-            semper.
+            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit
+            finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
+            fermentum semper.
           </p>
         </div>
         <div>
@@ -78,8 +71,8 @@ const TypographyTemplate: ComponentStory<any> = () => {
           <p className="tp-body1 fs-md">
             18 - Base body text - Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Mauris convallis, quam quis vehicula pulvinar, nisl
-            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
-            fermentum semper.
+            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris
+            pretium fermentum semper.
           </p>
           <p className="tp-body1 fs-sm">
             16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -88,9 +81,9 @@ const TypographyTemplate: ComponentStory<any> = () => {
           </p>
           <p className="tp-body1 fs-xs">
             10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
-            sem, quis aliquam arcu massa finibus arcu. Mauris pretium fermentum
-            semper.
+            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit
+            finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
+            fermentum semper.
           </p>
         </div>
         <div>
@@ -104,8 +97,8 @@ const TypographyTemplate: ComponentStory<any> = () => {
           <p className="tp-body2 fs-md">
             18 - Base body text - Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Mauris convallis, quam quis vehicula pulvinar, nisl
-            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
-            fermentum semper.
+            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris
+            pretium fermentum semper.
           </p>
           <p className="tp-body2 fs-sm">
             16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -114,9 +107,9 @@ const TypographyTemplate: ComponentStory<any> = () => {
           </p>
           <p className="tp-body2 fs-xs">
             10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
-            sem, quis aliquam arcu massa finibus arcu. Mauris pretium fermentum
-            semper.
+            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit
+            finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
+            fermentum semper.
           </p>
         </div>
         <div>
@@ -130,8 +123,8 @@ const TypographyTemplate: ComponentStory<any> = () => {
           <p className="tp-code fs-md">
             18 - Base body text - Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Mauris convallis, quam quis vehicula pulvinar, nisl
-            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
-            fermentum semper.
+            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris
+            pretium fermentum semper.
           </p>
           <p className="tp-code fs-sm">
             16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -140,9 +133,9 @@ const TypographyTemplate: ComponentStory<any> = () => {
           </p>
           <p className="tp-code fs-xs">
             10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
-            sem, quis aliquam arcu massa finibus arcu. Mauris pretium fermentum
-            semper.
+            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit
+            finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
+            fermentum semper.
           </p>
         </div>
         <div>
@@ -156,8 +149,8 @@ const TypographyTemplate: ComponentStory<any> = () => {
           <p className="tp-code1 fs-md">
             18 - Base body text - Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Mauris convallis, quam quis vehicula pulvinar, nisl
-            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
-            fermentum semper.
+            elit finibus sem, quis aliquam arcu massa finibus arcu. Mauris
+            pretium fermentum semper.
           </p>
           <p className="tp-code1 fs-sm">
             16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -166,9 +159,9 @@ const TypographyTemplate: ComponentStory<any> = () => {
           </p>
           <p className="tp-code1 fs-xs">
             10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
-            sem, quis aliquam arcu massa finibus arcu. Mauris pretium fermentum
-            semper.
+            elit. Mauris convallis, quam quis vehicula pulvinar, nisl elit
+            finibus sem, quis aliquam arcu massa finibus arcu. Mauris pretium
+            fermentum semper.
           </p>
         </div>
       </div>

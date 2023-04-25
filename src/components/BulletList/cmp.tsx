@@ -1,16 +1,32 @@
 import React from 'react'
 import { BulletListProps, BulletItemProps } from './types'
-import { StyledList, StyledIcon, StyledItem, StyledIconContainer, StyledTitle } from './styles'
+import {
+  StyledList,
+  StyledIcon,
+  StyledItem,
+  StyledIconContainer,
+  StyledTitle,
+} from './styles'
 
-export const BulletItem = ({ kind, size, title, text, ...rest }: BulletItemProps) => {
+export const BulletItem = ({
+  kind,
+  size,
+  title,
+  text,
+  ...rest
+}: BulletItemProps) => {
   return (
     <StyledItem {...rest}>
       <StyledIconContainer {...{ kind, size }}>
-        <StyledIcon  {...{ kind, $size: size }} />
+        <StyledIcon {...{ kind, $size: size }} />
       </StyledIconContainer>
       <div>
         <StyledTitle {...{ size }}>{title}</StyledTitle>
-        {text && (<p className='m-0 -mt-1 fs-sm'>{text}</p>)}
+        {text && (
+          <p className="fs-sm" tw="m-0 -mt-1">
+            {text}
+          </p>
+        )}
       </div>
     </StyledItem>
   )
@@ -24,9 +40,9 @@ export const BulletList = ({
 }: BulletListProps) => {
   return (
     <StyledList {...rest}>
-      {(children ? children : (
-        items.map((item, i) => <BulletItem key={i} {...item} size={size} />)
-      ))}
+      {children
+        ? children
+        : items.map((item, i) => <BulletItem key={i} {...item} size={size} />)}
     </StyledList>
   )
 }

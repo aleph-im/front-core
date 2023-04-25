@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { addClasses } from '../../utils'
 import Button from '../Button'
 import Icon from '../Icon'
+import tw from 'twin.macro'
 
-export const StyledContainer = styled.div.attrs(addClasses('p-sm'))`
+export const StyledContainer = styled.div`
+  ${tw`p-4`}
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
   position: fixed;
@@ -15,23 +16,23 @@ export const StyledContainer = styled.div.attrs(addClasses('p-sm'))`
   overflow: scroll;
 `
 
-export const StyledClearButton = styled(Button).attrs(props => {
+export const StyledClearButton = styled(Button).attrs(() => {
   return {
-    ...addClasses('mt-sm')(props),
     color: 'main0',
     variant: 'tertiary',
     kind: 'neon',
     size: 'regular',
   }
 })`
+  ${tw`mt-4`}
   flex: 1 0 auto;
 `
 
-export const StyledClearIcon = styled(Icon).attrs(props => {
+export const StyledClearIcon = styled(Icon).attrs((props) => {
   return {
     ...props,
     name: 'multiply',
     size: 'lg',
-    className: 'ml-xs',
+    className: 'ml-2.5',
   }
 })``

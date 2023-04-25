@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+import tw from 'twin.macro'
+
 import { ButtonVariant } from '../Button/types'
 import { CardVariant } from './types'
 
@@ -10,12 +12,12 @@ export const StyledCardContainer = styled.div`
 
 export const StyledCardHeader = styled.header`
   && {
-    margin: 0 0 8px 0;
+    ${tw`mb-2`}
   }
 `
 
 export const StyledCardHeaderContainer = styled.div`
-  padding: 0 10px;
+  padding: 0 0.625rem;
 
   & > img {
     height: auto;
@@ -26,9 +28,9 @@ export const StyledCardHeaderContainer = styled.div`
 export const StyledCardContentContainer = styled.div<{ variant: CardVariant }>`
   ${({ variant }) => {
     return css`
-      margin-top: ${variant === 'article' ? 0 : '24px'};
-      margin-bottom: 24px;
-      padding: 0 10px;
+      margin-top: ${variant === 'article' ? 0 : '1.5rem'};
+      margin-bottom: 1.5rem;
+      padding: 0 0.625rem;
   `
   }}
 `
@@ -37,11 +39,11 @@ export const StyledCardFooterContainer = styled.div<{ buttonVariant: ButtonVaria
   ${({ buttonVariant }) => {
 
     const buttonOffsetCss = buttonVariant === 'text-only' ? `
-      margin-left: -22px;
+      margin-left: -1.375rem;
     ` : ''
 
     return css`
-      padding: 0 10px;
+      padding: 0 0.625rem;
       ${buttonOffsetCss}
 
       & button {

@@ -15,7 +15,7 @@ export const StyledInputContainer = styled.div`
   width: 2rem;
   height: 2rem;
   margin-right: 1.125rem;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0px 4px 24px #00000040;
 `
 
@@ -29,7 +29,7 @@ export const StyledInput = styled.input`
       cursor: pointer;
       border: 1px solid #FFFFFF4D;
       background: #FFFFFF0F;
-      border-radius: 8px;
+      border-radius: 0.5rem;
       width: 100%;
       height: 100%;
       margin: 0;
@@ -69,7 +69,7 @@ export const StyledCheckIcon = styled(Icon).attrs(props => {
   height: 65%;
   background-color: transparent;
   color: #5CFFB1;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   z-index: 1;
 
   ${StyledInput}:checked + & {

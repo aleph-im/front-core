@@ -1,6 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 
 import ObjectImg from './cmp'
 import { ObjectId, ObjectImgProps } from './types'
@@ -9,30 +8,24 @@ import { ObjectId, ObjectImgProps } from './types'
 export default {
   title: 'Components/UI/ObjectImg',
   component: ObjectImg,
-  decorators: [withDesign],
   argTypes: {
     size: { control: 'text' },
-    id: { control: 'select' }
-  }
-} as ComponentMeta<typeof ObjectImg>
+    id: { control: 'select' },
+  },
+}
 
 const defaultArgs: Partial<ObjectImgProps> = {
   id: 'Object1',
-  size: '100px'
+  size: '100px',
 }
 
-const defaultParams = {
-  design: {
-    type: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=2%3A1226&t=XeMPIFw7c4dnGQr1-0',
-  },
-}
+const defaultParams = {}
 
 // ---
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: ComponentStory<typeof ObjectImg> = (args) => <ObjectImg {...args} />
+const Template: StoryFn<typeof ObjectImg> = (args) => <ObjectImg {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
@@ -44,7 +37,7 @@ Default.parameters = {
 
 // ---
 
-const Template2: ComponentStory<typeof ObjectImg> = (args) => {
+const Template2: StoryFn<typeof ObjectImg> = (args) => {
   const all = Array.from({ length: 19 })
 
   return (
@@ -52,13 +45,12 @@ const Template2: ComponentStory<typeof ObjectImg> = (args) => {
       {all.map((_, i) => {
         const id = `Object${i + 1}` as ObjectId
         return (
-          <div key={id} className="d-flex items-center my-xl" >
-            <span className='mx-lg'>{id}:</span>
+          <div key={id} tw="flex items-center my-7">
+            <span tw="mx-6">{id}:</span>
             <ObjectImg {...args} id={id} />
           </div>
         )
-      }
-      )}
+      })}
     </>
   )
 }

@@ -1,6 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import Navbar from './cmp'
 import { NavbarProps } from './types'
 import Button from '../Button'
@@ -13,8 +12,7 @@ export default {
   title: 'Components/UI/Navbar',
   component: Navbar,
   subcomponents: { NavbarLink },
-  decorators: [withDesign],
-} as ComponentMeta<typeof Navbar>
+} 
 
 const defaultArgs: Partial<NavbarProps> = {
 }
@@ -40,7 +38,7 @@ const navButtons = [
 ]
 /* eslint-enable react/jsx-key */
 
-const Template: ComponentStory<typeof Navbar> = (args) => (
+const Template: StoryFn<typeof Navbar> = (args) => (
   <>
     <Navbar {...args}
       logo={

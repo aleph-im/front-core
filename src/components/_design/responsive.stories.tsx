@@ -1,41 +1,37 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { withDesign } from 'storybook-addon-designs'
+import { StoryFn } from '@storybook/react'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
 import styled from 'styled-components'
 
 export default {
   title: 'Design/Atoms/Responsive',
-  decorators: [withDesign],
-} as ComponentMeta<any>
+}
 
 const defaultArgs: Partial<any> = {}
 
 const defaultParams = {
-  design: {
-    tpe: 'figma',
-    url: 'https://www.figma.com/file/OXq1C8cPtY3JtmwmGfD23I/ALEPH-rebranding-UIKIT?node-id=1%3A276&t=OG6V4eRdvQIurCbK-0',
-  },
 }
 
 // ---
 
-const ResponsiveTemplate: ComponentStory<any> = () => {
-  const Wrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-  `
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 
-  const Container = styled.div`
-    display: block;
-    overflow: hidden;
-    background-color: #cccccc33;
-    margin: 1rem;
-  `
+const Container = styled.div`
+  display: block;
+  overflow: hidden;
+  background-color: #cccccc33;
+  margin: 1rem;
+`
 
-  const Item = styled.span`
-    background-color: #fabada88;
-  `
+const Item = styled.span`
+  background-color: #fabada88;
+`
+
+
+const ResponsiveTemplate: StoryFn<any> = () => {
 
   return (
     <div>
@@ -44,10 +40,10 @@ const ResponsiveTemplate: ComponentStory<any> = () => {
         <StoryBookSubheader>Margins</StoryBookSubheader>
         <Wrapper>
           <Container>
-            <Item className="tp-h7 p-0 m-xl m-lg-xs m-md-sm m-sm-md m-xs-lg m-0-xl">from xl to 0</Item>
+            <Item className="tp-h7" tw="p-0 m-7 xs:m-6 sm:m-5 md:m-4 lg:m-2.5 xl:m-0">from xl to 0</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 p-0 m-0 m-xs-xs m-sm-sm m-md-md m-lg-lg m-xl-xl">from 0 to xl</Item>
+            <Item className="tp-h7" tw="p-0 m-0 xs:m-2.5 sm:m-4 md:m-5 lg:m-6 xl:m-7">from 0 to xl</Item>
           </Container>
         </Wrapper>
       </div>
@@ -55,10 +51,10 @@ const ResponsiveTemplate: ComponentStory<any> = () => {
         <StoryBookSubheader>Paddings</StoryBookSubheader>
         <Wrapper>
           <Container>
-            <Item className="tp-h7 m-0 p-xl p-lg-xs p-md-sm p-sm-md p-xs-lg p-0-xl">from xl to 0</Item>
+            <Item className="tp-h7" tw="m-0 p-7 xs:p-6 sm:p-5 md:p-4 lg:p-2.5 xl:p-0">from xl to 0</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 m-0 p-0 p-xs-xs p-sm-sm p-md-md p-lg-lg p-xl-xl">from 0 to xl</Item>
+            <Item className="tp-h7" tw="m-0 p-0 xs:p-2.5 sm:p-4 md:p-5 lg:p-6 xl:p-7">from 0 to xl</Item>
           </Container>
         </Wrapper>
       </div>
@@ -66,22 +62,22 @@ const ResponsiveTemplate: ComponentStory<any> = () => {
         <StoryBookSubheader>Display</StoryBookSubheader>
         <Wrapper>
           <Container>
-            <Item className="tp-h7 m-0 d-block d-none-xs">visible 0</Item>
+            <Item className="tp-h7" tw="m-0 block xs:hidden">visible 0</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 m-0 d-none d-block-xs d-none-sm">visible xs</Item>
+            <Item className="tp-h7" tw="m-0 hidden xs:block sm:hidden">visible xs</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 m-0 d-none d-block-sm d-none-md">visible sm</Item>
+            <Item className="tp-h7" tw="m-0 hidden sm:block md:hidden">visible sm</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 m-0 d-none d-block-md d-none-lg">visible md</Item>
+            <Item className="tp-h7" tw="m-0 hidden md:block lg:hidden">visible md</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 m-0 d-none d-block-lg d-none-xl">visible lg</Item>
+            <Item className="tp-h7" tw="m-0 hidden lg:block xl:hidden">visible lg</Item>
           </Container>
           <Container>
-            <Item className="tp-h7 m-0 d-none d-block-xl">visible xl</Item>
+            <Item className="tp-h7" tw="m-0 hidden xl:block">visible xl</Item>
           </Container>
         </Wrapper>
 

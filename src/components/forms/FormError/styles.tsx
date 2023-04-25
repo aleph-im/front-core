@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components"
-import { addClasses } from "../../../utils"
-import { FormErrorProps } from "./types"
+import styled, { css } from 'styled-components'
+import { addClasses } from '../../../utils'
+import { FormErrorProps } from './types'
 
 export const StyledFormErrorContainer = styled.span.attrs(
-  addClasses('tp-body')
-) <FormErrorProps>`
+  addClasses('tp-body'),
+)<FormErrorProps>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -16,11 +16,11 @@ export const StyledFormErrorContainer = styled.span.attrs(
   ${({ error }) => {
     if (error.type === 'warn') {
       return css`
-        color: #FFD179;
+        color: #ffd179;
       `
     } else {
       return css`
-        color: #D92446;
+        color: #d92446;
       `
     }
   }}

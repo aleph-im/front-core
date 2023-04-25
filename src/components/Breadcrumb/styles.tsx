@@ -1,9 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-export const  StyledNavlinks = styled.ul`
+export const StyledNavlinks = styled.ul`
   display: flex;
   align-items: center;
-  list-style: none;
   flex-wrap: wrap;
 `
 
