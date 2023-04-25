@@ -20,7 +20,11 @@ export const Logo = ({
   return (
     <StyledLogoContainer {...{ size, text, ...rest }}>
       <LogoSvg color={logoColor} />
-      {text && (<TextGradient type='logo' color={color}>{text}</TextGradient>)}
+      {text && (
+        <TextGradient type="logo" color={color}>
+          {text}
+        </TextGradient>
+      )}
     </StyledLogoContainer>
   )
 }

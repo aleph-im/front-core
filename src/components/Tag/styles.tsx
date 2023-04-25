@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components'
 
-export const StyledTag = styled.span.attrs(props => {
+export const StyledTag = styled.span.attrs((props) => {
   return {
     ...props,
-    className: `${props.className || ''} fx-glass-base1 fx-glass-border-base0` as string
+    className: `${
+      props.className || ''
+    } fx-glass-base1 fx-glass-border-base0` as string,
   }
 })`
   ${({ theme }) => {

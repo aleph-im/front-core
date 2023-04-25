@@ -11,7 +11,7 @@ export default {
     count: { control: { type: 'range', min: 1, max: 16, step: 1 } },
     gap: { control: { type: 'text' } },
   },
-} 
+}
 
 const defaultArgs: Partial<RowProps> = {
   count: 12,
@@ -43,13 +43,11 @@ const Template: StoryFn<typeof Row> = (args) => (
 
     <h1>Regular span blocks (size=1)</h1>
     <Row {...args}>
-      {Array.from({ length: args.count || 12 }, (_, i) => i + 1).map(
-        (i) => (
-          <Col span={1} key={i}>
-            <div style={colStyle}>{i}</div>
-          </Col>
-        ),
-      )}
+      {Array.from({ length: args.count || 12 }, (_, i) => i + 1).map((i) => (
+        <Col span={1} key={i}>
+          <div style={colStyle}>{i}</div>
+        </Col>
+      ))}
     </Row>
 
     <h1>Custom offset blocks</h1>
@@ -79,6 +77,5 @@ Default.args = {
   ...defaultArgs,
 }
 Default.parameters = {
-  controls: { exclude: ['color', 'size'] }
+  controls: { exclude: ['color', 'size'] },
 }
-

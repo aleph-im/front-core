@@ -19,7 +19,7 @@ export const RadioGroup = ({
 }: RadioGroupProps) => {
   const rndId = useId()
   id = id || rndId
-  
+
   const [groupValue, setGroupValue] = useState(defaultValue || value)
   const groupName = name || id
 

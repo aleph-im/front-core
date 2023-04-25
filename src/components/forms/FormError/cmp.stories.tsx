@@ -7,7 +7,7 @@ import { FormErrorProps } from './types'
 export default {
   title: 'Components/UI/forms/FormError',
   component: FormError,
-} 
+}
 
 const defaultArgs: Partial<FormErrorProps> = {
   error: new Error('There was an error'),
@@ -27,7 +27,7 @@ Default.args = {
 }
 Default.parameters = {
   ...defaultParams,
-} 
+}
 
 // ---
 

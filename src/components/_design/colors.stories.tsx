@@ -8,9 +8,7 @@ export default {
 
 const defaultArgs: Partial<any> = {}
 
-const defaultParams = {
-  
-}
+const defaultParams = {}
 
 // ---
 

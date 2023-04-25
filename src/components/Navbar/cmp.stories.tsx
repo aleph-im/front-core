@@ -12,10 +12,9 @@ export default {
   title: 'Components/UI/Navbar',
   component: Navbar,
   subcomponents: { NavbarLink },
-} 
-
-const defaultArgs: Partial<NavbarProps> = {
 }
+
+const defaultArgs: Partial<NavbarProps> = {}
 
 // ---
 
@@ -32,20 +31,25 @@ const navLinks = [
   <a href="#">Team</a>,
 ]
 const navButtons = [
-  <Button as="button" variant="secondary" color="main0" kind="neon" size="regular">
+  <Button
+    as="button"
+    variant="secondary"
+    color="main0"
+    kind="neon"
+    size="regular"
+  >
     Whitepaper
-  </Button>
+  </Button>,
 ]
 /* eslint-enable react/jsx-key */
 
 const Template: StoryFn<typeof Navbar> = (args) => (
   <>
-    <Navbar {...args}
-      logo={
-        <Logo />
-      }
+    <Navbar
+      {...args}
+      logo={<Logo />}
       mobileTopContent={
-        <NavbarLinkList onlyMobile mobileDirection='row'>
+        <NavbarLinkList onlyMobile mobileDirection="row">
           <Button
             color={'main0'}
             variant={'secondary'}
@@ -58,17 +62,26 @@ const Template: StoryFn<typeof Navbar> = (args) => (
       }
     >
       <NavbarLinkList withSlash collapsible="xl">
-        {navLinks.map((link, i) => (<NavbarLink key={i} >{link}</NavbarLink>))}
+        {navLinks.map((link, i) => (
+          <NavbarLink key={i}>{link}</NavbarLink>
+        ))}
       </NavbarLinkList>
-      <NavbarLinkList mobileDirection='row'>
-        {navButtons.map((link, i) => (<NavbarLink key={i}>{link}</NavbarLink>))}
+      <NavbarLinkList mobileDirection="row">
+        {navButtons.map((link, i) => (
+          <NavbarLink key={i}>{link}</NavbarLink>
+        ))}
       </NavbarLinkList>
     </Navbar>
 
     <h1>A random title</h1>
 
     {Array.from({ length: 200 }, (_, i) => (
-      <p key={i}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit aperiam qui, optio laboriosam animi labore repudiandae incidunt excepturi sint tempore accusamus.</p>
+      <p key={i}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error debitis
+        ullam voluptate necessitatibus? Quod debitis autem eveniet suscipit
+        aperiam qui, optio laboriosam animi labore repudiandae incidunt
+        excepturi sint tempore accusamus.
+      </p>
     ))}
   </>
 )

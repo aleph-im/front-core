@@ -3,10 +3,7 @@ import { calculateBoxShadowPossition } from './glow'
 
 export type GlassOpts = { width?: number; height?: number; offset?: boolean }
 
-export function getGlassEffectCss(
-  color: string,
-  opts?: GlassOpts,
-) {
+export function getGlassEffectCss(color: string, opts?: GlassOpts) {
   return css`
     ${({ theme }) => {
       if (color === 'main0' || color === 'main1' || color === 'main2') {
@@ -92,7 +89,8 @@ export function getGlassEffectCss(
               background-image:
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(84.86deg, #2260FF0C 65.23%, #1859FF00 99.89%),
-                linear-gradient(0deg, ${theme.color.background}, ${theme.color.background});
+                linear-gradient(0deg, ${theme.color.background}, ${theme.color
+                .background});
             `
           case 'base1':
             return css`
@@ -104,9 +102,7 @@ export function getGlassEffectCss(
             return css`
               ${bg}
               background: ${theme.color.main0}03;
-              box-shadow: 
-                inset ${bss.s1} #DEEFFF05,
-                inset ${bss.s2} #5E9DD705;
+              box-shadow: inset ${bss.s1} #deefff05, inset ${bss.s2} #5e9dd705;
               backdrop-filter: blur(50px);
             `
           case 'colored0':
@@ -116,7 +112,8 @@ export function getGlassEffectCss(
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(342.74deg, #2D113A66 22.13%, #43125900 67.01%),
                 linear-gradient(107.53deg, ${c[0]}4D 16.25%, ${c[1]}4D 82.42%),
-                linear-gradient(0deg, ${theme.color.background}, ${theme.color.background});
+                linear-gradient(0deg, ${theme.color.background}, ${theme.color
+                .background});
             `
         }
       }
@@ -124,33 +121,29 @@ export function getGlassEffectCss(
   `
 }
 
-export function getGlassEffectBorderCss(
-  color: string,
-) {
+export function getGlassEffectBorderCss(color: string) {
   return css`
     ${() => {
       switch (color) {
         case 'base0':
           return css`
-            border: 1px solid #FFFFFF1A;
+            border: 1px solid #ffffff1a;
           `
         case 'base1':
           return css`
-            border: 1px solid #FFFFFF66;
+            border: 1px solid #ffffff66;
           `
         case 'colored0':
         default:
           return css`
-            border: 1px solid #FFFFFF1A;
+            border: 1px solid #ffffff1a;
           `
       }
-    }}`
+    }}
+  `
 }
 
-export function getDarkEffectCss(
-  color: string,
-  opts?: GlassOpts,
-) {
+export function getDarkEffectCss(color: string, opts?: GlassOpts) {
   return css`
     ${({ theme }) => {
       const bs = {
@@ -164,7 +157,6 @@ export function getDarkEffectCss(
         background-color: ${theme.color.main0}03;
         box-shadow: ${bss.s1} #00000080;
       `
-    }
-    }
-`
+    }}
+  `
 }

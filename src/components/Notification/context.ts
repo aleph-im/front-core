@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import { NotificationCardProps } from "../NotificationCard"
+import React, { useContext } from 'react'
+import { NotificationCardProps } from '../NotificationCard'
 
 export type AddNotificationInfo = Omit<NotificationCardProps, 'onClose'> & {
   id?: string
@@ -16,6 +16,8 @@ export type NotificationContextValue = {
   remove: (id: string) => void
 }
 
-export const NotificationContext = React.createContext<NotificationContextValue | undefined>(undefined)
+export const NotificationContext = React.createContext<
+  NotificationContextValue | undefined
+>(undefined)
 
 export const useNotification = () => useContext(NotificationContext)

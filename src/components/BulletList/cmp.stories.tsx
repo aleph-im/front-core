@@ -7,10 +7,10 @@ export default {
   title: 'Components/UI/BulletList',
   component: BulletList,
   subcomponents: { BulletItem },
-} 
+}
 
 const defaultArgs: Partial<BulletListProps> = {
-  size: 'big'
+  size: 'big',
 }
 
 // ---
@@ -33,9 +33,8 @@ Default.args = {
     { kind: 'warning', title: 'bullet-item-6', text: 'Lorem ipsum' },
     { kind: 'error', title: 'bullet-item-7' },
     { kind: 'error', title: 'bullet-item-8', text: 'Lorem ipsum' },
-  ]
+  ],
 }
 Default.parameters = {
-  controls: { exclude: ['color'] }
+  controls: { exclude: ['color'] },
 }
-

@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 
 export type BulletItemKind = 'check' | 'success' | 'error' | 'warning'
 export type BulletListSize = 'regular' | 'big'
@@ -15,4 +15,3 @@ export type BulletItemProps = {
   text?: string
   size?: BulletListSize
 }
-

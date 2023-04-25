@@ -27,7 +27,7 @@ export const StyledInput = styled.input`
       outline: 0;
       cursor: pointer;
       border: 1px solid ${theme.color.main0};
-      background: #FFFFFF0F;
+      background: #ffffff0f;
       border-radius: 50%;
       width: 100%;
       height: 100%;
@@ -38,14 +38,15 @@ export const StyledInput = styled.input`
       }
 
       &:disabled {
-        border-color: #FFFFFF0F;
+        border-color: #ffffff0f;
         cursor: not-allowed;
       }
 
       &:checked:disabled {
         border-color: ${theme.color.main0}1A;
       }
-  `}}
+    `
+  }}
 `
 
 export const StyledInputDot = styled.span`
@@ -57,7 +58,7 @@ export const StyledInputDot = styled.span`
       content: '';
       width: 65%;
       height: 65%;
-      background-color: #FFFFFF1A;
+      background-color: #ffffff1a;
       border-radius: 50%;
       z-index: 1;
 
@@ -66,14 +67,15 @@ export const StyledInputDot = styled.span`
       }
 
       ${StyledInput}:disabled + & {
-        background-color: #FFFFFF0F;
+        background-color: #ffffff0f;
         cursor: not-allowed;
       }
 
       ${StyledInput}:checked:disabled + & {
         background-image: linear-gradient(90deg, ${g0}1A 0%, ${g1}1A 100%);
       }
-  `}}
+    `
+  }}
 `
 
 export const StyledLabel = styled.label`

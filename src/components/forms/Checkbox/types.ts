@@ -1,4 +1,4 @@
-import { ChangeEventHandler, InputHTMLAttributes } from "react"
+import { ChangeEventHandler, InputHTMLAttributes } from 'react'
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   id?: string

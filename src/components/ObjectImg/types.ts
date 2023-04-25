@@ -9,7 +9,7 @@ export type ObjectId =
   | 'Object8'
 
 export type ObjectImgProps = {
-  id: ObjectId,
+  id: ObjectId
   size?: number | string
   color?: string
   color2?: string

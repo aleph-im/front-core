@@ -12,7 +12,7 @@ export default {
       control: { type: 'inline-radio' },
     },
   },
-} 
+}
 
 const defaultArgs: Partial<IconProps> = {
   name: 'bitcoin',
@@ -21,8 +21,7 @@ const defaultArgs: Partial<IconProps> = {
   size: 'lg',
 }
 
-const defaultParams = {
-}
+const defaultParams = {}
 
 // ---
 

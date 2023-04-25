@@ -1,5 +1,5 @@
-import { HTMLAttributes, ReactNode } from "react"
-import { Typo, TypoKind } from "../../themes/types"
+import { HTMLAttributes, ReactNode } from 'react'
+import { Typo, TypoKind } from '../../themes/types'
 
 export type TypeElements =
   | 'h1'

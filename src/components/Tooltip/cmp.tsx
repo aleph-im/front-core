@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useBounds, useHover } from '../../hooks'
-import { StyledContentContainer, StyledHeaderContainer, StyledContainer, StyledHeaderCloseIcon } from './styles'
+import {
+  StyledContentContainer,
+  StyledHeaderContainer,
+  StyledContainer,
+  StyledHeaderCloseIcon,
+} from './styles'
 import { TooltipPosition, TooltipProps } from './types'
 
 export const Tooltip = ({
@@ -48,21 +53,42 @@ export const Tooltip = ({
     const [myPosY, myPosX] = my.split('-')
     const [atPosY, atPosX] = at.split('-')
 
-    const { x: atX, y: atY, width: atW, height: atH } = targetBounds || { x: 0, y: 0, width: 0, height: 0 }
-    const { width: myW, height: myH } = tooltipBounds || { x: 0, y: 0, width: 0, height: 0 }
+    const {
+      x: atX,
+      y: atY,
+      width: atW,
+      height: atH,
+    } = targetBounds || { x: 0, y: 0, width: 0, height: 0 }
+    const { width: myW, height: myH } = tooltipBounds || {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+    }
 
-    const targetX = atPosX === 'left' ? atX : atPosX === 'center' ? (atX + (atW / 2)) : (atX + atW)
-    const targetY = atPosY === 'top' ? atY : atPosY === 'center' ? (atY + (atH / 2)) : (atY + atH)
+    const targetX =
+      atPosX === 'left' ? atX : atPosX === 'center' ? atX + atW / 2 : atX + atW
+    const targetY =
+      atPosY === 'top' ? atY : atPosY === 'center' ? atY + atH / 2 : atY + atH
 
-    const tooltipOffsetX = myPosX === 'left' ? margin.x : myPosX === 'center' ? -(myW / 2) : -(myW + margin.x)
-    const tooltipOffsetY = myPosY === 'top' ? margin.y : myPosY === 'center' ? -(myH / 2) : -(myH + margin.y)
+    const tooltipOffsetX =
+      myPosX === 'left'
+        ? margin.x
+        : myPosX === 'center'
+        ? -(myW / 2)
+        : -(myW + margin.x)
+    const tooltipOffsetY =
+      myPosY === 'top'
+        ? margin.y
+        : myPosY === 'center'
+        ? -(myH / 2)
+        : -(myH + margin.y)
 
     const x = targetX + tooltipOffsetX + offset.x
     const y = targetY + tooltipOffsetY + offset.y
 
     return { x, y }
   }, [at, my, targetBounds, tooltipBounds, offset, margin])
-
 
   return (
     <>
@@ -71,11 +97,13 @@ export const Tooltip = ({
           {header}
           <StyledHeaderCloseIcon onClick={handleClose} />
         </StyledHeaderContainer>
-        <StyledContentContainer>
-          {content}
-        </StyledContentContainer>
+        <StyledContentContainer>{content}</StyledContentContainer>
       </StyledContainer>
-      {children && <span style={{ display: 'inline-block' }} ref={targetRef}>{children}</span>}
+      {children && (
+        <span style={{ display: 'inline-block' }} ref={targetRef}>
+          {children}
+        </span>
+      )}
     </>
   )
 }

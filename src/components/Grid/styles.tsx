@@ -18,7 +18,7 @@ export const StyledRow = styled.div<StyledRowProps>`
       mdGap = smGap,
       lgGap = mdGap,
       xlGap = lgGap,
-      xxlGap = xlGap
+      xxlGap = xlGap,
     } = props
 
     return css`
@@ -26,30 +26,45 @@ export const StyledRow = styled.div<StyledRowProps>`
       grid-gap: ${xsGap};
       grid-template-columns: repeat(${xs}, 1fr);
 
-      ${getResponsiveCss('sm', css`
-        grid-gap: ${smGap};
-        grid-template-columns: repeat(${sm}, 1fr);
-      `)}
+      ${getResponsiveCss(
+        'sm',
+        css`
+          grid-gap: ${smGap};
+          grid-template-columns: repeat(${sm}, 1fr);
+        `,
+      )}
 
-      ${getResponsiveCss('md', css`
-        grid-gap: ${mdGap};
-        grid-template-columns: repeat(${md}, 1fr);
-      `)}
+      ${getResponsiveCss(
+        'md',
+        css`
+          grid-gap: ${mdGap};
+          grid-template-columns: repeat(${md}, 1fr);
+        `,
+      )}
 
-      ${getResponsiveCss('lg', css`
-        grid-gap: ${lgGap};
-        grid-template-columns: repeat(${lg}, 1fr);
-      `)}
+      ${getResponsiveCss(
+        'lg',
+        css`
+          grid-gap: ${lgGap};
+          grid-template-columns: repeat(${lg}, 1fr);
+        `,
+      )}
 
-      ${getResponsiveCss('xl', css`
-        grid-gap: ${xlGap};
-        grid-template-columns: repeat(${xl}, 1fr);
-      `)}
+      ${getResponsiveCss(
+        'xl',
+        css`
+          grid-gap: ${xlGap};
+          grid-template-columns: repeat(${xl}, 1fr);
+        `,
+      )}
 
-      ${getResponsiveCss('xxl', css`
-        grid-gap: ${xxlGap};
-        grid-template-columns: repeat(${xxl}, 1fr);
-      `)}
+      ${getResponsiveCss(
+        'xxl',
+        css`
+          grid-gap: ${xxlGap};
+          grid-template-columns: repeat(${xxl}, 1fr);
+        `,
+      )}
     `
   }}
 `
@@ -70,31 +85,46 @@ export const StyledCol = styled.div<StyledColProps>`
       mdOffset = smOffset,
       lgOffset = mdOffset,
       xlOffset = lgOffset,
-      xxlOffset = xlOffset
+      xxlOffset = xlOffset,
     } = props
 
     return css`
       grid-column: ${`${xsOffset ? `${xsOffset} / ` : ''} span ${xs}`};
 
-      ${getResponsiveCss('sm', css`
-        grid-column: ${`${smOffset ? `${smOffset} / ` : ''} span ${sm}`};
-      `)}
+      ${getResponsiveCss(
+        'sm',
+        css`
+          grid-column: ${`${smOffset ? `${smOffset} / ` : ''} span ${sm}`};
+        `,
+      )}
 
-      ${getResponsiveCss('md', css`
-        grid-column: ${`${mdOffset ? `${mdOffset} / ` : ''} span ${md}`};
-      `)}
+      ${getResponsiveCss(
+        'md',
+        css`
+          grid-column: ${`${mdOffset ? `${mdOffset} / ` : ''} span ${md}`};
+        `,
+      )}
 
-      ${getResponsiveCss('lg', css`
-        grid-column: ${`${lgOffset ? `${lgOffset} / ` : ''} span ${lg}`};
-      `)}
+      ${getResponsiveCss(
+        'lg',
+        css`
+          grid-column: ${`${lgOffset ? `${lgOffset} / ` : ''} span ${lg}`};
+        `,
+      )}
 
-      ${getResponsiveCss('xl', css`
-        grid-column: ${`${xlOffset ? `${xlOffset} / ` : ''} span ${xl}`};
-      `)}
+      ${getResponsiveCss(
+        'xl',
+        css`
+          grid-column: ${`${xlOffset ? `${xlOffset} / ` : ''} span ${xl}`};
+        `,
+      )}
 
-      ${getResponsiveCss('xxl', css`
-        grid-column: ${`${xxlOffset ? `${xxlOffset} / ` : ''} span ${xxl}`};
-      `)}
+      ${getResponsiveCss(
+        'xxl',
+        css`
+          grid-column: ${`${xxlOffset ? `${xxlOffset} / ` : ''} span ${xxl}`};
+        `,
+      )}
     `
   }}
 `

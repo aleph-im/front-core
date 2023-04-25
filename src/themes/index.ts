@@ -13,9 +13,4 @@ export const themes = {
 // @note: sorted list for storybook UI
 export const themeList = [dark, light, alephDark, alephLight]
 
-export {
-  CoreTheme,
-  BreakpointId,
-  TypoSizeKind,
-  TypoKind,
-} from './types'
+export { CoreTheme, BreakpointId, TypoSizeKind, TypoKind } from './types'

@@ -21,7 +21,7 @@ export const StyledCardHeaderContainer = styled.div`
 
   & > img {
     height: auto;
-    max-width: 100%
+    max-width: 100%;
   }
 `
 
@@ -31,16 +31,20 @@ export const StyledCardContentContainer = styled.div<{ variant: CardVariant }>`
       margin-top: ${variant === 'article' ? 0 : '1.5rem'};
       margin-bottom: 1.5rem;
       padding: 0 0.625rem;
-  `
+    `
   }}
 `
 
-export const StyledCardFooterContainer = styled.div<{ buttonVariant: ButtonVariant }>`
+export const StyledCardFooterContainer = styled.div<{
+  buttonVariant: ButtonVariant
+}>`
   ${({ buttonVariant }) => {
-
-    const buttonOffsetCss = buttonVariant === 'text-only' ? `
+    const buttonOffsetCss =
+      buttonVariant === 'text-only'
+        ? `
       margin-left: -1.375rem;
-    ` : ''
+    `
+        : ''
 
     return css`
       padding: 0 0.625rem;

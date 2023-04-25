@@ -1,5 +1,5 @@
-import { MouseEventHandler, ReactNode } from "react"
-import { ButtonVariant } from "../Button/types"
+import { MouseEventHandler, ReactNode } from 'react'
+import { ButtonVariant } from '../Button/types'
 
 export type CardVariant = 'block' | 'article'
 

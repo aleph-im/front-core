@@ -1,7 +1,5 @@
 import { DefaultTheme } from 'styled-components'
-import {
-  pxToRem,
-} from '../styles/utils'
+import { pxToRem } from '../styles/utils'
 import {
   ThemeBreakpoint,
   ThemeButton,
@@ -109,7 +107,7 @@ const commonHeaderFont = {
   family: font.family.head,
   style: 'italic',
   weight: 800,
-  lineHeight: 1.18
+  lineHeight: 1.18,
 }
 
 const typo: ThemeTypo = {
@@ -152,7 +150,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 600,
     size: pxToRem(34),
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   nav: {
     tag: true,
@@ -160,7 +158,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 500,
     size: font.size.md,
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   info: {
     tag: false,
@@ -168,7 +166,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 800,
     size: pxToRem(10),
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   body: {
     tag: true,
@@ -176,7 +174,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 400,
     size: font.size.sm,
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   body1: {
     tag: false,
@@ -184,7 +182,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 400,
     size: font.size.sm,
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   body2: {
     tag: false,
@@ -192,7 +190,7 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 700,
     size: font.size.sm,
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   code: {
     tag: true,
@@ -200,7 +198,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 400,
     size: font.size.sm,
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   code1: {
     tag: false,
@@ -208,7 +206,7 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 700,
     size: font.size.sm,
-    lineHeight: 1.666
+    lineHeight: 1.666,
   },
   form: {
     tag: true,
@@ -216,8 +214,8 @@ const typo: ThemeTypo = {
     style: 'normal',
     weight: 400,
     size: font.size.sm,
-    lineHeight: 1.666
-  }
+    lineHeight: 1.666,
+  },
 }
 
 const icon: ThemeIcon = {

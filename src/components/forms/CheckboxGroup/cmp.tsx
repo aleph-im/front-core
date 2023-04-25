@@ -16,7 +16,9 @@ export const CheckboxGroup = ({
   error,
   ...rest
 }: CheckboxGroupProps) => {
-  const [groupValue, setGroupValue] = useState(new Set(defaultValue || value || []))
+  const [groupValue, setGroupValue] = useState(
+    new Set(defaultValue || value || []),
+  )
 
   const randomName = useId()
   const groupName = name ? randomName : undefined
@@ -30,9 +32,7 @@ export const CheckboxGroup = ({
         const checked = e.target.checked
         const value = e.target.value
 
-        checked
-          ? groupValue.add(value)
-          : groupValue.delete(value)
+        checked ? groupValue.add(value) : groupValue.delete(value)
 
         const newValue = new Set(groupValue)
         setGroupValue(newValue)

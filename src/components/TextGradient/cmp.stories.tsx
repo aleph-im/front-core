@@ -10,8 +10,8 @@ export default {
   component: TextGradient,
   argTypes: {
     size: { control: 'text' },
-  }
-} 
+  },
+}
 
 const defaultArgs: Partial<TextGradientProps> = {
   children: 'Aleph.im',
@@ -20,14 +20,15 @@ const defaultArgs: Partial<TextGradientProps> = {
   size: undefined,
 }
 
-const defaultParams = {
-} 
+const defaultParams = {}
 
 // ---
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: StoryFn<typeof TextGradient> = (args: TextGradientProps) => <TextGradient {...args} />
+const Template: StoryFn<typeof TextGradient> = (args: TextGradientProps) => (
+  <TextGradient {...args} />
+)
 
 // ---
 
@@ -45,7 +46,7 @@ export const Custom = Template.bind({})
 Custom.args = {
   ...defaultArgs,
   type: 'body',
-  color: 'main1'
+  color: 'main1',
 }
 Custom.parameters = {
   ...defaultParams,

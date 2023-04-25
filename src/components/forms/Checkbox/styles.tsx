@@ -27,16 +27,15 @@ export const StyledInput = styled.input`
       appearance: none;
       outline: 0;
       cursor: pointer;
-      border: 1px solid #FFFFFF4D;
-      background: #FFFFFF0F;
+      border: 1px solid #ffffff4d;
+      background: #ffffff0f;
       border-radius: 0.5rem;
       width: 100%;
       height: 100%;
       margin: 0;
 
       &:checked {
-        box-shadow: 
-          3px 6px 20px -3px rgba(0, 255, 189, 0.18), 
+        box-shadow: 3px 6px 20px -3px rgba(0, 255, 189, 0.18),
           0px -2px 30px rgba(0, 255, 189, 0.18),
           inset 0px 98px 100px -88px rgba(0, 255, 189, 0.06),
           inset 0px 4px 11px rgba(146, 210, 175, 0.1),
@@ -50,13 +49,14 @@ export const StyledInput = styled.input`
 
       &:disabled {
         box-shadow: none;
-        border-color: #FFFFFF4D;
+        border-color: #ffffff4d;
         cursor: not-allowed;
       }
-  `}}
+    `
+  }}
 `
 
-export const StyledCheckIcon = styled(Icon).attrs(props => {
+export const StyledCheckIcon = styled(Icon).attrs((props) => {
   return {
     ...props,
     name: 'check',
@@ -68,7 +68,7 @@ export const StyledCheckIcon = styled(Icon).attrs(props => {
   width: 65%;
   height: 65%;
   background-color: transparent;
-  color: #5CFFB1;
+  color: #5cffb1;
   border-radius: 0.5rem;
   z-index: 1;
 
@@ -77,7 +77,7 @@ export const StyledCheckIcon = styled(Icon).attrs(props => {
   }
 
   ${StyledInput}:disabled + & {
-    color: #FFFFFF4D;
+    color: #ffffff4d;
     cursor: not-allowed;
   }
 `

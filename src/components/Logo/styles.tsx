@@ -3,7 +3,11 @@ import { StyledLogoProps } from './types'
 
 export const StyledLogoContainer = styled.span<StyledLogoProps>`
   ${({ size, text }) => {
-    const logoSize = size ? (!Number.isNaN(Number(size)) ? `${size}px` : size) : `1em`;
+    const logoSize = size
+      ? !Number.isNaN(Number(size))
+        ? `${size}px`
+        : size
+      : `1em`
 
     return css`
       display: inline-flex;

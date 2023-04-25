@@ -9,15 +9,14 @@ export default {
   component: Tag,
   argTypes: {
     size: { control: 'text' },
-  }
-} 
+  },
+}
 
 const defaultArgs: Partial<TagProps> = {
   children: 'tagg',
 }
 
-const defaultParams = {
-}
+const defaultParams = {}
 
 // ---
 

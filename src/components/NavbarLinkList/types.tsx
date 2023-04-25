@@ -1,5 +1,5 @@
-import { ReactNode } from "react"
-import { BreakpointId } from "../../themes"
+import { ReactNode } from 'react'
+import { BreakpointId } from '../../themes'
 
 export type NavbarLinkListProps = {
   children: ReactNode

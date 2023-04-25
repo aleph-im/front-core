@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState } from 'react'
 import {
   StyledTabsHeader,
   StyledTabsItem,
   StyledTabLabel,
   StyledSelectedTab,
 } from './styles'
-import { StyledTabType, TabsProps } from "./types"
+import { StyledTabType, TabsProps } from './types'
 
 const noop = () => null
 
@@ -16,7 +16,10 @@ export const Tabs = ({
   align = 'center',
   ...rest
 }: TabsProps & StyledTabType) => {
-  const safeDefault = (tabs[defaultSelected] && !tabs[defaultSelected].disabled) ? defaultSelected : 0
+  const safeDefault =
+    tabs[defaultSelected] && !tabs[defaultSelected].disabled
+      ? defaultSelected
+      : 0
   const [selected, setSelected] = useState<number>(safeDefault)
   const handleClick = (i: number) => {
     onTabChange(selected, i)
@@ -48,8 +51,7 @@ export const Tabs = ({
                 {tab.name} {getTabLabel()}
               </StyledTabsItem>
             )
-          }
-          else if (i === selected) {
+          } else if (i === selected) {
             return (
               <StyledTabsItem
                 isSelected
@@ -76,9 +78,7 @@ export const Tabs = ({
           )
         })}
       </StyledTabsHeader>
-      <div role="tabpanel">
-        {tabs[selected].component}
-      </div>
+      <div role="tabpanel">{tabs[selected].component}</div>
     </>
   )
 }

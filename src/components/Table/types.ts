@@ -1,4 +1,4 @@
-import { ReactNode, TableHTMLAttributes } from "react"
+import { ReactNode, TableHTMLAttributes } from 'react'
 
 export type BorderType = 'none' | 'dashed' | 'solid'
 
@@ -16,5 +16,4 @@ export type TableProps = TableHTMLAttributes<HTMLTableElement> & {
 
   oddRowNoise?: boolean
   borderType: BorderType
-} 
-
+}

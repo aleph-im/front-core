@@ -9,7 +9,7 @@ export interface StyledIconProps extends FontAwesomeIconProps {
   $iconSize: IconSize
 }
 
-export const StyledIcon = styled(FontAwesomeIcon) <StyledIconProps>`
+export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
   ${({ $iconSize, theme }) => {
     switch ($iconSize) {
       case 'xs': {

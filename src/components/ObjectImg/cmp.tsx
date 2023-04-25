@@ -16,12 +16,14 @@ export const ObjectImg = ({
   const mainColor = theme.color[color] || color
   const bgColor = color2 || theme.color.background
 
-  const Obj = (objs as Record<string, FunctionComponent<StyledObjectImgSvgProps>>)[id]
+  const Obj = (
+    objs as Record<string, FunctionComponent<StyledObjectImgSvgProps>>
+  )[id]
 
   return (
     <StyledObjectImgContainer {...{ size, ...rest }}>
       <Obj color={mainColor} color2={bgColor} />
-    </StyledObjectImgContainer >
+    </StyledObjectImgContainer>
   )
 }
 

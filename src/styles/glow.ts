@@ -9,7 +9,7 @@ export function calculateBoxShadowPossition(
   opts = opts || {}
   opts.height = opts.height || 192
   opts.width = opts.width || 192
-  
+
   const bss: Record<string, string> = {}
 
   if (opts?.width !== undefined || opts?.height !== undefined) {
@@ -20,8 +20,9 @@ export function calculateBoxShadowPossition(
 
     if (opts?.offset === true) {
       for (const [k, v] of Object.entries(bs)) {
-        bss[k] = `calc(${v[0]}em + ${w * v[0]}px) calc(${v[1]}em + ${h * v[1]
-          }px) calc(${v[2]}em + ${r * v[2]}px) calc(${v[3]}em + ${s * v[3]}px)`
+        bss[k] = `calc(${v[0]}em + ${w * v[0]}px) calc(${v[1]}em + ${
+          h * v[1]
+        }px) calc(${v[2]}em + ${r * v[2]}px) calc(${v[3]}em + ${s * v[3]}px)`
       }
     } else {
       for (const [k, v] of Object.entries(bs)) {
@@ -158,10 +159,7 @@ export function getGlowMinEffectCss(
   }
 }
 
-export function getGlowHoverEffectCss(
-  color: string,
-  opts?: GlowOpts,
-) {
+export function getGlowHoverEffectCss(color: string, opts?: GlowOpts) {
   // inset 0px -82px 68px -64px
   // inset 0px 7px 11px -4px
   // inset 0px 1px 40px 0px

@@ -1,4 +1,3 @@
-
 import React, { useCallback, useState } from 'react'
 import Button from '../Button'
 import Icon from '../Icon'
@@ -19,7 +18,10 @@ export const Navbar = ({
   ...rest
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const toggleIsOpen = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen])
+  const toggleIsOpen = useCallback(
+    () => setIsOpen(!isOpen),
+    [isOpen, setIsOpen],
+  )
 
   return (
     <StyledNavbarContainer {...rest}>
@@ -36,9 +38,7 @@ export const Navbar = ({
           </Button>
         </StyledMobileTopContainer>
         {logo && (
-          <StyledLogoContainer height={height}>
-            {logo}
-          </StyledLogoContainer>
+          <StyledLogoContainer height={height}>{logo}</StyledLogoContainer>
         )}
         {mobileTopContent && (
           <StyledMobileTopContainer>
@@ -46,10 +46,8 @@ export const Navbar = ({
           </StyledMobileTopContainer>
         )}
       </StyledHeadingContainer>
-      <StyledNavContainer isOpen={isOpen}>
-        {children}
-      </StyledNavContainer>
-    </StyledNavbarContainer >
+      <StyledNavContainer isOpen={isOpen}>{children}</StyledNavContainer>
+    </StyledNavbarContainer>
   )
 }
 

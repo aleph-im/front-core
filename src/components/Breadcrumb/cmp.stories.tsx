@@ -4,7 +4,6 @@ import { StoryFn } from '@storybook/react'
 import Breadcrumb from './cmp'
 import { BreadcrumbProps } from './types'
 
-
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/UI/Breadcrumb',
@@ -28,7 +27,7 @@ const navLinks = [
 // ---
 
 const Template: StoryFn<typeof Breadcrumb> = (args) => (
-    <Breadcrumb {...args} navLinks={navLinks} />
+  <Breadcrumb {...args} navLinks={navLinks} />
 )
 
 export const Default = Template.bind({})

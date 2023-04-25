@@ -1,4 +1,11 @@
-import { css, DefaultTheme, FlattenInterpolation, FlattenSimpleInterpolation, SimpleInterpolation, ThemeProps } from 'styled-components'
+import {
+  css,
+  DefaultTheme,
+  FlattenInterpolation,
+  FlattenSimpleInterpolation,
+  SimpleInterpolation,
+  ThemeProps,
+} from 'styled-components'
 import {
   BreakpointId,
   ThemeColor,
@@ -17,7 +24,8 @@ export const pxToRem = (px: number, base: number = 16) => {
   return round(Number(px / base), 3)
 }
 
-export const getColorGradient = (color: string) => `linear-gradient(0deg, ${color}, ${color})`
+export const getColorGradient = (color: string) =>
+  `linear-gradient(0deg, ${color}, ${color})`
 
 // CSS
 
@@ -56,15 +64,23 @@ export function getTypoCss(typo: keyof ThemeTypo) {
 
 export function getResponsiveCss(
   breakpoint: BreakpointId | undefined,
-  styles: string | SimpleInterpolation | FlattenSimpleInterpolation | FlattenInterpolation<ThemeProps<DefaultTheme>>,
-  offset: number = 1) {
+  styles:
+    | string
+    | SimpleInterpolation
+    | FlattenSimpleInterpolation
+    | FlattenInterpolation<ThemeProps<DefaultTheme>>,
+  offset: number = 1,
+) {
   return !breakpoint
-    ? css`${styles}`
-    : css`
-    ${({ theme }) => css`
-      @media (min-width: ${theme.breakpoint[breakpoint] + pxToRem(offset)}rem) {
+    ? css`
         ${styles}
-      }
-    `}
-  `
+      `
+    : css`
+        ${({ theme }) => css`
+          @media (min-width: ${theme.breakpoint[breakpoint] +
+            pxToRem(offset)}rem) {
+            ${styles}
+          }
+        `}
+      `
 }

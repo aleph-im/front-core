@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext } from 'react'
 
 export type DropdownContextValue = {
   value: string | string[]
@@ -7,6 +7,8 @@ export type DropdownContextValue = {
   onRemove: (value: string) => void
 }
 
-export const DropdownContext = React.createContext<DropdownContextValue | undefined>(undefined)
+export const DropdownContext = React.createContext<
+  DropdownContextValue | undefined
+>(undefined)
 
 export const useDropdown = () => useContext(DropdownContext)

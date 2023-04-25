@@ -1,6 +1,9 @@
-import { InputHTMLAttributes } from "react"
+import { InputHTMLAttributes } from 'react'
 
-export type ChipInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
+export type ChipInputProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'onChange'
+> & {
   placeholder?: string
   label?: string
   onAdd?: (tag: string) => void

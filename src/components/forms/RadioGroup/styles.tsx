@@ -7,8 +7,10 @@ export const StyledRadioGroupContainer = styled.div`
   max-width: 100%;
 `
 
-export const StyledRadioContainer = styled.div<{ direction: RadioGroupDirection }>`
-   ${({ theme, direction }) => {
+export const StyledRadioContainer = styled.div<{
+  direction: RadioGroupDirection
+}>`
+  ${({ theme, direction }) => {
     const isRow = direction === 'row'
 
     return css`
@@ -18,11 +20,12 @@ export const StyledRadioContainer = styled.div<{ direction: RadioGroupDirection 
 
       & > * {
         ${isRow ? 'margin-left' : 'margin-top'}: ${theme.font.size.md}rem;
-        
+
         &:first-child {
-          ${isRow ? 'margin-left' : 'margin-top'}: 0;margin-top: 0;
+          ${isRow ? 'margin-left' : 'margin-top'}: 0;
+          margin-top: 0;
         }
       }
-  `
+    `
   }}
 `

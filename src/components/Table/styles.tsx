@@ -16,11 +16,11 @@ export const StyledTable = styled.table<TableProps>`
 
       td,
       th {
-        &:first-child{
+        &:first-child {
           padding-left: 1rem;
         }
 
-        &:last-child{
+        &:last-child {
           padding-right: 1rem;
         }
 
@@ -28,7 +28,7 @@ export const StyledTable = styled.table<TableProps>`
         padding: 1rem 0;
 
         ${hasBorder &&
-      css`
+        css`
           border-bottom: 1px ${borderType} #ffffff22;
         `}
       }
@@ -39,10 +39,10 @@ export const StyledTable = styled.table<TableProps>`
 
       tr {
         ${hasBorder &&
-      css`
+        css`
           border-bottom: 1px ${borderType} #ffffff22;
         `}
       }
-    `}
-  }
+    `
+  }}
 `

@@ -3,7 +3,12 @@ import { useTheme } from 'styled-components'
 import { useClickOutside } from '../../hooks'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import Icon from '../Icon'
-import { StyledList, StyledContainer, StyledButton, StyledRestContainer } from './styles'
+import {
+  StyledList,
+  StyledContainer,
+  StyledButton,
+  StyledRestContainer,
+} from './styles'
 import { NavbarLinkListProps } from './types'
 
 export const NavbarLinkList = ({
@@ -25,7 +30,8 @@ export const NavbarLinkList = ({
   const size = useWindowSize()
   const windowWidth = size?.width || 0
 
-  const isCollapsed = (collapsible && windowWidth <= bp && windowWidth > mobileBp) || false
+  const isCollapsed =
+    (collapsible && windowWidth <= bp && windowWidth > mobileBp) || false
 
   const handleToggleOpen = useCallback(() => {
     setOpen(!open)
@@ -40,23 +46,23 @@ export const NavbarLinkList = ({
   useClickOutside(handleClose, [buttonRef, containerRef])
 
   return (
-    <StyledContainer {...{
-      onlyDesktop,
-      onlyMobile,
-      isCollapsed,
-      ...rest
-    }}>
-      <StyledList {...{
-        theme,
-        withSlash,
-        mobileDirection,
-        desktopDirection
-      }}>
-        {isCollapsed ? (
-          children && (children as any[]).slice(0, 1)
-        ) : (
-          children
-        )}
+    <StyledContainer
+      {...{
+        onlyDesktop,
+        onlyMobile,
+        isCollapsed,
+        ...rest,
+      }}
+    >
+      <StyledList
+        {...{
+          theme,
+          withSlash,
+          mobileDirection,
+          desktopDirection,
+        }}
+      >
+        {isCollapsed ? children && (children as any[]).slice(0, 1) : children}
       </StyledList>
       {isCollapsed && (
         <StyledButton onClick={handleToggleOpen} ref={buttonRef}>

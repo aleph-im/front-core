@@ -11,16 +11,15 @@ export default {
   argTypes: {
     size: { control: 'text' },
     text: { control: 'text' },
-  }
-} 
+  },
+}
 
 const defaultArgs: Partial<LogoProps> = {
-  size: undefined
+  size: undefined,
 }
 
-const defaultParams = {
-}
- 
+const defaultParams = {}
+
 // ---
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -32,7 +31,7 @@ const Template: StoryFn<typeof Logo> = (args) => <Logo {...args} />
 export const OnlyIcon = Template.bind({})
 OnlyIcon.args = {
   ...defaultArgs,
-  text: ''
+  text: '',
 }
 OnlyIcon.parameters = {
   ...defaultParams,
@@ -54,7 +53,7 @@ export const WithColor = Template.bind({})
 WithColor.args = {
   ...defaultArgs,
   color: 'main0',
-  size: '100px'
+  size: '100px',
 }
 WithColor.parameters = {
   ...defaultParams,
@@ -65,7 +64,7 @@ WithColor.parameters = {
 export const CustomSize = Template.bind({})
 CustomSize.args = {
   ...defaultArgs,
-  size: '4rem'
+  size: '4rem',
 }
 CustomSize.parameters = {
   ...defaultParams,

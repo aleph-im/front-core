@@ -11,7 +11,7 @@ export default {
   // argTypes: {
   //   iconPosition: { control: { type: 'inline-radio' } }
   // },
-} 
+}
 
 const defaultArgs: Partial<ButtonProps> = {
   as: 'button',
@@ -22,9 +22,7 @@ const defaultArgs: Partial<ButtonProps> = {
   size: 'regular',
 }
 
-const defaultParams = {
-
-}
+const defaultParams = {}
 
 // ---
 

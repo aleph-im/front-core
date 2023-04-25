@@ -13,9 +13,9 @@ export default {
       control: {
         type: 'select',
         options: ['none', 'dashed', 'solid'],
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 const defaultArgs: Partial<TableProps> = {
@@ -68,7 +68,7 @@ const dataArgs: Partial<TableProps> = {
 }
 
 const defaultParams = {
-  controls: { exclude: ['color', 'size'] }
+  controls: { exclude: ['color', 'size'] },
 }
 
 // ---

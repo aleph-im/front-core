@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useContext } from "react"
+import React, { ChangeEventHandler, useContext } from 'react'
 
 export type RadioGroupContextValue = {
   name: string
@@ -6,6 +6,8 @@ export type RadioGroupContextValue = {
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-export const RadioGroupContext = React.createContext<RadioGroupContextValue | undefined>(undefined)
+export const RadioGroupContext = React.createContext<
+  RadioGroupContextValue | undefined
+>(undefined)
 
 export const useRadioGroup = () => useContext(RadioGroupContext)

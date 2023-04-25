@@ -15,7 +15,7 @@ export const StyledTabsItem = styled.div<StyledTabItemProps>`
       padding: 1rem;
       position: relative;
       font-weight: bold;
-      ${ !isSelected && 'cursor: pointer;' }
+      ${!isSelected && 'cursor: pointer;'}
       color: ${isDisabled ? theme.color.base0 + '66' : theme.color.base0};
       display: flex;
       user-select: none;
@@ -24,7 +24,9 @@ export const StyledTabsItem = styled.div<StyledTabItemProps>`
         content: '';
         height: 2px;
         width: 100%;
-        background: ${isSelected ? theme.gradient.main0.fn : theme.color.base0 + '66'};
+        background: ${isSelected
+          ? theme.gradient.main0.fn
+          : theme.color.base0 + '66'};
         display: block;
         position: absolute;
         bottom: 0;

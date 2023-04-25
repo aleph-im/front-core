@@ -8,9 +8,7 @@ export const Breadcrumb = ({ navLinks, ...rest }: BreadcrumbProps) => {
       {navLinks && (
         <StyledNavlinks>
           {navLinks.map((el, index) => (
-            <StyledNavlink key={index}>
-              {el}
-            </StyledNavlink>
+            <StyledNavlink key={index}>{el}</StyledNavlink>
           ))}
         </StyledNavlinks>
       )}

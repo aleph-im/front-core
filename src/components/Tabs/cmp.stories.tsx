@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import Tabs from './cmp'
 import { StyledTabType, TabsProps, TabType } from './types'
@@ -12,15 +12,14 @@ export default {
         type: 'select',
         options: ['left', 'center', 'right'],
       },
-    }
-  }
-} 
+    },
+  },
+}
 
 const defaultArgs: Partial<TabsProps & StyledTabType> = {
   defaultSelected: 2,
   align: 'center',
 }
-
 
 const tabs: TabType[] = [
   {
@@ -78,19 +77,25 @@ const tabs: TabType[] = [
 // ---
 
 const Template: StoryFn<typeof Tabs> = (args) => {
-  const [state, setState] = useState<{ prevTab?: number, nextTab?: number }>({
+  const [state, setState] = useState<{ prevTab?: number; nextTab?: number }>({
     prevTab: undefined,
     nextTab: undefined,
   })
 
   return (
-  <>
-    <Tabs {...args} tabs={tabs} onTabChange={(prevTab, nextTab) => setState({prevTab, nextTab})} />
+    <>
+      <Tabs
+        {...args}
+        tabs={tabs}
+        onTabChange={(prevTab, nextTab) => setState({ prevTab, nextTab })}
+      />
 
-    { (state.prevTab !== null && state.nextTab !== null) &&
-      <p>Switched from tab { state.prevTab } to { state.nextTab }</p>
-    }
-  </>
+      {state.prevTab !== null && state.nextTab !== null && (
+        <p>
+          Switched from tab {state.prevTab} to {state.nextTab}
+        </p>
+      )}
+    </>
   )
 }
 

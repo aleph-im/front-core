@@ -7,8 +7,10 @@ export const StyledCheckboxGroupContainer = styled.div`
   max-width: 100%;
 `
 
-export const StyledCheckboxContainer = styled.div<{ direction: CheckboxGroupDirection }>`
-   ${({ theme, direction }) => {
+export const StyledCheckboxContainer = styled.div<{
+  direction: CheckboxGroupDirection
+}>`
+  ${({ theme, direction }) => {
     const isRow = direction === 'row'
 
     return css`
@@ -18,11 +20,12 @@ export const StyledCheckboxContainer = styled.div<{ direction: CheckboxGroupDire
 
       & > * {
         ${isRow ? 'margin-left' : 'margin-top'}: ${theme.font.size.md}rem;
-        
+
         &:first-child {
-          ${isRow ? 'margin-left' : 'margin-top'}: 0;margin-top: 0;
+          ${isRow ? 'margin-left' : 'margin-top'}: 0;
+          margin-top: 0;
         }
       }
-  `
+    `
   }}
 `
