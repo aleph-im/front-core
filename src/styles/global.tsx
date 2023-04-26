@@ -49,6 +49,15 @@ const CustomGlobalStyles = createGlobalStyle`
     return css`
       @import '${theme.font.url}';
 
+      window {
+        scroll-behavior: smooth;
+      }
+
+      html {
+        /* @note: Scaled down by default (but all calculations from designs are consistent with base 16px = 1rem) */
+        font-size: 14px;
+      }
+
       body {
         margin: 0;
         padding: 0;
@@ -85,6 +94,21 @@ const CustomGlobalStyles = createGlobalStyle`
       header {
         margin-top: 0;
         margin-bottom: ${theme.font.size.lg}rem;
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      textarea:-webkit-autofill,
+      textarea:-webkit-autofill:hover,
+      textarea:-webkit-autofill:focus,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:focus {
+        -webkit-text-fill-color: ${theme.color.text};
+        -webkit-box-shadow: 0 0 0px 1000px #ffffff00 inset;
+        transition: background-color 5000s ease-in-out 0s;
+        border-radius: 1.875rem;
       }
 
       ${colorCss}
