@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
+import { LiHTMLAttributes, ReactNode } from 'react'
 
-export type NavbarLinkProps = {
+export type NavbarLinkProps = LiHTMLAttributes<HTMLLIElement> & {
   children: ReactNode
 }

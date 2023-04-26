@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 import { BreakpointId } from '../../themes'
 
-export type NavbarLinkListProps = {
+export type NavbarLinkListProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode
   withSlash?: boolean
   onlyMobile?: boolean

@@ -15,24 +15,28 @@ export const Navbar = ({
   children,
   mobileTopContent,
   height,
+  open,
+  onToggle,
   ...rest
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const toggleIsOpen = useCallback(
-    () => setIsOpen(!isOpen),
-    [isOpen, setIsOpen],
-  )
+  const isOpenMenu = open !== undefined ? open : isOpen
+
+  const toggleMenu = useCallback(() => {
+    setIsOpen(!isOpenMenu)
+    onToggle && onToggle(!isOpenMenu)
+  }, [isOpenMenu, setIsOpen, onToggle])
 
   return (
     <StyledNavbarContainer {...rest}>
-      <StyledHeadingContainer isOpen={isOpen} height={height}>
+      <StyledHeadingContainer isOpen={isOpenMenu} height={height}>
         <StyledMobileTopContainer>
           <Button
             color={'main0'}
             variant={'secondary'}
             kind={'neon'}
             size={'regular'}
-            onClick={toggleIsOpen}
+            onClick={toggleMenu}
           >
             <Icon name="bars" />
           </Button>
@@ -46,7 +50,7 @@ export const Navbar = ({
           </StyledMobileTopContainer>
         )}
       </StyledHeadingContainer>
-      <StyledNavContainer isOpen={isOpen}>{children}</StyledNavContainer>
+      <StyledNavContainer isOpen={isOpenMenu}>{children}</StyledNavContainer>
     </StyledNavbarContainer>
   )
 }
