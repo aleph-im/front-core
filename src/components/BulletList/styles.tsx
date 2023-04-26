@@ -13,6 +13,10 @@ export const StyledItem = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `
 
 export interface StyledBulletItemIconContainerProps {

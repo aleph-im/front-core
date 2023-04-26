@@ -44,6 +44,21 @@ Default.parameters = {
 
 // ---
 
+export const Forwarded = Template.bind({})
+Forwarded.args = {
+  ...defaultArgs,
+  hover: false,
+  active: false,
+  focus: false,
+  disabled: false,
+  as: 'a',
+}
+Forwarded.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
 const CatalogTemplate: StoryFn<typeof Button> = (args) => {
   args = {
     ...defaultArgs,
