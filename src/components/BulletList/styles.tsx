@@ -4,19 +4,17 @@ import { addClasses } from '../../utils'
 import Icon, { IconProps } from '../Icon'
 import { BulletItemKind, BulletListSize } from './types'
 
-export const StyledList = styled.ul`
-  margin: 0;
-  padding: 0;
+export const StyledList = styled.ul<{ gap?: string }>`
+  ${({ gap = '2rem' }) => css`
+    display: inline-flex;
+    flex-direction: column;
+    gap: ${gap};
+  `}
 `
 
 export const StyledItem = styled.li`
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 `
 
 export interface StyledBulletItemIconContainerProps {

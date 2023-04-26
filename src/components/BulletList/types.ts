@@ -7,6 +7,7 @@ export type BulletListProps = {
   items: BulletItemProps[]
   children?: ReactNode
   size?: BulletListSize
+  gap?: string
 }
 
 export type BulletItemProps = {
