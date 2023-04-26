@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import { babel } from '@rollup/plugin-babel'
-// import typescript from '@rollup/plugin-typescript'
+import typescript from '@rollup/plugin-typescript'
 
 import { terser } from 'rollup-plugin-terser'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
@@ -30,13 +30,38 @@ export default [
         extensions: ['.ts', '.tsx'],
       }),
       commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        emitDeclarationOnly: true,
+      }),
+    ],
+  },
+  {
+    input: 'src/index.ts',
+    output: [
+      {
+        file: packageJson.main,
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: packageJson.module,
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      peerDepsExternal(),
+      resolve({
+        extensions: ['.ts', '.tsx'],
+      }),
+      commonjs(),
       babel({
         babelHelpers: 'bundled',
         extensions: ['.ts', '.tsx'],
         include: ['src/**/*'],
         exclude: 'node_modules/**',
       }),
-      // typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
   },
