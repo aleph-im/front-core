@@ -1,7 +1,14 @@
 import React from 'react'
 import { StoryFn } from '@storybook/react'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
+import {
+  useResponsiveBetween,
+  useResponsiveBreakpoint,
+  useResponsiveMax,
+  useResponsiveMin,
+  useWindowSize,
+} from '../../hooks'
 
 export default {
   title: 'Design/Atoms/Responsive',
@@ -119,6 +126,78 @@ Responsive.args = {
   ...defaultArgs,
 }
 Responsive.parameters = {
+  ...defaultParams,
+  controls: { include: [], hideNoControlsWarning: true },
+}
+
+const ResponsiveHooksTemplate: StoryFn<any> = () => {
+  const theme = useTheme()
+  const currentSize = useWindowSize()
+
+  const breakpoint = useResponsiveBreakpoint()
+  const min = useResponsiveMin('md') + ''
+  const max = useResponsiveMax('lg') + ''
+  const bet = useResponsiveBetween('md', 'lg') + ''
+
+  return (
+    <>
+      <h6>Resize the window to test it</h6>
+      <table>
+        <tr>
+          <td>
+            <strong>Current size</strong>
+          </td>
+          <td>
+            <span tw="ml-4 text-sm">{currentSize?.width}px</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Current breakpoint</strong>
+          </td>
+          <td>
+            <span tw="ml-4 text-sm">
+              {breakpoint} ({theme.breakpoint[breakpoint] * 16}px)
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>size &gt;= md ({theme.breakpoint['md'] * 16}px)</strong>
+          </td>
+          <td>
+            <span tw="ml-4 text-sm">{min}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>size &lt; lg ({theme.breakpoint['lg'] * 16}px)</strong>
+          </td>
+          <td>
+            <span tw="ml-4 text-sm">{max}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>
+              size &gt;= ({theme.breakpoint['md'] * 16}px) && size &lt; (
+              {theme.breakpoint['lg'] * 16}px)
+            </strong>
+          </td>
+          <td>
+            <span tw="ml-4 text-sm">{bet}</span>
+          </td>
+        </tr>
+      </table>
+    </>
+  )
+}
+
+export const ResponsiveHooks = ResponsiveHooksTemplate.bind({})
+ResponsiveHooks.args = {
+  ...defaultArgs,
+}
+ResponsiveHooks.parameters = {
   ...defaultParams,
   controls: { include: [], hideNoControlsWarning: true },
 }
