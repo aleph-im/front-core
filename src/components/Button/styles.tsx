@@ -174,93 +174,95 @@ export const StyledButton = styled.button<StyledButtonProps>`
     const disableVariantsCss = disableVariants(props)
 
     return css`
-      position: relative;
-      cursor: pointer;
-      box-sizing: border-box;
-      /* display: inline-flex; inline-flex doesnt work with text-overflow */
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: ${theme.button.font.weight};
-      font-family: ${theme.button.font.family};
-      font-style: ${theme.button.font.style};
-      margin: 0;
-      padding: 0.5rem 1.375rem;
-      width: auto;
-      min-width: 0;
-      max-width: 100%;
-      min-height: 1rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      border: none;
-      border-radius: 1.875rem;
-      line-height: 1em;
-      background-color: transparent;
-      outline: 0;
-      color: ${theme.color.text};
-      transform: transale3d(0, 0, 0);
-      text-decoration: none !important;
-      z-index: 0;
-
-      /* BORDER */
-      &::after {
-        display: none;
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
+      && {
+        position: relative;
+        cursor: pointer;
         box-sizing: border-box;
-        background-color: ${mainColor};
-        z-index: -1;
-        padding: 1px;
+        /* display: inline-flex; inline-flex doesnt work with text-overflow */
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: ${theme.button.font.weight};
+        font-family: ${theme.button.font.family};
+        font-style: ${theme.button.font.style};
+        margin: 0;
+        padding: 0.5rem 1.375rem;
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        border: none;
         border-radius: 1.875rem;
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        -webkit-mask-composite: xor;
-      }
+        line-height: 1em;
+        background-color: transparent;
+        outline: 0;
+        color: ${theme.color.text};
+        transform: transale3d(0, 0, 0);
+        text-decoration: none !important;
+        z-index: 0;
 
-      /* DEFAULT VARIANT STYLES FOR EACH KIND */
-      ${defaultVariantsCss}
-
-      &:focus, &._focus {
-        ${focusVariantsCss}
-      }
-
-      &:hover,
-      &._hover {
-        ${hoverVariantsCss}
-      }
-
-      &:active,
-      &._active {
-        ${activeVariantsCss}
-      }
-
-      &[disabled] {
-        ${disableVariantsCss}
-      }
-
-      /* Size */
-      ${() => {
-        switch (size) {
-          case 'regular': {
-            return css`
-              font-size: ${theme.button.font.size.regular -
-              (variant !== 'text-only' ? 0 : 0.25)}rem;
-            `
-          }
-          case 'big': {
-            return css`
-              font-size: ${theme.button.font.size.big -
-              (variant !== 'text-only' ? 0 : 0.375)}rem;
-            `
-          }
+        /* BORDER */
+        &::after {
+          display: none;
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          background-color: ${mainColor};
+          z-index: -1;
+          padding: 1px;
+          border-radius: 1.875rem;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+          -webkit-mask-composite: xor;
         }
-      }}
+
+        /* DEFAULT VARIANT STYLES FOR EACH KIND */
+        ${defaultVariantsCss}
+
+        &:focus, &._focus {
+          ${focusVariantsCss}
+        }
+
+        &:hover,
+        &._hover {
+          ${hoverVariantsCss}
+        }
+
+        &:active,
+        &._active {
+          ${activeVariantsCss}
+        }
+
+        &[disabled] {
+          ${disableVariantsCss}
+        }
+
+        /* Size */
+        ${() => {
+          switch (size) {
+            case 'regular': {
+              return css`
+                font-size: ${theme.button.font.size.regular -
+                (variant !== 'text-only' ? 0 : 0.25)}rem;
+              `
+            }
+            case 'big': {
+              return css`
+                font-size: ${theme.button.font.size.big -
+                (variant !== 'text-only' ? 0 : 0.375)}rem;
+              `
+            }
+          }
+        }}
+      }
     `
   }}
 `

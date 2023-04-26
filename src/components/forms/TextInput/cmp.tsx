@@ -55,6 +55,7 @@ export const TextInput = forwardRef(
               className: classes,
               onFocus: handleFocus,
               onBlur: handleBlur,
+              name,
               ...rest,
             }}
           />

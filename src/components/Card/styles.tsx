@@ -40,17 +40,13 @@ export const StyledCardFooterContainer = styled.div<{
 }>`
   ${({ buttonVariant }) => {
     const buttonOffsetCss =
-      buttonVariant === 'text-only'
-        ? `
-      margin-left: -1.375rem;
-    `
-        : ''
+      buttonVariant === 'text-only' ? `margin-left: -1.375rem;` : ''
 
     return css`
       padding: 0 0.625rem;
       ${buttonOffsetCss}
 
-      & button {
+      && button {
         display: block;
       }
     `

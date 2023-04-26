@@ -41,7 +41,7 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
         border: 1px solid ${theme.color.text}
       }
 
-      & > button,
+      && > button,
       & > a {
         flex: 1 0 auto;
         align-self: stretch;
