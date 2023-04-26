@@ -17,7 +17,7 @@ jobs:
         run: |
           npm config set "@fortawesome:registry" https://npm.fontawesome.com/
           npm config set "//npm.fontawesome.com/:_authToken" FONTAWESOME_NPM_AUTH_TOKEN
-          npm ci
+          npm i
           npm run build-storybook
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2
