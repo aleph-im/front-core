@@ -322,5 +322,5 @@ function getSortedResponsiveBreakpoints(theme: DefaultTheme): BreakpointId[] {
 function getSortedFontSizes(theme: DefaultTheme): [string, string][] {
   return [[0, 0], ...Object.entries(theme.font.size)]
     .sort(([, av], [, bv]) => av - bv)
-    .map(([k, v]) => [k + '', (v ? `${v} rem` : '0') as string])
+    .map(([k, v]) => [k + '', (v ? `${v}rem` : '0') as string])
 }
