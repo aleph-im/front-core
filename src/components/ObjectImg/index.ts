@@ -1,2 +1,2 @@
 export { default, ObjectImg } from './cmp'
-export { ObjectImgProps } from './types'
+export type { ObjectImgProps } from './types'

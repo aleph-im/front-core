@@ -1,2 +1,2 @@
 export { default, NavbarLinkList } from './cmp'
-export { NavbarLinkListProps } from './types'
+export type { NavbarLinkListProps } from './types'

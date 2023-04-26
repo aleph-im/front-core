@@ -1,5 +1,10 @@
 import React from 'react'
-import { createGlobalStyle, css, DefaultTheme } from 'styled-components'
+import {
+  createGlobalStyle,
+  css,
+  DefaultTheme,
+  Interpolation,
+} from 'styled-components'
 import { BreakpointId } from '../themes/types'
 import {
   getDarkEffectCss,
@@ -255,41 +260,37 @@ function effectClasses() {
 }
 
 function typoClasses(theme: DefaultTheme) {
-  const breakpointId = getSortedResponsiveBreakpoints(theme)
-
   const typos = Object.entries(theme.typo).sort(
     ([, av], [, bv]) => av.size - bv.size,
   )
 
   const fontSizes = getSortedFontSizes(theme)
 
-  function getTypoClasses(bp: string = '') {
-    bp = bp ? `- ${bp} ` : ''
+  function getTypoClasses(bp: string) {
     return typos.map(
       ([k, v]) => css`
-        .tp-${k}${bp} ${v.tag && !bp ? `, ${k}` : ''} {
+        .${bp}tp-${k} ${v.tag && !bp ? `, ${k}` : ''} {
           ${getTypoCss(k as any)}
         }
       `,
     )
   }
 
-  function getFontSizesClasses(bp: string = '') {
-    bp = bp ? `- ${bp} ` : ''
+  function getFontSizesClasses(bp: string) {
     return fontSizes.map(
       ([k, v]) => css`
-        .fs-${k}${bp} {
+        .${bp}fs-${k} {
           font-size: ${v};
         }
       `,
     )
   }
 
-  const responsiveTypoCss = [undefined, ...breakpointId].map((bp) =>
-    getResponsiveCss(bp, getTypoClasses(bp)),
-  )
-  const responsiveFontSizesCss = [undefined, ...breakpointId].map((bp) =>
-    getResponsiveCss(bp, getFontSizesClasses(bp)),
+  const responsiveTypoCss = getResponsiveClasses(theme, getTypoClasses)
+
+  const responsiveFontSizesCss = getResponsiveClasses(
+    theme,
+    getFontSizesClasses,
   )
 
   return css`
@@ -299,6 +300,17 @@ function typoClasses(theme: DefaultTheme) {
     /* FONT-SIZE */
     ${responsiveFontSizesCss}
   `
+}
+
+function getResponsiveClasses(
+  theme: DefaultTheme,
+  getClasses: (bp: string) => Interpolation<any>[],
+) {
+  const breakpointId = getSortedResponsiveBreakpoints(theme)
+
+  return [undefined, ...breakpointId].map((bp) =>
+    getResponsiveCss(bp, getClasses(bp ? `${bp}\\:` : '')),
+  )
 }
 
 function getSortedResponsiveBreakpoints(theme: DefaultTheme): BreakpointId[] {

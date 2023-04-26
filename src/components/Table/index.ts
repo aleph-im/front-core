@@ -1,2 +1,2 @@
 export { default, Table } from './cmp'
-export { TableProps } from './types'
+export type { TableProps } from './types'

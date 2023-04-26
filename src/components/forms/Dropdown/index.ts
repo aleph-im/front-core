@@ -1,2 +1,2 @@
 export { default, Dropdown } from './cmp'
-export { DropdownProps } from './types'
+export type { DropdownProps } from './types'

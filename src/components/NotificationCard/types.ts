@@ -2,7 +2,10 @@ import { HTMLAttributes, ReactNode } from 'react'
 
 export type NotificationCardVariant = 'success' | 'warning' | 'error'
 
-export type NotificationCardProps = HTMLAttributes<HTMLDivElement> & {
+export type NotificationCardProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'content'
+> & {
   variant: NotificationCardVariant
   title?: string
   text?: string

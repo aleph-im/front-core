@@ -1,2 +1,2 @@
 export { default, CodeEditor } from './cmp'
-export { CodeEditorProps } from './types'
+export type { CodeEditorProps } from './types'

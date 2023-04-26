@@ -1,2 +1,2 @@
 export { default, Card } from './cmp'
-export { CardProps } from './types'
+export type { CardProps } from './types'

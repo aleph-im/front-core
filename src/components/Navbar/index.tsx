@@ -1,2 +1,2 @@
 export { default, Navbar } from './cmp'
-export { NavbarProps } from './types'
+export type { NavbarProps } from './types'

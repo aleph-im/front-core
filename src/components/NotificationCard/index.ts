@@ -1,2 +1,2 @@
 export { default, NotificationCard } from './cmp'
-export { NotificationCardProps } from './types'
+export type { NotificationCardProps } from './types'

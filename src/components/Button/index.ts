@@ -1,2 +1,2 @@
 export { default, Button } from './cmp'
-export { ButtonProps } from './types'
+export type { ButtonProps } from './types'

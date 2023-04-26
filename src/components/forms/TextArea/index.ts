@@ -1,2 +1,2 @@
 export { default, TextArea } from './cmp'
-export { TextAreaProps } from './types'
+export type { TextAreaProps } from './types'
