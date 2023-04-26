@@ -202,6 +202,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
       color: ${theme.color.text};
       transform: transale3d(0, 0, 0);
       text-decoration: none !important;
+      z-index: 0;
 
       /* BORDER */
       &::after {
