@@ -6,7 +6,7 @@ export type NavbarProps = {
   mobileTopContent?: ReactNode
   height?: string
   open?: boolean
-  onToggle: (open: boolean) => void
+  onToggle?: (open: boolean) => void
 }
 
 export type ResponsiveNavBarProps = {
