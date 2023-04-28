@@ -3,7 +3,7 @@ import styled, {
   DefaultTheme,
   FlattenSimpleInterpolation,
 } from 'styled-components'
-import { getGlowMinEffectCss } from '../../styles'
+import { getGlowHoverEffectCss, getGlowMinEffectCss } from '../../styles'
 import { StyledButtonProps } from './types'
 
 const defaultVariants = (
@@ -123,7 +123,14 @@ const focusVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
   `
 }
 
-const hoverVariants = () => {
+const hoverVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
+  const { color, variant, kind } = props
+  const glowHoverCss = getGlowHoverEffectCss(color, { width: 192, height: 192 })
+
+  if (kind === 'neon' && variant === 'primary') {
+    return glowHoverCss
+  }
+
   return css``
 }
 
@@ -169,7 +176,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
     const defaultVariantsCss = defaultVariants(props)
     const focusVariantsCss = focusVariants(props)
-    const hoverVariantsCss = hoverVariants()
+    const hoverVariantsCss = hoverVariants(props)
     const activeVariantsCss = activeVariants(props, defaultVariantsCss)
     const disableVariantsCss = disableVariants(props)
 
