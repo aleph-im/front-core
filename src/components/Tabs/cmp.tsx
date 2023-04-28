@@ -1,84 +1,98 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   StyledTabsHeader,
   StyledTabsItem,
   StyledTabLabel,
-  StyledSelectedTab,
+  StyledUnderscoreBar,
 } from './styles'
-import { StyledTabType, TabsProps } from './types'
+import { StyledTabType, TabLabelProps, TabsProps } from './types'
+import { useBounds } from '../../hooks'
 
-const noop = () => null
+export const TabLabel = (props: TabLabelProps) => {
+  return <StyledTabLabel {...props}>{props.label}</StyledTabLabel>
+}
 
 export const Tabs = ({
   tabs,
-  defaultSelected = 0,
-  onTabChange = noop,
+  selected: propSelected,
+  defaultSelected,
+  onTabChange,
   align = 'center',
   ...rest
 }: TabsProps & StyledTabType) => {
-  const safeDefault =
-    tabs[defaultSelected] && !tabs[defaultSelected].disabled
-      ? defaultSelected
-      : 0
-  const [selected, setSelected] = useState<number>(safeDefault)
-  const handleClick = (i: number) => {
-    onTabChange(selected, i)
+  const id = propSelected || defaultSelected
+  const { id: safeDefault } =
+    tabs.filter((tab) => !tab.disabled).find((tab) => tab.id === id) || {}
+
+  const [selected, setSelected] = useState<string | undefined>(safeDefault)
+  const safeSelected = propSelected || selected
+
+  const handleClick = (i: string) => {
     setSelected(i)
+    onTabChange && onTabChange(i)
   }
+
+  const [parentBounds, parentRef] = useBounds<HTMLDivElement>(
+    undefined,
+    undefined,
+    [safeSelected],
+  )
+
+  const [barBounds, ref] = useBounds<HTMLDivElement>(undefined, undefined, [
+    safeSelected,
+  ])
+
+  const underscoreStyle = useMemo(() => {
+    return {
+      left: (barBounds?.x || 0) - (parentBounds?.x || 0),
+      width: barBounds?.width || 0,
+    }
+  }, [barBounds, parentBounds])
+
+  console.log(underscoreStyle)
 
   return (
     <>
-      <StyledTabsHeader align={align} role="tablist" {...rest}>
-        {tabs.map((tab, i) => {
-          const getTabLabel = () => {
-            if (tab.label !== undefined) {
-              return (
-                <StyledTabLabel labelPosition={tab.labelPosition}>
-                  {tab.label}
-                </StyledTabLabel>
-              )
-            }
-          }
-
+      <StyledTabsHeader align={align} role="tablist" {...rest} ref={parentRef}>
+        {tabs.map((tab) => {
           if (tab.disabled) {
             return (
               <StyledTabsItem
-                isDisabled
-                key={i}
+                disabled
+                key={tab.id}
                 role="tab"
                 aria-disabled="true"
               >
-                {tab.name} {getTabLabel()}
+                {tab.name} {tab.label && <TabLabel {...tab} />}
               </StyledTabsItem>
             )
-          } else if (i === selected) {
+          } else if (tab.id === safeSelected) {
             return (
               <StyledTabsItem
-                isSelected
-                key={i}
+                ref={ref}
+                selected
+                key={tab.id}
                 role="tab"
                 aria-selected="true"
               >
-                <StyledSelectedTab color="main0" type="body">
-                  {tab.name}
-                </StyledSelectedTab>
-                {getTabLabel()}
+                {tab.name}
+                {tab.label && <TabLabel {...tab} />}
               </StyledTabsItem>
             )
           }
           return (
             <StyledTabsItem
-              onClick={() => handleClick(i)}
-              key={i}
+              onClick={() => handleClick(tab.id)}
+              key={tab.id}
               role="tab"
               aria-selected="false"
             >
-              {tab.name} {getTabLabel()}
+              {tab.name} {tab.label && <TabLabel {...tab} />}
             </StyledTabsItem>
           )
         })}
+        <StyledUnderscoreBar style={underscoreStyle} />
       </StyledTabsHeader>
-      <div role="tabpanel">{tabs[selected].component}</div>
     </>
   )
 }

@@ -1,25 +1,27 @@
-export type TabLabelProps = {
-  labelPosition?: 'top' | 'bottom'
-}
+export type LabelPosition = 'top' | 'bottom'
 
 export type StyledTabType = {
   align?: 'left' | 'center' | 'right'
 }
 
-export type TabType = {
+export type Tab = {
+  id: string
   name: string
-  component: JSX.Element
   disabled?: boolean
   label?: string
-} & TabLabelProps
-
-export type TabsProps = {
-  tabs: TabType[]
-  onTabChange?: (fromIndex: number, toIndex: number) => void
-  defaultSelected?: number
+  labelPosition?: LabelPosition
 }
 
+export type TabsProps = {
+  tabs: Tab[]
+  onTabChange?: (id: string) => void
+  selected?: string
+  defaultSelected?: string
+}
+
+export type TabLabelProps = Tab
+
 export type StyledTabItemProps = {
-  isSelected?: boolean
-  isDisabled?: boolean
+  selected?: boolean
+  disabled?: boolean
 }

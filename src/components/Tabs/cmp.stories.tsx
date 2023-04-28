@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import Tabs from './cmp'
-import { StyledTabType, TabsProps, TabType } from './types'
+import { StyledTabType, TabsProps, Tab } from './types'
 
 export default {
   title: 'Components/UI/Tabs',
@@ -17,58 +17,29 @@ export default {
 }
 
 const defaultArgs: Partial<TabsProps & StyledTabType> = {
-  defaultSelected: 2,
+  defaultSelected: 'billing',
   align: 'center',
 }
 
-const tabs: TabType[] = [
+const tabs: Tab[] = [
   {
+    id: 'general',
     name: 'General',
-    component: (
-      <div>
-        <h1>General</h1>
-        <p>
-          This section contains settings related to your account information,
-          such as your name, email address, and profile picture. You can also
-          manage your notification preferences and language settings here.
-        </p>
-      </div>
-    ),
   },
   {
-    name: 'Security',
-    component: (
-      <div>
-        <h1>Security</h1>
-        <p>
-          Here you can manage the security settings for your account, including
-          your password, two-factor authentication, and connected devices. You
-          can also view a log of recent account activity to help you stay on top
-          of any suspicious behavior.
-        </p>
-      </div>
-    ),
+    id: 'security',
+    name: 'Security -  really long title',
     label: '(3)',
     labelPosition: 'bottom',
   },
   {
+    id: 'billing',
     name: 'Billing',
-    component: (
-      <div>
-        <h1>Billing</h1>
-        <p>
-          This section allows you to manage your subscription and payment
-          information, view your billing history, and update your billing
-          preferences. You can also manage any additional services or add-ons
-          that you&#39;ve subscribed to.
-        </p>
-      </div>
-    ),
     label: 'NEW',
   },
   {
+    id: 'notifications',
     name: 'Notifications',
-    component: <div />,
     disabled: true,
     label: 'SOON',
   },
@@ -77,24 +48,46 @@ const tabs: TabType[] = [
 // ---
 
 const Template: StoryFn<typeof Tabs> = (args) => {
-  const [state, setState] = useState<{ prevTab?: number; nextTab?: number }>({
-    prevTab: undefined,
-    nextTab: undefined,
-  })
+  const [tabId, setTabId] = useState<string | undefined>(args.defaultSelected)
 
   return (
     <>
-      <Tabs
-        {...args}
-        tabs={tabs}
-        onTabChange={(prevTab, nextTab) => setState({ prevTab, nextTab })}
-      />
-
-      {state.prevTab !== null && state.nextTab !== null && (
-        <p>
-          Switched from tab {state.prevTab} to {state.nextTab}
-        </p>
-      )}
+      <Tabs {...args} tabs={tabs} onTabChange={(tabId) => setTabId(tabId)} />
+      <div role="tabpanel" tw="p-10">
+        {tabId === 'general' ? (
+          <div>
+            <h1>General</h1>
+            <p>
+              This section contains settings related to your account
+              information, such as your name, email address, and profile
+              picture. You can also manage your notification preferences and
+              language settings here.
+            </p>
+          </div>
+        ) : tabId === 'security' ? (
+          <div>
+            <h1>Security</h1>
+            <p>
+              Here you can manage the security settings for your account,
+              including your password, two-factor authentication, and connected
+              devices. You can also view a log of recent account activity to
+              help you stay on top of any suspicious behavior.
+            </p>
+          </div>
+        ) : tabId === 'billing' ? (
+          <div>
+            <h1>Billing</h1>
+            <p>
+              This section allows you to manage your subscription and payment
+              information, view your billing history, and update your billing
+              preferences. You can also manage any additional services or
+              add-ons that you&#39;ve subscribed to.
+            </p>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </>
   )
 }
