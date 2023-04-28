@@ -2,7 +2,7 @@ import { useRef, useState, RefObject, useEffect } from 'react'
 
 export function useBounds<E extends HTMLElement>(
   event?: string,
-  _ref: RefObject<E> = { current: null },
+  _ref?: RefObject<E>,
   deps: any[] = [],
 ): [DOMRect | undefined, RefObject<E>] {
   const ref = _ref || useRef<E>(null)
@@ -23,7 +23,7 @@ export function useBounds<E extends HTMLElement>(
       if (!ref.current) return
       event && ref.current.removeEventListener(event, updateSize)
     }
-  }, [ref.current, event, ...deps])
+  }, [ref, event, ...deps])
 
   return [size, ref]
 }
