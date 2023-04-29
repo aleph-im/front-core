@@ -17,7 +17,7 @@ export const StyledTabsItem = styled.div.attrs(
   ${({ theme, selected, disabled }) => {
     return css`
       ${tw`flex relative p-3 transition-colors duration-500`}
-      ${!selected && 'cursor: pointer;'}
+      cursor: ${disabled ? 'not-allowed' : selected ? 'default' : 'pointer'};
       user-select: none;
       color: ${disabled
         ? `${theme.color.base0}33`
