@@ -1,6 +1,18 @@
 // Dummy data for the table component storybook
 
-export const data = [
+export type MockDataRow = {
+  name: string
+  age: number
+  job: string
+  pets: {
+    dogs: number
+    cats: number
+    turtles: number
+  }
+  gender: string
+}
+
+export const data: MockDataRow[] = [
   {
     name: 'John Doe',
     age: 30,

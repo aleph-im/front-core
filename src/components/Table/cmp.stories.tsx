@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react'
 import Table from './cmp'
 import Icon from '../Icon'
 import { TableProps } from './types'
-import { data, Pets } from './fixture/data'
+import { data, MockDataRow, Pets } from './fixture/data'
 
 export default {
   title: 'Components/UI/Table',
@@ -23,14 +23,14 @@ const defaultArgs: Partial<TableProps> = {
   oddRowNoise: true,
 }
 
-const dataArgs: Partial<TableProps> = {
+const dataArgs: Partial<TableProps<MockDataRow>> = {
   data,
   columns: [
     {
       label: 'Name',
-      selector: (row: any) => row.name,
+      selector: (row) => row.name,
       sortable: true,
-      cell: (row: any) => (
+      cell: (row) => (
         <div>
           <strong>{row.name}</strong>
           {row.gender !== 'undisclosed' && (
@@ -47,17 +47,17 @@ const dataArgs: Partial<TableProps> = {
     },
     {
       label: 'Age',
-      selector: (row: any) => row.age,
+      selector: (row) => row.age,
       sortable: true,
     },
     {
       label: 'Job',
-      selector: (row: any) => row.job,
+      selector: (row) => row.job,
       sortable: false,
     },
     {
       label: 'Number of pets',
-      selector: (row: any): number =>
+      selector: (row) =>
         Object.values(row.pets as Pets).reduce(
           (acc: number, curr: number): number => acc + curr,
           0,

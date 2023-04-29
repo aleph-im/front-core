@@ -2,17 +2,21 @@ import { ReactNode, TableHTMLAttributes } from 'react'
 
 export type BorderType = 'none' | 'dashed' | 'solid'
 
-type Column = {
-  selector: <T>(row: T) => string | number
+export type Column<
+  R extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  selector: (row: R) => string | number
   label: string
   sortable?: boolean
-  cell?: <T>(row: T) => ReactNode
+  cell?: (row: R) => ReactNode
 }
 
-export type TableProps = TableHTMLAttributes<HTMLTableElement> & {
-  columns: Column[]
-  data: object[]
-  keySelector: <T>(row: T) => string | number
+export type TableProps<
+  R extends Record<string, unknown> = Record<string, unknown>,
+> = TableHTMLAttributes<HTMLTableElement> & {
+  columns: Column<R>[]
+  data: R[]
+  keySelector: (row: R) => string | number
 
   oddRowNoise?: boolean
   borderType: BorderType
