@@ -2,7 +2,7 @@ import React from 'react'
 import { StoryFn } from '@storybook/react'
 import Table from './cmp'
 import Icon from '../Icon'
-import { TableProps } from './types'
+import { BorderType, TableProps } from './types'
 import { data, MockDataRow, Pets } from './fixture/data'
 
 export default {
@@ -18,19 +18,14 @@ export default {
   },
 }
 
-const defaultArgs: Partial<TableProps> = {
-  borderType: 'dashed',
-  oddRowNoise: true,
-}
-
-const dataArgs: Partial<TableProps<MockDataRow>> = {
+const dataArgs = {
   data,
   columns: [
     {
       label: 'Name',
-      selector: (row) => row.name,
+      selector: (row: MockDataRow) => row.name,
       sortable: true,
-      cell: (row) => (
+      cell: (row: MockDataRow) => (
         <div>
           <strong>{row.name}</strong>
           {row.gender !== 'undisclosed' && (
@@ -47,17 +42,17 @@ const dataArgs: Partial<TableProps<MockDataRow>> = {
     },
     {
       label: 'Age',
-      selector: (row) => row.age,
+      selector: (row: MockDataRow) => row.age,
       sortable: true,
     },
     {
       label: 'Job',
-      selector: (row) => row.job,
+      selector: (row: MockDataRow) => row.job,
       sortable: false,
     },
     {
       label: 'Number of pets',
-      selector: (row) =>
+      selector: (row: MockDataRow) =>
         Object.values(row.pets as Pets).reduce(
           (acc: number, curr: number): number => acc + curr,
           0,
@@ -67,15 +62,19 @@ const dataArgs: Partial<TableProps<MockDataRow>> = {
   ],
 }
 
+const defaultArgs: TableProps<any> = {
+  borderType: 'dashed' as BorderType,
+  oddRowNoise: true,
+  ...dataArgs,
+}
+
 const defaultParams = {
   controls: { exclude: ['color', 'size'] },
 }
 
 // ---
 
-const Template: StoryFn<typeof Table> = (args) => (
-  <Table {...args} {...dataArgs} />
-)
+const Template: StoryFn<typeof Table> = (args) => <Table {...args} />
 
 export const Default = Template.bind({})
 Default.args = {

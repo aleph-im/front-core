@@ -9,7 +9,7 @@ const toggleSort = (sort: SortDirection): SortDirection => {
   return sort === 'asc' ? 'desc' : 'asc'
 }
 
-export const Table = (props: TableProps) => {
+export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
   const { columns, data, oddRowNoise = false, keySelector } = props
 
   const isSortedColumn = (column: string) => sortedColumn.column === column
