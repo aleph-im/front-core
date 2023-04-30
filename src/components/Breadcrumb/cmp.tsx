@@ -1,16 +1,27 @@
 import React from 'react'
-import { StyledNavlinks, StyledNavlink } from './styles'
+import { StyledNavlink } from './styles'
 import { BreadcrumbProps } from './types'
 
-export const Breadcrumb = ({ navLinks, ...rest }: BreadcrumbProps) => {
+export const Breadcrumb = ({
+  navLinks,
+  selected = navLinks.length - 1,
+  selectedColor,
+  ...rest
+}: BreadcrumbProps) => {
   return (
     <nav {...rest}>
       {navLinks && (
-        <StyledNavlinks>
+        <ul tw="flex flex-wrap items-center">
           {navLinks.map((el, index) => (
-            <StyledNavlink key={index}>{el}</StyledNavlink>
+            <StyledNavlink
+              key={index}
+              selected={index === selected}
+              selectedColor={selectedColor}
+            >
+              {el}
+            </StyledNavlink>
           ))}
-        </StyledNavlinks>
+        </ul>
       )}
     </nav>
   )
