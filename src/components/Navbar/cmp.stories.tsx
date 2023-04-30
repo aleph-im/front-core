@@ -47,7 +47,6 @@ const Template: StoryFn<typeof Navbar> = (args) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleToggleOpen = useCallback((open: boolean) => {
-    console.log('toggle', open)
     setIsOpen(open)
   }, [])
 

@@ -43,13 +43,13 @@ export const Tabs = ({
   ])
 
   const underscoreStyle = useMemo(() => {
+    if (!barBounds || !parentBounds) return {}
+
     return {
-      left: (barBounds?.x || 0) - (parentBounds?.x || 0),
-      width: barBounds?.width || 0,
+      left: (barBounds.x || 0) - (parentBounds.x || 0),
+      width: barBounds.width || 0,
     }
   }, [barBounds, parentBounds])
-
-  console.log(underscoreStyle)
 
   return (
     <>
