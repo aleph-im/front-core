@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-function useDebounce(
+export function useDebounce(
   callback: (...args: any[]) => any,
   delay: number,
   ...deps: any[]
@@ -10,5 +10,3 @@ function useDebounce(
     return () => clearTimeout(timer)
   }, [delay, callback, ...deps])
 }
-
-export default useDebounce
