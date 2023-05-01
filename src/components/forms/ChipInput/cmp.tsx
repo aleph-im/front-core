@@ -72,6 +72,8 @@ export const ChipInput = forwardRef(
         const value = inputValue.trim()
 
         if (event.key === 'Enter' && value !== '') {
+          event.preventDefault()
+
           const newTags = [...tags.filter((tag) => tag !== value), value]
           setTags(newTags)
           setInputValue('')
