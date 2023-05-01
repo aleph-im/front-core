@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { StyledTable } from './styles'
 import { TableProps } from './types'
 import Icon from '../Icon'
@@ -21,7 +21,7 @@ export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
   } = props
 
   const isSortedColumn = (column: string) => sortedColumn.column === column
-  const [sortedColumn, setSortedColumn] = React.useState({
+  const [sortedColumn, setSortedColumn] = useState({
     column: '',
     direction: 'asc',
   })
@@ -35,7 +35,7 @@ export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
     [data, keySelector],
   )
 
-  const sortedData = React.useMemo(() => {
+  const sortedData = useMemo(() => {
     return !sortedColumn.column
       ? keyedData
       : keyedData.sort((a, b) => {
@@ -73,14 +73,16 @@ export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
                 key={i}
                 className={`${sortable ? 'sortable' : ''} tp-table fs-sm`}
                 css={alignStyle}
-                onClick={() =>
+                onClick={() => {
+                  if (!sortable) return
+
                   setSortedColumn({
                     column: label,
                     direction: toggleSort(
                       sortedColumn.direction as SortDirection,
                     ),
                   })
-                }
+                }}
               >
                 {label}
 
