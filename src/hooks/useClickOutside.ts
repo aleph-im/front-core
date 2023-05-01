@@ -4,7 +4,8 @@ export function useClickOutside(
   callback: () => void,
   _refs?: RefObject<HTMLElement>[],
 ): RefObject<HTMLElement>[] {
-  const refs = _refs || [useRef<HTMLElement>(null)]
+  const defaultRefs = [useRef<HTMLElement>(null)]
+  const refs = _refs || defaultRefs
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {

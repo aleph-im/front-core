@@ -52,7 +52,7 @@ export const Dropdown = forwardRef(
                 {c.props.children}
               </span>
             ))
-    }, [placeholder, valueSet])
+    }, [children, placeholder, valueSet])
 
     const onClick = useCallback(() => {
       setIsOpen(!isOpen)

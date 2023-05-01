@@ -24,7 +24,7 @@ export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
         ...row,
         key: keySelector ? keySelector(row) : crypto.randomUUID(),
       })),
-    [data],
+    [data, keySelector],
   )
 
   const sortedData = React.useMemo(() => {
@@ -46,7 +46,7 @@ export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
             return 0
           }
         })
-  }, [keyedData, sortedColumn])
+  }, [columns, keyedData, sortedColumn.column, sortedColumn.direction])
 
   return (
     <StyledTable {...props}>

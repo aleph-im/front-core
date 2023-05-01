@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useState, RefObject, useEffect } from 'react'
 
 export function useBounds<E extends HTMLElement>(
@@ -5,23 +6,25 @@ export function useBounds<E extends HTMLElement>(
   _ref?: RefObject<E>,
   deps: any[] = [],
 ): [DOMRect | undefined, RefObject<E>] {
-  const ref = _ref || useRef<E>(null)
+  const defaultRef = useRef<E>(null)
+  const ref = _ref || defaultRef
   const [size, setSize] = useState<DOMRect>()
 
   useEffect(() => {
-    if (!ref.current) return
+    const current = ref.current
+    if (!current) return
 
     function updateSize() {
-      if (!ref.current) return
-      setSize(ref.current.getBoundingClientRect())
+      if (!current) return
+      setSize(current.getBoundingClientRect())
     }
 
     updateSize()
-    event && ref.current.addEventListener(event, updateSize)
+    event && current.addEventListener(event, updateSize)
 
     return () => {
-      if (!ref.current) return
-      event && ref.current.removeEventListener(event, updateSize)
+      if (!current) return
+      event && current.removeEventListener(event, updateSize)
     }
   }, [ref, event, ...deps])
 

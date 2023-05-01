@@ -4,11 +4,15 @@ export function useHover<E extends HTMLElement>(
   _ref?: RefObject<E>,
   propagate: boolean = true,
 ): [boolean, RefObject<E>] {
-  const ref = _ref ? _ref : useRef(null)
+  const defaultRef = useRef(null)
+  const ref = _ref || defaultRef
+
   const [isHover, setIsHover] = useState<boolean>(false)
 
   useLayoutEffect(() => {
-    if (!ref.current) return
+    const current = ref.current
+
+    if (!current) return
 
     function handleEnter(e: MouseEvent) {
       if (!propagate) e.stopPropagation()
@@ -20,16 +24,16 @@ export function useHover<E extends HTMLElement>(
       setIsHover(false)
     }
 
-    ref.current.addEventListener('mouseover', handleEnter)
-    ref.current.addEventListener('mouseout', handleLeave)
+    current.addEventListener('mouseover', handleEnter)
+    current.addEventListener('mouseout', handleLeave)
 
     return () => {
-      if (!ref.current) return
+      if (!current) return
 
-      ref.current.removeEventListener('mouseover', handleEnter)
-      ref.current.removeEventListener('mouseout', handleLeave)
+      current.removeEventListener('mouseover', handleEnter)
+      current.removeEventListener('mouseout', handleLeave)
     }
-  }, [ref.current, propagate])
+  }, [propagate, ref])
 
   return [isHover, ref]
 }

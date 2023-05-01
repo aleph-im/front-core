@@ -36,7 +36,7 @@ export const Notification = ({
         setNotifications(notifications.filter((noti) => noti.id !== id))
       },
     }),
-    [notifications, setNotifications],
+    [max, notifications],
   )
 
   const firstTimestamp = useMemo(
@@ -45,7 +45,7 @@ export const Notification = ({
         (acc, curr) => Math.min(acc, curr.timestamp),
         Number.MAX_SAFE_INTEGER,
       ),
-    [notifications, timeout],
+    [notifications],
   )
 
   const disposeNotifications = useCallback(() => {
@@ -59,7 +59,7 @@ export const Notification = ({
     if (!timeoutIdRef.current) return
     clearTimeout(timeoutIdRef.current)
     timeoutIdRef.current = undefined
-  }, [firstTimestamp, timeoutIdRef.current, timeout, disposeNotifications])
+  }, [])
 
   const resetTimeout = useCallback(() => {
     if (notifications.length === 0) return
@@ -70,7 +70,6 @@ export const Notification = ({
     notifications,
     stopTimeout,
     firstTimestamp,
-    timeoutIdRef.current,
     timeout,
     disposeNotifications,
   ])
@@ -83,7 +82,7 @@ export const Notification = ({
   useEffect(() => {
     resetTimeout()
     return stopTimeout
-  }, [notifications, timeoutIdRef.current, resetTimeout])
+  }, [notifications, resetTimeout, stopTimeout])
 
   return (
     <NotificationContext.Provider value={contextValue}>

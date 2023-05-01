@@ -85,15 +85,7 @@ export const ChipInput = forwardRef(
           handleRemoveTag(lastTag)
         }
       },
-      [
-        inputValue,
-        tags,
-        setTags,
-        setInputValue,
-        onAdd,
-        onRemove,
-        handleRemoveTag,
-      ],
+      [inputValue, tags, onAdd, onChange, handleRemoveTag],
     )
 
     return (

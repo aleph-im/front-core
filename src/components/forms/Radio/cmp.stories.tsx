@@ -22,11 +22,14 @@ const defaultParams = {
 // ---
 
 const Template: StoryFn<typeof Radio> = (args) => {
-  const options: [string, string][] = [
-    ['1', 'Option 1'],
-    ['2', 'Option 2'],
-    ['3', 'Option 3'],
-  ]
+  const options: [string, string][] = useMemo(
+    () => [
+      ['1', 'Option 1'],
+      ['2', 'Option 2'],
+      ['3', 'Option 3'],
+    ],
+    [],
+  )
 
   const [selectedId, setSelectedId] = useState<string>(options[0][0])
 

@@ -38,7 +38,7 @@ export const DropdownOption = forwardRef(
 
         onChangeProp && onChangeProp(value, newChecked)
       },
-      [value, dropdown, onChangeProp],
+      [dropdown, checked, value, onChangeProp],
     )
 
     return (
