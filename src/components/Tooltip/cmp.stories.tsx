@@ -52,7 +52,7 @@ const Template: StoryFn<typeof Tooltip> = (args) => {
         {...args}
         open={open}
         targetRef={targetRef}
-        onClose={handleClose}
+        onCloseClick={handleClose}
       />
       <button onClick={handleClick} tw="mt-7">
         Open tooltip

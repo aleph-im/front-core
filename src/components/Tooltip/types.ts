@@ -19,11 +19,15 @@ export type TooltipProps = {
   margin?: TooltipPosition
   offset?: TooltipPosition
 
+  closeDelay?: number
+
   open?: boolean
   header?: ReactNode
   content?: ReactNode
 
+  onOpen?: () => void
   onClose?: () => void
+  onCloseClick?: () => void
 } & (
   | {
       children: ReactNode & { ref?: RefObject<any> }

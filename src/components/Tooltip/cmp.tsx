@@ -18,36 +18,59 @@ export const Tooltip = ({
   at = 'top-center',
   margin = { x: 5, y: 5 },
   offset = { x: 0, y: 0 },
+  onOpen,
   onClose,
+  onCloseClick,
+  closeDelay = 200,
   ...rest
 }: TooltipProps) => {
-  const targetRef = targetRefProp || useRef<any>()
   const tooltipRef = useRef<any>()
+  const _targetRef = useRef<any>()
+  const targetRef = targetRefProp || _targetRef
 
   const [isOpen, setIsOpen] = useState(openProp || false)
+  const open = openProp !== undefined ? openProp : isOpen
 
   const [targetBounds] = useBounds('mouseover', targetRef, [targetRef])
-  const [tooltipBounds] = useBounds('mouseover', tooltipRef, [isOpen])
+  const [tooltipBounds] = useBounds('mouseover', tooltipRef, [open])
 
   const [isHoverTarget] = useHover(targetRef)
   const [isHoverTooltip] = useHover(tooltipRef)
 
-  useEffect(() => {
-    if (openProp === undefined) return
-    if (openProp === isOpen) return
-    setIsOpen(openProp)
-  }, [openProp, isOpen, setIsOpen])
+  const timmer = useRef<NodeJS.Timeout>()
 
-  useEffect(() => {
-    if (openProp !== undefined) return
-    const open = isHoverTarget || isHoverTooltip
-    setIsOpen(open)
-  }, [openProp, isHoverTarget, isHoverTooltip, setIsOpen])
+  const handleCloseClick = useCallback(() => {
+    if (timmer.current) clearTimeout(timmer.current)
 
-  const handleClose = useCallback(() => {
     setIsOpen(false)
+
+    onCloseClick && onCloseClick()
     onClose && onClose()
-  }, [setIsOpen, onClose])
+  }, [onCloseClick, onClose])
+
+  useEffect(() => {
+    if (timmer.current) clearTimeout(timmer.current)
+    const open = isHoverTarget || isHoverTooltip
+
+    if (open) {
+      setIsOpen(true)
+      onOpen && onOpen()
+    } else {
+      timmer.current = setTimeout(() => {
+        setIsOpen(false)
+        onClose && onClose()
+      }, closeDelay)
+    }
+  }, [
+    openProp,
+    isHoverTarget,
+    isHoverTooltip,
+    setIsOpen,
+    onOpen,
+    handleCloseClick,
+    closeDelay,
+    onClose,
+  ])
 
   const position: TooltipPosition = useMemo(() => {
     const [myPosY, myPosX] = my.split('-')
@@ -92,10 +115,13 @@ export const Tooltip = ({
 
   return (
     <>
-      <StyledContainer ref={tooltipRef} {...{ position, isOpen, ...rest }}>
+      <StyledContainer
+        ref={tooltipRef}
+        {...{ position, isOpen: open, ...rest }}
+      >
         <StyledHeaderContainer>
           {header}
-          <StyledHeaderCloseIcon onClick={handleClose} />
+          <StyledHeaderCloseIcon onClick={handleCloseClick} />
         </StyledHeaderContainer>
         <StyledContentContainer>{content}</StyledContentContainer>
       </StyledContainer>
