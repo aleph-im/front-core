@@ -10,7 +10,6 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
       ...addClasses('fx-glass-base0 fx-glass-border-base0 tp-form')(props),
       height: '100%',
       width: '100%',
-      defaultLanguage: 'javascript',
       theme: 'vs-dark',
       $theme: props.theme,
       options: {
