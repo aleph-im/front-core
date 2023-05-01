@@ -49,7 +49,7 @@ export const StyledTabLabel = styled.div.attrs(
 `
 export const StyledUnderscoreBar = styled.div`
   ${({ theme }) => css`
-    ${tw`absolute left-0 bottom-0 h-0.5 w-auto transition-all duration-500 m-0 p-0`}
+    ${tw`absolute bottom-0 h-0.5 w-auto transition-all duration-500 m-0 p-0`}
     background-color: ${theme.color.main0};
     will-change: left, width;
   `}

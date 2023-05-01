@@ -1,5 +1,5 @@
 import React, { useState, useCallback, forwardRef, ForwardedRef } from 'react'
-import { useBounds, useForwardRef } from '../../../hooks'
+import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
 import Icon from '../../Icon'
 import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
 import {
@@ -41,13 +41,15 @@ export const ChipInput = forwardRef(
     const [inputValue, setInputValue] = useState('')
     const [tags, setTags] = useState<string[]>(defaultValue || value || [])
 
+    const windowSize = useWindowSize()
+
     const reff = useForwardRef(ref)
     const [containerSize, containerRef] = useBounds<HTMLDivElement>(
       undefined,
       undefined,
-      [tags],
+      [tags, windowSize],
     )
-    const [inputSize, inputRef] = useBounds(undefined, reff, [tags])
+    const [inputSize, inputRef] = useBounds(undefined, reff, [tags, windowSize])
 
     const containerHeight = containerSize?.height || 0
     const inputHeight = inputSize?.height || 0

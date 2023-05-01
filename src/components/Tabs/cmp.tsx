@@ -6,7 +6,7 @@ import {
   StyledUnderscoreBar,
 } from './styles'
 import { StyledTabType, TabLabelProps, TabsProps } from './types'
-import { useBounds } from '../../hooks'
+import { useBounds, useWindowSize } from '../../hooks'
 
 export const TabLabel = (props: TabLabelProps) => {
   return <StyledTabLabel {...props}>{props.label}</StyledTabLabel>
@@ -27,6 +27,8 @@ export const Tabs = ({
   const [selected, setSelected] = useState<string | undefined>(safeDefault)
   const safeSelected = propSelected || selected
 
+  const windowSize = useWindowSize()
+
   const handleClick = (i: string) => {
     setSelected(i)
     onTabChange && onTabChange(i)
@@ -35,11 +37,12 @@ export const Tabs = ({
   const [parentBounds, parentRef] = useBounds<HTMLDivElement>(
     undefined,
     undefined,
-    [safeSelected],
+    [safeSelected, windowSize],
   )
 
   const [barBounds, ref] = useBounds<HTMLDivElement>(undefined, undefined, [
     safeSelected,
+    windowSize,
   ])
 
   const underscoreStyle = useMemo(() => {

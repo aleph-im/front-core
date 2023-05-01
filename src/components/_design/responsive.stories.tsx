@@ -132,7 +132,7 @@ Responsive.parameters = {
 
 const ResponsiveHooksTemplate: StoryFn<any> = () => {
   const theme = useTheme()
-  const currentSize = useWindowSize()
+  const currentSize = useWindowSize(0)
 
   const breakpoint = useResponsiveBreakpoint()
   const min = useResponsiveMin('md') + ''
