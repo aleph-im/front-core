@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { TableProps } from './types'
 
-export const StyledTable = styled.table<TableProps>`
+export const StyledTable = styled.table<TableProps<any>>`
   ${({ borderType = 'none' }) => {
     const hasBorder = borderType !== 'none'
 
@@ -24,7 +24,6 @@ export const StyledTable = styled.table<TableProps>`
           padding-right: 1rem;
         }
 
-        text-align: left;
         padding: 1rem 0;
 
         ${hasBorder &&

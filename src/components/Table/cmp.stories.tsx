@@ -2,7 +2,7 @@ import React from 'react'
 import { StoryFn } from '@storybook/react'
 import Table from './cmp'
 import Icon from '../Icon'
-import { BorderType, TableProps } from './types'
+import { BorderType, Column, TableProps } from './types'
 import { data, MockDataRow, Pets } from './fixture/data'
 
 export default {
@@ -44,11 +44,13 @@ const dataArgs = {
       label: 'Age',
       selector: (row: MockDataRow) => row.age,
       sortable: true,
+      align: 'right',
     },
     {
       label: 'Job',
       selector: (row: MockDataRow) => row.job,
       sortable: false,
+      align: 'center',
     },
     {
       label: 'Number of pets',
@@ -58,14 +60,20 @@ const dataArgs = {
           0,
         ),
       sortable: true,
+      align: 'right',
     },
-  ],
+  ] as Column<any>[],
 }
 
 const defaultArgs: TableProps<any> = {
   borderType: 'dashed' as BorderType,
   oddRowNoise: true,
   ...dataArgs,
+  rowProps: (row, i) => ({
+    onClick: () => {
+      alert(`row click ${i}`)
+    },
+  }),
 }
 
 const defaultParams = {

@@ -21,6 +21,7 @@ export type TypoKind =
   | 'body2'
   | 'code'
   | 'code1'
+  | 'table'
   | 'form'
 export type Typo = {
   tag: boolean

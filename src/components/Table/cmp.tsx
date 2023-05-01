@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { StyledTable } from './styles'
 import { TableProps } from './types'
 import Icon from '../Icon'
+import tw from 'twin.macro'
 
 type SortDirection = 'asc' | 'desc'
 
@@ -10,7 +11,14 @@ const toggleSort = (sort: SortDirection): SortDirection => {
 }
 
 export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
-  const { columns, data, oddRowNoise = false, keySelector } = props
+  const {
+    columns,
+    data,
+    oddRowNoise = false,
+    keySelector,
+    rowProps,
+    cellProps,
+  } = props
 
   const isSortedColumn = (column: string) => sortedColumn.column === column
   const [sortedColumn, setSortedColumn] = React.useState({
@@ -52,52 +60,75 @@ export function Table<T extends Record<string, unknown>>(props: TableProps<T>) {
     <StyledTable {...props}>
       <thead>
         <tr>
-          {columns.map(({ sortable, label }, i) => (
-            <th
-              key={i}
-              className={sortable ? 'sortable' : ''}
-              onClick={() =>
-                setSortedColumn({
-                  column: label,
-                  direction: toggleSort(
-                    sortedColumn.direction as SortDirection,
-                  ),
-                })
-              }
-            >
-              {sortable && (
-                <div
-                  style={{
-                    opacity: isSortedColumn(label) ? 1 : 0.45,
-                    display: 'inline-block',
-                    paddingRight: '1rem',
-                  }}
-                >
-                  <Icon
-                    name={
-                      !isSortedColumn(label)
-                        ? 'sort'
-                        : sortedColumn.direction === 'asc'
-                        ? 'sort-up'
-                        : 'sort-down'
-                    }
-                  />
-                </div>
-              )}
-              {label}
-            </th>
-          ))}
+          {columns.map(({ sortable, label, align = 'left' }, i) => {
+            const alignStyle =
+              align === 'center'
+                ? tw`text-center`
+                : align === 'right'
+                ? tw`text-right`
+                : tw`text-left`
+
+            return (
+              <th
+                key={i}
+                className={`${sortable ? 'sortable' : ''} tp-table fs-sm`}
+                css={alignStyle}
+                onClick={() =>
+                  setSortedColumn({
+                    column: label,
+                    direction: toggleSort(
+                      sortedColumn.direction as SortDirection,
+                    ),
+                  })
+                }
+              >
+                {label}
+
+                {sortable && (
+                  <div
+                    style={{
+                      opacity: isSortedColumn(label) ? 1 : 0.45,
+                      display: 'inline-block',
+                      paddingLeft: '0.625rem',
+                    }}
+                  >
+                    <Icon
+                      name={
+                        !isSortedColumn(label)
+                          ? 'sort'
+                          : sortedColumn.direction === 'asc'
+                          ? 'sort-up'
+                          : 'sort-down'
+                      }
+                    />
+                  </div>
+                )}
+              </th>
+            )
+          })}
         </tr>
       </thead>
       <tbody>
-        {sortedData.map((row, index) => (
+        {sortedData.map((row, i) => (
           <tr
             key={row.key}
-            className={oddRowNoise && index % 2 === 0 ? 'fx-noise-light' : ''}
+            className={oddRowNoise && i % 2 === 0 ? 'fx-noise-light' : ''}
+            {...rowProps?.(row, i)}
           >
-            {columns.map(({ selector, cell }, j) => (
-              <td key={j}>{cell ? cell(row) : selector(row)}</td>
-            ))}
+            {columns.map(({ selector, cell, align }, j) => {
+              const alignStyle =
+                align === 'center'
+                  ? tw`text-center`
+                  : align === 'right'
+                  ? tw`text-right`
+                  : tw`text-left`
+
+              return (
+                <td key={j} css={alignStyle} {...cellProps?.(row, i, j)}>
+                  {cell ? cell(row) : selector(row)}
+                </td>
+              )
+            })}
           </tr>
         ))}
       </tbody>

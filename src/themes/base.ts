@@ -208,6 +208,14 @@ const typo: ThemeTypo = {
     size: font.size.sm,
     lineHeight: 1.666,
   },
+  table: {
+    tag: false,
+    family: font.family.body,
+    style: 'normal',
+    weight: 700,
+    size: pxToRem(12),
+    lineHeight: 1.666,
+  },
   form: {
     tag: true,
     family: font.family.body,
