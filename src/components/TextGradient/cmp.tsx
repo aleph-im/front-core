@@ -15,7 +15,8 @@ export const TextGradient = ({
 }: TextGradientProps) => {
   const theme = useTheme()
   const tagConfig = theme.typo[type]
-  const tag = (as || (tagConfig.tag ? type : 'span')) as TypeElements
+  const tag = (as ||
+    (tagConfig.tag && type !== 'body' ? type : 'span')) as TypeElements
   const isInline = useMemo(() => inlineElements.has(tag), [tag])
 
   return (
