@@ -13,7 +13,7 @@ export const StyledContainer = styled.div`
   bottom: 0;
   right: 0;
   max-height: 100%;
-  overflow: scroll;
+  overflow: auto;
 `
 
 export const StyledClearButton = styled(Button).attrs(() => {

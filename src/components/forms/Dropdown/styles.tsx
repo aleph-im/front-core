@@ -49,7 +49,7 @@ export const StyledDropdownOptionMenu = styled.div<{ isOpen: boolean }>`
       margin-top: 0.375rem;
       width: 100%;
       border-radius: 1.875rem;
-      overflow: scroll;
+      overflow: auto;
       max-height: 20rem;
       backdrop-filter: blur(10px);
 
