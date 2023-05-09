@@ -12,4 +12,8 @@ export const StyledNavlink = styled.li<NavbarLinkProps>`
     color: inherit;
     text-decoration: none;
   }
+  & a,
+  & span {
+    border-bottom: ${({ isActive }) => isActive && '1px solid'};
+  }
 `
