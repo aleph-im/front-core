@@ -16,6 +16,7 @@ export * from './Tabs'
 export * from './Tag'
 export * from './TextGradient'
 export * from './Tooltip'
+export * from './WalletPicker'
 
 export * from './forms/Checkbox'
 export * from './forms/CheckboxGroup'
