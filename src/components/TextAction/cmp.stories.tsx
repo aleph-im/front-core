@@ -19,10 +19,8 @@ const defaultArgs: TextActionProps = {
   position: 'left',
   type: 'body1',
   color: 'white',
-  useAction: null,
+  useAction: async () => useClipboard(defaultArgs.content),
 }
-// eslint-disable-next-line
-defaultArgs.useAction = async () => useClipboard(defaultArgs.content)
 
 const defaultParams = {
   design: {

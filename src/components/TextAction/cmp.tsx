@@ -51,7 +51,7 @@ export const TextAction = ({
   const [iconColor, setIconColor] = useState<string>(color)
   const [showIcon, setShowIcon] = useState<boolean>(true)
 
-  const animation = (fn: any) => {
+  const animation = (fn: () => void) => {
     fn()
     setShowIcon(false)
 

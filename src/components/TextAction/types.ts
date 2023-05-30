@@ -18,5 +18,5 @@ export type TextActionProps = {
   children?: ReactNode
   size: number
   icon: IconName
-  useAction: any
+  useAction: () => void
 }
