@@ -1,33 +1,26 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Col, Row } from '../Grid'
 import Button from '../Button'
 import Icon from '../Icon'
 import { StyledPicker, WalletPickerText } from './styles'
-import { NetworkProps, PickerProps, WalletProps } from './types'
+import { NetworkProps, PickerProps } from './types'
 
 export const WalletPicker = ({
   size,
   backgroundColor = '#222134',
   networks,
+  address,
+  onConnect,
 }: PickerProps) => {
+  const slicedAddress = useMemo(
+    () => `${address?.slice(0, 4)}...${address?.slice(-4)}`,
+    [address],
+  )
+
   const [currentNetwork, setCurrentNetwork] = useState<NetworkProps>()
-  const [account, setAccount] = useState<string>('')
 
   const handleClick = (network: NetworkProps) => {
     setCurrentNetwork(network)
-  }
-
-  const handleConnect = async (wallet: WalletProps) => {
-    try {
-      const account = await wallet.callback()
-      setAccount(account)
-    } catch (e: any) {
-      console.log('An error has occured', e)
-    }
-  }
-
-  const slicedAccount = () => {
-    return `${account?.slice(0, 4)}...${account?.slice(-4)}`
   }
 
   return (
@@ -90,14 +83,14 @@ export const WalletPicker = ({
             <Col key={wallet.name}>
               <div style={{ display: 'block', textAlign: 'center' }}>
                 <Button
-                  onClick={() => handleConnect(wallet)}
+                  onClick={() => onConnect(wallet.name, wallet.provider())}
                   as="button"
                   variant="tertiary"
                   color="main0"
                   kind="neon"
                   size={size}
                 >
-                  {account.length === 0 ? wallet.name : slicedAccount()}
+                  {address ? slicedAddress : wallet.name}
                   <Icon
                     style={{ margin: '0 10px' }}
                     name={wallet.icon}

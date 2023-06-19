@@ -6,7 +6,7 @@ export type WalletProps = {
   name: string
   icon: IconName
   color: string
-  callback: any
+  provider: () => any
 }
 
 export type NetworkProps = {
@@ -19,6 +19,8 @@ export type PickerProps = {
   size: PickerSize
   backgroundColor?: string
   networks: NetworkProps[]
+  address?: string
+  onConnect: (chain: string, provider: any) => any
 }
 
 export type StyledPickerProps = {
