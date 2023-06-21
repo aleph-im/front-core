@@ -71,10 +71,21 @@ const Template: StoryFn<typeof WalletPicker> = ({
   networks,
 }: PickerProps) => {
   const [address, setAddress] = React.useState<string | undefined>(undefined)
+  const [balance, setBalance] = React.useState<number | undefined>(undefined)
+  const [addressHref, setAddressHref] = React.useState<string | undefined>(
+    undefined,
+  )
 
   const onConnect = async (_chain: string, provider: any) => {
     const address = await connectToEthereum(provider)
     setAddress(address)
+    setAddressHref('https://etherscan.io/address/' + address)
+    setBalance(Math.random() * 10 ** 6)
+  }
+
+  const onDisconnect = () => {
+    setAddress(undefined)
+    setBalance(undefined)
   }
 
   return (
@@ -82,8 +93,11 @@ const Template: StoryFn<typeof WalletPicker> = ({
       <WalletPicker
         size={size}
         networks={networks}
-        onConnect={onConnect}
         address={address}
+        balance={balance}
+        onConnect={onConnect}
+        onDisconnect={onDisconnect}
+        addressHref={addressHref}
       />
     </>
   )

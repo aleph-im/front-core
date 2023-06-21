@@ -26,3 +26,7 @@ export const WalletPickerText = styled.div<StyledPickerProps>`
     `
   }}
 `
+
+export const BottomBorderedDiv = styled.div`
+  border-bottom: 1px solid #ffffff33;
+`

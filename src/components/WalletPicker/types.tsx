@@ -20,7 +20,10 @@ export type PickerProps = {
   backgroundColor?: string
   networks: NetworkProps[]
   address?: string
-  onConnect: (chain: string, provider: any) => any
+  balance?: number
+  onDisconnect: () => void
+  onConnect: (chain: string, provider: any) => void
+  addressHref?: string
 }
 
 export type StyledPickerProps = {
