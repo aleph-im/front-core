@@ -13,21 +13,21 @@ export default {
   },
 }
 
-const connectToEthereum = async () => {
-  if (typeof window?.ethereum === 'undefined') {
-    console.log('MetaMask is not installed!')
-  }
+const connectToEthereum = async (provider: any) => {
+  if (!provider) throw new Error('No provider found')
+
   try {
-    const accounts = await window?.ethereum.request({
+    const accounts = await provider.request({
       method: 'eth_requestAccounts',
     })
-    await window?.ethereum.request({
+    await provider.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: '0x1' }],
     })
+
     return accounts[0]
   } catch (err) {
-    console.log('An error was occured', err)
+    console.log('An error has occured', err)
   }
 }
 
@@ -35,7 +35,7 @@ const metamaskForETH: WalletProps = {
   name: 'Metamask',
   icon: 'circle',
   color: 'orange',
-  callback: connectToEthereum,
+  provider: () => window.ethereum,
 }
 
 const ethereum: NetworkProps = {
@@ -50,11 +50,9 @@ const bitcoin: NetworkProps = {
   wallets: [],
 }
 
-const networks: NetworkProps[] = [ethereum, bitcoin]
-
 const defaultArgs: Partial<PickerProps> = {
   size: 'regular',
-  networks: networks,
+  networks: [ethereum, bitcoin],
 }
 
 const defaultParams = {
@@ -68,11 +66,42 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: StoryFn<typeof WalletPicker> = (args) => (
-  <>
-    <WalletPicker {...args} />
-  </>
-)
+const Template: StoryFn<typeof WalletPicker> = ({
+  size,
+  networks,
+}: PickerProps) => {
+  const [address, setAddress] = React.useState<string | undefined>(undefined)
+  const [balance, setBalance] = React.useState<number | undefined>(undefined)
+  const [addressHref, setAddressHref] = React.useState<string | undefined>(
+    undefined,
+  )
+
+  const onConnect = async (_chain: string, provider: any) => {
+    const address = await connectToEthereum(provider)
+    setAddress(address)
+    setAddressHref('https://etherscan.io/address/' + address)
+    setBalance(Math.random() * 10 ** 6)
+  }
+
+  const onDisconnect = () => {
+    setAddress(undefined)
+    setBalance(undefined)
+  }
+
+  return (
+    <>
+      <WalletPicker
+        size={size}
+        networks={networks}
+        address={address}
+        balance={balance}
+        onConnect={onConnect}
+        onDisconnect={onDisconnect}
+        addressHref={addressHref}
+      />
+    </>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {
