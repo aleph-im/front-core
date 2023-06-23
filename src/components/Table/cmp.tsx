@@ -213,7 +213,17 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
       </thead>
       <tbody>
         {sortedData.map((row, rowIndex) => (
-          <Row key={row.key} {...{ row, rowIndex, columns }} />
+          <Row
+            key={row.key}
+            {...{
+              row,
+              rowIndex,
+              columns,
+              rowRender: props.rowRender,
+              rowProps: props.rowProps,
+              oddRowNoise: props.oddRowNoise,
+            }}
+          />
         ))}
       </tbody>
     </StyledTable>
