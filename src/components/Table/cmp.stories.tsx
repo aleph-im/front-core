@@ -23,9 +23,10 @@ const dataArgs = {
   columns: [
     {
       label: 'Name',
-      selector: (row: MockDataRow) => row.name,
       sortable: true,
-      cell: (row: MockDataRow) => (
+      width: '50%',
+      sortBy: (row: MockDataRow) => row.name,
+      render: (row: MockDataRow) => (
         <div>
           <strong>{row.name}</strong>
           {row.gender !== 'undisclosed' && (
@@ -42,19 +43,19 @@ const dataArgs = {
     },
     {
       label: 'Age',
-      selector: (row: MockDataRow) => row.age,
+      render: (row: MockDataRow) => row.age,
       sortable: true,
       align: 'right',
     },
     {
       label: 'Job',
-      selector: (row: MockDataRow) => row.job,
+      render: (row: MockDataRow) => row.job,
       sortable: false,
       align: 'center',
     },
     {
       label: 'Number of pets',
-      selector: (row: MockDataRow) =>
+      render: (row: MockDataRow) =>
         Object.values(row.pets as Pets).reduce(
           (acc: number, curr: number): number => acc + curr,
           0,
