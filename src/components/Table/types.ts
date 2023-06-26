@@ -5,52 +5,52 @@ import {
   TdHTMLAttributes,
 } from 'react'
 
-export type BorderType = 'none' | 'dashed' | 'solid'
-export type AlignType = 'left' | 'center' | 'right'
+export type TableBorderType = 'none' | 'dashed' | 'solid'
+export type TableAlignType = 'left' | 'center' | 'right'
 
-export type Row<R extends Record<string, unknown>> = {
+export type TableRow<R extends Record<string, unknown>> = {
   rowRender?: (row: R, rowIndex: number) => ReactNode
   rowProps?: (row: R, rowIndex: number) => HTMLAttributes<HTMLTableRowElement>
   rowKey?: (row: R) => string
   oddRowNoise?: boolean
 }
 
-export type Column<R extends Record<string, unknown>> = {
+export type TableColumn<R extends Record<string, unknown>> = {
   label: string
   sortable?: boolean
-  align?: AlignType
+  align?: TableAlignType
   width?: string
   cellRender?: (
     row: R,
-    col: Column<R>,
+    col: TableColumn<R>,
     rowIndex: number,
     colIndex: number,
   ) => ReactNode
   cellProps?: (
     row: R,
-    col: Column<R>,
+    col: TableColumn<R>,
     rowIndex: number,
     colIndex: number,
   ) => HTMLAttributes<HTMLTableCellElement>
   cellKey?: (
     row: R,
-    col: Column<R>,
+    col: TableColumn<R>,
     rowIndex: number,
     colIndex: number,
   ) => string
   hcellProps?: (
-    col: Column<R>,
+    col: TableColumn<R>,
     colIndex: number,
   ) => HTMLAttributes<HTMLTableCellElement>
   hcellRender?: (
-    col: Column<R>,
+    col: TableColumn<R>,
     colIndex: number,
-    sortedColumn: SortedColumn,
-    setSortedColumn: (s: SortedColumn) => void,
+    sortedColumn: TableSortedColumn,
+    setSortedColumn: (s: TableSortedColumn) => void,
   ) => ReactNode
   render: (
     row: R,
-    col: Column<R>,
+    col: TableColumn<R>,
     rowIndex: number,
     colIndex: number,
   ) => ReactNode
@@ -60,34 +60,34 @@ export type Column<R extends Record<string, unknown>> = {
 
 export type TableProps<R extends Record<string, unknown>> =
   TableHTMLAttributes<HTMLTableElement> &
-    Row<R> & {
-      columns: Column<R>[]
+    TableRow<R> & {
+      columns: TableColumn<R>[]
       data: R[]
-      borderType: BorderType
+      borderType: TableBorderType
     }
 
-export type RowProps<R extends Record<string, unknown>> =
+export type TableRowProps<R extends Record<string, unknown>> =
   HTMLAttributes<HTMLTableRowElement> &
-    Row<R> & {
+    TableRow<R> & {
       row: R
-      columns: Column<R>[]
+      columns: TableColumn<R>[]
       rowIndex: number
     }
 
-export type CellProps<R extends Record<string, unknown>> =
+export type TableCellProps<R extends Record<string, unknown>> =
   TdHTMLAttributes<HTMLTableCellElement> & {
     row: R
-    col: Column<R>
+    col: TableColumn<R>
     rowIndex: number
     colIndex: number
   }
 
-export type SortedColumn = { column: string; asc: boolean }
+export type TableSortedColumn = { column: string; asc: boolean }
 
-export type HeaderCellProps<R extends Record<string, unknown>> =
+export type TableHeaderCellProps<R extends Record<string, unknown>> =
   TdHTMLAttributes<HTMLTableCellElement> & {
-    col: Column<R>
+    col: TableColumn<R>
     colIndex: number
-    sortedColumn: SortedColumn
-    setSortedColumn: (s: SortedColumn) => void
+    sortedColumn: TableSortedColumn
+    setSortedColumn: (s: TableSortedColumn) => void
   }

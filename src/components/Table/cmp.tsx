@@ -1,6 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import { StyledTable } from './styles'
-import { CellProps, HeaderCellProps, RowProps, TableProps } from './types'
+import {
+  TableCellProps,
+  TableHeaderCellProps,
+  TableRowProps,
+  TableProps,
+} from './types'
 import Icon from '../Icon'
 import tw from 'twin.macro'
 
@@ -11,13 +16,13 @@ function Row<R extends Record<string, unknown>>({
   rowRender,
   rowProps,
   oddRowNoise = false,
-}: RowProps<R>) {
+}: TableRowProps<R>) {
   const props = useMemo(() => {
     const rProps = rowProps?.(row, rowIndex) || {}
     const className =
       (rProps?.className ? `${rProps?.className} ` : '') +
       (oddRowNoise && rowIndex % 2 === 0 ? 'fx-noise-light' : '')
-    return { css: {}, ...rowProps, className }
+    return { css: {}, ...rProps, className }
   }, [rowIndex, oddRowNoise, row, rowProps])
 
   return (
@@ -40,7 +45,7 @@ function Cell<R extends Record<string, unknown>>({
   col,
   rowIndex,
   colIndex,
-}: CellProps<R>) {
+}: TableCellProps<R>) {
   const alignStyle = useMemo(() => {
     return col.align === 'center'
       ? tw`text-center`
@@ -73,7 +78,7 @@ function HeaderCell<R extends Record<string, unknown>>({
   colIndex,
   sortedColumn,
   setSortedColumn,
-}: HeaderCellProps<R>) {
+}: TableHeaderCellProps<R>) {
   const alignStyle = useMemo(() => {
     return col.align === 'center'
       ? tw`text-center`
