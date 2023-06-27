@@ -49,7 +49,7 @@ export const Checkbox = forwardRef(
 
     return (
       <StyledCheckboxContainer {...{ className }}>
-        <StyledInputContainer>
+        <StyledInputContainer {...{ label }}>
           <StyledInput
             {...{
               type: 'checkbox',

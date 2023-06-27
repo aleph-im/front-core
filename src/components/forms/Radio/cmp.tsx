@@ -49,7 +49,7 @@ export const Radio = forwardRef(
 
     return (
       <StyledRadioContainer {...{ className }}>
-        <StyledInputContainer>
+        <StyledInputContainer {...{ label }}>
           <StyledInput
             {...{
               type: 'radio',

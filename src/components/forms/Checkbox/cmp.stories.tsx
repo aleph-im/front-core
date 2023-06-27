@@ -11,7 +11,7 @@ export default {
 }
 
 const defaultArgs: Partial<CheckboxProps> = {
-  label: 'Select multiple options',
+  name: 'name',
 }
 
 const defaultParams = {

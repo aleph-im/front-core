@@ -11,7 +11,6 @@ export default {
 }
 
 const defaultArgs: Partial<RadioProps> = {
-  label: 'Select an option',
   name: 'group',
 }
 

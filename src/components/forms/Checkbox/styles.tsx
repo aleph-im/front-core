@@ -6,17 +6,21 @@ export const StyledCheckboxContainer = styled.div`
   align-items: center;
 `
 
-export const StyledInputContainer = styled.div`
-  flex: 0 0 auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  margin-right: 1.125rem;
-  border-radius: 0.5rem;
-  box-shadow: 0px 4px 24px #00000040;
+export const StyledInputContainer = styled.div<{ label?: string }>`
+  ${({ label }) => {
+    return css`
+      flex: 0 0 auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0px 4px 24px #00000040;
+      ${label ? 'margin-right: 1.125rem;' : ''}
+    `
+  }}
 `
 
 export const StyledInput = styled.input`
