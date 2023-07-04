@@ -211,6 +211,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
         transform: transale3d(0, 0, 0);
         text-decoration: none !important;
         z-index: 0;
+        transition: all 0.2s 0s ease-in-out;
 
         /* BORDER */
         &::after {
