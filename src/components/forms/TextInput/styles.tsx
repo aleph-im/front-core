@@ -5,26 +5,24 @@ import { ButtonProps } from './types'
 export const StyledTextInputField = styled.input.attrs(
   addClasses('tp-form'),
 )<ButtonProps>`
-  ${({ theme }) => {
-    return css`
-      box-sizing: border-box;
-      justify-content: space-between;
-      appearance: none;
-      outline: 0;
-      border: 0;
-      background: transparent;
-      color: ${theme.color.text};
-      padding: 0.5rem 2rem;
-      min-height: 2.75em;
-      width: 100%;
+  ${({ theme }) => css`
+    box-sizing: border-box;
+    justify-content: space-between;
+    appearance: none;
+    outline: 0;
+    border: 0;
+    background: transparent;
+    color: ${theme.color.text};
+    padding: 0.5rem 2rem;
+    min-height: 2.75em;
+    width: 100%;
 
-      &::placeholder {
-        text-transform: capitalize;
-        mix-blend-mode: normal;
-        opacity: 0.4;
-      }
-    `
-  }}
+    &::placeholder {
+      text-transform: capitalize;
+      mix-blend-mode: normal;
+      opacity: 0.4;
+    }
+  `}
 `
 
 export const StyledTextInputContainer = styled.div<ButtonProps>`

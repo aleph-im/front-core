@@ -13,6 +13,7 @@ export const TextArea = forwardRef(
       focus,
       error,
       placeholder = name,
+      variant = 'default',
       ...rest
     }: TextAreaProps,
     ref: ForwardedRef<HTMLTextAreaElement>,
@@ -30,6 +31,7 @@ export const TextArea = forwardRef(
             ref,
             placeholder,
             className: classes,
+            $variant: variant,
             ...rest,
           }}
         />

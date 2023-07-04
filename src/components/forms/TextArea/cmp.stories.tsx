@@ -46,3 +46,12 @@ Default.args = {
 Default.parameters = {
   ...defaultParams,
 }
+
+export const Code = Template.bind({})
+Code.args = {
+  ...defaultArgs,
+  variant: 'code',
+}
+Code.parameters = {
+  ...defaultParams,
+}
