@@ -1,4 +1,5 @@
 import React, {
+  FocusEvent,
   ForwardedRef,
   forwardRef,
   useCallback,
@@ -21,13 +22,29 @@ export const TextInput = forwardRef(
       button,
       buttonStyle = 'wrapped',
       placeholder = name,
+      onFocus: onFocusProp,
+      onBlur: onBlurProp,
       ...rest
     }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [isFocus, setIsFocus] = useState(focus)
-    const handleFocus = useCallback(() => setIsFocus(true), [setIsFocus])
-    const handleBlur = useCallback(() => setIsFocus(false), [setIsFocus])
+
+    const handleFocus = useCallback(
+      (e: FocusEvent<HTMLInputElement>) => {
+        setIsFocus(true)
+        onFocusProp && onFocusProp(e)
+      },
+      [onFocusProp],
+    )
+
+    const handleBlur = useCallback(
+      (e: FocusEvent<HTMLInputElement>) => {
+        setIsFocus(false)
+        onBlurProp && onBlurProp(e)
+      },
+      [onBlurProp],
+    )
 
     const isFocusClass = useMemo(
       () => (isFocus || focus ? '_focus' : ''),
@@ -53,10 +70,10 @@ export const TextInput = forwardRef(
               buttonStyle,
               placeholder,
               className: classes,
-              onFocus: handleFocus,
-              onBlur: handleBlur,
               name,
               ...rest,
+              onFocus: handleFocus,
+              onBlur: handleBlur,
             }}
           />
           {button}
