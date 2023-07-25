@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from 'react'
-import { FormErrorInfo } from '../FormError/types'
+import { FormError } from '../FormError/types'
 
 export type TextAreaVariant = 'default' | 'code'
 
@@ -10,7 +10,7 @@ export type TextAreaProps = InputHTMLAttributes<HTMLTextAreaElement> & {
   variant?: TextAreaVariant
 
   label?: string
-  error?: FormErrorInfo
+  error?: FormError
 
   // Force states
   focus?: boolean

@@ -34,7 +34,7 @@ Default.parameters = {
 export const Warning = Template.bind({})
 Warning.args = {
   ...defaultArgs,
-  error: { message: 'Warning message', type: 'warn' },
+  error: { message: 'Warning message', level: 'warn' },
 }
 Warning.parameters = {
   ...defaultParams,

@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { addClasses } from '../../utils'
-import tw from 'twin.macro'
+import { FormError } from './FormError/types'
 
-export const StyledInputWrapper = styled.div`
+export type StyledInputWrapperProps = {
+  error?: FormError
+}
+
+export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   max-width: 100%;
   min-width: 12.5rem;
 `
-
-export const StyledFormLabel = styled.label.attrs(addClasses('tp-body'))(() => [
-  tw`block mb-2.5`,
-])

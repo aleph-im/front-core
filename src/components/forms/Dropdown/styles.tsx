@@ -1,9 +1,15 @@
 import styled, { css } from 'styled-components'
 import Icon from '../../Icon'
 import tw from 'twin.macro'
+import { FormError } from '../FormError/types'
 
-export const StyledDropdown = styled.div<{ isOpen: boolean }>`
-  ${({ theme, isOpen }) => {
+export type StyledDropdownProps = {
+  isOpen: boolean
+  error?: FormError
+}
+
+export const StyledDropdown = styled.div<StyledDropdownProps>`
+  ${({ theme, isOpen, error }) => {
     return css`
       position: relative;
       display: flex;
@@ -22,11 +28,25 @@ export const StyledDropdown = styled.div<{ isOpen: boolean }>`
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      & {
-        ${isOpen &&
-        css`
-          border-color: ${theme.color.text};
-        `}
+      ${isOpen &&
+      css`
+        border-color: ${theme.color.text};
+      `}
+
+      && {
+        ${() => {
+          if (!error) return ''
+
+          if (error.level === 'warn') {
+            return css`
+              border-color: #ffd179;
+            `
+          } else {
+            return css`
+              border-color: #d92446;
+            `
+          }
+        }}
       }
     `
   }}
@@ -39,7 +59,7 @@ export const StyledDropdownIcon = styled(Icon).attrs(() => {
   }
 })(() => [tw`ml-auto`])
 
-export const StyledDropdownOptionMenu = styled.div<{ isOpen: boolean }>`
+export const StyledDropdownOptionMenu = styled.div<StyledDropdownProps>`
   ${({ isOpen }) => {
     return css`
       display: none;

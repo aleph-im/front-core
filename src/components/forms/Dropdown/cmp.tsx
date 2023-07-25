@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { useForwardRef } from '../../../hooks'
 import { useClickOutside } from '../../../hooks/useClickOutside'
-import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
+import { StyledInputWrapper } from '../styles.forms'
 import { DropdownContext } from './context'
 import {
   StyledDropdown,
@@ -15,12 +15,15 @@ import {
   StyledDropdownOptionMenu,
 } from './styles'
 import { DropdownProps } from './types'
+import FormLabel from '../FormLabel'
+import FormError from '../FormError'
 
 export const Dropdown = forwardRef(
   (
     {
       id,
       label,
+      error,
       value,
       defaultValue,
       onChange: parentOnChange,
@@ -100,14 +103,15 @@ export const Dropdown = forwardRef(
     return (
       <DropdownContext.Provider value={contextValue}>
         <StyledInputWrapper>
-          {label && <StyledFormLabel>{label}</StyledFormLabel>}
-          <StyledDropdown {...{ id, ref, onClick, isOpen, ...rest }}>
+          {label && <FormLabel label={label} error={error} />}
+          <StyledDropdown {...{ id, ref, onClick, isOpen, error, ...rest }}>
             {selectedText}
             <StyledDropdownIcon />
             <StyledDropdownOptionMenu isOpen={isOpen}>
               {children}
             </StyledDropdownOptionMenu>
           </StyledDropdown>
+          {error && <FormError error={error} />}
         </StyledInputWrapper>
       </DropdownContext.Provider>
     )

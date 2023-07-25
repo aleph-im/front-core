@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useId, useMemo, useState } from 'react'
 import FormError from '../FormError'
-import { StyledFormLabel } from '../styles.forms'
 import { CheckboxGroupContext } from './context'
 import { StyledCheckboxGroupContainer, StyledCheckboxContainer } from './styles'
 import { CheckboxGroupProps } from './types'
+import FormLabel from '../FormLabel'
 
 export const CheckboxGroup = ({
   name,
@@ -45,7 +45,7 @@ export const CheckboxGroup = ({
   return (
     <CheckboxGroupContext.Provider value={contextValue}>
       <StyledCheckboxGroupContainer {...{ direction, ...rest }}>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledCheckboxContainer direction={direction}>
           {children}
         </StyledCheckboxContainer>

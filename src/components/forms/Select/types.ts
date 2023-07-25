@@ -1,5 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes } from 'react'
-import { FormErrorInfo } from '../FormError/types'
+import { FormError } from '../FormError/types'
 
 export type SelectOption = {
   value: string
@@ -20,5 +20,5 @@ export type SelectProps = Omit<
   ) => void
 
   label?: string
-  error?: FormErrorInfo
+  error?: FormError
 }

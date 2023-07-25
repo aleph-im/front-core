@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, ReactNode } from 'react'
-import { FormErrorInfo } from '../FormError/types'
+import { FormError } from '../FormError/types'
 
 export type DropdownProps = Omit<
   InputHTMLAttributes<HTMLDivElement>,
@@ -13,6 +13,6 @@ export type DropdownProps = Omit<
   placeholder?: string
 
   label?: string
-  error?: FormErrorInfo
+  error?: FormError
   children: ReactNode
 }

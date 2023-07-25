@@ -7,9 +7,10 @@ import React, {
   useState,
 } from 'react'
 import FormError from '../FormError'
-import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
+import { StyledInputWrapper } from '../styles.forms'
 import { StyledTextInputField, StyledTextInputContainer } from './styles'
 import { TextInputProps } from './types'
+import FormLabel from '../FormLabel'
 
 export const TextInput = forwardRef(
   (
@@ -59,9 +60,9 @@ export const TextInput = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledTextInputContainer
-          {...{ button, buttonStyle, className: isFocusClass }}
+          {...{ button, buttonStyle, error, className: isFocusClass }}
         >
           <StyledTextInputField
             {...{

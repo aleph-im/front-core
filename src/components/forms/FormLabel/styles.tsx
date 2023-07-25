@@ -1,14 +1,16 @@
 import styled, { css } from 'styled-components'
 import tw from 'twin.macro'
 import { addClasses } from '../../../utils'
-import { FormErrorProps } from './types'
+import { FormLabelProps } from './types'
 
-export const StyledFormErrorContainer = styled.span.attrs(
+export const StyledFormLabelContainer = styled.span.attrs(
   addClasses('tp-body'),
-)<FormErrorProps>`
-  ${tw`flex items-center justify-start mt-2.5!`}
+)<FormLabelProps>`
+  ${tw`block mb-2.5!`}
 
   ${({ error }) => {
+    if (!error) return ''
+
     if (error.level === 'warn') {
       return css`
         color: #ffd179;

@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from 'react'
+import { FormError } from '../FormError/types'
 
 export type ChipInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -6,6 +7,7 @@ export type ChipInputProps = Omit<
 > & {
   placeholder?: string
   label?: string
+  error?: FormError
   onAdd?: (tag: string) => void
   onRemove?: (tag: string) => void
   defaultValue?: string[]

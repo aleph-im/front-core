@@ -2,9 +2,11 @@ import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
 import tw from 'twin.macro'
 import { TextAreaVariant } from './types'
+import { FormError } from '../FormError/types'
 
 type StyledTextAreaFieldProps = {
   $variant: TextAreaVariant
+  error?: FormError
 }
 
 export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProps>(
@@ -14,7 +16,7 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
     return addClasses(`${fxs}tp-form`)(props)
   },
 )<StyledTextAreaFieldProps>`
-  ${({ theme, $variant }) => css`
+  ${({ theme, $variant, error }) => css`
     ${tw`p-5`}
     appearance: none;
     border: none;
@@ -40,6 +42,22 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
     &:focus,
     &._focus {
       border-color: ${theme.color.text};
+    }
+
+    && {
+      ${() => {
+        if (!error) return ''
+
+        if (error.level === 'warn') {
+          return css`
+            border-color: #ffd179;
+          `
+        } else {
+          return css`
+            border-color: #d92446;
+          `
+        }
+      }}
     }
 
     &::placeholder {

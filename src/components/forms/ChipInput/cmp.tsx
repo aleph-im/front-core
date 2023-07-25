@@ -1,7 +1,7 @@
 import React, { useState, useCallback, forwardRef, ForwardedRef } from 'react'
 import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
 import Icon from '../../Icon'
-import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
+import { StyledInputWrapper } from '../styles.forms'
 import {
   StyledChip,
   StyledChipContainer,
@@ -11,6 +11,8 @@ import {
   StyledInput,
 } from './styles'
 import { ChipInputProps, ChipItemProps } from './types'
+import FormLabel from '../FormLabel'
+import FormError from '../FormError'
 
 const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
   const handleRemove = useCallback(() => onRemove(tag), [tag, onRemove])
@@ -30,6 +32,7 @@ export const ChipInput = forwardRef(
     {
       placeholder = 'Filter',
       label,
+      error,
       defaultValue,
       value,
       onAdd,
@@ -94,7 +97,7 @@ export const ChipInput = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledContainer ref={containerRef} isBig={isBig}>
           <StyledChipContainer isBig={isBig}>
             {tags.map((tag) => (
@@ -114,6 +117,7 @@ export const ChipInput = forwardRef(
             isBig={isBig}
           />
         </StyledContainer>
+        {error && <FormError error={error} />}
       </StyledInputWrapper>
     )
   },

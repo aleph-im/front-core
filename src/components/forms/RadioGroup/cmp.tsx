@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useId, useMemo, useState } from 'react'
 import FormError from '../FormError'
-import { StyledFormLabel } from '../styles.forms'
 import { RadioGroupContext } from './context'
 import { StyledRadioGroupContainer, StyledRadioContainer } from './styles'
 import { RadioGroupProps } from './types'
+import FormLabel from '../FormLabel'
 
 export const RadioGroup = ({
   id,
@@ -39,7 +39,7 @@ export const RadioGroup = ({
   return (
     <RadioGroupContext.Provider value={contextValue}>
       <StyledRadioGroupContainer {...{ direction, ...rest }}>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledRadioContainer direction={direction}>
           {children}
         </StyledRadioContainer>

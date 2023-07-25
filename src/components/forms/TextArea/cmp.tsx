@@ -1,8 +1,9 @@
 import React, { ForwardedRef, forwardRef, useMemo } from 'react'
 import FormError from '../FormError'
-import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
+import { StyledInputWrapper } from '../styles.forms'
 import { StyledTextAreaField } from './styles'
 import { TextAreaProps } from './types'
+import FormLabel from '../FormLabel'
 
 export const TextArea = forwardRef(
   (
@@ -25,13 +26,14 @@ export const TextArea = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledTextAreaField
           {...{
             ref,
             placeholder,
             className: classes,
             $variant: variant,
+            error,
             ...rest,
           }}
         />

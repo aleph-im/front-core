@@ -1,5 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
-import { FormErrorInfo } from '../FormError/types'
+import { FormError } from '../FormError/types'
 
 export type RadioGroupDirection = 'row' | 'column'
 export type RadioGroupValue =
@@ -22,5 +22,5 @@ export type RadioGroupProps = Omit<
   direction: RadioGroupDirection
   children: ReactNode
   label?: string
-  error?: FormErrorInfo
+  error?: FormError
 }

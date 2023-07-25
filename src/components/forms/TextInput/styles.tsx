@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
 import { ButtonProps } from './types'
+import { FormError } from '../FormError/types'
 
 export const StyledTextInputField = styled.input.attrs(
   addClasses('tp-form'),
@@ -25,8 +26,12 @@ export const StyledTextInputField = styled.input.attrs(
   `}
 `
 
-export const StyledTextInputContainer = styled.div<ButtonProps>`
-  ${({ theme, buttonStyle }) => {
+export type StyledTextInputContainerProps = ButtonProps & {
+  error?: FormError
+}
+
+export const StyledTextInputContainer = styled.div<StyledTextInputContainerProps>`
+  ${({ theme, buttonStyle, error }) => {
     return css`
       display: flex;
       align-items: center;
@@ -36,7 +41,23 @@ export const StyledTextInputContainer = styled.div<ButtonProps>`
       border-radius: 1.875rem;
 
       &._focus {
-        border: 1px solid ${theme.color.text}
+        border-color: ${theme.color.text};
+      }
+
+      && {
+        ${() => {
+          if (!error) return ''
+
+          if (error.level === 'warn') {
+            return css`
+              border-color: #ffd179;
+            `
+          } else {
+            return css`
+              border-color: #d92446;
+            `
+          }
+        }}
       }
 
       && > button,

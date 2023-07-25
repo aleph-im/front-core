@@ -7,9 +7,10 @@ import React, {
   useState,
 } from 'react'
 import FormError from '../FormError'
-import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
+import { StyledInputWrapper } from '../styles.forms'
 import { StyledMonacoEditor } from './styles'
 import { CodeEditorProps } from './types'
+import FormLabel from '../FormLabel'
 
 export const CodeEditor = forwardRef(
   (
@@ -40,7 +41,7 @@ export const CodeEditor = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledMonacoEditor
           {...{
             ref,

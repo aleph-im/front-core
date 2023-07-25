@@ -1,11 +1,22 @@
 import React, { forwardRef, ForwardedRef, useState, ChangeEvent } from 'react'
-import { StyledFormLabel, StyledInputWrapper } from '../styles.forms'
+import { StyledInputWrapper } from '../styles.forms'
 import { StyledSelect, StyledOption } from './styles'
 import { SelectProps } from './types'
+import FormLabel from '../FormLabel'
+import FormError from '../FormError'
 
 export const Select = forwardRef(
   (
-    { id, label, value, onChange, options, multiple, ...rest }: SelectProps,
+    {
+      id,
+      label,
+      error,
+      value,
+      onChange,
+      options,
+      multiple,
+      ...rest
+    }: SelectProps,
     ref: ForwardedRef<HTMLSelectElement>,
   ) => {
     const [selectedValue, setSelectedValue] = useState<string | string[]>(
@@ -23,7 +34,7 @@ export const Select = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <StyledFormLabel>{label}</StyledFormLabel>}
+        {label && <FormLabel label={label} error={error} />}
         <StyledSelect
           {...{
             id,
@@ -40,6 +51,7 @@ export const Select = forwardRef(
             </StyledOption>
           ))}
         </StyledSelect>
+        {error && <FormError error={error} />}
       </StyledInputWrapper>
     )
   },

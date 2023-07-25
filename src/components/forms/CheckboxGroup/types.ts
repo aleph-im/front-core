@@ -1,5 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
-import { FormErrorInfo } from '../FormError/types'
+import { FormError } from '../FormError/types'
 
 export type CheckboxGroupDirection = 'row' | 'column'
 export type CheckboxGroupValue =
@@ -24,5 +24,5 @@ export type CheckboxGroupProps = Omit<
   children: ReactNode
 
   label?: string
-  error?: FormErrorInfo
+  error?: FormError
 }
