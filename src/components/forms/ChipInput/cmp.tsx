@@ -98,7 +98,7 @@ export const ChipInput = forwardRef(
     return (
       <StyledInputWrapper>
         {label && <FormLabel label={label} error={error} />}
-        <StyledContainer ref={containerRef} isBig={isBig}>
+        <StyledContainer ref={containerRef} isBig={isBig} error={error}>
           <StyledChipContainer isBig={isBig}>
             {tags.map((tag) => (
               <ChipItem
