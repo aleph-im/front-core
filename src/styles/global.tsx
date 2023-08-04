@@ -30,7 +30,7 @@ import {
   getTextColorCss,
   getTypoCss,
 } from './utils'
-import tw, { GlobalStyles as TailwindGlobalStyles } from 'twin.macro'
+import tw, { GlobalStyles as TailwindGlobalStyles, theme } from 'twin.macro'
 
 export const GlobalStyles = () => (
   <>
@@ -153,35 +153,35 @@ function colorClasses(theme: DefaultTheme) {
 function functionalClasses() {
   return css`
     .bg-success {
-      background: #7cff79;
+      background: ${({ theme }) => theme.color.success};
       box-shadow: inset 3px 3px 9px rgba(255, 255, 255, 0.65),
         inset 0px 63px 60px rgba(145, 255, 189, 0.63),
         inset 8.375px 13.4px 46.75px rgba(252, 255, 96, 0.75);
     }
 
     .bg-warning {
-      background: #ffd179;
+      background: ${({ theme }) => theme.color.warn};
       box-shadow: inset 3px 3px 9px rgba(255, 255, 255, 0.65),
         inset 0px 63px 60px rgba(255, 138, 0, 0.63),
         inset 8.375px 13.4px 46.75px rgba(255, 135, 83, 0.75);
     }
 
     .bg-error {
-      background: #d92446;
+      background: ${({ theme }) => theme.color.error};
       box-shadow: inset 0px 1.675px 6px rgba(255, 255, 255, 0.17),
         inset -4px -1px 9px rgba(139, 99, 255, 0.19);
     }
 
     .gr-success {
-      background: linear-gradient(90deg, #eeff9e 0%, #3affcc 100%);
+      background: ${({ theme }) => theme.gradient.success.fn};
     }
 
     .gr-warning {
-      background: linear-gradient(90deg, #fff281 0%, #fbae18 100%);
+      background: ${({ theme }) => theme.gradient.warn.fn};
     }
 
     .gr-error {
-      background: linear-gradient(90deg, #ffb393 0%, #ff6161 90.62%);
+      background: ${({ theme }) => theme.gradient.error.fn};
     }
   `
 }

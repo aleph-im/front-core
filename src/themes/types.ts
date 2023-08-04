@@ -49,6 +49,10 @@ export type ThemeGradient = {
 
   extra0: Gradient
   extra1: Gradient
+
+  success: Gradient
+  warn: Gradient
+  error: Gradient
 }
 
 export type ThemeColor = {

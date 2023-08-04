@@ -107,9 +107,6 @@ WithError.args = {
 }
 WithError.parameters = {
   ...defaultParams,
-  controls: {
-    exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'],
-  },
 }
 
 // ---
@@ -118,11 +115,20 @@ export const WithWarning = Template.bind({})
 WithWarning.args = {
   ...defaultArgs,
   label: 'Label',
-  error: { message: 'Warning message', type: 'warn' },
+  error: { message: 'Warning message', level: 'warn' },
 }
 WithWarning.parameters = {
   ...defaultParams,
-  controls: {
-    exclude: [...defaultParams.controls.exclude, 'button', 'buttonStyle'],
-  },
+}
+
+// ---
+
+export const Disabled = Template.bind({})
+Disabled.args = {
+  ...defaultArgs,
+  value: 'text',
+  disabled: true,
+}
+Disabled.parameters = {
+  ...defaultParams,
 }

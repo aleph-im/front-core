@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import Icon from '../../Icon'
 import tw from 'twin.macro'
 import { FormError } from '../FormError/types'
+import { fieldDisabledCss, fieldErrorCss } from '../styles.forms'
 
 export type StyledDropdownProps = {
   isOpen: boolean
@@ -12,7 +13,7 @@ export type StyledDropdownOptionMenuProps = StyledDropdownProps & {
 }
 
 export const StyledDropdown = styled.div<StyledDropdownProps>`
-  ${({ theme, isOpen, error }) => {
+  ${({ theme, isOpen }) => {
     return css`
       position: relative;
       display: flex;
@@ -36,21 +37,9 @@ export const StyledDropdown = styled.div<StyledDropdownProps>`
         border-color: ${theme.color.text};
       `}
 
-      && {
-        ${() => {
-          if (!error) return ''
-
-          if (error.level === 'warn') {
-            return css`
-              border-color: #ffd179;
-            `
-          } else {
-            return css`
-              border-color: #d92446;
-            `
-          }
-        }}
-      }
+      ${fieldErrorCss}
+      
+      ${fieldDisabledCss}
     `
   }}
 `

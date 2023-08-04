@@ -31,6 +31,7 @@ export const Dropdown = memo(
         onChange: onChangeProp,
         multiple,
         children,
+        disabled,
         placeholder = 'Select an option',
         ...rest
       }: DropdownProps,
@@ -62,8 +63,10 @@ export const Dropdown = memo(
       }, [children, placeholder, valueSet])
 
       const onClick = useCallback(() => {
+        if (disabled) return
+
         setIsOpen(!isOpen)
-      }, [isOpen, setIsOpen])
+      }, [disabled, isOpen])
 
       const close = useCallback(() => {
         setIsOpen(false)
@@ -81,6 +84,8 @@ export const Dropdown = memo(
 
       const onChange = useCallback(
         (newValueSet: Set<string>) => {
+          if (disabled) return
+
           newValueSet = new Set(newValueSet)
 
           if (!multiple) {
@@ -92,7 +97,7 @@ export const Dropdown = memo(
             onChangeProp(multiple ? newValue : newValue[0])
           }
         },
-        [multiple, onChangeProp],
+        [disabled, multiple, onChangeProp],
       )
 
       const contextValue = useMemo(() => {
@@ -120,7 +125,7 @@ export const Dropdown = memo(
             {label && <FormLabel label={label} error={error} />}
             <StyledDropdown
               tabIndex={-1}
-              {...{ ref, onClick, isOpen, error, ...rest }}
+              {...{ ref, onClick, isOpen, error, disabled, ...rest }}
             >
               {selectedText}
               <StyledDropdownIcon />

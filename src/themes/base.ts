@@ -78,6 +78,24 @@ const gradient: ThemeGradient = {
     deg: 90,
     fn: 'linear-gradient(90deg, #F17E4C 0%, #98203D 90.62%)',
   },
+  success: {
+    colors: ['#EEFF9E', '#3AFFCC'],
+    stops: [0, 100],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #EEFF9E 0%, #3AFFCC 100%)',
+  },
+  warn: {
+    colors: ['#FFF281', '#FBAE18'],
+    stops: [0, 100],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #FFF281 0%, #FBAE18 100%)',
+  },
+  error: {
+    colors: ['#FFB393', '#FF6161'],
+    stops: [0, 90.62],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #FFB393 0%, #FF6161 90.62%)',
+  },
 }
 
 const font: ThemeFont = {

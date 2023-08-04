@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
 import { StyledTextInputContainer } from '../TextInput/styles'
+import { fieldPlaceholderCss } from '../styles.forms'
 
 export const StyledContainer = styled(StyledTextInputContainer)<{
   isBig: boolean
@@ -81,11 +82,7 @@ export const StyledInput = styled.input.attrs(addClasses('tp-form'))<{
       color: ${theme.color.text};
       background-color: transparent;
 
-      &::placeholder {
-        text-transform: capitalize;
-        mix-blend-mode: normal;
-        opacity: 0.4;
-      }
+      ${fieldPlaceholderCss}
     `
   }}
 `

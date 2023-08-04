@@ -3,6 +3,11 @@ import { addClasses } from '../../../utils'
 import tw from 'twin.macro'
 import { TextAreaVariant } from './types'
 import { FormError } from '../FormError/types'
+import {
+  fieldErrorCss,
+  fieldFocusCss,
+  fieldPlaceholderCss,
+} from '../styles.forms'
 
 type StyledTextAreaFieldProps = {
   $variant: TextAreaVariant
@@ -16,7 +21,7 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
     return addClasses(`${fxs}tp-form`)(props)
   },
 )<StyledTextAreaFieldProps>`
-  ${({ theme, $variant, error }) => css`
+  ${({ theme, $variant }) => css`
     ${tw`p-5`}
     appearance: none;
     border: none;
@@ -39,32 +44,11 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
       border-radius: 1.875rem;
     `}
 
-    &:focus,
-    &._focus {
-      border-color: ${theme.color.text};
-    }
+    ${fieldFocusCss}
 
-    && {
-      ${() => {
-        if (!error) return ''
+    ${fieldErrorCss}
 
-        if (error.level === 'warn') {
-          return css`
-            border-color: #ffd179;
-          `
-        } else {
-          return css`
-            border-color: #d92446;
-          `
-        }
-      }}
-    }
-
-    &::placeholder {
-      text-transform: capitalize;
-      mix-blend-mode: normal;
-      opacity: 0.4;
-    }
+    ${fieldPlaceholderCss}
 
     &::-webkit-resizer {
       display: none;

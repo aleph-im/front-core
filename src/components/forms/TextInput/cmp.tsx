@@ -20,6 +20,7 @@ export const TextInput = forwardRef(
       className,
       focus,
       error,
+      disabled,
       button,
       buttonStyle = 'wrapped',
       placeholder = name,
@@ -62,7 +63,7 @@ export const TextInput = forwardRef(
       <StyledInputWrapper>
         {label && <FormLabel label={label} error={error} />}
         <StyledTextInputContainer
-          {...{ button, buttonStyle, error, className: isFocusClass }}
+          {...{ button, buttonStyle, error, className: isFocusClass, disabled }}
         >
           <StyledTextInputField
             {...{
@@ -72,6 +73,7 @@ export const TextInput = forwardRef(
               placeholder,
               className: classes,
               name,
+              disabled,
               ...rest,
               onFocus: handleFocus,
               onBlur: handleBlur,

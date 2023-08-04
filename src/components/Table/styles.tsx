@@ -10,10 +10,6 @@ export const StyledTable = styled.table<TableProps<any>>`
       border-collapse: collapse;
       border-spacing: 0 0.625rem;
 
-      thead {
-        text-transform: uppercase;
-      }
-
       td,
       th {
         &:first-child {

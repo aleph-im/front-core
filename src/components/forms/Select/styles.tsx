@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components'
 import { getBackgroundGradientCss } from '../../../styles'
 import { addClasses } from '../../../utils'
+import {
+  fieldDisabledCss,
+  fieldErrorCss,
+  fieldPlaceholderCss,
+} from '../styles.forms'
 
 export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
   ${({ theme }) => {
@@ -40,6 +45,12 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       &:focus {
         border-color: ${theme.color.text};
       }
+
+      ${fieldPlaceholderCss}
+
+      ${fieldDisabledCss}
+
+      ${fieldErrorCss}
     `
   }}
 `

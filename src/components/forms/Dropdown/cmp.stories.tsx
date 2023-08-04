@@ -92,3 +92,13 @@ Multiselect.args = {
 Multiselect.parameters = {
   ...defaultParams,
 }
+
+// ---
+export const Disabled = Template.bind({})
+Disabled.args = {
+  ...defaultArgs,
+  disabled: true,
+}
+Disabled.parameters = {
+  ...defaultParams,
+}

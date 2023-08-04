@@ -2,6 +2,11 @@ import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
 import { ButtonProps } from './types'
 import { FormError } from '../FormError/types'
+import {
+  fieldDisabledCss,
+  fieldErrorCss,
+  fieldPlaceholderCss,
+} from '../styles.forms'
 
 export const StyledTextInputField = styled.input.attrs(
   addClasses('tp-form'),
@@ -18,20 +23,20 @@ export const StyledTextInputField = styled.input.attrs(
     min-height: 2.75em;
     width: 100%;
 
-    &::placeholder {
-      text-transform: capitalize;
-      mix-blend-mode: normal;
-      opacity: 0.4;
-    }
+    ${fieldPlaceholderCss}
+
+    ${fieldDisabledCss}
+    opacity: 1;
   `}
 `
 
 export type StyledTextInputContainerProps = ButtonProps & {
   error?: FormError
+  disabled?: boolean
 }
 
 export const StyledTextInputContainer = styled.div<StyledTextInputContainerProps>`
-  ${({ theme, buttonStyle, error }) => {
+  ${({ theme, buttonStyle }) => {
     return css`
       display: flex;
       align-items: center;
@@ -43,22 +48,10 @@ export const StyledTextInputContainer = styled.div<StyledTextInputContainerProps
       &._focus {
         border-color: ${theme.color.text};
       }
+      
+      ${fieldDisabledCss}
 
-      && {
-        ${() => {
-          if (!error) return ''
-
-          if (error.level === 'warn') {
-            return css`
-              border-color: #ffd179;
-            `
-          } else {
-            return css`
-              border-color: #d92446;
-            `
-          }
-        }}
-      }
+      ${fieldErrorCss}
 
       && > button,
       & > a {
