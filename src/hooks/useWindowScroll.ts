@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
-export type WindowSize = { width: number; height: number }
+export type WindowSize = { scrollX: number; scrollY: number }
 
-export function useWindowSize(
+export function useWindowScroll(
   debounceDelay: number = 300,
 ): WindowSize | undefined {
   const [value, setValue] = useState<WindowSize>()
@@ -11,9 +11,11 @@ export function useWindowSize(
     let timmerId: NodeJS.Timeout
 
     function update() {
+      console.log('uuu')
+
       setValue({
-        width: window.outerWidth,
-        height: window.outerHeight,
+        scrollX: window.scrollX,
+        scrollY: window.scrollY,
       })
     }
 
@@ -23,11 +25,11 @@ export function useWindowSize(
     }
 
     update()
-    window.addEventListener('resize', debouncedUpdate)
+    window.addEventListener('scroll', debouncedUpdate)
 
     return () => {
       timmerId && clearTimeout(timmerId)
-      window.removeEventListener('resize', debouncedUpdate)
+      window.removeEventListener('scroll', debouncedUpdate)
     }
   }, [debounceDelay])
 

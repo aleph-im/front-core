@@ -98,9 +98,11 @@ export const Notification = ({
             />
           ))}
           {notifications.length > 2 && (
-            <StyledClearButton onClick={clearAll}>
-              Clear all <StyledClearIcon />
-            </StyledClearButton>
+            <div tw="mt-4">
+              <StyledClearButton onClick={clearAll}>
+                Clear all <StyledClearIcon tw="ml-2" />
+              </StyledClearButton>
+            </div>
           )}
         </StyledContainer>,
         containerRef,

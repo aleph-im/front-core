@@ -14,7 +14,7 @@ export default {
 }
 
 const defaultArgs: Partial<NotificationProps> = {
-  max: 2,
+  max: 5,
 }
 
 const defaultParams = {

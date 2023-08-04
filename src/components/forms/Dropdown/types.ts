@@ -3,7 +3,7 @@ import { FormError } from '../FormError/types'
 
 export type DropdownProps = Omit<
   InputHTMLAttributes<HTMLDivElement>,
-  'onChange'
+  'onChange' | 'value'
 > & {
   name?: string
   multiple?: boolean

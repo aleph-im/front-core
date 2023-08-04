@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, {
   forwardRef,
   ForwardedRef,
   useState,
   useCallback,
   useMemo,
+  memo,
 } from 'react'
-import { useForwardRef } from '../../../hooks'
+import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
 import { useClickOutside } from '../../../hooks/useClickOutside'
 import { StyledInputWrapper } from '../styles.forms'
 import { DropdownContext } from './context'
@@ -17,107 +19,122 @@ import {
 import { DropdownProps } from './types'
 import FormLabel from '../FormLabel'
 import FormError from '../FormError'
+import { useWindowScroll } from '../../../hooks/useWindowScroll'
 
-export const Dropdown = forwardRef(
-  (
-    {
-      id,
-      label,
-      error,
-      value,
-      defaultValue,
-      onChange: parentOnChange,
-      multiple,
-      children,
-      placeholder = 'Select an option',
-      ...rest
-    }: DropdownProps,
-    fRef: ForwardedRef<HTMLDivElement>,
-  ) => {
-    const ref = useForwardRef(fRef)
+export const Dropdown = memo(
+  forwardRef(
+    (
+      {
+        label,
+        error,
+        value,
+        onChange: onChangeProp,
+        multiple,
+        children,
+        placeholder = 'Select an option',
+        ...rest
+      }: DropdownProps,
+      fRef: ForwardedRef<HTMLDivElement>,
+    ) => {
+      const ref = useForwardRef(fRef)
 
-    defaultValue = defaultValue || value || []
-    defaultValue = Array.isArray(defaultValue) ? defaultValue : [defaultValue]
+      const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const [valueSet, setValueSet] = useState<Set<string>>(new Set(defaultValue))
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+      const valueSet = useMemo(() => {
+        const val = value || []
+        const valueArray = Array.isArray(val) ? val : [val]
+        return new Set(valueArray)
+      }, [value])
 
-    const selectedText = useMemo(() => {
-      const values = Array.from(valueSet)
-      return values.length === 0
-        ? placeholder
-        : values.length > 3
-        ? `${values.length} options selected`
-        : (children as any[])
-            .filter((c) => valueSet.has(c.props.value))
-            .map((c) => (
-              <span key={c.props.value} tw="mr-5">
-                {c.props.children}
-              </span>
-            ))
-    }, [children, placeholder, valueSet])
+      const selectedText = useMemo(() => {
+        const values = Array.from(valueSet)
+        return values.length === 0
+          ? placeholder
+          : values.length > 3
+          ? `${values.length} options selected`
+          : (children as any[])
+              .filter((c) => valueSet.has(c.props.value))
+              .map((c) => (
+                <span key={c.props.value} tw="mr-5">
+                  {c.props.children}
+                </span>
+              ))
+      }, [children, placeholder, valueSet])
 
-    const onClick = useCallback(() => {
-      setIsOpen(!isOpen)
-    }, [isOpen, setIsOpen])
+      const onClick = useCallback(() => {
+        setIsOpen(!isOpen)
+      }, [isOpen, setIsOpen])
 
-    const close = useCallback(() => {
-      setIsOpen(false)
-    }, [setIsOpen])
+      const close = useCallback(() => {
+        setIsOpen(false)
+      }, [setIsOpen])
 
-    useClickOutside(close, [ref])
+      useClickOutside(close, [ref])
 
-    const contextValue = useMemo(() => {
-      function onChange(newValueSet: Set<string>) {
-        newValueSet = new Set(newValueSet)
-        setValueSet(newValueSet)
+      const windowSize = useWindowSize(0)
+      const windowScroll = useWindowScroll(0)
 
-        if (!multiple) {
-          setIsOpen(false)
-        }
+      const [size] = useBounds<HTMLDivElement>(undefined, ref, [
+        windowSize,
+        windowScroll,
+      ])
 
-        if (parentOnChange) {
-          const newValue = Array.from(newValueSet)
-          parentOnChange(multiple ? newValue : newValue[0])
-        }
-      }
+      const onChange = useCallback(
+        (newValueSet: Set<string>) => {
+          newValueSet = new Set(newValueSet)
 
-      return {
-        value: Array.from(valueSet),
-        valueSet,
-        onAdd(v: string) {
-          onChange(multiple ? valueSet.add(v) : new Set([v]))
-        },
-        onRemove(v: string) {
           if (!multiple) {
-            onChange(new Set([v]))
-            return
+            setIsOpen(false)
           }
 
-          valueSet.delete(v)
-          onChange(valueSet)
+          if (onChangeProp) {
+            const newValue = Array.from(newValueSet)
+            onChangeProp(multiple ? newValue : newValue[0])
+          }
         },
-      }
-    }, [multiple, valueSet, setValueSet, parentOnChange])
+        [multiple, onChangeProp],
+      )
 
-    return (
-      <DropdownContext.Provider value={contextValue}>
-        <StyledInputWrapper>
-          {label && <FormLabel label={label} error={error} />}
-          <StyledDropdown {...{ id, ref, onClick, isOpen, error, ...rest }}>
-            {selectedText}
-            <StyledDropdownIcon />
-            <StyledDropdownOptionMenu isOpen={isOpen}>
-              {children}
-            </StyledDropdownOptionMenu>
-          </StyledDropdown>
-          {error && <FormError error={error} />}
-        </StyledInputWrapper>
-      </DropdownContext.Provider>
-    )
-  },
+      const contextValue = useMemo(() => {
+        return {
+          value: Array.from(valueSet),
+          valueSet,
+          onAdd(v: string) {
+            onChange(multiple ? valueSet.add(v) : new Set([v]))
+          },
+          onRemove(v: string) {
+            if (!multiple) {
+              onChange(new Set([v]))
+              return
+            }
+
+            valueSet.delete(v)
+            onChange(valueSet)
+          },
+        }
+      }, [valueSet, onChange, multiple])
+
+      return (
+        <DropdownContext.Provider value={contextValue}>
+          <StyledInputWrapper>
+            {label && <FormLabel label={label} error={error} />}
+            <StyledDropdown
+              tabIndex={-1}
+              {...{ ref, onClick, isOpen, error, ...rest }}
+            >
+              {selectedText}
+              <StyledDropdownIcon />
+              <StyledDropdownOptionMenu isOpen={isOpen} size={size}>
+                {children}
+              </StyledDropdownOptionMenu>
+            </StyledDropdown>
+            {error && <FormError error={error} />}
+          </StyledInputWrapper>
+        </DropdownContext.Provider>
+      )
+    },
+  ),
 )
-
 Dropdown.displayName = 'Dropdown'
 
 export default Dropdown

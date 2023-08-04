@@ -1,4 +1,4 @@
-import React, { forwardRef, ForwardedRef, useState, ChangeEvent } from 'react'
+import React, { forwardRef, ForwardedRef, ChangeEvent } from 'react'
 import { StyledInputWrapper } from '../styles.forms'
 import { StyledSelect, StyledOption } from './styles'
 import { SelectProps } from './types'
@@ -19,16 +19,11 @@ export const Select = forwardRef(
     }: SelectProps,
     ref: ForwardedRef<HTMLSelectElement>,
   ) => {
-    const [selectedValue, setSelectedValue] = useState<string | string[]>(
-      value || options[0]?.value || '',
-    )
-
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
       const newValue = multiple
         ? Array.from(e.target.selectedOptions).map((o) => o.value)
         : e.target.value
 
-      setSelectedValue(newValue)
       onChange && onChange(e, newValue)
     }
 
@@ -39,7 +34,7 @@ export const Select = forwardRef(
           {...{
             id,
             ref,
-            value: selectedValue,
+            value,
             onChange: handleChange,
             multiple,
             ...rest,

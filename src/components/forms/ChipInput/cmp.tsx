@@ -1,4 +1,11 @@
-import React, { useState, useCallback, forwardRef, ForwardedRef } from 'react'
+/* eslint-disable react/prop-types */
+import React, {
+  useState,
+  useCallback,
+  forwardRef,
+  ForwardedRef,
+  memo,
+} from 'react'
 import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
 import Icon from '../../Icon'
 import { StyledInputWrapper } from '../styles.forms'
@@ -14,7 +21,7 @@ import { ChipInputProps, ChipItemProps } from './types'
 import FormLabel from '../FormLabel'
 import FormError from '../FormError'
 
-const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
+const ChipItem = memo(({ tag, onRemove }: ChipItemProps) => {
   const handleRemove = useCallback(() => onRemove(tag), [tag, onRemove])
 
   return (
@@ -25,104 +32,119 @@ const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
       </StyledChipRemoveButton>
     </StyledChip>
   )
-}
+})
+ChipItem.displayName = 'ChipItem'
 
-export const ChipInput = forwardRef(
-  (
-    {
-      placeholder = 'Filter',
-      label,
-      error,
-      defaultValue,
-      value,
-      onAdd,
-      onRemove,
-      onChange,
-    }: ChipInputProps,
-    ref: ForwardedRef<HTMLInputElement>,
-  ) => {
-    const [inputValue, setInputValue] = useState('')
-    const [tags, setTags] = useState<string[]>(defaultValue || value || [])
+export const ChipInput = memo(
+  forwardRef(
+    (
+      {
+        placeholder = 'Filter',
+        label,
+        error,
+        value,
+        onAdd,
+        onRemove,
+        onChange,
+      }: ChipInputProps,
+      ref: ForwardedRef<HTMLInputElement>,
+    ) => {
+      const [inputValue, setInputValue] = useState('')
 
-    const windowSize = useWindowSize()
+      const windowSize = useWindowSize()
 
-    const reff = useForwardRef(ref)
-    const [containerSize, containerRef] = useBounds<HTMLDivElement>(
-      undefined,
-      undefined,
-      [tags, windowSize],
-    )
-    const [inputSize, inputRef] = useBounds(undefined, reff, [tags, windowSize])
+      const reff = useForwardRef(ref)
+      const [containerSize, containerRef] = useBounds<HTMLDivElement>(
+        undefined,
+        undefined,
+        [value, windowSize],
+      )
+      const [inputSize, inputRef] = useBounds(undefined, reff, [
+        value,
+        windowSize,
+      ])
 
-    const containerHeight = containerSize?.height || 0
-    const inputHeight = inputSize?.height || 0
-    const isBig = containerHeight >= inputHeight * 2
+      const containerHeight = containerSize?.height || 0
+      const inputHeight = inputSize?.height || 0
+      const isBig = containerHeight >= inputHeight * 2
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInputValue(event.target.value)
-    }
+      const handleInputChange = (
+        event: React.ChangeEvent<HTMLInputElement>,
+      ) => {
+        setInputValue(event.target.value)
+      }
 
-    const handleRemoveTag = useCallback(
-      (tagToRemove: string) => {
-        const updatedTags = tags.filter((tag) => tag !== tagToRemove)
-        setTags(updatedTags)
-        onRemove && onRemove(tagToRemove)
-        onChange && onChange(updatedTags)
-      },
-      [tags, setTags, onRemove, onChange],
-    )
+      const handleRemoveTag = useCallback(
+        (tagToRemove: string) => {
+          if (!value) return
 
-    const handleInputKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLInputElement>) => {
-        const value = inputValue.trim()
+          const updatedTags = value.filter((tag) => tag !== tagToRemove)
 
-        if (event.key === 'Enter' && value !== '') {
-          event.preventDefault()
+          onRemove && onRemove(tagToRemove)
+          onChange && onChange(updatedTags)
+        },
+        [value, onRemove, onChange],
+      )
 
-          const newTags = [...tags.filter((tag) => tag !== value), value]
-          setTags(newTags)
-          setInputValue('')
-          onAdd && onAdd(value)
-          onChange && onChange(newTags)
-          return
-        }
+      const handleInputKeyDown = useCallback(
+        (event: React.KeyboardEvent<HTMLInputElement>) => {
+          const newTag = inputValue.trim()
 
-        if (event.key === 'Backspace' && value === '') {
-          const lastTag = tags[tags.length - 1]
-          handleRemoveTag(lastTag)
-        }
-      },
-      [inputValue, tags, onAdd, onChange, handleRemoveTag],
-    )
+          if (event.key === 'Enter' && newTag !== '') {
+            event.preventDefault()
 
-    return (
-      <StyledInputWrapper>
-        {label && <FormLabel label={label} error={error} />}
-        <StyledContainer ref={containerRef} isBig={isBig} error={error}>
-          <StyledChipContainer isBig={isBig}>
-            {tags.map((tag) => (
-              <ChipItem
-                key={tag}
-                {...{ tag, isBig, onRemove: handleRemoveTag }}
-              />
-            ))}
-          </StyledChipContainer>
-          <StyledInput
-            ref={inputRef}
-            type="text"
-            placeholder={placeholder}
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleInputKeyDown}
-            isBig={isBig}
-          />
-        </StyledContainer>
-        {error && <FormError error={error} />}
-      </StyledInputWrapper>
-    )
-  },
+            const newTags = [
+              ...(value || []).filter((tag) => tag !== newTag),
+              newTag,
+            ]
+
+            setInputValue('')
+            onAdd && onAdd(newTag)
+            onChange && onChange(newTags)
+
+            return
+          }
+
+          if (event.key === 'Backspace' && newTag === '') {
+            if (!value) return
+
+            const lastTag = value[value.length - 1]
+            handleRemoveTag(lastTag)
+          }
+        },
+        [inputValue, value, onAdd, onChange, handleRemoveTag],
+      )
+
+      return (
+        <StyledInputWrapper>
+          {label && <FormLabel label={label} error={error} />}
+          <StyledContainer ref={containerRef} isBig={isBig} error={error}>
+            {value && (
+              <StyledChipContainer isBig={isBig}>
+                {value.map((tag) => (
+                  <ChipItem
+                    key={tag}
+                    {...{ tag, isBig, onRemove: handleRemoveTag }}
+                  />
+                ))}
+              </StyledChipContainer>
+            )}
+            <StyledInput
+              ref={inputRef}
+              type="text"
+              placeholder={placeholder}
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleInputKeyDown}
+              isBig={isBig}
+            />
+          </StyledContainer>
+          {error && <FormError error={error} />}
+        </StyledInputWrapper>
+      )
+    },
+  ),
 )
-
 ChipInput.displayName = 'ChipInput'
 
 export default ChipInput

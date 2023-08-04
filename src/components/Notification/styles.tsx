@@ -24,8 +24,7 @@ export const StyledClearButton = styled(Button).attrs(() => {
     size: 'regular',
   }
 })`
-  ${tw`mt-4`}
-  flex: 1 0 auto;
+  ${tw`flex-1`}
 `
 
 export const StyledClearIcon = styled(Icon).attrs((props) => {
@@ -35,4 +34,6 @@ export const StyledClearIcon = styled(Icon).attrs((props) => {
     size: 'lg',
     className: 'ml-2.5',
   }
-})``
+})`
+  ${tw`ml-2`}
+`

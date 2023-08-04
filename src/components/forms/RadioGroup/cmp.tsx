@@ -1,52 +1,52 @@
-import React, { ChangeEvent, useId, useMemo, useState } from 'react'
+import React, { ChangeEvent, memo, useId, useMemo } from 'react'
 import FormError from '../FormError'
 import { RadioGroupContext } from './context'
 import { StyledRadioGroupContainer, StyledRadioContainer } from './styles'
 import { RadioGroupProps } from './types'
 import FormLabel from '../FormLabel'
 
-export const RadioGroup = ({
-  id,
-  name,
-  value,
-  defaultValue,
-  onChange: groupOnChange,
-  label,
-  direction,
-  children,
-  error,
-  ...rest
-}: RadioGroupProps) => {
-  const rndId = useId()
-  id = id || rndId
+export const RadioGroup = memo(
+  ({
+    id,
+    name: nameProp,
+    value,
+    onChange: onChangeProp,
+    label,
+    direction,
+    children,
+    error,
+    ...rest
+  }: RadioGroupProps) => {
+    const rndId = useId()
+    id = id || rndId
 
-  const [groupValue, setGroupValue] = useState(defaultValue || value)
-  const groupName = name || id
+    const name = nameProp || id
 
-  const contextValue = useMemo(
-    () => ({
-      name: groupName,
-      value: groupValue,
-      onChange(e: ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value
-        setGroupValue(value)
-        groupOnChange && groupOnChange(e, value)
-      },
-    }),
-    [groupName, groupValue, setGroupValue, groupOnChange],
-  )
+    const contextValue = useMemo(
+      () => ({
+        name,
+        value,
+        onChange(e: ChangeEvent<HTMLInputElement>) {
+          const value = e.target.value
+          onChangeProp && onChangeProp(e, value)
+        },
+      }),
+      [name, onChangeProp, value],
+    )
 
-  return (
-    <RadioGroupContext.Provider value={contextValue}>
-      <StyledRadioGroupContainer {...{ direction, ...rest }}>
-        {label && <FormLabel label={label} error={error} />}
-        <StyledRadioContainer direction={direction}>
-          {children}
-        </StyledRadioContainer>
-        {error && <FormError error={error} />}
-      </StyledRadioGroupContainer>
-    </RadioGroupContext.Provider>
-  )
-}
+    return (
+      <RadioGroupContext.Provider value={contextValue}>
+        <StyledRadioGroupContainer {...{ direction, ...rest }}>
+          {label && <FormLabel label={label} error={error} />}
+          <StyledRadioContainer direction={direction}>
+            {children}
+          </StyledRadioContainer>
+          {error && <FormError error={error} />}
+        </StyledRadioGroupContainer>
+      </RadioGroupContext.Provider>
+    )
+  },
+)
+RadioGroup.displayName = 'RadioGroup'
 
 export default RadioGroup

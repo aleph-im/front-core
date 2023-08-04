@@ -1,58 +1,60 @@
-import React, { ChangeEvent, useId, useMemo, useState } from 'react'
+import React, { ChangeEvent, useId, useMemo, memo } from 'react'
 import FormError from '../FormError'
 import { CheckboxGroupContext } from './context'
 import { StyledCheckboxGroupContainer, StyledCheckboxContainer } from './styles'
 import { CheckboxGroupProps } from './types'
 import FormLabel from '../FormLabel'
 
-export const CheckboxGroup = ({
-  name,
-  value,
-  defaultValue,
-  onChange: groupOnChange,
-  label,
-  direction,
-  children,
-  error,
-  ...rest
-}: CheckboxGroupProps) => {
-  const [groupValue, setGroupValue] = useState(
-    new Set(defaultValue || value || []),
-  )
+export const CheckboxGroup = memo(
+  ({
+    id,
+    name: nameProp,
+    value,
+    onChange: onChangeProp,
+    label,
+    direction,
+    children,
+    error,
+    ...rest
+  }: CheckboxGroupProps) => {
+    const rndId = useId()
+    id = id || rndId
 
-  const randomName = useId()
-  const groupName = name ? randomName : undefined
+    const name = nameProp || id
 
-  const contextValue = useMemo(
-    () => ({
-      name: groupName,
-      value: Array.from(groupValue),
-      valueSet: groupValue,
-      onChange(e: ChangeEvent<HTMLInputElement>) {
-        const checked = e.target.checked
-        const value = e.target.value
+    const valueSet = useMemo(() => new Set(value), [value])
 
-        checked ? groupValue.add(value) : groupValue.delete(value)
+    const contextValue = useMemo(
+      () => ({
+        name: name,
+        value: Array.from(valueSet),
+        valueSet,
+        onChange(e: ChangeEvent<HTMLInputElement>) {
+          const checked = e.target.checked
+          const value = e.target.value
 
-        const newValue = new Set(groupValue)
-        setGroupValue(newValue)
-        groupOnChange && groupOnChange(e, Array.from(newValue))
-      },
-    }),
-    [groupName, groupValue, setGroupValue, groupOnChange],
-  )
+          checked ? valueSet.add(value) : valueSet.delete(value)
 
-  return (
-    <CheckboxGroupContext.Provider value={contextValue}>
-      <StyledCheckboxGroupContainer {...{ direction, ...rest }}>
-        {label && <FormLabel label={label} error={error} />}
-        <StyledCheckboxContainer direction={direction}>
-          {children}
-        </StyledCheckboxContainer>
-        {error && <FormError error={error} />}
-      </StyledCheckboxGroupContainer>
-    </CheckboxGroupContext.Provider>
-  )
-}
+          const newValue = new Set(valueSet)
+          onChangeProp && onChangeProp(e, Array.from(newValue))
+        },
+      }),
+      [name, valueSet, onChangeProp],
+    )
+
+    return (
+      <CheckboxGroupContext.Provider value={contextValue}>
+        <StyledCheckboxGroupContainer {...{ direction, ...rest }}>
+          {label && <FormLabel label={label} error={error} />}
+          <StyledCheckboxContainer direction={direction}>
+            {children}
+          </StyledCheckboxContainer>
+          {error && <FormError error={error} />}
+        </StyledCheckboxGroupContainer>
+      </CheckboxGroupContext.Provider>
+    )
+  },
+)
+CheckboxGroup.displayName = 'CheckboxGroup'
 
 export default CheckboxGroup

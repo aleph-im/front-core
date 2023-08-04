@@ -31,31 +31,41 @@ const Template: StoryFn<typeof Dropdown> = (args) => {
     (_, i) => [`${i}`, `Option ${i}`, icons[i]],
   )
 
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(
-    new Set(args.value as string | string[]),
+  const [selectedIds, setSelectedIds] = useState<string | string[] | undefined>(
+    args.value,
   )
 
   const handleChange = useCallback(
     (value: string | string[]) => {
-      setSelectedIds(new Set(value))
+      setSelectedIds(value)
     },
     [setSelectedIds],
   )
 
-  const selectedOptions = useMemo(
-    () => options.filter(([k]) => selectedIds.has(k)),
-    [options, selectedIds],
-  )
+  const selectedOptions = useMemo(() => {
+    if (!selectedIds) return
+
+    const optsMap = new Map(Object.values(options).map((v) => [v[0], v]))
+
+    if (typeof selectedIds === 'string') {
+      return optsMap.get(selectedIds)
+    } else {
+      return selectedIds.map((s) => optsMap.get(s))
+    }
+  }, [options, selectedIds])
 
   return (
     <>
-      <Dropdown {...args} onChange={handleChange} tw="mb-5">
+      <Dropdown {...args} value={selectedIds} onChange={handleChange} tw="mb-5">
         {options.map(([id, label, icon]) => (
           <DropdownOption key={id} value={id}>
             <Icon name={icon} tw="mr-2" /> {label}
           </DropdownOption>
         ))}
       </Dropdown>
+      <br />
+      <button onClick={() => handleChange('')}>Reset value</button>
+      <br />
       <h6 tw="my-5">value:</h6>
       <pre>{JSON.stringify(selectedOptions, null, 2)}</pre>
     </>

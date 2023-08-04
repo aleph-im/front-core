@@ -7,6 +7,9 @@ export type StyledDropdownProps = {
   isOpen: boolean
   error?: FormError
 }
+export type StyledDropdownOptionMenuProps = StyledDropdownProps & {
+  size?: DOMRect
+}
 
 export const StyledDropdown = styled.div<StyledDropdownProps>`
   ${({ theme, isOpen, error }) => {
@@ -59,19 +62,35 @@ export const StyledDropdownIcon = styled(Icon).attrs(() => {
   }
 })(() => [tw`ml-auto`])
 
-export const StyledDropdownOptionMenu = styled.div<StyledDropdownProps>`
+export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMenuProps>(
+  (props) => {
+    const { size } = props
+
+    const y = (size?.y || 0) + (size?.height || 0)
+    const x = size?.x || 0
+    const width = size?.width || 200
+
+    return {
+      ...props,
+      style: {
+        transform: `translate3d(${x}px, ${y}px, 0)`,
+        width,
+      },
+    }
+  },
+)<StyledDropdownOptionMenuProps>`
   ${({ isOpen }) => {
     return css`
-      display: none;
-      position: absolute;
+      top: 0;
       left: 0;
-      top: 100%;
+      display: none;
+      position: fixed;
       margin-top: 0.375rem;
-      width: 100%;
       border-radius: 1.875rem;
       overflow: auto;
       max-height: 20rem;
       backdrop-filter: blur(10px);
+      z-index: 999;
 
       & {
         ${isOpen &&
