@@ -30,7 +30,7 @@ import {
   getTextColorCss,
   getTypoCss,
 } from './utils'
-import tw, { GlobalStyles as TailwindGlobalStyles, theme } from 'twin.macro'
+import tw, { GlobalStyles as TailwindGlobalStyles } from 'twin.macro'
 
 export const GlobalStyles = () => (
   <>
