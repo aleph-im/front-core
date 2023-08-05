@@ -1,13 +1,15 @@
 import { EditorProps } from '@monaco-editor/react'
 import { FormError } from '../FormError/types'
+import { HTMLAttributes } from 'react'
 
-export type CodeEditorProps = Omit<EditorProps, 'theme'> & {
-  placeholder?: string
+export type CodeEditorProps = Omit<EditorProps, 'theme'> &
+  HTMLAttributes<HTMLDivElement> & {
+    placeholder?: string
 
-  label?: string
-  error?: FormError
+    label?: string
+    error?: FormError
 
-  // Force states
-  focus?: boolean
-  disabled?: boolean
-}
+    // Force states
+    focus?: boolean
+    disabled?: boolean
+  }

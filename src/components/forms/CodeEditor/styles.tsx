@@ -7,23 +7,27 @@ import { fieldPlaceholderCss } from '../styles.forms'
 
 export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
   (props) => {
+    const { onFocus, onBlur, ...rest } = props
+
     return {
-      ...addClasses('fx-glass-base0 fx-glass-border-base0 tp-form')(props),
+      ...addClasses('fx-glass-base0 fx-glass-border-base0 tp-form')(rest),
       height: '100%',
       width: '100%',
       theme: 'vs-dark',
-      $theme: props.theme,
+      $theme: rest.theme,
       options: {
         minimap: { enabled: false },
         lineNumbers: 'off',
       },
       wrapperProps: {
         style: { padding: 0 },
+        onFocus,
+        onBlur,
       },
     } as EditorProps
   },
 )<CodeEditorProps & { $theme?: DefaultTheme }>`
-  ${({ $theme }) => css`
+  ${({ $theme, error }) => css`
     ${tw`p-5`}
     border-radius: 0.5rem;
     background: transparent;
@@ -70,11 +74,28 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
       }
     }
 
-    &._focus {
+    &&._focus,
+    &&:focus {
       border-color: ${$theme?.color.text};
       & .monaco-editor .view-overlays .current-line {
         display: block;
       }
+    }
+
+    && {
+      ${() => {
+        if (!error) return ''
+
+        if (error.level === 'warn') {
+          return css`
+            border-color: ${$theme?.color.warn};
+          `
+        } else {
+          return css`
+            border-color: ${$theme?.color.error};
+          `
+        }
+      }}
     }
   `}
 `

@@ -1,5 +1,6 @@
 import { EditorProps } from '@monaco-editor/react'
 import React, {
+  FocusEvent,
   ForwardedRef,
   forwardRef,
   useCallback,
@@ -20,13 +21,29 @@ export const CodeEditor = forwardRef(
       focus,
       error,
       placeholder = '// Write some code here',
+      onFocus: onFocusProp,
+      onBlur: onBlurProp,
       ...rest
     }: CodeEditorProps,
     ref: ForwardedRef<EditorProps>,
   ) => {
     const [isFocus, setIsFocus] = useState(focus)
-    const handleFocus = useCallback(() => setIsFocus(true), [setIsFocus])
-    const handleBlur = useCallback(() => setIsFocus(false), [setIsFocus])
+
+    const handleFocus = useCallback(
+      (e: FocusEvent<HTMLDivElement>) => {
+        setIsFocus(true)
+        onFocusProp && onFocusProp(e)
+      },
+      [onFocusProp],
+    )
+
+    const handleBlur = useCallback(
+      (e: FocusEvent<HTMLDivElement>) => {
+        setIsFocus(false)
+        onBlurProp && onBlurProp(e)
+      },
+      [onBlurProp],
+    )
 
     const isFocusClass = useMemo(
       () => (isFocus || focus ? '_focus' : ''),
@@ -35,7 +52,7 @@ export const CodeEditor = forwardRef(
 
     // @note: Storybook testing purposes
     const classes = useMemo(
-      () => isFocusClass + (className || ''),
+      () => (className ? `${className} ${isFocusClass}` : isFocusClass),
       [isFocusClass, className],
     )
 
@@ -47,9 +64,10 @@ export const CodeEditor = forwardRef(
             ref,
             placeholder,
             className: classes,
+            error,
+            ...rest,
             onFocus: handleFocus,
             onBlur: handleBlur,
-            ...rest,
           }}
         />
         {error && <FormError error={error} />}

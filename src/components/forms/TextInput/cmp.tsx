@@ -55,7 +55,7 @@ export const TextInput = forwardRef(
 
     // @note: Storybook testing purposes
     const classes = useMemo(
-      () => isFocusClass + (className || ''),
+      () => (className ? `${className} ${isFocusClass}` : isFocusClass),
       [isFocusClass, className],
     )
 
