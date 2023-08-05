@@ -56,18 +56,26 @@ export const CodeEditor = forwardRef(
       [isFocusClass, className],
     )
 
+    const handleEditorDidMount = useCallback(
+      (editor: any) => {
+        if (typeof ref === 'function') ref(editor as any)
+        else if (ref) ref.current = editor
+      },
+      [ref],
+    )
+
     return (
       <StyledInputWrapper>
         {label && <FormLabel label={label} error={error} />}
         <StyledMonacoEditor
           {...{
-            ref,
             placeholder,
             className: classes,
             error,
             ...rest,
             onFocus: handleFocus,
             onBlur: handleBlur,
+            onMount: handleEditorDidMount,
           }}
         />
         {error && <FormError error={error} />}

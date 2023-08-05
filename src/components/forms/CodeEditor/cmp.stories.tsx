@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import CodeEditor from './cmp'
 import { CodeEditorProps } from './types'
@@ -23,12 +23,20 @@ const defaultParams = {
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 const Template: StoryFn<typeof CodeEditor> = (args) => {
   const [value, setValue] = useState<string>(args.value as string)
+  const ref = useRef<HTMLDivElement>(null)
 
   return (
     <>
-      <CodeEditor {...args} value={value} onChange={(v) => setValue(v || '')} />
+      <CodeEditor
+        {...args}
+        value={value}
+        onChange={(v) => setValue((v as string) || '')}
+        ref={ref}
+      />
       <h6 tw="my-5">value:</h6>
       <pre>{value}</pre>
+
+      <button onClick={() => ref.current?.focus()}>Focus</button>
     </>
   )
 }
