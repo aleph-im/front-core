@@ -7,6 +7,7 @@ export type CodeEditorProps = Omit<EditorProps, 'theme'> &
     placeholder?: string
 
     label?: string
+    required?: boolean
     error?: FormError
 
     // Force states

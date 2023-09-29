@@ -46,6 +46,7 @@ export const ChipInput = memo(
         onAdd,
         onRemove,
         onChange,
+        required,
       }: ChipInputProps,
       ref: ForwardedRef<HTMLInputElement>,
     ) => {
@@ -117,7 +118,7 @@ export const ChipInput = memo(
 
       return (
         <StyledInputWrapper>
-          {label && <FormLabel label={label} error={error} />}
+          {label && <FormLabel {...{ label, error, required }} />}
           <StyledContainer ref={containerRef} isBig={isBig} error={error}>
             {value && (
               <StyledChipContainer isBig={isBig}>

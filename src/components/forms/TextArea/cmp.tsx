@@ -15,6 +15,7 @@ export const TextArea = forwardRef(
       error,
       placeholder = name,
       variant = 'default',
+      required,
       ...rest
     }: TextAreaProps,
     ref: ForwardedRef<HTMLTextAreaElement>,
@@ -26,7 +27,7 @@ export const TextArea = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <FormLabel label={label} error={error} />}
+        {label && <FormLabel {...{ label, error, required }} />}
         <StyledTextAreaField
           {...{
             ref,
@@ -34,6 +35,7 @@ export const TextArea = forwardRef(
             className: classes,
             $variant: variant,
             error,
+            required,
             ...rest,
           }}
         />

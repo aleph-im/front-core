@@ -15,6 +15,7 @@ export const CheckboxGroup = memo(
     direction,
     children,
     error,
+    required,
     ...rest
   }: CheckboxGroupProps) => {
     const rndId = useId()
@@ -45,7 +46,7 @@ export const CheckboxGroup = memo(
     return (
       <CheckboxGroupContext.Provider value={contextValue}>
         <StyledCheckboxGroupContainer {...{ direction, ...rest }}>
-          {label && <FormLabel label={label} error={error} />}
+          {label && <FormLabel {...{ label, error, required }} />}
           <StyledCheckboxContainer direction={direction}>
             {children}
           </StyledCheckboxContainer>

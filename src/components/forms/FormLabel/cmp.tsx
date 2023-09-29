@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyledFormLabelContainer } from './styles'
+import { StyledContainer, StyledRequiredSymbol } from './styles'
 import { FormLabelProps } from './types'
 
-export const FormLabel = ({ error, label }: FormLabelProps) => {
+export const FormLabel = ({ error, label, required }: FormLabelProps) => {
   return (
-    <StyledFormLabelContainer {...{ error, label }}>
-      {label}
-    </StyledFormLabelContainer>
+    <StyledContainer {...{ error, label }}>
+      {label} {required && <StyledRequiredSymbol>*</StyledRequiredSymbol>}
+    </StyledContainer>
   )
 }
 

@@ -23,6 +23,7 @@ export const CodeEditor = forwardRef(
       placeholder = '// Write some code here',
       onFocus: onFocusProp,
       onBlur: onBlurProp,
+      required,
       ...rest
     }: CodeEditorProps,
     ref: ForwardedRef<EditorProps>,
@@ -66,7 +67,7 @@ export const CodeEditor = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <FormLabel label={label} error={error} />}
+        {label && <FormLabel {...{ label, error, required }} />}
         <StyledMonacoEditor
           {...{
             placeholder,

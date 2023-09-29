@@ -15,6 +15,7 @@ export const RadioGroup = memo(
     direction,
     children,
     error,
+    required,
     ...rest
   }: RadioGroupProps) => {
     const rndId = useId()
@@ -37,7 +38,7 @@ export const RadioGroup = memo(
     return (
       <RadioGroupContext.Provider value={contextValue}>
         <StyledRadioGroupContainer {...{ direction, ...rest }}>
-          {label && <FormLabel label={label} error={error} />}
+          {label && <FormLabel {...{ label, error, required }} />}
           <StyledRadioContainer direction={direction}>
             {children}
           </StyledRadioContainer>

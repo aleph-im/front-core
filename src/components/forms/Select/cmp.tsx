@@ -15,6 +15,7 @@ export const Select = forwardRef(
       onChange,
       options,
       multiple,
+      required,
       ...rest
     }: SelectProps,
     ref: ForwardedRef<HTMLSelectElement>,
@@ -29,7 +30,7 @@ export const Select = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <FormLabel label={label} error={error} />}
+        {label && <FormLabel {...{ label, error, required }} />}
         <StyledSelect
           {...{
             id,
@@ -37,6 +38,7 @@ export const Select = forwardRef(
             value,
             onChange: handleChange,
             multiple,
+            required,
             ...rest,
           }}
         >

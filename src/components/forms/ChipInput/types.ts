@@ -5,14 +5,15 @@ export type ChipInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'onChange'
 > & {
+  value?: string[]
+  defaultValue?: string[]
   placeholder?: string
-  label?: string
-  error?: FormError
   onAdd?: (tag: string) => void
   onRemove?: (tag: string) => void
-  defaultValue?: string[]
-  value?: string[]
   onChange?: (value: string[]) => void
+
+  label?: string
+  error?: FormError
 }
 
 export type ChipItemProps = {

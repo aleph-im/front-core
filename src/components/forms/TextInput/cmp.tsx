@@ -26,6 +26,7 @@ export const TextInput = forwardRef(
       placeholder = name,
       onFocus: onFocusProp,
       onBlur: onBlurProp,
+      required,
       ...rest
     }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -61,7 +62,7 @@ export const TextInput = forwardRef(
 
     return (
       <StyledInputWrapper>
-        {label && <FormLabel label={label} error={error} />}
+        {label && <FormLabel {...{ label, error, required }} />}
         <StyledTextInputContainer
           {...{ button, buttonStyle, error, className: isFocusClass, disabled }}
         >
@@ -74,6 +75,7 @@ export const TextInput = forwardRef(
               className: classes,
               name,
               disabled,
+              required,
               ...rest,
               onFocus: handleFocus,
               onBlur: handleBlur,

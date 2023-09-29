@@ -33,6 +33,7 @@ export const Dropdown = memo(
         children,
         disabled,
         placeholder = 'Select an option',
+        required,
         ...rest
       }: DropdownProps,
       fRef: ForwardedRef<HTMLDivElement>,
@@ -122,7 +123,7 @@ export const Dropdown = memo(
       return (
         <DropdownContext.Provider value={contextValue}>
           <StyledInputWrapper>
-            {label && <FormLabel label={label} error={error} />}
+            {label && <FormLabel {...{ label, error, required }} />}
             <StyledDropdown
               tabIndex={-1}
               {...{ ref, onClick, isOpen, error, disabled, ...rest }}
