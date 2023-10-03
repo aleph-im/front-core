@@ -88,9 +88,7 @@ export function getGlassEffectCss(color: string, opts?: GlassOpts) {
               ${bg}
               background-image:
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
-                linear-gradient(84.86deg, #2260FF0C 65.23%, #1859FF00 99.89%),
-                linear-gradient(0deg, ${theme.color.background}, ${theme.color
-                .background});
+                linear-gradient(84.86deg, #2260FF0C 65.23%, #1859FF00 99.89%);
             `
           case 'base1':
             return css`
@@ -111,9 +109,7 @@ export function getGlassEffectCss(color: string, opts?: GlassOpts) {
               background: 
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(342.74deg, #2D113A66 22.13%, #43125900 67.01%),
-                linear-gradient(107.53deg, ${c[0]}4D 16.25%, ${c[1]}4D 82.42%),
-                linear-gradient(0deg, ${theme.color.background}, ${theme.color
-                .background});
+                linear-gradient(107.53deg, ${c[0]}4D 16.25%, ${c[1]}4D 82.42%);
             `
         }
       }

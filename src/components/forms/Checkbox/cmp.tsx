@@ -1,11 +1,4 @@
-import React, {
-  forwardRef,
-  ForwardedRef,
-  useCallback,
-  ChangeEvent,
-  useId,
-} from 'react'
-import { useCheckboxGroup } from '../CheckboxGroup/context'
+import React, { forwardRef, ForwardedRef } from 'react'
 import {
   StyledCheckboxContainer,
   StyledInput,
@@ -14,38 +7,11 @@ import {
   StyledCheckIcon,
 } from './styles'
 import { CheckboxProps } from './types'
+import { useCheckboxComponent } from './hook'
 
 export const Checkbox = forwardRef(
-  (
-    {
-      id,
-      label,
-      name,
-      value,
-      checked,
-      className,
-      onChange: onChangeProp,
-      ...rest
-    }: CheckboxProps,
-    ref: ForwardedRef<HTMLInputElement>,
-  ) => {
-    const rndId = useId()
-    id = id || rndId
-
-    const group = useCheckboxGroup()
-
-    const onChange = useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
-        onChangeProp && onChangeProp(e)
-        group && group.onChange(e)
-      },
-      [group, onChangeProp],
-    )
-
-    if (group) {
-      if (name === undefined) name = group.name
-      if (checked === undefined) checked = group.valueSet.has(value)
-    }
+  (props: CheckboxProps, ref: ForwardedRef<HTMLInputElement>) => {
+    const { className, id, label, ...rest } = useCheckboxComponent(props)
 
     return (
       <StyledCheckboxContainer {...{ className }}>
@@ -55,10 +21,6 @@ export const Checkbox = forwardRef(
               type: 'checkbox',
               id,
               ref,
-              name,
-              value,
-              checked,
-              onChange,
               ...rest,
             }}
           />

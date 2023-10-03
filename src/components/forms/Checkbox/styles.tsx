@@ -68,7 +68,6 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
 })`
   display: none;
   pointer-events: none;
-  content: '';
   width: 65%;
   height: 65%;
   background-color: transparent;
