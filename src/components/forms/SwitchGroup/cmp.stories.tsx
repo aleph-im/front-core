@@ -39,10 +39,7 @@ const Template: StoryFn<typeof SwitchGroup> = (args) => {
   )
 
   const handleChange = useCallback(
-    (
-      event: ChangeEvent<HTMLInputElement>,
-      groupValue: SwitchGroupValue[],
-    ) => {
+    (event: ChangeEvent<HTMLInputElement>, groupValue: SwitchGroupValue[]) => {
       setSelectedIds(new Set(groupValue))
     },
     [setSelectedIds],
