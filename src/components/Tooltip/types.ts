@@ -28,6 +28,8 @@ export type TooltipProps = {
   onOpen?: () => void
   onClose?: () => void
   onCloseClick?: () => void
+
+  containerRef?: Element | DocumentFragment
 } & (
   | {
       children: ReactNode & { ref?: RefObject<any> }

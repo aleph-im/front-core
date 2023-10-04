@@ -7,6 +7,7 @@ import {
   StyledHeaderCloseIcon,
 } from './styles'
 import { TooltipPosition, TooltipProps } from './types'
+import { createPortal } from 'react-dom'
 
 export const Tooltip = ({
   open: openProp,
@@ -22,6 +23,7 @@ export const Tooltip = ({
   onClose,
   onCloseClick,
   closeDelay = 200,
+  containerRef = document.body,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<any>()
@@ -115,16 +117,19 @@ export const Tooltip = ({
 
   return (
     <>
-      <StyledContainer
-        ref={tooltipRef}
-        {...{ position, isOpen: open, ...rest }}
-      >
-        <StyledHeaderContainer>
-          {header}
-          <StyledHeaderCloseIcon onClick={handleCloseClick} />
-        </StyledHeaderContainer>
-        <StyledContentContainer>{content}</StyledContentContainer>
-      </StyledContainer>
+      {createPortal(
+        <StyledContainer
+          ref={tooltipRef}
+          {...{ position, isOpen: open, ...rest }}
+        >
+          <StyledHeaderContainer>
+            {header}
+            <StyledHeaderCloseIcon onClick={handleCloseClick} />
+          </StyledHeaderContainer>
+          <StyledContentContainer>{content}</StyledContentContainer>
+        </StyledContainer>,
+        containerRef,
+      )}
       {children && (
         <span style={{ display: 'inline-block' }} ref={targetRef}>
           {children}
