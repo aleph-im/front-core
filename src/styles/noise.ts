@@ -29,6 +29,7 @@ export function getPlainNoiseEffectCss(color: string) {
     &::after {
       content: '';
       background-image: ${noiseImg};
+      background-size: 20rem;
       opacity: ${colorFilled[color].dotsOpacity};
       position: absolute;
       top: 0;
