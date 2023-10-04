@@ -58,6 +58,7 @@ export const StyledInputDot = styled.span`
     const [g0, g1] = theme.gradient.main0.colors
 
     return css`
+      position: relative;
       pointer-events: none;
       width: 65%;
       height: 65%;
@@ -65,8 +66,23 @@ export const StyledInputDot = styled.span`
       border-radius: 50%;
       z-index: 1;
 
-      ${StyledInput}:checked + & {
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
         background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
+        visibility: hidden;
+        clip-path: circle(0% at 50% 50%);
+        will-change: visibility clip-path;
+        transition: all ease-out 0.35s 0s;
+      }
+
+      ${StyledInput}:checked + &:after {
+        visibility: visible;
+        clip-path: circle(100% at 50% 50%);
       }
 
       ${StyledInput}:disabled + & {

@@ -66,7 +66,7 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
     name: 'check',
   }
 })`
-  display: none;
+  display: block;
   pointer-events: none;
   width: 65%;
   height: 65%;
@@ -74,9 +74,14 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
   color: #5cffb1;
   border-radius: 0.5rem;
   z-index: 1;
+  visibility: hidden;
+  clip-path: circle(0% at 0% 75%);
+  will-change: visibility clip-path;
+  transition: all ease-out 0.35s 0s;
 
   ${StyledInput}:checked + & {
-    display: block;
+    visibility: visible;
+    clip-path: circle(100% at 50% 50%);
   }
 
   ${StyledInput}:disabled + & {
