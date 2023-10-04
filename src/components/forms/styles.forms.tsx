@@ -7,7 +7,7 @@ export type StyledInputWrapperProps = {
 
 export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   max-width: 100%;
-  min-width: 12.5rem;
+  min-width: 10rem;
 `
 
 export const fieldErrorCss = css<{ error?: FormError }>`
