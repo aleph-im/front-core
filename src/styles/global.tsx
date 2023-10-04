@@ -19,7 +19,6 @@ import {
 import {
   colorFilled,
   getGradientNoiseEffectCss,
-  getNoiseSvgMaskCss,
   getPlainNoiseEffectCss,
   gradientFilled,
 } from './noise'
@@ -246,15 +245,6 @@ function effectClasses() {
     `,
   )
 
-  const noiseSvg = css`
-    ${[
-      ...noisePlainColors.map((x) => `.fx-noise-${x}::after`),
-      ...noiseGradientColors.map((x) => `.fx-noise-${x}`),
-    ].join(', ')} {
-      ${getNoiseSvgMaskCss()}
-    }
-  `
-
   const noisePlainCss = noisePlainColors.flatMap(
     (color) => css`
       .fx-noise-${color} {
@@ -277,7 +267,6 @@ function effectClasses() {
     ${glowMaxCss}
     ${glassCss}
     ${darkCss}
-    ${noiseSvg}
     ${noisePlainCss}
     ${noiseGradientCss}
   `
