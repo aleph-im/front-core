@@ -24,9 +24,8 @@ export function getPlainNoiseEffectCss(color: string) {
   return css`
     position: relative;
     background-color: ${colorFilled[color].backgroundColor};
-    z-index: 0;
 
-    &::after {
+    &::before {
       content: '';
       background-image: ${noiseImg};
       background-size: 20rem;
@@ -37,7 +36,8 @@ export function getPlainNoiseEffectCss(color: string) {
       width: 100%;
       height: 100%;
       border-radius: inherit;
-      z-index: -1;
+      z-index: 0;
+      pointer-events: none;
     }
   `
 }
