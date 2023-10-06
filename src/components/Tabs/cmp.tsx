@@ -46,8 +46,7 @@ export const Tabs = ({
   )
 
   const [barBounds, ref] = useBounds<HTMLDivElement>(undefined, undefined, [
-    selectedId,
-    windowSize,
+    parentBounds,
   ])
 
   const underscoreStyle = useMemo(() => {
