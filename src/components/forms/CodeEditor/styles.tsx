@@ -1,9 +1,8 @@
+import tw from 'twin.macro'
 import styled, { css, DefaultTheme } from 'styled-components'
 import Editor, { EditorProps } from '@monaco-editor/react'
 import { addClasses } from '../../../utils'
 import { CodeEditorProps } from './types'
-import tw from 'twin.macro'
-import { fieldPlaceholderCss } from '../styles.forms'
 
 export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
   (props) => {
@@ -37,7 +36,11 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
     height: 14rem;
     min-height: 3.25rem;
 
-    ${fieldPlaceholderCss}
+    &::placeholder {
+      mix-blend-mode: normal;
+      color: ${$theme?.color.text};
+      opacity: 0.4;
+    }
 
     & .monaco-editor {
       font-family: -apple-system, BlinkMacSystemFont, Segoe WPC, Segoe UI,
