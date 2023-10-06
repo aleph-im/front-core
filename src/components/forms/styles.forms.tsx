@@ -46,27 +46,27 @@ export const errorCss = css<{ error?: FormError }>`
   }
 `
 
-const disabledCss = css`
-  opacity: 0.5;
-  color: ${({ theme }) => theme.color.text}77;
-`
-
 export const fieldDisabledCss = css<{ disabled?: boolean }>`
   ${({ disabled }) => css`
-    ${disabled && disabledCss}
-
-    &:disabled,
-    &._disabled {
-      ${disabledCss}
-    }
+    ${disabled &&
+    css`
+      &,
+      &:disabled,
+      &._disabled {
+        opacity: 0.5;
+      }
+    `}
   `}
 `
 
 export const fieldPlaceholderCss = css`
-  &::placeholder {
-    mix-blend-mode: normal;
-    opacity: 0.4;
-  }
+  ${({ theme }) => css`
+    &::placeholder {
+      mix-blend-mode: normal;
+      color: ${theme.color.text};
+      opacity: 0.4;
+    }
+  `}
 `
 
 export const fieldFocusCss = css`

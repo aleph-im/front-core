@@ -22,11 +22,11 @@ export const StyledTextInputField = styled.input.attrs(
     padding: 0.5rem 2rem;
     min-height: 2.75em;
     width: 100%;
+    opacity: 1;
 
     ${fieldPlaceholderCss}
 
     ${fieldDisabledCss}
-    opacity: 1;
   `}
 `
 
