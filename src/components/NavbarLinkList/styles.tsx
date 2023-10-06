@@ -45,18 +45,23 @@ export const StyledList = styled.ul<NavbarLinkListProps>`
     withSlash,
     mobileDirection = 'column',
     desktopDirection = 'row',
+    mobileGap = mobileDirection === 'row',
+    desktopGap = true,
   }) => {
     return css`
       display: flex;
+      width: 100%;
       flex-direction: ${mobileDirection};
-      flex: 0 1 auto;
-      gap: ${theme.font.size.xl}rem;
+      gap: ${mobileGap ? theme.font.size.xl : 0}rem;
 
       ${getResponsiveCss(
         'md',
         css`
-          flex-direction: ${desktopDirection};
+          width: auto;
+          flex: 0 1 auto;
           align-items: center;
+          flex-direction: ${desktopDirection};
+          gap: ${desktopGap ? theme.font.size.xl : 0}rem;
 
           ${withSlash &&
           css`

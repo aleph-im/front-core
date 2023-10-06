@@ -18,6 +18,8 @@ export const NavbarLinkList = ({
   onlyMobile,
   desktopDirection,
   mobileDirection,
+  mobileGap,
+  desktopGap,
   withSlash,
   ...rest
 }: NavbarLinkListProps) => {
@@ -60,6 +62,8 @@ export const NavbarLinkList = ({
           withSlash,
           mobileDirection,
           desktopDirection,
+          mobileGap,
+          desktopGap,
         }}
       >
         {isCollapsed ? children && (children as any[]).slice(0, 1) : children}

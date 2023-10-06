@@ -76,7 +76,9 @@ const Template: StoryFn<typeof Navbar> = (args) => {
       >
         <NavbarLinkList withSlash collapsible="xl" onClick={handleCloseMenu}>
           {navLinks.map((link, i) => (
-            <NavbarLink key={i}>{link}</NavbarLink>
+            <NavbarLink key={i} isActive={!i}>
+              {link}
+            </NavbarLink>
           ))}
         </NavbarLinkList>
         <NavbarLinkList mobileDirection="row">
