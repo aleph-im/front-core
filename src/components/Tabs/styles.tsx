@@ -40,11 +40,13 @@ export const StyledTab = styled.div.attrs(
   }}
 `
 
-export const StyledLabel = styled.div.attrs(
-  addClasses('tp-info'),
-)<TabLabelProps>`
-  ${({ theme, disabled, labelPosition = 'top' }) => {
-    const multiplier = labelPosition === 'top' ? -1 : 1
+export const StyledLabel = styled.div.attrs(addClasses('tp-info'))<
+  Pick<TabLabelProps, 'position'> & {
+    disabled?: boolean
+  }
+>`
+  ${({ theme, position = 'top', disabled }) => {
+    const multiplier = position === 'top' ? -1 : 1
     const offset = theme.typo.info.size * multiplier
 
     return css`

@@ -1,4 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {
   StyledTabs,
   StyledTab,
@@ -6,12 +14,46 @@ import {
   StyledUnderscoreBar,
   StyledContainer,
 } from './styles'
-import { StyledTabType, TabLabelProps, TabsProps } from './types'
-import { useBounds, useWindowSize } from '../../hooks'
+import { StyledTabType, TabLabelProps, TabProps, TabsProps } from './types'
+import { useWindowSize } from '../../hooks'
 
-export const TabLabel = (props: TabLabelProps) => {
-  return <StyledLabel {...props}>{props.label}</StyledLabel>
-}
+export const Tab = forwardRef(
+  (
+    { id, name, label, selected, disabled, onTabSelected }: TabProps,
+    ref: ForwardedRef<HTMLDivElement>,
+  ) => {
+    const handleClick = useCallback(
+      () => onTabSelected(id),
+      [id, onTabSelected],
+    )
+
+    const labelProps: TabLabelProps | undefined = useMemo(
+      () =>
+        label ? (typeof label === 'string' ? { label } : label) : undefined,
+      [label],
+    )
+
+    return (
+      <StyledTab
+        ref={ref}
+        role="tab"
+        selected={selected}
+        aria-selected={selected ? 'true' : 'false'}
+        disabled={disabled}
+        aria-disabled={disabled ? 'true' : 'false'}
+        onClick={handleClick}
+      >
+        {name}
+        {labelProps && (
+          <StyledLabel {...labelProps} disabled={disabled}>
+            {labelProps.label}
+          </StyledLabel>
+        )}
+      </StyledTab>
+    )
+  },
+)
+Tab.displayName = 'Tab'
 
 export const Tabs = ({
   tabs,
@@ -30,7 +72,7 @@ export const Tabs = ({
 
   const windowSize = useWindowSize()
 
-  const handleClick = useCallback(
+  const handleTabSelected = useCallback(
     (id: string) => {
       if (id === selectedId) return
       setSelected(id)
@@ -39,42 +81,29 @@ export const Tabs = ({
     [onTabChange, selectedId],
   )
 
-  const [parentBounds, parentRef] = useBounds<HTMLDivElement>(
-    undefined,
-    undefined,
-    [selectedId, windowSize],
-  )
+  const ref = useRef<HTMLDivElement>(null)
+  const [underscoreStyle, setUnderscoreStyle] = useState({})
 
-  const [barBounds, ref] = useBounds<HTMLDivElement>(undefined, undefined, [
-    parentBounds,
-  ])
+  useEffect(() => {
+    if (!ref) return
 
-  const underscoreStyle = useMemo(() => {
-    if (!barBounds || !parentBounds) return {}
-
-    return {
-      left: (barBounds.x || 0) - (parentBounds.x || 0),
-      width: barBounds.width || 0,
-    }
-  }, [barBounds, parentBounds])
+    setUnderscoreStyle({
+      left: ref.current?.offsetLeft || 0,
+      width: ref.current?.offsetWidth || 0,
+    })
+  }, [windowSize, selectedId])
 
   return (
     <StyledContainer align={align}>
-      <StyledTabs role="tablist" ref={parentRef} {...rest}>
+      <StyledTabs role="tablist" {...rest}>
         {tabs.map((tab) => (
-          <StyledTab
-            ref={tab.id === selectedId ? ref : undefined}
+          <Tab
             key={tab.id}
-            role="tab"
-            selected={tab.id === selectedId}
-            aria-selected={selectedId ? 'true' : 'false'}
-            disabled={tab.disabled}
-            aria-disabled={tab.disabled ? 'true' : 'false'}
-            onClick={() => handleClick(tab.id)}
-          >
-            {tab.name}
-            {tab.label && <TabLabel {...tab} />}
-          </StyledTab>
+            ref={tab.id === selectedId ? ref : undefined}
+            selected={selectedId === tab.id}
+            onTabSelected={handleTabSelected}
+            {...tab}
+          />
         ))}
         <StyledUnderscoreBar style={underscoreStyle} />
       </StyledTabs>

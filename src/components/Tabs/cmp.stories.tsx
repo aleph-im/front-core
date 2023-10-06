@@ -29,8 +29,10 @@ const tabs: Tab[] = [
   {
     id: 'security',
     name: 'Security -  really long title',
-    label: '(3)',
-    labelPosition: 'bottom',
+    label: {
+      label: '(3)',
+      position: 'bottom',
+    },
   },
   {
     id: 'billing',

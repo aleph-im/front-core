@@ -1,2 +1,2 @@
 export { default, Tabs } from './cmp'
-export type { Tab as TabType, TabsProps } from './types'
+export type { TabProps as TabType, TabsProps } from './types'

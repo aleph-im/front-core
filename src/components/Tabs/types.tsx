@@ -1,15 +1,26 @@
+import { ReactNode } from 'react'
+
 export type LabelPosition = 'top' | 'bottom'
 
 export type StyledTabType = {
   align?: 'left' | 'center' | 'right'
 }
 
+export type TabLabelProps = {
+  label: ReactNode
+  position?: LabelPosition
+}
+
+export type TabProps = Tab & {
+  onTabSelected: (id: string) => void
+}
+
 export type Tab = {
   id: string
   name: string
   disabled?: boolean
-  label?: string
-  labelPosition?: LabelPosition
+  selected?: boolean
+  label?: string | TabLabelProps
 }
 
 export type TabsProps = {
@@ -18,8 +29,6 @@ export type TabsProps = {
   selected?: string
   defaultSelected?: string
 }
-
-export type TabLabelProps = Tab
 
 export type StyledTabItemProps = {
   selected?: boolean
