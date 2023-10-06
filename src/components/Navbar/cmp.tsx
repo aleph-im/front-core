@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import Button from '../Button'
 import Icon from '../Icon'
 import {
@@ -9,6 +9,7 @@ import {
   StyledLogoContainer,
 } from './styles'
 import { NavbarProps } from './types'
+import { useClickOutside } from '../../hooks'
 
 export const Navbar = ({
   logo,
@@ -27,8 +28,16 @@ export const Navbar = ({
     onToggle && onToggle(!isOpenMenu)
   }, [isOpenMenu, setIsOpen, onToggle])
 
+  const closeMenu = useCallback(() => {
+    setIsOpen(false)
+    onToggle && onToggle(false)
+  }, [setIsOpen, onToggle])
+
+  const ref = useRef<HTMLDivElement>(null)
+  useClickOutside(closeMenu, [ref])
+
   return (
-    <StyledNavbarContainer {...rest}>
+    <StyledNavbarContainer {...rest} ref={ref}>
       <StyledHeadingContainer isOpen={isOpenMenu} height={height}>
         <StyledMobileTopContainer>
           <Button
