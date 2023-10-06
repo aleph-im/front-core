@@ -1,22 +1,28 @@
+import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
 import { StyledTabItemProps, StyledTabType, TabLabelProps } from './types'
 import { addClasses } from '../../utils'
-import tw from 'twin.macro'
 
-export const StyledTabsHeader = styled.div<StyledTabType>`
+export const StyledContainer = styled.div<StyledTabType>`
   ${({ align }) => css`
-    position: relative;
     display: flex;
     justify-content: ${align};
   `}
 `
 
-export const StyledTabsItem = styled.div.attrs(
+export const StyledTabs = styled.div<StyledTabType>`
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  overflow: auto;
+`
+
+export const StyledTab = styled.div.attrs(
   addClasses('tp-nav'),
 )<StyledTabItemProps>`
   ${({ theme, selected, disabled }) => {
     return css`
-      ${tw`flex relative p-3 transition-colors duration-500`}
+      ${tw`flex relative p-3 transition-colors duration-500 flex-initial shrink-0`}
       cursor: ${disabled ? 'not-allowed' : selected ? 'default' : 'pointer'};
       user-select: none;
       color: ${disabled
@@ -34,7 +40,7 @@ export const StyledTabsItem = styled.div.attrs(
   }}
 `
 
-export const StyledTabLabel = styled.div.attrs(
+export const StyledLabel = styled.div.attrs(
   addClasses('tp-info'),
 )<TabLabelProps>`
   ${({ theme, disabled, labelPosition = 'top' }) => {
