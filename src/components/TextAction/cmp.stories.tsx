@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { StoryFn } from '@storybook/react'
 import { TextAction } from './cmp'
 import { TextActionProps } from './types'
-import { useClipboard } from '../../hooks/useCopyToClipboard'
+import useCopyToClipboard from '../../hooks/useCopyToClipboard'
 
 export default {
   title: 'Components/UI/TextAction',
@@ -12,14 +12,13 @@ export default {
   },
 }
 
-const defaultArgs: TextActionProps = {
+const defaultArgs: Partial<TextActionProps> = {
   icon: 'copy',
   size: 14,
   content: 'e03b28d01a3a8e7cbb2f9bafbaa58d9dbdf7c75906a01b075890ad06ddc670',
   position: 'left',
   type: 'body1',
   color: 'white',
-  useAction: async () => useClipboard(defaultArgs.content),
 }
 
 const defaultParams = {
@@ -31,11 +30,19 @@ const defaultParams = {
 
 // ---
 
-const Template: StoryFn<typeof TextAction> = (args) => (
-  <>
-    <TextAction {...args} />
-  </>
-)
+const Template: StoryFn<typeof TextAction> = (args) => {
+  const [, copy] = useCopyToClipboard()
+
+  const handleAction = useCallback(() => {
+    copy(args.content)
+  }, [args.content, copy])
+
+  return (
+    <>
+      <TextAction {...args} useAction={handleAction} />
+    </>
+  )
+}
 
 export const Default = Template.bind({})
 Default.args = {

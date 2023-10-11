@@ -35,7 +35,7 @@ const metamaskForETH: WalletProps = {
   name: 'Metamask',
   icon: 'circle',
   color: 'orange',
-  provider: () => window.ethereum,
+  provider: () => (window as any)?.ethereum,
 }
 
 const ethereum: NetworkProps = {
