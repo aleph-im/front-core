@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useId, useMemo, useState } from 'react'
 import { StyledTable } from './styles'
 import {
   TableCellProps,
@@ -160,13 +160,15 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     asc: true,
   })
 
+  const randomId = useId()
+
   const keyedData: (R & { key: string })[] = useMemo(
     () =>
-      data.map((row) => ({
+      data.map((row, i) => ({
         ...row,
-        key: rowKey ? rowKey(row) : crypto.randomUUID(),
+        key: rowKey ? rowKey(row) : `${randomId}${i}`,
       })),
-    [data, rowKey],
+    [data, randomId, rowKey],
   )
 
   const targetSortColumn = useMemo(() => {
