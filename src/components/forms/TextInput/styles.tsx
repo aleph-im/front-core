@@ -27,6 +27,20 @@ export const StyledTextInputField = styled.input.attrs(
     ${fieldPlaceholderCss}
 
     ${fieldDisabledCss}
+
+    /* Remove Arrows/Spinners */
+    
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
   `}
 `
 
