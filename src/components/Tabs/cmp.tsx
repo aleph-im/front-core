@@ -91,7 +91,7 @@ export const Tabs = ({
       left: ref.current?.offsetLeft || 0,
       width: ref.current?.offsetWidth || 0,
     })
-  }, [windowSize, selectedId])
+  }, [windowSize, selectedId, tabs])
 
   return (
     <StyledContainer align={align}>
