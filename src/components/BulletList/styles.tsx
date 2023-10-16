@@ -83,7 +83,9 @@ export const StyledIcon = styled(Icon).attrs<
     prefix: 'fass',
   }
 })<StyledBulletItemIconProps>`
-  font-size: ${(props) => (props.$size === 'big' ? '1.25rem' : '0.875rem')};
+  && {
+    font-size: ${(props) => (props.$size === 'big' ? '1.25rem' : '0.875rem')};
+  }
 `
 
 export const StyledTitle = styled.span.attrs<{ size: string }>((props) => {

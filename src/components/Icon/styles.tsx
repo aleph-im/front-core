@@ -10,43 +10,45 @@ export interface StyledIconProps extends FontAwesomeIconProps {
 }
 
 export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
-  ${({ $iconSize, theme }) => {
-    switch ($iconSize) {
-      case 'xs': {
-        return css`
-          font-size: ${theme.icon.size.xs}rem;
-        `
+  && {
+    ${({ $iconSize, theme }) => {
+      switch ($iconSize) {
+        case 'xs': {
+          return css`
+            font-size: ${theme.icon.size.xs}rem;
+          `
+        }
+        case 'sm': {
+          return css`
+            font-size: ${theme.icon.size.sm}rem;
+          `
+        }
+        case 'md': {
+          return css`
+            font-size: ${theme.icon.size.md}rem;
+          `
+        }
+        case 'lg': {
+          return css`
+            font-size: ${theme.icon.size.lg}rem;
+          `
+        }
+        case 'xl': {
+          return css`
+            font-size: ${theme.icon.size.xl}rem;
+          `
+        }
+        case 'xxl': {
+          return css`
+            font-size: ${theme.icon.size.xxl}rem;
+          `
+        }
+        default: {
+          return css`
+            font-size: ${$iconSize}rem;
+          `
+        }
       }
-      case 'sm': {
-        return css`
-          font-size: ${theme.icon.size.sm}rem;
-        `
-      }
-      case 'md': {
-        return css`
-          font-size: ${theme.icon.size.md}rem;
-        `
-      }
-      case 'lg': {
-        return css`
-          font-size: ${theme.icon.size.lg}rem;
-        `
-      }
-      case 'xl': {
-        return css`
-          font-size: ${theme.icon.size.xl}rem;
-        `
-      }
-      case 'xxl': {
-        return css`
-          font-size: ${theme.icon.size.xxl}rem;
-        `
-      }
-      default: {
-        return css`
-          font-size: ${$iconSize}rem;
-        `
-      }
-    }
-  }}
+    }}
+  }
 `

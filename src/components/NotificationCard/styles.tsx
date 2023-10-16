@@ -55,15 +55,18 @@ export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
     size: 'xl',
   }
 })`
-  top: 0;
-  right: 0;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0.375rem;
-  cursor: pointer;
-  margin-left: auto;
-  align-self: flex-start;
-  flex: 0 0 auto;
+  && {
+    top: 0;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    padding: 0.375rem;
+    cursor: pointer;
+    margin-left: auto;
+    align-self: flex-start;
+    flex: 0 0 auto;
+  }
 `
 
 export const StyledContentContainer = styled.div.attrs(

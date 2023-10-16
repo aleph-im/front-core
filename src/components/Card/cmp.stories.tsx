@@ -81,7 +81,7 @@ Transcluded.args = {
         color="main1"
         onClick={() => alert('1')}
       >
-        Button 1<Icon name="arrow-right" />
+        Button 1 <Icon name="arrow-right" />
       </Button>
       <Button
         variant="text-only"
@@ -90,7 +90,7 @@ Transcluded.args = {
         color="main2"
         onClick={() => alert('2')}
       >
-        Button 2<Icon name="arrow-right" />
+        Button 2 <Icon name="arrow-right" />
       </Button>
     </div>
   ),

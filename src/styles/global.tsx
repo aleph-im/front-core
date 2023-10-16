@@ -30,6 +30,7 @@ import {
   getTypoCss,
 } from './utils'
 import tw, { GlobalStyles as TailwindGlobalStyles } from 'twin.macro'
+import { fontAwesomeCss } from './font'
 
 export const GlobalStyles = () => (
   <>
@@ -46,6 +47,7 @@ const CustomGlobalStyles = createGlobalStyle`
     const typoCss = typoClasses(theme)
 
     return css`
+      ${fontAwesomeCss}
       @import '${theme.font.url}';
 
       window {
