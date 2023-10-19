@@ -36,19 +36,19 @@ const Template: StoryFn<typeof RadioGroup> = (args) => {
     [],
   )
 
-  const [selectedId, setSelectedId] = useState<string>(args.value as string)
+  const [value, setValue] = useState<string>(args.value as string)
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const id = event.target.value
-      setSelectedId(id)
+      setValue(id)
     },
-    [setSelectedId],
+    [setValue],
   )
 
   const selectedOption = useMemo(
-    () => options.find(([k]) => k === selectedId),
-    [options, selectedId],
+    () => options.find(([k]) => k === value),
+    [options, value],
   )
 
   return (
@@ -56,7 +56,7 @@ const Template: StoryFn<typeof RadioGroup> = (args) => {
       <RadioGroup
         {...args}
         name={args.name}
-        value={args.value}
+        value={value}
         onChange={handleChange}
       >
         {options.map((opt) => {

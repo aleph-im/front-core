@@ -34,19 +34,16 @@ const Template: StoryFn<typeof CheckboxGroup> = (args) => {
     ],
     [],
   )
-  const [selectedIds, setSelectedIds] = useState<Set<CheckboxGroupValue>>(
-    new Set(args.value as string[]),
-  )
+
+  const [value, setValue] = useState<string[]>(args.value as string[])
 
   const handleChange = useCallback(
-    (
-      event: ChangeEvent<HTMLInputElement>,
-      groupValue: CheckboxGroupValue[],
-    ) => {
-      setSelectedIds(new Set(groupValue))
-    },
-    [setSelectedIds],
+    (event: ChangeEvent<HTMLInputElement>, groupValue: CheckboxGroupValue[]) =>
+      setValue(groupValue as string[]),
+    [setValue],
   )
+
+  const selectedIds = useMemo(() => new Set(value), [value])
 
   const selectedOption = useMemo(
     () => options.filter(([k]) => selectedIds.has(k)),
@@ -55,7 +52,12 @@ const Template: StoryFn<typeof CheckboxGroup> = (args) => {
 
   return (
     <>
-      <CheckboxGroup {...args} name={args.name} onChange={handleChange}>
+      <CheckboxGroup
+        {...args}
+        name={args.name}
+        value={value}
+        onChange={handleChange}
+      >
         {options.map((opt) => {
           const [id, label] = opt
           return <Checkbox key={id} label={label} value={id} />

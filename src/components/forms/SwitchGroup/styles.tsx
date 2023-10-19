@@ -10,22 +10,12 @@ export const StyledSwitchGroupContainer = styled.div`
 export const StyledSwitchContainer = styled.div<{
   direction: SwitchGroupDirection
 }>`
-  ${({ theme, direction }) => {
-    const isRow = direction === 'row'
-
+  ${({ direction }) => {
     return css`
       display: flex;
       align-items: flex-start;
       flex-direction: ${direction};
-
-      & > * {
-        ${isRow ? 'margin-left' : 'margin-top'}: ${theme.font.size.md}rem;
-
-        &:first-child {
-          ${isRow ? 'margin-left' : 'margin-top'}: 0;
-          margin-top: 0;
-        }
-      }
+      gap: 1.125rem;
     `
   }}
 `
