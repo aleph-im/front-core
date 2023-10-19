@@ -122,10 +122,12 @@ export const Tooltip = ({
           ref={tooltipRef}
           {...{ position, isOpen: open, ...rest }}
         >
-          <StyledHeaderContainer>
-            {header}
-            <StyledHeaderCloseIcon onClick={handleCloseClick} />
-          </StyledHeaderContainer>
+          {header !== undefined && (
+            <StyledHeaderContainer>
+              {header}
+              <StyledHeaderCloseIcon onClick={handleCloseClick} />
+            </StyledHeaderContainer>
+          )}
           <StyledContentContainer>{content}</StyledContentContainer>
         </StyledContainer>,
         containerRef,
