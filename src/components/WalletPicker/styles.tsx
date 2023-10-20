@@ -2,31 +2,33 @@ import styled, { css } from 'styled-components'
 import { StyledPickerProps } from './types'
 
 export const StyledPicker = styled.div<StyledPickerProps>`
-  ${({ size, backgroundColor }) => {
-    const width = size === 'regular' ? '303px;' : '100%;'
+  ${({ theme, size }) => {
+    const width = size === 'regular' ? '318px;' : '100%;'
     return css`
       position: relative;
       width: ${width}
-      border-radius: 30px;
-      background: ${backgroundColor};
+      border-radius: 1.875rem;
+      background: ${theme.color.base0}0A;
       z-index:1;
-      padding: 24px;
+      padding: 1.5rem;
       `
   }}
 `
 
-export const WalletPickerText = styled.div<StyledPickerProps>`
+export const StyledTitle = styled.div<StyledPickerProps>`
   ${({ theme, size }) => {
-    const width = size === 'regular' ? '18px;' : '24px;'
+    const width = size === 'regular' ? '1.125rem' : '1.5rem'
+
     return css`
-    color: white;
-    font-family: ${theme.typo.info.family};
-    font-size: ${width}
-    margin: 0 0 18px 0;
+      color: ${theme.color.base0};
+      font-family: ${theme.typo.info.family};
+      font-size: ${width};
+      margin: 0 0 2rem 0;
     `
   }}
 `
 
-export const BottomBorderedDiv = styled.div`
-  border-bottom: 1px solid #ffffff33;
+export const BorderedDiv = styled.div`
+  padding-top: 1.5rem;
+  border-top: ${({ theme }) => `1px solid ${theme.color.base0}33`};
 `

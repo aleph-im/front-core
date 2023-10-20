@@ -1,6 +1,6 @@
 export { default, WalletPicker } from './cmp'
 export type {
-  PickerProps,
+  WalletPickerProps as PickerProps,
   NetworkProps,
   WalletProps,
   PickerSize,

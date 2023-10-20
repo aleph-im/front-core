@@ -1,21 +1,21 @@
 import React, { useMemo, useState } from 'react'
 import { Col, Row } from '../Grid'
 import Button from '../Button'
-import Icon from '../Icon'
-import { BottomBorderedDiv, StyledPicker, WalletPickerText } from './styles'
-import { NetworkProps, PickerProps } from './types'
+import { BorderedDiv, StyledPicker, StyledTitle } from './styles'
+import { NetworkProps, WalletPickerProps } from './types'
 import { Logo } from '../Logo'
+import WalletIcon from './icons'
+import Icon from '../Icon'
 
 export const WalletPicker = ({
   size,
-  backgroundColor = '#222134',
   networks,
   address,
   balance,
   onConnect,
   onDisconnect,
   addressHref,
-}: PickerProps) => {
+}: WalletPickerProps) => {
   const displayAddress = useMemo(
     () => `${address?.slice(0, 8)}...${address?.slice(-6)}`,
     [address],
@@ -38,26 +38,26 @@ export const WalletPicker = ({
     <StyledPicker
       {...{
         size,
-        backgroundColor,
       }}
     >
       {address ? (
         <>
-          <BottomBorderedDiv tw="pb-8">
-            <Row count={4}>
-              <Col>
-                <Logo color="white" size="3.2rem" text="" />
-              </Col>
-              <Col span={3}>
-                <div style={{ lineHeight: '2px' }}>
-                  <div className="tp-code1 fs-xl">{displayBalance}</div>
-                  <p className="fs-sm m-0">ALEPH</p>
-                </div>
-              </Col>
-            </Row>
-          </BottomBorderedDiv>
+          <div tw="flex items-center gap-4 mb-6">
+            <Logo color="base0" size="3rem" text="" />
+            <div tw="leading-3">
+              <div
+                className="tp-code1 fs-lg"
+                tw="whitespace-nowrap leading-4! mb-3"
+              >
+                {displayBalance}
+              </div>
+              <span className="fs-sm m-0" tw="opacity-40">
+                ALEPH
+              </span>
+            </div>
+          </div>
 
-          <BottomBorderedDiv tw="py-8 text-center">
+          <BorderedDiv tw="py-8 text-center">
             {addressHref ? (
               <Button
                 color="main0"
@@ -68,15 +68,15 @@ export const WalletPicker = ({
                 as="a"
                 target="_blank"
               >
-                {displayAddress}&nbsp;
-                <Icon name="external-link-square" />
+                {displayAddress}
+                <Icon name="external-link-square-alt" tw="ml-2.5" />
               </Button>
             ) : (
               displayAddress
             )}
-          </BottomBorderedDiv>
+          </BorderedDiv>
 
-          <div tw="py-8 text-center">
+          <BorderedDiv tw="py-8 text-center">
             <Button
               color="main2"
               variant="tertiary"
@@ -86,14 +86,12 @@ export const WalletPicker = ({
             >
               Logout
             </Button>
-          </div>
+          </BorderedDiv>
         </>
       ) : (
         <div>
-          <WalletPickerText {...{ size, backgroundColor }}>
-            1. Choose your network
-          </WalletPickerText>
-          <Row count={4}>
+          <StyledTitle {...{ size }}>1. Choose your network</StyledTitle>
+          <Row count={4} gap="0.75rem" tw="mb-6">
             {networks.map((network) => (
               <Col key={network.name}>
                 <div tw="text-center">
@@ -101,6 +99,7 @@ export const WalletPicker = ({
                     onClick={() => handleClick(network)}
                     disabled={network.wallets.length === 0}
                     size="big"
+                    tw="relative"
                     kind={
                       currentNetwork?.name === network.name ? 'neon' : 'flat'
                     }
@@ -113,49 +112,54 @@ export const WalletPicker = ({
                         : 'secondary'
                     }
                   >
+                    <div
+                      tw="absolute! h-full w-full inset-0 -z-1"
+                      className="fx-noise-base"
+                    ></div>
                     <Icon
                       name={network.icon}
                       size={size == 'regular' ? 'md' : 'xl'}
-                    ></Icon>
+                    />
                   </Button>
-                  <div
-                    style={{
-                      fontSize: '10px',
-                      color: 'rgba(255, 255, 255, 0.6)',
-                    }}
-                  >
+                  <div className="fs-xs text-base0" tw="opacity-60">
                     {network.name}
                   </div>
                 </div>
               </Col>
             ))}
           </Row>
-          <WalletPickerText {...{ size, backgroundColor }}>
-            2. Connect your wallet
-          </WalletPickerText>
-          <Row count={1}>
-            {currentNetwork?.wallets?.map((wallet: { [key: string]: any }) => (
-              <Col key={wallet.name}>
-                <div style={{ display: 'block', textAlign: 'center' }}>
-                  <Button
-                    onClick={() => onConnect(wallet.name, wallet.provider())}
-                    as="button"
-                    variant="tertiary"
-                    color="main0"
-                    kind="neon"
-                    size={size}
-                  >
-                    {wallet.name}
-                    <Icon
-                      style={{ margin: '0 10px' }}
-                      name={wallet.icon}
-                      color={wallet.color}
-                    ></Icon>
-                  </Button>
-                </div>
-              </Col>
-            ))}
-          </Row>
+          {currentNetwork?.wallets && (
+            <BorderedDiv>
+              <StyledTitle {...{ size }}>2. Connect your wallet</StyledTitle>
+              <Row count={1}>
+                {currentNetwork?.wallets?.map(
+                  (wallet: { [key: string]: any }) => (
+                    <Col key={wallet.name}>
+                      <div tw="block text-center">
+                        <Button
+                          onClick={() =>
+                            onConnect(wallet.name, wallet.provider())
+                          }
+                          as="button"
+                          variant="tertiary"
+                          color="main0"
+                          kind="neon"
+                          size={size}
+                        >
+                          {wallet.name}
+                          <WalletIcon
+                            tw="ml-2.5"
+                            name={wallet.icon}
+                            color={wallet.color}
+                          />
+                        </Button>
+                      </div>
+                    </Col>
+                  ),
+                )}
+              </Row>
+            </BorderedDiv>
+          )}
         </div>
       )}
     </StyledPicker>

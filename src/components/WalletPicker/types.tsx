@@ -1,10 +1,11 @@
 import { IconName } from '@fortawesome/fontawesome-svg-core'
+import { WalletIconName } from './icons'
 
 export type PickerSize = 'regular' | 'big'
 
 export type WalletProps = {
   name: string
-  icon: IconName
+  icon: WalletIconName
   color: string
   provider: () => any
 }
@@ -15,7 +16,7 @@ export type NetworkProps = {
   wallets: WalletProps[]
 }
 
-export type PickerProps = {
+export type WalletPickerProps = {
   size: PickerSize
   backgroundColor?: string
   networks: NetworkProps[]
@@ -28,5 +29,4 @@ export type PickerProps = {
 
 export type StyledPickerProps = {
   size: PickerSize
-  backgroundColor: string
 }

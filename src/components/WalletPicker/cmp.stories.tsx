@@ -2,7 +2,7 @@ import React from 'react'
 import { StoryFn } from '@storybook/react'
 
 import WalletPicker from './cmp'
-import { PickerProps, NetworkProps, WalletProps } from './types'
+import { WalletPickerProps, NetworkProps, WalletProps } from './types'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -13,27 +13,9 @@ export default {
   },
 }
 
-const connectToEthereum = async (provider: any) => {
-  if (!provider) throw new Error('No provider found')
-
-  try {
-    const accounts = await provider.request({
-      method: 'eth_requestAccounts',
-    })
-    await provider.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x1' }],
-    })
-
-    return accounts[0]
-  } catch (err) {
-    console.log('An error has occured', err)
-  }
-}
-
 const metamaskForETH: WalletProps = {
   name: 'Metamask',
-  icon: 'circle',
+  icon: 'metamask',
   color: 'orange',
   provider: () => (window as any)?.ethereum,
 }
@@ -50,7 +32,7 @@ const bitcoin: NetworkProps = {
   wallets: [],
 }
 
-const defaultArgs: Partial<PickerProps> = {
+const defaultArgs: Partial<WalletPickerProps> = {
   size: 'regular',
   networks: [ethereum, bitcoin],
 }
@@ -66,39 +48,10 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: StoryFn<typeof WalletPicker> = ({
-  size,
-  networks,
-}: PickerProps) => {
-  const [address, setAddress] = React.useState<string | undefined>(undefined)
-  const [balance, setBalance] = React.useState<number | undefined>(undefined)
-  const [addressHref, setAddressHref] = React.useState<string | undefined>(
-    undefined,
-  )
-
-  const onConnect = async (_chain: string, provider: any) => {
-    const address = await connectToEthereum(provider)
-    setAddress(address)
-    setAddressHref('https://etherscan.io/address/' + address)
-    setBalance(Math.random() * 10 ** 6)
-  }
-
-  const onDisconnect = () => {
-    setAddress(undefined)
-    setBalance(undefined)
-  }
-
+const Template: StoryFn<typeof WalletPicker> = (props: WalletPickerProps) => {
   return (
     <>
-      <WalletPicker
-        size={size}
-        networks={networks}
-        address={address}
-        balance={balance}
-        onConnect={onConnect}
-        onDisconnect={onDisconnect}
-        addressHref={addressHref}
-      />
+      <WalletPicker {...props} />
     </>
   )
 }
@@ -108,5 +61,17 @@ Default.args = {
   ...defaultArgs,
 }
 Default.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedIn = Template.bind({})
+LoggedIn.args = {
+  ...defaultArgs,
+  address: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  addressHref:
+    'https://etherscan.io/address/0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  balance: Math.random() * 10 ** 8,
+}
+LoggedIn.parameters = {
   ...defaultParams,
 }
