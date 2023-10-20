@@ -56,7 +56,7 @@ export function getTypoCss(typo: keyof ThemeTypo) {
         font-style: ${style};
         font-weight: ${weight};
         font-size: ${size}rem;
-        line-height: ${lineHeight}em;
+        line-height: ${lineHeight};
       `
     }}
   `

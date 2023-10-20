@@ -8,6 +8,7 @@ import {
   ThemeGradient,
   ThemeIcon,
   ThemeTypo,
+  Typo,
 } from './types'
 
 // const breakpoint: ThemeBreakpoint = {
@@ -120,127 +121,114 @@ const font: ThemeFont = {
   },
 }
 
-const commonHeaderFont = {
+const defaultFontTypo: Typo = {
+  tag: false,
+  family: font.family.body,
+  style: 'normal',
+  weight: 400,
+  lineHeight: 1.6,
+  size: pxToRem(16),
+}
+
+const defaultHeaderFontTypo: Typo = {
   tag: true,
   family: font.family.head,
   style: 'italic',
   weight: 800,
-  lineHeight: 1.18,
+  lineHeight: 'normal',
+  size: pxToRem(16),
 }
 
 const typo: ThemeTypo = {
   h1: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(72),
   },
   h2: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(64),
   },
   h3: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(48),
   },
   h4: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(40),
   },
   h5: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(36),
   },
   h6: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(32),
   },
   h7: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     tag: false,
     size: pxToRem(24),
   },
   header: {
-    ...commonHeaderFont,
+    ...defaultHeaderFontTypo,
     size: pxToRem(128),
   },
   logo: {
-    tag: false,
+    ...defaultFontTypo,
     family: font.family.head,
     style: 'italic',
     weight: 600,
     size: pxToRem(34),
-    lineHeight: 1.666,
   },
   nav: {
+    ...defaultFontTypo,
     tag: true,
     family: font.family.head,
-    style: 'normal',
     weight: 500,
-    size: font.size.md,
-    lineHeight: 1.666,
+    size: pxToRem(18),
   },
   info: {
-    tag: false,
+    ...defaultFontTypo,
     family: font.family.head,
     style: 'italic',
     weight: 800,
     size: pxToRem(10),
-    lineHeight: 1.666,
   },
   body: {
+    ...defaultFontTypo,
     tag: true,
-    family: font.family.body,
-    style: 'normal',
-    weight: 400,
-    size: font.size.sm,
-    lineHeight: 1.666,
   },
   body1: {
-    tag: false,
-    family: font.family.body,
+    ...defaultFontTypo,
     style: 'italic',
-    weight: 400,
-    size: font.size.sm,
-    lineHeight: 1.666,
   },
   body2: {
-    tag: false,
-    family: font.family.body,
+    ...defaultFontTypo,
     style: 'italic',
     weight: 700,
-    size: font.size.sm,
-    lineHeight: 1.666,
+  },
+  body3: {
+    ...defaultFontTypo,
+    weight: 700,
   },
   code: {
+    ...defaultFontTypo,
     tag: true,
     family: font.family.code,
-    style: 'normal',
-    weight: 400,
-    size: font.size.sm,
-    lineHeight: 1.666,
   },
   code1: {
-    tag: false,
+    ...defaultFontTypo,
     family: font.family.code,
-    style: 'normal',
     weight: 700,
-    size: font.size.sm,
-    lineHeight: 1.666,
   },
   table: {
-    tag: false,
-    family: font.family.body,
-    style: 'normal',
+    ...defaultFontTypo,
     weight: 700,
     size: pxToRem(12),
-    lineHeight: 1.666,
   },
   form: {
+    ...defaultFontTypo,
     tag: true,
-    family: font.family.body,
-    style: 'normal',
-    weight: 400,
-    size: font.size.sm,
-    lineHeight: 1.666,
   },
 }
 

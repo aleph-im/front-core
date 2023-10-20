@@ -19,6 +19,7 @@ export type TypoKind =
   | 'body'
   | 'body1'
   | 'body2'
+  | 'body3'
   | 'code'
   | 'code1'
   | 'table'
@@ -28,8 +29,8 @@ export type Typo = {
   size: number
   family: string
   weight: number
-  style: string
-  lineHeight: number
+  style: 'normal' | 'italic'
+  lineHeight: number | string | 'normal'
 }
 export type ThemeTypo = Record<TypoKind, Typo>
 
