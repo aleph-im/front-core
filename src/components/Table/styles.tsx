@@ -31,13 +31,6 @@ export const StyledTable = styled.table<TableProps<any>>`
       th.sortable {
         cursor: pointer;
       }
-
-      tr {
-        ${hasBorder &&
-        css`
-          border-bottom: 1px ${borderType} #ffffff22;
-        `}
-      }
     `
   }}
 `

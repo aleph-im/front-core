@@ -19,11 +19,8 @@ function Row<R extends Record<string, unknown>>({
 }: TableRowProps<R>) {
   const props = useMemo(() => {
     const rProps = rowProps?.(row, rowIndex) || {}
-    const className =
-      (rProps?.className ? `${rProps?.className} ` : '') +
-      (oddRowNoise && rowIndex % 2 === 0 ? 'fx-noise-light' : '')
-    return { css: {}, ...rProps, className }
-  }, [rowIndex, oddRowNoise, row, rowProps])
+    return { css: {}, ...rProps }
+  }, [rowIndex, row, rowProps])
 
   return (
     <>
@@ -32,7 +29,10 @@ function Row<R extends Record<string, unknown>>({
       ) : (
         <tr {...props} css={props.css}>
           {columns.map((col, colIndex) => (
-            <Cell key={colIndex} {...{ row, col, rowIndex, colIndex }} />
+            <Cell
+              key={colIndex}
+              {...{ row, col, rowIndex, colIndex, oddRowNoise }}
+            />
           ))}
         </tr>
       )}
@@ -45,6 +45,7 @@ function Cell<R extends Record<string, unknown>>({
   col,
   rowIndex,
   colIndex,
+  oddRowNoise,
 }: TableCellProps<R>) {
   const alignStyle = useMemo(() => {
     return col.align === 'center'
@@ -56,9 +57,12 @@ function Cell<R extends Record<string, unknown>>({
 
   const props = useMemo(() => {
     const cellProps = col.cellProps?.(row, col, rowIndex, colIndex) || {}
+    const className =
+      (cellProps?.className ? `${cellProps?.className} ` : '') +
+      (oddRowNoise && rowIndex % 2 === 0 ? 'fx-noise-light' : '')
     const css = { ...alignStyle, ...(cellProps?.css as any) }
-    return { ...cellProps, css }
-  }, [alignStyle, col, rowIndex, colIndex, row])
+    return { ...cellProps, className, css }
+  }, [col, row, rowIndex, colIndex, oddRowNoise, alignStyle])
 
   return (
     <>

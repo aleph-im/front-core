@@ -12,7 +12,6 @@ export type TableRow<R extends Record<string, unknown>> = {
   rowRender?: (row: R, rowIndex: number) => ReactNode
   rowProps?: (row: R, rowIndex: number) => HTMLAttributes<HTMLTableRowElement>
   rowKey?: (row: R) => string
-  oddRowNoise?: boolean
 }
 
 export type TableColumn<R extends Record<string, unknown>> = {
@@ -64,6 +63,7 @@ export type TableProps<R extends Record<string, unknown>> =
       columns: TableColumn<R>[]
       data: R[]
       borderType: TableBorderType
+      oddRowNoise?: boolean
     }
 
 export type TableRowProps<R extends Record<string, unknown>> =
@@ -72,6 +72,7 @@ export type TableRowProps<R extends Record<string, unknown>> =
       row: R
       columns: TableColumn<R>[]
       rowIndex: number
+      oddRowNoise?: boolean
     }
 
 export type TableCellProps<R extends Record<string, unknown>> =
@@ -80,6 +81,7 @@ export type TableCellProps<R extends Record<string, unknown>> =
     col: TableColumn<R>
     rowIndex: number
     colIndex: number
+    oddRowNoise?: boolean
   }
 
 export type TableSortedColumn = { column: string; asc: boolean }
