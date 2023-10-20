@@ -80,15 +80,20 @@ export type ThemeColor = {
 export type ThemeFont = {
   url: string
   size: {
-    xl4: number
-    xl3: number
-    xxl: number
+    '7xl': number
+    '6xl': number
+    '5xl': number
+    '4xl': number
+    '3xl': number
+    '2xl': number
     xl: number
     lg: number
+    base: number
     md: number
     sm: number
     xs: number
-    xxs: number
+    '2xs': number
+    '3xs': number
   }
   family: {
     head: string

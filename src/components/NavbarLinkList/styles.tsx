@@ -12,7 +12,7 @@ export const StyledContainer = styled.div<
       position: relative;
       display: flex;
       max-width: 100%;
-      gap: ${theme.font.size.xl}rem;
+      gap: ${theme.font.size['3xl']}rem;
       ${onlyDesktop ? 'display: none;' : ''}
 
       ${getResponsiveCss(
@@ -52,7 +52,7 @@ export const StyledList = styled.ul<NavbarLinkListProps>`
       display: flex;
       width: 100%;
       flex-direction: ${mobileDirection};
-      gap: ${mobileGap ? theme.font.size.xl : 0}rem;
+      gap: ${mobileGap ? theme.font.size['3xl'] : 0}rem;
 
       ${getResponsiveCss(
         'md',
@@ -61,7 +61,7 @@ export const StyledList = styled.ul<NavbarLinkListProps>`
           flex: 0 1 auto;
           align-items: center;
           flex-direction: ${desktopDirection};
-          gap: ${desktopGap ? theme.font.size.xl : 0}rem;
+          gap: ${desktopGap ? theme.font.size['3xl'] : 0}rem;
 
           ${withSlash &&
           css`

@@ -70,9 +70,9 @@ export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
 `
 
 export const StyledContentContainer = styled.div.attrs(
-  addClasses('tp-body1 fs-md'),
+  addClasses('tp-body1 fs-lg'),
 )<NotificationVariantProps>(() => [tw`mb-4`])
 
 export const StyledFooterContainer = styled.div.attrs(
-  addClasses('tp-code fs-sm'),
+  addClasses('tp-code fs-md'),
 )<NotificationVariantProps>``

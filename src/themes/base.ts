@@ -107,17 +107,20 @@ const font: ThemeFont = {
     code: "'Source Code Pro', monospace",
   },
   size: {
-    // ---------
-    xl4: pxToRem(82),
-    xl3: pxToRem(62),
-    xxl: pxToRem(48),
-    xl: pxToRem(28),
-    lg: pxToRem(24),
-    md: pxToRem(18),
-    sm: pxToRem(16),
-    xs: pxToRem(10),
-    xxs: pxToRem(8),
-    // ---------
+    '7xl': pxToRem(82),
+    '6xl': pxToRem(62),
+    '5xl': pxToRem(48),
+    '4xl': pxToRem(36),
+    '3xl': pxToRem(28),
+    '2xl': pxToRem(24),
+    xl: pxToRem(20),
+    lg: pxToRem(18),
+    base: pxToRem(16),
+    md: pxToRem(16),
+    sm: pxToRem(14),
+    xs: pxToRem(12),
+    '2xs': pxToRem(10),
+    '3xs': pxToRem(8),
   },
 }
 

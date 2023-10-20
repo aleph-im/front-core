@@ -46,12 +46,12 @@ export const WalletPicker = ({
             <Logo color="base0" size="3rem" text="" />
             <div tw="leading-3">
               <div
-                className="tp-code1 fs-lg"
+                className="tp-code1 fs-2xl"
                 tw="whitespace-nowrap leading-4! mb-3"
               >
                 {displayBalance}
               </div>
-              <span className="fs-sm m-0" tw="opacity-40">
+              <span className="fs-md m-0" tw="opacity-40">
                 ALEPH
               </span>
             </div>
@@ -121,7 +121,7 @@ export const WalletPicker = ({
                       size={size == 'regular' ? 'md' : 'xl'}
                     />
                   </Button>
-                  <div className="fs-xs text-base0" tw="opacity-60">
+                  <div className="fs-2xs text-base0" tw="opacity-60">
                     {network.name}
                   </div>
                 </div>

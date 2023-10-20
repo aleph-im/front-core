@@ -77,7 +77,7 @@ const CustomGlobalStyles = createGlobalStyle`
       }
 
       section {
-        padding: ${theme.font.size.xxl}rem ${theme.font.size.lg}rem;
+        padding: ${theme.font.size['5xl']}rem ${theme.font.size['2xl']}rem;
       }
 
       form,
@@ -94,7 +94,7 @@ const CustomGlobalStyles = createGlobalStyle`
       h6,
       header {
         margin-top: 0;
-        margin-bottom: ${theme.font.size.lg}rem;
+        margin-bottom: ${theme.font.size['2xl']}rem;
       }
 
       input:-webkit-autofill,

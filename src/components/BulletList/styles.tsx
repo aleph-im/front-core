@@ -89,6 +89,6 @@ export const StyledIcon = styled(Icon).attrs<
 `
 
 export const StyledTitle = styled.span.attrs<{ size: string }>((props) => {
-  const cls = props.size === 'big' ? 'tp-h7' : 'tp-body2 fs-md'
+  const cls = props.size === 'big' ? 'tp-h7' : 'tp-body2 fs-lg'
   return addClasses(`${cls}`)(props)
 })``

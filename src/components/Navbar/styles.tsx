@@ -19,7 +19,7 @@ export const StyledNavbarContainer = styled.div.attrs(
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: ${theme.font.size.xl}rem;
+        gap: ${theme.font.size['3xl']}rem;
       `,
     )}
   `}
@@ -70,7 +70,7 @@ export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
     flex: 0 1 0px;
     display: ${isOpen ? 'flex' : 'none'};
     flex-direction: column;
-    gap: ${theme.font.size.xl}rem;
+    gap: ${theme.font.size['3xl']}rem;
 
     ${getResponsiveCss(
       'md',
