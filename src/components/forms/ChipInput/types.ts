@@ -14,6 +14,10 @@ export type ChipInputProps = Omit<
 
   label?: string
   error?: FormError
+
+  // Force states
+  focus?: boolean
+  disabled?: boolean
 }
 
 export type ChipItemProps = {

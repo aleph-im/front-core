@@ -7,7 +7,7 @@ import tw from 'twin.macro'
 export const StyledContainer = styled(StyledInputContainer)`
   flex-wrap: wrap;
   border-radius: 1.375rem;
-  padding: 0.5rem;
+  padding: 0.4375rem 0.5rem;
   min-height: 2.75rem;
 `
 
@@ -18,16 +18,12 @@ export const StyledChipContainer = styled.div`
 export const StyledChip = styled.span`
   ${({ theme }) => {
     return css`
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      flex: 1 1 auto;
+      ${tw`inline-flex items-center justify-between max-w-full`}
       background-color: ${theme.color.main0};
       color: ${theme.color.text};
       border-radius: 1.875rem;
-      min-height: 2.0625rem; // 33px
+      height: 1.75rem;
       padding: 0.125rem 1.125rem;
-      max-width: 100%;
     `
   }}
 `

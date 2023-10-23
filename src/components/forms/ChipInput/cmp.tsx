@@ -5,6 +5,8 @@ import React, {
   forwardRef,
   ForwardedRef,
   memo,
+  FocusEvent,
+  useMemo,
 } from 'react'
 import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
 import Icon from '../../Icon'
@@ -46,28 +48,17 @@ export const ChipInput = memo(
         onAdd,
         onRemove,
         onChange,
+        onFocus: onFocusProp,
+        onBlur: onBlurProp,
         required,
+        focus,
+        className,
       }: ChipInputProps,
       ref: ForwardedRef<HTMLInputElement>,
     ) => {
-      const [inputValue, setInputValue] = useState('')
-
-      const windowSize = useWindowSize()
-
       const reff = useForwardRef(ref)
-      const [containerSize, containerRef] = useBounds<HTMLDivElement>(
-        undefined,
-        undefined,
-        [value, windowSize],
-      )
-      const [inputSize, inputRef] = useBounds(undefined, reff, [
-        value,
-        windowSize,
-      ])
 
-      const containerHeight = containerSize?.height || 0
-      const inputHeight = inputSize?.height || 0
-      const isBig = containerHeight >= inputHeight * 2
+      const [inputValue, setInputValue] = useState('')
 
       const handleInputChange = (
         event: React.ChangeEvent<HTMLInputElement>,
@@ -83,8 +74,10 @@ export const ChipInput = memo(
 
           onRemove && onRemove(tagToRemove)
           onChange && onChange(updatedTags)
+
+          reff.current.focus()
         },
-        [value, onRemove, onChange],
+        [value, onRemove, onChange, reff],
       )
 
       const handleInputKeyDown = useCallback(
@@ -116,10 +109,41 @@ export const ChipInput = memo(
         [inputValue, value, onAdd, onChange, handleRemoveTag],
       )
 
+      // ----------------------------
+
+      const [isFocus, setIsFocus] = useState(focus)
+
+      const handleFocus = useCallback(
+        (e: FocusEvent<HTMLInputElement>) => {
+          setIsFocus(true)
+          onFocusProp && onFocusProp(e)
+        },
+        [onFocusProp],
+      )
+
+      const handleBlur = useCallback(
+        (e: FocusEvent<HTMLInputElement>) => {
+          setIsFocus(false)
+          onBlurProp && onBlurProp(e)
+        },
+        [onBlurProp],
+      )
+
+      const isFocusClass = useMemo(
+        () => (isFocus || focus ? '_focus' : ''),
+        [isFocus, focus],
+      )
+
+      // @note: Storybook testing purposes
+      const classes = useMemo(
+        () => (className ? `${className} ${isFocusClass}` : isFocusClass),
+        [isFocusClass, className],
+      )
+
       return (
         <StyledInputWrapper>
           {label && <FormLabel {...{ label, error, required }} />}
-          <StyledContainer ref={containerRef} isBig={isBig} error={error}>
+          <StyledContainer error={error} className={classes}>
             {value && (
               <StyledChipContainer>
                 {value.map((tag) => (
@@ -128,12 +152,14 @@ export const ChipInput = memo(
               </StyledChipContainer>
             )}
             <StyledInput
-              ref={inputRef}
+              ref={reff}
               type="text"
               placeholder={placeholder}
               value={inputValue}
               onChange={handleInputChange}
               onKeyDown={handleInputKeyDown}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </StyledContainer>
           {error && <FormError error={error} />}
