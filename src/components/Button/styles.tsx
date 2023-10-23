@@ -151,20 +151,38 @@ const activeVariants = (
 const disableVariants = (
   props: StyledButtonProps & { theme: DefaultTheme },
 ) => {
-  const { theme } = props
+  const { theme, variant } = props
+  const whiteDisabled = `${theme.color.text}4C`
+  const blackDisabled = theme.color.base2
 
   return css`
     cursor: not-allowed;
-    opacity: 0.4;
     color: ${theme.color.text};
     background-color: transparent;
     background-image: none;
     box-shadow: none;
     backdrop-filter: none;
 
+    ${variant === 'primary'
+      ? css`
+          background-color: ${whiteDisabled};
+          color: ${blackDisabled};
+        `
+      : css`
+          color: ${whiteDisabled};
+        `}
+
     &::after {
-      background-color: ${theme.color.text};
-      background-image: none;
+      display: block;
+
+      ${variant === 'primary'
+        ? css`
+            background-color: ${blackDisabled};
+          `
+        : css`
+            background-color: ${whiteDisabled};
+            background-image: none;
+          `}
     }
   `
 }
@@ -184,7 +202,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
       && {
         position: relative;
         cursor: pointer;
-        box-sizing: border-box;
         /* display: inline-flex; inline-flex doesnt work with text-overflow */
         display: inline-flex;
         justify-content: center;
@@ -222,7 +239,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
           left: 0;
           height: 100%;
           width: 100%;
-          box-sizing: border-box;
           background-color: ${mainColor};
           z-index: -1;
           padding: 1px;
