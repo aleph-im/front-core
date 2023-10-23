@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
-export type WindowSize = { scrollX: number; scrollY: number }
+export type WindowScroll = { scrollX: number; scrollY: number }
 
 export function useWindowScroll(
   debounceDelay: number = 300,
-): WindowSize | undefined {
-  const [value, setValue] = useState<WindowSize>()
+): WindowScroll | undefined {
+  const [value, setValue] = useState<WindowScroll>()
 
   useEffect(() => {
     let timmerId: NodeJS.Timeout
