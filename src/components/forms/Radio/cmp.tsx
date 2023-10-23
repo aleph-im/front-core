@@ -25,6 +25,7 @@ export const Radio = forwardRef(
       checked,
       onChange: onChangeProp,
       className,
+      size: $size,
       ...rest
     }: RadioProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -48,8 +49,8 @@ export const Radio = forwardRef(
     }
 
     return (
-      <StyledRadioContainer {...{ className }}>
-        <StyledInputContainer {...{ label }}>
+      <StyledRadioContainer {...{ className, $size }}>
+        <StyledInputContainer {...{ $size }}>
           <StyledInput
             {...{
               type: 'radio',
@@ -64,7 +65,9 @@ export const Radio = forwardRef(
           />
           <StyledInputDot />
         </StyledInputContainer>
-        {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+        {label && (
+          <StyledLabel {...{ htmlFor: id, $size }}>{label}</StyledLabel>
+        )}
       </StyledRadioContainer>
     )
   },

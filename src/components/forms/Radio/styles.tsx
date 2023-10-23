@@ -1,23 +1,32 @@
 import styled, { css } from 'styled-components'
+import { RadioSize } from './types'
 
-export const StyledRadioContainer = styled.div`
-  display: flex;
-  align-items: center;
+export const StyledRadioContainer = styled.div<{ $size?: RadioSize }>`
+  ${({ $size }) => {
+    const gap = $size === 'xs' ? '0.75rem' : '1.125rem'
+
+    return css`
+      display: flex;
+      align-items: center;
+      gap: ${gap};
+    `
+  }}
 `
 
-export const StyledInputContainer = styled.div<{ label?: string }>`
-  ${({ label }) => {
+export const StyledInputContainer = styled.div<{ $size?: RadioSize }>`
+  ${({ $size }) => {
+    const size = $size === 'xs' ? '1rem' : $size === 'sm' ? '1.5rem' : '2rem'
+
     return css`
       flex: 0 0 auto;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 2rem;
-      height: 2rem;
+      width: ${size};
+      height: ${size};
       border-radius: 50%;
       box-shadow: 0px 4px 24px #00000040;
-      ${label ? 'margin-right: 1.125rem;' : ''}
     `
   }}
 `
@@ -97,6 +106,13 @@ export const StyledInputDot = styled.span`
   }}
 `
 
-export const StyledLabel = styled.label`
-  cursor: pointer;
+export const StyledLabel = styled.label<{ $size?: RadioSize }>`
+  ${({ $size }) => {
+    const size = $size === 'xs' ? '0.75rem' : '1rem'
+
+    return css`
+      cursor: pointer;
+      font-size: ${size};
+    `
+  }}
 `

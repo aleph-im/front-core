@@ -34,14 +34,7 @@ export const Checkbox = forwardRef(
           <StyledCheckIcon />
         </StyledInputContainer>
         {label && (
-          <StyledLabel
-            {...{
-              htmlFor: id,
-              $size,
-            }}
-          >
-            {label}
-          </StyledLabel>
+          <StyledLabel {...{ htmlFor: id, $size }}>{label}</StyledLabel>
         )}
       </StyledCheckboxContainer>
     )

@@ -8,14 +8,21 @@ import { RadioProps } from './types'
 export default {
   title: 'Components/UI/forms/Radio',
   component: Radio,
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md'],
+      control: { type: 'inline-radio' },
+    },
+  },
 }
 
 const defaultArgs: Partial<RadioProps> = {
   name: 'group',
+  size: 'md',
 }
 
 const defaultParams = {
-  controls: { exclude: ['color', 'size'] },
+  controls: { exclude: ['color'] },
 }
 
 // ---
