@@ -85,5 +85,5 @@ export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
 `
 
 export const StyledContentContainer = styled.div.attrs(
-  addClasses('tp-body1 fs-md'),
+  addClasses('tp-body1 fs-16'),
 )``

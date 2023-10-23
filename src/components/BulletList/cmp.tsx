@@ -23,7 +23,7 @@ export const BulletItem = ({
       <div>
         <StyledTitle {...{ size }}>{title}</StyledTitle>
         {text && (
-          <p className="fs-md" tw="m-0 -mt-1">
+          <p className="fs-16" tw="m-0 -mt-1">
             {text}
           </p>
         )}

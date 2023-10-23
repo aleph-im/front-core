@@ -51,7 +51,7 @@ export const WalletPicker = ({
               >
                 {displayBalance}
               </div>
-              <span className="fs-md m-0" tw="opacity-40">
+              <span className="fs-16 m-0" tw="opacity-40">
                 ALEPH
               </span>
             </div>

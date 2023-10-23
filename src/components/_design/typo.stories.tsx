@@ -43,31 +43,31 @@ const TypographyTemplate: StoryFn<any> = () => {
         <div>
           <StoryBookSubheader>Body text - Regular</StoryBookSubheader>
           <StyledBlock>
-            <p className="tp-body fs-3xl">
+            <p className="tp-body fs-28">
               28 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body fs-2xl">
+            <p className="tp-body fs-24">
               24 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body fs-lg">
+            <p className="tp-body fs-18">
               18 - Base body text - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body fs-md">
+            <p className="tp-body fs-16">
               16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
               sem, quis aliquam arcu massa finibus arcu. Mauris pretium
               fermentum semper.
             </p>
-            <p className="tp-body fs-xs">
+            <p className="tp-body fs-12">
               12 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body fs-2xs">
+            <p className="tp-body fs-10">
               10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
@@ -78,31 +78,31 @@ const TypographyTemplate: StoryFn<any> = () => {
         <div>
           <StoryBookSubheader>Body text - italic</StoryBookSubheader>
           <StyledBlock>
-            <p className="tp-body1 fs-3xl">
+            <p className="tp-body1 fs-28">
               28 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body1 fs-2xl">
+            <p className="tp-body1 fs-24">
               24 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body1 fs-lg">
+            <p className="tp-body1 fs-18">
               18 - Base body text - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body1 fs-md">
+            <p className="tp-body1 fs-16">
               16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
               sem, quis aliquam arcu massa finibus arcu. Mauris pretium
               fermentum semper.
             </p>
-            <p className="tp-body1 fs-xs">
+            <p className="tp-body1 fs-12">
               12 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body1 fs-2xs">
+            <p className="tp-body1 fs-10">
               10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
@@ -113,31 +113,31 @@ const TypographyTemplate: StoryFn<any> = () => {
         <div>
           <StoryBookSubheader>Body text - bold-italic</StoryBookSubheader>
           <StyledBlock>
-            <p className="tp-body2 fs-3xl">
+            <p className="tp-body2 fs-28">
               28 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body2 fs-2xl">
+            <p className="tp-body2 fs-24">
               24 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body2 fs-lg">
+            <p className="tp-body2 fs-18">
               18 - Base body text - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body2 fs-md">
+            <p className="tp-body2 fs-16">
               16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
               sem, quis aliquam arcu massa finibus arcu. Mauris pretium
               fermentum semper.
             </p>
-            <p className="tp-body2 fs-xs">
+            <p className="tp-body2 fs-12">
               12 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body2 fs-2xs">
+            <p className="tp-body2 fs-10">
               10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
@@ -148,31 +148,31 @@ const TypographyTemplate: StoryFn<any> = () => {
         <div>
           <StoryBookSubheader>Body text - bold-italic</StoryBookSubheader>
           <StyledBlock>
-            <p className="tp-body3 fs-3xl">
+            <p className="tp-body3 fs-28">
               28 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body3 fs-2xl">
+            <p className="tp-body3 fs-24">
               24 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-body3 fs-lg">
+            <p className="tp-body3 fs-18">
               18 - Base body text - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body3 fs-md">
+            <p className="tp-body3 fs-16">
               16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
               sem, quis aliquam arcu massa finibus arcu. Mauris pretium
               fermentum semper.
             </p>
-            <p className="tp-body3 fs-xs">
+            <p className="tp-body3 fs-12">
               12 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-body3 fs-2xs">
+            <p className="tp-body3 fs-10">
               10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
@@ -183,31 +183,31 @@ const TypographyTemplate: StoryFn<any> = () => {
         <div>
           <StoryBookSubheader>Embedded code - default</StoryBookSubheader>
           <StyledBlock>
-            <p className="tp-code fs-3xl">
+            <p className="tp-code fs-28">
               28 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-code fs-2xl">
+            <p className="tp-code fs-24">
               24 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-code fs-lg">
+            <p className="tp-code fs-18">
               18 - Base body text - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-code fs-md">
+            <p className="tp-code fs-16">
               16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
               sem, quis aliquam arcu massa finibus arcu. Mauris pretium
               fermentum semper.
             </p>
-            <p className="tp-code fs-xs">
+            <p className="tp-code fs-12">
               12 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-code fs-2xs">
+            <p className="tp-code fs-10">
               10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
@@ -218,31 +218,31 @@ const TypographyTemplate: StoryFn<any> = () => {
         <div>
           <StoryBookSubheader>Embedded code - bold</StoryBookSubheader>
           <StyledBlock>
-            <p className="tp-code1 fs-3xl">
+            <p className="tp-code1 fs-28">
               28 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-code1 fs-2xl">
+            <p className="tp-code1 fs-24">
               24 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <p className="tp-code1 fs-lg">
+            <p className="tp-code1 fs-18">
               18 - Base body text - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-code1 fs-md">
+            <p className="tp-code1 fs-16">
               16 - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Mauris convallis, quam quis vehicula pulvinar, nisl elit finibus
               sem, quis aliquam arcu massa finibus arcu. Mauris pretium
               fermentum semper.
             </p>
-            <p className="tp-code1 fs-xs">
+            <p className="tp-code1 fs-12">
               12 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.
               Mauris pretium fermentum semper.
             </p>
-            <p className="tp-code1 fs-2xs">
+            <p className="tp-code1 fs-10">
               10 - LEGAL TEXT - Lorem ipsum dolor sit amet, consectetur
               adipiscing elit. Mauris convallis, quam quis vehicula pulvinar,
               nisl elit finibus sem, quis aliquam arcu massa finibus arcu.

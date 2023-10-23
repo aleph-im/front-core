@@ -98,7 +98,7 @@ function HeaderCell<R extends Record<string, unknown>>({
 
     const className =
       (hcellProps?.className ? `${hcellProps?.className} ` : '') +
-      `${col.sortable ? 'sortable' : ''} tp-table fs-md`
+      `${col.sortable ? 'sortable' : ''} tp-table fs-16`
 
     const widthStyle = col.width ? { width: col.width } : {}
     const style = { ...widthStyle, ...(hcellProps?.style as any) }
