@@ -1,6 +1,7 @@
 import React, {
   ForwardedRef,
   forwardRef,
+  memo,
   useCallback,
   useEffect,
   useMemo,
@@ -23,8 +24,8 @@ export const Tab = forwardRef(
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const handleClick = useCallback(
-      () => onTabSelected(id),
-      [id, onTabSelected],
+      () => !disabled && onTabSelected(id),
+      [disabled, id, onTabSelected],
     )
 
     const labelProps: TabLabelProps | undefined = useMemo(
@@ -55,60 +56,65 @@ export const Tab = forwardRef(
 )
 Tab.displayName = 'Tab'
 
-export const Tabs = ({
-  tabs,
-  selected: propSelected,
-  defaultSelected,
-  onTabChange,
-  align = 'center',
-  ...rest
-}: TabsProps & StyledTabType) => {
-  const id = propSelected || defaultSelected
-  const { id: safeDefault } =
-    tabs.filter((tab) => !tab.disabled).find((tab) => tab.id === id) || {}
+export const Tabs = memo(
+  ({
+    tabs,
+    selected: propSelected,
+    defaultSelected,
+    onTabChange,
+    align = 'center',
+    ...rest
+  }: TabsProps & StyledTabType) => {
+    const id = propSelected || defaultSelected
+    const { id: safeDefault } =
+      tabs.filter((tab) => !tab.disabled).find((tab) => tab.id === id) || {}
 
-  const [selected, setSelected] = useState<string | undefined>(safeDefault)
-  const selectedId = propSelected || selected
+    const [selected, setSelected] = useState<string | undefined>(safeDefault)
+    const selectedId = propSelected || selected
 
-  const windowSize = useWindowSize()
+    const windowSize = useWindowSize()
 
-  const handleTabSelected = useCallback(
-    (id: string) => {
-      if (id === selectedId) return
-      setSelected(id)
-      onTabChange && onTabChange(id)
-    },
-    [onTabChange, selectedId],
-  )
+    const handleTabSelected = useCallback(
+      (id: string) => {
+        if (id === selectedId) return
+        setSelected(id)
+        onTabChange && onTabChange(id)
+      },
+      [onTabChange, selectedId],
+    )
 
-  const ref = useRef<HTMLDivElement>(null)
-  const [underscoreStyle, setUnderscoreStyle] = useState({})
+    const ref = useRef<HTMLDivElement>(null)
+    const [underscoreStyle, setUnderscoreStyle] = useState({})
 
-  useEffect(() => {
-    if (!ref) return
+    useEffect(() => {
+      if (!ref) return
 
-    setUnderscoreStyle({
-      left: ref.current?.offsetLeft || 0,
-      width: ref.current?.offsetWidth || 0,
-    })
-  }, [windowSize, selectedId, tabs])
+      const width = ref.current?.getBoundingClientRect().width || 0
 
-  return (
-    <StyledContainer align={align}>
-      <StyledTabs role="tablist" {...rest}>
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.id}
-            ref={tab.id === selectedId ? ref : undefined}
-            selected={selectedId === tab.id}
-            onTabSelected={handleTabSelected}
-            {...tab}
-          />
-        ))}
-        <StyledUnderscoreBar style={underscoreStyle} />
-      </StyledTabs>
-    </StyledContainer>
-  )
-}
+      setUnderscoreStyle({
+        left: ref.current?.offsetLeft || 0,
+        width,
+      })
+    }, [windowSize, selectedId, tabs])
+
+    return (
+      <StyledContainer align={align}>
+        <StyledTabs role="tablist" {...rest}>
+          {tabs.map((tab) => (
+            <Tab
+              key={tab.id}
+              ref={tab.id === selectedId ? ref : undefined}
+              selected={selectedId === tab.id}
+              onTabSelected={handleTabSelected}
+              {...tab}
+            />
+          ))}
+          <StyledUnderscoreBar style={underscoreStyle} />
+        </StyledTabs>
+      </StyledContainer>
+    )
+  },
+)
+Tabs.displayName = 'Tabs'
 
 export default Tabs

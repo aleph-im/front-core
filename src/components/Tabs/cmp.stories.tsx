@@ -55,6 +55,7 @@ const Template: StoryFn<typeof Tabs> = (args) => {
   return (
     <>
       <Tabs {...args} tabs={tabs} onTabChange={(tabId) => setTabId(tabId)} />
+
       <div role="tabpanel" tw="p-10">
         {tabId === 'general' ? (
           <div>
