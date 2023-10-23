@@ -8,14 +8,21 @@ import { CheckboxProps } from './types'
 export default {
   title: 'Components/UI/forms/Checkbox',
   component: Checkbox,
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md'],
+      control: { type: 'inline-radio' },
+    },
+  },
 }
 
 const defaultArgs: Partial<CheckboxProps> = {
   name: 'name',
+  size: 'md',
 }
 
 const defaultParams = {
-  controls: { exclude: ['color', 'size'] },
+  controls: { exclude: ['color'] },
 }
 
 // ---
