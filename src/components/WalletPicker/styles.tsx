@@ -1,30 +1,27 @@
 import styled, { css } from 'styled-components'
-import { StyledPickerProps } from './types'
+import { addClasses } from '../../utils'
 
-export const StyledPicker = styled.div<StyledPickerProps>`
-  ${({ theme, size }) => {
-    const width = size === 'regular' ? '318px;' : '100%;'
+export const StyledPicker = styled.div`
+  ${({ theme }) => {
     return css`
       position: relative;
-      width: ${width}
+      width: 320px;
       border-radius: 1.875rem;
       background: ${theme.color.base0}0A;
-      z-index:1;
+      z-index: 1;
       padding: 1.5rem;
       box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(50px);
-      `
+    `
   }}
 `
 
-export const StyledTitle = styled.div<StyledPickerProps>`
-  ${({ theme, size }) => {
-    const width = size === 'regular' ? '1.125rem' : '1.5rem'
-
+export const StyledTitle = styled.h6.attrs(addClasses('tp-nav'))`
+  ${({ theme }) => {
     return css`
       color: ${theme.color.base0};
       font-family: ${theme.typo.info.family};
-      font-size: ${width};
+      font-size: 1.125rem;
       margin: 0 0 2rem 0;
     `
   }}

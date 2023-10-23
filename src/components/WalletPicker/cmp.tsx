@@ -8,7 +8,6 @@ import WalletIcon from './icons'
 import Icon from '../Icon'
 
 export const WalletPicker = ({
-  size,
   networks,
   address,
   balance,
@@ -35,18 +34,14 @@ export const WalletPicker = ({
   }
 
   return (
-    <StyledPicker
-      {...{
-        size,
-      }}
-    >
+    <StyledPicker>
       {address ? (
         <>
           <div tw="flex items-center gap-4 mb-6">
             <Logo color="base0" size="3rem" text="" />
             <div tw="leading-3">
               <div
-                className="tp-code1 fs-2xl"
+                className="tp-code1 fs-24"
                 tw="whitespace-nowrap leading-4! mb-3"
               >
                 {displayBalance}
@@ -90,7 +85,7 @@ export const WalletPicker = ({
         </>
       ) : (
         <div>
-          <StyledTitle {...{ size }}>1. Choose your network</StyledTitle>
+          <StyledTitle>1. Choose your network</StyledTitle>
           <Row count={4} gap="0.75rem" tw="mb-6">
             {networks.map((network) => (
               <Col key={network.name}>
@@ -116,12 +111,9 @@ export const WalletPicker = ({
                       tw="absolute! h-full w-full inset-0 -z-1"
                       className="fx-noise-base"
                     ></div>
-                    <Icon
-                      name={network.icon}
-                      size={size == 'regular' ? 'md' : 'xl'}
-                    />
+                    <Icon name={network.icon} size="xl" tw="w-6" />
                   </Button>
-                  <div className="fs-2xs text-base0" tw="opacity-60">
+                  <div className="fs-10 text-base0" tw="mt-1 opacity-60">
                     {network.name}
                   </div>
                 </div>
@@ -130,7 +122,7 @@ export const WalletPicker = ({
           </Row>
           {currentNetwork?.wallets && (
             <BorderedDiv>
-              <StyledTitle {...{ size }}>2. Connect your wallet</StyledTitle>
+              <StyledTitle>2. Connect your wallet</StyledTitle>
               <Row count={1}>
                 {currentNetwork?.wallets?.map(
                   (wallet: { [key: string]: any }) => (
@@ -144,7 +136,7 @@ export const WalletPicker = ({
                           variant="tertiary"
                           color="main0"
                           kind="neon"
-                          size={size}
+                          size="big"
                         >
                           {wallet.name}
                           <WalletIcon

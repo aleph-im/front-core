@@ -33,7 +33,6 @@ const bitcoin: NetworkProps = {
 }
 
 const defaultArgs: Partial<WalletPickerProps> = {
-  size: 'regular',
   networks: [ethereum, bitcoin],
 }
 
@@ -51,7 +50,16 @@ const defaultParams = {
 const Template: StoryFn<typeof WalletPicker> = (props: WalletPickerProps) => {
   return (
     <>
-      <WalletPicker {...props} />
+      <div tw="absolute top-0 left-0 ">
+        <WalletPicker {...props} />
+      </div>
+      Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem
+      ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum v v v Lorem
+      ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum
+      Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem
+      ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem
+      ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem
+      ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
     </>
   )
 }
