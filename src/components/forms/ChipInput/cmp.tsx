@@ -8,7 +8,7 @@ import React, {
   FocusEvent,
   useMemo,
 } from 'react'
-import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
+import { useForwardRef } from '../../../hooks'
 import Icon from '../../Icon'
 import { StyledInputWrapper } from '../styles.forms'
 import {
