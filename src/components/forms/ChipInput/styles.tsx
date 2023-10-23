@@ -1,28 +1,18 @@
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
-import { StyledTextInputContainer } from '../TextInput/styles'
+import { StyledContainer as StyledInputContainer } from '../TextInput/styles'
 import { fieldPlaceholderCss } from '../styles.forms'
+import tw from 'twin.macro'
 
-export const StyledContainer = styled(StyledTextInputContainer)<{
-  isBig: boolean
-}>`
-  ${({ isBig }) => {
-    return css`
-      flex-wrap: wrap;
-      border-radius: ${isBig ? '1.375rem' : '1.875rem'};
-      padding: ${isBig ? '0.5rem' : '0'};
-    `
-  }}
+export const StyledContainer = styled(StyledInputContainer)`
+  flex-wrap: wrap;
+  border-radius: 1.375rem;
+  padding: 0.5rem;
+  min-height: 2.75rem;
 `
 
-export const StyledChipContainer = styled.div<{ isBig: boolean }>`
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  align-self: stretch;
-  margin: ${({ isBig }) => (isBig ? '0' : '0 0.34375rem')};
-  max-width: 100%;
-  overflow: hidden;
+export const StyledChipContainer = styled.div`
+  ${tw`inline-flex flex-wrap items-center self-stretch max-w-full overflow-hidden gap-x-1.5 gap-y-3`}
 `
 
 export const StyledChip = styled.span`
@@ -30,13 +20,13 @@ export const StyledChip = styled.span`
     return css`
       display: inline-flex;
       align-items: center;
+      justify-content: space-between;
+      flex: 1 1 auto;
       background-color: ${theme.color.main0};
       color: ${theme.color.text};
       border-radius: 1.875rem;
       min-height: 2.0625rem; // 33px
       padding: 0.125rem 1.125rem;
-      margin: 0.34375rem 0;
-      margin-right: 0.5rem;
       max-width: 100%;
     `
   }}
@@ -69,14 +59,12 @@ export const StyledChipRemoveButton = styled.button`
   }}
 `
 
-export const StyledInput = styled.input.attrs(addClasses('tp-form'))<{
-  isBig: boolean
-}>`
-  ${({ theme, isBig }) => {
+export const StyledInput = styled.input.attrs(addClasses('tp-form'))`
+  ${({ theme }) => {
     return css`
       flex: 1 1 auto;
-      padding: ${isBig ? '0.5rem 0.5rem 0' : '0.5rem 1.5rem'};
-      min-height: 2.75em;
+      padding: 0 0.5rem;
+      min-height: 1.625rem;
       border: none;
       outline: none;
       color: ${theme.color.text};

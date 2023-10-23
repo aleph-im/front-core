@@ -10,7 +10,6 @@ export const StyledTag = styled.span.attrs((props) => {
 })`
   ${({ theme }) => {
     return css`
-      box-sizing: border-box;
       display: inline-block;
       padding: 0.5rem 1.125rem;
       color: ${theme.color.text};

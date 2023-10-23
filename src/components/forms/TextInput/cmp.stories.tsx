@@ -3,6 +3,7 @@ import { StoryFn } from '@storybook/react'
 import TextInput from './cmp'
 import { TextInputProps } from './types'
 import Button from '../../Button'
+import Icon from '../../Icon'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -14,6 +15,7 @@ const defaultArgs: Partial<TextInputProps> = {
   name: 'text-input',
   placeholder: 'Placeholder',
   value: '',
+  disabled: false,
 }
 
 const defaultParams = {
@@ -130,5 +132,33 @@ Disabled.args = {
   disabled: true,
 }
 Disabled.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const WithIcon = Template.bind({})
+WithIcon.args = {
+  ...defaultArgs,
+  icon: <Icon name="search" size="lg" />,
+  buttonStyle: 'wrapped',
+  disabled: false,
+}
+WithIcon.parameters = {
+  ...defaultParams,
+}
+
+export const WithIconAndButton = Template.bind({})
+WithIconAndButton.args = {
+  ...defaultArgs,
+  icon: <Icon name="search" size="lg" />,
+  buttonStyle: 'wrapped',
+  button: (
+    <Button variant="primary" kind="neon" size="regular" color="main0">
+      Click
+    </Button>
+  ),
+}
+WithIconAndButton.parameters = {
   ...defaultParams,
 }

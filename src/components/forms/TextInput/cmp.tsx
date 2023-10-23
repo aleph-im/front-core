@@ -1,16 +1,24 @@
 import React, {
   FocusEvent,
   ForwardedRef,
+  cloneElement,
   forwardRef,
+  isValidElement,
   useCallback,
   useMemo,
   useState,
 } from 'react'
 import FormError from '../FormError'
 import { StyledInputWrapper } from '../styles.forms'
-import { StyledTextInputField, StyledTextInputContainer } from './styles'
-import { TextInputProps } from './types'
+import {
+  StyledInput,
+  StyledContainer,
+  StyledRightContent,
+  StyledLeftContent,
+} from './styles'
+import { ButtonProps, TextInputProps } from './types'
 import FormLabel from '../FormLabel'
+import { Button } from '../../Button'
 
 export const TextInput = forwardRef(
   (
@@ -27,6 +35,7 @@ export const TextInput = forwardRef(
       onFocus: onFocusProp,
       onBlur: onBlurProp,
       required,
+      icon,
       ...rest
     }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -63,10 +72,25 @@ export const TextInput = forwardRef(
     return (
       <StyledInputWrapper>
         {label && <FormLabel {...{ label, error, required }} />}
-        <StyledTextInputContainer
-          {...{ button, buttonStyle, error, className: isFocusClass, disabled }}
+        <StyledContainer
+          {...{
+            $hasButton: !!button,
+            className: isFocusClass,
+            error,
+            disabled,
+          }}
         >
-          <StyledTextInputField
+          {icon && (
+            <StyledLeftContent
+              {...{
+                $isFilled: !!rest.value,
+                disabled,
+              }}
+            >
+              {icon}
+            </StyledLeftContent>
+          )}
+          <StyledInput
             {...{
               ref,
               button,
@@ -81,8 +105,14 @@ export const TextInput = forwardRef(
               onBlur: handleBlur,
             }}
           />
-          {button}
-        </StyledTextInputContainer>
+          {button && (
+            <StyledRightContent $style={buttonStyle}>
+              {isValidElement(button) && button.type === Button
+                ? cloneElement(button, { disabled } as ButtonProps)
+                : button}
+            </StyledRightContent>
+          )}
+        </StyledContainer>
         {error && <FormError error={error} />}
       </StyledInputWrapper>
     )

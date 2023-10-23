@@ -1,26 +1,59 @@
+import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
-import { ButtonProps } from './types'
+import { ButtonProps, ButtonStyle } from './types'
 import { FormError } from '../FormError/types'
 import {
   fieldDisabledCss,
+  fieldDisabledStyles,
   fieldErrorCss,
   fieldPlaceholderCss,
+  fieldPlaceholderStyles,
 } from '../styles.forms'
 
-export const StyledTextInputField = styled.input.attrs(
+export type StyledContainerProps = ButtonProps & {
+  error?: FormError
+  disabled?: boolean
+  $hasButton?: boolean
+}
+
+export const StyledContainer = styled.div<StyledContainerProps>`
+  ${({ theme, $hasButton }) => {
+    return css`
+      ${tw`flex items-center gap-2.5 relative`}
+      background: ${theme.color.text}0F;
+      box-shadow: 0px 4px 24px #00000040;
+      border: 1px solid transparent;
+      border-radius: 1.875rem;
+      // padding: 0.5rem 2rem;
+      padding: 0.4375rem 2rem;
+
+      ${$hasButton &&
+      css`
+        padding-right: 0.4375rem;
+      `}
+
+      &._focus {
+        border-color: ${theme.color.text};
+      }
+
+      ${fieldDisabledCss}
+
+      ${fieldErrorCss}
+    `
+  }}
+`
+
+export const StyledInput = styled.input.attrs(
   addClasses('tp-form'),
 )<ButtonProps>`
   ${({ theme }) => css`
-    box-sizing: border-box;
-    justify-content: space-between;
     appearance: none;
     outline: 0;
     border: 0;
     background: transparent;
     color: ${theme.color.text};
-    padding: 0.5rem 2rem;
-    min-height: 2.75em;
+    min-height: 1.625rem;
     width: 100%;
     opacity: 1;
 
@@ -44,38 +77,21 @@ export const StyledTextInputField = styled.input.attrs(
   `}
 `
 
-export type StyledTextInputContainerProps = ButtonProps & {
-  error?: FormError
-  disabled?: boolean
-}
-
-export const StyledTextInputContainer = styled.div<StyledTextInputContainerProps>`
-  ${({ theme, buttonStyle }) => {
+export type StyledRightContentProps = { $style: ButtonStyle }
+export const StyledRightContent = styled.div<StyledRightContentProps>`
+  ${({ $style }) => {
     return css`
-      display: flex;
-      align-items: center;
-      background: ${theme.color.text}0F;
-      box-shadow: 0px 4px 24px #00000040;
-      border: 1px solid transparent;
-      border-radius: 1.875rem;
-
-      &._focus {
-        border-color: ${theme.color.text};
-      }
-      
-      ${fieldDisabledCss}
-
-      ${fieldErrorCss}
-
-      && > button,
-      & > a {
-        flex: 1 0 auto;
-        align-self: stretch;
-
+      && > a,
+      && > button {
         ${() => {
-          switch (buttonStyle) {
+          switch ($style) {
             case 'stuck': {
               return css`
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
 
@@ -85,13 +101,25 @@ export const StyledTextInputContainer = styled.div<StyledTextInputContainerProps
                 }
               `
             }
-            default: {
-              return css`
-                margin: 0.5rem;
-              `
-            }
           }
         }}
+      }
+    `
+  }}
+`
+
+export type StyledLeftContentProps = { $isFilled: boolean; disabled?: boolean }
+export const StyledLeftContent = styled.div<StyledLeftContentProps>`
+  ${({ $isFilled, disabled }) => {
+    return css`
+      ${!$isFilled && fieldPlaceholderStyles}
+      ${disabled && fieldDisabledStyles}
+      ${!$isFilled &&
+      disabled &&
+      css`
+        /* disabled + placeholder 0.5 * 0.4 = 0.2 */
+        opacity: 0.2;
+      `}
     `
   }}
 `

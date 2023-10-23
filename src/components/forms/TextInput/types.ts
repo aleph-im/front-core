@@ -1,9 +1,15 @@
 import { InputHTMLAttributes, ReactNode } from 'react'
 import { FormError } from '../FormError/types'
 
+export type ButtonStyle = 'wrapped' | 'stuck'
+
 export type ButtonProps = {
   button?: ReactNode
-  buttonStyle?: 'wrapped' | 'stuck'
+  buttonStyle?: ButtonStyle
+}
+
+export type IconProps = {
+  icon?: ReactNode
 }
 
 export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -17,4 +23,5 @@ export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   // Force states
   focus?: boolean
   disabled?: boolean
-} & ButtonProps
+} & ButtonProps &
+  IconProps

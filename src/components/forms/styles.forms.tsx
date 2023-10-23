@@ -46,6 +46,10 @@ export const errorCss = css<{ error?: FormError }>`
   }
 `
 
+export const fieldDisabledStyles = css`
+  opacity: 0.5;
+`
+
 export const fieldDisabledCss = css<{ disabled?: boolean }>`
   ${({ disabled }) => css`
     ${disabled &&
@@ -53,20 +57,24 @@ export const fieldDisabledCss = css<{ disabled?: boolean }>`
       &,
       &:disabled,
       &._disabled {
-        opacity: 0.5;
+        ${fieldDisabledStyles}
       }
     `}
   `}
 `
 
-export const fieldPlaceholderCss = css`
+export const fieldPlaceholderStyles = css`
   ${({ theme }) => css`
-    &::placeholder {
-      mix-blend-mode: normal;
-      color: ${theme.color.text};
-      opacity: 0.4;
-    }
+    mix-blend-mode: normal;
+    color: ${theme.color.text};
+    opacity: 0.4;
   `}
+`
+
+export const fieldPlaceholderCss = css`
+  &::placeholder {
+    ${fieldPlaceholderStyles}
+  }
 `
 
 export const fieldFocusCss = css`

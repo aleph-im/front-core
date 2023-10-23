@@ -121,12 +121,9 @@ export const ChipInput = memo(
           {label && <FormLabel {...{ label, error, required }} />}
           <StyledContainer ref={containerRef} isBig={isBig} error={error}>
             {value && (
-              <StyledChipContainer isBig={isBig}>
+              <StyledChipContainer>
                 {value.map((tag) => (
-                  <ChipItem
-                    key={tag}
-                    {...{ tag, isBig, onRemove: handleRemoveTag }}
-                  />
+                  <ChipItem key={tag} {...{ tag, onRemove: handleRemoveTag }} />
                 ))}
               </StyledChipContainer>
             )}
@@ -137,7 +134,6 @@ export const ChipInput = memo(
               value={inputValue}
               onChange={handleInputChange}
               onKeyDown={handleInputKeyDown}
-              isBig={isBig}
             />
           </StyledContainer>
           {error && <FormError error={error} />}
