@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import tw from 'twin.macro'
 import { addClasses } from '../../utils'
 
-export const StyledNavlink = styled.li.attrs(addClasses('tp-info fs-2xs'))<{
+export const StyledNavlink = styled.li.attrs(addClasses('tp-info fs-10'))<{
   selected: boolean
   selectedColor?: string
 }>`
