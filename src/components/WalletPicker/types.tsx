@@ -1,5 +1,6 @@
 import { IconName } from '@fortawesome/fontawesome-svg-core'
 import { WalletIconName } from './icons'
+import { HTMLAttributes } from 'react'
 
 export type WalletProps = {
   name: string
@@ -14,7 +15,7 @@ export type NetworkProps = {
   wallets: WalletProps[]
 }
 
-export type WalletPickerProps = {
+export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
   backgroundColor?: string
   networks: NetworkProps[]
   address?: string
