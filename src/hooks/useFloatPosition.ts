@@ -43,6 +43,9 @@ export function useFloatPosition<E extends HTMLElement>({
   const defaultTargetRef = useRef<E>(null)
   const defaultFloaterRef = useRef<E>(null)
 
+  targetRef = targetRef || defaultTargetRef
+  floaterRef = floaterRef || defaultFloaterRef
+
   const { bounds: targetBounds } = useBounds({
     ref: targetRef,
     deps,
@@ -52,9 +55,6 @@ export function useFloatPosition<E extends HTMLElement>({
     ref: floaterRef,
     deps,
   })
-
-  targetRef = targetRef || defaultTargetRef
-  floaterRef = floaterRef || defaultFloaterRef
 
   const position: FloatPosition = useMemo(() => {
     const [myPosY, myPosX] = my.split('-')
