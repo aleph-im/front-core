@@ -45,8 +45,8 @@ export const Tooltip = ({
     at,
     margin,
     offset,
-    targetRef,
-    floaterRef: tooltipRef,
+    atRef: targetRef,
+    myRef: tooltipRef,
     deps: [state],
   })
 

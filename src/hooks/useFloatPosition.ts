@@ -15,44 +15,50 @@ export type FloatPositionType =
 
 export type FloatPosition = { x: number; y: number }
 
-export type UseFloatPositionProps<E extends HTMLElement> = {
+export type UseFloatPositionProps<
+  M extends HTMLElement,
+  A extends HTMLElement,
+> = {
   my: FloatPositionType
   at: FloatPositionType
   margin?: FloatPosition
   offset?: FloatPosition
-  targetRef?: RefObject<E>
-  floaterRef?: RefObject<E>
+  myRef?: RefObject<M>
+  atRef?: RefObject<A>
   deps?: any[]
 }
 
-export type UseFloatPositionReturn<E extends HTMLElement> = {
+export type UseFloatPositionReturn<
+  M extends HTMLElement,
+  A extends HTMLElement,
+> = {
   position: FloatPosition
-  targetRef: RefObject<E>
-  floaterRef: RefObject<E>
+  myRef: RefObject<M>
+  atRef: RefObject<A>
 }
 
-export function useFloatPosition<E extends HTMLElement>({
+export function useFloatPosition<M extends HTMLElement, A extends HTMLElement>({
   my,
   at,
-  targetRef,
-  floaterRef,
+  myRef,
+  atRef,
   margin = { x: 5, y: 5 },
   offset = { x: 0, y: 0 },
   deps = [],
-}: UseFloatPositionProps<E>): UseFloatPositionReturn<E> {
-  const defaultTargetRef = useRef<E>(null)
-  const defaultFloaterRef = useRef<E>(null)
+}: UseFloatPositionProps<M, A>): UseFloatPositionReturn<M, A> {
+  const defaultMyRef = useRef<M>(null)
+  const defaultAtRef = useRef<A>(null)
 
-  targetRef = targetRef || defaultTargetRef
-  floaterRef = floaterRef || defaultFloaterRef
+  myRef = myRef || defaultMyRef
+  atRef = atRef || defaultAtRef
 
-  const { bounds: targetBounds } = useBounds({
-    ref: targetRef,
+  const { bounds: floaterBounds } = useBounds({
+    ref: myRef,
     deps,
   })
 
-  const { bounds: floaterBounds } = useBounds({
-    ref: floaterRef,
+  const { bounds: targetBounds } = useBounds({
+    ref: atRef,
     deps,
   })
 
@@ -66,6 +72,7 @@ export function useFloatPosition<E extends HTMLElement>({
       width: atW,
       height: atH,
     } = targetBounds || { x: 0, y: 0, width: 0, height: 0 }
+
     const { width: myW, height: myH } = floaterBounds || {
       x: 0,
       y: 0,
@@ -75,6 +82,7 @@ export function useFloatPosition<E extends HTMLElement>({
 
     const targetX =
       atPosX === 'left' ? atX : atPosX === 'center' ? atX + atW / 2 : atX + atW
+
     const targetY =
       atPosY === 'top' ? atY : atPosY === 'center' ? atY + atH / 2 : atY + atH
 
@@ -84,6 +92,7 @@ export function useFloatPosition<E extends HTMLElement>({
         : myPosX === 'center'
         ? -(myW / 2)
         : -(myW + margin.x)
+
     const tooltipOffsetY =
       myPosY === 'top'
         ? margin.y
@@ -97,5 +106,5 @@ export function useFloatPosition<E extends HTMLElement>({
     return { x, y }
   }, [at, my, targetBounds, floaterBounds, offset, margin])
 
-  return { position, targetRef, floaterRef }
+  return { position, myRef, atRef }
 }
