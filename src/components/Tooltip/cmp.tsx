@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useBounds, useHover } from '../../hooks'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useHover } from '../../hooks'
 import {
   StyledContentContainer,
   StyledHeaderContainer,
   StyledContainer,
   StyledHeaderCloseIcon,
 } from './styles'
-import { TooltipPosition, TooltipProps } from './types'
+import { TooltipProps } from './types'
 import { createPortal } from 'react-dom'
+import { useFloatPosition } from '../../hooks/useFloatPosition'
 
 export const Tooltip = ({
   open: openProp,
@@ -27,14 +28,21 @@ export const Tooltip = ({
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<any>()
-  const _targetRef = useRef<any>()
-  const targetRef = targetRefProp || _targetRef
+  const defaultTargetRef = useRef<any>()
+  const targetRef = targetRefProp || defaultTargetRef
 
   const [isOpen, setIsOpen] = useState(openProp || false)
   const open = openProp !== undefined ? openProp : isOpen
 
-  const [targetBounds] = useBounds('mouseover', targetRef, [targetRef])
-  const [tooltipBounds] = useBounds('mouseover', tooltipRef, [open])
+  const { position } = useFloatPosition({
+    my,
+    at,
+    margin,
+    offset,
+    targetRef,
+    floaterRef: tooltipRef,
+    deps: [open],
+  })
 
   const [isHoverTarget] = useHover(targetRef)
   const [isHoverTooltip] = useHover(tooltipRef)
@@ -73,47 +81,6 @@ export const Tooltip = ({
     closeDelay,
     onClose,
   ])
-
-  const position: TooltipPosition = useMemo(() => {
-    const [myPosY, myPosX] = my.split('-')
-    const [atPosY, atPosX] = at.split('-')
-
-    const {
-      x: atX,
-      y: atY,
-      width: atW,
-      height: atH,
-    } = targetBounds || { x: 0, y: 0, width: 0, height: 0 }
-    const { width: myW, height: myH } = tooltipBounds || {
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-    }
-
-    const targetX =
-      atPosX === 'left' ? atX : atPosX === 'center' ? atX + atW / 2 : atX + atW
-    const targetY =
-      atPosY === 'top' ? atY : atPosY === 'center' ? atY + atH / 2 : atY + atH
-
-    const tooltipOffsetX =
-      myPosX === 'left'
-        ? margin.x
-        : myPosX === 'center'
-        ? -(myW / 2)
-        : -(myW + margin.x)
-    const tooltipOffsetY =
-      myPosY === 'top'
-        ? margin.y
-        : myPosY === 'center'
-        ? -(myH / 2)
-        : -(myH + margin.y)
-
-    const x = targetX + tooltipOffsetX + offset.x
-    const y = targetY + tooltipOffsetY + offset.y
-
-    return { x, y }
-  }, [at, my, targetBounds, tooltipBounds, offset, margin])
 
   return (
     <>

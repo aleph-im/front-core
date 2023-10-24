@@ -78,10 +78,10 @@ export const Dropdown = memo(
       const windowSize = useWindowSize(0)
       const windowScroll = useWindowScroll(0)
 
-      const [size] = useBounds<HTMLDivElement>(undefined, ref, [
-        windowSize,
-        windowScroll,
-      ])
+      const { bounds: size } = useBounds<HTMLDivElement>({
+        ref,
+        deps: [windowSize, windowScroll],
+      })
 
       const onChange = useCallback(
         (newValueSet: Set<string>) => {

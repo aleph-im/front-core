@@ -1,32 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useState, RefObject, useEffect } from 'react'
 
-export function useBounds<E extends HTMLElement>(
-  event?: string,
-  _ref?: RefObject<E>,
-  deps: any[] = [],
-): [DOMRect | undefined, RefObject<E>] {
+export type useBoundsProps<E extends HTMLElement> = {
+  ref?: RefObject<E>
+  deps: any[]
+}
+
+export type useBoundsReturn<E extends HTMLElement> = {
+  ref: RefObject<E>
+  bounds?: DOMRect
+}
+
+export function useBounds<E extends HTMLElement>({
+  ref,
+  deps,
+}: useBoundsProps<E>): useBoundsReturn<E> {
   const defaultRef = useRef<E>(null)
-  const ref = _ref || defaultRef
-  const [size, setSize] = useState<DOMRect>()
+  ref = ref || defaultRef
+
+  const [bounds, setBounds] = useState<DOMRect>()
 
   useEffect(() => {
-    const current = ref.current
-    if (!current) return
+    if (!ref) return
+    if (!ref.current) return
 
-    function updateSize() {
-      if (!current) return
-      setSize(current.getBoundingClientRect())
-    }
+    setBounds(ref.current.getBoundingClientRect())
+  }, [ref, ...deps])
 
-    updateSize()
-    event && current.addEventListener(event, updateSize)
-
-    return () => {
-      if (!current) return
-      event && current.removeEventListener(event, updateSize)
-    }
-  }, [ref, event, ...deps])
-
-  return [size, ref]
+  return { bounds, ref }
 }
