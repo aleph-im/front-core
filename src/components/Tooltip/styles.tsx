@@ -4,28 +4,21 @@ import { addClasses } from '../../utils'
 import Icon from '../Icon'
 import { TooltipPosition } from './types'
 import tw from 'twin.macro'
+import { TransitionedState } from '../../hooks/useTransitionedEnterExit'
 
-export const StyledContainer = styled.div.attrs<
-  { position: TooltipPosition; isOpen: boolean },
-  HTMLAttributes<HTMLDivElement>
->((props) => {
-  const { x, y } = props.position || { x: 0, y: 0 }
+export type StyledContainerProps = {
+  $position: TooltipPosition
+  $state: TransitionedState
+} & HTMLAttributes<HTMLDivElement>
 
-  return {
-    ...addClasses('fx-glass-base2')(props),
-    style: {
-      display: props.isOpen ? 'block' : 'none',
-      top: 0,
-      left: 0,
-      transform: `translate3d(${x}px, ${y}px, 0)`,
-    },
-  }
-})`
-  ${({ theme }) => {
+export const StyledContainer = styled.div.attrs(
+  addClasses('fx-glass-base2'),
+)<StyledContainerProps>`
+  ${({ theme, $state, $position: { x = 0, y = 0 } }) => {
     const [g0, g1] = theme.gradient.main0.colors
 
     return css`
-      ${tw`p-6`}
+      ${tw`block p-6 top-0 left-0`}
 
       position: fixed;
       display: inline-flex;
@@ -37,6 +30,10 @@ export const StyledContainer = styled.div.attrs<
       border-radius: 1.5rem;
       backdrop-filter: blur(50px);
       color: ${theme.color.text};
+      will-change: opacity translate3d;
+      transition: opacity ease-in-out 0.25s 0s;
+      opacity: ${$state === 'enter' ? 1 : 0};
+      transform: ${`translate3d(${x}px, ${y}px, 0)`};
 
       /* BORDER */
       &::before {

@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useRef, RefObject, useState, useEffect } from 'react'
+import { useRef, RefObject, useState, useEffect, useCallback } from 'react'
 
 export type UseCollapsibleHeightProps<E extends HTMLElement> = {
   isCollapsed: boolean
   containerRef?: RefObject<E>
   contentRef?: RefObject<E>
-  deps?: any[]
 }
 
 export type UseCollapsibleHeightReturn<E extends HTMLElement> = {
@@ -18,7 +16,6 @@ export function useCollapsibleHeight<E extends HTMLElement>({
   isCollapsed,
   containerRef,
   contentRef,
-  deps = [],
 }: UseCollapsibleHeightProps<E>): UseCollapsibleHeightReturn<E> {
   const defaultContainerRef = useRef<E>(null)
   const defaultContentRef = useRef<E>(null)
@@ -28,13 +25,13 @@ export function useCollapsibleHeight<E extends HTMLElement>({
 
   const [height, setHeight] = useState(!isCollapsed ? 'auto' : '0')
 
-  function getHeights() {
+  const getHeights = useCallback(() => {
     const divHeight = contentRef?.current?.getBoundingClientRect()?.height || 0
     const wrapHeight =
       containerRef?.current?.getBoundingClientRect()?.height || 0
 
     return [divHeight, wrapHeight]
-  }
+  }, [containerRef, contentRef])
 
   useEffect(() => {
     let frame: number
@@ -69,7 +66,7 @@ export function useCollapsibleHeight<E extends HTMLElement>({
     }
 
     return clear
-  }, [isCollapsed, ...deps])
+  }, [containerRef, getHeights, isCollapsed])
 
   return { height, containerRef, contentRef }
 }

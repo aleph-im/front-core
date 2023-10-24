@@ -1,17 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect, useState, RefObject, useRef } from 'react'
 
-export function useHover<E extends HTMLElement>(
-  _ref?: RefObject<E>,
-  propagate: boolean = true,
-): [boolean, RefObject<E>] {
+export type UseHoverProps<E extends HTMLElement> = {
+  ref?: RefObject<E>
+  propagate?: boolean
+  deps?: any[]
+}
+
+export type UseHoverReturn<E extends HTMLElement> = {
+  isHover: boolean
+  ref: RefObject<E>
+}
+
+export function useHover<E extends HTMLElement>({
+  ref: refProp,
+  propagate = true,
+  deps = [],
+}: UseHoverProps<E>): UseHoverReturn<E> {
   const defaultRef = useRef(null)
-  const ref = _ref || defaultRef
+  const ref = refProp || defaultRef
 
   const [isHover, setIsHover] = useState<boolean>(false)
 
   useLayoutEffect(() => {
     const current = ref.current
-
     if (!current) return
 
     function handleEnter(e: MouseEvent) {
@@ -33,7 +45,10 @@ export function useHover<E extends HTMLElement>(
       current.removeEventListener('mouseover', handleEnter)
       current.removeEventListener('mouseout', handleLeave)
     }
-  }, [propagate, ref])
+  }, [propagate, ref, ...deps])
 
-  return [isHover, ref]
+  return {
+    isHover,
+    ref,
+  }
 }

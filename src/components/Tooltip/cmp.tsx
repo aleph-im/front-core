@@ -9,6 +9,7 @@ import {
 import { TooltipProps } from './types'
 import { createPortal } from 'react-dom'
 import { useFloatPosition } from '../../hooks/useFloatPosition'
+import { useTransitionedEnterExit } from '../../hooks/useTransitionedEnterExit'
 
 export const Tooltip = ({
   open: openProp,
@@ -31,8 +32,13 @@ export const Tooltip = ({
   const defaultTargetRef = useRef<any>()
   const targetRef = targetRefProp || defaultTargetRef
 
-  const [isOpen, setIsOpen] = useState(openProp || false)
-  const open = openProp !== undefined ? openProp : isOpen
+  const [openState, setOpenState] = useState(openProp || false)
+  const isOpen = openProp !== undefined ? openProp : openState
+
+  const { shouldMount, state } = useTransitionedEnterExit({
+    onOff: isOpen,
+    ref: tooltipRef,
+  })
 
   const { position } = useFloatPosition({
     my,
@@ -41,64 +47,64 @@ export const Tooltip = ({
     offset,
     targetRef,
     floaterRef: tooltipRef,
-    deps: [open],
+    deps: [state],
   })
 
-  const [isHoverTarget] = useHover(targetRef)
-  const [isHoverTooltip] = useHover(tooltipRef)
+  const { isHover: isHoverTarget } = useHover({ ref: targetRef })
+  const { isHover: isHoverTooltip } = useHover({
+    ref: tooltipRef,
+    deps: [state],
+  })
 
-  const timmer = useRef<NodeJS.Timeout>()
+  const timerRef = useRef<NodeJS.Timeout>()
 
   const handleCloseClick = useCallback(() => {
-    if (timmer.current) clearTimeout(timmer.current)
+    if (timerRef.current) clearTimeout(timerRef.current)
 
-    setIsOpen(false)
+    setOpenState(false)
 
     onCloseClick && onCloseClick()
     onClose && onClose()
   }, [onCloseClick, onClose])
 
   useEffect(() => {
-    if (timmer.current) clearTimeout(timmer.current)
-    const open = isHoverTarget || isHoverTooltip
+    if (timerRef.current) clearTimeout(timerRef.current)
+    const isHovered = isHoverTarget || isHoverTooltip
 
-    if (open) {
-      setIsOpen(true)
+    if (isHovered) {
+      setOpenState(true)
       onOpen && onOpen()
-    } else {
-      timmer.current = setTimeout(() => {
-        setIsOpen(false)
-        onClose && onClose()
-      }, closeDelay)
+      return
     }
-  }, [
-    openProp,
-    isHoverTarget,
-    isHoverTooltip,
-    setIsOpen,
-    onOpen,
-    handleCloseClick,
-    closeDelay,
-    onClose,
-  ])
+
+    timerRef.current = setTimeout(() => {
+      setOpenState(false)
+      onClose && onClose()
+    }, closeDelay)
+  }, [isHoverTarget, isHoverTooltip, closeDelay, onOpen, onClose])
 
   return (
     <>
-      {createPortal(
-        <StyledContainer
-          ref={tooltipRef}
-          {...{ position, isOpen: open, ...rest }}
-        >
-          {header !== undefined && (
-            <StyledHeaderContainer>
-              {header}
-              <StyledHeaderCloseIcon onClick={handleCloseClick} />
-            </StyledHeaderContainer>
-          )}
-          <StyledContentContainer>{content}</StyledContentContainer>
-        </StyledContainer>,
-        containerRef,
-      )}
+      {shouldMount &&
+        createPortal(
+          <StyledContainer
+            {...{
+              ref: tooltipRef,
+              $position: position,
+              $state: state,
+              ...rest,
+            }}
+          >
+            {header !== undefined && (
+              <StyledHeaderContainer>
+                {header}
+                <StyledHeaderCloseIcon onClick={handleCloseClick} />
+              </StyledHeaderContainer>
+            )}
+            <StyledContentContainer>{content}</StyledContentContainer>
+          </StyledContainer>,
+          containerRef,
+        )}
       {children && (
         <span style={{ display: 'inline-block' }} ref={targetRef}>
           {children}

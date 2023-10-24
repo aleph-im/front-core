@@ -12,16 +12,15 @@ export type useBoundsReturn<E extends HTMLElement> = {
 }
 
 export function useBounds<E extends HTMLElement>({
-  ref,
+  ref: refProp,
   deps,
 }: useBoundsProps<E>): useBoundsReturn<E> {
   const defaultRef = useRef<E>(null)
-  ref = ref || defaultRef
+  const ref = refProp || defaultRef
 
   const [bounds, setBounds] = useState<DOMRect>()
 
   useEffect(() => {
-    if (!ref) return
     if (!ref.current) return
 
     setBounds(ref.current.getBoundingClientRect())
