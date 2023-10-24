@@ -99,7 +99,7 @@ export const StyledInputDot = styled.span`
         cursor: not-allowed;
       }
 
-      ${StyledInput}:checked:disabled + & {
+      ${StyledInput}:checked:disabled + &:after {
         background-image: linear-gradient(90deg, ${g0}1A 0%, ${g1}1A 100%);
       }
     `
