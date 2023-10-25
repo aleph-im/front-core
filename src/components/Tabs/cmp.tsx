@@ -89,12 +89,10 @@ export const Tabs = memo(
     useEffect(() => {
       if (!ref) return
 
-      const width = ref.current?.getBoundingClientRect().width || 0
+      const left = ref.current?.offsetLeft || 0
+      const width = Math.floor(ref.current?.getBoundingClientRect().width || 0)
 
-      setUnderscoreStyle({
-        left: ref.current?.offsetLeft || 0,
-        width,
-      })
+      setUnderscoreStyle({ left, width })
     }, [windowSize, selectedId, tabs])
 
     return (
