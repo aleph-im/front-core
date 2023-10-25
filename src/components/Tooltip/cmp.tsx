@@ -101,10 +101,7 @@ export const Tooltip = ({
                 <StyledHeaderCloseIcon onClick={handleCloseClick} />
               </div>
             )}
-            <StyledContentContainer>
-              {isMobile + ''}
-              {content}
-            </StyledContentContainer>
+            <StyledContentContainer>{content}</StyledContentContainer>
           </StyledContainer>,
           containerRef,
         )}
