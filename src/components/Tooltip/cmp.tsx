@@ -47,7 +47,7 @@ export const Tooltip = ({
     offset,
     atRef: targetRef,
     myRef: tooltipRef,
-    deps: [state],
+    deps: [shouldMount],
   })
 
   const { isHover: isHoverTarget } = useHover({ ref: targetRef })
