@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useHover } from '../../hooks'
+import { useHover, useResponsiveMax } from '../../hooks'
 import {
   StyledContentContainer,
-  StyledHeaderContainer,
   StyledContainer,
   StyledHeaderCloseIcon,
 } from './styles'
@@ -15,7 +14,7 @@ export const Tooltip = ({
   open: openProp,
   targetRef: targetRefProp,
   children,
-  header,
+  closeButton = false,
   content,
   my = 'bottom-center',
   at = 'top-center',
@@ -83,6 +82,8 @@ export const Tooltip = ({
     }, closeDelay)
   }, [isHoverTarget, isHoverTooltip, closeDelay, onOpen, onClose])
 
+  const isMobile = useResponsiveMax('md')
+
   return (
     <>
       {shouldMount &&
@@ -95,13 +96,15 @@ export const Tooltip = ({
               ...rest,
             }}
           >
-            {header !== undefined && (
-              <StyledHeaderContainer>
-                {header}
+            {(closeButton || isMobile) && (
+              <div tw="flex items-center justify-end">
                 <StyledHeaderCloseIcon onClick={handleCloseClick} />
-              </StyledHeaderContainer>
+              </div>
             )}
-            <StyledContentContainer>{content}</StyledContentContainer>
+            <StyledContentContainer>
+              {isMobile + ''}
+              {content}
+            </StyledContentContainer>
           </StyledContainer>,
           containerRef,
         )}

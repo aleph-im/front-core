@@ -11,9 +11,9 @@ export type TooltipProps = {
   offset?: TooltipPosition
 
   closeDelay?: number
+  closeButton?: boolean
 
   open?: boolean
-  header?: ReactNode
   content?: ReactNode
 
   onOpen?: () => void

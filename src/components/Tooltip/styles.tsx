@@ -5,6 +5,7 @@ import Icon from '../Icon'
 import { TooltipPosition } from './types'
 import tw from 'twin.macro'
 import { TransitionedState } from '../../hooks/useTransitionedEnterExit'
+import { getResponsiveCss } from '../../styles'
 
 export type StyledContainerProps = {
   $position: TooltipPosition
@@ -18,22 +19,25 @@ export const StyledContainer = styled.div.attrs(
     const [g0, g1] = theme.gradient.main0.colors
 
     return css`
-      ${tw`block p-6 top-0 left-0`}
+      ${tw`fixed inline-flex flex-col items-stretch justify-start gap-4 p-6 inset-6 z-50`}
 
-      position: fixed;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
       will-change: transform;
-      gap: 1rem;
-      max-width: 31.25rem;
       border-radius: 1.5rem;
       backdrop-filter: blur(50px);
       color: ${theme.color.text};
       will-change: opacity translate3d;
       transition: opacity ease-in-out 0.25s 0s;
       opacity: ${$state === 'enter' ? 1 : 0};
-      transform: ${`translate3d(${x}px, ${y}px, 0)`};
+
+      ${getResponsiveCss(
+        'md',
+        css`
+          ${tw`inset-auto top-0 left-0`}
+
+          transform: ${`translate3d(${x}px, ${y}px, 0)`};
+          max-width: 24.5625rem;
+        `,
+      )}
 
       /* BORDER */
       &::before {
@@ -55,13 +59,6 @@ export const StyledContainer = styled.div.attrs(
   }}
 `
 
-export const StyledHeaderContainer = styled.div.attrs(addClasses('tp-h7'))`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-`
-
 export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
   return {
     ...props,
@@ -81,5 +78,5 @@ export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
 `
 
 export const StyledContentContainer = styled.div.attrs(
-  addClasses('tp-body1 fs-16'),
+  addClasses('tp-body1 fs-12'),
 )``

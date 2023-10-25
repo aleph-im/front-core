@@ -12,7 +12,7 @@ export default {
 }
 
 const defaultArgs: Partial<TooltipProps> = {
-  header: 'Information',
+  content: 'Information',
 }
 
 const defaultParams = {
