@@ -63,7 +63,7 @@ export type TableProps<R extends Record<string, unknown>> =
       columns: TableColumn<R>[]
       data: R[]
       borderType: TableBorderType
-      oddRowNoise?: boolean
+      rowNoise?: boolean
     }
 
 export type TableRowProps<R extends Record<string, unknown>> =
@@ -72,7 +72,7 @@ export type TableRowProps<R extends Record<string, unknown>> =
       row: R
       columns: TableColumn<R>[]
       rowIndex: number
-      oddRowNoise?: boolean
+      rowNoise?: boolean
     }
 
 export type TableCellProps<R extends Record<string, unknown>> =
@@ -81,7 +81,7 @@ export type TableCellProps<R extends Record<string, unknown>> =
     col: TableColumn<R>
     rowIndex: number
     colIndex: number
-    oddRowNoise?: boolean
+    rowNoise?: boolean
   }
 
 export type TableSortedColumn = { column: string; asc: boolean }

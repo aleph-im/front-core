@@ -68,7 +68,7 @@ const dataArgs = {
 
 const defaultArgs: TableProps<any> = {
   borderType: 'dashed' as TableBorderType,
-  oddRowNoise: true,
+  rowNoise: true,
   ...dataArgs,
   rowProps: (row, i) => ({
     onClick: () => {

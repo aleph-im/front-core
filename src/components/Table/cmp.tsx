@@ -15,7 +15,7 @@ function Row<R extends Record<string, unknown>>({
   rowIndex,
   rowRender,
   rowProps,
-  oddRowNoise = false,
+  rowNoise = false,
 }: TableRowProps<R>) {
   const props = useMemo(() => {
     const rProps = rowProps?.(row, rowIndex) || {}
@@ -31,7 +31,7 @@ function Row<R extends Record<string, unknown>>({
           {columns.map((col, colIndex) => (
             <Cell
               key={colIndex}
-              {...{ row, col, rowIndex, colIndex, oddRowNoise }}
+              {...{ row, col, rowIndex, colIndex, rowNoise }}
             />
           ))}
         </tr>
@@ -45,7 +45,7 @@ function Cell<R extends Record<string, unknown>>({
   col,
   rowIndex,
   colIndex,
-  oddRowNoise,
+  rowNoise,
 }: TableCellProps<R>) {
   const alignStyle = useMemo(() => {
     return col.align === 'center'
@@ -59,10 +59,10 @@ function Cell<R extends Record<string, unknown>>({
     const cellProps = col.cellProps?.(row, col, rowIndex, colIndex) || {}
     const className =
       (cellProps?.className ? `${cellProps?.className} ` : '') +
-      (oddRowNoise && rowIndex % 2 === 0 ? 'fx-noise-light' : '')
+      (rowNoise && rowIndex % 2 !== 0 ? 'fx-noise-light' : '')
     const css = { ...alignStyle, ...(cellProps?.css as any) }
     return { ...cellProps, className, css }
-  }, [col, row, rowIndex, colIndex, oddRowNoise, alignStyle])
+  }, [col, row, rowIndex, colIndex, rowNoise, alignStyle])
 
   return (
     <>
@@ -98,7 +98,7 @@ function HeaderCell<R extends Record<string, unknown>>({
 
     const className =
       (hcellProps?.className ? `${hcellProps?.className} ` : '') +
-      `${col.sortable ? 'sortable' : ''} tp-table fs-16`
+      `${col.sortable ? 'sortable' : ''} tp-table`
 
     const widthStyle = col.width ? { width: col.width } : {}
     const style = { ...widthStyle, ...(hcellProps?.style as any) }
@@ -232,7 +232,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
               columns,
               rowRender: props.rowRender,
               rowProps: props.rowProps,
-              oddRowNoise: props.oddRowNoise,
+              rowNoise: props.rowNoise,
             }}
           />
         ))}
