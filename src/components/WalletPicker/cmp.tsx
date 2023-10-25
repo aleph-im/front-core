@@ -6,6 +6,7 @@ import { NetworkProps, WalletPickerProps } from './types'
 import { Logo } from '../Logo'
 import WalletIcon from './icons'
 import Icon from '../Icon'
+import tw from 'twin.macro'
 
 export const WalletPicker = forwardRef(
   (
@@ -98,8 +99,8 @@ export const WalletPicker = forwardRef(
                     <Button
                       onClick={() => handleClick(network)}
                       disabled={network.wallets.length === 0}
-                      size="big"
-                      tw="relative"
+                      size="regular"
+                      tw="relative py-1!"
                       kind={
                         currentNetwork?.name === network.name ? 'neon' : 'flat'
                       }
@@ -114,13 +115,21 @@ export const WalletPicker = forwardRef(
                           : 'secondary'
                       }
                     >
-                      <div
-                        tw="absolute! h-full w-full inset-0 -z-1"
-                        className="fx-noise-base"
-                      ></div>
+                      {currentNetwork?.name !== network.name && (
+                        <div
+                          tw="absolute! h-full w-full inset-0 -z-10"
+                          className="fx-noise-base"
+                        />
+                      )}
                       <Icon name={network.icon} size="xl" tw="w-6" />
                     </Button>
-                    <div className="fs-10 text-base0" tw="mt-1 opacity-60">
+                    <div
+                      className="fs-10 text-base0"
+                      css={[
+                        tw`mt-1`,
+                        currentNetwork?.name !== network.name && tw`opacity-60`,
+                      ]}
+                    >
                       {network.name}
                     </div>
                   </div>
@@ -143,7 +152,7 @@ export const WalletPicker = forwardRef(
                             variant="tertiary"
                             color="main0"
                             kind="neon"
-                            size="big"
+                            size="regular"
                           >
                             {wallet.name}
                             <WalletIcon

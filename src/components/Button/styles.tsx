@@ -215,13 +215,13 @@ export const StyledButton = styled.button<StyledButtonProps>`
         width: auto;
         min-width: 0;
         max-width: 100%;
-        min-height: 1rem;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         border: none;
         border-radius: 1.875rem;
-        line-height: 1em;
+        line-height: 1.16666666667;
+        letter-spacing: 0.0522rem;
         background-color: transparent;
         outline: 0;
         color: ${theme.color.text};
@@ -274,12 +274,14 @@ export const StyledButton = styled.button<StyledButtonProps>`
           switch (size) {
             case 'regular': {
               return css`
+                min-height: 2.3125rem; // 37px
                 font-size: ${theme.button.font.size.regular -
                 (variant !== 'text-only' ? 0 : 0.25)}rem;
               `
             }
             case 'big': {
               return css`
+                min-height: 2.75rem; // 44px
                 font-size: ${theme.button.font.size.big -
                 (variant !== 'text-only' ? 0 : 0.375)}rem;
               `
