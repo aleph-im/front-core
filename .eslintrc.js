@@ -31,6 +31,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-inferrable-types': 0,
     "prettier/prettier": "error",
-    "react/no-unknown-property": ['error', { ignore: ['css', 'tw'] }]
+    "react/no-unknown-property": ['error', { ignore: ['css', 'tw'] }],
+    "react/prop-types": "off"
   }
 };
