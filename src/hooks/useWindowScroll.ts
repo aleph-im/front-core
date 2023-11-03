@@ -11,8 +11,6 @@ export function useWindowScroll(
     let timmerId: NodeJS.Timeout
 
     function update() {
-      console.log('uuu')
-
       setValue({
         scrollX: window.scrollX,
         scrollY: window.scrollY,
