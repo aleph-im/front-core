@@ -18,6 +18,7 @@ export * from './TextGradient'
 export * from './Tooltip'
 export * from './WalletPicker'
 export * from './ToggleContainer'
+export * from './Spinner'
 
 export * from './forms/Checkbox'
 export * from './forms/CheckboxGroup'
