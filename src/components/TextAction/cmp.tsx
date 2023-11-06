@@ -4,7 +4,7 @@ import { StyledTextAction, StyledText } from './styles'
 import { Transition } from 'react-transition-group'
 import { Icon } from '../Icon'
 import { Button } from '../Button'
-import { IconName } from '@fortawesome/fontawesome-svg-core'
+import { IconName } from '../Icon/types'
 
 const duration = 150
 const defaultStyle = {

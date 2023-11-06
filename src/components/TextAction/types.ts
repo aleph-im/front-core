@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { TypoKind } from '../../themes'
-import { IconName } from '@fortawesome/fontawesome-svg-core'
+import { IconName } from '../Icon/types'
 
 export type TitlePositionProps = 'left' | 'center' | 'right'
 

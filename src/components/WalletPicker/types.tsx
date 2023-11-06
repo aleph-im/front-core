@@ -1,4 +1,4 @@
-import { IconName } from '@fortawesome/fontawesome-svg-core'
+import { IconName } from '../Icon/types'
 import { WalletIconName } from './icons'
 import { HTMLAttributes } from 'react'
 

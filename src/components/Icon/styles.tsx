@@ -9,7 +9,7 @@ export interface StyledIconProps extends FontAwesomeIconProps {
   $iconSize: IconSize
 }
 
-export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
+export const StyledIconSizeCss = css<StyledIconProps>`
   && {
     ${({ $iconSize, theme }) => {
       switch ($iconSize) {
@@ -50,5 +50,21 @@ export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
         }
       }
     }}
+  }
+`
+
+export const StyledCustomIconCss = css<StyledIconProps>`
+  display: inline-block;
+  overflow: visible;
+  box-sizing: content-box;
+  font-size: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  ${StyledIconSizeCss};
+`
+
+export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
+  && {
+    ${StyledIconSizeCss}
   }
 `

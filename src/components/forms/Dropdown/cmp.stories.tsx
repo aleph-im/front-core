@@ -5,7 +5,7 @@ import Dropdown from './cmp'
 import { DropdownProps } from './types'
 import DropdownOption from '../DropdownOption'
 import Icon from '../../Icon'
-import { IconName } from '@fortawesome/fontawesome-svg-core'
+import { IconName } from '../../Icon/types'
 
 export default {
   title: 'Components/UI/forms/Dropdown',
@@ -25,7 +25,13 @@ const defaultParams = {
 // ---
 
 const Template: StoryFn<typeof Dropdown> = (args) => {
-  const icons: IconName[] = ['user', 'house', 'twitter', 'image', 'phone']
+  const icons: IconName[] = [
+    'user',
+    'house',
+    'twitter',
+    'image',
+    'phone',
+  ] as any[]
   const options: [string, string, IconName][] = Array.from(
     { length: icons.length },
     (_, i) => [`${i}`, `Option ${i}`, icons[i]],
