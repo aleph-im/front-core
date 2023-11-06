@@ -2,7 +2,6 @@ import React from 'react'
 import {
   library,
   findIconDefinition,
-  IconPrefix,
   IconDefinition,
   IconName as FAIconName,
 } from '@fortawesome/fontawesome-svg-core'
@@ -10,7 +9,7 @@ import { fass } from '@fortawesome/sharp-solid-svg-icons'
 import { far } from '@fortawesome/pro-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
-import { IconName, IconProps } from './types'
+import { IconName, IconProps, IconPrefix } from './types'
 import { StyledCustomIconCss, StyledIcon } from './styles'
 
 import * as customIcons from './custom/index'
@@ -19,7 +18,7 @@ import styled from 'styled-components'
 // @todo: Think about it as we are including all the icons on the final bundle
 library.add(far, fab, fass)
 
-const iconPrefixes: IconPrefix[] = ['fass', 'fab', 'far']
+const iconPrefixes: IconPrefix[] = ['fass', 'fab', 'far', 'custom']
 
 export const Icon = ({
   name,
@@ -27,43 +26,39 @@ export const Icon = ({
   size = 'md',
   ...rest
 }: IconProps) => {
-  if (prefix === 'custom') {
-    const CustomIcon = (customIcons as Record<IconName, any>)[name]
-    if (CustomIcon) return <></>
+  for (const p of [prefix, ...iconPrefixes.filter((p) => p !== prefix)]) {
+    if (p === 'custom') {
+      const CustomIcon = (customIcons as Record<IconName, any>)[name]
+      if (!CustomIcon) continue
 
-    const StyledCustomIcon = styled(CustomIcon)`
-      ${StyledCustomIconCss};
-    `
+      const StyledCustomIcon = styled(CustomIcon)`
+        ${StyledCustomIconCss};
+      `
 
-    return <StyledCustomIcon {...{ $iconSize: size, fill: rest.color }} />
+      return <StyledCustomIcon {...{ $iconSize: size, fill: rest.color }} />
+    } else {
+      const iconName = name as FAIconName
+      const icon: IconDefinition | undefined = findIconDefinition({
+        iconName,
+        prefix: p,
+      })
+
+      if (!icon) continue
+
+      return (
+        <StyledIcon
+          {...{
+            icon,
+            size: '1x',
+            $iconSize: size,
+            ...rest,
+          }}
+        />
+      )
+    }
   }
 
-  const iconName = name as FAIconName
-  let icon: IconDefinition | undefined = findIconDefinition({
-    iconName,
-    prefix,
-  })
-
-  if (!icon) {
-    const prefix = iconPrefixes.find((prefix) =>
-      findIconDefinition({ iconName, prefix }),
-    )
-
-    if (!prefix) return <></>
-
-    icon = findIconDefinition({ iconName, prefix })
-  }
-
-  return (
-    <StyledIcon
-      {...{
-        icon,
-        size: '1x',
-        $iconSize: size,
-        ...rest,
-      }}
-    />
-  )
+  return <></>
 }
 
 export default Icon
