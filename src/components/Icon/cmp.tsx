@@ -19,17 +19,17 @@ import styled from 'styled-components'
 // @todo: Think about it as we are including all the icons on the final bundle
 library.add(far, fab, fass)
 
-const iconPrefixes: IconPrefix[] = ['far', 'fab', 'fass']
+const iconPrefixes: IconPrefix[] = ['fass', 'fab', 'far']
 
 export const Icon = ({
   name,
-  prefix = 'custom',
+  prefix = 'fass',
   size = 'md',
   ...rest
 }: IconProps) => {
   if (prefix === 'custom') {
     const CustomIcon = (customIcons as Record<IconName, any>)[name]
-    if (!CustomIcon) return <></>
+    if (CustomIcon) return <></>
 
     const StyledCustomIcon = styled(CustomIcon)`
       ${StyledCustomIconCss};

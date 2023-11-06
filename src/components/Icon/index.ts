@@ -1,2 +1,2 @@
 export { default, Icon } from './cmp'
-export type { IconProps } from './types'
+export type { IconProps, IconName, IconPrefix, IconSize } from './types'
