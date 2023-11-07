@@ -2,9 +2,14 @@ import React, { memo } from 'react'
 import { StyledLabel } from './styles'
 import { LabelProps } from './types'
 
-export const Label = ({ children, variant, ...rest }: LabelProps) => {
+export const Label = ({
+  children,
+  variant = 'info',
+  kind = 'primary',
+  ...rest
+}: LabelProps) => {
   return (
-    <StyledLabel {...rest} $variant={variant}>
+    <StyledLabel {...rest} $variant={variant} $kind={kind}>
       {children}
     </StyledLabel>
   )

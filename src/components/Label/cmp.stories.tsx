@@ -12,6 +12,7 @@ export default {
 
 const defaultArgs: Partial<LabelProps> = {
   variant: 'success',
+  kind: 'primary',
   children: 'Label',
 }
 
@@ -27,10 +28,10 @@ const Template: StoryFn<typeof Label> = (args) => <Label {...args} />
 
 // ---
 
-export const OnlyIcon = Template.bind({})
-OnlyIcon.args = {
+export const Default = Template.bind({})
+Default.args = {
   ...defaultArgs,
 }
-OnlyIcon.parameters = {
+Default.parameters = {
   ...defaultParams,
 }
