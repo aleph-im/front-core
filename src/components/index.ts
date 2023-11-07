@@ -19,6 +19,7 @@ export * from './Tooltip'
 export * from './WalletPicker'
 export * from './ToggleContainer'
 export * from './Spinner'
+export * from './Label'
 
 export * from './forms/Checkbox'
 export * from './forms/CheckboxGroup'
