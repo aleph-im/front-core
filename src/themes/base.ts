@@ -180,6 +180,7 @@ const typo: ThemeTypo = {
     tag: true,
     family: font.family.head,
     weight: 500,
+    lineHeight: 'normal',
     size: pxToRem(18),
   },
   info: {
@@ -187,6 +188,7 @@ const typo: ThemeTypo = {
     family: font.family.head,
     style: 'italic',
     weight: 800,
+    lineHeight: 'normal',
     size: pxToRem(10),
   },
   body: {
