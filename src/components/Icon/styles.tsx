@@ -59,6 +59,7 @@ export const StyledCustomIconCss = css<StyledIconProps>`
   box-sizing: content-box;
   font-size: 1em;
   height: 1em;
+  width: 1em;
   vertical-align: -0.125em;
   ${StyledIconSizeCss};
 `
