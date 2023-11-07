@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
   library,
   findIconDefinition,
@@ -71,4 +71,4 @@ export const Icon = ({
   return <></>
 }
 
-export default Icon
+export default memo(Icon)
