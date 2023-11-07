@@ -53,7 +53,7 @@ export const StyledIconSizeCss = css<StyledIconProps>`
   }
 `
 
-export const StyledCustomIconCss = css<StyledIconProps>`
+export const StyledCustomIconCss = css<StyledIconProps & { $color?: string }>`
   display: inline-block;
   overflow: visible;
   box-sizing: content-box;
@@ -62,6 +62,7 @@ export const StyledCustomIconCss = css<StyledIconProps>`
   width: 1em;
   vertical-align: -0.125em;
   ${StyledIconSizeCss};
+  fill: ${({ $color }) => $color || 'currentColor'};
 `
 
 export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`

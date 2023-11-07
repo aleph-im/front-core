@@ -38,7 +38,11 @@ export const Icon = ({
 
       return (
         <StyledCustomIcon
-          {...{ $iconSize: size, fill: color || 'currentColor' }}
+          {...{
+            $iconSize: size,
+            $color: color,
+            ...rest,
+          }}
         />
       )
     } else {
