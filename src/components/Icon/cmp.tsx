@@ -24,6 +24,7 @@ export const Icon = ({
   name,
   prefix = 'fass',
   size = 'md',
+  color,
   ...rest
 }: IconProps) => {
   for (const p of [prefix, ...iconPrefixes.filter((p) => p !== prefix)]) {
@@ -35,7 +36,11 @@ export const Icon = ({
         ${StyledCustomIconCss};
       `
 
-      return <StyledCustomIcon {...{ $iconSize: size, fill: rest.color }} />
+      return (
+        <StyledCustomIcon
+          {...{ $iconSize: size, fill: color || 'currentColor' }}
+        />
+      )
     } else {
       const iconName = name as FAIconName
       const icon: IconDefinition | undefined = findIconDefinition({
@@ -51,6 +56,7 @@ export const Icon = ({
             icon,
             size: '1x',
             $iconSize: size,
+            color,
             ...rest,
           }}
         />
