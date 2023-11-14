@@ -49,10 +49,10 @@ export const argTypes = {
 };
 
 // The default value of the theme arg to all stories
-export const args = {
-  size: 'lg',
-  color: 'white'
-};
+// export const args = {
+//   size: 'lg',
+//   color: 'white'
+// };
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 import { StyledTextGradientContainer } from './styles'
 import { TextGradientProps, TypeElements } from './types'
@@ -33,5 +33,6 @@ export const TextGradient = ({
     </StyledTextGradientContainer>
   )
 }
+TextGradient.displayName = 'TextGradient'
 
-export default TextGradient
+export default memo(TextGradient)
