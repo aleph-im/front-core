@@ -23,6 +23,7 @@ export * from './modules/Navbar'
 export * from './modules/NavbarLinkList'
 export * from './modules/NavbarLink'
 export * from './modules/WalletPicker'
+export * from './modules/Footer'
 
 export * from './forms/Checkbox'
 export * from './forms/CheckboxGroup'
