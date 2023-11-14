@@ -21,8 +21,8 @@ export type RequestState<T> = {
 
 export type UseRequestStateProps<T> = RequestCallbacks<T> & {
   state: RequestState<T>
-  setState(set: (prevState: RequestState<T>) => RequestState<T>): void
-  flushData: boolean
+  flushData?: boolean
+  setState: (prevState: RequestState<T>) => void
 }
 
 export type UseRequestStateReturn<T> = [
@@ -42,7 +42,7 @@ export function useRequestState<T>({
 
   const onSuccess = useCallback(
     (data: T) => {
-      setState(() => ({ data, loading: false, error: undefined }))
+      setState({ data, loading: false, error: undefined })
 
       function defaultSuccessHandler() {
         noti &&
@@ -61,11 +61,11 @@ export function useRequestState<T>({
 
   const onError = useCallback(
     (error: Error) => {
-      setState((prev) => ({
-        data: flushData ? undefined : prev.data,
+      setState({
+        data: flushData ? undefined : state.data,
         loading: false,
         error,
-      }))
+      })
 
       function defaultErrorHandler(error: Error) {
         const text = error.message
@@ -85,18 +85,18 @@ export function useRequestState<T>({
         ? errorProp(error, defaultErrorHandler)
         : defaultErrorHandler(error)
     },
-    [noti, flushData, setState, errorProp],
+    [state, noti, flushData, setState, errorProp],
   )
 
   const onLoad = useCallback(() => {
-    setState((prev: RequestState<T>) => ({
-      data: flushData ? undefined : prev.data,
+    setState({
+      data: flushData ? undefined : state.data,
       loading: true,
       error: undefined,
-    }))
+    })
 
     loadProp && loadProp()
-  }, [flushData, setState, loadProp])
+  }, [state, flushData, setState, loadProp])
 
   return [state, { onSuccess, onError, onLoad }]
 }
