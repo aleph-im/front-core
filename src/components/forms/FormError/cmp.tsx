@@ -1,7 +1,7 @@
 import React from 'react'
-import Icon from '../../Icon'
 import { StyledFormErrorContainer } from './styles'
 import { FormErrorProps } from './types'
+import Icon from '../../common/Icon'
 
 export const FormError = ({ error, ...rest }: FormErrorProps) => {
   return (

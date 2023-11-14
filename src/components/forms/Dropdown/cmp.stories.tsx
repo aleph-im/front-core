@@ -4,8 +4,7 @@ import { StoryFn } from '@storybook/react'
 import Dropdown from './cmp'
 import { DropdownProps } from './types'
 import DropdownOption from '../DropdownOption'
-import Icon from '../../Icon'
-import { IconName } from '../../Icon/types'
+import Icon, { IconName } from '../../common/Icon'
 
 export default {
   title: 'Components/UI/forms/Dropdown',

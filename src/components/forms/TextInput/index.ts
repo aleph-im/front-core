@@ -1,2 +1,2 @@
-export { default, TextInput } from './cmp'
+export { default, default as TextInput } from './cmp'
 export type { TextInputProps } from './types'

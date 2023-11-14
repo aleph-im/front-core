@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
-import Icon from '../../Icon'
 import tw from 'twin.macro'
 import { FormError } from '../FormError/types'
 import { fieldDisabledCss, fieldErrorCss } from '../styles.forms'
+import Icon from '../../common/Icon'
 
 export type StyledDropdownProps = {
   isOpen: boolean

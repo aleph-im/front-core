@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import TextInput from './cmp'
 import { TextInputProps } from './types'
-import Button from '../../Button'
-import Icon from '../../Icon'
+import Button from '../../common/Button'
+import Icon from '../../common/Icon'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

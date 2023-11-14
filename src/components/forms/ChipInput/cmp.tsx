@@ -9,7 +9,6 @@ import React, {
   useMemo,
 } from 'react'
 import { useForwardRef } from '../../../hooks'
-import Icon from '../../Icon'
 import { StyledInputWrapper } from '../styles.forms'
 import {
   StyledChip,
@@ -22,6 +21,7 @@ import {
 import { ChipInputProps, ChipItemProps } from './types'
 import FormLabel from '../FormLabel'
 import FormError from '../FormError'
+import Icon from '../../common/Icon'
 
 const ChipItem = memo(({ tag, onRemove }: ChipItemProps) => {
   const handleRemove = useCallback(() => onRemove(tag), [tag, onRemove])

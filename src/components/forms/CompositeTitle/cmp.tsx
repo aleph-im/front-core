@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { CompositeTitleProps } from './types'
 import { StyledLabel } from './styles'
-import TextGradient from '../../TextGradient'
+import TextGradient from '../../common/TextGradient'
 
 export const CompositeTitle = ({
   children,

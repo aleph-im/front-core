@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useNotification } from '../components/Notification/context'
+import { useNotification } from '../components/common/Notification/context'
 
 export type CopiedValue = string | null
 export type CopyFn = (text: string) => Promise<boolean> // Return success

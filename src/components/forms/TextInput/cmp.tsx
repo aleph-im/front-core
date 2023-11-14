@@ -4,6 +4,7 @@ import React, {
   cloneElement,
   forwardRef,
   isValidElement,
+  memo,
   useCallback,
   useMemo,
   useState,
@@ -18,7 +19,7 @@ import {
 } from './styles'
 import { ButtonProps, TextInputProps } from './types'
 import FormLabel from '../FormLabel'
-import { Button } from '../../Button'
+import Button from '../../common/Button'
 
 export const TextInput = forwardRef(
   (
@@ -121,4 +122,4 @@ export const TextInput = forwardRef(
 
 TextInput.displayName = 'TextInput'
 
-export default TextInput
+export default memo(TextInput)

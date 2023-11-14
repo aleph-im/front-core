@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import Icon from '../../Icon'
 import { CheckboxSize } from './types'
+import Icon from '../../common/Icon'
 
 export const StyledCheckboxContainer = styled.div<{ $size?: CheckboxSize }>`
   ${({ $size }) => {

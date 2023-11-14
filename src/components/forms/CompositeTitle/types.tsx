@@ -1,5 +1,5 @@
 import { ElementType } from 'react'
-import { TextGradientProps } from '../../TextGradient'
+import { TextGradientProps } from '../../common/TextGradient'
 import { TypoKind } from '../../../themes'
 
 export type CompositeTitleProps = TextGradientProps & {
