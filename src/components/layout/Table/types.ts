@@ -62,6 +62,7 @@ export type TableProps<R extends Record<string, unknown>> =
     TableRow<R> & {
       columns: TableColumn<R>[]
       data: R[]
+      stickyHeader: boolean
       borderType: TableBorderType
       rowNoise?: boolean
     }
@@ -88,6 +89,7 @@ export type TableSortedColumn = { column: string; asc: boolean }
 
 export type TableHeaderCellProps<R extends Record<string, unknown>> =
   TdHTMLAttributes<HTMLTableCellElement> & {
+    sticky: boolean
     col: TableColumn<R>
     colIndex: number
     sortedColumn: TableSortedColumn

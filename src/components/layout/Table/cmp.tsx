@@ -79,6 +79,7 @@ function Cell<R extends Record<string, unknown>>({
 
 function HeaderCell<R extends Record<string, unknown>>({
   col,
+  sticky,
   colIndex,
   sortedColumn,
   setSortedColumn,
@@ -119,7 +120,7 @@ function HeaderCell<R extends Record<string, unknown>>({
         <th
           key={colIndex}
           {...props}
-          css={props.css}
+          css={[props.css, sticky && tw`sticky top-0`]}
           style={props.style}
           onClick={() => {
             if (!col.sortable) return
@@ -211,6 +212,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
         <tr>
           {columns.map((col, colIndex) => (
             <HeaderCell
+              sticky={props.stickyHeader}
               key={colIndex}
               {...{
                 col,
