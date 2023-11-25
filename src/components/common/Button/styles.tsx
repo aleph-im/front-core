@@ -202,10 +202,10 @@ export const StyledButton = styled.button<StyledButtonProps>`
       && {
         position: relative;
         cursor: pointer;
-        /* display: inline-flex; inline-flex doesnt work with text-overflow */
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        gap: 0.375rem;
         text-align: center;
         font-weight: ${theme.button.font.weight};
         font-family: ${theme.button.font.family};
