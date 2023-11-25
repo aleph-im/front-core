@@ -13,7 +13,7 @@ import { IconName, IconProps, IconPrefix } from './types'
 import { StyledCustomIconCss, StyledIcon } from './styles'
 
 import * as customIcons from './custom/index'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 // @todo: Think about it as we are including all the icons on the final bundle
 library.add(far, fab, fass)
@@ -23,10 +23,13 @@ const iconPrefixes: IconPrefix[] = ['fass', 'fab', 'far', 'custom']
 export const Icon = ({
   name,
   prefix = 'fass',
-  size = 'md',
+  size: $iconSize = 'md',
   color,
   ...rest
 }: IconProps) => {
+  const theme = useTheme()
+  const $color = color ? theme.color[color] || color : color
+
   for (const p of [prefix, ...iconPrefixes.filter((p) => p !== prefix)]) {
     if (p === 'custom') {
       const CustomIcon = (customIcons as Record<IconName, any>)[name]
@@ -39,8 +42,8 @@ export const Icon = ({
       return (
         <StyledCustomIcon
           {...{
-            $iconSize: size,
-            $color: color,
+            $iconSize,
+            $color,
             ...rest,
           }}
         />
@@ -59,8 +62,8 @@ export const Icon = ({
           {...{
             icon,
             size: '1x',
-            $iconSize: size,
-            color,
+            $iconSize,
+            color: $color,
             ...rest,
           }}
         />
