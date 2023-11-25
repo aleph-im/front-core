@@ -15,6 +15,7 @@ function Row<R extends Record<string, unknown>>({
   rowIndex,
   rowRender,
   rowProps,
+  sticky,
   rowNoise = false,
 }: TableRowProps<R>) {
   const props = useMemo(() => {
@@ -32,6 +33,7 @@ function Row<R extends Record<string, unknown>>({
             <Cell
               key={colIndex}
               {...{ row, col, rowIndex, colIndex, rowNoise }}
+              sticky={sticky} // Pass the sticky prop
             />
           ))}
         </tr>
@@ -46,7 +48,8 @@ function Cell<R extends Record<string, unknown>>({
   rowIndex,
   colIndex,
   rowNoise,
-}: TableCellProps<R>) {
+  sticky, // New prop to determine if the column should be sticky
+}: TableCellProps<R> & { sticky?: boolean }) {
   const alignStyle = useMemo(() => {
     return col.align === 'center'
       ? tw`text-center`
@@ -69,7 +72,11 @@ function Cell<R extends Record<string, unknown>>({
       {col.cellRender ? (
         col.cellRender(row, col, rowIndex, colIndex)
       ) : (
-        <td key={colIndex} {...props} css={props.css}>
+        <td
+          key={colIndex}
+          {...props}
+          css={[props.css, sticky && tw`sticky left-0`]} // Apply sticky styles conditionally
+        >
           {col.render(row, col, rowIndex, colIndex)}
         </td>
       )}
@@ -227,6 +234,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
       <tbody>
         {sortedData.map((row, rowIndex) => (
           <Row
+            sticky={props.stickyColumn}
             key={row.key}
             {...{
               row,

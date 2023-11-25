@@ -63,6 +63,7 @@ export type TableProps<R extends Record<string, unknown>> =
       columns: TableColumn<R>[]
       data: R[]
       stickyHeader: boolean
+      stickyColumn: boolean
       borderType: TableBorderType
       rowNoise?: boolean
     }
@@ -74,6 +75,7 @@ export type TableRowProps<R extends Record<string, unknown>> =
       columns: TableColumn<R>[]
       rowIndex: number
       rowNoise?: boolean
+      sticky: boolean
     }
 
 export type TableCellProps<R extends Record<string, unknown>> =
