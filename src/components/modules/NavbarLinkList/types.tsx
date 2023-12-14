@@ -10,5 +10,6 @@ export type NavbarLinkListProps = HTMLAttributes<HTMLDivElement> & {
   desktopDirection?: 'row' | 'column'
   mobileGap?: boolean
   desktopGap?: boolean
+  breakpoint?: BreakpointId
   collapsible?: BreakpointId
 }

@@ -1,29 +1,9 @@
+import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
 import { ResponsiveNavBarProps } from './types'
 import { getResponsiveCss } from '../../../styles'
 import { addClasses } from '../../../utils'
-import tw from 'twin.macro'
-
-// Main container
-export const StyledNavbarContainer = styled.div.attrs(
-  addClasses('fx-glass-base2'),
-)`
-  ${({ theme }) => css`
-    ${tw`md:px-16`}
-    position: sticky;
-    top: 0;
-
-    ${getResponsiveCss(
-      'md',
-      css`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: ${theme.font.size['28']}rem;
-      `,
-    )}
-  `}
-`
+import { BreakpointId } from '../../../themes'
 
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
@@ -35,13 +15,6 @@ export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
     justify-content: space-between;
     height: ${height};
     background-color: ${isOpen ? '#07071366' : 'transparent'};
-
-    ${getResponsiveCss(
-      'md',
-      css`
-        background-color: transparent;
-      `,
-    )}
   `}
 `
 
@@ -52,13 +25,6 @@ export const StyledMobileTopContainer = styled.div`
       display: block;
       flex: 0 1 0px;
       z-index: 1;
-
-      ${getResponsiveCss(
-        'md',
-        css`
-          display: none;
-        `,
-      )}
     `
   }}
 `
@@ -71,20 +37,11 @@ export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
     display: ${isOpen ? 'flex' : 'none'};
     flex-direction: column;
     gap: ${theme.font.size['28']}rem;
-
-    ${getResponsiveCss(
-      'md',
-      css`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-      `,
-    )}
   `}
 `
 
 export const StyledLogoContainer = styled.div<ResponsiveNavBarProps>`
-  ${({ theme, height = '6.25rem' }) => {
+  ${({ height = '6.25rem' }) => {
     return css`
       position: absolute;
       top: 0;
@@ -95,16 +52,52 @@ export const StyledLogoContainer = styled.div<ResponsiveNavBarProps>`
       justify-content: center;
       align-items: center;
       font-size: 1.375rem; // 22px
+    `
+  }}
+`
 
-      ${getResponsiveCss(
-        'md',
-        css`
+// Main container
+export type StyledNavbarContainerProps = {
+  $breakpoint?: BreakpointId
+}
+
+export const StyledNavbarContainer = styled.div.attrs(
+  addClasses('fx-glass-base2'),
+)<StyledNavbarContainerProps>`
+  ${({ theme, $breakpoint = 'md' }) => css`
+    ${tw`md:px-16`}
+    position: sticky;
+    top: 0;
+
+    ${getResponsiveCss(
+      $breakpoint,
+      css`
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: ${theme.font.size['28']}rem;
+
+        & ${StyledHeadingContainer} {
+          background-color: transparent;
+        }
+
+        & ${StyledMobileTopContainer} {
+          display: none;
+        }
+
+        & ${StyledNavContainer} {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        & ${StyledLogoContainer} {
           position: static;
           height: auto;
           display: inline-block;
           font-size: ${theme.typo.logo.size}rem; // 34px
-        `,
-      )}
-    `
-  }}
+        }
+      `,
+    )}
+  `}
 `

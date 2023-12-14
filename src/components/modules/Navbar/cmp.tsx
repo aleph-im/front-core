@@ -18,6 +18,7 @@ export const Navbar = ({
   height,
   open,
   onToggle,
+  breakpoint: $breakpoint,
   ...rest
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -37,7 +38,7 @@ export const Navbar = ({
   useClickOutside(closeMenu, [ref])
 
   return (
-    <StyledNavbarContainer {...rest} ref={ref}>
+    <StyledNavbarContainer {...{ $breakpoint, ...rest }} ref={ref}>
       <StyledHeadingContainer isOpen={isOpenMenu} height={height}>
         <StyledMobileTopContainer>
           <Button

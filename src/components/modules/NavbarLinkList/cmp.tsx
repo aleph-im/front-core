@@ -1,7 +1,5 @@
 import React, { memo, useCallback, useRef, useState } from 'react'
-import { useTheme } from 'styled-components'
-import { useClickOutside } from '../../../hooks'
-import { useWindowSize } from '../../../hooks/useWindowSize'
+import { useClickOutside, useResponsiveBetween } from '../../../hooks'
 import {
   StyledList,
   StyledContainer,
@@ -13,27 +11,20 @@ import Icon from '../../common/Icon'
 
 export const NavbarLinkList = ({
   children,
-  collapsible,
-  onlyDesktop,
-  onlyMobile,
-  desktopDirection,
-  mobileDirection,
-  mobileGap,
-  desktopGap,
-  withSlash,
+  breakpoint = 'md',
+  collapsible = 'xs',
+  onlyDesktop: $onlyDesktop,
+  onlyMobile: $onlyMobile,
+  desktopDirection: $desktopDirection,
+  mobileDirection: $mobileDirection,
+  mobileGap: $mobileGap,
+  desktopGap: $desktopGap,
+  withSlash: $withSlash,
   ...rest
 }: NavbarLinkListProps) => {
   const [open, setOpen] = useState(false)
-
-  const theme = useTheme()
-  const bp = (collapsible ? theme.breakpoint[collapsible] : 0) * 16
-  const mobileBp = theme.breakpoint.md * 16
-
-  const size = useWindowSize()
-  const windowWidth = size?.width || 0
-
-  const isCollapsed =
-    (collapsible && windowWidth <= bp && windowWidth > mobileBp) || false
+  const isCollapsed = useResponsiveBetween(breakpoint, collapsible)
+  console.log(isCollapsed)
 
   const handleToggleOpen = useCallback(() => {
     setOpen(!open)
@@ -50,22 +41,19 @@ export const NavbarLinkList = ({
   return (
     <StyledContainer
       {...{
-        onlyDesktop,
-        onlyMobile,
-        isCollapsed,
+        $withSlash,
+        $onlyDesktop,
+        $onlyMobile,
+        $mobileDirection,
+        $desktopDirection,
+        $mobileGap,
+        $desktopGap,
+        $breakpoint: breakpoint,
+        $isCollapsed: isCollapsed,
         ...rest,
       }}
     >
-      <StyledList
-        {...{
-          theme,
-          withSlash,
-          mobileDirection,
-          desktopDirection,
-          mobileGap,
-          desktopGap,
-        }}
-      >
+      <StyledList>
         {isCollapsed ? children && (children as any[]).slice(0, 1) : children}
       </StyledList>
       {isCollapsed && (

@@ -14,7 +14,9 @@ export default {
   subcomponents: { NavbarLink },
 }
 
-const defaultArgs: Partial<NavbarProps> = {}
+const defaultArgs: Partial<NavbarProps> = {
+  breakpoint: 'md',
+}
 
 // ---
 
@@ -54,6 +56,8 @@ const Template: StoryFn<typeof Navbar> = (args) => {
     setIsOpen(false)
   }, [setIsOpen])
 
+  const { breakpoint } = args
+
   return (
     <>
       <Navbar
@@ -62,7 +66,11 @@ const Template: StoryFn<typeof Navbar> = (args) => {
         open={isOpen}
         onToggle={handleToggleOpen}
         mobileTopContent={
-          <NavbarLinkList onlyMobile mobileDirection="row">
+          <NavbarLinkList
+            onlyMobile
+            mobileDirection="row"
+            breakpoint={breakpoint}
+          >
             <Button
               color={'main0'}
               variant={'secondary'}
@@ -74,9 +82,14 @@ const Template: StoryFn<typeof Navbar> = (args) => {
           </NavbarLinkList>
         }
       >
-        <NavbarLinkList withSlash collapsible="xl" onClick={handleCloseMenu}>
+        <NavbarLinkList
+          withSlash
+          collapsible="xl"
+          onClick={handleCloseMenu}
+          breakpoint={breakpoint}
+        >
           {navLinks.map((link, i) => (
-            <NavbarLink key={i} isActive={!i}>
+            <NavbarLink key={i} isActive={!i} breakpoint={breakpoint}>
               {link}
             </NavbarLink>
           ))}

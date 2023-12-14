@@ -4,6 +4,7 @@ export type WindowSize = { width: number; height: number }
 
 export function useWindowSize(
   debounceDelay: number = 300,
+  inner: boolean = true,
 ): WindowSize | undefined {
   const [value, setValue] = useState<WindowSize>()
 
@@ -12,8 +13,8 @@ export function useWindowSize(
 
     function update() {
       setValue({
-        width: window.outerWidth,
-        height: window.outerHeight,
+        width: inner ? window.innerWidth : window.outerWidth,
+        height: inner ? window.innerHeight : window.outerHeight,
       })
     }
 
@@ -29,7 +30,7 @@ export function useWindowSize(
       timmerId && clearTimeout(timmerId)
       window.removeEventListener('resize', debouncedUpdate)
     }
-  }, [debounceDelay])
+  }, [debounceDelay, inner])
 
   return value
 }
