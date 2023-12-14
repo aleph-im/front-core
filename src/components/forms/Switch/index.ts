@@ -1,2 +1,2 @@
-export { default, Switch } from './cmp'
+export { default, default as Switch } from './cmp'
 export type { SwitchProps } from './types'

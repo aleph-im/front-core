@@ -1,4 +1,4 @@
-import React, { forwardRef, ForwardedRef } from 'react'
+import React, { forwardRef, ForwardedRef, memo } from 'react'
 import {
   StyledCheckboxContainer,
   StyledInput,
@@ -43,4 +43,4 @@ export const Checkbox = forwardRef(
 
 Checkbox.displayName = 'Checkbox'
 
-export default Checkbox
+export default memo(Checkbox)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { TextActionProps, TextProps } from './types'
 import { StyledTextAction, StyledText } from './styles'
 import { Transition } from 'react-transition-group'
@@ -11,6 +11,7 @@ const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
   opacity: 0,
 }
+
 type TransitionStyles = {
   entering: { opacity: number }
   entered: { opacity: number }
@@ -37,6 +38,7 @@ export const Text = ({ size = 18, value, color = 'main0' }: TextProps) => {
     </StyledText>
   )
 }
+Text.displayName = 'Text'
 
 export const TextAction = ({
   size,
@@ -51,6 +53,7 @@ export const TextAction = ({
   const [iconColor, setIconColor] = useState<string>(color)
   const [showIcon, setShowIcon] = useState<boolean>(true)
 
+  // @todo: Refactor this into styled-components properties and transitions / keyframes
   const animation = (fn: () => void) => {
     fn()
     setShowIcon(false)
@@ -91,7 +94,7 @@ export const TextAction = ({
             justifyContent: position,
           }}
         >
-          <Text size={size} value={content} color={color}></Text>
+          <TextMemo size={size} value={content} color={color} />
           <Button
             onClick={() => animation(useAction)}
             variant="tertiary"
@@ -119,3 +122,7 @@ export const TextAction = ({
     </StyledTextAction>
   )
 }
+TextAction.displayName = 'TextAction'
+
+export const TextMemo = memo(Text)
+export default memo(TextAction)

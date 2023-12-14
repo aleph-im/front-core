@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useMemo } from 'react'
+import React, { ForwardedRef, forwardRef, memo, useMemo } from 'react'
 import FormError from '../FormError'
 import { StyledInputWrapper } from '../styles.forms'
 import { StyledTextAreaField } from './styles'
@@ -44,7 +44,6 @@ export const TextArea = forwardRef(
     )
   },
 )
-
 TextArea.displayName = 'TextArea'
 
-export default TextArea
+export default memo(TextArea)

@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useMemo } from 'react'
+import React, { ForwardedRef, forwardRef, memo, useMemo } from 'react'
 import { StyledButton } from './styles'
 import { ButtonProps } from './types'
 
@@ -49,7 +49,6 @@ export const Button = forwardRef(
     )
   },
 )
-
 Button.displayName = 'Button'
 
-export default Button
+export default memo(Button)

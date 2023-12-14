@@ -1,4 +1,4 @@
-import React, { useId, useMemo, useState } from 'react'
+import React, { memo, useId, useMemo, useState } from 'react'
 import { StyledTable } from './styles'
 import {
   TableCellProps,
@@ -9,7 +9,7 @@ import {
 import tw from 'twin.macro'
 import Icon from '../../common/Icon'
 
-function Row<R extends Record<string, unknown>>({
+export function TableRow<R extends Record<string, unknown>>({
   row,
   columns,
   rowIndex,
@@ -29,7 +29,7 @@ function Row<R extends Record<string, unknown>>({
       ) : (
         <tr {...props} css={props.css}>
           {columns.map((col, colIndex) => (
-            <Cell
+            <TableCell
               key={colIndex}
               {...{ row, col, rowIndex, colIndex, rowNoise }}
             />
@@ -39,8 +39,9 @@ function Row<R extends Record<string, unknown>>({
     </>
   )
 }
+TableRow.displayName = 'TableRow'
 
-function Cell<R extends Record<string, unknown>>({
+export function TableCell<R extends Record<string, unknown>>({
   row,
   col,
   rowIndex,
@@ -76,8 +77,9 @@ function Cell<R extends Record<string, unknown>>({
     </>
   )
 }
+TableCell.displayName = 'TableCell'
 
-function HeaderCell<R extends Record<string, unknown>>({
+export function TableHeaderCell<R extends Record<string, unknown>>({
   col,
   colIndex,
   sortedColumn,
@@ -155,6 +157,7 @@ function HeaderCell<R extends Record<string, unknown>>({
     </>
   )
 }
+TableHeaderCell.displayName = 'TableHeaderCell'
 
 export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
   const { columns, data, rowKey } = props
@@ -210,7 +213,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
       <thead>
         <tr>
           {columns.map((col, colIndex) => (
-            <HeaderCell
+            <TableHeaderCell
               key={colIndex}
               {...{
                 col,
@@ -224,7 +227,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
       </thead>
       <tbody>
         {sortedData.map((row, rowIndex) => (
-          <Row
+          <TableRow
             key={row.key}
             {...{
               row,
@@ -240,5 +243,9 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     </StyledTable>
   )
 }
+Table.displayName = 'Table'
 
-export default Table
+export const TableRowMemo = memo(TableRow)
+export const TableCellMemo = memo(TableCell)
+export const TableHeaderCellMemo = memo(TableHeaderCell)
+export default memo(Table)

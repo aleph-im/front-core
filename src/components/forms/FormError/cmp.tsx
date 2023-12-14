@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { StyledFormErrorContainer } from './styles'
 import { FormErrorProps } from './types'
 import Icon from '../../common/Icon'
@@ -11,5 +11,6 @@ export const FormError = ({ error, ...rest }: FormErrorProps) => {
     </StyledFormErrorContainer>
   )
 }
+FormError.displayName = 'FormError'
 
-export default FormError
+export default memo(FormError)

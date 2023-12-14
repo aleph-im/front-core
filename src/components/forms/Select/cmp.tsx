@@ -1,4 +1,4 @@
-import React, { forwardRef, ForwardedRef, ChangeEvent } from 'react'
+import React, { forwardRef, ForwardedRef, ChangeEvent, memo } from 'react'
 import { StyledInputWrapper } from '../styles.forms'
 import { StyledSelect, StyledOption } from './styles'
 import { SelectProps } from './types'
@@ -53,7 +53,6 @@ export const Select = forwardRef(
     )
   },
 )
-
 Select.displayName = 'Select'
 
-export default Select
+export default memo(Select)

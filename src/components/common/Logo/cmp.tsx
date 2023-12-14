@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useTheme } from 'styled-components'
 import { StyledLogoContainer } from './styles'
 import { LogoProps } from './types'
@@ -28,5 +28,6 @@ export const Logo = ({
     </StyledLogoContainer>
   )
 }
+Logo.displayName = 'Logo'
 
-export default Logo
+export default memo(Logo)

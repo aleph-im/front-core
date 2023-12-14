@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import ObjectImg from '../../common/ObjectImg'
 import { ObjectId } from '../../common/ObjectImg/types'
 import {
@@ -75,5 +75,6 @@ export const Card = ({
     </StyledCardContainer>
   )
 }
+Card.displayName = 'Card'
 
-export default Card
+export default memo(Card)

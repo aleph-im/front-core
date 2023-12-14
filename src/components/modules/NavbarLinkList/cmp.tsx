@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { memo, useCallback, useRef, useState } from 'react'
 import { useTheme } from 'styled-components'
 import { useClickOutside } from '../../../hooks'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -81,5 +81,6 @@ export const NavbarLinkList = ({
     </StyledContainer>
   )
 }
+NavbarLinkList.displayName = 'NavbarLinkList'
 
-export default NavbarLinkList
+export default memo(NavbarLinkList)

@@ -1,2 +1,2 @@
-export { default, Logo } from './cmp'
+export { default, default as Logo } from './cmp'
 export type { LogoProps } from './types'

@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useMemo, useState } from 'react'
+import React, { ForwardedRef, forwardRef, memo, useMemo, useState } from 'react'
 import tw from 'twin.macro'
 import { Col, Row } from '../../layout/Grid'
 import { BorderedDiv, StyledPicker, StyledTitle } from './styles'
@@ -176,4 +176,4 @@ export const WalletPicker = forwardRef(
 )
 WalletPicker.displayName = 'WalletPicker'
 
-export default WalletPicker
+export default memo(WalletPicker)

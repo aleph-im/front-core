@@ -1,2 +1,2 @@
-export { default, Radio } from './cmp'
+export { default, default as Radio } from './cmp'
 export type { RadioProps } from './types'

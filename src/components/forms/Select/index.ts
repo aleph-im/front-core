@@ -1,2 +1,2 @@
-export { default, Select } from './cmp'
+export { default, default as Select } from './cmp'
 export type { SelectProps } from './types'

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { useHover, useResponsiveMax } from '../../../hooks'
 import {
   StyledContentContainer,
@@ -113,5 +113,6 @@ export const Tooltip = ({
     </>
   )
 }
+Tooltip.displayName = 'Tooltip'
 
-export default Tooltip
+export default memo(Tooltip)

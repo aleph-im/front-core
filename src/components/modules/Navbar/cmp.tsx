@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { memo, useCallback, useRef, useState } from 'react'
 import {
   StyledMobileTopContainer,
   StyledHeadingContainer,
@@ -63,5 +63,6 @@ export const Navbar = ({
     </StyledNavbarContainer>
   )
 }
+Navbar.displayName = 'Navbar'
 
-export default Navbar
+export default memo(Navbar)

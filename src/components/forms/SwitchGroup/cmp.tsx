@@ -6,7 +6,7 @@ import { SwitchGroupProps } from './types'
 import FormLabel from '../FormLabel'
 import { useSwitchGroupComponent } from './hook'
 
-export const SwitchGroup = memo((props: SwitchGroupProps) => {
+export const SwitchGroup = (props: SwitchGroupProps) => {
   const { contextValue, children, direction, error, label, required, ...rest } =
     useSwitchGroupComponent(props)
 
@@ -21,7 +21,7 @@ export const SwitchGroup = memo((props: SwitchGroupProps) => {
       </StyledSwitchGroupContainer>
     </SwitchGroupContext.Provider>
   )
-})
+}
 SwitchGroup.displayName = 'SwitchGroup'
 
-export default SwitchGroup
+export default memo(SwitchGroup)

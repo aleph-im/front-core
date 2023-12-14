@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { StyledObjectImgContainer } from './styles'
 import { ObjectImgProps, StyledObjectImgSvgProps } from './types'
@@ -26,5 +26,6 @@ export const ObjectImg = ({
     </StyledObjectImgContainer>
   )
 }
+ObjectImg.displayName = 'ObjectImg'
 
-export default ObjectImg
+export default memo(ObjectImg)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { StyledNavlink } from './styles'
 import { BreadcrumbProps } from './types'
 
@@ -26,5 +26,6 @@ export const Breadcrumb = ({
     </nav>
   )
 }
+Breadcrumb.displayName = 'Breadcrumb'
 
-export default Breadcrumb
+export default memo(Breadcrumb)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { StyledContainer, StyledRequiredSymbol } from './styles'
 import { FormLabelProps } from './types'
 
@@ -11,4 +11,4 @@ export const FormLabel = ({ error, label, required }: FormLabelProps) => {
   )
 }
 
-export default FormLabel
+export default memo(FormLabel)

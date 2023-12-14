@@ -1,2 +1,2 @@
-export { default, Breadcrumb } from './cmp'
+export { default, default as Breadcrumb } from './cmp'
 export type { BreadcrumbProps } from './types'

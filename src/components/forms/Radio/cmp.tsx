@@ -4,6 +4,7 @@ import React, {
   useCallback,
   ChangeEvent,
   useId,
+  memo,
 } from 'react'
 import { useRadioGroup } from '../RadioGroup/context'
 import {
@@ -72,7 +73,6 @@ export const Radio = forwardRef(
     )
   },
 )
-
 Radio.displayName = 'Radio'
 
-export default Radio
+export default memo(Radio)

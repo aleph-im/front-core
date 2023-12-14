@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { BulletListProps, BulletItemProps } from './types'
 import {
   StyledList,
@@ -31,6 +31,7 @@ export const BulletItem = ({
     </StyledItem>
   )
 }
+BulletItem.displayName = 'BulletItem'
 
 export const BulletList = ({
   size = 'big',
@@ -42,7 +43,13 @@ export const BulletList = ({
     <StyledList {...rest}>
       {children
         ? children
-        : items.map((item, i) => <BulletItem key={i} {...item} size={size} />)}
+        : items.map((item, i) => (
+            <BulletItemMemo key={i} {...item} size={size} />
+          ))}
     </StyledList>
   )
 }
+BulletList.displayName = 'BulletList'
+
+export const BulletItemMemo = memo(BulletItem)
+export default memo(BulletList)

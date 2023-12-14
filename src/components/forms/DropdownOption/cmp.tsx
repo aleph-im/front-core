@@ -4,6 +4,7 @@ import React, {
   useCallback,
   MouseEvent,
   useMemo,
+  memo,
 } from 'react'
 import { useDropdown } from '../Dropdown/context'
 import { StyledDropdownOption } from './styles'
@@ -48,7 +49,6 @@ export const DropdownOption = forwardRef(
     )
   },
 )
-
 DropdownOption.displayName = 'DropdownOption'
 
-export default DropdownOption
+export default memo(DropdownOption)

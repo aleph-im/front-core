@@ -1,2 +1,6 @@
-export { BulletList, BulletItem } from './cmp'
+export {
+  default,
+  default as BulletList,
+  BulletItemMemo as BulletItem,
+} from './cmp'
 export type { BulletListProps, BulletItemProps } from './types'

@@ -6,7 +6,7 @@ import { CheckboxGroupProps } from './types'
 import FormLabel from '../FormLabel'
 import { useCheckboxGroupComponent } from './hook'
 
-export const CheckboxGroup = memo((props: CheckboxGroupProps) => {
+export const CheckboxGroup = (props: CheckboxGroupProps) => {
   const { contextValue, children, direction, error, label, required, ...rest } =
     useCheckboxGroupComponent(props)
 
@@ -21,7 +21,7 @@ export const CheckboxGroup = memo((props: CheckboxGroupProps) => {
       </StyledCheckboxGroupContainer>
     </CheckboxGroupContext.Provider>
   )
-})
+}
 CheckboxGroup.displayName = 'CheckboxGroup'
 
-export default CheckboxGroup
+export default memo(CheckboxGroup)

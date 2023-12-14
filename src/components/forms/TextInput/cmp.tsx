@@ -119,7 +119,6 @@ export const TextInput = forwardRef(
     )
   },
 )
-
 TextInput.displayName = 'TextInput'
 
 export default memo(TextInput)

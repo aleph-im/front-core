@@ -73,5 +73,6 @@ export const Icon = ({
 
   return <></>
 }
+Icon.displayName = 'Icon'
 
 export default memo(Icon)

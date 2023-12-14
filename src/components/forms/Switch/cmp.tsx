@@ -1,4 +1,4 @@
-import React, { forwardRef, ForwardedRef } from 'react'
+import React, { forwardRef, ForwardedRef, memo } from 'react'
 import {
   StyledSwitchContainer,
   StyledInput,
@@ -31,7 +31,6 @@ export const Switch = forwardRef(
     )
   },
 )
-
 Switch.displayName = 'Switch'
 
-export default Switch
+export default memo(Switch)

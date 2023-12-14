@@ -3,6 +3,7 @@ import React, {
   FocusEvent,
   ForwardedRef,
   forwardRef,
+  memo,
   useCallback,
   useMemo,
   useState,
@@ -84,7 +85,6 @@ export const CodeEditor = forwardRef(
     )
   },
 )
-
 CodeEditor.displayName = 'CodeEditor'
 
-export default CodeEditor
+export default memo(CodeEditor)

@@ -1,4 +1,4 @@
-export { default, WalletPicker } from './cmp'
+export { default, default as WalletPicker } from './cmp'
 export type {
   WalletPickerProps as PickerProps,
   NetworkProps,

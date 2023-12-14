@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {
   StyledContentContainer,
   StyledFooterContainer,
@@ -40,5 +40,6 @@ export const NotificationCard = ({
     </StyledContainer>
   )
 }
+NotificationCard.displayName = 'NotificationCard'
 
-export default NotificationCard
+export default memo(NotificationCard)

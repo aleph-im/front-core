@@ -144,5 +144,6 @@ export const Footer = ({ small = false, maxWidth, ...rest }: FooterProps) => {
     </StyledFooter>
   )
 }
+Footer.displayName = 'Footer'
 
 export default memo(Footer)

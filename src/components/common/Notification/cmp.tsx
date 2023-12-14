@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { createPortal } from 'react-dom'
 import NotificationCard from '../NotificationCard'
 import {
@@ -110,5 +117,6 @@ export const Notification = ({
     </NotificationContext.Provider>
   )
 }
+Notification.displayName = 'Notification'
 
-export default Notification
+export default memo(Notification)
