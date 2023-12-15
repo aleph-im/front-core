@@ -23,6 +23,7 @@ export const StyledRestContainer = styled.ul`
   ${tw`flex flex-col absolute left-0 p-6 m-0 w-full`}
   top: 130%;
   background-color: #070713a6 !important;
+  backdrop-filter: blur(50px);
   border-radius: 1.25rem;
   gap: 1.75rem;
 `

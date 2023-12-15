@@ -24,6 +24,7 @@ export * from './modules/NavbarLinkList'
 export * from './modules/NavbarLink'
 export * from './modules/WalletPicker'
 export * from './modules/Footer'
+export * from './modules/Sidebar'
 
 export * from './forms/Checkbox'
 export * from './forms/CheckboxGroup'

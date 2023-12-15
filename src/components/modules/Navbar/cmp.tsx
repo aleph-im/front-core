@@ -18,7 +18,7 @@ export const Navbar = ({
   height,
   open,
   onToggle,
-  breakpoint: $breakpoint,
+  breakpoint: $breakpoint = 'md',
   ...rest
 }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)

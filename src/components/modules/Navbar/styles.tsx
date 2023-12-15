@@ -58,13 +58,13 @@ export const StyledLogoContainer = styled.div<ResponsiveNavBarProps>`
 
 // Main container
 export type StyledNavbarContainerProps = {
-  $breakpoint?: BreakpointId
+  $breakpoint: BreakpointId
 }
 
 export const StyledNavbarContainer = styled.div.attrs(
   addClasses('fx-glass-base2'),
 )<StyledNavbarContainerProps>`
-  ${({ theme, $breakpoint = 'md' }) => css`
+  ${({ theme, $breakpoint }) => css`
     ${tw`md:px-16`}
     position: sticky;
     top: 0;
