@@ -1,4 +1,4 @@
-export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 export type ThemeBreakpoint = Record<BreakpointId, number>
 
 export type TypoSizeKind = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -108,7 +108,7 @@ export type ThemeButton = {
 
 export type ThemeIcon = {
   size: {
-    xxl: number
+    '2xl': number
     xl: number
     lg: number
     md: number

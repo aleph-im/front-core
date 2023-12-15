@@ -38,9 +38,9 @@ export const StyledIconSizeCss = css<StyledIconProps>`
             font-size: ${theme.icon.size.xl}rem;
           `
         }
-        case 'xxl': {
+        case '2xl': {
           return css`
-            font-size: ${theme.icon.size.xxl}rem;
+            font-size: ${theme.icon.size['2xl']}rem;
           `
         }
         default: {

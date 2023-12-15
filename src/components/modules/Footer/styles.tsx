@@ -9,7 +9,7 @@ export type StyledContainerProps = {
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  ${({ theme, $maxWidth = `${theme.breakpoint.xxl + 12.5}rem` }) => css`
+  ${({ theme, $maxWidth = `${theme.breakpoint['2xl'] + 12.5}rem` }) => css`
     ${tw`px-6 md:px-16`}
     box-sizing: border-box;
     width: 100%;

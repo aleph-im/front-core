@@ -15,7 +15,7 @@ export type StyledRowProps = {
   md?: number
   lg?: number
   xl?: number
-  xxl?: number
+  '2xl'?: number
 
   gap?: string | number
   xsGap?: string | number
@@ -23,7 +23,7 @@ export type StyledRowProps = {
   mdGap?: string | number
   lgGap?: string | number
   xlGap?: string | number
-  xxlGap?: string | number
+  '2xlGap'?: string | number
 }
 
 export type StyledColProps = {
@@ -33,7 +33,7 @@ export type StyledColProps = {
   md?: number
   lg?: number
   xl?: number
-  xxl?: number
+  '2xl'?: number
 
   offset?: number
   xsOffset?: number
@@ -41,5 +41,5 @@ export type StyledColProps = {
   mdOffset?: number
   lgOffset?: number
   xlOffset?: number
-  xxlOffset?: number
+  '2xlOffset'?: number
 }

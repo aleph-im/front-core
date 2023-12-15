@@ -11,17 +11,8 @@ import {
   Typo,
 } from './types'
 
-// const breakpoint: ThemeBreakpoint = {
-//   xxl: pxToRem(1400),
-//   xl: pxToRem(1200),
-//   lg: pxToRem(1024),
-//   md: pxToRem(768),
-//   sm: pxToRem(480),
-//   xs: pxToRem(320),
-// }
-
 const breakpoint: ThemeBreakpoint = {
-  xxl: pxToRem(1400),
+  '2xl': pxToRem(1400),
   xl: pxToRem(1200),
   lg: pxToRem(992),
   md: pxToRem(768),
@@ -231,7 +222,7 @@ const typo: ThemeTypo = {
 
 const icon: ThemeIcon = {
   size: {
-    xxl: pxToRem(36),
+    '2xl': pxToRem(36),
     xl: pxToRem(24),
     lg: pxToRem(16),
     md: pxToRem(14),

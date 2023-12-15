@@ -9,7 +9,7 @@ module.exports = {
       md: '48rem', // 768px
       lg: '62rem', // 992px
       xl: '75rem', // 1200px
-      '2xl': '96rem', // 1400px
+      '2xl': '87.5rem', // 1400px
     },
     fontSize: {
       '2xs': '0.5rem', // 8px

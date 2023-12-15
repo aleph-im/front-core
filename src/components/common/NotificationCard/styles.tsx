@@ -44,7 +44,7 @@ export const StyledHeaderIcon = styled(Icon).attrs<
 
   return {
     name,
-    size: 'xxl',
+    size: '2xl',
   }
 })<NotificationVariantProps>(() => [tw`mr-4`])
 

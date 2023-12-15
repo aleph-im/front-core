@@ -8,7 +8,7 @@ export default {
   component: Icon,
   argTypes: {
     size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       control: { type: 'inline-radio' },
     },
   },

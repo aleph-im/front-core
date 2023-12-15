@@ -11,15 +11,16 @@ export const StyledRow = styled.div<StyledRowProps>`
       md = sm,
       lg = md,
       xl = lg,
-      xxl = xl,
       gap = '1rem',
       xsGap = gap,
       smGap = xsGap,
       mdGap = smGap,
       lgGap = mdGap,
       xlGap = lgGap,
-      xxlGap = xlGap,
     } = props
+
+    const xl2 = props['2xl'] || xl
+    const xl2Gap = props['2xlGap'] || xlGap
 
     return css`
       display: grid;
@@ -59,10 +60,10 @@ export const StyledRow = styled.div<StyledRowProps>`
       )}
 
       ${getResponsiveCss(
-        'xxl',
+        '2xl',
         css`
-          grid-gap: ${xxlGap};
-          grid-template-columns: repeat(${xxl}, 1fr);
+          grid-gap: ${xl2Gap};
+          grid-template-columns: repeat(${xl2}, 1fr);
         `,
       )}
     `
@@ -78,15 +79,16 @@ export const StyledCol = styled.div<StyledColProps>`
       md = sm,
       lg = md,
       xl = lg,
-      xxl = xl,
       offset = 0,
       xsOffset = offset,
       smOffset = xsOffset,
       mdOffset = smOffset,
       lgOffset = mdOffset,
       xlOffset = lgOffset,
-      xxlOffset = xlOffset,
     } = props
+
+    const xl2 = props['2xl'] || xl
+    const xl2Offset = props['2xlOffset'] || xlOffset
 
     return css`
       grid-column: ${`${xsOffset ? `${xsOffset} / ` : ''} span ${xs}`};
@@ -120,9 +122,9 @@ export const StyledCol = styled.div<StyledColProps>`
       )}
 
       ${getResponsiveCss(
-        'xxl',
+        '2xl',
         css`
-          grid-column: ${`${xxlOffset ? `${xxlOffset} / ` : ''} span ${xxl}`};
+          grid-column: ${`${xl2Offset ? `${xl2Offset} / ` : ''} span ${xl2}`};
         `,
       )}
     `

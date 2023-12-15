@@ -2,7 +2,7 @@ import { IconName as FAIconName } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
 
 export type IconPrefix = 'fass' | 'far' | 'fab' | 'custom'
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | string
+export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | string
 
 export type CustomIconName =
   | 'avalanche'
