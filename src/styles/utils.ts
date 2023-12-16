@@ -69,7 +69,7 @@ export function getResponsiveCss(
     | SimpleInterpolation
     | FlattenSimpleInterpolation
     | FlattenInterpolation<ThemeProps<DefaultTheme>>,
-  offset: number = 1,
+  offset: number = 0,
 ) {
   return !breakpoint
     ? css`
