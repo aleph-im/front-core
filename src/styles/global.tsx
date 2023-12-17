@@ -50,6 +50,11 @@ const CustomGlobalStyles = createGlobalStyle`
       ${fontAwesomeCss}
       @import '${theme.font.url}';
 
+      ${colorCss}
+      ${functionalCss}
+      ${effectCss}
+      ${typoCss}
+
       window {
         scroll-behavior: smooth;
       }
@@ -60,12 +65,11 @@ const CustomGlobalStyles = createGlobalStyle`
       }
 
       body {
-        margin: 0;
-        padding: 0;
+        ${tw`m-0 p-0 antialiased`}
         background-color: ${theme.color.background};
         color: ${theme.color.text};
-        ${getTypoCss('body')}
-        ${tw`antialiased`}
+        /* @note: overrides tp-body, from body typoCss */
+        line-height: normal;
       }
 
       * {
@@ -74,6 +78,7 @@ const CustomGlobalStyles = createGlobalStyle`
 
       p {
         color: ${theme.color.text}b3;
+        ${getTypoCss('body')}
       }
 
       section {
@@ -111,11 +116,6 @@ const CustomGlobalStyles = createGlobalStyle`
         transition: background-color 5000s ease-in-out 0s;
         border-radius: 1.875rem;
       }
-
-      ${colorCss}
-      ${functionalCss}
-      ${effectCss}
-      ${typoCss}
     `
   }}
 `

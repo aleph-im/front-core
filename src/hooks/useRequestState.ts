@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useNotification } from '../components'
+import { useNotification } from '../components/common/Notification/context'
 
 export type RequestCallbacks<T> = {
   onSuccess?: (data: T, defaultSuccessHandler: () => void) => void

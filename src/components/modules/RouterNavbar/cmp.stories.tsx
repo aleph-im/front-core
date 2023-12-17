@@ -1,54 +1,77 @@
 import React from 'react'
 import { StoryFn } from '@storybook/react'
-import Sidebar from './cmp'
-import { SidebarProps } from './types'
+import RouterNavbar from './cmp'
+import { RouterNavbarProps } from './types'
+import NavbarLink from '../NavbarLink'
 
 export default {
-  title: 'Components/UI/modules/Sidebar',
-  component: Sidebar,
+  title: 'Components/UI/modules/RouterNavbar',
+  component: RouterNavbar,
+  subcomponents: { NavbarLink },
 }
 
-const defaultArgs: Partial<SidebarProps> = {
+const defaultArgs: Partial<RouterNavbarProps> = {
   breakpoint: 'md',
   pathname: '/earn/staking',
   routes: [
     {
-      name: 'EARN',
-      path: '/earn',
+      name: 'Earn',
+      href: '/earn',
       icon: 'earn',
       children: [
         {
           name: 'Staking',
-          path: '/earn/staking',
+          href: '/earn/staking',
           icon: 'earn',
           flag: 1,
         },
         {
           name: 'Core nodes',
-          path: '/earn/ccn',
+          href: '/earn/ccn',
           icon: 'ccn',
           flag: 2,
         },
         {
           name: 'Compute nodes',
-          path: '/earn/crn',
+          href: '/earn/crn',
           icon: 'crn',
           flag: 3,
         },
       ],
     },
+    {
+      name: 'Console',
+      icon: 'console',
+      href: 'https://console.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Explorer',
+      icon: 'explore',
+      href: 'https://explorer.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Swap',
+      icon: 'swap',
+      href: 'https://swap.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
   ],
-  Link: (props) => <div>{props.children}</div>,
+  Link: (props) => <a {...props} />,
 }
 
 // ---
 
-const Template: StoryFn<typeof Sidebar> = (args) => {
+const Template: StoryFn<typeof RouterNavbar> = (args) => {
   return (
-    <div tw="h-[900px]">
-      <Sidebar {...args} />
+    <>
+      <RouterNavbar {...args} />
 
-      {/* <h1>A random title</h1>
+      <h1>A random title</h1>
 
       {Array.from({ length: 200 }, (_, i) => (
         <p key={i}>
@@ -57,8 +80,8 @@ const Template: StoryFn<typeof Sidebar> = (args) => {
           aperiam qui, optio laboriosam animi labore repudiandae incidunt
           excepturi sint tempore accusamus.
         </p>
-      ))} */}
-    </div>
+      ))}
+    </>
   )
 }
 

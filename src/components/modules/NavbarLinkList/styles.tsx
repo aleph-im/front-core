@@ -54,9 +54,7 @@ export const StyledContainer = styled.div<StyledContainerProps>`
     $desktopGap = true,
   }) => {
     return css`
-      position: relative;
-      display: flex;
-      max-width: 100%;
+      ${tw`relative flex flex-col max-w-full`}
       gap: ${theme.font.size['28']}rem;
       ${$onlyDesktop ? 'display: none;' : ''}
 
@@ -68,10 +66,9 @@ export const StyledContainer = styled.div<StyledContainerProps>`
       ${getResponsiveCss(
         $breakpoint,
         css`
-          display: flex;
+          ${tw`flex flex-row items-center`}
           flex: 0 1 0px;
           padding-left: ${$isCollapsed ? '1.5rem' : ''};
-          align-items: center;
           ${$onlyMobile ? 'display: none;' : ''}
 
           & ${StyledList} {

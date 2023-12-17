@@ -89,7 +89,7 @@ const Template: StoryFn<typeof Navbar> = (args) => {
           breakpoint={breakpoint}
         >
           {navLinks.map((link, i) => (
-            <NavbarLink key={i} isActive={!i} breakpoint={breakpoint}>
+            <NavbarLink key={i} breakpoint={breakpoint}>
               {link}
             </NavbarLink>
           ))}

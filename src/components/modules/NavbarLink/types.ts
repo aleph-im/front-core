@@ -3,6 +3,6 @@ import { BreakpointId } from '../../../themes'
 
 export type NavbarLinkProps = LiHTMLAttributes<HTMLLIElement> & {
   children: ReactNode
-  isActive?: boolean
+  level?: number
   breakpoint?: BreakpointId
 }

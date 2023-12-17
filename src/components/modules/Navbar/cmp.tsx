@@ -42,13 +42,13 @@ export const Navbar = ({
       <StyledHeadingContainer isOpen={isOpenMenu} height={height}>
         <StyledMobileTopContainer>
           <Button
-            color={'main0'}
-            variant={'secondary'}
-            kind={'neon'}
-            size={'regular'}
+            color="main0"
+            variant="secondary"
+            kind="neon"
+            size="regular"
             onClick={toggleMenu}
           >
-            <Icon name="bars" />
+            {!isOpenMenu ? <Icon name="bars" /> : <Icon name="close" />}
           </Button>
         </StyledMobileTopContainer>
         {logo && (

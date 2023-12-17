@@ -5,14 +5,14 @@ import { NavbarLinkProps } from './types'
 export const NavbarLink = ({
   children,
   breakpoint: $breakpoint = 'md',
-  isActive: $isActive,
+  level: $level,
   ...rest
 }: NavbarLinkProps) => {
   return (
     <StyledNavlink
       {...{
         $breakpoint,
-        $isActive,
+        $level,
         ...rest,
       }}
     >

@@ -1,7 +1,7 @@
+import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
 import { NotificationBadgeVariant } from './types'
 import { addClasses } from '../../../utils'
-import tw from 'twin.macro'
 
 export type StyledNotificationBadgeProps = {
   $variant: NotificationBadgeVariant

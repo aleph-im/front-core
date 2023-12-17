@@ -24,7 +24,6 @@ export const NavbarLinkList = ({
 }: NavbarLinkListProps) => {
   const [open, setOpen] = useState(false)
   const isCollapsed = useResponsiveBetween(breakpoint, collapsible)
-  console.log(isCollapsed)
 
   const handleToggleOpen = useCallback(() => {
     setOpen(!open)

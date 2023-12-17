@@ -4,80 +4,42 @@ import {
   StyledLogo,
   StyledNav1,
   StyledNav1Link,
-  StyledNav1LinkIcon,
   StyledNav2,
   StyledNav2Link,
   StyledNav2LinkContainer,
-  StyledNav2LinkIcon,
-  StyledNav2LinkText,
   StyledNav2Title,
-  StyledNotificationBadge,
   StyledProgressBar,
   StyledSidebar,
   StyledStorageContainer,
   StyledToggleButton,
 } from './styles'
-import Icon from '../../common/Icon'
 import React from 'react'
-import NotificationBadge from '../../common/NotificationBadge'
-import { SidebarLinkProps, SidebarProps } from './types'
+import { RouteProps, RouterSidebarProps } from './types'
 
-const SidebarLink = ({
-  level = 1,
-  icon,
-  flag,
-  isOpen: $isOpen,
-  isActive: $isActive,
-  Link,
-  children,
-  ...rest
-}: SidebarLinkProps) => {
-  const props = { $isActive, $isOpen }
-
-  const iconCmp = useMemo(
-    () =>
-      icon && (
-        <Icon tw="p-1" {...{ name: icon, size: 'lg', prefix: 'custom' }} />
-      ),
-    [icon],
-  )
+const Route = (props: RouteProps) => {
+  const { level = 0 } = props
 
   return (
     <StyledLink>
-      <Link {...rest}>
-        {level <= 1 ? (
-          <StyledNav1Link {...props}>
-            <StyledNav1LinkIcon>{iconCmp}</StyledNav1LinkIcon>
-          </StyledNav1Link>
-        ) : (
-          <StyledNav2Link {...props}>
-            <StyledNav2LinkIcon>
-              {iconCmp}
-              {flag && (
-                <StyledNotificationBadge>{flag}</StyledNotificationBadge>
-              )}
-            </StyledNav2LinkIcon>
-            <StyledNav2LinkText>
-              {children}
-              {flag && <NotificationBadge>{flag}</NotificationBadge>}
-            </StyledNav2LinkText>
-          </StyledNav2Link>
-        )}
-      </Link>
+      {level <= 0 ? (
+        <StyledNav1Link {...props} />
+      ) : (
+        <StyledNav2Link {...props} />
+      )}
     </StyledLink>
   )
 }
-SidebarLink.displayName = 'SidebarLink'
+Route.displayName = 'Route'
 
 // -------------------------
 
-export const Sidebar = ({
+export const RouterSidebar = ({
   routes,
   pathname,
   allowanceInfo,
   Link,
   breakpoint: $breakpoint = 'md',
-}: SidebarProps) => {
+}: RouterSidebarProps) => {
   const [open, setOpen] = useState<boolean | undefined>(undefined)
   const [hover, setHover] = useState<boolean | undefined>(false)
 
@@ -110,7 +72,10 @@ export const Sidebar = ({
   // -----------------------------------
 
   const currentRoute = useMemo(
-    () => routes.find((route) => pathname.indexOf(route.path) === 0),
+    () =>
+      routes
+        .filter((route) => !route.external)
+        .find((route) => pathname.indexOf(route.href) === 0),
     [pathname, routes],
   )
 
@@ -130,36 +95,17 @@ export const Sidebar = ({
     >
       <StyledNav1>
         <StyledLogo />
-        {routes.map((child) => (
-          <SidebarLinkMemo
-            key={child.path}
+        {routes.map((route) => (
+          <RouteMemo
+            key={route.href}
             {...{
-              href: child.path,
-              icon: child.icon,
-              isOpen: open,
-              isActive: pathname.indexOf(child.path) >= 0,
+              route,
+              level: 0,
+              isActive: pathname.indexOf(route.href) >= 0,
               Link,
             }}
           />
         ))}
-        <SidebarLinkMemo
-          icon="console"
-          href="https://console.aleph.im/"
-          target="_blank"
-          Link={Link}
-        />
-        <SidebarLinkMemo
-          icon="explore"
-          href="https://explorer.aleph.im/"
-          target="_blank"
-          Link={Link}
-        />
-        <SidebarLinkMemo
-          icon="swap"
-          href="https://swap.aleph.im/"
-          target="_blank"
-          Link={Link}
-        />
       </StyledNav1>
       <StyledNav2
         onClick={handleToggle}
@@ -176,17 +122,16 @@ export const Sidebar = ({
               {currentRoute?.name && (
                 <StyledNav2Title>{currentRoute?.name}</StyledNav2Title>
               )}
-              {currentRoute?.children.map((child) => (
-                <SidebarLinkMemo
-                  key={child.path}
-                  href={child.path}
-                  icon={child?.icon || currentRoute?.icon}
-                  flag={child?.flag || currentRoute?.flag}
-                  Link={Link}
-                  level={2}
-                >
-                  {child.name}
-                </SidebarLinkMemo>
+              {currentRoute?.children.map((route) => (
+                <RouteMemo
+                  key={route.href}
+                  {...{
+                    route,
+                    level: 1,
+                    isActive: pathname.indexOf(route.href) >= 0,
+                    Link,
+                  }}
+                />
               ))}
             </>
           )}
@@ -210,7 +155,7 @@ export const Sidebar = ({
     </StyledSidebar>
   )
 }
-Sidebar.displayName = 'Sidebar'
+RouterSidebar.displayName = 'RouterSidebar'
 
-export const SidebarLinkMemo = memo(SidebarLink)
-export default memo(Sidebar)
+export const RouteMemo = memo(Route)
+export default memo(RouterSidebar)

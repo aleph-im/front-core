@@ -1,16 +1,19 @@
-import styled, { css, keyframes } from 'styled-components'
 import tw from 'twin.macro'
+import styled, { css, keyframes } from 'styled-components'
 import { addClasses } from '../../../utils'
-import NotificationBadge from '../../common/NotificationBadge'
-import Logo from '../../common/Logo'
-import Icon from '../../common/Icon'
 import { getResponsiveCss } from '../../../styles'
 import { BreakpointId } from '../../../themes'
+import Logo from '../../common/Logo'
+import Icon from '../../common/Icon'
+import RouterLink, { RouterLinkProps } from '../RouterLink'
+import {
+  StyledNotificationBadge,
+  StyledRouteLink,
+  StyledRouteLinkIcon,
+  StyledRouteLinkText,
+} from '../RouterLink/styles'
 
-export const StyledLinkContentCss = css`
-  ${tw`flex items-center justify-start gap-2.5 whitespace-nowrap w-full`}
-`
-export const StyledLinkContentPaddingCss = css`
+export const styledLinkContentPaddingCss = css`
   ${tw`py-2 px-6`}
 `
 
@@ -19,39 +22,36 @@ export const StyledLink = styled.div`
 `
 
 export const StyledNav1 = styled.nav`
-  ${tw`h-full w-full`}
+  ${tw`h-full w-full flex flex-col`}
   background-color: #0000004c;
 `
 
-export const StyledNav1Link = styled.div.attrs(addClasses('tp-nav'))<{
-  $isActive?: boolean
-}>`
-  ${({ theme, $isActive }) => css`
-    ${StyledLinkContentCss}
-    ${StyledLinkContentPaddingCss}
-    ${tw`relative justify-center`}
+export type StyledNav1LinkProps = Omit<RouterLinkProps, 'variant'>
 
-    color: ${theme.color.main0}${$isActive ? 'ff' : '66'};
-    cursor: pointer;
-
-    &:hover {
-      color: ${theme.color.main0};
+export const StyledNav1Link = styled(RouterLink).attrs<StyledNav1LinkProps>(
+  (props) => {
+    return {
+      ...props,
+      variant: '1',
+      route: { ...props.route, name: undefined, flag: undefined },
     }
+  },
+)`
+  ${({ theme, isActive }) => css`
+    ${StyledRouteLink} {
+      ${styledLinkContentPaddingCss}
 
-    ${$isActive &&
-    css`
-      &::after {
-        ${tw`absolute -top-2 left-0 h-full opacity-0`}
-        content: '';
-        width: 0.375rem;
-        background-color: ${theme.color.main0};
-      }
-    `}
+      ${isActive &&
+      css`
+        &::after {
+          ${tw`absolute -top-2 left-0 h-full opacity-0`}
+          content: '';
+          width: 0.375rem;
+          background-color: ${theme.color.main0};
+        }
+      `}
+    }
   `}
-`
-
-export const StyledNav1LinkIcon = styled.div`
-  ${tw`relative`}
 `
 
 export const StyledNav2 = styled.nav`
@@ -64,8 +64,8 @@ export const StyledNav2 = styled.nav`
 `
 
 export const StyledNav2Title = styled.div.attrs(addClasses('tp-nav'))`
-  ${StyledLinkContentPaddingCss}
-  ${tw`w-auto`}
+  ${styledLinkContentPaddingCss}
+  ${tw`w-auto max-w-full uppercase`}
 `
 
 export const StyledNav2LinkContainer = styled.div`
@@ -74,34 +74,20 @@ export const StyledNav2LinkContainer = styled.div`
   padding-bottom: 4rem;
 `
 
-export const StyledNav2LinkText = styled.div`
-  ${StyledLinkContentCss}
-  ${tw`overflow-hidden`}
-`
+export type StyledNav2LinkProps = Omit<RouterLinkProps, 'variant'>
 
-export const StyledNav2LinkIcon = styled.div`
-  ${tw`relative`}
-`
-
-export const StyledNotificationBadge = styled(NotificationBadge)`
-  ${tw`absolute top-0.5 left-full`}
-`
-
-export const StyledNav2Link = styled.div.attrs(addClasses('tp-nav'))<{
-  $isActive?: boolean
-  $open?: boolean
-}>`
-  ${({ theme, $isActive }) => css`
-    ${StyledLinkContentCss}
-    ${StyledLinkContentPaddingCss}
-
-    color: ${$isActive ? theme.color.main0 : theme.color.base0};
-    cursor: pointer;
-
-    &:hover ${StyledNav2LinkIcon} {
-      color: ${theme.color.main0};
+export const StyledNav2Link = styled(RouterLink).attrs<StyledNav2LinkProps>(
+  (props) => {
+    return {
+      ...props,
+      variant: '2',
     }
-  `}
+  },
+)`
+  ${StyledRouteLink} {
+    ${styledLinkContentPaddingCss}
+    ${tw`inline-flex w-auto max-w-full overflow-hidden`}
+  }
 `
 
 export const StyledLogo = styled(Logo).attrs((props) => {
@@ -110,7 +96,13 @@ export const StyledLogo = styled(Logo).attrs((props) => {
     size: '1.5rem',
     text: '',
   }
-})(() => [tw`flex items-center justify-center h-8 mt-8 mb-12`])
+})`
+  ${styledLinkContentPaddingCss}
+  ${tw`inline-flex items-center justify-center h-8 mt-8 mb-12 py-0`}
+  & > svg {
+    ${tw`shrink-0`}
+  }
+`
 
 export const StyledToggleButton = styled(Icon).attrs((props) => {
   return {
@@ -226,15 +218,15 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width ease-in-out ${0.35 / $speed}s ${0.4 / $speed}s;
           }
 
-          & ${StyledNav1LinkIcon}, & ${StyledLogo} {
+          & ${StyledNav1} ${StyledRouteLinkIcon}, & ${StyledLogo} {
             ${tw`opacity-100 visible`}
 
-            transition: opacity ease-in-out ${0.2 / $speed}s ${0.45 / $speed}s,
-              visibility linear ${0.2 / $speed}s ${0.45 / $speed}s,
+            transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 / $speed}s,
+              visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
               color ease-in-out 0.25s 0s !important;
           }
 
-          & ${StyledNav1Link}::after {
+          & ${StyledNav1Link} ${StyledRouteLink}::after {
             ${tw`-top-2 opacity-0`}
             transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
               top ease-in-out ${0.7 / $speed}s ${0.1 / $speed}s;
@@ -259,11 +251,14 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
-          & ${StyledNav2Title}, & ${StyledNav2LinkIcon} {
-            ${tw`relative left-0 translate-x-0`}
-            transition: left linear 0s ${0.5 / $speed}s, 
+          & ${StyledNav2Title}, & ${StyledNav2Link} ${StyledRouteLink} {
+            ${tw`relative left-0 translate-x-0 px-6 gap-2.5`}
+
+            transition: left linear 0s ${0.5 / $speed}s,
               transform linear 0s ${0.5 / $speed}s,
               font-size linear 0s ${0.5 / $speed}s,
+              padding linear 0s ${0.5 / $speed}s,
+              gap linear 0s ${0.5 / $speed}s,
               color ease-in-out 0.25s 0s !important;
           }
 
@@ -271,17 +266,20 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             font-size: 1.125rem;
           }
 
-          & ${StyledNav2LinkText} {
+          & ${StyledRouteLinkText} {
             max-width: 100%;
             transition: max-width linear 0s ${0.5 / $speed}s,
               color ease-in-out 0.25s 0s !important;
           }
 
-          & ${StyledNotificationBadge} {
-            ${tw`opacity-0 invisible`}
+          & ${StyledRouteLinkIcon} {
+            transition: color ease-in-out 0.25s 0s !important;
+          }
 
-            transition: opacity ease-in-out 0s ${0.5 / $speed}s,
-              visibility linear 0s ${0.5 / $speed}s;
+          & ${StyledNotificationBadge} {
+            ${tw`top-3.5 right-0.5`}
+            transition: all linear 0s ${0.45 / $speed}s;
+            transition-property: top right;
           }
 
           & ${StyledToggleButton} {
@@ -306,15 +304,15 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width ease-in-out ${0.2 / $speed}s ${0.15 / $speed}s;
           }
 
-          & ${StyledNav1LinkIcon}, & ${StyledLogo} {
+          & ${StyledNav1Link} ${StyledRouteLinkIcon}, & ${StyledLogo} {
             ${tw`opacity-0 invisible`}
 
             transition: opacity ease-in-out ${0.2 / $speed}s 0s,
-              visibility linear ${0.2 /
-            $speed}s 0s, color ease-in-out 0.25s 0s !important;
+              visibility linear ${0.2 / $speed}s 0s,
+               color ease-in-out 0.25s 0s !important;
           }
 
-          & ${StyledNav1Link}::after {
+          & ${StyledNav1Link} ${StyledRouteLink}::after {
             ${tw`top-0 opacity-100`}
             transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
               top ease-in-out ${0.7 / $speed}s ${0.3 / $speed}s;
@@ -342,29 +340,35 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
           }
 
-          & ${StyledNav2Title}, & ${StyledNav2LinkIcon} {
-            ${tw`relative left-1/2 -translate-x-1/2`}
-            transition: left linear 0s ${0.45 / $speed}s, 
+          & ${StyledNav2Title}, & ${StyledNav2Link} ${StyledRouteLink} {
+            ${tw`relative left-1/2 -translate-x-1/2 px-6 gap-0`}
+
+            transition: left linear 0s ${0.45 / $speed}s,
               transform linear 0s ${0.45 / $speed}s,
               font-size linear 0s ${0.45 / $speed}s,
-              color ease-in-out 0.25s 0s !important;
+              padding linear 0s ${0.45 / $speed}s,
+              gap linear 0s ${0.45 / $speed}s;
           }
 
           & ${StyledNav2Title} {
+            ${tw`px-0`}
             font-size: 0.75rem;
           }
 
-          & ${StyledNav2LinkText} {
+          & ${StyledRouteLinkText} {
             max-width: 0;
             transition: max-width linear 0s ${0.45 / $speed}s,
               color ease-in-out 0.25s 0s !important;
           }
 
-          & ${StyledNotificationBadge} {
-            ${tw`opacity-100 visible`}
+          & ${StyledRouteLinkIcon} {
+            transition: color ease-in-out 0.25s 0s !important;
+          }
 
-            transition: opacity ease-in-out 0s ${0.45 / $speed}s,
-              visibility linear 0s ${0.45 / $speed}s;
+          & ${StyledNotificationBadge} {
+            ${tw`top-2.5 right-3`}
+            transition: all linear 0s ${0.45 / $speed}s;
+            transition-property: top right;
           }
 
           & ${StyledToggleButton} {
