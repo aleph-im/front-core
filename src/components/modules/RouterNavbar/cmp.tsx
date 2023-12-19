@@ -98,6 +98,7 @@ export const RouterNavbar = ({
   pathname,
   routes,
   Link,
+  children,
   onToggle,
   ...rest
 }: RouterNavbarProps) => {
@@ -108,7 +109,7 @@ export const RouterNavbar = ({
   // -----------------------------------
 
   return (
-    <Navbar {...rest} logo={<Logo />}>
+    <Navbar {...{ breakpoint, ...rest }} logo={<Logo />}>
       <NavbarLinkList
         withSlash
         collapsible="xl"
@@ -128,7 +129,7 @@ export const RouterNavbar = ({
           />
         ))}
       </NavbarLinkList>
-      <NavbarLinkList mobileDirection="row">HOLA</NavbarLinkList>
+      {children}
     </Navbar>
   )
 }
