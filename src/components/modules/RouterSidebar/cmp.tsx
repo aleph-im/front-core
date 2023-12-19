@@ -17,14 +17,22 @@ import React from 'react'
 import { RouteProps, RouterSidebarProps } from './types'
 
 const Route = (props: RouteProps) => {
-  const { level = 0 } = props
+  const { href, pathname, route, level = 0, Link } = props
+  const isActive = pathname.indexOf(route.href) >= 0
+
+  const linkProps = {
+    href,
+    route,
+    Link,
+    isActive,
+  }
 
   return (
     <StyledLink>
       {level <= 0 ? (
-        <StyledNav1Link {...props} />
+        <StyledNav1Link {...linkProps} />
       ) : (
-        <StyledNav2Link {...props} />
+        <StyledNav2Link {...linkProps} />
       )}
     </StyledLink>
   )
@@ -99,10 +107,11 @@ export const RouterSidebar = ({
           <RouteMemo
             key={route.href}
             {...{
+              href: route.href,
               route,
-              level: 0,
-              isActive: pathname.indexOf(route.href) >= 0,
               Link,
+              pathname,
+              level: 0,
             }}
           />
         ))}
@@ -126,10 +135,11 @@ export const RouterSidebar = ({
                 <RouteMemo
                   key={route.href}
                   {...{
+                    href: route.href,
                     route,
-                    level: 1,
-                    isActive: pathname.indexOf(route.href) >= 0,
                     Link,
+                    pathname,
+                    level: 1,
                   }}
                 />
               ))}

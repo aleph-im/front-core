@@ -4,8 +4,8 @@ export type RouterLinkVariant = '1' | '2' | '3'
 
 export type RouterLinkProps = RenderLinkProps & {
   route: Route
-  isActive?: boolean
+  Link: LinkComponent
+  isActive: boolean
   disabled?: boolean
   variant?: RouterLinkVariant
-  Link: LinkComponent
 }

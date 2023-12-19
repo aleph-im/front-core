@@ -13,6 +13,7 @@ export type RouterSidebarProps = {
   Link: LinkComponent
 }
 
-export type RouteProps = RouterLinkProps & {
+export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
   level?: number
+  pathname: string
 }

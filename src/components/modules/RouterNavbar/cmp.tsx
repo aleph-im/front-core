@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState, MouseEvent } from 'react'
-import { RouterNavbarProps, RouteProps } from './types'
+import { RouterNavbarProps, RouteProps, ParentRouteProps } from './types'
 import Logo from '../../common/Logo'
 import Navbar from '../Navbar'
 import NavbarLinkList from '../NavbarLinkList'
@@ -7,8 +7,43 @@ import NavbarLink from '../NavbarLink'
 import { StyledChildRoutes, StyledNavLink, StyledNavTitle } from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
 
-const ParentRoute = (props: RouteProps) => {
-  const { breakpoint, pathname, route, isActive, Link, level = 0 } = props
+const Route = (props: RouteProps) => {
+  const { href, pathname, route, breakpoint, Link, level = 0 } = props
+  const isActive = pathname.indexOf(route.href) >= 0
+
+  return (
+    <>
+      {route.children ? (
+        <ParentRouteMemo
+          {...{
+            href,
+            isActive,
+            route,
+            Link,
+            pathname,
+            breakpoint,
+            level,
+          }}
+        />
+      ) : (
+        <NavbarLink breakpoint={breakpoint} level={level}>
+          <StyledNavLink
+            {...{
+              href,
+              isActive,
+              route,
+              Link,
+            }}
+          />
+        </NavbarLink>
+      )}
+    </>
+  )
+}
+Route.displayName = 'Route'
+
+const ParentRoute = (props: ParentRouteProps) => {
+  const { href, breakpoint, pathname, route, isActive, Link, level = 0 } = props
   const { name, children = [] } = route
 
   const [active, setActive] = useState(isActive)
@@ -23,7 +58,15 @@ const ParentRoute = (props: RouteProps) => {
   return (
     <>
       <NavbarLink breakpoint={breakpoint} level={level}>
-        <StyledNavLink {...props} onClick={handleClick} />
+        <StyledNavLink
+          {...{
+            href,
+            route,
+            isActive,
+            Link,
+          }}
+          onClick={handleClick}
+        />
       </NavbarLink>
       <StyledChildRoutes $breakpoint={breakpoint}>
         <ToggleContainer open={!!active} as="ul">
@@ -34,6 +77,7 @@ const ParentRoute = (props: RouteProps) => {
             <RouteMemo
               key={route.href}
               {...{
+                href: route.href,
                 breakpoint,
                 pathname,
                 route,
@@ -48,25 +92,6 @@ const ParentRoute = (props: RouteProps) => {
   )
 }
 ParentRoute.displayName = 'ParentRoute'
-
-const Route = (props: RouteProps) => {
-  const { route, breakpoint, level = 0 } = props
-  const isActive = props.pathname.indexOf(route.href) >= 0
-  const newProps = { ...props, level, isActive }
-
-  return (
-    <>
-      {route.children ? (
-        <ParentRouteMemo {...newProps} />
-      ) : (
-        <NavbarLink breakpoint={breakpoint} level={level}>
-          <StyledNavLink {...newProps} />
-        </NavbarLink>
-      )}
-    </>
-  )
-}
-Route.displayName = 'Route'
 
 export const RouterNavbar = ({
   breakpoint = 'md',
@@ -94,6 +119,7 @@ export const RouterNavbar = ({
           <RouteMemo
             key={route.href}
             {...{
+              href: route.href,
               breakpoint,
               pathname,
               route,
@@ -108,6 +134,6 @@ export const RouterNavbar = ({
 }
 RouterNavbar.displayName = 'RouterNavbar'
 
-export const ParentRouteMemo = memo(ParentRoute) as typeof ParentRoute
 export const RouteMemo = memo(Route) as typeof Route
+export const ParentRouteMemo = memo(ParentRoute) as typeof ParentRoute
 export default memo(RouterNavbar) as typeof RouterNavbar

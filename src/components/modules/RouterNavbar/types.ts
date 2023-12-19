@@ -10,8 +10,12 @@ export type RouterNavbarProps = Omit<NavbarProps, 'children'> & {
   Link: LinkComponent
 }
 
-export type RouteProps = RouterLinkProps & {
+export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
   breakpoint: BreakpointId
   level?: number
   pathname: string
+}
+
+export type ParentRouteProps = RouteProps & {
+  isActive: boolean
 }
