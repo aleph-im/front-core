@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import {
-  StyledRouteLink,
+  StyledRouterLink,
   StyledRouteLinkIcon,
   StyledRouteLinkText,
   StyledNotificationBadge,
@@ -19,7 +19,7 @@ export const RouterLink = ({
 
   return (
     <Link {...{ route, ...rest }}>
-      <StyledRouteLink
+      <StyledRouterLink
         {...{
           $variant,
           $isActive,
@@ -31,7 +31,7 @@ export const RouterLink = ({
         {!!icon && <StyledRouteLinkIcon name={icon} />}
         {!!name && <StyledRouteLinkText>{name}</StyledRouteLinkText>}
         {!!flag && <StyledNotificationBadge>{flag}</StyledNotificationBadge>}
-      </StyledRouteLink>
+      </StyledRouterLink>
     </Link>
   )
 }

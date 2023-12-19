@@ -11,6 +11,8 @@ export type RouterSidebarProps = {
     allowedSize: number
   }
   Link: LinkComponent
+  open?: boolean
+  onToggle?: (open?: boolean) => void
 }
 
 export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {

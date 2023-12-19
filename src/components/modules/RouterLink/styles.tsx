@@ -46,7 +46,7 @@ export const StyledNavlink = styled.li<StyledNavlinkProps>`
 
 // ------------------------------------------------
 
-export type StyledRouteLinkProps = {
+export type StyledRouterLinkProps = {
   $isActive?: boolean
   $variant?: RouterLinkVariant
   $disabled?: boolean
@@ -54,9 +54,9 @@ export type StyledRouteLinkProps = {
   $hasFlag?: boolean
 }
 
-export const StyledRouteLink = styled.div.attrs(
+export const StyledRouterLink = styled.div.attrs(
   addClasses('tp-nav'),
-)<StyledRouteLinkProps>`
+)<StyledRouterLinkProps>`
   ${({
     theme,
     $disabled,

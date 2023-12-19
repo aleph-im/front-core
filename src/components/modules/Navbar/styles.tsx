@@ -7,7 +7,7 @@ import { BreakpointId } from '../../../themes'
 
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
-  ${({ isOpen, height = '6.25rem' }) => css`
+  ${({ isOpen, height }) => css`
     ${tw`px-6`}
     flex: 0 0 0px;
     display: flex;
@@ -41,7 +41,7 @@ export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
 `
 
 export const StyledLogoContainer = styled.div<ResponsiveNavBarProps>`
-  ${({ height = '6.25rem' }) => {
+  ${({ height }) => {
     return css`
       position: absolute;
       top: 0;

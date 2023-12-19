@@ -3,9 +3,9 @@ import {
   StyledLink,
   StyledLogo,
   StyledNav1,
-  StyledNav1Link,
+  StyledRouterLink1,
   StyledNav2,
-  StyledNav2Link,
+  StyledRouterLink2,
   StyledNav2LinkContainer,
   StyledNav2Title,
   StyledProgressBar,
@@ -30,9 +30,9 @@ const Route = (props: RouteProps) => {
   return (
     <StyledLink>
       {level <= 0 ? (
-        <StyledNav1Link {...linkProps} />
+        <StyledRouterLink1 {...linkProps} />
       ) : (
-        <StyledNav2Link {...linkProps} />
+        <StyledRouterLink2 {...linkProps} />
       )}
     </StyledLink>
   )
@@ -47,22 +47,22 @@ export const RouterSidebar = ({
   allowanceInfo,
   Link,
   breakpoint: $breakpoint = 'md',
+  open,
+  onToggle,
 }: RouterSidebarProps) => {
-  const [open, setOpen] = useState<boolean | undefined>(undefined)
   const [hover, setHover] = useState<boolean | undefined>(false)
 
   const handleToggle = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation()
       const tagName = e.currentTarget.tagName
+      const isOpen = open === undefined || !!open
+      const toggleTo =
+        isOpen && tagName.toLowerCase() !== 'svg' ? open : !isOpen
 
-      setOpen((prev) => {
-        const isOpen = prev === undefined || !!prev
-        if (isOpen && tagName.toLowerCase() !== 'svg') return prev
-        return !isOpen
-      })
+      onToggle && onToggle(toggleTo)
     },
-    [setOpen],
+    [open, onToggle],
   )
 
   const handleMouseOver = useCallback(() => {

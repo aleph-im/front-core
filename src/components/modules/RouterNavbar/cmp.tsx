@@ -4,11 +4,11 @@ import Logo from '../../common/Logo'
 import Navbar from '../Navbar'
 import NavbarLinkList from '../NavbarLinkList'
 import NavbarLink from '../NavbarLink'
-import { StyledChildRoutes, StyledNavLink, StyledNavTitle } from './styles'
+import { StyledChildRoutes, StyledRouterLink, StyledNavTitle } from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
 
 const Route = (props: RouteProps) => {
-  const { href, pathname, route, breakpoint, Link, level = 0 } = props
+  const { href, pathname, route, breakpoint, Link, level = 0, onClick } = props
   const isActive = pathname.indexOf(route.href) >= 0
 
   return (
@@ -23,16 +23,18 @@ const Route = (props: RouteProps) => {
             pathname,
             breakpoint,
             level,
+            onClick,
           }}
         />
       ) : (
         <NavbarLink breakpoint={breakpoint} level={level}>
-          <StyledNavLink
+          <StyledRouterLink
             {...{
               href,
               isActive,
               route,
               Link,
+              onClick,
             }}
           />
         </NavbarLink>
@@ -43,7 +45,16 @@ const Route = (props: RouteProps) => {
 Route.displayName = 'Route'
 
 const ParentRoute = (props: ParentRouteProps) => {
-  const { href, breakpoint, pathname, route, isActive, Link, level = 0 } = props
+  const {
+    href,
+    breakpoint,
+    pathname,
+    route,
+    isActive,
+    Link,
+    level = 0,
+    onClick,
+  } = props
   const { name, children = [] } = route
 
   const [active, setActive] = useState(isActive)
@@ -58,7 +69,7 @@ const ParentRoute = (props: ParentRouteProps) => {
   return (
     <>
       <NavbarLink breakpoint={breakpoint} level={level}>
-        <StyledNavLink
+        <StyledRouterLink
           {...{
             href,
             route,
@@ -83,6 +94,7 @@ const ParentRoute = (props: ParentRouteProps) => {
                 route,
                 Link,
                 level: newLevel,
+                onClick,
               }}
             />
           ))}
@@ -102,20 +114,15 @@ export const RouterNavbar = ({
   onToggle,
   ...rest
 }: RouterNavbarProps) => {
-  const handleCloseMenu = useCallback(() => {
+  const handleLinkClick = useCallback(() => {
     onToggle && onToggle(false)
   }, [onToggle])
 
   // -----------------------------------
 
   return (
-    <Navbar {...{ breakpoint, ...rest }} logo={<Logo />}>
-      <NavbarLinkList
-        withSlash
-        collapsible="xl"
-        onClick={handleCloseMenu}
-        breakpoint={breakpoint}
-      >
+    <Navbar {...{ breakpoint, onToggle, ...rest }} logo={<Logo />}>
+      <NavbarLinkList withSlash collapsible="xl" breakpoint={breakpoint}>
         {routes.map((route) => (
           <RouteMemo
             key={route.href}
@@ -125,6 +132,7 @@ export const RouterNavbar = ({
               pathname,
               route,
               Link,
+              onClick: handleLinkClick,
             }}
           />
         ))}

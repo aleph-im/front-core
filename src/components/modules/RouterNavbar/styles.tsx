@@ -5,9 +5,9 @@ import { addClasses } from '../../../utils'
 import { BreakpointId } from '../../../themes'
 import { getResponsiveCss } from '../../../styles'
 
-export type StyledNavLinkProps = Omit<RouterLinkProps, 'variant'>
+export type StyledRouterLinkProps = Omit<RouterLinkProps, 'variant'>
 
-export const StyledNavLink = styled(RouterLink).attrs<StyledNavLinkProps>(
+export const StyledRouterLink = styled(RouterLink).attrs<StyledRouterLinkProps>(
   (props) => {
     return {
       ...props,

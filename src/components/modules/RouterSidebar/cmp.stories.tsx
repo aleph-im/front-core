@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import RouterSidebar from './cmp'
 import { RouterSidebarProps } from './types'
@@ -63,9 +63,11 @@ const defaultArgs: Partial<RouterSidebarProps> = {
 // ---
 
 const Template: StoryFn<typeof RouterSidebar> = (args) => {
+  const [open, setOpen] = useState<boolean>()
+
   return (
     <div tw="h-[900px]">
-      <RouterSidebar {...args} />
+      <RouterSidebar {...{ ...args, open, onToggle: setOpen }} />
 
       {/* <h1>A random title</h1>
 

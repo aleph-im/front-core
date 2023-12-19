@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useState } from 'react'
+import React, { memo, useCallback, useRef } from 'react'
 import {
   StyledMobileTopContainer,
   StyledHeadingContainer,
@@ -15,31 +15,26 @@ export const Navbar = ({
   logo,
   children,
   mobileTopContent,
-  height,
   open,
   onToggle,
+  height = '6.5rem',
   breakpoint: $breakpoint = 'md',
   ...rest
 }: NavbarProps) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const isOpenMenu = open !== undefined ? open : isOpen
-
   const toggleMenu = useCallback(() => {
-    setIsOpen(!isOpenMenu)
-    onToggle && onToggle(!isOpenMenu)
-  }, [isOpenMenu, setIsOpen, onToggle])
+    onToggle && onToggle(!open)
+  }, [open, onToggle])
 
   const closeMenu = useCallback(() => {
-    setIsOpen(false)
     onToggle && onToggle(false)
-  }, [setIsOpen, onToggle])
+  }, [onToggle])
 
   const ref = useRef<HTMLDivElement>(null)
   useClickOutside(closeMenu, [ref])
 
   return (
     <StyledNavbarContainer {...{ $breakpoint, ...rest }} ref={ref}>
-      <StyledHeadingContainer isOpen={isOpenMenu} height={height}>
+      <StyledHeadingContainer isOpen={open} height={height}>
         <StyledMobileTopContainer>
           <Button
             color="main0"
@@ -48,7 +43,7 @@ export const Navbar = ({
             size="regular"
             onClick={toggleMenu}
           >
-            {!isOpenMenu ? <Icon name="bars" /> : <Icon name="close" />}
+            {!open ? <Icon name="bars" /> : <Icon name="close" />}
           </Button>
         </StyledMobileTopContainer>
         {logo && (
@@ -60,7 +55,7 @@ export const Navbar = ({
           </StyledMobileTopContainer>
         )}
       </StyledHeadingContainer>
-      <StyledNavContainer isOpen={isOpenMenu}>{children}</StyledNavContainer>
+      <StyledNavContainer isOpen={open}>{children}</StyledNavContainer>
     </StyledNavbarContainer>
   )
 }

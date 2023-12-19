@@ -8,7 +8,7 @@ import Icon from '../../common/Icon'
 import RouterLink, { RouterLinkProps } from '../RouterLink'
 import {
   StyledNotificationBadge,
-  StyledRouteLink,
+  StyledRouterLink,
   StyledRouteLinkIcon,
   StyledRouteLinkText,
 } from '../RouterLink/styles'
@@ -26,19 +26,19 @@ export const StyledNav1 = styled.nav`
   background-color: #0000004c;
 `
 
-export type StyledNav1LinkProps = Omit<RouterLinkProps, 'variant'>
+export type StyledRouterLink1Props = Omit<RouterLinkProps, 'variant'>
 
-export const StyledNav1Link = styled(RouterLink).attrs<StyledNav1LinkProps>(
-  (props) => {
-    return {
-      ...props,
-      variant: '1',
-      route: { ...props.route, name: undefined, flag: undefined },
-    }
-  },
-)`
+export const StyledRouterLink1 = styled(
+  RouterLink,
+).attrs<StyledRouterLink1Props>((props) => {
+  return {
+    ...props,
+    variant: '1',
+    route: { ...props.route, name: undefined, flag: undefined },
+  }
+})`
   ${({ theme, isActive }) => css`
-    ${StyledRouteLink} {
+    ${StyledRouterLink} {
       ${styledLinkContentPaddingCss}
 
       ${isActive &&
@@ -74,17 +74,17 @@ export const StyledNav2LinkContainer = styled.div`
   padding-bottom: 4rem;
 `
 
-export type StyledNav2LinkProps = Omit<RouterLinkProps, 'variant'>
+export type StyledRouterLink2Props = Omit<RouterLinkProps, 'variant'>
 
-export const StyledNav2Link = styled(RouterLink).attrs<StyledNav2LinkProps>(
-  (props) => {
-    return {
-      ...props,
-      variant: '2',
-    }
-  },
-)`
-  ${StyledRouteLink} {
+export const StyledRouterLink2 = styled(
+  RouterLink,
+).attrs<StyledRouterLink2Props>((props) => {
+  return {
+    ...props,
+    variant: '2',
+  }
+})`
+  ${StyledRouterLink} {
     ${styledLinkContentPaddingCss}
     ${tw`inline-flex w-auto max-w-full overflow-hidden`}
   }
@@ -226,7 +226,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               color ease-in-out 0.25s 0s !important;
           }
 
-          & ${StyledNav1Link} ${StyledRouteLink}::after {
+          & ${StyledRouterLink1} ${StyledRouterLink}::after {
             ${tw`-top-2 opacity-0`}
             transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
               top ease-in-out ${0.7 / $speed}s ${0.1 / $speed}s;
@@ -251,7 +251,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
-          & ${StyledNav2Title}, & ${StyledNav2Link} ${StyledRouteLink} {
+          & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
             ${tw`relative left-0 translate-x-0 px-6 gap-2.5`}
 
             transition: left linear 0s ${0.5 / $speed}s,
@@ -304,7 +304,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width ease-in-out ${0.2 / $speed}s ${0.15 / $speed}s;
           }
 
-          & ${StyledNav1Link} ${StyledRouteLinkIcon}, & ${StyledLogo} {
+          & ${StyledRouterLink1} ${StyledRouteLinkIcon}, & ${StyledLogo} {
             ${tw`opacity-0 invisible`}
 
             transition: opacity ease-in-out ${0.2 / $speed}s 0s,
@@ -312,7 +312,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
                color ease-in-out 0.25s 0s !important;
           }
 
-          & ${StyledNav1Link} ${StyledRouteLink}::after {
+          & ${StyledRouterLink1} ${StyledRouterLink}::after {
             ${tw`top-0 opacity-100`}
             transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
               top ease-in-out ${0.7 / $speed}s ${0.3 / $speed}s;
@@ -340,7 +340,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
           }
 
-          & ${StyledNav2Title}, & ${StyledNav2Link} ${StyledRouteLink} {
+          & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
             ${tw`relative left-1/2 -translate-x-1/2 px-6 gap-0`}
 
             transition: left linear 0s ${0.45 / $speed}s,

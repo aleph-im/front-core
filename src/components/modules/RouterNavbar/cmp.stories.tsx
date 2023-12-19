@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import RouterNavbar from './cmp'
 import { RouterNavbarProps } from './types'
@@ -61,15 +61,17 @@ const defaultArgs: Partial<RouterNavbarProps> = {
       external: true,
     },
   ],
-  Link: (props) => <a {...props} />,
+  Link: (props) => <span {...props} />,
 }
 
 // ---
 
 const Template: StoryFn<typeof RouterNavbar> = (args) => {
+  const [open, setOpen] = useState<boolean>()
+
   return (
     <>
-      <RouterNavbar {...args} />
+      <RouterNavbar {...{ ...args, open, onToggle: setOpen }} />
 
       <h1>A random title</h1>
 
