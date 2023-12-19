@@ -8,4 +8,4 @@ const CRNIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(CRNIcon)
+export default memo(CRNIcon) as typeof CRNIcon

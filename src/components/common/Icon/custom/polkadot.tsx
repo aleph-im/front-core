@@ -8,4 +8,4 @@ const PolkadotIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(PolkadotIcon)
+export default memo(PolkadotIcon) as typeof PolkadotIcon

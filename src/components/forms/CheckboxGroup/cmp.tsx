@@ -24,4 +24,4 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
 }
 CheckboxGroup.displayName = 'CheckboxGroup'
 
-export default memo(CheckboxGroup)
+export default memo(CheckboxGroup) as typeof CheckboxGroup

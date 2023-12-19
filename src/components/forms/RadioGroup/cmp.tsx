@@ -48,4 +48,4 @@ export const RadioGroup = ({
 }
 RadioGroup.displayName = 'RadioGroup'
 
-export default memo(RadioGroup)
+export default memo(RadioGroup) as typeof RadioGroup

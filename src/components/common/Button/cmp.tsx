@@ -51,4 +51,4 @@ export const Button = forwardRef(
 )
 Button.displayName = 'Button'
 
-export default memo(Button)
+export default memo(Button) as typeof Button

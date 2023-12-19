@@ -8,4 +8,4 @@ const PolygonIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(PolygonIcon)
+export default memo(PolygonIcon) as typeof PolygonIcon

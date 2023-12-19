@@ -37,4 +37,4 @@ export const CompositeTitle = ({
 }
 CompositeTitle.displayName = 'CompositeTitle'
 
-export default memo(CompositeTitle)
+export default memo(CompositeTitle) as typeof CompositeTitle

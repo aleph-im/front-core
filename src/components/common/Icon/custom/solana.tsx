@@ -8,4 +8,4 @@ const SolanaIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(SolanaIcon)
+export default memo(SolanaIcon) as typeof SolanaIcon

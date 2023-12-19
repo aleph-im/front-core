@@ -121,4 +121,4 @@ export const TextInput = forwardRef(
 )
 TextInput.displayName = 'TextInput'
 
-export default memo(TextInput)
+export default memo(TextInput) as typeof TextInput

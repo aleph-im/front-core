@@ -26,4 +26,4 @@ export const Spinner = ({
 }
 Spinner.displayName = 'Spinner'
 
-export default memo(Spinner)
+export default memo(Spinner) as typeof Spinner

@@ -8,4 +8,4 @@ const TezosIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(TezosIcon)
+export default memo(TezosIcon) as typeof TezosIcon

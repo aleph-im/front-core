@@ -70,4 +70,4 @@ export const NavbarLinkList = ({
 }
 NavbarLinkList.displayName = 'NavbarLinkList'
 
-export default memo(NavbarLinkList)
+export default memo(NavbarLinkList) as typeof NavbarLinkList

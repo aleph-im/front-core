@@ -8,4 +8,4 @@ const CosmosIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(CosmosIcon)
+export default memo(CosmosIcon) as typeof CosmosIcon

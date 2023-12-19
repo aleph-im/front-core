@@ -113,5 +113,5 @@ export const Tabs = ({
 }
 Tabs.displayName = 'Tabs'
 
-export const TabMemo = memo(Tab)
-export default memo(Tabs)
+export const TabMemo = memo(Tab) as typeof Tab
+export default memo(Tabs) as typeof Tabs

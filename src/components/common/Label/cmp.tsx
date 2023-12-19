@@ -16,4 +16,4 @@ export const Label = ({
 }
 Label.displayName = 'Label'
 
-export default memo(Label)
+export default memo(Label) as typeof Label

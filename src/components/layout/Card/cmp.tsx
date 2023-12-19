@@ -77,4 +77,4 @@ export const Card = ({
 }
 Card.displayName = 'Card'
 
-export default memo(Card)
+export default memo(Card) as typeof Card

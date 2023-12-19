@@ -18,4 +18,4 @@ export const ToggleContainer = forwardRef(
 )
 ToggleContainer.displayName = 'ToggleContainer'
 
-export default memo(ToggleContainer)
+export default memo(ToggleContainer) as typeof ToggleContainer

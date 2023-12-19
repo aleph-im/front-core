@@ -7,4 +7,4 @@ export const NoisyContainer = ({ children, ...rest }: NoisyContainerProps) => {
 }
 NoisyContainer.displayName = 'NoisyContainer'
 
-export default memo(NoisyContainer)
+export default memo(NoisyContainer) as typeof NoisyContainer

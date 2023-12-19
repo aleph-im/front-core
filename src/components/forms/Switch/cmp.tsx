@@ -33,4 +33,4 @@ export const Switch = forwardRef(
 )
 Switch.displayName = 'Switch'
 
-export default memo(Switch)
+export default memo(Switch) as typeof Switch

@@ -8,4 +8,4 @@ const ProfileIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(ProfileIcon)
+export default memo(ProfileIcon) as typeof ProfileIcon

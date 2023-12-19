@@ -7,4 +7,4 @@ export const Tag = ({ children, ...rest }: TagProps) => {
 }
 Tag.displayName = 'Tag'
 
-export default memo(Tag)
+export default memo(Tag) as typeof Tag

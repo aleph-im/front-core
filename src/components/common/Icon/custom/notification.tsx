@@ -8,4 +8,4 @@ const NotificationIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(NotificationIcon)
+export default memo(NotificationIcon) as typeof NotificationIcon

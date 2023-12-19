@@ -42,4 +42,4 @@ export const NotificationCard = ({
 }
 NotificationCard.displayName = 'NotificationCard'
 
-export default memo(NotificationCard)
+export default memo(NotificationCard) as typeof NotificationCard

@@ -11,4 +11,4 @@ export const FormLabel = ({ error, label, required }: FormLabelProps) => {
   )
 }
 
-export default memo(FormLabel)
+export default memo(FormLabel) as typeof FormLabel

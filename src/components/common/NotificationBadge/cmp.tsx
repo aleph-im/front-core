@@ -15,4 +15,4 @@ export const NotificationBadge = ({
 }
 NotificationBadge.displayName = 'NotificationBadge'
 
-export default memo(NotificationBadge)
+export default memo(NotificationBadge) as typeof NotificationBadge

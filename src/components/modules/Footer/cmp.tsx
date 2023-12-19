@@ -146,4 +146,4 @@ export const Footer = ({ small = false, maxWidth, ...rest }: FooterProps) => {
 }
 Footer.displayName = 'Footer'
 
-export default memo(Footer)
+export default memo(Footer) as typeof Footer

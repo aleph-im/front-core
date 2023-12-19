@@ -8,4 +8,4 @@ const EthereumIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(EthereumIcon)
+export default memo(EthereumIcon) as typeof EthereumIcon

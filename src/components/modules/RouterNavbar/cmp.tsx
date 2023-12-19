@@ -108,6 +108,6 @@ export const RouterNavbar = ({
 }
 RouterNavbar.displayName = 'RouterNavbar'
 
-export const ParentRouteMemo = memo(ParentRoute)
-export const RouteMemo = memo(Route)
-export default memo(RouterNavbar)
+export const ParentRouteMemo = memo(ParentRoute) as typeof ParentRoute
+export const RouteMemo = memo(Route) as typeof Route
+export default memo(RouterNavbar) as typeof RouterNavbar

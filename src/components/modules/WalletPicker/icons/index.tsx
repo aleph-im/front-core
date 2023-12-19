@@ -14,4 +14,4 @@ export const WalletIcon = ({ name, ...rest }: WalletIconProps) => {
   return <Icon name={name} {...rest} />
 }
 
-export default memo(WalletIcon)
+export default memo(WalletIcon) as typeof WalletIcon

@@ -157,5 +157,5 @@ export const RouterSidebar = ({
 }
 RouterSidebar.displayName = 'RouterSidebar'
 
-export const RouteMemo = memo(Route)
-export default memo(RouterSidebar)
+export const RouteMemo = memo(Route) as typeof Route
+export default memo(RouterSidebar) as typeof RouterSidebar

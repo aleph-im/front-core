@@ -8,4 +8,4 @@ const BinanceIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(BinanceIcon)
+export default memo(BinanceIcon) as typeof BinanceIcon

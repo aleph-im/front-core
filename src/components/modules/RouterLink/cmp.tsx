@@ -37,4 +37,4 @@ export const RouterLink = ({
 }
 RouterLink.displayName = 'RouterLink'
 
-export default memo(RouterLink)
+export default memo(RouterLink) as typeof RouterLink

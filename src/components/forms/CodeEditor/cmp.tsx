@@ -87,4 +87,4 @@ export const CodeEditor = forwardRef(
 )
 CodeEditor.displayName = 'CodeEditor'
 
-export default memo(CodeEditor)
+export default memo(CodeEditor) as typeof CodeEditor

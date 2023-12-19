@@ -8,4 +8,4 @@ const ConsoleIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(ConsoleIcon)
+export default memo(ConsoleIcon) as typeof ConsoleIcon

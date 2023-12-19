@@ -10,5 +10,5 @@ export const Col = ({ children, ...rest }: ColProps) => {
   return <StyledCol {...rest}>{children}</StyledCol>
 }
 
-export const RowMemo = memo(Row)
-export const ColMemo = memo(Col)
+export const RowMemo = memo(Row) as typeof Row
+export const ColMemo = memo(Col) as typeof Col

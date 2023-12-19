@@ -245,7 +245,9 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
 }
 Table.displayName = 'Table'
 
-export const TableRowMemo = memo(TableRow)
-export const TableCellMemo = memo(TableCell)
-export const TableHeaderCellMemo = memo(TableHeaderCell)
-export default memo(Table)
+export const TableRowMemo = memo(TableRow) as typeof TableRow
+export const TableCellMemo = memo(TableCell) as typeof TableCell
+export const TableHeaderCellMemo = memo(
+  TableHeaderCell,
+) as typeof TableHeaderCell
+export default memo(Table) as typeof Table

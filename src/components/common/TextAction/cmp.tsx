@@ -124,5 +124,5 @@ export const TextAction = ({
 }
 TextAction.displayName = 'TextAction'
 
-export const TextMemo = memo(Text)
-export default memo(TextAction)
+export const TextMemo = memo(Text) as typeof Text
+export default memo(TextAction) as typeof TextAction

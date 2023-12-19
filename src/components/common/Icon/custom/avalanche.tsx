@@ -8,4 +8,4 @@ const AvalancheIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(AvalancheIcon)
+export default memo(AvalancheIcon) as typeof AvalancheIcon

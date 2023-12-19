@@ -51,5 +51,5 @@ export const BulletList = ({
 }
 BulletList.displayName = 'BulletList'
 
-export const BulletItemMemo = memo(BulletItem)
-export default memo(BulletList)
+export const BulletItemMemo = memo(BulletItem) as typeof BulletItem
+export default memo(BulletList) as typeof BulletList

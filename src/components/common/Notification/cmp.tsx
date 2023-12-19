@@ -119,4 +119,4 @@ export const Notification = ({
 }
 Notification.displayName = 'Notification'
 
-export default memo(Notification)
+export default memo(Notification) as typeof Notification

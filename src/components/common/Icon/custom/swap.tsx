@@ -8,4 +8,4 @@ const SwapIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(SwapIcon)
+export default memo(SwapIcon) as typeof SwapIcon

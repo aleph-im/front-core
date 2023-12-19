@@ -8,4 +8,4 @@ const SettingsIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(SettingsIcon)
+export default memo(SettingsIcon) as typeof SettingsIcon

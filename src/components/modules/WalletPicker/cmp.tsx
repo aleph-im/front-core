@@ -176,4 +176,4 @@ export const WalletPicker = forwardRef(
 )
 WalletPicker.displayName = 'WalletPicker'
 
-export default memo(WalletPicker)
+export default memo(WalletPicker) as typeof WalletPicker

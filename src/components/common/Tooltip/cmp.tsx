@@ -115,4 +115,4 @@ export const Tooltip = ({
 }
 Tooltip.displayName = 'Tooltip'
 
-export default memo(Tooltip)
+export default memo(Tooltip) as typeof Tooltip

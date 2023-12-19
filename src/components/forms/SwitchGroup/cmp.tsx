@@ -24,4 +24,4 @@ export const SwitchGroup = (props: SwitchGroupProps) => {
 }
 SwitchGroup.displayName = 'SwitchGroup'
 
-export default memo(SwitchGroup)
+export default memo(SwitchGroup) as typeof SwitchGroup

@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-export const MetamaskIcon = memo((props) => {
+export const MetamaskIcon = (props: any) => {
   return (
     <svg
       width="17"
@@ -146,7 +146,7 @@ export const MetamaskIcon = memo((props) => {
       </g>
     </svg>
   )
-})
+}
 MetamaskIcon.displayName = 'MetamaskIcon'
 
-export default MetamaskIcon
+export default memo(MetamaskIcon) as typeof MetamaskIcon

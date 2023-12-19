@@ -55,4 +55,4 @@ export const Select = forwardRef(
 )
 Select.displayName = 'Select'
 
-export default memo(Select)
+export default memo(Select) as typeof Select

@@ -35,4 +35,4 @@ export const TextGradient = ({
 }
 TextGradient.displayName = 'TextGradient'
 
-export default memo(TextGradient)
+export default memo(TextGradient) as typeof TextGradient

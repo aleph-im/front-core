@@ -28,4 +28,4 @@ export const Breadcrumb = ({
 }
 Breadcrumb.displayName = 'Breadcrumb'
 
-export default memo(Breadcrumb)
+export default memo(Breadcrumb) as typeof Breadcrumb

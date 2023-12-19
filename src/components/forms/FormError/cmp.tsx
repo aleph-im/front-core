@@ -13,4 +13,4 @@ export const FormError = ({ error, ...rest }: FormErrorProps) => {
 }
 FormError.displayName = 'FormError'
 
-export default memo(FormError)
+export default memo(FormError) as typeof FormError

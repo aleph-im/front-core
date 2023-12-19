@@ -21,4 +21,4 @@ export const NavbarLink = ({
   )
 }
 
-export default memo(NavbarLink)
+export default memo(NavbarLink) as typeof NavbarLink

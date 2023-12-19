@@ -75,4 +75,4 @@ export const Radio = forwardRef(
 )
 Radio.displayName = 'Radio'
 
-export default memo(Radio)
+export default memo(Radio) as typeof Radio

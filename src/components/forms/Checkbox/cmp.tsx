@@ -43,4 +43,4 @@ export const Checkbox = forwardRef(
 
 Checkbox.displayName = 'Checkbox'
 
-export default memo(Checkbox)
+export default memo(Checkbox) as typeof Checkbox

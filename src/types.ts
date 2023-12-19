@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ComponentType, ReactNode } from 'react'
+import { AnchorHTMLAttributes, ComponentType } from 'react'
 import type { IconName } from './components/common/Icon'
 
 export type Route = {

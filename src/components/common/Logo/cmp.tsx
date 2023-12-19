@@ -30,4 +30,4 @@ export const Logo = ({
 }
 Logo.displayName = 'Logo'
 
-export default memo(Logo)
+export default memo(Logo) as typeof Logo

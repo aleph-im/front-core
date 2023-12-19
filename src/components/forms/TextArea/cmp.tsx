@@ -46,4 +46,4 @@ export const TextArea = forwardRef(
 )
 TextArea.displayName = 'TextArea'
 
-export default memo(TextArea)
+export default memo(TextArea) as typeof TextArea

@@ -169,5 +169,5 @@ export const ChipInput = forwardRef(
 )
 ChipInput.displayName = 'ChipInput'
 
-export const ChipItemMemo = memo(ChipItem)
-export default memo(ChipInput)
+export const ChipItemMemo = memo(ChipItem) as typeof ChipItem
+export default memo(ChipInput) as typeof ChipInput

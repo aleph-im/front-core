@@ -51,4 +51,4 @@ export const DropdownOption = forwardRef(
 )
 DropdownOption.displayName = 'DropdownOption'
 
-export default memo(DropdownOption)
+export default memo(DropdownOption) as typeof DropdownOption

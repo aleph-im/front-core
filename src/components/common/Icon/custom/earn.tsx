@@ -8,4 +8,4 @@ const EarnIcon = (props: SVGAttributes<SVGElement>) => {
   )
 }
 
-export default memo(EarnIcon)
+export default memo(EarnIcon) as typeof EarnIcon

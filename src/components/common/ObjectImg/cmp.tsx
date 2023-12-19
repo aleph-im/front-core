@@ -28,4 +28,4 @@ export const ObjectImg = ({
 }
 ObjectImg.displayName = 'ObjectImg'
 
-export default memo(ObjectImg)
+export default memo(ObjectImg) as typeof ObjectImg

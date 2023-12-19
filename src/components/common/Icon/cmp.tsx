@@ -75,4 +75,4 @@ export const Icon = ({
 }
 Icon.displayName = 'Icon'
 
-export default memo(Icon)
+export default memo(Icon) as typeof Icon
