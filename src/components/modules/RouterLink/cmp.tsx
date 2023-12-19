@@ -28,9 +28,9 @@ export const RouterLink = ({
           $hasFlag: !!flag,
         }}
       >
-        {icon && <StyledRouteLinkIcon name={icon} />}
-        {name && <StyledRouteLinkText>{name}</StyledRouteLinkText>}
-        {flag && <StyledNotificationBadge>{flag}</StyledNotificationBadge>}
+        {!!icon && <StyledRouteLinkIcon name={icon} />}
+        {!!name && <StyledRouteLinkText>{name}</StyledRouteLinkText>}
+        {!!flag && <StyledNotificationBadge>{flag}</StyledNotificationBadge>}
       </StyledRouteLink>
     </Link>
   )
