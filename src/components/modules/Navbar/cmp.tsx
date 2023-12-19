@@ -1,4 +1,10 @@
-import React, { memo, useCallback, useRef } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  UIEventHandler,
+} from 'react'
 import {
   StyledMobileTopContainer,
   StyledHeadingContainer,
@@ -7,7 +13,7 @@ import {
   StyledLogoContainer,
 } from './styles'
 import { NavbarProps } from './types'
-import { useClickOutside } from '../../../hooks'
+import { useClickOutside, useTransitionedEnterExit } from '../../../hooks'
 import Button from '../../common/Button'
 import Icon from '../../common/Icon'
 
@@ -17,7 +23,7 @@ export const Navbar = ({
   mobileTopContent,
   open,
   onToggle,
-  height = '6.5rem',
+  height: $height = '6.5rem',
   breakpoint: $breakpoint = 'md',
   ...rest
 }: NavbarProps) => {
@@ -29,12 +35,38 @@ export const Navbar = ({
     onToggle && onToggle(false)
   }, [onToggle])
 
-  const ref = useRef<HTMLDivElement>(null)
-  useClickOutside(closeMenu, [ref])
+  const containerRef = useRef<HTMLDivElement>(null)
+  useClickOutside(closeMenu, [containerRef])
+
+  // @note: Quick fix to dont push the content using position sticky with scroll 0
+  useEffect(() => {
+    for (const el of [
+      containerRef.current?.parentElement,
+      document.documentElement,
+    ]) {
+      if (!!open && el?.scrollTop === 0) el.scrollTop++
+      if (!open && el?.scrollTop === 1) el.scrollTop--
+    }
+
+    document.documentElement.style.overflow = open ? 'hidden' : 'auto'
+  }, [open])
+
+  const { ref, shouldMount, state } = useTransitionedEnterExit({
+    onOff: !!open,
+  })
+  const $isOpen = state === 'enter'
 
   return (
-    <StyledNavbarContainer {...{ $breakpoint, ...rest }} ref={ref}>
-      <StyledHeadingContainer isOpen={open} height={height}>
+    <StyledNavbarContainer
+      {...{
+        $breakpoint,
+        $height,
+        $isOpen,
+        ...rest,
+      }}
+      ref={containerRef}
+    >
+      <StyledHeadingContainer>
         <StyledMobileTopContainer>
           <Button
             color="main0"
@@ -46,16 +78,16 @@ export const Navbar = ({
             {!open ? <Icon name="bars" /> : <Icon name="close" />}
           </Button>
         </StyledMobileTopContainer>
-        {logo && (
-          <StyledLogoContainer height={height}>{logo}</StyledLogoContainer>
-        )}
+        {logo && <StyledLogoContainer>{logo}</StyledLogoContainer>}
         {mobileTopContent && (
           <StyledMobileTopContainer>
             {mobileTopContent}
           </StyledMobileTopContainer>
         )}
       </StyledHeadingContainer>
-      <StyledNavContainer isOpen={open}>{children}</StyledNavContainer>
+      {shouldMount && (
+        <StyledNavContainer ref={ref}>{children}</StyledNavContainer>
+      )}
     </StyledNavbarContainer>
   )
 }
