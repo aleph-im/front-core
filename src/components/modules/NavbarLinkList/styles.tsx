@@ -11,7 +11,7 @@ export const StyledButton = styled(Button).attrs(() => {
     kind: 'neon',
     size: 'regular',
   }
-})(() => [tw`hidden md:inline-flex`])
+})(() => [tw`hidden`])
 
 // A <ul> element, wrapping the links (text and buttons)
 export const StyledList = styled.ul`
@@ -70,6 +70,10 @@ export const StyledContainer = styled.div<StyledContainerProps>`
           flex: 0 1 0px;
           padding-left: ${$isCollapsed ? '1.5rem' : ''};
           ${$onlyMobile ? 'display: none;' : ''}
+
+          & ${StyledButton} {
+            ${tw`inline-flex`}
+          }
 
           & ${StyledList} {
             width: auto;

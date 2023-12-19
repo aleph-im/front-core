@@ -8,7 +8,7 @@ import { BreakpointId } from '../../../themes'
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingContainer = styled.div<ResponsiveNavBarProps>`
   ${({ isOpen, height = '6.25rem' }) => css`
-    ${tw`px-6 md:px-0`}
+    ${tw`px-6`}
     flex: 0 0 0px;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ export const StyledMobileTopContainer = styled.div`
 // A <nav> element, wrapping the links (text and buttons)
 export const StyledNavContainer = styled.nav<ResponsiveNavBarProps>`
   ${({ theme, isOpen }) => css`
-    ${tw`m-0 p-6 md:p-0`}
+    ${tw`m-0 p-6`}
     flex: 0 1 0px;
     display: ${isOpen ? 'flex' : 'none'};
     flex-direction: column;
@@ -65,19 +65,17 @@ export const StyledNavbarContainer = styled.div.attrs(
   addClasses('fx-glass-base2'),
 )<StyledNavbarContainerProps>`
   ${({ theme, $breakpoint }) => css`
-    ${tw`md:px-16`}
     position: sticky;
     top: 0;
 
     ${getResponsiveCss(
       $breakpoint,
       css`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        ${tw`flex items-center justify-between px-16`}
         gap: ${theme.font.size['28']}rem;
 
         & ${StyledHeadingContainer} {
+          ${tw`px-0`}
           background-color: transparent;
         }
 
@@ -86,9 +84,7 @@ export const StyledNavbarContainer = styled.div.attrs(
         }
 
         & ${StyledNavContainer} {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
+          ${tw`flex flex-row items-center p-0`}
         }
 
         & ${StyledLogoContainer} {
