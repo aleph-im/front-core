@@ -39,7 +39,7 @@ export function useRequest<T>({
     if (!triggerOnMount) return
     request()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, triggerDeps)
+  }, [...triggerDeps])
 
   return { ...reqState, request }
 }
