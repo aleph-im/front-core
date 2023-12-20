@@ -64,8 +64,8 @@ export type TableProps<R extends Record<string, unknown>> =
     TableRow<R> & {
       columns: TableColumn<R>[]
       data: R[]
-      stickyHeader: boolean
-      borderType: TableBorderType
+      stickyHeader?: boolean
+      borderType?: TableBorderType
       rowNoise?: boolean
     }
 

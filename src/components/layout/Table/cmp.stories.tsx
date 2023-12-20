@@ -149,6 +149,7 @@ const stickyDataArgs = {
 const defaultArgs: TableProps<any> = {
   borderType: 'dashed' as TableBorderType,
   rowNoise: true,
+  stickyHeader: false,
   ...dataArgs,
   rowProps: (row, i) => ({
     onClick: () => {
