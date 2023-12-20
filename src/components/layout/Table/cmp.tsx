@@ -56,21 +56,29 @@ export function TableCell<R extends Record<string, unknown>>({
       : tw`text-left`
   }, [col.align])
 
+  const stickyStyle = useMemo(() => {
+    return col.sticky === 'start'
+      ? tw`sticky left-0 z-10 `
+      : col.sticky === 'end'
+      ? tw`sticky right-0 z-10 `
+      : ''
+  }, [col.sticky])
+
   const props = useMemo(() => {
     const cellProps = col.cellProps?.(row, col, rowIndex, colIndex) || {}
     const className =
       (cellProps?.className ? `${cellProps?.className} ` : '') +
       (rowNoise && rowIndex % 2 !== 0 ? 'fx-noise-light' : '')
-    const css = { ...alignStyle, ...(cellProps?.css as any) }
+    const css = { ...alignStyle, ...stickyStyle, ...(cellProps?.css as any) }
     return { ...cellProps, className, css }
-  }, [col, row, rowIndex, colIndex, rowNoise, alignStyle])
+  }, [col, row, rowIndex, colIndex, rowNoise, alignStyle, stickyStyle])
 
   return (
     <>
       {col.cellRender ? (
         col.cellRender(row, col, rowIndex, colIndex)
       ) : (
-        <td key={colIndex} {...props} css={props.css}>
+        <td key={colIndex} {...props} css={[props.css]}>
           {col.render(row, col, rowIndex, colIndex)}
         </td>
       )}
@@ -113,6 +121,13 @@ export function TableHeaderCell<R extends Record<string, unknown>>({
     [col.label, sortedColumn.column],
   )
 
+  const stickyPosition =
+    col.sticky === 'start'
+      ? tw`sticky left-0 z-20 `
+      : col.sticky === 'end'
+      ? tw`sticky right-0 z-20 `
+      : ''
+
   return (
     <>
       {col.hcellRender ? (
@@ -121,7 +136,7 @@ export function TableHeaderCell<R extends Record<string, unknown>>({
         <th
           key={colIndex}
           {...props}
-          css={props.css}
+          css={[props.css, stickyPosition]}
           style={props.style}
           onClick={() => {
             if (!col.sortable) return
@@ -211,7 +226,12 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
   return (
     <StyledTable {...props}>
       <thead>
-        <tr>
+        <tr
+          css={[
+            props.stickyHeader &&
+              tw`sticky top-0 z-10 bg-clip-border bg-opacity-50 backdrop-blur-sm`,
+          ]}
+        >
           {columns.map((col, colIndex) => (
             <TableHeaderCell
               key={colIndex}

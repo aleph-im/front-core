@@ -7,6 +7,7 @@ import {
 
 export type TableBorderType = 'none' | 'dashed' | 'solid'
 export type TableAlignType = 'left' | 'center' | 'right'
+export type TableStickyPosition = 'start' | 'end'
 
 export type TableRow<R extends Record<string, unknown>> = {
   rowRender?: (row: R, rowIndex: number) => ReactNode
@@ -19,6 +20,7 @@ export type TableColumn<R extends Record<string, unknown>> = {
   sortable?: boolean
   align?: TableAlignType
   width?: string
+  sticky?: TableStickyPosition
   cellRender?: (
     row: R,
     col: TableColumn<R>,
@@ -62,6 +64,7 @@ export type TableProps<R extends Record<string, unknown>> =
     TableRow<R> & {
       columns: TableColumn<R>[]
       data: R[]
+      stickyHeader: boolean
       borderType: TableBorderType
       rowNoise?: boolean
     }
