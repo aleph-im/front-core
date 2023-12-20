@@ -1,8 +1,9 @@
-import { LinkComponent, RenderLinkProps, Route } from '../../../types'
+import { AnchorHTMLAttributes } from 'react'
+import { LinkComponent, Route } from '../../../types'
 
 export type RouterLinkVariant = '1' | '2' | '3'
 
-export type RouterLinkProps = RenderLinkProps & {
+export type RouterLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   route: Route
   Link: LinkComponent
   isActive: boolean
