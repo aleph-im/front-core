@@ -18,6 +18,4 @@ export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
   pathname: string
 }
 
-export type ParentRouteProps = RouteProps & {
-  isActive: boolean
-}
+export type ParentRouteProps = RouteProps

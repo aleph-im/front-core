@@ -16,7 +16,7 @@ const defaultArgs: Partial<RouterSidebarProps> = {
       name: 'Earn',
       href: '/earn',
       icon: 'earn',
-      flag: 1,
+      flag: 6,
       children: [
         {
           name: 'Staking',

@@ -8,18 +8,29 @@ import { StyledChildRoutes, StyledRouterLink, StyledNavTitle } from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
 
 const Route = (props: RouteProps) => {
-  const { href, pathname, route, breakpoint, Link, level = 0, onClick } = props
+  const {
+    pathname,
+    route,
+    breakpoint,
+    Link,
+    level = 0,
+    onClick,
+    ...rest
+  } = props
   const isActive = pathname.indexOf(route.href) >= 0
+
+  const linkProps = {
+    route,
+    Link,
+    ...rest,
+  }
 
   return (
     <>
       {route.children ? (
         <ParentRouteMemo
           {...{
-            href,
-            isActive,
-            route,
-            Link,
+            ...linkProps,
             pathname,
             breakpoint,
             level,
@@ -30,10 +41,8 @@ const Route = (props: RouteProps) => {
         <NavbarLink breakpoint={breakpoint} level={level}>
           <StyledRouterLink
             {...{
-              href,
+              ...linkProps,
               isActive,
-              route,
-              Link,
               onClick,
             }}
           />
@@ -46,17 +55,17 @@ Route.displayName = 'Route'
 
 const ParentRoute = (props: ParentRouteProps) => {
   const {
-    href,
     breakpoint,
     pathname,
     route,
-    isActive,
     Link,
     level = 0,
     onClick,
+    ...rest
   } = props
   const { name, children = [] } = route
 
+  const isActive = pathname.indexOf(route.href) >= 0
   const [active, setActive] = useState(isActive)
 
   const handleClick = useCallback((e: MouseEvent) => {
@@ -71,10 +80,10 @@ const ParentRoute = (props: ParentRouteProps) => {
       <NavbarLink breakpoint={breakpoint} level={level}>
         <StyledRouterLink
           {...{
-            href,
             route,
-            isActive,
             Link,
+            isActive,
+            ...rest,
           }}
           onClick={handleClick}
         />
@@ -88,13 +97,13 @@ const ParentRoute = (props: ParentRouteProps) => {
             <RouteMemo
               key={route.href}
               {...{
-                href: route.href,
-                breakpoint,
-                pathname,
                 route,
                 Link,
+                breakpoint,
+                pathname,
                 level: newLevel,
                 onClick,
+                ...rest,
               }}
             />
           ))}
@@ -127,11 +136,10 @@ export const RouterNavbar = ({
           <RouteMemo
             key={route.href}
             {...{
-              href: route.href,
-              breakpoint,
-              pathname,
               route,
               Link,
+              breakpoint,
+              pathname,
               onClick: handleLinkClick,
             }}
           />

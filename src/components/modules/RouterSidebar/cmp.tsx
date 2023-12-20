@@ -17,14 +17,14 @@ import React from 'react'
 import { RouteProps, RouterSidebarProps } from './types'
 
 const Route = (props: RouteProps) => {
-  const { href, pathname, route, level = 0, Link } = props
+  const { pathname, route, level = 0, Link, ...rest } = props
   const isActive = pathname.indexOf(route.href) >= 0
 
   const linkProps = {
-    href,
     route,
     Link,
     isActive,
+    ...rest,
   }
 
   return (
@@ -107,7 +107,6 @@ export const RouterSidebar = ({
           <RouteMemo
             key={route.href}
             {...{
-              href: route.href,
               route,
               Link,
               pathname,
@@ -135,7 +134,6 @@ export const RouterSidebar = ({
                 <RouteMemo
                   key={route.href}
                   {...{
-                    href: route.href,
                     route,
                     Link,
                     pathname,

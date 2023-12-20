@@ -12,7 +12,6 @@ export type Route = {
 }
 
 export type RenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string
   route: Route
 }
 

@@ -18,6 +18,7 @@ const defaultArgs: Partial<RouterNavbarProps> = {
       name: 'Earn',
       href: '/earn',
       icon: 'earn',
+      flag: 6,
       children: [
         {
           name: 'Staking',
@@ -61,7 +62,7 @@ const defaultArgs: Partial<RouterNavbarProps> = {
       external: true,
     },
   ],
-  Link: (props) => <span {...props} />,
+  Link: (props) => <a {...props} />,
 }
 
 // ---

@@ -1,10 +1,4 @@
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  UIEventHandler,
-} from 'react'
+import React, { memo, useCallback, useEffect, useRef } from 'react'
 import {
   StyledMobileTopContainer,
   StyledHeadingContainer,

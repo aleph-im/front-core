@@ -15,10 +15,10 @@ export const RouterLink = ({
   Link,
   ...rest
 }: RouterLinkProps) => {
-  const { name, icon, flag } = route
+  const { name, icon, flag, href, target } = route
 
   return (
-    <Link {...{ route, ...rest }}>
+    <Link {...{ route, href, target, ...rest }}>
       <StyledRouterLink
         {...{
           $variant,
