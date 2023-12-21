@@ -15,10 +15,9 @@ export const StyledContainer = styled.div<{
       will-change: grid-template-rows;
 
       transition: ${$variant === '1'
-        ? `grid-template-rows ease-in-out ${$duration}ms 0s`
-        : `grid-template-rows ease-in-out ${$duration}ms ${
-            $isOpen ? '0' : $duration2
-          }ms`};
+        ? `all ease-in-out ${$duration}ms 0s`
+        : `all ease-in-out ${$duration}ms ${$isOpen ? '0' : $duration2}ms`};
+      transition-property: grid-template-rows;
 
       ${$isOpen &&
       css`
@@ -28,10 +27,12 @@ export const StyledContainer = styled.div<{
       & ${StyledContent} {
         ${$variant === '2' &&
         css`
+          visibility: ${$isOpen ? 'visible' : 'hidden'};
           opacity: ${$isOpen ? '1' : '0'};
-          transition: ${`opacity ease-in-out ${$duration2}ms ${
+          transition: ${`all ease-in-out ${$duration2}ms ${
             $isOpen ? $duration : '0'
           }ms`};
+          transition-property: visibility opacity;
         `}
       }
     `
