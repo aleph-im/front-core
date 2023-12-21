@@ -12,6 +12,7 @@ export type TransitionedSubstate =
 
 export type UseTransitionedEnterExitProps<E extends HTMLElement> = {
   onOff: boolean
+  duration?: number
   ref?: RefObject<E>
   deps?: any[]
 }
@@ -25,6 +26,7 @@ export type UseTransitionedEnterExitReturn<E extends HTMLElement> = {
 
 export function useTransitionedEnterExit<E extends HTMLElement>({
   onOff,
+  duration,
   ref: refProp,
   deps = [],
 }: UseTransitionedEnterExitProps<E>): UseTransitionedEnterExitReturn<E> {
@@ -46,10 +48,14 @@ export function useTransitionedEnterExit<E extends HTMLElement>({
   useEffect(() => {
     let enterFrame: number
     let exitFrame: number
+    let enterTimeout: NodeJS.Timeout
+    let exitTimeout: NodeJS.Timeout
 
     function clear() {
       enterFrame && cancelAnimationFrame(enterFrame)
       exitFrame && cancelAnimationFrame(exitFrame)
+      enterTimeout && clearTimeout(enterTimeout)
+      exitTimeout && clearTimeout(exitTimeout)
       ref.current?.removeEventListener('transitionend', onEnterTransitionEnd)
       ref.current?.removeEventListener('transitionend', onExitTransitionEnd)
     }
@@ -89,14 +95,24 @@ export function useTransitionedEnterExit<E extends HTMLElement>({
       }
 
       startTransition(() => {
-        ref.current?.addEventListener('transitionend', onEnterTransitionEnd)
+        if (duration) {
+          enterTimeout = setTimeout(onEnterTransitionEnd, duration)
+        } else {
+          ref.current?.addEventListener('transitionend', onEnterTransitionEnd)
+        }
+
         enterFrame = requestAnimationFrame(onEnterFrame)
       })
     } else {
       if (state === 'exit') return
 
       startTransition(() => {
-        ref.current?.addEventListener('transitionend', onExitTransitionEnd)
+        if (duration) {
+          enterTimeout = setTimeout(onExitTransitionEnd, duration)
+        } else {
+          ref.current?.addEventListener('transitionend', onExitTransitionEnd)
+        }
+
         exitFrame = requestAnimationFrame(onExitFrame)
 
         setSubstate('exitStart')
