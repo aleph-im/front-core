@@ -73,10 +73,12 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
 
     & ${StyledNavContainer} {
       ${getGlassEffectCss('base2')}
+      ${tw`h-full overflow-hidden`}
 
-      height: 100%;
       opacity: ${$isOpen ? '1' : '0'};
-      transition: opacity ease-in-out 0.2s 0s;
+      visibility: ${$isOpen ? 'visible' : 'hidden'};
+      transition: all ease-in-out 0.2s 0s;
+      transition-property: opacity, visibility;
     }
 
     & ${StyledLogoContainer} {
