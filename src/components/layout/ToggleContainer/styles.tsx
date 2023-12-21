@@ -7,7 +7,8 @@ export const StyledContainer = styled.div<{
   $variant?: ToggleContainerVariant
 }>`
   ${({ $isOpen, $duration = 200, $variant = '2' }) => {
-    const $duration2 = $duration
+    const $duration1 = $duration * (2 / 3)
+    const $duration2 = $duration * (1 / 3)
 
     return css`
       display: grid;
@@ -16,7 +17,7 @@ export const StyledContainer = styled.div<{
 
       transition: ${$variant === '1'
         ? `all ease-in-out ${$duration}ms 0s`
-        : `all ease-in-out ${$duration}ms ${$isOpen ? '0' : $duration2}ms`};
+        : `all ease-in-out ${$duration1}ms ${$isOpen ? '0' : $duration2}ms`};
       transition-property: grid-template-rows;
 
       ${$isOpen &&
@@ -30,7 +31,7 @@ export const StyledContainer = styled.div<{
           visibility: ${$isOpen ? 'visible' : 'hidden'};
           opacity: ${$isOpen ? '1' : '0'};
           transition: ${`all ease-in-out ${$duration2}ms ${
-            $isOpen ? $duration : '0'
+            $isOpen ? $duration1 : '0'
           }ms`};
           transition-property: visibility opacity;
         `}
