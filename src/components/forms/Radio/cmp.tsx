@@ -27,6 +27,7 @@ export const Radio = forwardRef(
       onChange: onChangeProp,
       className,
       size: $size,
+      disabled,
       ...rest
     }: RadioProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -61,13 +62,16 @@ export const Radio = forwardRef(
               value,
               checked,
               onChange,
+              disabled,
               ...rest,
             }}
           />
           <StyledInputDot />
         </StyledInputContainer>
         {label && (
-          <StyledLabel {...{ htmlFor: id, $size }}>{label}</StyledLabel>
+          <StyledLabel {...{ htmlFor: id, $size, $disable: disabled }}>
+            {label}
+          </StyledLabel>
         )}
       </StyledRadioContainer>
     )

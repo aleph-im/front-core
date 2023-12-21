@@ -16,6 +16,7 @@ export const Checkbox = forwardRef(
       id,
       label,
       size: $size,
+      disabled,
       ...rest
     } = useCheckboxComponent(props)
 
@@ -28,13 +29,16 @@ export const Checkbox = forwardRef(
               id,
               ref,
               $size,
+              disabled,
               ...rest,
             }}
           />
           <StyledCheckIcon />
         </StyledInputContainer>
         {label && (
-          <StyledLabel {...{ htmlFor: id, $size }}>{label}</StyledLabel>
+          <StyledLabel {...{ htmlFor: id, $size, $disable: disabled }}>
+            {label}
+          </StyledLabel>
         )}
       </StyledCheckboxContainer>
     )

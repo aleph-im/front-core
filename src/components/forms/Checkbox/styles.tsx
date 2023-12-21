@@ -2,7 +2,11 @@ import styled, { css } from 'styled-components'
 import { CheckboxSize } from './types'
 import Icon from '../../common/Icon'
 
-export const StyledCheckboxContainer = styled.div<{ $size?: CheckboxSize }>`
+export type StyledCheckboxContainerProps = {
+  $size?: CheckboxSize
+}
+
+export const StyledCheckboxContainer = styled.div<StyledCheckboxContainerProps>`
   ${({ $size }) => {
     const gap = $size === 'xs' ? '0.75rem' : '1.125rem'
 
@@ -133,13 +137,24 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
   }
 `
 
-export const StyledLabel = styled.label<{ $size?: CheckboxSize }>`
-  ${({ $size }) => {
+export type StyledLabelProps = {
+  $size?: CheckboxSize
+  $disable?: boolean
+}
+
+export const StyledLabel = styled.label<StyledLabelProps>`
+  ${({ $size, $disable }) => {
     const size = $size === 'xs' ? '0.75rem' : '1rem'
 
     return css`
       cursor: pointer;
       font-size: ${size};
+
+      ${$disable &&
+      css`
+        cursor: not-allowed;
+        opacity: 0.4;
+      `}
     `
   }}
 `

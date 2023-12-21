@@ -106,13 +106,24 @@ export const StyledInputDot = styled.span`
   }}
 `
 
-export const StyledLabel = styled.label<{ $size?: RadioSize }>`
-  ${({ $size }) => {
+export type StyledLabelProps = {
+  $size?: RadioSize
+  $disable?: boolean
+}
+
+export const StyledLabel = styled.label<StyledLabelProps>`
+  ${({ $size, $disable }) => {
     const size = $size === 'xs' ? '0.75rem' : '1rem'
 
     return css`
       cursor: pointer;
       font-size: ${size};
+
+      ${$disable &&
+      css`
+        cursor: not-allowed;
+        opacity: 0.4;
+      `}
     `
   }}
 `

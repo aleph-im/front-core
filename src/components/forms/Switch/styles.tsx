@@ -105,6 +105,20 @@ export const StyledInputDot = styled.span`
   }}
 `
 
-export const StyledLabel = styled.label`
-  cursor: pointer;
+export type StyledLabelProps = {
+  $disable?: boolean
+}
+
+export const StyledLabel = styled.label<StyledLabelProps>`
+  ${({ $disable }) => {
+    return css`
+      cursor: pointer;
+
+      ${$disable &&
+      css`
+        cursor: not-allowed;
+        opacity: 0.4;
+      `}
+    `
+  }}
 `

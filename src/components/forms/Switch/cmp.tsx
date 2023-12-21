@@ -11,7 +11,8 @@ import { useSwitchComponent } from './hook'
 
 export const Switch = forwardRef(
   (props: SwitchProps, ref: ForwardedRef<HTMLInputElement>) => {
-    const { className, id, label, ...rest } = useSwitchComponent(props)
+    const { className, id, label, disabled, ...rest } =
+      useSwitchComponent(props)
 
     return (
       <StyledSwitchContainer {...{ className }}>
@@ -21,12 +22,17 @@ export const Switch = forwardRef(
               type: 'checkbox',
               id,
               ref,
+              disabled,
               ...rest,
             }}
           />
           <StyledInputDot />
         </StyledInputContainer>
-        {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+        {label && (
+          <StyledLabel {...{ htmlFor: id, $disable: disabled }}>
+            {label}
+          </StyledLabel>
+        )}
       </StyledSwitchContainer>
     )
   },
