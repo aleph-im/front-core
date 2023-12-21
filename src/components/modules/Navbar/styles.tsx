@@ -1,7 +1,6 @@
 import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
-import { getResponsiveCss } from '../../../styles'
-import { addClasses } from '../../../utils'
+import { getGlassEffectCss, getResponsiveCss } from '../../../styles'
 import { BreakpointId } from '../../../themes'
 
 // A wrapper for the logo and burger icon (heading in mobile)
@@ -52,29 +51,32 @@ export type StyledNavbarContainerProps = {
   $isOpen?: boolean
 }
 
-export const StyledNavbarContainer = styled.div.attrs(
-  addClasses('fx-glass-base2'),
-)<StyledNavbarContainerProps>`
+export const disableBackgroundCss = css`
+  box-shadow: none !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+`
+
+export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
   ${({ theme, $breakpoint, $height, $isOpen }) => css`
-    position: sticky;
-    top: 0;
+    ${tw`sticky top-0`}
+
+    backdrop-filter: none;
     height: ${$isOpen ? '100vh' : $height};
-    transition: ${$isOpen
-      ? 'height ease-in-out 0.2s 0s'
-      : 'height ease-in-out 0.2s 0.3s'};
+    transition: ${$isOpen ? 'height linear 0s 0s' : 'height linear 0s 0.2s'};
 
     & ${StyledHeadingContainer} {
+      ${getGlassEffectCss('base2')}
       height: ${$height};
       background-color: ${$isOpen ? '#07071366' : 'transparent'};
     }
 
     & ${StyledNavContainer} {
-      opacity: ${$isOpen ? '1' : '0'};
-      transition: ${$isOpen
-        ? 'opacity ease-in-out 0.3s 0.2s'
-        : 'opacity ease-in-out 0.3s 0s'};
+      ${getGlassEffectCss('base2')}
 
-      transition: ;
+      height: 100%;
+      opacity: ${$isOpen ? '1' : '0'};
+      transition: opacity ease-in-out 0.2s 0s;
     }
 
     & ${StyledLogoContainer} {
@@ -87,10 +89,11 @@ export const StyledNavbarContainer = styled.div.attrs(
         ${tw`flex items-center justify-between px-16`}
         gap: ${theme.font.size['28']}rem;
         height: ${$height};
+        ${getGlassEffectCss('base2')}
 
-        & ${StyledHeadingContainer} {
-          ${tw`px-0`}
-          background-color: transparent;
+        && ${StyledHeadingContainer} {
+          ${tw`w-full px-0`}
+          ${disableBackgroundCss}
         }
 
         & ${StyledMobileTopContainer} {
@@ -98,7 +101,8 @@ export const StyledNavbarContainer = styled.div.attrs(
         }
 
         & ${StyledNavContainer} {
-          ${tw`flex flex-row items-center p-0`}
+          ${tw`flex flex-row items-center p-0 opacity-100!`}
+          ${disableBackgroundCss}
         }
 
         & ${StyledLogoContainer} {

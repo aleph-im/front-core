@@ -9,7 +9,7 @@ export default {
 }
 
 const defaultArgs: Partial<ToggleContainerProps> = {
-  duration: 700,
+  duration: 200,
   open: true,
 }
 
@@ -18,6 +18,18 @@ const defaultArgs: Partial<ToggleContainerProps> = {
 const Template: StoryFn<typeof ToggleContainer> = (args) => {
   return (
     <>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas
+        odio ligula, vitae mollis orci auctor in. Morbi rhoncus erat felis,
+        pretium cursus lorem aliquet sit amet. Donec ornare malesuada elementum.
+        Suspendisse porttitor eleifend leo, vitae sollicitudin mi sollicitudin
+        quis. Sed at lacus mattis, euismod ante eu, consectetur diam. Donec
+        iaculis cursus nulla, ut lacinia tellus aliquet id. In feugiat
+        consectetur lectus, at congue sem gravida et. Suspendisse auctor
+        facilisis convallis. Integer a fringilla ipsum. Sed aliquam odio est,
+        sed lobortis felis faucibus in. Fusce tristique vitae eros eget
+        efficitur. Fusce ac nibh ultrices, elementum ex eget, ornare arcu.
+      </p>
       <ToggleContainer {...args} style={{ backgroundColor: '#ffffff11' }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas
         odio ligula, vitae mollis orci auctor in. Morbi rhoncus erat felis,
@@ -66,6 +78,18 @@ const Template: StoryFn<typeof ToggleContainer> = (args) => {
         tincidunt est. Quisque dui ante, pulvinar eu mi quis, condimentum
         condimentum dui.
       </ToggleContainer>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas
+        odio ligula, vitae mollis orci auctor in. Morbi rhoncus erat felis,
+        pretium cursus lorem aliquet sit amet. Donec ornare malesuada elementum.
+        Suspendisse porttitor eleifend leo, vitae sollicitudin mi sollicitudin
+        quis. Sed at lacus mattis, euismod ante eu, consectetur diam. Donec
+        iaculis cursus nulla, ut lacinia tellus aliquet id. In feugiat
+        consectetur lectus, at congue sem gravida et. Suspendisse auctor
+        facilisis convallis. Integer a fringilla ipsum. Sed aliquam odio est,
+        sed lobortis felis faucibus in. Fusce tristique vitae eros eget
+        efficitur. Fusce ac nibh ultrices, elementum ex eget, ornare arcu.
+      </p>
     </>
   )
 }

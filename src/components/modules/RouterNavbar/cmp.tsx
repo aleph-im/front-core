@@ -4,7 +4,12 @@ import Logo from '../../common/Logo'
 import Navbar from '../Navbar'
 import NavbarLinkList from '../NavbarLinkList'
 import NavbarLink from '../NavbarLink'
-import { StyledChildRoutes, StyledRouterLink, StyledNavTitle } from './styles'
+import {
+  StyledChildRoutes,
+  StyledRouterLink,
+  StyledNavTitle,
+  StyledChildRoutesContent,
+} from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
 
 const Route = (props: RouteProps) => {
@@ -89,24 +94,26 @@ const ParentRoute = (props: ParentRouteProps) => {
         />
       </NavbarLink>
       <StyledChildRoutes $breakpoint={breakpoint}>
-        <ToggleContainer open={!!active} as="ul">
-          <NavbarLink breakpoint={breakpoint} level={newLevel}>
-            <StyledNavTitle>{name}</StyledNavTitle>
-          </NavbarLink>
-          {children.map((route) => (
-            <RouteMemo
-              key={route.href}
-              {...{
-                route,
-                Link,
-                breakpoint,
-                pathname,
-                level: newLevel,
-                onClick,
-                ...rest,
-              }}
-            />
-          ))}
+        <ToggleContainer open={!!active}>
+          <StyledChildRoutesContent>
+            <NavbarLink breakpoint={breakpoint} level={newLevel}>
+              <StyledNavTitle>{name}</StyledNavTitle>
+            </NavbarLink>
+            {children.map((route) => (
+              <RouteMemo
+                key={route.href}
+                {...{
+                  route,
+                  Link,
+                  breakpoint,
+                  pathname,
+                  level: newLevel,
+                  onClick,
+                  ...rest,
+                }}
+              />
+            ))}
+          </StyledChildRoutesContent>
         </ToggleContainer>
       </StyledChildRoutes>
     </>

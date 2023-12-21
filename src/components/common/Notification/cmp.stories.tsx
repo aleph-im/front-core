@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { StoryFn } from '@storybook/react'
 
 import Notification from './cmp'
@@ -27,6 +27,10 @@ const variants = ['success', 'warning', 'error']
 
 const ConsumerComponent = () => {
   const noti = useNotification()
+
+  useEffect(() => {
+    console.log('HELLO!!!')
+  }, [])
 
   const handleAddNotification = useCallback(() => {
     noti?.add({

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useRef } from 'react'
+import React, { memo, useCallback, useRef } from 'react'
 import {
   StyledMobileTopContainer,
   StyledHeadingContainer,
@@ -7,7 +7,7 @@ import {
   StyledLogoContainer,
 } from './styles'
 import { NavbarProps } from './types'
-import { useClickOutside, useTransitionedEnterExit } from '../../../hooks'
+import { useClickOutside } from '../../../hooks'
 import Button from '../../common/Button'
 import Icon from '../../common/Icon'
 
@@ -32,23 +32,7 @@ export const Navbar = ({
   const containerRef = useRef<HTMLDivElement>(null)
   useClickOutside(closeMenu, [containerRef])
 
-  // @note: Quick fix to dont push the content using position sticky with scroll 0
-  useEffect(() => {
-    for (const el of [
-      containerRef.current?.parentElement,
-      document.documentElement,
-    ]) {
-      if (!!open && el?.scrollTop === 0) el.scrollTop++
-      if (!open && el?.scrollTop === 1) el.scrollTop--
-    }
-
-    document.documentElement.style.overflow = open ? 'hidden' : 'auto'
-  }, [open])
-
-  const { ref, shouldMount, state } = useTransitionedEnterExit({
-    onOff: !!open,
-  })
-  const $isOpen = state === 'enter'
+  const $isOpen = !!open
 
   return (
     <StyledNavbarContainer
@@ -79,9 +63,7 @@ export const Navbar = ({
           </StyledMobileTopContainer>
         )}
       </StyledHeadingContainer>
-      {shouldMount && (
-        <StyledNavContainer ref={ref}>{children}</StyledNavContainer>
-      )}
+      <StyledNavContainer>{children}</StyledNavContainer>
     </StyledNavbarContainer>
   )
 }

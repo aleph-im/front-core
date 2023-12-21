@@ -32,8 +32,7 @@ export type StyledChildRoutesProps = {
 
 export const StyledChildRoutes = styled.li<StyledChildRoutesProps>`
   ${({ $breakpoint }) => css`
-    ${tw`block rounded-3xl`}
-    background-color: #0000001a;
+    ${tw`block`}
 
     ${getResponsiveCss(
       $breakpoint,
@@ -42,4 +41,9 @@ export const StyledChildRoutes = styled.li<StyledChildRoutesProps>`
       `,
     )}
   `}
+`
+
+export const StyledChildRoutesContent = styled.ul`
+  ${tw`block rounded-3xl`}
+  background-color: #0000001a;
 `
