@@ -13,7 +13,7 @@ export default {
 const defaultArgs: Partial<NotificationCardProps> = {
   title: 'Information',
   variant: 'success',
-  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis',
+  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis 0x9318d7bb1be054cd500f7341dce588f087cdf8f818972b61e3d902018d4251d6',
   detail: 'Lorem ipsum dolor sit amet',
 }
 

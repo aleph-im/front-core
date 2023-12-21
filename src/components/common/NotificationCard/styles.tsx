@@ -10,7 +10,8 @@ export const StyledContainer = styled.div.attrs<NotificationVariantProps>(
   (props) => addClasses(`gr-${props.variant}`)(props),
 )`
   ${({ theme }) => css`
-    ${tw`p-6`}
+    ${tw`p-6 break-words max-w-full`}
+    word-break: break-word;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
