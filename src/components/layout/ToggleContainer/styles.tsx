@@ -6,7 +6,7 @@ export const StyledContainer = styled.div<{
   $duration?: number
   $variant?: ToggleContainerVariant
 }>`
-  ${({ $isOpen, $duration = 200, $variant = '2' }) => {
+  ${({ $isOpen, $duration = 700, $variant = '2' }) => {
     const $duration1 = $duration * (2 / 3)
     const $duration2 = $duration * (1 / 3)
 
@@ -30,8 +30,8 @@ export const StyledContainer = styled.div<{
         css`
           visibility: ${$isOpen ? 'visible' : 'hidden'};
           opacity: ${$isOpen ? '1' : '0'};
-          transition: ${`all ease-in-out ${$duration2}ms ${
-            $isOpen ? $duration1 : '0'
+          transition: ${`all ease-in-out ${$duration1}ms ${
+            $isOpen ? $duration2 : '0'
           }ms`};
           transition-property: visibility opacity;
         `}

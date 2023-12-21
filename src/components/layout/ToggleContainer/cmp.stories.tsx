@@ -9,7 +9,7 @@ export default {
 }
 
 const defaultArgs: Partial<ToggleContainerProps> = {
-  duration: 200,
+  duration: 700,
   open: true,
 }
 
