@@ -7,8 +7,8 @@ export type RouterSidebarProps = {
   pathname: string
   breakpoint: BreakpointId
   allowanceInfo?: {
-    consumedSize: number
-    allowedSize: number
+    consumedSize?: number
+    allowedSize?: number
   }
   Link: LinkComponent
   open?: boolean

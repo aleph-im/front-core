@@ -25,12 +25,7 @@ export const StyledMobileTopContainer = styled.div`
 
 // A <nav> element, wrapping the links (text and buttons)
 export const StyledNavContainer = styled.nav`
-  ${({ theme }) => css`
-    ${tw`flex m-0 p-6`}
-    flex: 0 1 0px;
-    flex-direction: column;
-    gap: ${theme.font.size['28']}rem;
-  `}
+  ${tw`flex gap-7 m-0 p-6`}
 `
 
 export const StyledLogoContainer = styled.div`
@@ -73,7 +68,7 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
 
     & ${StyledNavContainer} {
       ${getGlassEffectCss('base2')}
-      ${tw`h-full overflow-hidden`}
+      ${tw`flex-col justify-start h-full`}
 
       opacity: ${$isOpen ? '1' : '0'};
       visibility: ${$isOpen ? 'visible' : 'hidden'};
@@ -103,7 +98,7 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
         }
 
         & ${StyledNavContainer} {
-          ${tw`flex flex-row items-center p-0 opacity-100!`}
+          ${tw`flex-row items-center justify-end p-0 opacity-100 visible`}
           ${disableBackgroundCss}
         }
 
