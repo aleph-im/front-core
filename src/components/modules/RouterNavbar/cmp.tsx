@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState, MouseEvent } from 'react'
+import React, { memo, useCallback, useState, MouseEvent, useMemo } from 'react'
 import { RouterNavbarProps, RouteProps, ParentRouteProps } from './types'
 import Logo from '../../common/Logo'
 import Navbar from '../Navbar'
@@ -136,8 +136,24 @@ export const RouterNavbar = ({
 
   // -----------------------------------
 
+  const logo = useMemo(
+    () => (
+      <Link href="/" route={{ href: '/' }}>
+        <Logo />
+      </Link>
+    ),
+    [Link],
+  )
+
   return (
-    <Navbar {...{ breakpoint, onToggle, ...rest }} logo={<Logo />}>
+    <Navbar
+      {...{
+        breakpoint,
+        onToggle,
+        logo,
+        ...rest,
+      }}
+    >
       <NavbarLinkList withSlash collapsible="xl" breakpoint={breakpoint}>
         {routes.map((route) => (
           <RouteMemo
