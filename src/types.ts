@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ComponentType } from 'react'
+import { AnchorHTMLAttributes, ComponentType, ImgHTMLAttributes } from 'react'
 import type { IconName } from './components/common/Icon'
 
 export type Route = {
@@ -17,3 +17,10 @@ export type RenderLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 }
 
 export type LinkComponent = ComponentType<RenderLinkProps>
+
+export type RenderImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+  src: string
+  alt: string
+}
+
+export type ImageComponent = ComponentType<RenderImageProps>
