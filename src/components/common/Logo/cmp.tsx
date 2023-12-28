@@ -13,7 +13,7 @@ export const Logo = ({
 }: LogoProps) => {
   const theme = useTheme()
 
-  const logoGradient = theme.gradient[color]?.colors[0]
+  const logoGradient = theme.gradient[color]?.colors[!text ? 1 : 0]
   const logoColor = logoGradient || theme.color[color] || color
   text = typeof text === 'boolean' ? text && 'Aleph.im' : text
 
