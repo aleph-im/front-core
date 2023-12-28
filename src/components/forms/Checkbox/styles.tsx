@@ -139,18 +139,18 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
 
 export type StyledLabelProps = {
   $size?: CheckboxSize
-  $disable?: boolean
+  $disabled?: boolean
 }
 
 export const StyledLabel = styled.label<StyledLabelProps>`
-  ${({ $size, $disable }) => {
+  ${({ $size, $disabled }) => {
     const size = $size === 'xs' ? '0.75rem' : '1rem'
 
     return css`
       cursor: pointer;
       font-size: ${size};
 
-      ${$disable &&
+      ${$disabled &&
       css`
         cursor: not-allowed;
         opacity: 0.4;

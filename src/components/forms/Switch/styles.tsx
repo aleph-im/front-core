@@ -106,15 +106,15 @@ export const StyledInputDot = styled.span`
 `
 
 export type StyledLabelProps = {
-  $disable?: boolean
+  $disabled?: boolean
 }
 
 export const StyledLabel = styled.label<StyledLabelProps>`
-  ${({ $disable }) => {
+  ${({ $disabled }) => {
     return css`
       cursor: pointer;
 
-      ${$disable &&
+      ${$disabled &&
       css`
         cursor: not-allowed;
         opacity: 0.4;

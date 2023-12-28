@@ -69,7 +69,7 @@ export const Radio = forwardRef(
           <StyledInputDot />
         </StyledInputContainer>
         {label && (
-          <StyledLabel {...{ htmlFor: id, $size, $disable: disabled }}>
+          <StyledLabel {...{ htmlFor: id, $size, $disabled: disabled }}>
             {label}
           </StyledLabel>
         )}

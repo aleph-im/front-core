@@ -29,7 +29,7 @@ export const Switch = forwardRef(
           <StyledInputDot />
         </StyledInputContainer>
         {label && (
-          <StyledLabel {...{ htmlFor: id, $disable: disabled }}>
+          <StyledLabel {...{ htmlFor: id, $disabled: disabled }}>
             {label}
           </StyledLabel>
         )}

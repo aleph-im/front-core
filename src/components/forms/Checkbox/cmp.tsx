@@ -36,7 +36,7 @@ export const Checkbox = forwardRef(
           <StyledCheckIcon />
         </StyledInputContainer>
         {label && (
-          <StyledLabel {...{ htmlFor: id, $size, $disable: disabled }}>
+          <StyledLabel {...{ htmlFor: id, $size, $disabled: disabled }}>
             {label}
           </StyledLabel>
         )}
