@@ -15,9 +15,9 @@ export const fieldErrorCss = css<{ error?: FormError }>`
     ${({ theme, error }) => {
       if (!error) return ''
 
-      if (error.level === 'warn') {
+      if (error.level === 'warning') {
         return css`
-          border-color: ${theme.color.warn};
+          border-color: ${theme.color.warning};
         `
       } else {
         return css`
@@ -33,9 +33,9 @@ export const errorCss = css<{ error?: FormError }>`
     ${({ theme, error }) => {
       if (!error) return ''
 
-      if (error.level === 'warn') {
+      if (error.level === 'warning') {
         return css`
-          color: ${theme.color.warn};
+          color: ${theme.color.warning};
         `
       } else {
         return css`

@@ -89,9 +89,9 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
       ${() => {
         if (!error) return ''
 
-        if (error.level === 'warn') {
+        if (error.level === 'warning') {
           return css`
-            border-color: ${$theme?.color.warn};
+            border-color: ${$theme?.color.warning};
           `
         } else {
           return css`

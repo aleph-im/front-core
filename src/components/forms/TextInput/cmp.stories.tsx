@@ -117,7 +117,7 @@ export const WithWarning = Template.bind({})
 WithWarning.args = {
   ...defaultArgs,
   label: 'Label',
-  error: { message: 'Warning message', level: 'warn' },
+  error: { message: 'Warning message', level: 'warning' },
 }
 WithWarning.parameters = {
   ...defaultParams,

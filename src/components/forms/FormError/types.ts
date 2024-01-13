@@ -1,4 +1,4 @@
-export type FormErrorLevel = 'warn' | 'error'
+export type FormErrorLevel = 'warning' | 'error'
 
 export type FormError = {
   message?: string

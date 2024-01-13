@@ -117,14 +117,18 @@ const ColorsTemplate: StoryFn<any> = () => {
       </div>
       <div>
         <h3>Functional</h3>
+        <Circle className="bg-info"></Circle>
         <Circle className="bg-success"></Circle>
         <Circle className="bg-warning"></Circle>
         <Circle className="bg-error"></Circle>
+        <Circle className="bg-disabled"></Circle>
       </div>
       <div>
+        <Circle className="gr-info"></Circle>
         <Circle className="gr-success"></Circle>
         <Circle className="gr-warning"></Circle>
         <Circle className="gr-error"></Circle>
+        <Circle className="gr-disabled"></Circle>
       </div>
     </>
   )

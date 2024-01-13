@@ -29,9 +29,11 @@ const color: ThemeColor = {
   main1: '#5CFFB1',
   main2: '#FECD17',
 
+  info: '#029AFF',
   success: '#7CFF79',
-  warn: '#FFD179',
+  warning: '#FFD179',
   error: '#D92446',
+  disabled: '#FFFFFF1A',
 
   background: '#141327',
   contentBackground: '#141327',
@@ -70,13 +72,19 @@ const gradient: ThemeGradient = {
     deg: 90,
     fn: 'linear-gradient(90deg, #F17E4C 0%, #98203D 90.62%)',
   },
+  info: {
+    colors: ['#00D1FF', '#0054FF'],
+    stops: [0, 100],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #00D1FF 0%, #0054FF 100%)',
+  },
   success: {
     colors: ['#EEFF9E', '#3AFFCC'],
     stops: [0, 100],
     deg: 90,
     fn: 'linear-gradient(90deg, #EEFF9E 0%, #3AFFCC 100%)',
   },
-  warn: {
+  warning: {
     colors: ['#FFF281', '#FBAE18'],
     stops: [0, 100],
     deg: 90,
@@ -87,6 +95,12 @@ const gradient: ThemeGradient = {
     stops: [0, 90.62],
     deg: 90,
     fn: 'linear-gradient(90deg, #FFB393 0%, #FF6161 90.62%)',
+  },
+  disabled: {
+    colors: ['#FFFFFF1A', '#FFFFFF0A'],
+    stops: [0, 90.62],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #FFFFFF1A 0%, #FFFFFF0A 90.62%)',
   },
 }
 
@@ -102,6 +116,7 @@ const font: ThemeFont = {
     '24': pxToRem(24),
     '18': pxToRem(18),
     '16': pxToRem(16),
+    '14': pxToRem(14),
     '12': pxToRem(12),
     '10': pxToRem(10),
   },

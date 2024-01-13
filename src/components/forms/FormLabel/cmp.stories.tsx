@@ -34,7 +34,7 @@ Default.parameters = {
 export const WithError = Template.bind({})
 WithError.args = {
   ...defaultArgs,
-  error: { message: 'Error message', level: 'warn' },
+  error: { message: 'Error message', level: 'warning' },
 }
 WithError.parameters = {
   ...defaultParams,

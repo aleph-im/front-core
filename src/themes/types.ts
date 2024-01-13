@@ -52,7 +52,7 @@ export type ThemeGradient = {
   extra1: Gradient
 
   success: Gradient
-  warn: Gradient
+  warning: Gradient
   error: Gradient
 }
 
@@ -67,9 +67,11 @@ export type ThemeColor = {
   main1: string
   main2: string
 
+  info: string
   success: string
-  warn: string
+  warning: string
   error: string
+  disabled: string
 
   background: string
   contentBackground: string
@@ -80,10 +82,13 @@ export type ThemeColor = {
 export type ThemeFont = {
   url: string
   size: {
+    [k: string]: number
+
     '28': number
     '24': number
     '18': number
     '16': number
+    '14': number
     '12': number
     '10': number
   }

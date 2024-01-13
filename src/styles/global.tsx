@@ -153,36 +153,41 @@ function colorClasses(theme: DefaultTheme) {
 
 function functionalClasses() {
   return css`
-    .bg-success {
-      background: ${({ theme }) => theme.color.success};
-      box-shadow: inset 3px 3px 9px rgba(255, 255, 255, 0.65),
+    .fx-func-info {
+      ${getBackgroundColorCss('info')}
+      box-shadow: 
+        inset -4px -1px 11px 0px rgba(61, 92, 255, 0.50),
+        inset 0px 1.675px 6px 0px rgba(255, 255, 255, 0.63);
+    }
+
+    .fx-func-success {
+      ${getBackgroundColorCss('success')}
+      box-shadow: 
+        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
         inset 0px 63px 60px rgba(145, 255, 189, 0.63),
         inset 8.375px 13.4px 46.75px rgba(252, 255, 96, 0.75);
     }
 
-    .bg-warning {
-      background: ${({ theme }) => theme.color.warn};
-      box-shadow: inset 3px 3px 9px rgba(255, 255, 255, 0.65),
+    .fx-func-warning {
+      ${getBackgroundColorCss('warning')}
+      box-shadow: 
+        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
         inset 0px 63px 60px rgba(255, 138, 0, 0.63),
         inset 8.375px 13.4px 46.75px rgba(255, 135, 83, 0.75);
     }
 
-    .bg-error {
-      background: ${({ theme }) => theme.color.error};
-      box-shadow: inset 0px 1.675px 6px rgba(255, 255, 255, 0.17),
+    .fx-func-error {
+      ${getBackgroundColorCss('error')}
+      box-shadow:
+        inset 0px 1.675px 6px rgba(255, 255, 255, 0.17),
         inset -4px -1px 9px rgba(139, 99, 255, 0.19);
     }
 
-    .gr-success {
-      background: ${({ theme }) => theme.gradient.success.fn};
-    }
-
-    .gr-warning {
-      background: ${({ theme }) => theme.gradient.warn.fn};
-    }
-
-    .gr-error {
-      background: ${({ theme }) => theme.gradient.error.fn};
+    .fx-func-disabled {
+      ${getBackgroundColorCss('disabled')}
+      box-shadow: 
+        inset -4px -1px 16px 0px rgba(224, 223, 255, 0.10),
+        inset 0px 1.675px 6px 0px rgba(255, 255, 255, 0.17);
     }
   `
 }

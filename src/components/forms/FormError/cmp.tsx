@@ -6,7 +6,7 @@ import Icon from '../../common/Icon'
 export const FormError = ({ error, ...rest }: FormErrorProps) => {
   return (
     <StyledFormErrorContainer {...{ error, ...rest }}>
-      <Icon name={error.level === 'warn' ? 'warning' : 'bomb'} tw="mr-2" />
+      <Icon name={error.level === 'warning' ? 'warning' : 'bomb'} tw="mr-2" />
       {error.message}
     </StyledFormErrorContainer>
   )
