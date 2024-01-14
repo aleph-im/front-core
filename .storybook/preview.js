@@ -8,7 +8,7 @@ import logoDark from '../assets/img/aleph-dark.svg';
 import logoLight from '../assets/img/aleph-light.svg';
 
 function getThemeColors(theme) {
-  const { color } = theme;
+  const { color } = theme.storybook;
 
   return {
     brandTitle: 'Aleph.im Components',
@@ -43,10 +43,11 @@ export const argTypes = {
   color: {
     control: {
       type: 'color',
-      presetColors: Object.entries(themes.alephDark.color).map(([title, color]) => ({ title, color }))
+      presetColors: Object.entries(themes.aleph.color).map(([title, color]) => ({ title, color }))
     }
   },
 };
+
 
 // The default value of the theme arg to all stories
 // export const args = {
@@ -68,12 +69,12 @@ export const parameters = {
     // Override the default dark theme
     dark: {
       ...theming.dark,
-      ...getThemeColors(themes.alephDark)
+      ...getThemeColors(themes.aleph)
     },
     // Override the default light theme
     light: {
       ...theming.normal,
-      ...getThemeColors(themes.alephLight)
+      ...getThemeColors(themes.aleph)
     }
   },
   docs: {
@@ -83,7 +84,7 @@ export const parameters = {
     iframeHeight: 500,
     theme: {
       ...theming.dark,
-      ...getThemeColors(themes.alephDark)
+      ...getThemeColors(themes.aleph)
     },
   }
 }
@@ -92,12 +93,12 @@ export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Platform Theme',
-    defaultValue: 'dark',
+    defaultValue: 'aleph',
     toolbar: {
       icon: 'paintbrush',
       items: [
-        { value: 'dark', title: 'Dark' },
-        { value: 'light', title: 'Light' },
+        { value: 'aleph', title: 'Aleph' },
+        { value: 'twentysix', title: 'Twentysix' },
       ],
     },
   },

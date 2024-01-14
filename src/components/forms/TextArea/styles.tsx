@@ -21,37 +21,49 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
     return addClasses(`${fxs}tp-form`)(props)
   },
 )<StyledTextAreaFieldProps>`
-  ${({ theme, $variant }) => css`
-    ${tw`p-5`}
-    appearance: none;
-    border: none;
-    outline: 0;
-    color: ${theme.color.text};
-    border-radius: 0.5rem;
-    width: 100%;
-    background: transparent;
-    font-size: 1rem;
-    height: 100%;
-    width: 100%;
-    min-height: 6.25rem;
+  ${({ theme, $variant }) => {
+    const { background, shadow, border } = theme.form.input
+    const { duration, timing } = theme.transition
 
-    // Text input styles
-    ${$variant === 'default' &&
-    css`
-      background: ${theme.color.text}0F;
-      box-shadow: 0px 4px 24px #00000040;
-      border: 1px solid transparent;
-      border-radius: 1.875rem;
-    `}
+    const borderSize = Math.max(
+      border.size,
+      border.focus.size,
+      border.feedback.size,
+    )
 
-    ${fieldFocusCss}
+    return css`
+      ${tw`p-5`}
+      appearance: none;
+      border: none;
+      outline: 0;
+      color: ${theme.color.text};
+      border-radius: 0.5rem;
+      width: 100%;
+      background: transparent;
+      font-size: 1rem;
+      height: 100%;
+      width: 100%;
+      min-height: 6.25rem;
+      transition: border ${timing} ${duration.fast}ms 0ms;
 
-    ${fieldErrorCss}
+      // Text input styles
+      ${$variant === 'default' &&
+      css`
+        background: ${background};
+        box-shadow: ${shadow};
+        border: ${borderSize}rem solid transparent;
+        border-radius: 1.875rem;
+      `}
 
-    ${fieldPlaceholderCss}
+      ${fieldFocusCss}
 
-    &::-webkit-resizer {
-      display: none;
-    }
-  `}
+      ${fieldErrorCss}
+
+      ${fieldPlaceholderCss}
+
+      &::-webkit-resizer {
+        display: none;
+      }
+    `
+  }}
 `

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StoryFn } from '@storybook/react'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import tw from 'twin.macro'
 
 export default {
@@ -19,21 +19,25 @@ const StyledBlock = styled.div`
 `
 
 const TypographyTemplate: StoryFn<any> = () => {
+  const theme = useTheme()
+
+  const fontName = theme.name === 'aleph' ? 'Rubik' : 'RIGID SQUARE'
+
   return (
     <div>
       <StoryBookHeader>Typography</StoryBookHeader>
       <div>
         <StoryBookSubheader>Headers</StoryBookSubheader>
         <StyledBlock>
-          <h1>H1 - Rubik - headers</h1>
-          <h2>H2 - Rubik - headers</h2>
-          <h3>H3 - Rubik - headers</h3>
-          <h4>H4 - Rubik - headers</h4>
-          <h5>H5 - Rubik - headers</h5>
-          <h6>H6 - Rubik - headers</h6>
-          <span className="tp-h7">H7 - Rubik - headers</span>
+          <h1>H1 - {fontName} - headers</h1>
+          <h2>H2 - {fontName} - headers</h2>
+          <h3>H3 - {fontName} - headers</h3>
+          <h4>H4 - {fontName} - headers</h4>
+          <h5>H5 - {fontName} - headers</h5>
+          <h6>H6 - {fontName} - headers</h6>
+          <span className="tp-h7">H7 - {fontName} - headers</span>
 
-          <nav>NAVIGIATION - Rubik - headers</nav>
+          <nav>NAVIGIATION - {fontName} - headers</nav>
 
           <span className="tp-info">SUPPERSCRIPT - info - title</span>
           <header>Article Header</header>

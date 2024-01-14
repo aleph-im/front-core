@@ -14,6 +14,18 @@ export type StyledDropdownOptionMenuProps = StyledDropdownProps & {
 
 export const StyledDropdown = styled.div<StyledDropdownProps>`
   ${({ theme, isOpen }) => {
+    const { background, shadow, border, color } = theme.form.input
+    const { duration, timing } = theme.transition
+
+    const borderSize = Math.max(
+      border.size,
+      border.focus.size,
+      border.feedback.size,
+    )
+
+    const paddingYSize = 0.5 - borderSize
+    const paddingXSize = 2 - borderSize
+
     return css`
       position: relative;
       display: flex;
@@ -23,14 +35,16 @@ export const StyledDropdown = styled.div<StyledDropdownProps>`
       width: 100%;
       max-width: 100%;
       cursor: pointer;
-      background-color: ${theme.color.text}0F;
-      color: ${theme.color.text};
-      box-shadow: 0px 4px 24px #00000040;
-      border: 1px solid transparent;
+      background: ${background};
+      color: ${color};
+      box-shadow: ${shadow};
+      border: ${borderSize}rem solid transparent;
+      transition: border ${timing} ${duration.fast}ms 0ms;
       border-radius: 1.875rem;
-      padding: 0.5rem 2rem;
+      padding: ${paddingYSize}rem ${paddingXSize}rem;
       text-overflow: ellipsis;
       white-space: nowrap;
+      min-height: 2.625rem;
 
       ${isOpen &&
       css`
@@ -68,23 +82,27 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
     }
   },
 )<StyledDropdownOptionMenuProps>`
-  ${({ isOpen }) => {
+  ${({ theme, isOpen }) => {
+    const { duration, timing } = theme.transition
+    const { shadow } = theme.form.input
+
     return css`
-      top: 0;
-      left: 0;
-      display: none;
-      position: fixed;
+      ${tw`fixed left-0 overflow-auto`}
+      ${tw`opacity-0 invisible -top-2`}
+
       margin-top: 0.375rem;
       border-radius: 1.875rem;
-      overflow: auto;
       max-height: 20rem;
       backdrop-filter: blur(10px);
       z-index: 999;
+      box-shadow: ${shadow};
+      transition: all ${timing} ${duration.fast}ms 0ms;
+      transition-property: opacity visiblility top;
 
       & {
         ${isOpen &&
         css`
-          display: block;
+          ${tw`opacity-100 visible top-0`}
         `}
       }
     `

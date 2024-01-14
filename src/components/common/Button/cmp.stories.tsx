@@ -3,6 +3,7 @@ import { StoryFn } from '@storybook/react'
 
 import Button from './cmp'
 import { ButtonKind, ButtonProps, ButtonSize, ButtonVariant } from './types'
+import { useTheme } from 'styled-components'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -16,7 +17,7 @@ export default {
 const defaultArgs: Partial<ButtonProps> = {
   as: 'button',
   children: 'Text',
-  color: 'main2',
+  color: 'main0',
   variant: 'primary',
   kind: 'flat',
   size: 'regular',
@@ -59,13 +60,36 @@ Forwarded.parameters = {
 
 // ---
 
+function Cell({ children, gc, gr, bg = false }: any) {
+  return (
+    <div
+      style={{
+        gridColumn: gc,
+        gridRow: gr,
+        padding: '5px',
+        background: bg ? 'rgba(128,128,128,0.5)' : undefined,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
 const CatalogTemplate: StoryFn<typeof Button> = (args) => {
   args = {
     ...defaultArgs,
     ...args,
   } as ButtonProps
 
-  const colors: string[] = ['main0', 'main1', 'main2']
+  const theme = useTheme()
+
+  const colors: string[] = Object.keys(theme.color).filter(
+    (c) => c.indexOf('main') !== -1,
+  )
+
   const kinds: ButtonKind[] = ['neon', 'flat']
   const sizes: ButtonSize[] = ['big', 'regular']
   const variants: ButtonVariant[] = [
@@ -78,24 +102,6 @@ const CatalogTemplate: StoryFn<typeof Button> = (args) => {
   const col1 = kinds.length * sizes.length * variants.length - sizes.length
   const col2 = sizes.length * variants.length
   const col3 = variants.length
-
-  function Cell({ children, gc, gr, bg = false }: any) {
-    return (
-      <div
-        style={{
-          gridColumn: gc,
-          gridRow: gr,
-          padding: '5px',
-          background: bg ? 'rgba(255,255,255,0.2)' : undefined,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {children}
-      </div>
-    )
-  }
 
   return (
     <div

@@ -43,12 +43,13 @@ const CustomGlobalStyles = createGlobalStyle`
   ${({ theme }) => {
     const colorCss = colorClasses(theme)
     const functionalCss = functionalClasses()
-    const effectCss = effectClasses()
+    const effectCss = effectClasses(theme)
     const typoCss = typoClasses(theme)
+    const fontUrlCss = fontUrlImports(theme)
 
     return css`
       ${fontAwesomeCss}
-      @import '${theme.font.url}';
+      ${fontUrlCss}
 
       ${colorCss}
       ${functionalCss}
@@ -61,7 +62,7 @@ const CustomGlobalStyles = createGlobalStyle`
 
       html {
         /* @note: Scaled down by default (but all calculations from designs are consistent with base 16px = 1rem) */
-        font-size: 14px;
+        // font-size: 14px;
       }
 
       body {
@@ -192,7 +193,21 @@ function functionalClasses() {
   `
 }
 
-function effectClasses() {
+function fontUrlImports(theme: DefaultTheme) {
+  const importCss = theme.font.urls.flatMap(
+    (url) => css`
+      @import '${url}';
+    `,
+  )
+
+  return css`
+    ${importCss}
+  `
+}
+
+function effectClasses(theme: DefaultTheme) {
+  if (theme.name !== 'aleph') return
+
   const glowColors = ['main0', 'main1', 'main2']
   const glowMaxColors = ['main0', 'main1', 'main2', 'extra0', 'extra1']
   const glassColors = [

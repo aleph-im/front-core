@@ -7,7 +7,12 @@ import React, {
   useMemo,
   memo,
 } from 'react'
-import { useBounds, useForwardRef, useWindowSize } from '../../../hooks'
+import {
+  useBounds,
+  useForwardRef,
+  useTransitionedEnterExit,
+  useWindowSize,
+} from '../../../hooks'
 import { useClickOutside } from '../../../hooks/useClickOutside'
 import { StyledInputWrapper } from '../styles.forms'
 import { DropdownContext } from './context'
@@ -119,6 +124,16 @@ export const Dropdown = forwardRef(
       }
     }, [valueSet, onChange, multiple])
 
+    const {
+      ref: optionsRef,
+      shouldMount,
+      state: optionsState,
+    } = useTransitionedEnterExit<HTMLDivElement>({
+      onOff: isOpen,
+    })
+
+    const optionsIsOpen = optionsState === 'enter'
+
     return (
       <DropdownContext.Provider value={contextValue}>
         <StyledInputWrapper>
@@ -129,9 +144,15 @@ export const Dropdown = forwardRef(
           >
             {selectedText}
             <StyledDropdownIcon />
-            <StyledDropdownOptionMenu isOpen={isOpen} size={size}>
-              {children}
-            </StyledDropdownOptionMenu>
+            {shouldMount && (
+              <StyledDropdownOptionMenu
+                isOpen={optionsIsOpen}
+                size={size}
+                ref={optionsRef}
+              >
+                {children}
+              </StyledDropdownOptionMenu>
+            )}
           </StyledDropdown>
           {error && <FormError error={error} />}
         </StyledInputWrapper>

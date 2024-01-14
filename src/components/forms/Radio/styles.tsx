@@ -14,7 +14,8 @@ export const StyledRadioContainer = styled.div<{ $size?: RadioSize }>`
 `
 
 export const StyledInputContainer = styled.div<{ $size?: RadioSize }>`
-  ${({ $size }) => {
+  ${({ theme, $size }) => {
+    const { shadow } = theme.form.radio
     const size = $size === 'xs' ? '1rem' : $size === 'sm' ? '1.5rem' : '2rem'
 
     return css`
@@ -26,37 +27,53 @@ export const StyledInputContainer = styled.div<{ $size?: RadioSize }>`
       width: ${size};
       height: ${size};
       border-radius: 50%;
-      box-shadow: 0px 4px 24px #00000040;
+      box-shadow: ${shadow};
     `
   }}
 `
 
 export const StyledInput = styled.input`
   ${({ theme }) => {
+    const { duration } = theme.transition
+    const { background, border, disabledType } = theme.form.radio
+
     return css`
       position: absolute;
       inset: 0;
       appearance: none;
       outline: 0;
       cursor: pointer;
-      border: 1px solid ${theme.color.main0};
-      background: #ffffff0f;
+      border: ${border.size}rem solid ${border.color};
+      background: ${background};
       border-radius: 50%;
       width: 100%;
       height: 100%;
       margin: 0;
+      transition: all ease-out ${duration.fast}ms 0s;
+      transition-property: border;
+
+      &:checked {
+        border-color: ${border.checked.color};
+      }
 
       &:focus {
-        border-color: ${theme.color.base0};
+        border-color: ${border.focus.color};
       }
 
       &:disabled {
-        border-color: #ffffff0f;
-        cursor: not-allowed;
-      }
+        ${disabledType === 'opacity'
+          ? css`
+              border-color: #ffffff0f;
+              cursor: not-allowed;
 
-      &:checked:disabled {
-        border-color: ${theme.color.main0}1A;
+              &:checked {
+                border-color: ${border.checked.color}1A;
+              }
+            `
+          : css`
+              border-color: ${theme.color.disabled};
+              background: ${theme.color.disabled};
+            `}
       }
     `
   }}
@@ -64,14 +81,16 @@ export const StyledInput = styled.input`
 
 export const StyledInputDot = styled.span`
   ${({ theme }) => {
-    const [g0, g1] = theme.gradient.main0.colors
+    const { duration } = theme.transition
+    const { dot, disabledType } = theme.form.radio
+    const [g0, g1] = dot.checked.background.colors
 
     return css`
       position: relative;
       pointer-events: none;
       width: 65%;
       height: 65%;
-      background-color: #ffffff1a;
+      background: ${dot.background};
       border-radius: 50%;
       z-index: 1;
 
@@ -86,7 +105,7 @@ export const StyledInputDot = styled.span`
         visibility: hidden;
         clip-path: circle(0% at 50% 50%);
         will-change: visibility clip-path;
-        transition: all ease-out 0.35s 0s;
+        transition: all ease-out ${duration.fast}ms 0s;
       }
 
       ${StyledInput}:checked + &:after {
@@ -95,12 +114,29 @@ export const StyledInputDot = styled.span`
       }
 
       ${StyledInput}:disabled + & {
-        background-color: #ffffff0f;
         cursor: not-allowed;
+
+        ${disabledType === 'opacity'
+          ? css`
+              background: #ffffff0f;
+            `
+          : css`
+              background: #00000010;
+            `}
       }
 
       ${StyledInput}:checked:disabled + &:after {
-        background-image: linear-gradient(90deg, ${g0}1A 0%, ${g1}1A 100%);
+        ${disabledType === 'opacity'
+          ? css`
+              background-image: linear-gradient(
+                90deg,
+                ${g0}1A 0%,
+                ${g1}1A 100%
+              );
+            `
+          : css`
+              background: #00000040;
+            `}
       }
     `
   }}

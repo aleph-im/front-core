@@ -1,17 +1,60 @@
 import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
-import { ButtonProps, ButtonStyle } from './types'
+import { ButtonStyle } from './types'
 import { FormError } from '../FormError/types'
 import {
   fieldDisabledCss,
   fieldDisabledStyles,
   fieldErrorCss,
+  fieldFocusCss,
   fieldPlaceholderCss,
   fieldPlaceholderStyles,
 } from '../styles.forms'
 
-export type StyledContainerProps = ButtonProps & {
+export type StyledOuterContainerProps = {
+  $hasButton?: boolean
+  $buttonStyle?: ButtonStyle
+}
+
+export const StyledOuterContainer = styled.div<StyledOuterContainerProps>`
+  ${({ theme, $buttonStyle }) => {
+    const { background } = theme.form.input
+
+    return css`
+      ${tw`flex items-stretch`}
+      ${StyledContainer} {
+        ${tw`flex-auto`}
+      }
+
+      ${$buttonStyle === 'stuck' &&
+      css`
+        && {
+          background: ${background};
+          border-radius: 1.875rem;
+
+          & > a,
+          & > button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+
+            &::after {
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+            }
+          }
+
+          ${StyledContainer} {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      `}
+    `
+  }}
+`
+
+export type StyledContainerProps = {
   error?: FormError
   disabled?: boolean
   $hasButton?: boolean
@@ -19,23 +62,33 @@ export type StyledContainerProps = ButtonProps & {
 
 export const StyledContainer = styled.div<StyledContainerProps>`
   ${({ theme, $hasButton }) => {
+    const { background, shadow, border } = theme.form.input
+    const { duration, timing } = theme.transition
+
+    const borderSize = Math.max(
+      border.size,
+      border.focus.size,
+      border.feedback.size,
+    )
+
+    const paddingSize = 0.5 - borderSize
+    const paddingLeftSize = 2 - borderSize
+    const paddingRightSize = !$hasButton ? paddingLeftSize : paddingSize
+
     return css`
       ${tw`flex items-center gap-2.5 relative`}
-      background: ${theme.color.text}0F;
-      box-shadow: 0px 4px 24px #00000040;
-      border: 1px solid transparent;
+      background: ${background};
+      box-shadow: ${shadow};
+      border: ${borderSize}rem solid transparent;
+      transition: border ${timing} ${duration.fast}ms 0ms;
       border-radius: 1.875rem;
-      // padding: 0.5rem 2rem;
-      padding: 0.4375rem 2rem;
+      padding-top: ${paddingSize}rem;
+      padding-bottom: ${paddingSize}rem;
+      padding-left: ${paddingLeftSize}rem;
+      padding-right: ${paddingRightSize}rem;
+      min-height: 2.625rem;
 
-      ${$hasButton &&
-      css`
-        padding-right: 0.4375rem;
-      `}
-
-      &._focus {
-        border-color: ${theme.color.text};
-      }
+      ${fieldFocusCss}
 
       ${fieldDisabledCss}
 
@@ -44,65 +97,36 @@ export const StyledContainer = styled.div<StyledContainerProps>`
   }}
 `
 
-export const StyledInput = styled.input.attrs(
-  addClasses('tp-form'),
-)<ButtonProps>`
-  ${({ theme }) => css`
-    appearance: none;
-    outline: 0;
-    border: 0;
-    background: transparent;
-    color: ${theme.color.text};
-    min-height: 1.625rem;
-    width: 100%;
-    opacity: 1;
+export const StyledInput = styled.input.attrs(addClasses('tp-form'))`
+  ${({ theme }) => {
+    const { color } = theme.form.input
 
-    ${fieldPlaceholderCss}
+    return css`
+      appearance: none;
+      outline: 0;
+      border: 0;
+      background: transparent;
+      color: ${color};
+      min-height: 1.625rem;
+      width: 100%;
+      opacity: 1;
 
-    ${fieldDisabledCss}
+      ${fieldPlaceholderCss}
+
+      ${fieldDisabledCss}
 
     /* Remove Arrows/Spinners */
     
     /* Chrome, Safari, Edge, Opera */
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
-    /* Firefox */
-    &[type='number'] {
-      -moz-appearance: textfield;
-    }
-  `}
-`
-
-export type StyledRightContentProps = { $style: ButtonStyle }
-export const StyledRightContent = styled.div<StyledRightContentProps>`
-  ${({ $style }) => {
-    return css`
-      && > a,
-      && > button {
-        ${() => {
-          switch ($style) {
-            case 'stuck': {
-              return css`
-                position: absolute;
-                top: 0;
-                right: 0;
-                height: 100%;
-
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-
-                &::after {
-                  border-top-left-radius: 0;
-                  border-bottom-left-radius: 0;
-                }
-              `
-            }
-          }
-        }}
+      /* Firefox */
+      &[type='number'] {
+        -moz-appearance: textfield;
       }
     `
   }}

@@ -13,6 +13,7 @@ export default {
 const defaultArgs: Partial<SelectProps> = {
   label: 'Select an option',
   value: '2',
+  disabled: false,
 }
 
 const defaultParams = {
@@ -27,20 +28,18 @@ const Template: StoryFn<typeof Select> = (args) => {
     `Option ${i}`,
   ])
 
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(
-    new Set(args.value as string | string[]),
-  )
+  const [value, setValue] = useState<undefined | string | string[]>(args.value)
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>, value: string | string[]) => {
-      setSelectedIds(new Set(value))
+      setValue(value)
     },
-    [setSelectedIds],
+    [setValue],
   )
 
   const selectedOptions = useMemo(
-    () => options.filter(([k]) => selectedIds.has(k)),
-    [options, selectedIds],
+    () => options.filter(([k]) => value?.includes(k)),
+    [options, value],
   )
 
   return (
@@ -49,6 +48,7 @@ const Template: StoryFn<typeof Select> = (args) => {
         {...args}
         options={options.map(([k, v]) => ({ label: v, value: k }))}
         onChange={handleChange}
+        value={value}
         tw="mb-5"
       />
       <h6 tw="my-5">value:</h6>
@@ -86,5 +86,16 @@ Disabled.args = {
   disabled: true,
 }
 Disabled.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const WithError = Template.bind({})
+WithError.args = {
+  ...defaultArgs,
+  error: new Error('Boom'),
+}
+WithError.parameters = {
   ...defaultParams,
 }

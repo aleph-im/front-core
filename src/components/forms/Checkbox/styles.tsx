@@ -28,7 +28,8 @@ export const borderRadiusStyles = css<{
 export const StyledInputContainer = styled.div<{
   $size?: CheckboxSize
 }>`
-  ${({ $size }) => {
+  ${({ theme, $size }) => {
+    const { shadow } = theme.form.checkbox
     const size = $size === 'xs' ? '1rem' : $size === 'sm' ? '1.5rem' : '2rem'
 
     return css`
@@ -39,7 +40,7 @@ export const StyledInputContainer = styled.div<{
       justify-content: center;
       width: ${size};
       height: ${size};
-      box-shadow: 0px 4px 24px #00000040;
+      box-shadow: ${shadow};
       ${borderRadiusStyles}
     `
   }}
@@ -49,6 +50,9 @@ export const StyledInput = styled.input<{
   $size?: CheckboxSize
 }>`
   ${({ theme, $size }) => {
+    const { duration } = theme.transition
+    const { background, border, disabledType, check } = theme.form.checkbox
+
     return css`
       position: absolute;
 
@@ -56,50 +60,36 @@ export const StyledInput = styled.input<{
       appearance: none;
       outline: 0;
       cursor: pointer;
-      border: 1px solid #ffffff4d;
-      background: #ffffff0f;
+      border: ${border.size}rem solid ${border.color};
+      background: ${background};
       width: 100%;
       height: 100%;
       margin: 0;
       ${borderRadiusStyles}
+      transition: box-shadow ease-out ${duration.fast}ms 0s;
+      transition-property: border box-shadow;
 
       &:checked {
-        box-shadow: ${$size === 'xs'
-          ? `
-          0px -41px 34px -32px rgba(68, 98, 144, 0.20) inset,
-          0px 3.5px 5.5px -2px rgba(255, 255, 255, 0.80) inset,
-          0px 2px 5.5px 0px rgba(146, 210, 175, 0.10) inset,
-          0px 49px 50px -44px rgba(0, 255, 189, 0.06) inset,
-          0px -1px 15px 0px rgba(0, 255, 189, 0.18),
-          1.5px 3px 10px -1.5px rgba(0, 255, 189, 0.18)
-        `
-          : $size === 'sm'
-          ? `
-          0px -61.5px 51px -48px rgba(68, 98, 144, 0.20) inset,
-          0px 5.25px 8.25px -3px rgba(255, 255, 255, 0.80) inset,
-          0px 3px 8.25px 0px rgba(146, 210, 175, 0.10) inset,
-          0px 73.5px 75px -66px rgba(0, 255, 189, 0.06) inset,
-          0px -1.5px 22.5px 0px rgba(0, 255, 189, 0.18),
-          2.25px 4.5px 15px -2.25px rgba(0, 255, 189, 0.18)
-        `
-          : `
-          0px -82px 68px -64px rgba(68, 98, 144, 0.20) inset,
-          0px 7px 11px -4px rgba(255, 255, 255, 0.80) inset,
-          0px 4px 11px 0px rgba(146, 210, 175, 0.10) inset,
-          0px 98px 100px -88px rgba(0, 255, 189, 0.06) inset,
-          0px -2px 30px 0px rgba(0, 255, 189, 0.18),
-          3px 6px 20px -3px rgba(0, 255, 189, 0.18)
-        `};
+        box-shadow: ${check.checked.shadow?.($size)};
+        background: ${check.checked.background};
+        border: ${border.checked.size}rem solid ${border.color};
       }
 
       &:focus {
-        border-color: ${theme.color.base0};
+        border-color: ${border.focus.color};
       }
 
       &:disabled {
-        box-shadow: none;
-        border-color: #ffffff4d;
-        cursor: not-allowed;
+        ${disabledType === 'opacity'
+          ? css`
+              box-shadow: none;
+              border-color: ${border.color};
+              cursor: not-allowed;
+            `
+          : css`
+              border-color: ${theme.color.disabled};
+              background: ${theme.color.disabled};
+            `}
       }
     `
   }}
@@ -111,30 +101,44 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
     name: 'check',
   }
 })`
-  && {
-    display: block;
-    pointer-events: none;
-    width: 65%;
-    height: 65%;
-    background-color: transparent;
-    color: #5cffb1;
-    border-radius: 0.5rem;
-    z-index: 1;
-    visibility: hidden;
-    clip-path: circle(0% at 0% 75%);
-    will-change: visibility clip-path;
-    transition: all ease-out 0.35s 0s;
+  ${({ theme }) => {
+    const { duration } = theme.transition
+    const { border, check, disabledType } = theme.form.checkbox
 
-    ${StyledInput}:checked + & {
-      visibility: visible;
-      clip-path: circle(100% at 50% 50%);
-    }
+    return css`
+      && {
+        display: block;
+        pointer-events: none;
+        width: 65%;
+        height: 65%;
+        background: transparent;
+        color: ${check.checked.color};
+        border-radius: 0.5rem;
+        z-index: 1;
+        visibility: hidden;
+        clip-path: circle(0% at 0% 75%);
+        will-change: visibility clip-path;
+        transition: all ease-out ${duration.fast}ms 0s;
 
-    ${StyledInput}:disabled + & {
-      color: #ffffff4d;
-      cursor: not-allowed;
-    }
-  }
+        ${StyledInput}:checked + & {
+          visibility: visible;
+          clip-path: circle(100% at 50% 50%);
+        }
+
+        ${StyledInput}:disabled + & {
+          cursor: not-allowed;
+
+          ${disabledType === 'opacity'
+            ? css`
+                color: ${border.color};
+              `
+            : css`
+                color: #ffffff66;
+              `}
+        }
+      }
+    `
+  }}
 `
 
 export type StyledLabelProps = {

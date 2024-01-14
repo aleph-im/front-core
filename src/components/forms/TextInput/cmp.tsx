@@ -14,8 +14,8 @@ import { StyledInputWrapper } from '../styles.forms'
 import {
   StyledInput,
   StyledContainer,
-  StyledRightContent,
   StyledLeftContent,
+  StyledOuterContainer,
 } from './styles'
 import { ButtonProps, TextInputProps } from './types'
 import FormLabel from '../FormLabel'
@@ -70,50 +70,59 @@ export const TextInput = forwardRef(
       [isFocusClass, className],
     )
 
+    const buttonComponent =
+      button &&
+      (isValidElement(button) && button.type === Button
+        ? cloneElement(button, { disabled } as ButtonProps)
+        : button)
+
     return (
       <StyledInputWrapper>
         {label && <FormLabel {...{ label, error, required }} />}
-        <StyledContainer
+        <></>
+        <StyledOuterContainer
           {...{
             $hasButton: !!button,
-            className: isFocusClass,
-            error,
-            disabled,
+            $buttonStyle: buttonStyle,
           }}
         >
-          {icon && (
-            <StyledLeftContent
-              {...{
-                $isFilled: !!rest.value,
-                disabled,
-              }}
-            >
-              {icon}
-            </StyledLeftContent>
-          )}
-          <StyledInput
+          <StyledContainer
             {...{
-              ref,
-              button,
-              buttonStyle,
-              placeholder,
-              className: classes,
-              name,
+              $hasButton: !!button,
+              className: isFocusClass,
+              error,
               disabled,
-              required,
-              ...rest,
-              onFocus: handleFocus,
-              onBlur: handleBlur,
             }}
-          />
-          {button && (
-            <StyledRightContent $style={buttonStyle}>
-              {isValidElement(button) && button.type === Button
-                ? cloneElement(button, { disabled } as ButtonProps)
-                : button}
-            </StyledRightContent>
-          )}
-        </StyledContainer>
+          >
+            {icon && (
+              <StyledLeftContent
+                {...{
+                  $isFilled: !!rest.value,
+                  disabled,
+                }}
+              >
+                {icon}
+              </StyledLeftContent>
+            )}
+            <StyledInput
+              {...{
+                ref,
+                button,
+                buttonStyle,
+                placeholder,
+                className: classes,
+                name,
+                disabled,
+                required,
+                ...rest,
+                onFocus: handleFocus,
+                onBlur: handleBlur,
+              }}
+            />
+            {buttonStyle === 'wrapped' && buttonComponent}
+          </StyledContainer>
+          {buttonStyle === 'stuck' && buttonComponent}
+        </StyledOuterContainer>
         {error && <FormError error={error} />}
       </StyledInputWrapper>
     )

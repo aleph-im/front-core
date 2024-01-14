@@ -1,25 +1,41 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const StoryBookHeader = styled.h1`
-  display: inline-block;
-  font-family: 'Public Sans';
-  font-style: italic;
-  font-weight: 800;
-  font-size: 132px;
-  line-height: 155px;
-  color: #ffffff;
-  border-bottom: 2px solid white;
-  margin-bottom: 74px;
+  ${({ theme }) => {
+    const font =
+      theme.name === 'aleph' ? theme.font.family.body : theme.font.family.head
+    const color = theme.name === 'aleph' ? theme.color.text : theme.color.main0
+
+    return css`
+      display: inline-block;
+      font-family: ${font};
+      font-style: italic;
+      font-weight: 800;
+      font-size: 132px;
+      line-height: 155px;
+      color: ${color};
+      border-bottom: 2px solid ${color};
+      margin-bottom: 74px;
+    `
+  }}
 `
 
 export const StoryBookSubheader = styled.h2`
-  display: inline-block;
-  font-family: 'Rubik';
-  font-style: italic;
-  font-weight: 600;
-  font-size: 48px;
-  line-height: 57px;
-  border-bottom: 2px solid white;
-  margin-bottom: 74px;
-  margin-top: 74px;
+  ${({ theme }) => {
+    const font = theme.font.family.head
+    const color = theme.name === 'aleph' ? theme.color.text : theme.color.main0
+
+    return css`
+      display: inline-block;
+      font-family: ${font};
+      font-style: italic;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 57px;
+      color: ${color};
+      border-bottom: 2px solid ${color};
+      margin-bottom: 74px;
+      margin-top: 74px;
+    `
+  }}
 `

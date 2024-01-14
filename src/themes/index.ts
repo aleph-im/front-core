@@ -1,16 +1,12 @@
-import { default as light } from './light'
-import { default as dark } from './dark'
-import { default as alephLight } from './alephLight'
-import { default as alephDark } from './alephDark'
+import { default as aleph } from './aleph'
+import { default as twentysix } from './twentysix'
 
 export const themes = {
-  dark,
-  light,
-  alephDark,
-  alephLight,
+  aleph,
+  twentysix,
 }
 
 // @note: sorted list for storybook UI
-export const themeList = [dark, light, alephDark, alephLight]
+export const themeList = [aleph, twentysix]
 
 export type { CoreTheme, BreakpointId, TypoSizeKind, TypoKind } from './types'

@@ -1,6 +1,11 @@
 import React, { forwardRef, ForwardedRef, ChangeEvent, memo } from 'react'
 import { StyledInputWrapper } from '../styles.forms'
-import { StyledSelect, StyledOption } from './styles'
+import {
+  StyledSelect,
+  StyledOption,
+  StyledDropdownIcon,
+  StyledContainer,
+} from './styles'
 import { SelectProps } from './types'
 import FormLabel from '../FormLabel'
 import FormError from '../FormError'
@@ -16,6 +21,7 @@ export const Select = forwardRef(
       options,
       multiple,
       required,
+      disabled,
       ...rest
     }: SelectProps,
     ref: ForwardedRef<HTMLSelectElement>,
@@ -31,23 +37,28 @@ export const Select = forwardRef(
     return (
       <StyledInputWrapper>
         {label && <FormLabel {...{ label, error, required }} />}
-        <StyledSelect
-          {...{
-            id,
-            ref,
-            value,
-            onChange: handleChange,
-            multiple,
-            required,
-            ...rest,
-          }}
-        >
-          {options.map((option) => (
-            <StyledOption key={option.value} value={option.value}>
-              {option.label}
-            </StyledOption>
-          ))}
-        </StyledSelect>
+        <StyledContainer {...{ disabled }}>
+          <StyledSelect
+            {...{
+              id,
+              ref,
+              value,
+              onChange: handleChange,
+              multiple,
+              required,
+              disabled,
+              error,
+              ...rest,
+            }}
+          >
+            {options.map((option) => (
+              <StyledOption key={option.value} value={option.value}>
+                {option.label}
+              </StyledOption>
+            ))}
+          </StyledSelect>
+          {!multiple && <StyledDropdownIcon />}
+        </StyledContainer>
         {error && <FormError error={error} />}
       </StyledInputWrapper>
     )

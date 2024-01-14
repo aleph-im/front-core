@@ -14,7 +14,30 @@ const defaultVariants = (
   const [g0, g1] = theme.gradient[color]?.colors || [color, color]
 
   // @todo: Fix this
-  const glowMinCss = getGlowMinEffectCss(color, { width: 192, height: 192 })
+  const glowMinCss = theme.button.glow
+    ? getGlowMinEffectCss(color, { width: 192, height: 192 })
+    : undefined
+
+  const underscoreCss =
+    variant === 'text-only'
+      ? css`
+          padding-left: 0;
+          padding-right: 0;
+          border-radius: 0;
+
+          /* TRANSFORM BORDER INTO UNDERSCORE */
+          &::after {
+            display: block;
+            mask: none;
+            height: ${theme.button.border.size}rem;
+            padding: 0;
+            background-clip: content-box;
+            border-radius: 0;
+            top: 50%;
+            margin-top: 0.48em;
+          }
+        `
+      : undefined
 
   if (kind === 'flat') {
     switch (variant) {
@@ -37,20 +60,7 @@ const defaultVariants = (
       }
       case 'text-only': {
         return css`
-          padding-left: 0;
-          padding-right: 0;
-          border-radius: 0;
-
-          /* TRANSFORM BORDER INTO UNDERSCORE */
-          &::after {
-            display: block;
-            mask: none;
-            height: 1px;
-            padding: 0;
-            background-clip: content-box;
-            top: 100%;
-            margin-top: -0.5rem;
-          }
+          ${underscoreCss}
         `
       }
     }
@@ -90,20 +100,7 @@ const defaultVariants = (
         return css`
           color: ${theme.color.text};
           background-color: transparent;
-          padding-left: 0;
-          padding-right: 0;
-          border-radius: 0;
-
-          /* TRANSFORM BORDER INTO UNDERSCORE */
-          &::after {
-            display: block;
-            mask: none;
-            height: 1px;
-            padding: 0;
-            background-clip: content-box;
-            top: 100%;
-            margin-top: -0.5rem;
-          }
+          ${underscoreCss}
         `
       }
     }
@@ -118,14 +115,24 @@ const focusVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
       display: block;
       background-image: none;
       background-color: ${theme.color.text};
-      ${variant === 'text-only' ? 'height: 2px;' : 'padding: 2px;'}
+
+      ${variant === 'text-only'
+        ? css`
+            height: ${theme.button.border.focus.size}rem;
+          `
+        : css`
+            padding: ${theme.button.border.focus.size}rem;
+          `}
     }
   `
 }
 
 const hoverVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
-  const { color, variant, kind } = props
-  const glowHoverCss = getGlowHoverEffectCss(color, { width: 192, height: 192 })
+  const { theme, color, variant, kind } = props
+
+  const glowHoverCss = theme.button.glow
+    ? getGlowHoverEffectCss(color, { width: 192, height: 192 })
+    : undefined
 
   if (kind === 'neon' && variant === 'primary') {
     return glowHoverCss
@@ -241,7 +248,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
           width: 100%;
           background-color: ${mainColor};
           z-index: -1;
-          padding: 1px;
+          padding: ${theme.button.border.size}rem;
           border-radius: 1.875rem;
           mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           mask-composite: exclude;

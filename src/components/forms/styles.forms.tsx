@@ -15,13 +15,15 @@ export const fieldErrorCss = css<{ error?: FormError }>`
     ${({ theme, error }) => {
       if (!error) return ''
 
+      const { input, feedback } = theme.form
+
       if (error.level === 'warning') {
         return css`
-          border-color: ${theme.color.warning};
+          border: ${input.border.feedback.size}rem solid ${feedback.warning};
         `
       } else {
         return css`
-          border-color: ${theme.color.error};
+          border: ${input.border.feedback.size}rem solid ${feedback.error};
         `
       }
     }}
@@ -33,13 +35,15 @@ export const errorCss = css<{ error?: FormError }>`
     ${({ theme, error }) => {
       if (!error) return ''
 
+      const { feedback } = theme.form
+
       if (error.level === 'warning') {
         return css`
-          color: ${theme.color.warning};
+          color: ${feedback.warning};
         `
       } else {
         return css`
-          color: ${theme.color.error};
+          color: ${feedback.error};
         `
       }
     }}
@@ -51,16 +55,10 @@ export const fieldDisabledStyles = css`
 `
 
 export const fieldDisabledCss = css<{ disabled?: boolean }>`
-  ${({ disabled }) => css`
-    ${disabled &&
-    css`
-      &,
-      &:disabled,
-      &._disabled {
-        ${fieldDisabledStyles}
-      }
-    `}
-  `}
+  ${({ disabled }) => {
+    if (!disabled) return ''
+    return fieldDisabledStyles
+  }}
 `
 
 export const fieldPlaceholderStyles = css`
@@ -78,8 +76,14 @@ export const fieldPlaceholderCss = css`
 `
 
 export const fieldFocusCss = css`
-  &:focus,
-  &._focus {
-    border-color: ${({ theme }) => theme.color.text};
-  }
+  ${({ theme }) => {
+    const { border } = theme.form.input
+
+    return css`
+      &:focus,
+      &._focus {
+        border: ${border.focus.size}rem solid ${border.color};
+      }
+    `
+  }}
 `

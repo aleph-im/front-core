@@ -11,6 +11,7 @@ export default {
 
 const defaultArgs: Partial<FormLabelProps> = {
   label: 'My label',
+  required: true,
 }
 
 const defaultParams = {

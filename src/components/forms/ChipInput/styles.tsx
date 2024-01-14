@@ -17,13 +17,16 @@ export const StyledChipContainer = styled.div`
 
 export const StyledChip = styled.span`
   ${({ theme }) => {
+    const { background, color, fontWeight } = theme.form.chip
+
     return css`
       ${tw`inline-flex items-center justify-between max-w-full`}
-      background-color: ${theme.color.main0};
-      color: ${theme.color.text};
+      background: ${background};
+      color: ${color};
       border-radius: 1.875rem;
       height: 1.75rem;
       padding: 0.125rem 1.125rem;
+      font-weight: ${fontWeight};
     `
   }}
 `
@@ -37,10 +40,12 @@ export const StyledChipTag = styled.span`
 
 export const StyledChipRemoveButton = styled.button`
   ${({ theme }) => {
+    const { color } = theme.form.chip
+
     return css`
       border: none;
       cursor: pointer;
-      color: ${theme.color.text};
+      color: ${color};
       background-color: transparent;
       line-height: 0;
       padding: 0;
