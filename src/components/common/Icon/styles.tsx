@@ -12,35 +12,37 @@ export interface StyledIconProps extends FontAwesomeIconProps {
 export const StyledIconSizeCss = css<StyledIconProps>`
   && {
     ${({ $iconSize, theme }) => {
+      const { icon } = theme.component
+
       switch ($iconSize) {
         case 'xs': {
           return css`
-            font-size: ${theme.icon.size.xs}rem;
+            font-size: ${icon.size.xs}rem;
           `
         }
         case 'sm': {
           return css`
-            font-size: ${theme.icon.size.sm}rem;
+            font-size: ${icon.size.sm}rem;
           `
         }
         case 'md': {
           return css`
-            font-size: ${theme.icon.size.md}rem;
+            font-size: ${icon.size.md}rem;
           `
         }
         case 'lg': {
           return css`
-            font-size: ${theme.icon.size.lg}rem;
+            font-size: ${icon.size.lg}rem;
           `
         }
         case 'xl': {
           return css`
-            font-size: ${theme.icon.size.xl}rem;
+            font-size: ${icon.size.xl}rem;
           `
         }
         case '2xl': {
           return css`
-            font-size: ${theme.icon.size['2xl']}rem;
+            font-size: ${icon.size['2xl']}rem;
           `
         }
         default: {
@@ -66,7 +68,5 @@ export const StyledCustomIconCss = css<StyledIconProps & { $color?: string }>`
 `
 
 export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
-  && {
-    ${StyledIconSizeCss}
-  }
+  ${StyledIconSizeCss}
 `

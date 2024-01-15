@@ -9,19 +9,19 @@ import {
 } from './styles'
 
 export const BulletItem = ({
-  kind,
-  size,
+  kind: $kind,
+  size: $size,
   title,
   text,
   ...rest
 }: BulletItemProps) => {
   return (
     <StyledItem {...rest}>
-      <StyledIconContainer {...{ kind, size }}>
-        <StyledIcon {...{ kind, $size: size }} />
+      <StyledIconContainer {...{ $kind, $size }}>
+        <StyledIcon {...{ $kind }} />
       </StyledIconContainer>
       <div>
-        <StyledTitle {...{ size }}>{title}</StyledTitle>
+        <StyledTitle {...{ $size }}>{title}</StyledTitle>
         {text && (
           <p className="fs-16" tw="m-0 -mt-1">
             {text}

@@ -7,6 +7,12 @@ export default {
   title: 'Components/UI/common/BulletList',
   component: BulletList,
   subcomponents: { BulletItem },
+  argTypes: {
+    size: {
+      options: ['big', 'regular'],
+      control: { type: 'inline-radio' },
+    },
+  },
 }
 
 const defaultArgs: Partial<BulletListProps> = {
@@ -25,8 +31,8 @@ export const Default = Template.bind({})
 Default.args = {
   ...defaultArgs,
   items: [
-    { kind: 'check', title: 'bullet-item-1' },
-    { kind: 'check', title: 'bullet-item-2', text: 'Lorem ipsum' },
+    { kind: 'info', title: 'bullet-item-1' },
+    { kind: 'info', title: 'bullet-item-2', text: 'Lorem ipsum' },
     { kind: 'success', title: 'bullet-item-3' },
     { kind: 'success', title: 'bullet-item-4', text: 'Lorem ipsum' },
     { kind: 'warning', title: 'bullet-item-5' },

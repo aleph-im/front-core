@@ -1,3 +1,5 @@
+import { FlattenSimpleInterpolation } from 'styled-components'
+
 export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 export type ThemeBreakpoint = Record<BreakpointId, number>
 
@@ -95,25 +97,31 @@ export type ThemeFont = {
   }
 }
 
-export type ThemeButton = {
-  glow: boolean
-  border: {
-    size: number
-    focus: {
-      size: number
-    }
+// -----------------------------------
+
+export type ThemeTransition = {
+  duration: {
+    slow: number
+    normal: number
+    fast: number
   }
-  font: {
-    family: string
-    weight: number
-    style: string
-    size: {
-      small: number
-      regular: number
-      big: number
-    }
+  timing: string
+}
+
+// -----------------------------------
+
+export type ThemeStorybookConfig = {
+  color: {
+    primary: string
+    secondary: string
+    background: string
+    contentBackground: string
+    foreground: string
+    text: string
   }
 }
+
+// -----------------------------------
 
 export type ThemeFormInput = {
   shadow: string
@@ -210,6 +218,8 @@ export type ThemeForm = {
   chip: ThemeFormChip
 }
 
+// -----------------------------------
+
 export type ThemeIcon = {
   size: {
     '2xl': number
@@ -221,34 +231,57 @@ export type ThemeIcon = {
   }
 }
 
-export type ThemeTransition = {
-  duration: {
-    slow: number
-    normal: number
-    fast: number
+export type ThemeButton = {
+  glow: boolean
+  border: {
+    size: number
+    focus: {
+      size: number
+    }
   }
-  timing: string
+  font: {
+    family: string
+    weight: number
+    style: string
+    size: {
+      small: number
+      regular: number
+      big: number
+    }
+  }
 }
 
-export type ThemeStorybookConfig = {
-  color: {
-    primary: string
-    secondary: string
-    background: string
-    contentBackground: string
-    foreground: string
-    text: string
+export type BulletListCheck = {
+  background?: string
+  shadow?: string
+  css?: (...args: any[]) => string | FlattenSimpleInterpolation | undefined
+}
+
+export type ThemeBulletList = {
+  bullet: {
+    [kind: string]: BulletListCheck
+    // info: BulletListCheck
+    // success: BulletListCheck
+    // warning: BulletListCheck
+    // error: BulletListCheck
   }
 }
+
+export type ThemeComponent = {
+  icon: ThemeIcon
+  button: ThemeButton
+  bulletList: ThemeBulletList
+}
+
+// -----------------------------------
 
 export interface CoreTheme {
   name: string
   font: ThemeFont
   color: ThemeColor
   typo: ThemeTypo
-  icon: ThemeIcon
   form: ThemeForm
-  button: ThemeButton
+  component: ThemeComponent
   gradient: ThemeGradient
   transition: ThemeTransition
   breakpoint: ThemeBreakpoint

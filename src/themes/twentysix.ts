@@ -18,6 +18,8 @@ import {
   ThemeFormRadio,
   ThemeFormCheckbox,
   ThemeFormChip,
+  ThemeComponent,
+  ThemeBulletList,
 } from './types'
 
 const breakpoint: ThemeBreakpoint = {
@@ -264,34 +266,23 @@ const typo: ThemeTypo = {
   },
 }
 
-const icon: ThemeIcon = {
-  size: {
-    '2xl': pxToRem(36),
-    xl: pxToRem(24),
-    lg: pxToRem(16),
-    md: pxToRem(14),
-    sm: pxToRem(12),
-    xs: pxToRem(8),
+const transition: ThemeTransition = {
+  duration: {
+    slow: 700,
+    normal: 500,
+    fast: 200,
   },
+  timing: 'ease-in-out',
 }
 
-const button: ThemeButton = {
-  glow: false,
-  border: {
-    size: pxToRem(3),
-    focus: {
-      size: pxToRem(3),
-    },
-  },
-  font: {
-    family: font.family.head,
-    style: 'normal',
-    weight: 700,
-    size: {
-      small: pxToRem(14),
-      regular: pxToRem(18),
-      big: pxToRem(24),
-    },
+const storybook: ThemeStorybookConfig = {
+  color: {
+    primary: '#0054ff',
+    secondary: '#71c9fa',
+    background: '#172025',
+    contentBackground: '#1d2a31',
+    foreground: '#2e363b',
+    text: '#000000',
   },
 }
 
@@ -387,24 +378,51 @@ const form: ThemeForm = {
   chip,
 }
 
-const transition: ThemeTransition = {
-  duration: {
-    slow: 700,
-    normal: 500,
-    fast: 200,
+// -------------------------------
+
+const icon: ThemeIcon = {
+  size: {
+    '2xl': pxToRem(36),
+    xl: pxToRem(24),
+    lg: pxToRem(16),
+    md: pxToRem(14),
+    sm: pxToRem(12),
+    xs: pxToRem(8),
   },
-  timing: 'ease-in-out',
 }
 
-const storybook: ThemeStorybookConfig = {
-  color: {
-    primary: '#0054ff',
-    secondary: '#71c9fa',
-    background: '#172025',
-    contentBackground: '#1d2a31',
-    foreground: '#2e363b',
-    text: '#000000',
+const button: ThemeButton = {
+  glow: false,
+  border: {
+    size: pxToRem(3),
+    focus: {
+      size: pxToRem(3),
+    },
   },
+  font: {
+    family: font.family.head,
+    style: 'normal',
+    weight: 700,
+    size: {
+      small: pxToRem(14),
+      regular: pxToRem(18),
+      big: pxToRem(24),
+    },
+  },
+}
+
+const bulletList: ThemeBulletList = {
+  bullet: {
+    info: {
+      background: gradient.main0.fn,
+    },
+  },
+}
+
+const component: ThemeComponent = {
+  icon,
+  button,
+  bulletList,
 }
 
 const theme: DefaultTheme = {
@@ -412,10 +430,9 @@ const theme: DefaultTheme = {
   color,
   font,
   typo,
-  icon,
-  button,
   form,
   gradient,
+  component,
   transition,
   breakpoint,
   storybook,

@@ -18,7 +18,10 @@ import {
   ThemeFormRadio,
   ThemeFormCheckbox,
   ThemeFormChip,
+  ThemeComponent,
+  ThemeBulletList,
 } from './types'
+import { getGlowMinEffectCss } from '../styles'
 
 const breakpoint: ThemeBreakpoint = {
   '2xl': pxToRem(1400),
@@ -254,34 +257,23 @@ const typo: ThemeTypo = {
   },
 }
 
-const icon: ThemeIcon = {
-  size: {
-    '2xl': pxToRem(36),
-    xl: pxToRem(24),
-    lg: pxToRem(16),
-    md: pxToRem(14),
-    sm: pxToRem(12),
-    xs: pxToRem(8),
+const transition: ThemeTransition = {
+  duration: {
+    slow: 700,
+    normal: 500,
+    fast: 200,
   },
+  timing: 'ease-in-out',
 }
 
-const button: ThemeButton = {
-  glow: true,
-  border: {
-    size: pxToRem(1),
-    focus: {
-      size: pxToRem(2),
-    },
-  },
-  font: {
-    family: font.family.head,
-    style: 'normal',
-    weight: 700,
-    size: {
-      small: pxToRem(18),
-      regular: pxToRem(18),
-      big: pxToRem(24),
-    },
+const storybook: ThemeStorybookConfig = {
+  color: {
+    primary: '#0054ff',
+    secondary: '#71c9fa',
+    background: '#172025',
+    contentBackground: '#1d2a31',
+    foreground: '#2e363b',
+    text: '#000000',
   },
 }
 
@@ -405,24 +397,80 @@ const form: ThemeForm = {
   chip,
 }
 
-const transition: ThemeTransition = {
-  duration: {
-    slow: 700,
-    normal: 500,
-    fast: 200,
+// -------------------------------
+
+const icon: ThemeIcon = {
+  size: {
+    '2xl': pxToRem(36),
+    xl: pxToRem(24),
+    lg: pxToRem(16),
+    md: pxToRem(14),
+    sm: pxToRem(12),
+    xs: pxToRem(8),
   },
-  timing: 'ease-in-out',
 }
 
-const storybook: ThemeStorybookConfig = {
-  color: {
-    primary: '#0054ff',
-    secondary: '#71c9fa',
-    background: '#172025',
-    contentBackground: '#1d2a31',
-    foreground: '#2e363b',
-    text: '#000000',
+const button: ThemeButton = {
+  glow: true,
+  border: {
+    size: pxToRem(1),
+    focus: {
+      size: pxToRem(2),
+    },
   },
+  font: {
+    family: font.family.head,
+    style: 'normal',
+    weight: 700,
+    size: {
+      small: pxToRem(18),
+      regular: pxToRem(18),
+      big: pxToRem(24),
+    },
+  },
+}
+
+const bulletList: ThemeBulletList = {
+  bullet: {
+    info: {
+      background: gradient.main0.fn,
+      shadow: `
+        inset -4px -1px 11px 0px rgba(61, 92, 255, 0.50),
+        inset 0px 1.675px 6px 0px rgba(255, 255, 255, 0.63)
+      `,
+      css: (fontSize: number) =>
+        getGlowMinEffectCss('main0', { height: fontSize * 16 }),
+    },
+    success: {
+      shadow: `
+        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
+        inset 0px 63px 60px rgba(145, 255, 189, 0.63),
+        inset 8.375px 13.4px 46.75px rgba(252, 255, 96, 0.75)
+      `,
+    },
+    warning: {
+      background: gradient.main2.fn,
+      shadow: `
+        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
+        inset 0px 63px 60px rgba(255, 138, 0, 0.63),
+        inset 8.375px 13.4px 46.75px rgba(255, 135, 83, 0.75)
+      `,
+      css: (fontSize: number) =>
+        getGlowMinEffectCss('main2', { height: fontSize * 16 }),
+    },
+    error: {
+      shadow: `
+        inset 0px 1.675px 6px rgba(255, 255, 255, 0.17),
+        inset -4px -1px 9px rgba(139, 99, 255, 0.19)
+      `,
+    },
+  },
+}
+
+const component: ThemeComponent = {
+  icon,
+  button,
+  bulletList,
 }
 
 const theme: DefaultTheme = {
@@ -430,10 +478,9 @@ const theme: DefaultTheme = {
   color,
   font,
   typo,
-  icon,
-  button,
   form,
   gradient,
+  component,
   transition,
   breakpoint,
   storybook,

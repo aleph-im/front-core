@@ -1,4 +1,5 @@
 import React, { SVGAttributes, memo } from 'react'
+import { useTheme } from 'styled-components'
 
 export type AvatarColor =
   | 'color1'
@@ -24,7 +25,9 @@ export const avatarDefaultColor: Record<AvatarColor, string> = {
 }
 
 export const Avatar = ({ color = 'color2', ...rest }: AvatarProps) => {
-  const c1 = avatarDefaultColor[color as AvatarColor] || color
+  const theme = useTheme()
+  const c1 =
+    avatarDefaultColor[color as AvatarColor] || theme.color[color] || color
 
   return (
     <svg

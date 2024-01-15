@@ -42,7 +42,6 @@ export const GlobalStyles = () => (
 const CustomGlobalStyles = createGlobalStyle`
   ${({ theme }) => {
     const colorCss = colorClasses(theme)
-    const functionalCss = functionalClasses()
     const effectCss = effectClasses(theme)
     const typoCss = typoClasses(theme)
     const fontUrlCss = fontUrlImports(theme)
@@ -52,7 +51,6 @@ const CustomGlobalStyles = createGlobalStyle`
       ${fontUrlCss}
 
       ${colorCss}
-      ${functionalCss}
       ${effectCss}
       ${typoCss}
 
@@ -149,47 +147,6 @@ function colorClasses(theme: DefaultTheme) {
         }
       `,
     )}
-  `
-}
-
-function functionalClasses() {
-  return css`
-    .fx-func-info {
-      ${getBackgroundColorCss('info')}
-      box-shadow: 
-        inset -4px -1px 11px 0px rgba(61, 92, 255, 0.50),
-        inset 0px 1.675px 6px 0px rgba(255, 255, 255, 0.63);
-    }
-
-    .fx-func-success {
-      ${getBackgroundColorCss('success')}
-      box-shadow: 
-        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
-        inset 0px 63px 60px rgba(145, 255, 189, 0.63),
-        inset 8.375px 13.4px 46.75px rgba(252, 255, 96, 0.75);
-    }
-
-    .fx-func-warning {
-      ${getBackgroundColorCss('warning')}
-      box-shadow: 
-        inset 3px 3px 9px rgba(255, 255, 255, 0.65),
-        inset 0px 63px 60px rgba(255, 138, 0, 0.63),
-        inset 8.375px 13.4px 46.75px rgba(255, 135, 83, 0.75);
-    }
-
-    .fx-func-error {
-      ${getBackgroundColorCss('error')}
-      box-shadow:
-        inset 0px 1.675px 6px rgba(255, 255, 255, 0.17),
-        inset -4px -1px 9px rgba(139, 99, 255, 0.19);
-    }
-
-    .fx-func-disabled {
-      ${getBackgroundColorCss('disabled')}
-      box-shadow: 
-        inset -4px -1px 16px 0px rgba(224, 223, 255, 0.10),
-        inset 0px 1.675px 6px 0px rgba(255, 255, 255, 0.17);
-    }
   `
 }
 

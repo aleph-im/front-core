@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { getGlowMinEffectCss } from '../../../styles'
 import { addClasses } from '../../../utils'
 import Icon, { IconProps } from '../Icon'
 import { BulletItemKind, BulletListSize } from './types'
@@ -18,23 +17,22 @@ export const StyledItem = styled.li`
 `
 
 export interface StyledBulletItemIconContainerProps {
-  kind: BulletItemKind
-  size?: BulletListSize
+  $kind: BulletItemKind
+  $size?: BulletListSize
 }
 
-export const StyledIconContainer = styled.div.attrs<StyledBulletItemIconContainerProps>(
-  (props) => {
-    const { kind } = props
-    const cls = kind !== 'check' && kind !== 'warning' ? `bg-${kind}` : ''
+export const StyledIconContainer = styled.div<StyledBulletItemIconContainerProps>`
+  ${({ theme, $kind, $size }) => {
+    const { bulletList } = theme.component
+    const {
+      background = theme.color[$kind],
+      shadow,
+      css: buttonCSS,
+    } = bulletList.bullet[$kind] || {}
 
-    return addClasses(cls)(props)
-  },
-)<StyledBulletItemIconContainerProps>`
-  ${(props) => {
-    const { theme, kind } = props
-    const fontSize = props.size === 'big' ? 2.25 : 1.5
+    const fontSize = $size === 'big' ? 2.25 : 1.5
 
-    const commonCss = css`
+    return css`
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -45,49 +43,36 @@ export const StyledIconContainer = styled.div.attrs<StyledBulletItemIconContaine
       margin-right: 1rem;
       border-radius: 50%;
       color: ${theme.color.background};
-    `
+      background: ${background};
+      box-shadow: ${shadow};
+      ${buttonCSS && buttonCSS(fontSize)}
 
-    switch (kind) {
-      case 'check':
-        return css`
-          ${commonCss}
-          background-image: ${theme.gradient.main0.fn};
-          ${getGlowMinEffectCss('main0', { height: fontSize * 16 })};
-        `
-      case 'warning':
-        return css`
-          ${commonCss}
-          background-image: ${theme.gradient.main2.fn};
-          ${getGlowMinEffectCss('main2', { height: fontSize * 16 })};
-        `
-      default:
-        return commonCss
-    }
+      && ${StyledIcon} {
+        font-size: ${$size === 'big' ? '1.25rem' : '0.875rem'};
+      }
+    `
   }}
 `
 
 export interface StyledBulletItemIconProps {
-  kind: BulletItemKind
-  $size?: BulletListSize
+  $kind: BulletItemKind
 }
 
 export const StyledIcon = styled(Icon).attrs<
   StyledBulletItemIconProps,
   IconProps
->((props: any) => {
+>((props) => {
   return {
     ...props,
-    name: props.kind === 'error' ? 'minus' : 'check',
+    name: props.$kind === 'error' ? 'minus' : 'check',
     color: props.theme.color.background,
     prefix: 'fass',
   }
-})<StyledBulletItemIconProps>`
-  && {
-    font-size: ${(props) => (props.$size === 'big' ? '1.25rem' : '0.875rem')};
-  }
-`
+})<StyledBulletItemIconProps>``
 
-export const StyledTitle = styled.span.attrs<{ size: string }>((props) => {
-  const cls = props.size === 'big' ? 'tp-h7' : 'tp-body2 fs-18'
+export type StyledTitleProps = { $size: string }
+
+export const StyledTitle = styled.span.attrs<StyledTitleProps>((props) => {
+  const cls = props.$size === 'big' ? 'tp-h7' : 'tp-body2 fs-18'
   return addClasses(`${cls}`)(props)
 })``
