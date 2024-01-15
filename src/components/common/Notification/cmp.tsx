@@ -13,7 +13,12 @@ import {
   NotificationContext,
   NotificationInfo,
 } from './context'
-import { StyledClearButton, StyledClearIcon, StyledContainer } from './styles'
+import {
+  StyledClearButton,
+  StyledClearIcon,
+  StyledContainer,
+  StyledNotificationContainer,
+} from './styles'
 import { NotificationProps } from './types'
 
 export const Notification = ({
@@ -96,14 +101,16 @@ export const Notification = ({
       {children}
       {createPortal(
         <StyledContainer onMouseOver={stopTimeout} onMouseOut={resetTimeout}>
-          {notifications.sort().map((noti) => (
-            <NotificationCard
-              key={noti.id}
-              onClose={() => contextValue.remove(noti.id)}
-              tw="mt-4"
-              {...noti}
-            />
-          ))}
+          <StyledNotificationContainer>
+            {notifications.sort().map((noti) => (
+              <NotificationCard
+                key={noti.id}
+                onClose={() => contextValue.remove(noti.id)}
+                tw="mt-4"
+                {...noti}
+              />
+            ))}
+          </StyledNotificationContainer>
           {notifications.length > 2 && (
             <div tw="mt-4">
               <StyledClearButton onClick={clearAll}>

@@ -60,7 +60,7 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
 
       & .view-overlays .current-line {
         display: none;
-        border: 1px solid ${$theme?.color.text}1A;
+        border: 0.0625rem solid ${$theme?.color.text}1A;
       }
 
       & .margin {

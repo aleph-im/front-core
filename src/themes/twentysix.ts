@@ -22,6 +22,9 @@ import {
   ThemeBulletList,
   ThemeLabel,
   ThemeLogo,
+  ThemeNotification,
+  ThemeTab,
+  ThemeTag,
 } from './types'
 
 const breakpoint: ThemeBreakpoint = {
@@ -47,9 +50,8 @@ const color: ThemeColor = {
 
   purple0: '#F5EDFF',
   purple1: '#EDE4FB',
-  purple2: '#EDE4FB',
-  purple3: '#DBC8F6',
-  purple4: '#C8ADF0',
+  purple2: '#DBC8F6',
+  purple3: '#C8ADF0',
 
   dark0: '#1414211A',
   dark1: '#1D1D2A',
@@ -92,9 +94,9 @@ const gradient: ThemeGradient = {
   },
   info: {
     colors: ['#C8ADF0', '#5100CD'],
-    stops: [0, 100],
+    stops: [22.66, 244.27],
     deg: 90,
-    fn: 'linear-gradient(90deg, #C8ADF0 0%, #5100CD 100%)',
+    fn: 'linear-gradient(90deg, #C8ADF0 22.66%, #5100CD 244.27%)',
   },
   success: {
     colors: ['#38EC49', '#47FF59'],
@@ -119,12 +121,6 @@ const gradient: ThemeGradient = {
     stops: [0, 90.62],
     deg: 90,
     fn: 'linear-gradient(90deg, #81818F1A 0%, #81818F0A 90.62%)',
-  },
-  radio: {
-    colors: ['#141421', '#5100CD'],
-    stops: [0, 100],
-    deg: 90,
-    fn: 'linear-gradient(90deg, #141421 0%, #5100CD 100%)',
   },
 }
 
@@ -220,7 +216,7 @@ const typo: ThemeTypo = {
     ...defaultFontTypo,
     tag: true,
     family: font.family.head,
-    weight: 500,
+    weight: 700,
     lineHeight: 'normal',
     size: pxToRem(18),
   },
@@ -231,6 +227,7 @@ const typo: ThemeTypo = {
     weight: 800,
     lineHeight: 'normal',
     size: pxToRem(10),
+    transform: 'uppercase',
   },
   body: {
     ...defaultFontTypo,
@@ -324,11 +321,11 @@ const radio: ThemeFormRadio = {
   dot: {
     background: color.white,
     checked: {
-      background: gradient.radio,
+      background: gradient.main0,
     },
   },
   border: {
-    color: color.purple4,
+    color: color.purple3,
     size: pxToRem(3),
     focus: {
       color: color.black,
@@ -346,11 +343,11 @@ const checkbox: ThemeFormCheckbox = {
   check: {
     checked: {
       color: color.white,
-      background: gradient.radio.fn,
+      background: gradient.main0.fn,
     },
   },
   border: {
-    color: color.purple4,
+    color: color.purple3,
     size: pxToRem(3),
     focus: {
       color: color.black,
@@ -436,12 +433,38 @@ const logo: ThemeLogo = {
   gap: '0',
 }
 
+const notification: ThemeNotification = {
+  color: color.base2,
+  background: {
+    success: gradient.info.fn,
+  },
+}
+
+const tab: ThemeTab = {
+  color: {
+    default: color.base2,
+    active: color.main0,
+    disabled: color.dark0,
+  },
+}
+
+const tag: ThemeTag = {
+  color: {
+    text: color.text,
+    background: color.purple2,
+    border: color.purple1,
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
   bulletList,
   label,
   logo,
+  notification,
+  tab,
+  tag,
 }
 
 const theme: DefaultTheme = {

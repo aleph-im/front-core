@@ -11,14 +11,8 @@ export const StyledNotificationBadge = styled.span.attrs<StyledNotificationBadge
   addClasses('tp-info'),
 )<StyledNotificationBadgeProps>`
   ${({ theme, $variant }) => {
-    const color =
-      $variant === 'success'
-        ? 'main1'
-        : $variant === 'error'
-        ? 'error'
-        : $variant === 'info'
-        ? 'main0'
-        : 'main2'
+    const color = $variant
+    const background = theme.color[color]
 
     return css`
       && {
@@ -28,7 +22,7 @@ export const StyledNotificationBadge = styled.span.attrs<StyledNotificationBadge
         border-radius: 2.5rem;
         line-height: normal !important;
         color: ${theme.color.base2};
-        background-color: ${theme.color[color]};
+        background-color: ${background};
         text-transform: uppercase;
         font-style: normal;
         white-space: nowrap;

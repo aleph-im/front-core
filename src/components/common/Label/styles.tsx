@@ -13,7 +13,9 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
   ${({ theme, $variant, $kind }) => {
     const { label } = theme.component
     const color = $variant
-    const [g0, g1] = theme.gradient[color]?.colors || [color, color]
+    const background =
+      theme.gradient[color]?.fn ||
+      `linear-gradient(90deg, ${color} 0%, ${color} 100%)`
 
     return css`
       position: relative;
@@ -23,28 +25,28 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
       line-height: normal !important;
       text-transform: uppercase;
       color: ${label.color.primary};
-      background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
+      background: ${background}
+        ${$kind === 'secondary' &&
+        css`
+          color: ${label.color.secondary};
+          background-image: none;
 
-      ${$kind === 'secondary' &&
-      css`
-        color: ${label.color.secondary};
-        background-image: none;
-
-        /* BORDER */
-        &::after {
-          content: '';
-          display: block;
-          position: absolute;
-          inset: 0;
-          z-index: -1;
-          padding: 1px;
-          border-radius: 0.375rem;
-          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          mask-composite: exclude;
-          -webkit-mask-composite: xor;
-          background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
-        }
-      `}
+          /* BORDER */
+          &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            padding: 0.0625rem;
+            border-radius: 0.375rem;
+            mask: linear-gradient(#fff 0 0) content-box,
+              linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+            background: ${background};
+          }
+        `};
     `
   }}
 `

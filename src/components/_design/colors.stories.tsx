@@ -39,7 +39,7 @@ const ColorsTemplate: StoryFn<any> = () => {
         <Circle className="bg-base0"></Circle>
         <Circle
           className="bg-base1 text-text"
-          style={{ border: `1px solid ${theme.color.text}` }}
+          style={{ border: `0.0625rem solid ${theme.color.text}` }}
         ></Circle>
         <Circle className="bg-base2"></Circle>
       </div>

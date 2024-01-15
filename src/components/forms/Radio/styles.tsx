@@ -83,7 +83,9 @@ export const StyledInputDot = styled.span`
   ${({ theme }) => {
     const { duration } = theme.transition
     const { dot, disabledType } = theme.form.radio
-    const [g0, g1] = dot.checked.background.colors
+    const { colors, deg, stops } = dot.checked.background
+    const [g0, g1] = colors
+    const [s0, s1] = stops
 
     return css`
       position: relative;
@@ -101,7 +103,11 @@ export const StyledInputDot = styled.span`
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
+        background-image: linear-gradient(
+          ${deg}deg,
+          ${g0} ${s0}%,
+          ${g1} ${s1}%
+        );
         visibility: hidden;
         clip-path: circle(0% at 50% 50%);
         will-change: visibility clip-path;
@@ -129,9 +135,9 @@ export const StyledInputDot = styled.span`
         ${disabledType === 'opacity'
           ? css`
               background-image: linear-gradient(
-                90deg,
-                ${g0}1A 0%,
-                ${g1}1A 100%
+                ${deg}deg,
+                ${g0}1A ${s0}%,
+                ${g1}1A ${s1}%
               );
             `
           : css`

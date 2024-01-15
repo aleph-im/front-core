@@ -22,6 +22,9 @@ import {
   ThemeBulletList,
   ThemeLabel,
   ThemeLogo,
+  ThemeNotification,
+  ThemeTab,
+  ThemeTag,
 } from './types'
 import { getGlowMinEffectCss } from '../styles'
 
@@ -220,6 +223,7 @@ const typo: ThemeTypo = {
     weight: 800,
     lineHeight: 'normal',
     size: pxToRem(10),
+    transform: 'uppercase',
   },
   body: {
     ...defaultFontTypo,
@@ -299,7 +303,7 @@ const select: ThemeFormSelect = {
   option: {
     color: color.text,
     background: color.translucid,
-    border: '1px solid #ffffff1a',
+    border: '0.0625rem solid #ffffff1a',
     selected: {
       color: color.base2,
       background: gradient.main0.fn,
@@ -482,12 +486,35 @@ const logo: ThemeLogo = {
   gap: '0.2em',
 }
 
+const notification: ThemeNotification = {
+  color: color.base1,
+}
+
+const tab: ThemeTab = {
+  color: {
+    default: color.base0,
+    active: color.main0,
+    disabled: `${color.base0}33`,
+  },
+}
+
+const tag: ThemeTag = {
+  color: {
+    text: color.text,
+    background: 'transparent',
+    border: color.disabled,
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
   bulletList,
   label,
   logo,
+  notification,
+  tab,
+  tag,
 }
 
 const theme: DefaultTheme = {

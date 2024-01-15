@@ -6,23 +6,28 @@ import tw from 'twin.macro'
 
 type NotificationVariantProps = { variant: NotificationCardVariant }
 
-export const StyledContainer = styled.div.attrs<NotificationVariantProps>(
-  (props) => addClasses(`gr-${props.variant}`)(props),
-)`
-  ${({ theme }) => css`
-    ${tw`p-6 break-words max-w-full`}
-    word-break: break-word;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    width: 31.25rem;
-    border-radius: 1.5rem;
+export const StyledContainer = styled.div<NotificationVariantProps>`
+  ${({ theme, variant }) => {
+    const { notification } = theme.component
+    const background =
+      notification.background?.[variant] || theme.gradient[variant]?.fn
 
-    && {
-      color: ${theme.color.base1};
-    }
-  `}
+    return css`
+      ${tw`p-6 break-words max-w-full`}
+      word-break: break-word;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      width: 31.25rem;
+      border-radius: 1.5rem;
+      background: ${background};
+
+      && {
+        color: ${notification.color};
+      }
+    `
+  }}
 `
 
 export const StyledHeaderContainer = styled.div.attrs(addClasses('tp-h7'))`

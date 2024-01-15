@@ -262,10 +262,7 @@ export type BulletListCheck = {
 export type ThemeBulletList = {
   bullet: {
     [kind: string]: BulletListCheck
-    // info: BulletListCheck
-    // success: BulletListCheck
-    // warning: BulletListCheck
-    // error: BulletListCheck
+    // kind: info | success | warning | error
   }
 }
 
@@ -282,12 +279,40 @@ export type ThemeLogo = {
   gap?: string
 }
 
+export type ThemeNotification = {
+  color: string
+  background?: {
+    [kind: string]: string
+    // kind: success | warning | error
+  }
+}
+
+export type ThemeTab = {
+  color: {
+    default: string
+    active: string
+    disabled: string
+    label?: string
+  }
+}
+
+export type ThemeTag = {
+  color: {
+    border: string
+    text: string
+    background: string
+  }
+}
+
 export type ThemeComponent = {
   icon: ThemeIcon
   button: ThemeButton
   bulletList: ThemeBulletList
   label: ThemeLabel
   logo: ThemeLogo
+  notification: ThemeNotification
+  tab: ThemeTab
+  tag: ThemeTag
 }
 
 // -----------------------------------

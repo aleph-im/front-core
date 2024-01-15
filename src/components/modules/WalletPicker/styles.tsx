@@ -29,5 +29,5 @@ export const StyledTitle = styled.h6.attrs(addClasses('tp-nav'))`
 
 export const BorderedDiv = styled.div`
   padding-top: 1.5rem;
-  border-top: ${({ theme }) => `1px solid ${theme.color.base0}33`};
+  border-top: ${({ theme }) => `0.0625rem solid ${theme.color.base0}33`};
 `

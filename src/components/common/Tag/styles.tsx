@@ -9,10 +9,14 @@ export const StyledTag = styled.span.attrs((props) => {
   }
 })`
   ${({ theme }) => {
+    const { color } = theme.component.tag
+
     return css`
       display: inline-block;
       padding: 0.5rem 1.125rem;
-      color: ${theme.color.text};
+      color: ${color.text};
+      background: ${color.background};
+      border: 0.0625rem solid ${color.border};
       margin: 0 auto;
       border-radius: 0.5rem;
     `

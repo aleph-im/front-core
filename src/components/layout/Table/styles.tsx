@@ -24,13 +24,13 @@ export const StyledTable = styled.table<TableProps<any>>`
       }
 
       th {
-        border-bottom: 1px solid #ffffff22;
+        border-bottom: 0.0625rem solid #ffffff22;
       }
 
       td {
         ${hasBorder &&
         css`
-          border-bottom: 1px ${borderType} #ffffff22;
+          border-bottom: 0.0625rem ${borderType} #ffffff22;
         `}
       }
 

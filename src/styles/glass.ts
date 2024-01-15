@@ -123,16 +123,16 @@ export function getGlassEffectBorderCss(color: string) {
       switch (color) {
         case 'base0':
           return css`
-            border: 1px solid #ffffff1a;
+            border: 0.0625rem solid #ffffff1a;
           `
         case 'base1':
           return css`
-            border: 1px solid #ffffff66;
+            border: 0.0625rem solid #ffffff66;
           `
         case 'colored0':
         default:
           return css`
-            border: 1px solid #ffffff1a;
+            border: 0.0625rem solid #ffffff1a;
           `
       }
     }}

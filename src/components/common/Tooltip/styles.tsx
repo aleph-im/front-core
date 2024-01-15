@@ -49,7 +49,7 @@ export const StyledContainer = styled.div.attrs(
         height: 100%;
         width: 100%;
         background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
-        padding: 1px;
+        padding: 0.0625rem;
         border-radius: 1.5rem;
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
