@@ -11,15 +11,8 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
   addClasses('tp-info'),
 )<StyledLabelProps>`
   ${({ theme, $variant, $kind }) => {
-    const color =
-      $variant === 'success'
-        ? 'main1'
-        : $variant === 'error'
-        ? 'extra1'
-        : $variant === 'info'
-        ? 'main0'
-        : 'main2'
-
+    const { label } = theme.component
+    const color = $variant
     const [g0, g1] = theme.gradient[color]?.colors || [color, color]
 
     return css`
@@ -29,12 +22,12 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
       border-radius: 0.375rem;
       line-height: normal !important;
       text-transform: uppercase;
-      color: ${theme.color.base2};
+      color: ${label.color.primary};
       background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
 
       ${$kind === 'secondary' &&
       css`
-        color: ${theme.color.base0};
+        color: ${label.color.secondary};
         background-image: none;
 
         /* BORDER */

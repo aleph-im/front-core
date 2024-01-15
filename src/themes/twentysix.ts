@@ -20,6 +20,7 @@ import {
   ThemeFormChip,
   ThemeComponent,
   ThemeBulletList,
+  ThemeLabel,
 } from './types'
 
 const breakpoint: ThemeBreakpoint = {
@@ -419,10 +420,18 @@ const bulletList: ThemeBulletList = {
   },
 }
 
+const label: ThemeLabel = {
+  color: {
+    primary: color.text,
+    secondary: color.text,
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
   bulletList,
+  label,
 }
 
 const theme: DefaultTheme = {

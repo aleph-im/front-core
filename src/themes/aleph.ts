@@ -20,6 +20,7 @@ import {
   ThemeFormChip,
   ThemeComponent,
   ThemeBulletList,
+  ThemeLabel,
 } from './types'
 import { getGlowMinEffectCss } from '../styles'
 
@@ -467,10 +468,18 @@ const bulletList: ThemeBulletList = {
   },
 }
 
+const label: ThemeLabel = {
+  color: {
+    primary: color.background,
+    secondary: color.text,
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
   bulletList,
+  label,
 }
 
 const theme: DefaultTheme = {

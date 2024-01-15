@@ -267,10 +267,18 @@ export type ThemeBulletList = {
   }
 }
 
+export type ThemeLabel = {
+  color: {
+    primary: string
+    secondary: string
+  }
+}
+
 export type ThemeComponent = {
   icon: ThemeIcon
   button: ThemeButton
   bulletList: ThemeBulletList
+  label: ThemeLabel
 }
 
 // -----------------------------------
