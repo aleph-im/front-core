@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 import { StyledLogoProps } from './types'
 
 export const StyledLogoContainer = styled.span<StyledLogoProps>`
-  ${({ size, text }) => {
+  ${({ theme, size, text }) => {
+    const { logo } = theme.component
+
     const logoSize = size
       ? !Number.isNaN(Number(size))
         ? `${size}px`
@@ -15,6 +17,7 @@ export const StyledLogoContainer = styled.span<StyledLogoProps>`
       align-items: center;
       background-color: transparent;
       font-size: ${logoSize};
+      gap: ${logo.gap};
 
       & > span {
         font-size: 1em;
@@ -25,7 +28,6 @@ export const StyledLogoContainer = styled.span<StyledLogoProps>`
 
       & > svg {
         font-size: ${text ? '0.8em' : '1em'};
-        ${text ? 'margin-right: 0.2em;' : ''};
       }
     `
   }}

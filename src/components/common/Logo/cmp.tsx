@@ -1,21 +1,24 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 import { StyledLogoContainer } from './styles'
 import { LogoProps } from './types'
-import LogoSvg from './img/logo'
 import TextGradient from '../TextGradient'
+import logos from './img'
 
 export const Logo = ({
-  text = 'Aleph.im',
+  text = false,
   color = 'text',
   size,
   ...rest
 }: LogoProps) => {
   const theme = useTheme()
+  const { logo } = theme.component
+
+  const LogoSvg = useMemo(() => logos[logo.img], [logo.img])
 
   const logoGradient = theme.gradient[color]?.colors[!text ? 1 : 0]
   const logoColor = logoGradient || theme.color[color] || color
-  text = typeof text === 'boolean' ? text && 'Aleph.im' : text
+  text = typeof text === 'boolean' ? text && logo.text : text || logo.text
 
   return (
     <StyledLogoContainer {...{ size, text, ...rest }}>

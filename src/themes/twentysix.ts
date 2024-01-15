@@ -21,6 +21,7 @@ import {
   ThemeComponent,
   ThemeBulletList,
   ThemeLabel,
+  ThemeLogo,
 } from './types'
 
 const breakpoint: ThemeBreakpoint = {
@@ -209,9 +210,11 @@ const typo: ThemeTypo = {
   logo: {
     ...defaultFontTypo,
     family: font.family.head,
-    style: 'italic',
-    weight: 600,
+    style: 'normal',
+    weight: 900,
     size: pxToRem(34),
+    spacing: '-0.05em',
+    transform: 'lowercase',
   },
   nav: {
     ...defaultFontTypo,
@@ -427,11 +430,18 @@ const label: ThemeLabel = {
   },
 }
 
+const logo: ThemeLogo = {
+  img: 'twentysix',
+  text: 'twentysix',
+  gap: '0',
+}
+
 const component: ThemeComponent = {
   icon,
   button,
   bulletList,
   label,
+  logo,
 }
 
 const theme: DefaultTheme = {

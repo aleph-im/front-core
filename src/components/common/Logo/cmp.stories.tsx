@@ -31,7 +31,7 @@ const Template: StoryFn<typeof Logo> = (args) => <Logo {...args} />
 export const OnlyIcon = Template.bind({})
 OnlyIcon.args = {
   ...defaultArgs,
-  text: '',
+  text: false,
 }
 OnlyIcon.parameters = {
   ...defaultParams,
@@ -42,6 +42,7 @@ OnlyIcon.parameters = {
 export const WithText = Template.bind({})
 WithText.args = {
   ...defaultArgs,
+  text: true,
 }
 WithText.parameters = {
   ...defaultParams,

@@ -33,6 +33,8 @@ export type Typo = {
   weight: number
   style: 'normal' | 'italic'
   lineHeight: number | string | 'normal'
+  spacing?: string
+  transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'none'
 }
 export type ThemeTypo = Record<TypoKind, Typo>
 
@@ -274,11 +276,18 @@ export type ThemeLabel = {
   }
 }
 
+export type ThemeLogo = {
+  img: string
+  text: string
+  gap?: string
+}
+
 export type ThemeComponent = {
   icon: ThemeIcon
   button: ThemeButton
   bulletList: ThemeBulletList
   label: ThemeLabel
+  logo: ThemeLogo
 }
 
 // -----------------------------------

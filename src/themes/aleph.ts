@@ -21,6 +21,7 @@ import {
   ThemeComponent,
   ThemeBulletList,
   ThemeLabel,
+  ThemeLogo,
 } from './types'
 import { getGlowMinEffectCss } from '../styles'
 
@@ -475,11 +476,18 @@ const label: ThemeLabel = {
   },
 }
 
+const logo: ThemeLogo = {
+  img: 'aleph',
+  text: 'Aleph.im',
+  gap: '0.2em',
+}
+
 const component: ThemeComponent = {
   icon,
   button,
   bulletList,
   label,
+  logo,
 }
 
 const theme: DefaultTheme = {

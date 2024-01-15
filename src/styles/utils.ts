@@ -50,13 +50,16 @@ export function getBackgroundGradientCss(color: keyof ThemeGradient) {
 export function getTypoCss(typo: keyof ThemeTypo) {
   return css`
     ${({ theme }) => {
-      const { family, style, weight, size, lineHeight } = theme.typo[typo]
+      const { family, style, weight, size, lineHeight, spacing, transform } =
+        theme.typo[typo]
       return css`
         font-family: ${family};
         font-style: ${style};
         font-weight: ${weight};
         font-size: ${size}rem;
         line-height: ${lineHeight};
+        letter-spacing: ${spacing};
+        text-transform: ${transform};
       `
     }}
   `

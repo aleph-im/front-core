@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledLogoSvgProps } from '../types'
 
-export const LogoSvg = ({ color = '#ffffff' }: StyledLogoSvgProps) => {
+export const AlephLogoSvg = ({ color = '#ffffff' }: StyledLogoSvgProps) => {
   return (
     <svg
       height="1.2em"
@@ -29,4 +29,4 @@ export const LogoSvg = ({ color = '#ffffff' }: StyledLogoSvgProps) => {
   )
 }
 
-export default LogoSvg
+export default AlephLogoSvg
