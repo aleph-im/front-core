@@ -26,6 +26,8 @@ import {
   ThemeTab,
   ThemeTag,
   ThemeFormSwitch,
+  ThemeSidebar,
+  ThemeRouterLink,
 } from './types'
 import { getGlowMinEffectCss } from '../styles'
 
@@ -535,6 +537,58 @@ const tag: ThemeTag = {
   },
 }
 
+const routerLink: ThemeRouterLink = {
+  variant: {
+    '1': {
+      color: {
+        default: `${color.main0}66`,
+        hover: color.main0,
+        active: color.main0,
+        disabled: '#92929280',
+      },
+    },
+    '2': {
+      color: {
+        default: color.white,
+        hover: color.main0,
+        active: color.main0,
+        disabled: '#92929280',
+      },
+    },
+    '3': {
+      color: {
+        default: color.white,
+        hover: color.white,
+        active: color.white,
+        disabled: '#92929280',
+      },
+    },
+  },
+}
+const sidebar: ThemeSidebar = {
+  nav1: {
+    background: '#0000004c',
+    logo: {
+      padding: '2rem 0 3rem',
+      size: pxToRem(24),
+    },
+    active: {
+      background2: color.main0,
+    },
+  },
+  nav2: {
+    color: color.white,
+    background: '#00000020',
+    progress: {
+      color: color.main0,
+    },
+    toggle: {
+      color: color.base1,
+      background: color.white,
+    },
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
@@ -544,6 +598,8 @@ const component: ThemeComponent = {
   notification,
   tab,
   tag,
+  routerLink,
+  sidebar,
 }
 
 const theme: DefaultTheme = {

@@ -44,7 +44,7 @@ export const WalletPicker = forwardRef(
         {address ? (
           <>
             <div tw="flex items-center gap-4 mb-6">
-              <Logo color="base0" size="3rem" text="" />
+              <Logo color="base0" size="3rem" />
               <div tw="leading-3">
                 <div
                   className="tp-code1 fs-24"

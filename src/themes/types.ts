@@ -332,6 +332,53 @@ export type ThemeTag = {
   }
 }
 
+export type RouterLinkVariant = {
+  color: {
+    default: string
+    hover: string
+    active: string
+    disabled: string
+  }
+}
+
+export type ThemeRouterLink = {
+  variant: {
+    1: RouterLinkVariant
+    2: RouterLinkVariant
+    3: RouterLinkVariant
+  }
+}
+
+export type ThemeSidebar = {
+  nav1: {
+    background: string
+    logo: {
+      background?: string
+      size: number
+      padding: string
+    }
+    active: {
+      background?: string
+      background2?: string
+    }
+  }
+  nav2: {
+    color: string
+    background: string
+    progress: {
+      color: string
+    }
+    toggle: {
+      color: string
+      background: string
+    }
+    active?: {
+      color?: string
+      background?: string
+    }
+  }
+}
+
 export type ThemeComponent = {
   icon: ThemeIcon
   button: ThemeButton
@@ -341,6 +388,8 @@ export type ThemeComponent = {
   notification: ThemeNotification
   tab: ThemeTab
   tag: ThemeTag
+  routerLink: ThemeRouterLink
+  sidebar: ThemeSidebar
 }
 
 // -----------------------------------

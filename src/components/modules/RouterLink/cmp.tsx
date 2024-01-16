@@ -26,6 +26,7 @@ export const RouterLink = ({
           $disabled,
           $hasIcon: !!icon,
           $hasFlag: !!flag,
+          className: $isActive ? '_active' : '',
         }}
       >
         {!!icon && <StyledRouteLinkIcon name={icon} />}

@@ -57,125 +57,134 @@ export type StyledRouterLinkProps = {
 export const StyledRouterLink = styled.div.attrs(
   addClasses('tp-nav'),
 )<StyledRouterLinkProps>`
-  ${({
-    theme,
-    $disabled,
-    $isActive,
-    $hasIcon,
-    $hasFlag,
-    $variant = '2',
-  }) => css`
-    ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap`}
+  ${({ theme, $disabled, $isActive, $hasIcon, $hasFlag, $variant = '2' }) => {
+    const routerLink = theme.component.routerLink.variant[$variant]
 
-    transition: box-shadow ease-in-out 0.25s 0s;
+    return css`
+      ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap`}
 
-    ${$isActive &&
-    css`
-      ${tw`cursor-default`}
-    `}
+      transition: box-shadow ease-in-out 0.25s 0s;
 
-    ${$disabled &&
-    css`
-      ${tw`cursor-not-allowed`}
-    `}
+      ${$isActive &&
+      css`
+        ${tw`cursor-default`}
+      `}
+
+      ${$disabled &&
+      css`
+        ${tw`cursor-not-allowed`}
+      `}
  
     ${$hasFlag &&
-    css`
-      ${tw`pr-4`}
-    `}
+      css`
+        ${tw`pr-4`}
+      `}
     
     & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-      transition: color ease-in-out 0.25s 0s;
-    }
+        transition: color ease-in-out 0.25s 0s;
+      }
 
-    ${$variant === '1'
-      ? css`
-          & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-            color: ${theme.color.main0}${$isActive ? 'ff' : '66'};
-          }
-
-          &:hover {
+      ${$variant === '1'
+        ? css`
             & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              color: ${theme.color.main0};
-            }
-          }
-
-          ${$isActive &&
-          css`
-            && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-              color: ${theme.color.main0};
-            }
-          `}
-
-          ${$disabled &&
-          css`
-            && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-              color: ${$isActive ? `${theme.color.main0}66` : '#92929280'};
-            }
-          `}
-        `
-      : $variant === '2'
-      ? css`
-          & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-            color: ${theme.color.base0};
-          }
-
-          &:hover {
-            & ${StyledRouteLinkIcon} {
-              color: ${theme.color.main0};
+              color: ${$isActive
+                ? routerLink.color.active
+                : routerLink.color.default};
             }
 
-            & ${StyledRouteLinkText} {
-              color: ${!$hasIcon ? theme.color.main0 : theme.color.base0};
-            }
-          }
-
-          ${$isActive &&
-          css`
-            && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-              color: ${theme.color.main0};
-            }
-          `}
-
-          ${$disabled &&
-          css`
-            && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-              color: ${$isActive ? `${theme.color.main0}66` : '#92929280'};
-            }
-          `}
-        `
-      : css`
-          & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-            color: ${theme.color.base0};
-          }
-
-          &:hover {
-            box-shadow: inset 0px -1px 0px 0px ${theme.color.base0};
-          }
-
-          ${$isActive &&
-          css`
-            && {
-              box-shadow: inset 0px -1px 0px 0px ${theme.color.base0};
-
+            &:hover {
               & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                color: ${theme.color.base0};
+                color: ${routerLink.color.hover};
               }
             }
-          `}
 
-          ${$disabled &&
-          css`
-            && {
-              box-shadow: inset 0px -1px 0px 0px #92929280;
+            ${$isActive &&
+            css`
+              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
+                color: ${routerLink.color.active};
+              }
+            `}
 
-              & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                color: #92929280;
+            ${$disabled &&
+            css`
+              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
+                color: ${$isActive
+                  ? `${routerLink.color.active}66`
+                  : routerLink.color.disabled};
+              }
+            `}
+          `
+        : $variant === '2'
+        ? css`
+            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+              color: ${routerLink.color.default};
+            }
+
+            &:hover {
+              & ${StyledRouteLinkIcon} {
+                color: ${routerLink.color.hover};
+              }
+
+              & ${StyledRouteLinkText} {
+                color: ${!$hasIcon || (routerLink as any).textHover
+                  ? routerLink.color.hover
+                  : routerLink.color.default};
               }
             }
+
+            ${$isActive &&
+            css`
+              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
+                color: ${routerLink.color.active};
+              }
+            `}
+
+            ${$disabled &&
+            css`
+              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
+                color: ${$isActive
+                  ? `${routerLink.color.active}66`
+                  : routerLink.color.disabled};
+              }
+            `}
+          `
+        : css`
+            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+              color: ${routerLink.color.default};
+            }
+
+            &:hover {
+              & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+                color: ${routerLink.color.hover};
+              }
+
+              box-shadow: inset 0px -1px 0px 0px ${routerLink.color.hover};
+            }
+
+            ${$isActive &&
+            css`
+              && {
+                box-shadow: inset 0px -1px 0px 0px ${routerLink.color.active};
+
+                & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+                  color: ${routerLink.color.active};
+                }
+              }
+            `}
+
+            ${$disabled &&
+            css`
+              && {
+                box-shadow: inset 0px -1px 0px 0px ${routerLink.color.disabled};
+
+                & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+                  color: ${routerLink.color.disabled};
+                }
+              }
+            `}
           `}
-        `}
-  `}
+    `
+  }}
 `
 
 export type StyledRouteLinkIconProps = Omit<IconProps, 'size' | 'prefix'>
@@ -193,9 +202,9 @@ export const StyledRouteLinkIcon = styled(Icon).attrs<StyledRouteLinkIconProps>(
 `
 
 export const StyledRouteLinkText = styled.div`
-  ${tw`flex items-center justify-start gap-2.5 whitespace-nowrap w-full overflow-hidden h-6`}
+  ${tw`flex items-center justify-start gap-2.5 whitespace-nowrap max-w-full overflow-hidden h-6`}
 `
 
 export const StyledNotificationBadge = styled(NotificationBadge)`
-  ${tw`absolute top-0.5 right-0`}
+  ${tw`relative top-0.5 -left-1 shrink-0 self-start`}
 `

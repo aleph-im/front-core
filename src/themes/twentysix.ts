@@ -26,6 +26,8 @@ import {
   ThemeTab,
   ThemeTag,
   ThemeFormSwitch,
+  ThemeSidebar,
+  ThemeRouterLink,
 } from './types'
 
 const breakpoint: ThemeBreakpoint = {
@@ -480,6 +482,65 @@ const tag: ThemeTag = {
   },
 }
 
+const routerLink: ThemeRouterLink = {
+  variant: {
+    '1': {
+      color: {
+        default: color.white,
+        hover: color.main1,
+        active: color.main1,
+        disabled: '#92929280',
+      },
+    },
+    '2': {
+      color: {
+        default: color.white,
+        hover: color.main1,
+        active: color.main1,
+        disabled: '#92929280',
+      },
+    },
+    '3': {
+      color: {
+        default: color.white,
+        hover: color.white,
+        active: color.white,
+        disabled: '#92929280',
+      },
+    },
+  },
+}
+
+const sidebar: ThemeSidebar = {
+  nav1: {
+    background: color.dark3,
+    logo: {
+      background: color.main1,
+      padding: '2rem 0',
+      size: pxToRem(38),
+    },
+    active: {
+      background: color.dark2,
+      background2: color.main1,
+    },
+  },
+  nav2: {
+    color: color.white,
+    background: color.dark2,
+    progress: {
+      color: color.main1,
+    },
+    toggle: {
+      color: color.dark2,
+      background: color.white,
+    },
+    active: {
+      color: color.black,
+      background: color.main1,
+    },
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
@@ -489,6 +550,8 @@ const component: ThemeComponent = {
   notification,
   tab,
   tag,
+  routerLink,
+  sidebar,
 }
 
 const theme: DefaultTheme = {

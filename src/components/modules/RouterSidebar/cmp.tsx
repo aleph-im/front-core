@@ -6,12 +6,15 @@ import {
   StyledRouterLink1,
   StyledNav2,
   StyledRouterLink2,
-  StyledNav2LinkContainer,
+  StyledNav2Container,
   StyledNav2Title,
   StyledProgressBar,
   StyledSidebar,
   StyledStorageContainer,
   StyledToggleButton,
+  StyledLogoContainer,
+  StyledNav1Container,
+  StyledNav2LinkContainer,
 } from './styles'
 import React from 'react'
 import { RouteProps, RouterSidebarProps } from './types'
@@ -102,63 +105,71 @@ export const RouterSidebar = ({
       }}
     >
       <StyledNav1>
-        <StyledLogo />
-        {routes.map((route) => (
-          <RouteMemo
-            key={route.href}
-            {...{
-              route,
-              Link,
-              pathname,
-              level: 0,
-            }}
-          />
-        ))}
+        <StyledNav1Container>
+          <StyledLogoContainer>
+            <StyledLogo />
+          </StyledLogoContainer>
+          {routes.map((route) => (
+            <RouteMemo
+              key={route.href}
+              {...{
+                route,
+                Link,
+                pathname,
+                level: 0,
+                $isOpen: open,
+              }}
+            />
+          ))}
+        </StyledNav1Container>
       </StyledNav1>
       <StyledNav2
         onClick={handleToggle}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
-        <StyledNav2LinkContainer
-          onClick={handlePreventPropagation}
-          onMouseOver={handlePreventPropagation}
-          onMouseOut={handlePreventPropagation}
-        >
-          {currentRoute?.children && (
-            <>
-              {currentRoute?.name && (
-                <StyledNav2Title>{currentRoute?.name}</StyledNav2Title>
-              )}
-              {currentRoute?.children.map((route) => (
-                <RouteMemo
-                  key={route.href}
-                  {...{
-                    route,
-                    Link,
-                    pathname,
-                    level: 1,
-                  }}
-                />
-              ))}
-            </>
-          )}
-        </StyledNav2LinkContainer>
-        <div tw="flex-1" />
-        <div tw="py-12 flex flex-col justify-between h-[14.9375rem]">
-          <div tw="px-6">
-            <StyledToggleButton onClick={handleToggle} />
-          </div>
-          <StyledStorageContainer>
-            <div tw="mb-4 flex gap-1 flex-wrap">
-              <span tw="whitespace-nowrap">{consumedSize.toFixed(3)} GB</span>
-              <span tw="opacity-60 font-normal whitespace-nowrap">
-                of {allowedSize.toFixed(3)} GB
-              </span>
+        <StyledNav2Container>
+          <StyledNav2LinkContainer
+            onClick={handlePreventPropagation}
+            onMouseOver={handlePreventPropagation}
+            onMouseOut={handlePreventPropagation}
+          >
+            {currentRoute?.children && (
+              <>
+                {currentRoute?.name && (
+                  <StyledNav2Title>{currentRoute?.name}</StyledNav2Title>
+                )}
+                {currentRoute?.children.map((route) => (
+                  <RouteMemo
+                    key={route.href}
+                    {...{
+                      route,
+                      Link,
+                      pathname,
+                      level: 1,
+                      $isOpen: open,
+                    }}
+                  />
+                ))}
+              </>
+            )}
+          </StyledNav2LinkContainer>
+          <div tw="flex-1" />
+          <div tw="py-12 flex flex-col justify-between h-[14.9375rem] w-full">
+            <div tw="px-6">
+              <StyledToggleButton onClick={handleToggle} />
             </div>
-            <StyledProgressBar $percent={storePercent} />
-          </StyledStorageContainer>
-        </div>
+            <StyledStorageContainer>
+              <div tw="mb-4 flex gap-1 flex-wrap">
+                <span tw="whitespace-nowrap">{consumedSize.toFixed(3)} GB</span>
+                <span tw="opacity-60 font-normal whitespace-nowrap">
+                  of {allowedSize.toFixed(3)} GB
+                </span>
+              </div>
+              <StyledProgressBar $percent={storePercent} />
+            </StyledStorageContainer>
+          </div>
+        </StyledNav2Container>
       </StyledNav2>
     </StyledSidebar>
   )

@@ -13,6 +13,11 @@ import {
   StyledRouteLinkText,
 } from '../RouterLink/styles'
 
+const nav1OpenSize = 4.5
+const nav1CloseSize = 0.375
+const nav2OpenSize = 18.75
+const nav2CloseSize = nav1OpenSize
+
 export const styledLinkContentPaddingCss = css`
   ${tw`py-2 px-6`}
 `
@@ -22,8 +27,18 @@ export const StyledLink = styled.div`
 `
 
 export const StyledNav1 = styled.nav`
-  ${tw`h-full w-full flex flex-col`}
-  background-color: #0000004c;
+  ${({ theme }) => {
+    const { nav1 } = theme.component.sidebar
+
+    return css`
+      ${tw`h-full w-full flex flex-col overflow-hidden`}
+      background-color: ${nav1.background};
+    `
+  }}
+`
+
+export const StyledNav1Container = styled.div`
+  ${tw`flex flex-col items-start`}
 `
 
 export type StyledRouterLink1Props = Omit<RouterLinkProps, 'variant'>
@@ -37,30 +52,47 @@ export const StyledRouterLink1 = styled(
     route: { ...props.route, name: undefined, flag: undefined },
   }
 })`
-  ${({ theme, isActive }) => css`
-    ${StyledRouterLink} {
-      ${styledLinkContentPaddingCss}
+  ${({ theme, isActive }) => {
+    const { nav1 } = theme.component.sidebar
 
-      ${isActive &&
-      css`
-        &::after {
-          ${tw`absolute -top-2 left-0 h-full opacity-0`}
-          content: '';
-          width: 0.375rem;
-          background-color: ${theme.color.main0};
-        }
-      `}
-    }
-  `}
+    return css`
+      ${StyledRouterLink} {
+        ${styledLinkContentPaddingCss}
+
+        ${isActive &&
+        css`
+          background-color: ${nav1.active.background};
+
+          &::after {
+            ${tw`absolute -top-2 left-0 h-full opacity-0`}
+            content: '';
+            width: ${nav1CloseSize}rem;
+            background-color: ${nav1.active.background2};
+          }
+        `}
+      }
+    `
+  }}
 `
 
 export const StyledNav2 = styled.nav`
-  ${tw`flex flex-col h-full overflow-hidden`}
-  background-color: #00000020;
+  ${({ theme }) => {
+    const { nav2 } = theme.component.sidebar
 
-  box-sizing: content-box;
-  padding-left: 0;
-  box-shadow: 0px 0px 0px 0px #00000020;
+    return css`
+      ${tw`flex flex-col h-full overflow-hidden`}
+      color: ${nav2.color};
+      background: ${nav2.background};
+
+      box-sizing: content-box;
+      padding-left: 0;
+      box-shadow: 0px 0px 0px 0px #00000020;
+    `
+  }}
+`
+
+export const StyledNav2Container = styled.div`
+  ${tw`flex flex-col items-start h-full`}
 `
 
 export const StyledNav2Title = styled.div.attrs(addClasses('tp-nav'))`
@@ -69,7 +101,7 @@ export const StyledNav2Title = styled.div.attrs(addClasses('tp-nav'))`
 `
 
 export const StyledNav2LinkContainer = styled.div`
-  ${tw`flex flex-col items-start cursor-auto`}
+  ${tw`flex flex-col items-start cursor-auto w-full`}
   padding-top: 7rem;
   padding-bottom: 4rem;
 `
@@ -83,25 +115,36 @@ export const StyledRouterLink2 = styled(
     ...props,
     variant: '2',
   }
-})`
+})<StyledRouterLink2Props>`
   ${StyledRouterLink} {
     ${styledLinkContentPaddingCss}
-    ${tw`inline-flex w-auto max-w-full overflow-hidden`}
+    ${tw`flex max-w-full overflow-hidden`}
   }
 `
 
+export const StyledLogoContainer = styled.div`
+  ${({ theme }) => {
+    const { logo } = theme.component.sidebar.nav1
+
+    return css`
+      ${tw`flex items-center justify-center`}
+      width: ${nav2CloseSize}rem;
+      background: ${logo?.background};
+      padding: ${logo?.padding};
+    `
+  }}
+`
+
 export const StyledLogo = styled(Logo).attrs((props) => {
+  const { logo } = props.theme.component.sidebar.nav1
+
   return {
     ...props,
-    size: '1.5rem',
-    text: '',
+    size: `${logo.size}rem`,
   }
 })`
   ${styledLinkContentPaddingCss}
-  ${tw`inline-flex items-center justify-center h-8 mt-8 mb-12 py-0`}
-  & > svg {
-    ${tw`shrink-0`}
-  }
+  ${tw`inline-flex items-center justify-center px-0 py-0`}
 `
 
 export const StyledToggleButton = styled(Icon).attrs((props) => {
@@ -110,11 +153,15 @@ export const StyledToggleButton = styled(Icon).attrs((props) => {
     name: 'angle-right', //props.$open ? 'angle-left' : 'angle-right',
   }
 })`
-  ${({ theme }) => css`
-    ${tw`!w-4 !h-4 p-0.5 !box-border cursor-pointer origin-center`}
-    color: ${theme.color.base1};
-    background-color: ${theme.color.base0};
-  `}
+  ${({ theme }) => {
+    const { toggle } = theme.component.sidebar.nav2
+
+    return css`
+      ${tw`!w-4 !h-4 p-0.5 !box-border cursor-pointer origin-center`}
+      color: ${toggle.color};
+      background-color: ${toggle.background};
+    `
+  }}
 `
 
 export const StyledStorageContainer = styled.div.attrs(addClasses('tp-body3'))`
@@ -124,10 +171,11 @@ export const StyledStorageContainer = styled.div.attrs(addClasses('tp-body3'))`
 // https://github.com/aleph-im/aleph-account/blob/8b920e34fab9f4f70e3387eed2bd5839ae923971/src/layouts/MainLayout.vue#L131C14-L131C14
 export const StyledProgressBar = styled.div<{ $percent: number }>(
   ({ theme, $percent }) => {
+    const { color } = theme.component.sidebar.nav2.progress
+
     // @note: add a min width on the bar if percent is gt 0
     $percent = $percent > 0 ? Math.max($percent, 0.05) : $percent
 
-    const color = theme.gradient.main0.fn
     const bgColor = `${theme.color.base0}20`
 
     return [
@@ -210,20 +258,25 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
     )}
   `}
 
-  ${({ $isOpen, $isHover, $speed = 1 }) =>
+  ${({ theme, $isOpen, $isHover, $speed = 0.5 }) =>
     $isOpen || $isOpen === undefined
       ? css`
           & ${StyledNav1} {
-            width: 4.5rem;
+            width: ${nav1OpenSize}rem;
             transition: width ease-in-out ${0.35 / $speed}s ${0.4 / $speed}s;
           }
 
-          & ${StyledNav1} ${StyledRouteLinkIcon}, & ${StyledLogo} {
+          & ${StyledRouterLink1} ${StyledRouteLinkIcon}, & ${StyledLogo} {
             ${tw`opacity-100 visible`}
 
             transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 / $speed}s,
               visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
               color ease-in-out 0.25s 0s !important;
+          }
+
+          & ${StyledLogoContainer} {
+            transition: background-color ease-in-out ${0.7 / $speed}s
+              ${0.2 / $speed}s;
           }
 
           & ${StyledRouterLink1} ${StyledRouterLink}::after {
@@ -233,7 +286,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNav2} {
-            width: 18.75rem;
+            width: ${nav2OpenSize}rem;
 
             transition: width ease-in-out ${0.5 / $speed}s ${0.1 / $speed}s,
               padding-left ease-in-out ${0.4 / $speed}s 0s,
@@ -245,7 +298,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             `}
           }
 
-          & ${StyledNav2LinkContainer} {
+          & ${StyledNav1Container}, & ${StyledNav2Container} {
             width: 100%;
             transition: width linear 0s ${0.5 / $speed}s;
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
@@ -259,6 +312,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               font-size linear 0s ${0.5 / $speed}s,
               padding linear 0s ${0.5 / $speed}s,
               gap linear 0s ${0.5 / $speed}s,
+              background-color ease-in-out 0s ${0.5 / $speed}s,
               color ease-in-out 0.25s 0s !important;
           }
 
@@ -266,20 +320,14 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             font-size: 1.125rem;
           }
 
-          & ${StyledRouteLinkText} {
-            max-width: 100%;
-            transition: max-width linear 0s ${0.5 / $speed}s,
-              color ease-in-out 0.25s 0s !important;
-          }
-
           & ${StyledRouteLinkIcon} {
             transition: color ease-in-out 0.25s 0s !important;
           }
 
           & ${StyledNotificationBadge} {
-            ${tw`top-3.5 right-0.5`}
+            ${tw`-left-0.5`}
             transition: all linear 0s ${0.45 / $speed}s;
-            transition-property: top right;
+            transition-property: left;
           }
 
           & ${StyledToggleButton} {
@@ -297,10 +345,20 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               transition: max-width linear 0s ${0.3 / $speed}s;
             }
           }
+
+          & ${StyledRouterLink2} ${StyledRouterLink}._active {
+            background-color: ${theme.component.sidebar.nav2.active
+              ?.background};
+
+            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+              color: ${theme.component.sidebar.nav2.active?.color};
+              transition: color ease-in-out 0s ${0.5 / $speed}s !important;
+            }
+          }
         `
       : css`
           & ${StyledNav1} {
-            width: 0.375rem;
+            width: ${nav1CloseSize}rem;
             transition: width ease-in-out ${0.2 / $speed}s ${0.15 / $speed}s;
           }
 
@@ -312,6 +370,12 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
                color ease-in-out 0.25s 0s !important;
           }
 
+          & ${StyledLogoContainer} {
+            background-color: transparent;
+            transition: background-color ease-in-out ${0.7 / $speed}s
+              ${0.2 / $speed}s;
+          }
+
           & ${StyledRouterLink1} ${StyledRouterLink}::after {
             ${tw`top-0 opacity-100`}
             transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
@@ -319,7 +383,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNav2} {
-            width: 4.5rem;
+            width: ${nav2CloseSize}rem;
 
             transition: width ease-in-out ${0.4 / $speed}s ${0.25 / $speed}s,
               padding-left ease-in-out ${0.4 / $speed}s 0s,
@@ -329,15 +393,22 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             css`
               cursor: pointer;
 
-              padding-left: 0.375rem;
-              box-shadow: 0.375rem 0px 0px 0px #00000020;
+              padding-left: ${nav1CloseSize}rem;
+              box-shadow: ${nav1CloseSize}rem 0px 0px 0px #00000020;
             `}
           }
 
-          & ${StyledNav2LinkContainer} {
-            width: 4.5rem;
+          & ${StyledNav1Container}, & ${StyledNav2Container} {
             transition: width linear 0s ${0.45 / $speed}s;
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
+          }
+
+          & ${StyledNav1Container} {
+            width: ${nav1CloseSize}rem;
+          }
+
+          & ${StyledNav2Container} {
+            width: ${nav2CloseSize}rem;
           }
 
           & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
@@ -347,6 +418,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               transform linear 0s ${0.45 / $speed}s,
               font-size linear 0s ${0.45 / $speed}s,
               padding linear 0s ${0.45 / $speed}s,
+              background-color ease-in-out 0s ${0.45 / $speed}s,
               gap linear 0s ${0.45 / $speed}s;
           }
 
@@ -355,20 +427,14 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             font-size: 0.75rem;
           }
 
-          & ${StyledRouteLinkText} {
-            max-width: 0;
-            transition: max-width linear 0s ${0.45 / $speed}s,
-              color ease-in-out 0.25s 0s !important;
-          }
-
           & ${StyledRouteLinkIcon} {
             transition: color ease-in-out 0.25s 0s !important;
           }
 
           & ${StyledNotificationBadge} {
-            ${tw`top-2.5 right-3`}
+            ${tw`left-0`}
             transition: all linear 0s ${0.45 / $speed}s;
-            transition-property: top right;
+            transition-property: left;
           }
 
           & ${StyledToggleButton} {
@@ -384,6 +450,12 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             & > :first-child {
               max-width: 0;
               transition: max-width linear 0s ${0.46 / $speed}s;
+            }
+          }
+
+          & ${StyledRouterLink2} ${StyledRouterLink}._active {
+            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+              transition: color ease-in-out 0s ${0.45 / $speed}s !important;
             }
           }
         `};
