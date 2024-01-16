@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { RadioSize } from './types'
+import { normalizeBackgroundColor } from '../../../utils/color'
 
 export const StyledRadioContainer = styled.div<{ $size?: RadioSize }>`
   ${({ $size }) => {
@@ -83,9 +84,10 @@ export const StyledInputDot = styled.span`
   ${({ theme }) => {
     const { duration } = theme.transition
     const { dot, disabledType } = theme.form.radio
-    const { colors, deg, stops } = dot.checked.background
-    const [g0, g1] = colors
-    const [s0, s1] = stops
+
+    const { background, backgroundDisabled } = normalizeBackgroundColor(
+      dot.checked.background,
+    )
 
     return css`
       position: relative;
@@ -103,11 +105,7 @@ export const StyledInputDot = styled.span`
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background-image: linear-gradient(
-          ${deg}deg,
-          ${g0} ${s0}%,
-          ${g1} ${s1}%
-        );
+        background: ${background};
         visibility: hidden;
         clip-path: circle(0% at 50% 50%);
         will-change: visibility clip-path;
@@ -134,11 +132,7 @@ export const StyledInputDot = styled.span`
       ${StyledInput}:checked:disabled + &:after {
         ${disabledType === 'opacity'
           ? css`
-              background-image: linear-gradient(
-                ${deg}deg,
-                ${g0}1A ${s0}%,
-                ${g1}1A ${s1}%
-              );
+              background: ${backgroundDisabled};
             `
           : css`
               background: #00000040;

@@ -1,3 +1,5 @@
+import { Gradient } from '../themes/types'
+
 export const defaultBrowserColors: Record<string, string> = {
   aliceblue: '#f0f8ff',
   antiquewhite: '#faebd7',
@@ -162,4 +164,36 @@ export function colorHexToRGBALottie(
 ): [number, number, number, number] {
   const [r, g, b, a] = colorHexToRGBA(hex)
   return [r / 255, g / 255, b / 255, a / 255]
+}
+
+export function normalizeBackgroundColor(
+  color: string | Gradient,
+  disabledOpacity: string = '1A',
+): {
+  background: string
+  backgroundDisabled: string
+} {
+  const gradient =
+    typeof color === 'string'
+      ? {
+          colors: [color, color],
+          deg: 90,
+          stops: [0, 100],
+          fn: `linear-gradient(90deg, ${color} 0%, ${color} 100%)`,
+        }
+      : color
+
+  const disabledGradient = {
+    ...gradient,
+    fn: `linear-gradient(90deg, ${color}${disabledOpacity} 0%, ${color}${disabledOpacity} 100%)`,
+  }
+
+  const background = color === 'string' ? color : gradient.fn
+  const backgroundDisabled =
+    color === 'string' ? `${color}${disabledOpacity}` : disabledGradient.fn
+
+  return {
+    background,
+    backgroundDisabled,
+  }
 }

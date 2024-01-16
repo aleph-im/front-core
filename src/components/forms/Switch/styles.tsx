@@ -1,27 +1,31 @@
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
-import { getGlassEffectBorderCss } from '../../../styles'
+import { normalizeBackgroundColor } from '../../../utils/color'
 
 export const StyledSwitchContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 1.125rem;
 `
 
-export const StyledInputContainer = styled.div<{ label?: string }>`
-  ${({ label }) => {
+export const StyledInputContainer = styled.div`
+  ${({ theme }) => {
+    const { shadow } = theme.form.switch
+
     return css`
       position: relative;
       width: 3.75rem;
       height: 2rem;
-      border-radius: 0.5rem;
-      box-shadow: 0px 4px 24px #00000040;
-      ${label ? 'margin-right: 1.125rem;' : ''}
+      border-radius: 6.25rem;
+      box-shadow: ${shadow};
     `
   }}
 `
 
 export const StyledInput = styled.input.attrs(addClasses('fx-glass-base0'))`
   ${({ theme }) => {
+    const { border, disabledType } = theme.form.switch
+
     return css`
       position: absolute;
       appearance: none;
@@ -32,23 +36,31 @@ export const StyledInput = styled.input.attrs(addClasses('fx-glass-base0'))`
       width: 100%;
       height: 100%;
       margin: 0;
-      ${getGlassEffectBorderCss('base1')}
+      border: ${border.size}rem solid ${border.color};
 
       &:checked {
-        border-color: ${theme.color.main0};
+        border-color: ${border.checked.color};
       }
 
       &:focus {
-        border-color: ${theme.color.base0};
+        border-width: ${border.focus.size}rem;
+        border-color: ${border.focus.color};
       }
 
       &:disabled {
-        border-color: #ffffff0f;
-        cursor: not-allowed;
-      }
+        ${disabledType === 'opacity'
+          ? css`
+              border-color: #ffffff0f;
+              cursor: not-allowed;
 
-      &:checked:disabled {
-        border-color: ${theme.color.main0}1A;
+              &:checked {
+                border-color: ${border.checked.color}1A;
+              }
+            `
+          : css`
+              border-color: ${theme.color.disabled};
+              background: ${theme.color.disabled};
+            `}
       }
     `
   }}
@@ -56,7 +68,12 @@ export const StyledInput = styled.input.attrs(addClasses('fx-glass-base0'))`
 
 export const StyledInputDot = styled.span`
   ${({ theme }) => {
-    const [g0, g1] = theme.gradient.main0.colors
+    const { duration } = theme.transition
+    const { dot, disabledType } = theme.form.switch
+
+    const { background, backgroundDisabled } = normalizeBackgroundColor(
+      dot.checked.background,
+    )
 
     return css`
       position: absolute;
@@ -67,7 +84,7 @@ export const StyledInputDot = styled.span`
       height: 1.5rem;
       z-index: 1;
       border-radius: 50%;
-      background-color: ${theme.color.base0};
+      background: ${dot.background};
 
       &:after {
         content: '';
@@ -76,14 +93,14 @@ export const StyledInputDot = styled.span`
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
+        background: ${background};
         opacity: 0;
         will-change: opacity;
-        transition: opacity ease-in-out 0.35s 0s;
+        transition: all ease-in-out ${duration.fast}ms 0s;
       }
 
       will-change: transform;
-      transition: transform ease-in-out 0.35s 0s;
+      transition: transform ease-in-out ${duration.fast}ms 0s;
 
       ${StyledInput}:checked + & {
         transform: translateX(100%);
@@ -95,11 +112,24 @@ export const StyledInputDot = styled.span`
 
       ${StyledInput}:disabled + & {
         cursor: not-allowed;
-        background-color: #ffffff1a;
+
+        ${disabledType === 'opacity'
+          ? css`
+              background: #ffffff1a;
+            `
+          : css`
+              background: #ffffff;
+            `}
       }
 
       ${StyledInput}:checked:disabled + &:after {
-        background-image: linear-gradient(90deg, ${g0}1A 0%, ${g1}1A 100%);
+        ${disabledType === 'opacity'
+          ? css`
+              background: ${backgroundDisabled};
+            `
+          : css`
+              background: #ffffff;
+            `}
       }
     `
   }}

@@ -19,11 +19,13 @@ export const fieldErrorCss = css<{ error?: FormError }>`
 
       if (error.level === 'warning') {
         return css`
-          border: ${input.border.feedback.size}rem solid ${feedback.warning};
+          border-width: ${input.border.feedback.size}rem;
+          border-color: ${feedback.warning};
         `
       } else {
         return css`
-          border: ${input.border.feedback.size}rem solid ${feedback.error};
+          border-width: ${input.border.feedback.size}rem;
+          border-color: ${feedback.error};
         `
       }
     }}
@@ -82,7 +84,8 @@ export const fieldFocusCss = css`
     return css`
       &:focus,
       &._focus {
-        border: ${border.focus.size}rem solid ${border.color};
+        border-width: ${border.focus.size}rem;
+        border-color: ${border.color};
       }
     `
   }}

@@ -61,6 +61,10 @@ export type ThemeGradient = {
 export type ThemeColor = {
   [k: string]: string
 
+  white: string
+  black: string
+  translucid: string
+
   base0: string
   base1: string
   base2: string
@@ -154,14 +158,37 @@ export type ThemeFormSelect = {
   }
 }
 
+export type ThemeFormSwitch = {
+  disabledType?: 'opacity' | 'grayscale'
+  shadow?: string
+  dot: {
+    shadow?: string
+    background: string
+    checked: {
+      background: string | Gradient
+    }
+  }
+  border: {
+    color: string
+    size: number
+    focus: {
+      color: string
+      size: number
+    }
+    checked: {
+      color: string
+    }
+  }
+}
+
 export type ThemeFormRadio = {
   disabledType?: 'opacity' | 'grayscale'
   shadow?: string
   background: string
   dot: {
-    background?: string
+    background: string
     checked: {
-      background: Gradient
+      background: string | Gradient
     }
   }
   border: {
@@ -215,6 +242,7 @@ export type ThemeForm = {
   feedback: ThemeFormFeedback
   input: ThemeFormInput
   select: ThemeFormSelect
+  switch: ThemeFormSwitch
   radio: ThemeFormRadio
   checkbox: ThemeFormCheckbox
   chip: ThemeFormChip

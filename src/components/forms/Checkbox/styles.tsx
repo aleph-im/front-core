@@ -72,7 +72,8 @@ export const StyledInput = styled.input<{
       &:checked {
         box-shadow: ${check.checked.shadow?.($size)};
         background: ${check.checked.background};
-        border: ${border.checked.size}rem solid ${border.color};
+        border-width: ${border.checked.size}rem;
+        border-color: ${border.color};
       }
 
       &:focus {

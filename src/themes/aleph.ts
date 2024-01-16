@@ -25,6 +25,7 @@ import {
   ThemeNotification,
   ThemeTab,
   ThemeTag,
+  ThemeFormSwitch,
 } from './types'
 import { getGlowMinEffectCss } from '../styles'
 
@@ -127,6 +128,11 @@ const gradient: ThemeGradient = {
 
 const shadows = {
   black0: '0px 4px 24px #00000040',
+}
+
+const border = {
+  base0: '0.0625rem solid #ffffff1a',
+  base1: '0.0625rem solid #ffffff66',
 }
 
 const font: ThemeFont = {
@@ -303,11 +309,33 @@ const select: ThemeFormSelect = {
   option: {
     color: color.text,
     background: color.translucid,
-    border: '0.0625rem solid #ffffff1a',
+    border: border.base0,
     selected: {
       color: color.base2,
       background: gradient.main0.fn,
       shadow: '0px -18px 40px 7px rgba(0, 84, 255, 0.11)',
+    },
+  },
+}
+
+const switchcmp: ThemeFormSwitch = {
+  disabledType: 'opacity',
+  shadow: shadows.black0,
+  dot: {
+    background: color.white,
+    checked: {
+      background: gradient.main0,
+    },
+  },
+  border: {
+    color: '#ffffff66',
+    size: pxToRem(1),
+    focus: {
+      color: color.white,
+      size: pxToRem(1),
+    },
+    checked: {
+      color: color.main0,
     },
   },
 }
@@ -398,6 +426,7 @@ const form: ThemeForm = {
   feedback,
   input,
   select,
+  switch: switchcmp,
   radio,
   checkbox,
   chip,

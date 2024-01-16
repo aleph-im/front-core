@@ -25,6 +25,7 @@ import {
   ThemeNotification,
   ThemeTab,
   ThemeTag,
+  ThemeFormSwitch,
 } from './types'
 
 const breakpoint: ThemeBreakpoint = {
@@ -314,6 +315,28 @@ const select: ThemeFormSelect = {
   },
 }
 
+const switchcmp: ThemeFormSwitch = {
+  disabledType: 'grayscale',
+  shadow: shadows.purple0,
+  dot: {
+    background: color.black,
+    checked: {
+      background: color.main0,
+    },
+  },
+  border: {
+    color: color.black,
+    size: pxToRem(1),
+    focus: {
+      color: color.black,
+      size: pxToRem(2),
+    },
+    checked: {
+      color: color.main0,
+    },
+  },
+}
+
 const radio: ThemeFormRadio = {
   disabledType: 'grayscale',
   shadow: shadows.purple0,
@@ -374,6 +397,7 @@ const form: ThemeForm = {
   feedback,
   input,
   select,
+  switch: switchcmp,
   radio,
   checkbox,
   chip,

@@ -16,7 +16,7 @@ export const Switch = forwardRef(
 
     return (
       <StyledSwitchContainer {...{ className }}>
-        <StyledInputContainer {...{ label }}>
+        <StyledInputContainer>
           <StyledInput
             {...{
               type: 'checkbox',

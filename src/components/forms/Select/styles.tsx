@@ -58,7 +58,8 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       }
 
       &:focus {
-        border: ${border.focus.size}rem solid ${border.color};
+        border-width: ${border.focus.size}rem;
+        border-color: ${border.color};
       }
 
       ${fieldPlaceholderCss}
