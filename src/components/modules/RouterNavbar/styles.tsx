@@ -18,13 +18,13 @@ export const StyledRouterLink = styled(RouterLink).attrs<StyledRouterLinkProps>(
     }
   },
 )<StyledRouterLinkProps>`
-  ${({ $level }) => {
+  ${({ $level, route: { icon } }) => {
     return css`
       ${tw`w-full`}
 
       & ${StyledRouterLinkContent} {
-        padding-left: ${$level * 1.5}rem;
-        padding-right: ${$level * 1.5}rem;
+        padding-left: ${0.25 + $level * (!icon ? 3.125 : 1.5)}rem;
+        padding-right: ${0.25 + $level * 1.5}rem;
       }
 
       &,
@@ -44,9 +44,9 @@ export const StyledNavTitle = styled.div.attrs(
 )<StyledNavTitleProps>`
   ${({ $level }) => {
     return css`
-      ${tw`w-auto max-w-full uppercase box-content ml-1 h-6 py-3`}
-      padding-left: ${$level * 1.5}rem;
-      padding-right: ${$level * 1.5}rem;
+      ${tw`flex items-center w-auto max-w-full uppercase h-12`}
+      padding-left: ${0.25 + $level * 1.5}rem;
+      padding-right: ${0.25 + $level * 1.5}rem;
     `
   }}
 `

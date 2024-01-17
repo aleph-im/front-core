@@ -35,7 +35,26 @@ const Route = (props: RouteProps) => {
       {level <= 0 ? (
         <StyledRouterLink1 {...linkProps} />
       ) : (
-        <StyledRouterLink2 {...linkProps} />
+        <>
+          {route.children ? (
+            <>
+              {route.name && <StyledNav2Title>{route.name}</StyledNav2Title>}
+              {route?.children?.map((route) => (
+                <RouteMemo
+                  key={route.href}
+                  {...{
+                    route,
+                    Link,
+                    pathname,
+                    level: 1,
+                  }}
+                />
+              ))}
+            </>
+          ) : (
+            <StyledRouterLink2 {...linkProps} />
+          )}
+        </>
       )}
     </StyledLink>
   )
@@ -96,19 +115,33 @@ export const RouterSidebar = ({
   const allowedSize = (allowanceInfo?.allowedSize || 0) / 1024
   const storePercent = allowedSize ? consumedSize / allowedSize : 0
 
+  // -----------------------------------------
+
+  const logo = useMemo(
+    () => (
+      <Link href="/" route={{ href: '/' }}>
+        <StyledLogo />
+      </Link>
+    ),
+    [Link],
+  )
+
+  // -----------------------------------------
+
+  const $isOpen = open
+  const $isHover = hover && !!onToggle
+
   return (
     <StyledSidebar
       {...{
         $breakpoint,
-        $isOpen: open,
-        $isHover: hover,
+        $isOpen,
+        $isHover,
       }}
     >
       <StyledNav1>
         <StyledNav1Container>
-          <StyledLogoContainer>
-            <StyledLogo />
-          </StyledLogoContainer>
+          <StyledLogoContainer>{logo}</StyledLogoContainer>
           {routes.map((route) => (
             <RouteMemo
               key={route.href}
@@ -117,7 +150,6 @@ export const RouterSidebar = ({
                 Link,
                 pathname,
                 level: 0,
-                $isOpen: open,
               }}
             />
           ))}
@@ -134,31 +166,25 @@ export const RouterSidebar = ({
             onMouseOver={handlePreventPropagation}
             onMouseOut={handlePreventPropagation}
           >
-            {currentRoute?.children && (
-              <>
-                {currentRoute?.name && (
-                  <StyledNav2Title>{currentRoute?.name}</StyledNav2Title>
-                )}
-                {currentRoute?.children.map((route) => (
-                  <RouteMemo
-                    key={route.href}
-                    {...{
-                      route,
-                      Link,
-                      pathname,
-                      level: 1,
-                      $isOpen: open,
-                    }}
-                  />
-                ))}
-              </>
-            )}
+            {currentRoute?.children?.map((route) => (
+              <RouteMemo
+                key={route.href}
+                {...{
+                  route,
+                  Link,
+                  pathname,
+                  level: 1,
+                }}
+              />
+            ))}
           </StyledNav2LinkContainer>
           <div tw="flex-1" />
-          <div tw="py-12 flex flex-col justify-between h-[14.9375rem] w-full">
-            <div tw="px-6">
-              <StyledToggleButton onClick={handleToggle} />
-            </div>
+          <div tw="py-12 flex flex-col justify-between h-[14.9375rem] shrink-0 w-full">
+            {!!onToggle && (
+              <div tw="px-6">
+                <StyledToggleButton onClick={handleToggle} />
+              </div>
+            )}
             <StyledStorageContainer>
               <div tw="mb-4 flex gap-1 flex-wrap">
                 <span tw="whitespace-nowrap">{consumedSize.toFixed(3)} GB</span>

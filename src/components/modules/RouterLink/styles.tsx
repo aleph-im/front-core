@@ -61,7 +61,7 @@ export const StyledRouterLink = styled.div.attrs(
     const routerLink = theme.component.routerLink.variant[$variant]
 
     return css`
-      ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap`}
+      ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap h-7`}
 
       transition: box-shadow ease-in-out 0.25s 0s;
 
@@ -198,11 +198,11 @@ export const StyledRouteLinkIcon = styled(Icon).attrs<StyledRouteLinkIconProps>(
     }
   },
 )`
-  ${tw`relative h-6 p-1 shrink-0`}
+  ${tw`relative shrink-0`}
 `
 
 export const StyledRouteLinkText = styled.div`
-  ${tw`flex items-center justify-start gap-2.5 whitespace-nowrap max-w-full overflow-hidden h-6`}
+  ${tw`flex items-center justify-start gap-2.5 whitespace-nowrap max-w-full overflow-hidden`}
 `
 
 export const StyledNotificationBadge = styled(NotificationBadge)`

@@ -94,7 +94,7 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
         transition-property: opacity, visibility;
 
         & ${StyledRouterLink} {
-          ${tw`flex py-3`}
+          ${tw`flex h-12`}
 
           &._active {
             background-color: ${mobile.content.active?.background};
@@ -133,7 +133,7 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
             ${disableBackgroundCss}
 
             & ${StyledRouterLink} {
-              ${tw`inline-flex py-0`}
+              ${tw`inline-flex`}
 
               &._active {
                 background-color: transparent;

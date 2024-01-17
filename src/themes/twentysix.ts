@@ -529,6 +529,9 @@ const sidebar: ThemeSidebar = {
   nav2: {
     color: color.white,
     background: color.dark2,
+    title: {
+      color: color.light1,
+    },
     progress: {
       color: color.main1,
     },

@@ -376,6 +376,9 @@ export type ThemeSidebar = {
   nav2: {
     color: string
     background: string
+    title?: {
+      color: string
+    }
     progress: {
       color: string
     }

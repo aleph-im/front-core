@@ -18,10 +18,6 @@ const nav1CloseSize = 0.375
 const nav2OpenSize = 18.75
 const nav2CloseSize = nav1OpenSize
 
-export const styledLinkContentPaddingCss = css`
-  ${tw`py-2 px-6`}
-`
-
 export const StyledLink = styled.div`
   ${tw`w-full`}
 `
@@ -39,6 +35,7 @@ export const StyledNav1 = styled.nav`
 
 export const StyledNav1Container = styled.div`
   ${tw`flex flex-col items-start`}
+  width: ${nav1OpenSize}rem;
 `
 
 export type StyledRouterLink1Props = Omit<RouterLinkProps, 'variant'>
@@ -57,7 +54,7 @@ export const StyledRouterLink1 = styled(
 
     return css`
       ${StyledRouterLink} {
-        ${styledLinkContentPaddingCss}
+        ${tw`h-12 px-6 w-full justify-center`}
 
         ${isActive &&
         css`
@@ -86,7 +83,7 @@ export const StyledNav2 = styled.nav`
 
       box-sizing: content-box;
       padding-left: 0;
-      box-shadow: 0px 0px 0px 0px #00000020;
+      box-shadow: 0px 0px 0px 0px ${nav2.background};
     `
   }}
 `
@@ -96,14 +93,20 @@ export const StyledNav2Container = styled.div`
 `
 
 export const StyledNav2Title = styled.div.attrs(addClasses('tp-nav'))`
-  ${styledLinkContentPaddingCss}
-  ${tw`w-auto max-w-full uppercase`}
+  ${({ theme }) => {
+    const { title } = theme.component.sidebar.nav2
+
+    return css`
+      ${tw`h-12 px-6`}
+      ${tw`flex items-center w-auto max-w-full uppercase`}
+      color: ${title?.color};
+    `
+  }}
 `
 
 export const StyledNav2LinkContainer = styled.div`
-  ${tw`flex flex-col items-start cursor-auto w-full`}
-  padding-top: 7rem;
-  padding-bottom: 4rem;
+  ${tw`flex flex-col items-start cursor-auto w-full overflow-auto`}
+  margin-top: 6.5rem;
 `
 
 export type StyledRouterLink2Props = Omit<RouterLinkProps, 'variant'>
@@ -116,10 +119,15 @@ export const StyledRouterLink2 = styled(
     variant: '2',
   }
 })<StyledRouterLink2Props>`
-  ${StyledRouterLink} {
-    ${styledLinkContentPaddingCss}
-    ${tw`flex max-w-full overflow-hidden`}
-  }
+  ${({ route: { icon } }) => {
+    return css`
+      ${StyledRouterLink} {
+        ${tw`h-12 px-6`}
+        ${tw`flex max-w-full overflow-hidden`}
+        padding-left: ${!icon ? 3.125 : 1.5}rem;
+      }
+    `
+  }}
 `
 
 export const StyledLogoContainer = styled.div`
@@ -127,8 +135,8 @@ export const StyledLogoContainer = styled.div`
     const { logo } = theme.component.sidebar.nav1
 
     return css`
-      ${tw`flex items-center justify-center`}
-      width: ${nav2CloseSize}rem;
+      ${tw`flex items-center justify-center w-full`}
+      height: 6.5rem;
       background: ${logo?.background};
       padding: ${logo?.padding};
     `
@@ -143,8 +151,7 @@ export const StyledLogo = styled(Logo).attrs((props) => {
     size: `${logo.size}rem`,
   }
 })`
-  ${styledLinkContentPaddingCss}
-  ${tw`inline-flex items-center justify-center px-0 py-0`}
+  ${tw`inline-flex items-center justify-center`}
 `
 
 export const StyledToggleButton = styled(Icon).attrs((props) => {
@@ -189,7 +196,7 @@ export const StyledProgressBar = styled.div<{ $percent: number }>(
           ${tw`absolute top-0 left-0 w-full h-full`}
           content: '';
           border-radius: 1rem;
-          background-image: ${color};
+          background: ${color};
           clip-path: ${`inset(0 ${100 - $percent * 100}% 0 0);`};
         }
       `,
@@ -299,16 +306,20 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNav1Container}, & ${StyledNav2Container} {
-            width: 100%;
             transition: width linear 0s ${0.5 / $speed}s;
           }
 
+          & ${StyledNav1Container} {
+            width: ${nav1OpenSize}rem;
+          }
+
           & ${StyledNav2Container} {
+            width: ${nav2OpenSize}rem;
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
           & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
-            ${tw`relative left-0 translate-x-0 px-6 gap-2.5`}
+            ${tw`relative left-0 translate-x-0 gap-2.5`}
 
             transition: left linear 0s ${0.5 / $speed}s,
               transform linear 0s ${0.5 / $speed}s,
@@ -397,7 +408,8 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               cursor: pointer;
 
               padding-left: ${nav1CloseSize}rem;
-              box-shadow: ${nav1CloseSize}rem 0px 0px 0px #00000020;
+              box-shadow: ${nav1CloseSize}rem 0px 0px 0px
+                ${theme.component.sidebar.nav2.background};
             `}
           }
 
@@ -405,20 +417,17 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width linear 0s ${0.45 / $speed}s;
           }
 
-          & ${StyledNav2Container} {
-            animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
-          }
-
-          & ${StyledNav1Container} {
+          /* & ${StyledNav1Container} {
             width: ${nav1CloseSize}rem;
-          }
+          } */
 
           & ${StyledNav2Container} {
             width: ${nav2CloseSize}rem;
+            animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
           }
 
           & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
-            ${tw`relative left-1/2 -translate-x-1/2 px-6 gap-0`}
+            ${tw`relative left-1/2 -translate-x-1/2 gap-0`}
 
             transition: left linear 0s ${0.45 / $speed}s,
               transform linear 0s ${0.45 / $speed}s,

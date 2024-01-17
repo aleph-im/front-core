@@ -82,43 +82,53 @@ const ParentRoute = (props: ParentRouteProps) => {
 
   const newLevel = level + 1
 
-  return (
+  const subroutes = (
     <>
       <NavbarLink breakpoint={breakpoint}>
-        <StyledRouterLink
+        <StyledNavTitle {...{ $level: newLevel }}>{name}</StyledNavTitle>
+      </NavbarLink>
+      {children.map((route) => (
+        <RouteMemo
+          key={route.href}
           {...{
             route,
             Link,
-            isActive,
-            $level: level,
+            breakpoint,
+            pathname,
+            level: newLevel,
+            onClick,
             ...rest,
           }}
-          onClick={handleClick}
         />
-      </NavbarLink>
-      <StyledChildRoutes $breakpoint={breakpoint}>
-        <ToggleContainer open={!!active}>
-          <StyledChildRoutesContent>
-            <NavbarLink breakpoint={breakpoint}>
-              <StyledNavTitle {...{ $level: newLevel }}>{name}</StyledNavTitle>
-            </NavbarLink>
-            {children.map((route) => (
-              <RouteMemo
-                key={route.href}
-                {...{
-                  route,
-                  Link,
-                  breakpoint,
-                  pathname,
-                  level: newLevel,
-                  onClick,
-                  ...rest,
-                }}
-              />
-            ))}
-          </StyledChildRoutesContent>
-        </ToggleContainer>
-      </StyledChildRoutes>
+      ))}
+    </>
+  )
+
+  return (
+    <>
+      {level < 1 ? (
+        <>
+          <NavbarLink breakpoint={breakpoint}>
+            <StyledRouterLink
+              {...{
+                route,
+                Link,
+                isActive,
+                $level: level,
+                ...rest,
+              }}
+              onClick={handleClick}
+            />
+          </NavbarLink>
+          <StyledChildRoutes $breakpoint={breakpoint}>
+            <ToggleContainer open={!!active}>
+              <StyledChildRoutesContent>{subroutes}</StyledChildRoutesContent>
+            </ToggleContainer>
+          </StyledChildRoutes>
+        </>
+      ) : (
+        subroutes
+      )}
     </>
   )
 }

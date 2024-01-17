@@ -95,3 +95,110 @@ Default.args = {
 Default.parameters = {
   controls: { exclude: ['color', 'size'] },
 }
+
+export const NestedRoutes = Template.bind({})
+NestedRoutes.args = {
+  ...defaultArgs,
+  pathname: '/computing/instance',
+  routes: [
+    {
+      name: 'Console',
+      href: '/',
+      icon: 'console',
+      children: [
+        {
+          name: 'Solutions',
+          href: '/solutions',
+          children: [
+            {
+              name: 'Dashboard',
+              href: '/solutions/dashboard',
+            },
+          ],
+        },
+        {
+          name: 'Computing',
+          href: '/computing',
+          children: [
+            {
+              name: 'Functions',
+              href: '/computing/function',
+            },
+            {
+              name: 'Instances',
+              href: '/computing/instance',
+            },
+            {
+              name: 'Confidential',
+              href: '/computing/confidential',
+            },
+          ],
+        },
+        {
+          name: 'Storage',
+          href: '/storage',
+          children: [
+            {
+              name: 'Inmutable volumes',
+              href: '/storage/volume',
+            },
+          ],
+        },
+        {
+          name: 'Tools',
+          href: '#',
+          children: [
+            {
+              name: 'VRF',
+              href: 'https://medium.com/aleph-im/aleph-im-verifiable-random-function-vrf-b03544a7e904',
+              external: true,
+            },
+            {
+              name: 'Indexing framework',
+              href: 'https://docs.aleph.im/tools/indexer/',
+              external: true,
+            },
+          ],
+        },
+        {
+          name: 'Configure',
+          href: '/configure',
+          children: [
+            {
+              name: 'Secrets',
+              href: '/configure/ssh',
+            },
+            {
+              name: 'Custom domains',
+              href: '/configure/domain',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Account',
+      icon: 'profile',
+      href: 'https://account.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Explorer',
+      icon: 'explore',
+      href: 'https://explorer.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Swap',
+      icon: 'swap',
+      href: 'https://swap.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+  ],
+}
+NestedRoutes.parameters = {
+  controls: { exclude: ['color', 'size'] },
+}
