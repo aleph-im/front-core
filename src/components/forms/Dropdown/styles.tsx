@@ -102,7 +102,8 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
       & {
         ${isOpen &&
         css`
-          ${tw`opacity-100 visible top-0`}
+          ${tw`opacity-100 top-0`}
+          visibility: inherit;
         `}
       }
     `

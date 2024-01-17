@@ -28,7 +28,9 @@ import {
   ThemeFormSwitch,
   ThemeSidebar,
   ThemeRouterLink,
+  ThemeNavbar,
 } from './types'
+import { getGlassEffectCss } from '../styles'
 
 const breakpoint: ThemeBreakpoint = {
   '2xl': pxToRem(1400),
@@ -535,8 +537,31 @@ const sidebar: ThemeSidebar = {
       background: color.white,
     },
     active: {
-      color: color.black,
+      color: color.base2,
       background: color.main1,
+    },
+  },
+}
+
+const navbar: ThemeNavbar = {
+  logoText: true,
+  mobile: {
+    header: {
+      shadow: shadows.purple0,
+      css: () => getGlassEffectCss('base2'),
+    },
+    content: {
+      css: () => getGlassEffectCss('base2'),
+      color: color.white,
+      background: color.base2,
+      child: {
+        background: color.dark2,
+        radius: pxToRem(0),
+      },
+      active: {
+        color: color.base2,
+        background: color.main1,
+      },
     },
   },
 }
@@ -552,6 +577,7 @@ const component: ThemeComponent = {
   tag,
   routerLink,
   sidebar,
+  navbar,
 }
 
 const theme: DefaultTheme = {

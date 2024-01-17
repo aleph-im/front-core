@@ -258,7 +258,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
     )}
   `}
 
-  ${({ theme, $isOpen, $isHover, $speed = 0.5 }) =>
+  ${({ theme, $isOpen, $isHover, $speed = 1 }) =>
     $isOpen || $isOpen === undefined
       ? css`
           & ${StyledNav1} {
@@ -301,6 +301,9 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           & ${StyledNav1Container}, & ${StyledNav2Container} {
             width: 100%;
             transition: width linear 0s ${0.5 / $speed}s;
+          }
+
+          & ${StyledNav2Container} {
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
@@ -400,6 +403,9 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
 
           & ${StyledNav1Container}, & ${StyledNav2Container} {
             transition: width linear 0s ${0.45 / $speed}s;
+          }
+
+          & ${StyledNav2Container} {
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
           }
 

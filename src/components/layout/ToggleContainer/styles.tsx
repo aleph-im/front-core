@@ -28,7 +28,7 @@ export const StyledContainer = styled.div<{
       & ${StyledContent} {
         ${$variant === '2' &&
         css`
-          visibility: ${$isOpen ? 'visible' : 'hidden'};
+          visibility: ${$isOpen ? 'inherit' : 'hidden'};
           opacity: ${$isOpen ? '1' : '0'};
           transition: ${`all ease-in-out ${$duration1}ms ${
             $isOpen ? $duration2 : '0'

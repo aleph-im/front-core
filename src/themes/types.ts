@@ -1,4 +1,15 @@
-import { FlattenSimpleInterpolation } from 'styled-components'
+import {
+  FlattenInterpolation,
+  FlattenSimpleInterpolation,
+  SimpleInterpolation,
+} from 'styled-components'
+
+export type CssOutput =
+  | string
+  | FlattenInterpolation<any>
+  | FlattenSimpleInterpolation
+  | SimpleInterpolation
+  | undefined
 
 export type BreakpointId = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 export type ThemeBreakpoint = Record<BreakpointId, number>
@@ -284,7 +295,7 @@ export type ThemeButton = {
 export type BulletListCheck = {
   background?: string
   shadow?: string
-  css?: (...args: any[]) => string | FlattenSimpleInterpolation | undefined
+  css?: (...args: any[]) => CssOutput
 }
 
 export type ThemeBulletList = {
@@ -379,6 +390,34 @@ export type ThemeSidebar = {
   }
 }
 
+export type ThemeNavbar = {
+  logoText: boolean
+  mobile: {
+    header: {
+      background?: string
+      shadow?: string
+      css?: (...args: any[]) => CssOutput
+      open?: {
+        background: string
+      }
+    }
+    content: {
+      color: string
+      background?: string
+      shadow?: string
+      css?: (...args: any[]) => CssOutput
+      child: {
+        background: string
+        radius: number
+      }
+      active?: {
+        color?: string
+        background?: string
+      }
+    }
+  }
+}
+
 export type ThemeComponent = {
   icon: ThemeIcon
   button: ThemeButton
@@ -390,6 +429,7 @@ export type ThemeComponent = {
   tag: ThemeTag
   routerLink: ThemeRouterLink
   sidebar: ThemeSidebar
+  navbar: ThemeNavbar
 }
 
 // -----------------------------------

@@ -4,8 +4,11 @@ import tw from 'twin.macro'
 import { addClasses } from '../../../utils'
 import { BreakpointId } from '../../../themes'
 import { getResponsiveCss } from '../../../styles'
+import { StyledRouterLink as StyledRouterLinkContent } from '../RouterLink/styles'
 
-export type StyledRouterLinkProps = Omit<RouterLinkProps, 'variant'>
+export type StyledRouterLinkProps = Omit<RouterLinkProps, 'variant'> & {
+  $level: number
+}
 
 export const StyledRouterLink = styled(RouterLink).attrs<StyledRouterLinkProps>(
   (props) => {
@@ -14,16 +17,38 @@ export const StyledRouterLink = styled(RouterLink).attrs<StyledRouterLinkProps>(
       variant: '2',
     }
   },
-)`
-  ${tw`w-full`}
+)<StyledRouterLinkProps>`
+  ${({ $level }) => {
+    return css`
+      ${tw`w-full`}
 
-  &, & * {
-    ${tw`cursor-pointer!`}
-  }
+      & ${StyledRouterLinkContent} {
+        padding-left: ${$level * 1.5}rem;
+        padding-right: ${$level * 1.5}rem;
+      }
+
+      &,
+      & * {
+        ${tw`cursor-pointer!`}
+      }
+    `
+  }}
 `
 
-export const StyledNavTitle = styled.div.attrs(addClasses('tp-nav'))`
-  ${tw`w-auto max-w-full uppercase p-1 ml-1`}
+export type StyledNavTitleProps = {
+  $level: number
+}
+
+export const StyledNavTitle = styled.div.attrs(
+  addClasses('tp-nav'),
+)<StyledNavTitleProps>`
+  ${({ $level }) => {
+    return css`
+      ${tw`w-auto max-w-full uppercase box-content ml-1 h-6 py-3`}
+      padding-left: ${$level * 1.5}rem;
+      padding-right: ${$level * 1.5}rem;
+    `
+  }}
 `
 
 export type StyledChildRoutesProps = {
@@ -44,6 +69,13 @@ export const StyledChildRoutes = styled.li<StyledChildRoutesProps>`
 `
 
 export const StyledChildRoutesContent = styled.ul`
-  ${tw`block rounded-3xl`}
-  background-color: #0000001a;
+  ${({ theme }) => {
+    const { background, radius } = theme.component.navbar.mobile.content.child
+
+    return css`
+      ${tw`block`}
+      background-color: ${background};
+      border-radius: ${radius}rem;
+    `
+  }}
 `

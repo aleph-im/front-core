@@ -113,7 +113,7 @@ export const StyledInputDot = styled.span`
       }
 
       ${StyledInput}:checked + &:after {
-        visibility: visible;
+        visibility: inherit;
         clip-path: circle(100% at 50% 50%);
       }
 

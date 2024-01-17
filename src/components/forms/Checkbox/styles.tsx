@@ -122,7 +122,7 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
         transition: all ease-out ${duration.fast}ms 0s;
 
         ${StyledInput}:checked + & {
-          visibility: visible;
+          visibility: inherit;
           clip-path: circle(100% at 50% 50%);
         }
 

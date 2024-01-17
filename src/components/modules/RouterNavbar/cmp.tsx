@@ -11,6 +11,7 @@ import {
   StyledChildRoutesContent,
 } from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
+import { useTheme } from 'styled-components'
 
 const Route = (props: RouteProps) => {
   const {
@@ -49,6 +50,7 @@ const Route = (props: RouteProps) => {
               ...linkProps,
               isActive,
               onClick,
+              $level: level,
             }}
           />
         </NavbarLink>
@@ -82,12 +84,13 @@ const ParentRoute = (props: ParentRouteProps) => {
 
   return (
     <>
-      <NavbarLink breakpoint={breakpoint} level={level}>
+      <NavbarLink breakpoint={breakpoint}>
         <StyledRouterLink
           {...{
             route,
             Link,
             isActive,
+            $level: level,
             ...rest,
           }}
           onClick={handleClick}
@@ -96,8 +99,8 @@ const ParentRoute = (props: ParentRouteProps) => {
       <StyledChildRoutes $breakpoint={breakpoint}>
         <ToggleContainer open={!!active}>
           <StyledChildRoutesContent>
-            <NavbarLink breakpoint={breakpoint} level={newLevel}>
-              <StyledNavTitle>{name}</StyledNavTitle>
+            <NavbarLink breakpoint={breakpoint}>
+              <StyledNavTitle {...{ $level: newLevel }}>{name}</StyledNavTitle>
             </NavbarLink>
             {children.map((route) => (
               <RouteMemo
@@ -130,19 +133,23 @@ export const RouterNavbar = ({
   onToggle,
   ...rest
 }: RouterNavbarProps) => {
+  const theme = useTheme()
+
   const handleLinkClick = useCallback(() => {
     onToggle && onToggle(false)
   }, [onToggle])
 
   // -----------------------------------
 
+  const { logoText } = theme.component.navbar
+
   const logo = useMemo(
     () => (
       <Link href="/" route={{ href: '/' }}>
-        <Logo />
+        <Logo text={logoText} />
       </Link>
     ),
-    [Link],
+    [Link, logoText],
   )
 
   return (

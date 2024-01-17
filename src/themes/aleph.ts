@@ -28,8 +28,9 @@ import {
   ThemeFormSwitch,
   ThemeSidebar,
   ThemeRouterLink,
+  ThemeNavbar,
 } from './types'
-import { getGlowMinEffectCss } from '../styles'
+import { getGlassEffectCss, getGlowMinEffectCss } from '../styles'
 
 const breakpoint: ThemeBreakpoint = {
   '2xl': pxToRem(1400),
@@ -565,6 +566,7 @@ const routerLink: ThemeRouterLink = {
     },
   },
 }
+
 const sidebar: ThemeSidebar = {
   nav1: {
     background: '#0000004c',
@@ -589,6 +591,26 @@ const sidebar: ThemeSidebar = {
   },
 }
 
+const navbar: ThemeNavbar = {
+  logoText: false,
+  mobile: {
+    header: {
+      css: () => getGlassEffectCss('base2'),
+      open: {
+        background: '#07071366',
+      },
+    },
+    content: {
+      color: color.white,
+      css: () => getGlassEffectCss('base2'),
+      child: {
+        background: '#0000001A',
+        radius: pxToRem(24),
+      },
+    },
+  },
+}
+
 const component: ThemeComponent = {
   icon,
   button,
@@ -600,6 +622,7 @@ const component: ThemeComponent = {
   tag,
   routerLink,
   sidebar,
+  navbar,
 }
 
 const theme: DefaultTheme = {
