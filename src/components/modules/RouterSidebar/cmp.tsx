@@ -179,12 +179,13 @@ export const RouterSidebar = ({
             ))}
           </StyledNav2LinkContainer>
           <div tw="flex-1" />
-          <div tw="py-12 flex flex-col justify-between h-[14.9375rem] shrink-0 w-full">
+          <div tw="py-12 flex flex-col justify-end h-[14.9375rem] shrink-0 w-full">
             {!!onToggle && (
               <div tw="px-6">
                 <StyledToggleButton onClick={handleToggle} />
               </div>
             )}
+            <div tw="flex-1" />
             <StyledStorageContainer>
               <div tw="mb-4 flex gap-1 flex-wrap">
                 <span tw="whitespace-nowrap">{consumedSize.toFixed(3)} GB</span>
