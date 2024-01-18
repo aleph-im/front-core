@@ -422,6 +422,11 @@ export type ThemeNavbar = {
   }
 }
 
+export type NoisyContainer = {
+  default: string
+  borderRadius: number
+}
+
 export type ThemeComponent = {
   icon: ThemeIcon
   button: ThemeButton
@@ -434,6 +439,7 @@ export type ThemeComponent = {
   routerLink: ThemeRouterLink
   sidebar: ThemeSidebar
   navbar: ThemeNavbar
+  noisyContainer: NoisyContainer
 }
 
 // -----------------------------------

@@ -29,6 +29,7 @@ import {
   ThemeSidebar,
   ThemeRouterLink,
   ThemeNavbar,
+  NoisyContainer,
 } from './types'
 import { getGlassEffectCss, getGlowMinEffectCss } from '../styles'
 
@@ -612,6 +613,11 @@ const navbar: ThemeNavbar = {
   },
 }
 
+const noisyContainer: NoisyContainer = {
+  default: 'noise-light',
+  borderRadius: pxToRem(24),
+}
+
 const component: ThemeComponent = {
   icon,
   button,
@@ -624,6 +630,7 @@ const component: ThemeComponent = {
   routerLink,
   sidebar,
   navbar,
+  noisyContainer,
 }
 
 const theme: DefaultTheme = {

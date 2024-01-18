@@ -10,7 +10,6 @@ export default {
 }
 
 const defaultArgs: Partial<NoisyContainerProps> = {
-  $type: 'noise-base',
   children: 'content',
 }
 
