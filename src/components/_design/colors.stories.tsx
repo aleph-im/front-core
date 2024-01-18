@@ -122,6 +122,20 @@ const ColorsTemplate: StoryFn<any> = () => {
           </div>
         </>
       )}
+      {theme.name === 'twentysix' && (
+        <>
+          <StoryBookHeader>Effects</StoryBookHeader>
+          <div>
+            <h3>Grains</h3>
+            <Circle className="fx-grain-0"></Circle>
+            <Circle className="fx-grain-1"></Circle>
+            <Circle className="fx-grain-2"></Circle>
+            <Circle className="fx-grain-3"></Circle>
+            <Circle className="fx-grain-4"></Circle>
+            <Circle className="fx-grain-5"></Circle>
+          </div>
+        </>
+      )}
       <div>
         <h3>Functional</h3>
         <Circle className="bg-info"></Circle>

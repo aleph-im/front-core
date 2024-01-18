@@ -15,7 +15,6 @@ const defaultArgs: Partial<CompositeTitleProps> = {
   label: 'beta',
   children: 'Title',
   as: 'h2',
-  disabled: false,
 }
 
 const defaultParams = {}

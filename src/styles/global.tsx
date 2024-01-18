@@ -17,10 +17,10 @@ import {
   getGlowMinEffectCss,
 } from './glow'
 import {
-  colorFilled,
+  noiseColor,
   getGradientNoiseEffectCss,
   getPlainNoiseEffectCss,
-  gradientFilled,
+  noiseGradient,
 } from './noise'
 import {
   getBackgroundColorCss,
@@ -31,6 +31,7 @@ import {
 } from './utils'
 import tw, { GlobalStyles as TailwindGlobalStyles } from 'twin.macro'
 import { fontAwesomeCss } from './font'
+import { getPlainGrainEffectCss, grainColor } from './grains'
 
 export const GlobalStyles = () => (
   <>
@@ -42,7 +43,8 @@ export const GlobalStyles = () => (
 const CustomGlobalStyles = createGlobalStyle`
   ${({ theme }) => {
     const colorCss = colorClasses(theme)
-    const effectCss = effectClasses(theme)
+    const effects1Css = alephEffectClasses(theme)
+    const effects2Css = twentysixEffectClasses(theme)
     const typoCss = typoClasses(theme)
     const fontUrlCss = fontUrlImports(theme)
 
@@ -51,7 +53,8 @@ const CustomGlobalStyles = createGlobalStyle`
       ${fontUrlCss}
 
       ${colorCss}
-      ${effectCss}
+      ${effects1Css}
+      ${effects2Css}
       ${typoCss}
 
       window {
@@ -162,7 +165,7 @@ function fontUrlImports(theme: DefaultTheme) {
   `
 }
 
-function effectClasses(theme: DefaultTheme) {
+function alephEffectClasses(theme: DefaultTheme) {
   if (theme.name !== 'aleph') return
 
   const glowColors = ['main0', 'main1', 'main2']
@@ -177,8 +180,8 @@ function effectClasses(theme: DefaultTheme) {
     'colored0',
   ]
   const darkColors = ['main0']
-  const noisePlainColors = Object.keys(colorFilled)
-  const noiseGradientColors = Object.keys(gradientFilled)
+  const noisePlainColors = Object.keys(noiseColor)
+  const noiseGradientColors = Object.keys(noiseGradient)
 
   const glowHoverCss = glowColors.flatMap(
     (color) => css`
@@ -251,6 +254,23 @@ function effectClasses(theme: DefaultTheme) {
   `
 }
 
+function twentysixEffectClasses(theme: DefaultTheme) {
+  if (theme.name !== 'twentysix') return
+
+  const grainPlainColors = Object.keys(grainColor)
+
+  const grainPlainCss = grainPlainColors.flatMap(
+    (color) => css`
+      .fx-grain-${color} {
+        ${getPlainGrainEffectCss(color)}
+      }
+    `,
+  )
+
+  return css`
+    ${grainPlainCss}
+  `
+}
 function typoClasses(theme: DefaultTheme) {
   const typos = Object.entries(theme.typo).sort(
     ([, av], [, bv]) => av.size - bv.size,

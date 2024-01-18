@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const gradientFilled: Record<string, string> = {
+export const noiseGradient: Record<string, string> = {
   main0: 'linear-gradient(#81b8d8, #4b6599)',
   main1: 'linear-gradient(#a2dfce, #607a84)',
   main2: 'linear-gradient(#c0b6a4, #675550)',
@@ -11,7 +11,7 @@ export type UniformNoiseEffect = {
   backgroundColor: string
 }
 
-export const colorFilled: Record<string, UniformNoiseEffect> = {
+export const noiseColor: Record<string, UniformNoiseEffect> = {
   base: { dotsOpacity: '1', backgroundColor: 'transparent' },
   dark: { dotsOpacity: '0.1', backgroundColor: '#00000033' },
   light: { dotsOpacity: '0.1', backgroundColor: '#1D1C3780' },
@@ -23,13 +23,13 @@ export const noiseImg =
 export function getPlainNoiseEffectCss(color: string) {
   return css`
     position: relative;
-    background-color: ${colorFilled[color].backgroundColor};
+    background-color: ${noiseColor[color].backgroundColor};
 
     &::after {
       content: '';
       background-image: ${noiseImg};
       background-size: 20rem;
-      opacity: ${colorFilled[color].dotsOpacity};
+      opacity: ${noiseColor[color].dotsOpacity};
       position: absolute;
       top: 0;
       left: 0;
@@ -45,6 +45,6 @@ export function getPlainNoiseEffectCss(color: string) {
 export function getGradientNoiseEffectCss(color: string) {
   return css`
     mask-image: ${noiseImg};
-    background-image: ${gradientFilled[color]};
+    background-image: ${noiseGradient[color]};
   `
 }
