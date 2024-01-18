@@ -54,9 +54,10 @@ const color: ThemeColor = {
   main1: '#D4FF00',
 
   purple0: '#F5EDFF',
-  purple1: '#EDE4FB',
-  purple2: '#DBC8F6',
-  purple3: '#C8ADF0',
+  purple1: '#F1E9FD',
+  purple2: '#EDE4FB',
+  purple3: '#DBC8F6',
+  purple4: '#C8ADF0',
 
   dark0: '#1414211A',
   dark1: '#1D1D2A',
@@ -352,7 +353,7 @@ const radio: ThemeFormRadio = {
     },
   },
   border: {
-    color: color.purple3,
+    color: color.purple4,
     size: pxToRem(3),
     focus: {
       color: color.black,
@@ -374,10 +375,11 @@ const checkbox: ThemeFormCheckbox = {
     },
   },
   border: {
-    color: color.purple3,
+    color: color.purple4,
     size: pxToRem(3),
     focus: {
       color: color.black,
+      size: pxToRem(3),
     },
     checked: {
       size: pxToRem(0),
@@ -479,8 +481,8 @@ const tab: ThemeTab = {
 const tag: ThemeTag = {
   color: {
     text: color.text,
-    background: color.purple2,
-    border: color.purple1,
+    background: color.purple3,
+    border: color.purple2,
   },
 }
 

@@ -230,6 +230,7 @@ export type ThemeFormCheckbox = {
     size: number
     focus: {
       color: string
+      size: number
     }
     checked: {
       size: number

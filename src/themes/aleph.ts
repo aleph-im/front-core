@@ -407,6 +407,7 @@ const checkbox: ThemeFormCheckbox = {
     size: pxToRem(1),
     focus: {
       color: color.base0,
+      size: pxToRem(1),
     },
     checked: {
       size: pxToRem(1),

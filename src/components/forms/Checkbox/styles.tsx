@@ -77,6 +77,7 @@ export const StyledInput = styled.input<{
       }
 
       &:focus {
+        border-width: ${border.focus.size}rem;
         border-color: ${border.focus.color};
       }
 
