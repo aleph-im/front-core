@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { CompositeTitleProps } from './types'
-import { StyledLabel } from './styles'
-import TextGradient from '../../common/TextGradient'
+import { StyledLabel, StyledNumber, StyledTextGradient } from './styles'
 
 export const CompositeTitle = ({
   children,
@@ -9,29 +8,20 @@ export const CompositeTitle = ({
   as: As = 'h1',
   type = 'h5',
   color = 'main1',
-  disabled = false,
+  numberColor = 'text',
+  labelColor = 'text',
   label,
   ...rest
 }: CompositeTitleProps) => {
   return (
     <As style={{ lineHeight: '1rem', margin: 0 }}>
-      <span className={disabled ? 'unavailable-content' : ''}>
-        <span className="tp-body1 fs-28 text-base0" tw="inline">
-          {String(number).padStart(2, '0')}/&nbsp;
-        </span>
-        <TextGradient
-          {...{
-            forwardedAs: 'span',
-            type,
-            color,
-            ...rest,
-          }}
-          tw="inline"
-        >
-          {children}
-        </TextGradient>
-      </span>
-      {label && <StyledLabel type={type}>{label}</StyledLabel>}
+      <StyledNumber {...{ $color: numberColor }}>
+        {String(number).padStart(2, '0')}/&nbsp;
+      </StyledNumber>
+      <StyledTextGradient {...{ type, color, ...rest }}>
+        {children}
+      </StyledTextGradient>
+      {label && <StyledLabel {...{ $color: labelColor }}>{label}</StyledLabel>}
     </As>
   )
 }
