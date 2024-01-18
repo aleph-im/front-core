@@ -63,7 +63,7 @@ const CustomGlobalStyles = createGlobalStyle`
 
       html {
         /* @note: Scaled down by default (but all calculations from designs are consistent with base 16px = 1rem) */
-        // font-size: 14px;
+        font-size: 14px;
       }
 
       body {
