@@ -12,15 +12,13 @@ module.exports = {
       '2xl': '87.5rem', // 1400px
     },
     fontSize: {
-      '2xs': '0.5rem', // 8px
-      xs: '0.625rem', // 10px
-      sm: '1rem', // 16px
-      md: '1.125rem', // 18px
-      lg: '1.5rem', // 24px
-      xl: '1.75rem', // 28px
-      '2xl': '3rem', // 48px
-      '3xl': '3.875rem', // 62px
-      '4xl': '5.125rem', // 82px
+      28: '1.75rem',
+      24: '1.5rem',
+      18: '1.125rem',
+      16: '1rem',
+      14: '0.875rem',
+      12: '0.75rem',
+      10: '0.625rem',
     },
     extend: {},
   },

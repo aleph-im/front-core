@@ -140,7 +140,7 @@ const shadows = {
 const font: ThemeFont = {
   urls: [
     'https://use.typekit.net/acb7qvn.css',
-    'https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;1,400;1,700&family=Source+Code+Pro:wght@400;700',
+    'https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,400;1,700&family=Source+Code+Pro:wght@400;700&display=swap',
   ],
   family: {
     head: "'rigid-square', sans-serif",
