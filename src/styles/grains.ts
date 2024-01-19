@@ -81,11 +81,10 @@ export function getPlainGrainEffectCss(color: string) {
       opacity: ${opacity};
       background-image: ${image};
       background-blend-mode: ${blendMode};
-      background-attachment: fixed;
       background-repeat: repeat;
       background-size: ${imageWidth}rem ${imageWidth * imageRatio}rem;
-      /* background-position: center center; */
       animation: 20s linear 0s infinite ${moveBackground};
+      /* background-attachment: fixed; */
     }
   `
 }
