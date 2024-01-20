@@ -64,7 +64,7 @@ export const WalletPicker = forwardRef(
                   color="main0"
                   variant="tertiary"
                   kind="neon"
-                  size="regular"
+                  size="md"
                   href={addressHref}
                   as="a"
                   target="_blank"
@@ -82,7 +82,7 @@ export const WalletPicker = forwardRef(
                 color="main2"
                 variant="tertiary"
                 kind="neon"
-                size="regular"
+                size="md"
                 onClick={onDisconnect}
               >
                 Logout
@@ -99,7 +99,7 @@ export const WalletPicker = forwardRef(
                     <Button
                       onClick={() => handleClick(network)}
                       disabled={network.wallets.length === 0}
-                      size="regular"
+                      size="md"
                       tw="relative py-1!"
                       kind={
                         currentNetwork?.name === network.name ? 'neon' : 'flat'
@@ -152,7 +152,7 @@ export const WalletPicker = forwardRef(
                             variant="tertiary"
                             color="main0"
                             kind="neon"
-                            size="regular"
+                            size="md"
                           >
                             {wallet.name}
                             <WalletIcon

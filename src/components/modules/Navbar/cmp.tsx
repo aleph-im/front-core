@@ -50,7 +50,7 @@ export const Navbar = ({
             color="main0"
             variant="secondary"
             kind="neon"
-            size="regular"
+            size="md"
             onClick={toggleMenu}
           >
             {!open ? <Icon name="bars" /> : <Icon name="close" />}

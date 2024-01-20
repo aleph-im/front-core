@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { addClasses } from '../../../utils'
-import { normalizeBackgroundColor } from '../../../utils/color'
+import { normalizeBackgroundImageColor } from '../../../utils/color'
 
 export const StyledSwitchContainer = styled.div`
   display: flex;
@@ -71,7 +71,7 @@ export const StyledInputDot = styled.span`
     const { duration } = theme.transition
     const { dot, disabledType } = theme.form.switch
 
-    const { background, backgroundDisabled } = normalizeBackgroundColor(
+    const { background, backgroundDisabled } = normalizeBackgroundImageColor(
       dot.checked.background,
     )
 

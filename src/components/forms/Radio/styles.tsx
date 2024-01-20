@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { RadioSize } from './types'
-import { normalizeBackgroundColor } from '../../../utils/color'
+import { normalizeBackgroundImageColor } from '../../../utils/color'
 
 export const StyledRadioContainer = styled.div<{ $size?: RadioSize }>`
   ${({ $size }) => {
@@ -85,7 +85,7 @@ export const StyledInputDot = styled.span`
     const { duration } = theme.transition
     const { dot, disabledType } = theme.form.radio
 
-    const { background, backgroundDisabled } = normalizeBackgroundColor(
+    const { background, backgroundDisabled } = normalizeBackgroundImageColor(
       dot.checked.background,
     )
 

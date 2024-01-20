@@ -1,15 +1,14 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
+import { DefaultTheme } from 'styled-components'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'text-only'
-export type ButtonKind = 'neon' | 'flat'
-export type ButtonSize = 'regular' | 'big'
+export type ButtonSize = 'sm' | 'md' | 'lg'
 export type ButtonTag = 'button' | 'a'
 
 export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     children: ReactNode
-    variant: ButtonVariant
-    kind: ButtonKind
+    kind: string
+    variant: string
     size: ButtonSize
     color: string
 
@@ -24,8 +23,8 @@ export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   }
 
 export type StyledButtonProps = {
-  variant: ButtonVariant
-  kind: ButtonKind
-  size: ButtonSize
-  color: string
-}
+  $kind: string
+  $variant: string
+  $size: ButtonSize
+  $color: string
+} & { theme: DefaultTheme }

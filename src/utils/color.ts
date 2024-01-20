@@ -166,33 +166,64 @@ export function colorHexToRGBALottie(
   return [r / 255, g / 255, b / 255, a / 255]
 }
 
-export function normalizeBackgroundColor(
+export function normalizeBackgroundImageColor(
   color: string | Gradient,
-  disabledOpacity: string = '1A',
+  transparency: string = '1A',
 ): {
+  backgroundColor: string
+  backgroundColorDisabled: string
+  backgroundImage: string
+  backgroundImageDisabled: string
   background: string
   backgroundDisabled: string
 } {
-  const gradient =
-    typeof color === 'string'
-      ? {
-          colors: [color, color],
-          deg: 90,
-          stops: [0, 100],
-          fn: `linear-gradient(90deg, ${color} 0%, ${color} 100%)`,
-        }
-      : color
+  if (color === 'transparent')
+    return {
+      backgroundColor: color,
+      backgroundColorDisabled: color,
+      backgroundImage: 'none',
+      backgroundImageDisabled: 'none',
+      background: color,
+      backgroundDisabled: color,
+    }
+
+  let gradient = color as Gradient
+
+  if (typeof color === 'string') {
+    color = colorNameToHex(color) || color
+
+    gradient = {
+      colors: [color, color],
+      deg: 90,
+      stops: [0, 100],
+      fn: `linear-gradient(90deg, ${color} 0%, ${color} 100%)`,
+    }
+  }
+
+  const dc1 = `${gradient.colors[0]}${transparency}`
+  const dc2 = `${gradient.colors[1]}${transparency}`
 
   const disabledGradient = {
     ...gradient,
-    fn: `linear-gradient(90deg, ${color}${disabledOpacity} 0%, ${color}${disabledOpacity} 100%)`,
+    colors: [dc1, dc2],
+    fn: `linear-gradient(90deg, ${dc1} 0%, ${dc2} 100%)`,
   }
 
-  const background = color === 'string' ? color : gradient.fn
+  const backgroundColor = gradient.colors[0]
+  const backgroundColorDisabled = disabledGradient.colors[0]
+
+  const backgroundImage = gradient.fn
+  const backgroundImageDisabled = disabledGradient.fn
+
+  const background = color === 'string' ? backgroundColor : backgroundImage
   const backgroundDisabled =
-    color === 'string' ? `${color}${disabledOpacity}` : disabledGradient.fn
+    color === 'string' ? backgroundColorDisabled : backgroundImageDisabled
 
   return {
+    backgroundColor,
+    backgroundColorDisabled,
+    backgroundImage,
+    backgroundImageDisabled,
     background,
     backgroundDisabled,
   }

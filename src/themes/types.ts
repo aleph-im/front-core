@@ -273,25 +273,82 @@ export type ThemeIcon = {
   }
 }
 
-export type ThemeButton = {
-  glow: boolean
+// -----------------------------------
+
+export type ThemeButtonSchemaSize = 'sm' | 'md' | 'lg'
+
+export type ThemeButtonSchemaVariant = {
+  height: Record<ThemeButtonSchemaSize, number>
+  color?: {
+    default?: string
+    disabled?: string
+  }
+  transparency?: string
+  background?: {
+    default?: boolean | string
+    focus?: boolean | string
+    disabled?: boolean | string
+  }
+  gradient?: {
+    default?: boolean | string | Gradient
+    focus?: boolean | string | Gradient
+    disabled?: boolean | string | Gradient
+  }
+  css?: {
+    default?: (...args: any[]) => CssOutput
+    hover?: (...args: any[]) => CssOutput
+    active?: (...args: any[]) => CssOutput
+  }
+  outline: {
+    size?: {
+      default?: number
+      focus?: number
+      disabled?: number
+    }
+    color?: {
+      default?: string
+      focus?: string
+      disabled?: string
+    }
+  }
   border: {
-    size: number
-    focus: {
-      size: number
+    type: 'full' | 'underscore'
+    transparency?: string
+    background?: {
+      default?: boolean | string
+      focus?: boolean | string
+      disabled?: boolean | string
+    }
+    gradient?: {
+      default?: boolean | string | Gradient
+      focus?: boolean | string | Gradient
+      disabled?: boolean | string | Gradient
+    }
+    size: {
+      default?: number
+      focus?: number
+      disabled?: number
     }
   }
   font: {
-    family: string
-    weight: number
-    style: string
-    size: {
-      small: number
-      regular: number
-      big: number
-    }
+    family?: string
+    weight?: number
+    style?: string
+    size: Record<ThemeButtonSchemaSize, number>
   }
 }
+
+export type ThemeButtonSchema = {
+  [variant: string]: ThemeButtonSchemaVariant
+  primary: ThemeButtonSchemaVariant
+}
+
+export type ThemeButton = {
+  [kind: string]: ThemeButtonSchema
+  default: ThemeButtonSchema
+}
+
+// -----------------------------------
 
 export type BulletListCheck = {
   background?: string

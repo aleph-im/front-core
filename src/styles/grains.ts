@@ -46,7 +46,7 @@ export const grainColor: Record<string, UniformGrainEffect> = {
   },
 }
 
-const imageWidth = 17
+const imageWidth = 22
 const imageRatio = 0.68760300311
 
 //image ratio is 1.45432756325

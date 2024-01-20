@@ -5,10 +5,10 @@ import { ButtonProps } from './types'
 export const Button = forwardRef(
   (
     {
-      variant = 'primary',
-      kind = 'flat',
-      size = 'regular',
-      color = 'main2',
+      kind: $kind = 'default',
+      variant: $variant = 'primary',
+      size: $size = 'md',
+      color: $color = 'main0',
       as = 'button',
       children,
       hover,
@@ -34,12 +34,12 @@ export const Button = forwardRef(
       <StyledButton
         role="button"
         {...{
+          $variant,
+          $kind,
+          $size,
+          $color,
           ref,
           as,
-          variant,
-          kind,
-          size,
-          color,
           className: classes,
           ...rest,
         }}

@@ -1,209 +1,223 @@
-import styled, {
-  css,
-  DefaultTheme,
-  FlattenSimpleInterpolation,
-} from 'styled-components'
-import { getGlowHoverEffectCss, getGlowMinEffectCss } from '../../../styles'
+import styled, { DefaultTheme, css } from 'styled-components'
 import { StyledButtonProps } from './types'
+import { normalizeBackgroundImageColor } from '../../../utils/color'
+import { CssOutput, Gradient } from '../../../themes/types'
 
-const defaultVariants = (
-  props: StyledButtonProps & { theme: DefaultTheme },
-) => {
-  const { theme, color, variant, kind } = props
-  const mainColor = theme.color[color] || color
-  const [g0, g1] = theme.gradient[color]?.colors || [color, color]
-
-  const { button } = theme.component
-
-  // @todo: Fix this
-  const glowMinCss = button.glow
-    ? getGlowMinEffectCss(color, { width: 192, height: 192 })
-    : undefined
-
-  const underscoreCss =
-    variant === 'text-only'
-      ? css`
-          padding-left: 0;
-          padding-right: 0;
-          border-radius: 0;
-
-          /* TRANSFORM BORDER INTO UNDERSCORE */
-          &::after {
-            display: block;
-            mask: none;
-            height: ${button.border.size}rem;
-            padding: 0;
-            background-clip: content-box;
-            border-radius: 0;
-            top: 50%;
-            margin-top: 0.48em;
-          }
-        `
-      : undefined
-
-  if (kind === 'flat') {
-    switch (variant) {
-      case 'primary': {
-        return css`
-          color: ${theme.color.background};
-          background-color: ${mainColor};
-
-          &::after {
-            display: none;
-          }
-        `
-      }
-      case 'secondary': {
-        return css`
-          &::after {
-            display: block;
-          }
-        `
-      }
-      case 'text-only': {
-        return css`
-          ${underscoreCss}
-        `
-      }
+function getColor(
+  theme: DefaultTheme,
+  item: {
+    transparency?: string
+    background?: {
+      default?: boolean | string
+      focus?: boolean | string
+      disabled?: boolean | string
     }
-  } else {
-    switch (variant) {
-      case 'primary': {
-        return css`
-          color: ${theme.color.background};
-          background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
-
-          ${glowMinCss}
-
-          &::after {
-            display: none;
-          }
-        `
-      }
-      case 'secondary': {
-        return css`
-          &::after {
-            display: block;
-            background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
-          }
-        `
-      }
-      case 'tertiary': {
-        return css`
-          background-image: linear-gradient(90deg, ${g0}1f 0%, ${g1}1f 100%);
-
-          &::after {
-            display: block;
-            background-image: linear-gradient(90deg, ${g0} 0%, ${g1} 100%);
-          }
-        `
-      }
-      case 'text-only': {
-        return css`
-          color: ${theme.color.text};
-          background-color: transparent;
-          ${underscoreCss}
-        `
-      }
+    gradient?: {
+      default?: boolean | string | Gradient
+      focus?: boolean | string | Gradient
+      disabled?: boolean | string | Gradient
     }
-  }
+  },
+  $color: string,
+  state: 'default' | 'focus' | 'disabled' = 'default',
+) {
+  const c1 = item.background?.[state]
+  const c2 = item.gradient?.[state]
+
+  const color1Config =
+    c1 === true ? theme.color[$color] || $color : c1 || 'transparent'
+
+  const gradient1Config =
+    c2 === true ? theme.gradient[$color] || $color : c2 || 'transparent'
+
+  const { backgroundColor: color1, backgroundColorDisabled: color1Disabled } =
+    normalizeBackgroundImageColor(color1Config, item.transparency)
+
+  const {
+    backgroundImage: gradient1,
+    backgroundImageDisabled: gradient1Disabled,
+  } = normalizeBackgroundImageColor(gradient1Config, item.transparency)
+
+  const color = !item.transparency ? color1 : color1Disabled
+  const gradient = !item.transparency ? gradient1 : gradient1Disabled
+
+  return { color, gradient }
 }
 
-const focusVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
-  const { theme, variant } = props
-  const { button } = theme.component
+const defaultVariants = (props: StyledButtonProps) => {
+  const { theme, $color, $variant, $kind, $size } = props
+
+  const button = theme.component.button[$kind][$variant]
+  if (!button) return
+
+  const buttonCl = getColor(theme, button, $color)
+  const borderCl = getColor(theme, button.border, $color)
 
   return css`
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+    text-align: center;
+    margin: 0;
+    padding: 0.5rem 1.375rem;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: none;
+    border-radius: 1.875rem;
+    line-height: 1.16666666667;
+    letter-spacing: 0.0522rem;
+    outline: 0;
+    transform: transale3d(0, 0, 0);
+    text-decoration: none !important;
+    z-index: 0;
+    transition: all 0.2s 0s ease-in-out;
+    outline-style: solid;
+    font-family: ${button.font.family};
+    font-style: ${button.font.style};
+    font-weight: ${button.font.weight};
+    font-size: ${button.font.size[$size]}rem;
+    min-height: ${button.height[$size]}rem;
+    color: ${button.color?.default};
+    background-color: ${buttonCl.color};
+    background-image: ${buttonCl.gradient};
+    outline-width: ${button.outline.size?.default}rem;
+    outline-color: ${button.outline.color?.default};
+    ${button.css?.default && button.css?.default($color)}
+
+    ${button.border.type === 'underscore' &&
+    css`
+      padding-left: 0;
+      padding-right: 0;
+      border-radius: 0;
+      background-color: transparent;
+    `}
+
+    /* BORDER */
     &::after {
       display: block;
-      background-image: none;
-      background-color: ${theme.color.text};
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      border-radius: 1.875rem;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      padding: ${button.border.size.default}rem;
+      background-color: ${borderCl.color};
+      background-image: ${borderCl.gradient};
 
-      ${variant === 'text-only'
-        ? css`
-            height: ${button.border.focus.size}rem;
-          `
-        : css`
-            padding: ${button.border.focus.size}rem;
-          `}
+      ${button.border.type === 'underscore' &&
+      css`
+        mask: none;
+        height: ${button.border.size.default}rem;
+        padding: 0;
+        background-clip: content-box;
+        border-radius: 0;
+        top: 50%;
+        margin-top: 0.48em;
+      `}
     }
   `
 }
 
-const hoverVariants = (props: StyledButtonProps & { theme: DefaultTheme }) => {
-  const { theme, color, variant, kind } = props
-  const { button } = theme.component
+const focusVariants = (props: StyledButtonProps) => {
+  const { theme, $kind, $variant } = props
 
-  const glowHoverCss = button.glow
-    ? getGlowHoverEffectCss(color, { width: 192, height: 192 })
-    : undefined
+  const button = theme.component.button[$kind][$variant]
+  if (!button) return
 
-  if (kind === 'neon' && variant === 'primary') {
-    return glowHoverCss
-  }
+  const borderCl = getColor(theme, button.border, 'white', 'focus')
 
-  return css``
+  return css`
+    outline-width: ${button.outline.size?.focus}rem;
+    outline-color: ${button.outline.color?.focus};
+
+    &::after {
+      background-color: ${borderCl.color};
+      background-image: ${borderCl.gradient};
+      padding: ${button.border.size.focus}rem;
+
+      ${button.border.type === 'underscore' &&
+      css`
+        padding: 0;
+        height: ${button.border.size.focus}rem;
+      `}
+    }
+  `
+}
+
+const hoverVariants = (props: StyledButtonProps) => {
+  const { theme, $color, $variant, $kind } = props
+
+  const button = theme.component.button[$kind][$variant]
+  if (!button) return
+
+  return css`
+    ${button.css?.hover && button.css?.hover($color)}
+  `
 }
 
 const activeVariants = (
-  props: StyledButtonProps & { theme: DefaultTheme },
-  defaultVariantsCss?: FlattenSimpleInterpolation,
+  props: StyledButtonProps,
+  defaultVariantsCss?: CssOutput,
 ) => {
-  const { variant } = props
+  const { theme, $kind, $variant, $color } = props
+
+  const button = theme.component.button[$kind][$variant]
+  if (!button) return
 
   return css`
     ${defaultVariantsCss}
-    ${variant === 'tertiary' ? `background-image: none;` : ''}
-    box-shadow: none;
-    backdrop-filter: none;
+    ${button.css?.active && button.css?.active($color)}
   `
 }
 
-const disableVariants = (
-  props: StyledButtonProps & { theme: DefaultTheme },
-) => {
-  const { theme, variant } = props
-  const whiteDisabled = `${theme.color.text}4C`
-  const blackDisabled = theme.color.base2
+const disableVariants = (props: StyledButtonProps) => {
+  const { theme, $kind, $variant } = props
+
+  const button = theme.component.button[$kind][$variant]
+  if (!button) return
+
+  const buttonCl = getColor(theme, button, 'transparent', 'disabled')
+  const borderCl = getColor(theme, button.border, 'transparent', 'disabled')
 
   return css`
     cursor: not-allowed;
-    color: ${theme.color.text};
-    background-color: transparent;
-    background-image: none;
+    color: ${button.color?.disabled};
+    background-color: ${buttonCl.color};
+    background-image: ${buttonCl.gradient};
+    outline-width: ${button.outline.size?.disabled}rem;
+    outline-color: ${button.outline.color?.disabled};
     box-shadow: none;
     backdrop-filter: none;
 
-    ${variant === 'primary'
-      ? css`
-          background-color: ${whiteDisabled};
-          color: ${blackDisabled};
-        `
-      : css`
-          color: ${whiteDisabled};
-        `}
-
     &::after {
-      display: block;
+      background-color: ${borderCl.color};
+      background-image: ${borderCl.gradient};
+      padding: ${button.border.size.disabled}rem;
 
-      ${variant === 'primary'
-        ? css`
-            background-color: ${blackDisabled};
-          `
-        : css`
-            background-color: ${whiteDisabled};
-            background-image: none;
-          `}
+      ${button.border.type === 'underscore' &&
+      css`
+        padding: 0;
+        height: ${button.border.size.disabled}rem;
+      `}
     }
   `
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
   ${(props) => {
-    const { theme, color, size, variant } = props
-    const mainColor = theme.color[color] || color
-    const { button } = theme.component
-
     const defaultVariantsCss = defaultVariants(props)
     const focusVariantsCss = focusVariants(props)
     const hoverVariantsCss = hoverVariants(props)
@@ -212,54 +226,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
     return css`
       && {
-        position: relative;
-        cursor: pointer;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.375rem;
-        text-align: center;
-        font-weight: ${button.font.weight};
-        font-family: ${button.font.family};
-        font-style: ${button.font.style};
-        margin: 0;
-        padding: 0.5rem 1.375rem;
-        width: auto;
-        min-width: 0;
-        max-width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        border: none;
-        border-radius: 1.875rem;
-        line-height: 1.16666666667;
-        letter-spacing: 0.0522rem;
-        background-color: transparent;
-        outline: 0;
-        color: ${theme.color.text};
-        transform: transale3d(0, 0, 0);
-        text-decoration: none !important;
-        z-index: 0;
-        transition: all 0.2s 0s ease-in-out;
-
-        /* BORDER */
-        &::after {
-          display: none;
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background-color: ${mainColor};
-          z-index: -1;
-          padding: ${button.border.size}rem;
-          border-radius: 1.875rem;
-          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          mask-composite: exclude;
-          -webkit-mask-composite: xor;
-        }
-
         /* DEFAULT VARIANT STYLES FOR EACH KIND */
         ${defaultVariantsCss}
 
@@ -280,27 +246,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
         &[disabled] {
           ${disableVariantsCss}
         }
-
-        /* Size */
-        ${() => {
-          switch (size) {
-            case 'regular': {
-              return css`
-                min-height: 2.3125rem; // 37px
-                font-size: ${button.font.size.regular -
-                (variant !== 'text-only' ? 0 : 0.25)}rem;
-              `
-            }
-            case 'big': {
-              return css`
-                min-height: 2.75rem; // 44px
-                font-size: ${button.font.size.big -
-                (variant !== 'text-only' ? 0 : 0.375)}rem;
-              `
-            }
-          }
-        }}
-      }
     `
   }}
 `

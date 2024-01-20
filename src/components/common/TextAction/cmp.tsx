@@ -99,9 +99,9 @@ export const TextAction = ({
             onClick={() => animation(useAction)}
             variant="tertiary"
             as="a"
-            color={''}
-            kind={'neon'}
-            size={'regular'}
+            color=""
+            kind="neon"
+            size="md"
             style={{ padding: '0 0 0 0.5rem' }}
           >
             <Transition in={showIcon} timeout={duration}>

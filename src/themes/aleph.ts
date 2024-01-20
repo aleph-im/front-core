@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme, css } from 'styled-components'
 import { pxToRem } from '../styles/utils'
 import {
   ThemeBreakpoint,
@@ -30,8 +30,14 @@ import {
   ThemeRouterLink,
   ThemeNavbar,
   NoisyContainer,
+  ThemeButtonSchemaVariant,
+  ThemeButtonSchema,
 } from './types'
-import { getGlassEffectCss, getGlowMinEffectCss } from '../styles'
+import {
+  getGlassEffectCss,
+  getGlowHoverEffectCss,
+  getGlowMinEffectCss,
+} from '../styles'
 
 const breakpoint: ThemeBreakpoint = {
   '2xl': pxToRem(1400),
@@ -450,12 +456,37 @@ const icon: ThemeIcon = {
   },
 }
 
-const button: ThemeButton = {
-  glow: true,
+// -------------------------------
+
+const disabledButtonColor = `${color.text}4C`
+
+const defaultButton: ThemeButtonSchemaVariant = {
+  color: {
+    default: color.text,
+    disabled: disabledButtonColor,
+  },
+  height: {
+    sm: pxToRem(37),
+    md: pxToRem(37),
+    lg: pxToRem(44),
+  },
   border: {
-    size: pxToRem(1),
-    focus: {
-      size: pxToRem(2),
+    type: 'full',
+    size: {
+      default: pxToRem(1),
+      focus: pxToRem(2),
+      disabled: pxToRem(1),
+    },
+    background: {
+      disabled: disabledButtonColor,
+      focus: color.white,
+    },
+  },
+  outline: {
+    size: {
+      default: pxToRem(0),
+      focus: pxToRem(0),
+      disabled: pxToRem(0),
     },
   },
   font: {
@@ -463,12 +494,176 @@ const button: ThemeButton = {
     style: 'normal',
     weight: 700,
     size: {
-      small: pxToRem(18),
-      regular: pxToRem(18),
-      big: pxToRem(24),
+      sm: pxToRem(14),
+      md: pxToRem(18),
+      lg: pxToRem(24),
     },
   },
 }
+
+// ----------------------------------------------
+
+const primaryNeonButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  color: {
+    ...defaultButton.color,
+    default: color.background,
+    disabled: color.black,
+  },
+  gradient: {
+    ...defaultButton.gradient,
+    default: true,
+    disabled: disabledButtonColor,
+  },
+  css: {
+    ...defaultButton.css,
+    default: ($color: string) =>
+      getGlowMinEffectCss($color, { width: 192, height: 192 }),
+    hover: ($color: string) =>
+      getGlowHoverEffectCss($color, { width: 192, height: 192 }),
+    active: () => css`
+      box-shadow: none;
+    `,
+  },
+  border: {
+    ...defaultButton.border,
+    size: {
+      ...defaultButton.border.size,
+      default: pxToRem(0),
+    },
+    background: {
+      ...defaultButton.border.background,
+      disabled: color.black,
+    },
+  },
+}
+
+const secondaryNeonButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    gradient: {
+      ...defaultButton.border.gradient,
+      default: true,
+    },
+  },
+}
+
+const tertiaryNeonButton: ThemeButtonSchemaVariant = {
+  ...secondaryNeonButton,
+  transparency: '1f',
+  gradient: {
+    ...secondaryNeonButton.gradient,
+    default: true,
+  },
+  css: {
+    ...secondaryNeonButton.css,
+    active: () => css`
+      background-image: none;
+    `,
+  },
+}
+
+const textOnlyNeonButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    type: 'underscore',
+    gradient: {
+      ...defaultButton.border.gradient,
+      default: true,
+    },
+  },
+  font: {
+    ...defaultButton.font,
+    size: {
+      sm: pxToRem(14),
+      md: pxToRem(14),
+      lg: pxToRem(18),
+    },
+  },
+}
+
+const neonButton: ThemeButtonSchema = {
+  primary: primaryNeonButton,
+  secondary: secondaryNeonButton,
+  tertiary: tertiaryNeonButton,
+  textOnly: textOnlyNeonButton,
+}
+
+// -------------------------------
+
+const primaryFlatButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  color: {
+    ...defaultButton.color,
+    default: color.background,
+    disabled: color.black,
+  },
+  background: {
+    ...defaultButton.background,
+    default: true,
+    disabled: disabledButtonColor,
+  },
+  border: {
+    ...defaultButton.border,
+    background: {
+      ...defaultButton.border.background,
+      disabled: color.black,
+    },
+    size: {
+      ...defaultButton.border.size,
+      default: pxToRem(0),
+    },
+  },
+}
+
+const secondaryFlatButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    background: {
+      ...defaultButton.border.background,
+      default: true,
+    },
+  },
+}
+
+const textOnlyFlatButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    type: 'underscore',
+    background: {
+      ...defaultButton.border.background,
+      default: true,
+    },
+  },
+  font: {
+    ...defaultButton.font,
+    size: {
+      sm: pxToRem(14),
+      md: pxToRem(14),
+      lg: pxToRem(18),
+    },
+  },
+}
+
+const flatButton: ThemeButtonSchema = {
+  primary: primaryFlatButton,
+  secondary: secondaryFlatButton,
+  textOnly: textOnlyFlatButton,
+}
+
+// -------------------------------
+
+const button: ThemeButton = {
+  default: neonButton,
+  neon: neonButton,
+  flat: flatButton,
+}
+
+// -------------------------------
 
 const bulletList: ThemeBulletList = {
   bullet: {
@@ -492,7 +687,7 @@ const bulletList: ThemeBulletList = {
       background: gradient.main2.fn,
       shadow: `
         inset 3px 3px 9px rgba(255, 255, 255, 0.65),
-        inset 0px 63px 60px rgba(255, 138, 0, 0.63),
+        inset 0pxsecondaryFlatButton 63px 60px rgba(255, 138, 0, 0.63),
         inset 8.375px 13.4px 46.75px rgba(255, 135, 83, 0.75)
       `,
       css: (fontSize: number) =>

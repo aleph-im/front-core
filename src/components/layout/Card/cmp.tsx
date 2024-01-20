@@ -60,13 +60,13 @@ export const Card = ({
           <Button
             variant={buttonVariant}
             kind="neon"
-            size="regular"
+            size="md"
             color={buttonColor}
             onClick={buttonOnClick}
             disabled={buttonDisabled}
           >
             {buttonLabel}
-            {buttonVariant === 'text-only' && (
+            {buttonVariant === 'textOnly' && (
               <Icon name="arrow-right" tw="ml-2.5" />
             )}
           </Button>

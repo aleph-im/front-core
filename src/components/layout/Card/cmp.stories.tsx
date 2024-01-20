@@ -75,18 +75,18 @@ Transcluded.args = {
   footer: (
     <div>
       <Button
-        variant="text-only"
+        variant="textOnly"
         kind="neon"
-        size="regular"
+        size="md"
         color="main1"
         onClick={() => alert('1')}
       >
         Button 1 <Icon name="arrow-right" />
       </Button>
       <Button
-        variant="text-only"
+        variant="textOnly"
         kind="neon"
-        size="regular"
+        size="md"
         color="main2"
         onClick={() => alert('2')}
       >

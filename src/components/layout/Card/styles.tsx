@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import tw from 'twin.macro'
 
 import { CardVariant } from './types'
-import { ButtonVariant } from '../../common/Button/types'
 
 export const StyledCardContainer = styled.div`
   display: inline-flex;
@@ -36,11 +35,11 @@ export const StyledCardContentContainer = styled.div<{ variant: CardVariant }>`
 `
 
 export const StyledCardFooterContainer = styled.div<{
-  buttonVariant: ButtonVariant
+  buttonVariant: string
 }>`
   ${({ buttonVariant }) => {
     const buttonOffsetCss =
-      buttonVariant === 'text-only' ? `margin-left: -1.375rem;` : ''
+      buttonVariant === 'textOnly' ? `margin-left: -1.375rem;` : ''
 
     return css`
       padding: 0 0.625rem;

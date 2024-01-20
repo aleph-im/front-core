@@ -57,7 +57,7 @@ export const WithButton = Template.bind({})
 WithButton.args = {
   ...defaultArgs,
   button: (
-    <Button variant="primary" kind="neon" size="big" color="main0">
+    <Button variant="primary" kind="neon" size="lg" color="main0">
       Dynamic text size
     </Button>
   ),
@@ -73,7 +73,7 @@ export const WithButtonContainer = Template.bind({})
 WithButtonContainer.args = {
   ...defaultArgs,
   button: (
-    <Button variant="primary" kind="neon" size="regular" color="main0">
+    <Button variant="primary" kind="neon" size="md" color="main0">
       Click
     </Button>
   ),
@@ -89,7 +89,7 @@ export const WithButtonVariant = Template.bind({})
 WithButtonVariant.args = {
   ...defaultArgs,
   button: (
-    <Button variant="secondary" kind="neon" size="regular" color="main0">
+    <Button variant="secondary" kind="neon" size="md" color="main0">
       Click
     </Button>
   ),
@@ -154,7 +154,7 @@ WithIconAndButton.args = {
   icon: <Icon name="search" size="lg" />,
   buttonStyle: 'wrapped',
   button: (
-    <Button variant="primary" kind="neon" size="regular" color="main0">
+    <Button variant="primary" kind="neon" size="md" color="main0">
       Click
     </Button>
   ),

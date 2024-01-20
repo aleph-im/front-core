@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme, css } from 'styled-components'
 import { pxToRem } from '../styles/utils'
 import {
   ThemeBreakpoint,
@@ -30,6 +30,8 @@ import {
   ThemeRouterLink,
   ThemeNavbar,
   NoisyContainer,
+  ThemeButtonSchemaVariant,
+  ThemeButtonSchema,
 } from './types'
 import { getGlassEffectCss } from '../styles'
 
@@ -296,10 +298,10 @@ const storybook: ThemeStorybookConfig = {
 
 const input: ThemeFormInput = {
   shadow: shadows.purple0,
-  color: color.text,
+  color: color.base2,
   background: color.base0,
   border: {
-    color: color.black,
+    color: color.base2,
     size: 0,
     feedback: {
       size: pxToRem(1),
@@ -312,7 +314,7 @@ const input: ThemeFormInput = {
 
 const select: ThemeFormSelect = {
   option: {
-    color: color.text,
+    color: color.base2,
     background: color.base0,
     selected: {
       color: color.base0,
@@ -325,16 +327,16 @@ const switchcmp: ThemeFormSwitch = {
   disabledType: 'grayscale',
   shadow: shadows.purple0,
   dot: {
-    background: color.black,
+    background: color.base2,
     checked: {
       background: color.main0,
     },
   },
   border: {
-    color: color.black,
+    color: color.base2,
     size: pxToRem(1),
     focus: {
-      color: color.black,
+      color: color.base2,
       size: pxToRem(2),
     },
     checked: {
@@ -357,7 +359,7 @@ const radio: ThemeFormRadio = {
     color: color.purple4,
     size: pxToRem(3),
     focus: {
-      color: color.black,
+      color: color.base2,
     },
     checked: {
       color: color.main0,
@@ -379,7 +381,7 @@ const checkbox: ThemeFormCheckbox = {
     color: color.purple4,
     size: pxToRem(3),
     focus: {
-      color: color.black,
+      color: color.base2,
       size: pxToRem(3),
     },
     checked: {
@@ -423,12 +425,45 @@ const icon: ThemeIcon = {
   },
 }
 
-const button: ThemeButton = {
-  glow: false,
+// ----------------------------------------------
+
+const defaultButton: ThemeButtonSchemaVariant = {
+  color: {
+    default: color.base2,
+    disabled: color.disabled,
+  },
+  height: {
+    sm: pxToRem(30),
+    md: pxToRem(38),
+    lg: pxToRem(45),
+  },
+  css: {
+    hover: ($color: string) => css`
+      filter: drop-shadow(0px 4px 24px ${color[$color]}46);
+      /* filter: drop-shadow(0px 4px 24px ${color[$color]}26); */
+      /* filter: drop-shadow(0px 4px 24px ${color[$color]}80); */
+    `,
+  },
   border: {
-    size: pxToRem(3),
-    focus: {
-      size: pxToRem(3),
+    type: 'full',
+    size: {
+      default: pxToRem(3),
+      focus: pxToRem(3),
+      disabled: pxToRem(3),
+    },
+    background: {
+      disabled: color.disabled,
+      focus: color.base2,
+    },
+  },
+  outline: {
+    size: {
+      default: pxToRem(0),
+      focus: pxToRem(2),
+      disabled: pxToRem(0),
+    },
+    color: {
+      focus: color.base1,
     },
   },
   font: {
@@ -436,12 +471,337 @@ const button: ThemeButton = {
     style: 'normal',
     weight: 700,
     size: {
-      small: pxToRem(14),
-      regular: pxToRem(18),
-      big: pxToRem(24),
+      sm: pxToRem(14),
+      md: pxToRem(18),
+      lg: pxToRem(24),
     },
   },
 }
+
+const primaryGradientButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  css: {
+    hover: ($color: string) => css`
+      filter: drop-shadow(0px 4px 24px ${color[$color]}80);
+    `,
+  },
+  color: {
+    ...defaultButton.color,
+    default: color.white,
+    disabled: color.white,
+  },
+  gradient: {
+    ...defaultButton.gradient,
+    default: true,
+    disabled: color.disabled,
+  },
+  border: {
+    ...defaultButton.border,
+    size: {
+      ...defaultButton.border.size,
+      default: pxToRem(0),
+      disabled: pxToRem(0),
+    },
+  },
+}
+
+const secondaryGradientButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    gradient: {
+      ...defaultButton.border.gradient,
+      default: true,
+    },
+  },
+}
+
+const tertiaryGradientButton: ThemeButtonSchemaVariant = {
+  ...secondaryGradientButton,
+  transparency: '10',
+  background: {
+    ...secondaryGradientButton.background,
+    default: true,
+  },
+}
+
+const textOnlyGradientButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    type: 'underscore',
+    gradient: {
+      ...defaultButton.border.gradient,
+      default: true,
+    },
+  },
+}
+
+const GradientButton: ThemeButtonSchema = {
+  primary: primaryGradientButton,
+  secondary: secondaryGradientButton,
+  tertiary: tertiaryGradientButton,
+  textOnly: textOnlyGradientButton,
+}
+
+// -------------------------------
+
+const primaryFlatButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  color: {
+    ...defaultButton.color,
+    default: color.white,
+    disabled: color.white,
+  },
+  background: {
+    ...defaultButton.background,
+    default: true,
+    disabled: color.disabled,
+  },
+  border: {
+    ...defaultButton.border,
+    size: {
+      ...defaultButton.border.size,
+      default: pxToRem(0),
+      disabled: pxToRem(0),
+    },
+  },
+}
+
+const secondaryFlatButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    background: {
+      ...defaultButton.border.background,
+      default: true,
+    },
+  },
+}
+
+const tertiaryFlatButton: ThemeButtonSchemaVariant = {
+  ...secondaryFlatButton,
+  transparency: '10',
+  background: {
+    ...secondaryFlatButton.background,
+    default: true,
+  },
+}
+
+const textOnlyFlatButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    type: 'underscore',
+    background: {
+      ...defaultButton.border.background,
+      default: true,
+    },
+  },
+}
+
+const flatButton: ThemeButtonSchema = {
+  primary: primaryFlatButton,
+  secondary: secondaryFlatButton,
+  tertiary: tertiaryFlatButton,
+  textOnly: textOnlyFlatButton,
+}
+
+// -------------------------------
+
+const defaultYellowButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  css: {
+    hover: () => css`
+      filter: drop-shadow(0px 4px 24px ${color.main1}46);
+    `,
+  },
+}
+
+const primaryYellowButton: ThemeButtonSchemaVariant = {
+  ...defaultYellowButton,
+  color: {
+    ...defaultYellowButton.color,
+    disabled: color.white,
+  },
+  gradient: {
+    ...defaultYellowButton.gradient,
+    default: gradient.main1,
+    disabled: color.disabled,
+  },
+  border: {
+    ...defaultYellowButton.border,
+    background: {
+      ...defaultYellowButton.border.background,
+      default: color.base2,
+    },
+    size: {
+      ...defaultYellowButton.border.size,
+      disabled: pxToRem(0),
+    },
+  },
+}
+
+const secondaryYellowButton: ThemeButtonSchemaVariant = {
+  ...defaultYellowButton,
+  background: {
+    ...defaultYellowButton.background,
+    default: color.main1,
+    disabled: 'transparent',
+  },
+  border: {
+    ...defaultYellowButton.border,
+    gradient: {
+      ...defaultYellowButton.border.gradient,
+      default: gradient.main1,
+    },
+  },
+}
+
+const tertiaryYellowButton: ThemeButtonSchemaVariant = {
+  ...secondaryYellowButton,
+  transparency: '10',
+}
+
+const textOnlyYellowButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  border: {
+    ...defaultButton.border,
+    type: 'underscore',
+    gradient: {
+      ...defaultButton.border.gradient,
+      default: gradient.main1,
+    },
+  },
+}
+
+const yellowButton: ThemeButtonSchema = {
+  primary: primaryYellowButton,
+  secondary: secondaryYellowButton,
+  tertiary: tertiaryYellowButton,
+  textOnly: textOnlyYellowButton,
+}
+// -------------------------------
+
+const primaryFunctionalButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  css: {
+    hover: () => css`
+      filter: drop-shadow(0px 4px 24px ${color.main0}80);
+    `,
+  },
+  color: {
+    ...defaultButton.color,
+    default: color.white,
+    disabled: color.white,
+  },
+  background: {
+    ...defaultButton.background,
+    default: color.base2,
+    disabled: color.disabled,
+  },
+  border: {
+    ...defaultButton.border,
+    size: {
+      ...defaultButton.border.size,
+      default: pxToRem(0),
+      disabled: pxToRem(0),
+    },
+  },
+}
+
+const secondaryFunctionalButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  css: {
+    hover: () => css`
+      filter: drop-shadow(0px 4px 24px ${color.main0}46);
+    `,
+  },
+  transparency: '10',
+  background: {
+    ...defaultButton.background,
+    default: color.base2,
+    disabled: 'transparent',
+  },
+  border: {
+    ...defaultButton.border,
+    background: {
+      ...defaultButton.border.background,
+      default: color.base2,
+    },
+  },
+}
+
+const errorFunctionalButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  css: {
+    hover: () => css`
+      filter: drop-shadow(0px 4px 24px ${color.error}80);
+    `,
+  },
+  transparency: '10',
+  background: {
+    ...defaultButton.background,
+    default: color.error,
+    disabled: 'transparent',
+  },
+  outline: {
+    ...defaultButton.outline,
+    color: {
+      ...defaultButton.outline.color,
+      focus: color.base2,
+    },
+  },
+  border: {
+    ...defaultButton.border,
+    gradient: {
+      ...defaultButton.border.gradient,
+      default: gradient.error,
+      focus: gradient.error,
+    },
+  },
+}
+
+const warningFunctionalButton: ThemeButtonSchemaVariant = {
+  ...errorFunctionalButton,
+  css: {
+    hover: () => css`
+      filter: drop-shadow(0px 4px 24px ${color.warning}80);
+    `,
+  },
+  background: {
+    ...errorFunctionalButton.background,
+    default: color.warning,
+  },
+  border: {
+    ...errorFunctionalButton.border,
+    gradient: {
+      ...errorFunctionalButton.border.gradient,
+      default: gradient.warning,
+      focus: gradient.warning,
+    },
+  },
+}
+
+const functionalButton: ThemeButtonSchema = {
+  primary: primaryFunctionalButton,
+  secondary: secondaryFunctionalButton,
+  error: errorFunctionalButton,
+  warning: warningFunctionalButton,
+}
+
+// -------------------------------
+
+const button: ThemeButton = {
+  default: GradientButton,
+  gradient: GradientButton,
+  flat: flatButton,
+  yellow: yellowButton,
+  functional: functionalButton,
+}
+
+// -------------------------------
+// -------------------------------
 
 const bulletList: ThemeBulletList = {
   bullet: {
@@ -453,8 +813,8 @@ const bulletList: ThemeBulletList = {
 
 const label: ThemeLabel = {
   color: {
-    primary: color.text,
-    secondary: color.text,
+    primary: color.base2,
+    secondary: color.base2,
   },
 }
 
@@ -481,7 +841,7 @@ const tab: ThemeTab = {
 
 const tag: ThemeTag = {
   color: {
-    text: color.text,
+    text: color.base2,
     background: color.purple3,
     border: color.purple2,
   },
