@@ -59,7 +59,6 @@ export const Card = ({
         {footer || (
           <Button
             variant={buttonVariant}
-            kind="neon"
             size="md"
             color={buttonColor}
             onClick={buttonOnClick}

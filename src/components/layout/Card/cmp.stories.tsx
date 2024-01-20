@@ -76,7 +76,6 @@ Transcluded.args = {
     <div>
       <Button
         variant="textOnly"
-        kind="neon"
         size="md"
         color="main1"
         onClick={() => alert('1')}
@@ -85,7 +84,6 @@ Transcluded.args = {
       </Button>
       <Button
         variant="textOnly"
-        kind="neon"
         size="md"
         color="main2"
         onClick={() => alert('2')}

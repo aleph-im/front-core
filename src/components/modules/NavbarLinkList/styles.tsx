@@ -8,7 +8,6 @@ export const StyledButton = styled(Button).attrs(() => {
   return {
     color: '#ffffff66',
     variant: 'secondary',
-    kind: 'neon',
     size: 'regular',
   }
 })(() => [tw`hidden`])

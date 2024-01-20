@@ -33,7 +33,7 @@ const navLinks = [
   <a href="#">Team</a>,
 ]
 const navButtons = [
-  <Button as="button" variant="secondary" color="main0" kind="neon" size="md">
+  <Button as="button" variant="secondary" color="main0" size="md">
     Whitepaper
   </Button>,
 ]
@@ -65,7 +65,7 @@ const Template: StoryFn<typeof Navbar> = (args) => {
             mobileDirection="row"
             breakpoint={breakpoint}
           >
-            <Button color="main0" variant="secondary" kind="neon" size="md">
+            <Button color="main0" variant="secondary" size="md">
               <Icon name="comet" />
             </Button>
           </NavbarLinkList>

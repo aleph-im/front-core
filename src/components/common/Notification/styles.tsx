@@ -15,7 +15,6 @@ export const StyledClearButton = styled(Button).attrs(() => {
   return {
     color: 'main0',
     variant: 'tertiary',
-    kind: 'neon',
     size: 'regular',
   }
 })`

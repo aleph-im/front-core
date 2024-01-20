@@ -100,7 +100,6 @@ export const TextAction = ({
             variant="tertiary"
             as="a"
             color=""
-            kind="neon"
             size="md"
             style={{ padding: '0 0 0 0.5rem' }}
           >

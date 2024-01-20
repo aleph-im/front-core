@@ -7,10 +7,10 @@ export type ButtonTag = 'button' | 'a'
 export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     children: ReactNode
-    kind: string
-    variant: string
-    size: ButtonSize
-    color: string
+    kind?: string
+    variant?: string
+    size?: ButtonSize
+    color?: string
 
     // Force states
     hover?: boolean

@@ -148,7 +148,7 @@ const ResponsiveHooksTemplate: StoryFn<any> = () => {
             <strong>Current size</strong>
           </td>
           <td>
-            <span tw="ml-4 text-sm">{currentSize?.width}px</span>
+            <span tw="ml-4 text-10">{currentSize?.width}px</span>
           </td>
         </tr>
         <tr>
@@ -156,7 +156,7 @@ const ResponsiveHooksTemplate: StoryFn<any> = () => {
             <strong>Current breakpoint</strong>
           </td>
           <td>
-            <span tw="ml-4 text-sm">
+            <span tw="ml-4 text-10">
               {breakpoint} ({theme.breakpoint[breakpoint] * 16}px)
             </span>
           </td>
@@ -166,7 +166,7 @@ const ResponsiveHooksTemplate: StoryFn<any> = () => {
             <strong>size &gt;= md ({theme.breakpoint['md'] * 16}px)</strong>
           </td>
           <td>
-            <span tw="ml-4 text-sm">{min}</span>
+            <span tw="ml-4 text-10">{min}</span>
           </td>
         </tr>
         <tr>
@@ -174,7 +174,7 @@ const ResponsiveHooksTemplate: StoryFn<any> = () => {
             <strong>size &lt; lg ({theme.breakpoint['lg'] * 16}px)</strong>
           </td>
           <td>
-            <span tw="ml-4 text-sm">{max}</span>
+            <span tw="ml-4 text-10">{max}</span>
           </td>
         </tr>
         <tr>
@@ -185,7 +185,7 @@ const ResponsiveHooksTemplate: StoryFn<any> = () => {
             </strong>
           </td>
           <td>
-            <span tw="ml-4 text-sm">{bet}</span>
+            <span tw="ml-4 text-10">{bet}</span>
           </td>
         </tr>
       </table>

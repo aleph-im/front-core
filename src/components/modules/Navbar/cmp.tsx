@@ -49,7 +49,6 @@ export const Navbar = ({
           <Button
             color="main0"
             variant="secondary"
-            kind="neon"
             size="md"
             onClick={toggleMenu}
           >

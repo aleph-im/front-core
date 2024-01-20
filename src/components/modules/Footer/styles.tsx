@@ -28,7 +28,6 @@ export const StyledFooter = styled.footer`
 export const StyledButton = styled(Button).attrs((props) => {
   return {
     ...props,
-    kind: 'neon',
     variant: 'tertiary',
     color: 'main0',
     size: 'big',
