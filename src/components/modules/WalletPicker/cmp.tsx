@@ -7,6 +7,8 @@ import { Logo } from '../../common/Logo'
 import WalletIcon from './icons'
 import Button from '../../common/Button'
 import Icon from '../../common/Icon'
+import { useTheme } from 'styled-components'
+import ToggleContainer from '../../layout/ToggleContainer'
 
 export const WalletPicker = forwardRef(
   (
@@ -39,12 +41,16 @@ export const WalletPicker = forwardRef(
       setCurrentNetwork(network)
     }
 
+    const theme = useTheme()
+    const { color, button, button2, button3, button4 } =
+      theme.component.walletPicker
+
     return (
       <StyledPicker ref={ref} {...rest}>
         {address ? (
           <>
             <div tw="flex items-center gap-4 mb-6">
-              <Logo color="base0" size="3rem" />
+              <Logo img="aleph" color="text" size="3rem" />
               <div tw="leading-3">
                 <div
                   className="tp-code1 fs-24"
@@ -58,15 +64,16 @@ export const WalletPicker = forwardRef(
               </div>
             </div>
 
-            <BorderedDiv tw="py-8 text-center">
+            <BorderedDiv tw="mt-6 text-center">
               {addressHref ? (
                 <Button
-                  color="main0"
-                  variant="tertiary"
-                  size="md"
-                  href={addressHref}
                   as="a"
                   target="_blank"
+                  size="md"
+                  href={addressHref}
+                  kind={button3.kind}
+                  variant={button3.variant}
+                  color={button3.color}
                 >
                   {displayAddress}
                   <Icon name="external-link-square-alt" tw="ml-2.5" />
@@ -76,11 +83,12 @@ export const WalletPicker = forwardRef(
               )}
             </BorderedDiv>
 
-            <BorderedDiv tw="py-8 text-center">
+            <BorderedDiv tw="mt-6 text-center">
               <Button
-                color="main2"
-                variant="tertiary"
                 size="md"
+                kind={button4.kind}
+                variant={button4.variant}
+                color={button4.color}
                 onClick={onDisconnect}
               >
                 Logout
@@ -91,52 +99,46 @@ export const WalletPicker = forwardRef(
           <div>
             <StyledTitle>1. Choose your network</StyledTitle>
             <Row count={4} gap="0.75rem" tw="mb-6">
-              {networks.map((network) => (
-                <Col key={network.name}>
-                  <div tw="text-center">
-                    <Button
-                      onClick={() => handleClick(network)}
-                      disabled={network.wallets.length === 0}
-                      size="md"
-                      tw="relative py-1!"
-                      kind={
-                        currentNetwork?.name === network.name
-                          ? 'default'
-                          : 'flat'
-                      }
-                      color={
-                        currentNetwork?.name === network.name
-                          ? 'main0'
-                          : 'white'
-                      }
-                      variant={
-                        currentNetwork?.name === network.name
-                          ? 'tertiary'
-                          : 'secondary'
-                      }
-                    >
-                      {currentNetwork?.name !== network.name && (
-                        <div
-                          tw="absolute! h-full w-full inset-0 -z-10"
-                          className="fx-noise-base"
-                        />
-                      )}
-                      <Icon name={network.icon} size="xl" tw="w-6" />
-                    </Button>
-                    <div
-                      className="fs-10 text-base0"
-                      css={[
-                        tw`mt-1`,
-                        currentNetwork?.name !== network.name && tw`opacity-60`,
-                      ]}
-                    >
-                      {network.name}
+              {networks.map((network) => {
+                const isSelected = currentNetwork?.name === network.name
+
+                return (
+                  <Col key={network.name}>
+                    <div tw="text-center">
+                      <Button
+                        onClick={() => handleClick(network)}
+                        disabled={network.wallets.length === 0}
+                        size="md"
+                        tw="relative"
+                        kind={button.kind(isSelected)}
+                        color={button.color(isSelected)}
+                        variant={button.variant(isSelected)}
+                      >
+                        {!isSelected && (
+                          <div
+                            tw="absolute! h-full w-full inset-0 -z-10"
+                            className="fx-noise-base"
+                          />
+                        )}
+                        <Icon name={network.icon} size="xl" tw="w-6" />
+                      </Button>
+                      <div
+                        className="fs-10"
+                        css={[
+                          tw`mt-1`,
+                          {
+                            color: !isSelected ? color.disabled : color.default,
+                          },
+                        ]}
+                      >
+                        {network.name}
+                      </div>
                     </div>
-                  </div>
-                </Col>
-              ))}
+                  </Col>
+                )
+              })}
             </Row>
-            {currentNetwork?.wallets && (
+            <ToggleContainer open={!!currentNetwork?.wallets}>
               <BorderedDiv>
                 <StyledTitle>2. Connect your wallet</StyledTitle>
                 <Row count={1}>
@@ -149,15 +151,16 @@ export const WalletPicker = forwardRef(
                               onConnect(wallet.name, wallet.provider())
                             }
                             as="button"
-                            variant="tertiary"
-                            color="main0"
                             size="md"
+                            kind={button2.kind}
+                            variant={button2.variant}
+                            color={button2.color}
                           >
                             {wallet.name}
                             <WalletIcon
                               tw="ml-2.5"
                               name={wallet.icon}
-                              color={wallet.color}
+                              color={button2.iconColor || wallet.color}
                             />
                           </Button>
                         </div>
@@ -166,7 +169,7 @@ export const WalletPicker = forwardRef(
                   )}
                 </Row>
               </BorderedDiv>
-            )}
+            </ToggleContainer>
           </div>
         )}
       </StyledPicker>

@@ -32,6 +32,7 @@ import {
   NoisyContainer,
   ThemeButtonSchemaVariant,
   ThemeButtonSchema,
+  ThemeWalletPicker,
 } from './types'
 import {
   getGlassEffectCss,
@@ -66,6 +67,7 @@ const color: ThemeColor = {
   warning: '#FFD179',
   error: '#D92446',
   disabled: '#FFFFFF1A',
+  disabled2: '#FFFFFF33',
 
   background: '#141327',
   contentBackground: '#141327',
@@ -461,6 +463,7 @@ const icon: ThemeIcon = {
 const disabledButtonColor = `${color.text}4C`
 
 const defaultButton: ThemeButtonSchemaVariant = {
+  padding: '0.5rem 1.375rem',
   color: {
     default: color.text,
     disabled: disabledButtonColor,
@@ -723,7 +726,7 @@ const tab: ThemeTab = {
   color: {
     default: color.base0,
     active: color.main0,
-    disabled: `${color.base0}33`,
+    disabled: color.disabled2,
   },
 }
 
@@ -808,6 +811,39 @@ const navbar: ThemeNavbar = {
   },
 }
 
+const walletPicker: ThemeWalletPicker = {
+  color: {
+    default: color.text,
+    disabled: `${color.text}99`,
+  },
+  background: color.disabled,
+  shadow: shadows.black0,
+  border: {
+    size: pxToRem(3),
+    color: color.disabled2,
+  },
+  button: {
+    kind: (s) => (s ? 'default' : 'flat'),
+    color: (s) => (s ? 'main0' : 'white'),
+    variant: (s) => (s ? 'tertiary' : 'secondary'),
+  },
+  button2: {
+    kind: 'neon',
+    variant: 'tertiary',
+    color: 'main0',
+  },
+  button3: {
+    kind: 'neon',
+    variant: 'tertiary',
+    color: 'main0',
+  },
+  button4: {
+    kind: 'neon',
+    variant: 'tertiary',
+    color: 'main2',
+  },
+}
+
 const noisyContainer: NoisyContainer = {
   default: 'noise-light',
   borderRadius: pxToRem(24),
@@ -826,6 +862,7 @@ const component: ThemeComponent = {
   sidebar,
   navbar,
   noisyContainer,
+  walletPicker,
 }
 
 const theme: DefaultTheme = {

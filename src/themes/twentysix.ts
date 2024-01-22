@@ -32,6 +32,7 @@ import {
   NoisyContainer,
   ThemeButtonSchemaVariant,
   ThemeButtonSchema,
+  ThemeWalletPicker,
 } from './types'
 import { getGlassEffectCss } from '../styles'
 
@@ -79,7 +80,7 @@ const color: ThemeColor = {
   background: '#F9F4FF',
   contentBackground: '#F9F4FF',
   foreground: '#F9F4FF',
-  text: '#000000',
+  text: '#141421',
 }
 
 const gradient: ThemeGradient = {
@@ -298,10 +299,10 @@ const storybook: ThemeStorybookConfig = {
 
 const input: ThemeFormInput = {
   shadow: shadows.purple0,
-  color: color.base2,
+  color: color.text,
   background: color.base0,
   border: {
-    color: color.base2,
+    color: color.text,
     size: 0,
     feedback: {
       size: pxToRem(1),
@@ -314,7 +315,7 @@ const input: ThemeFormInput = {
 
 const select: ThemeFormSelect = {
   option: {
-    color: color.base2,
+    color: color.text,
     background: color.base0,
     selected: {
       color: color.base0,
@@ -327,16 +328,16 @@ const switchcmp: ThemeFormSwitch = {
   disabledType: 'grayscale',
   shadow: shadows.purple0,
   dot: {
-    background: color.base2,
+    background: color.text,
     checked: {
       background: color.main0,
     },
   },
   border: {
-    color: color.base2,
+    color: color.text,
     size: pxToRem(1),
     focus: {
-      color: color.base2,
+      color: color.text,
       size: pxToRem(2),
     },
     checked: {
@@ -359,7 +360,7 @@ const radio: ThemeFormRadio = {
     color: color.purple4,
     size: pxToRem(3),
     focus: {
-      color: color.base2,
+      color: color.text,
     },
     checked: {
       color: color.main0,
@@ -381,7 +382,7 @@ const checkbox: ThemeFormCheckbox = {
     color: color.purple4,
     size: pxToRem(3),
     focus: {
-      color: color.base2,
+      color: color.text,
       size: pxToRem(3),
     },
     checked: {
@@ -428,8 +429,9 @@ const icon: ThemeIcon = {
 // ----------------------------------------------
 
 const defaultButton: ThemeButtonSchemaVariant = {
+  padding: '0.5rem 1.375rem',
   color: {
-    default: color.base2,
+    default: color.text,
     disabled: color.disabled,
   },
   height: {
@@ -453,7 +455,7 @@ const defaultButton: ThemeButtonSchemaVariant = {
     },
     background: {
       disabled: color.disabled,
-      focus: color.base2,
+      focus: color.text,
     },
   },
   outline: {
@@ -633,7 +635,7 @@ const primaryYellowButton: ThemeButtonSchemaVariant = {
     ...defaultYellowButton.border,
     background: {
       ...defaultYellowButton.border.background,
-      default: color.base2,
+      default: color.text,
     },
     size: {
       ...defaultYellowButton.border.size,
@@ -697,7 +699,7 @@ const primaryFunctionalButton: ThemeButtonSchemaVariant = {
   },
   background: {
     ...defaultButton.background,
-    default: color.base2,
+    default: color.text,
     disabled: color.disabled,
   },
   border: {
@@ -720,14 +722,14 @@ const secondaryFunctionalButton: ThemeButtonSchemaVariant = {
   transparency: '10',
   background: {
     ...defaultButton.background,
-    default: color.base2,
+    default: color.text,
     disabled: 'transparent',
   },
   border: {
     ...defaultButton.border,
     background: {
       ...defaultButton.border.background,
-      default: color.base2,
+      default: color.text,
     },
   },
 }
@@ -749,7 +751,7 @@ const errorFunctionalButton: ThemeButtonSchemaVariant = {
     ...defaultButton.outline,
     color: {
       ...defaultButton.outline.color,
-      focus: color.base2,
+      focus: color.text,
     },
   },
   border: {
@@ -792,12 +794,47 @@ const functionalButton: ThemeButtonSchema = {
 
 // -------------------------------
 
+const primaryRoundedButton: ThemeButtonSchemaVariant = {
+  ...defaultButton,
+  padding: '0.5rem',
+  color: {
+    ...defaultButton.color,
+    default: color.text,
+    disabled: color.disabled,
+  },
+  background: {
+    ...defaultButton.background,
+    default: true,
+  },
+  border: {
+    ...defaultButton.border,
+    background: {
+      default: color.text,
+      focus: color.text,
+      disabled: color.disabled,
+    },
+    size: {
+      ...defaultButton.border.size,
+      default: pxToRem(2),
+      focus: pxToRem(3),
+      disabled: pxToRem(2),
+    },
+  },
+}
+
+const roundedButton: ThemeButtonSchema = {
+  primary: primaryRoundedButton,
+}
+
+// -------------------------------
+
 const button: ThemeButton = {
   default: GradientButton,
   gradient: GradientButton,
   flat: flatButton,
   yellow: yellowButton,
   functional: functionalButton,
+  rounded: roundedButton,
 }
 
 // -------------------------------
@@ -813,8 +850,8 @@ const bulletList: ThemeBulletList = {
 
 const label: ThemeLabel = {
   color: {
-    primary: color.base2,
-    secondary: color.base2,
+    primary: color.text,
+    secondary: color.text,
   },
 }
 
@@ -825,7 +862,7 @@ const logo: ThemeLogo = {
 }
 
 const notification: ThemeNotification = {
-  color: color.base2,
+  color: color.text,
   background: {
     success: gradient.info.fn,
   },
@@ -833,7 +870,7 @@ const notification: ThemeNotification = {
 
 const tab: ThemeTab = {
   color: {
-    default: color.base2,
+    default: color.text,
     active: color.main0,
     disabled: color.dark0,
   },
@@ -841,7 +878,7 @@ const tab: ThemeTab = {
 
 const tag: ThemeTag = {
   color: {
-    text: color.base2,
+    text: color.text,
     background: color.purple3,
     border: color.purple2,
   },
@@ -903,7 +940,7 @@ const sidebar: ThemeSidebar = {
       background: color.white,
     },
     active: {
-      color: color.base2,
+      color: color.text,
       background: color.main1,
     },
   },
@@ -919,16 +956,48 @@ const navbar: ThemeNavbar = {
     content: {
       css: () => getGlassEffectCss('base2'),
       color: color.white,
-      background: color.base2,
+      background: color.text,
       child: {
         background: color.dark2,
         radius: pxToRem(0),
       },
       active: {
-        color: color.base2,
+        color: color.text,
         background: color.main1,
       },
     },
+  },
+}
+
+const walletPicker: ThemeWalletPicker = {
+  color: {
+    default: color.text,
+    disabled: color.text,
+  },
+  background: '#FFFFFF05',
+  shadow: shadows.purple0,
+  border: {
+    size: pxToRem(3),
+    color: color.purple2,
+  },
+  button: {
+    kind: () => 'rounded',
+    variant: () => 'primary',
+    color: (s) => (s ? color.main1 : color.base1),
+  },
+  button2: {
+    kind: 'gradient',
+    variant: 'secondary',
+    color: 'main0',
+    iconColor: color.text,
+  },
+  button3: {
+    kind: 'functional',
+    variant: 'primary',
+  },
+  button4: {
+    kind: 'functional',
+    variant: 'warning',
   },
 }
 
@@ -950,6 +1019,7 @@ const component: ThemeComponent = {
   sidebar,
   navbar,
   noisyContainer,
+  walletPicker,
 }
 
 const theme: DefaultTheme = {

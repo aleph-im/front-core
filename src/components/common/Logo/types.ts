@@ -1,4 +1,5 @@
 export type LogoProps = {
+  img?: string
   size?: number | string
   color?: string
   text?: boolean | string

@@ -6,6 +6,7 @@ import TextGradient from '../TextGradient'
 import logos from './img'
 
 export const Logo = ({
+  img,
   text = false,
   color = 'text',
   size,
@@ -14,7 +15,7 @@ export const Logo = ({
   const theme = useTheme()
   const { logo } = theme.component
 
-  const LogoSvg = useMemo(() => logos[logo.img], [logo.img])
+  const LogoSvg = useMemo(() => logos[img || logo.img], [img, logo.img])
 
   const logoGradient = theme.gradient[color]?.colors[!text ? 1 : 0]
   const logoColor = logoGradient || theme.color[color] || color

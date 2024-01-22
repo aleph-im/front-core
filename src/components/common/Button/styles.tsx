@@ -62,7 +62,6 @@ const defaultVariants = (props: StyledButtonProps) => {
     gap: 0.375rem;
     text-align: center;
     margin: 0;
-    padding: 0.5rem 1.375rem;
     width: auto;
     min-width: 0;
     max-width: 100%;
@@ -84,6 +83,7 @@ const defaultVariants = (props: StyledButtonProps) => {
     font-weight: ${button.font.weight};
     font-size: ${button.font.size[$size]}rem;
     min-height: ${button.height[$size]}rem;
+    padding: ${button.padding};
     color: ${button.color?.default};
     background-color: ${buttonCl.color};
     background-image: ${buttonCl.gradient};

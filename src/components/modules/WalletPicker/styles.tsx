@@ -3,14 +3,16 @@ import { addClasses } from '../../../utils'
 
 export const StyledPicker = styled.div`
   ${({ theme }) => {
+    const { background, shadow } = theme.component.walletPicker
+
     return css`
       position: relative;
-      width: 320px;
+      width: 20rem;
       border-radius: 1.875rem;
-      background: ${theme.color.base0}0A;
+      background: ${background};
       z-index: 1;
       padding: 1.5rem;
-      box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.25);
+      box-shadow: ${shadow};
       backdrop-filter: blur(50px);
     `
   }}
@@ -18,9 +20,10 @@ export const StyledPicker = styled.div`
 
 export const StyledTitle = styled.h6.attrs(addClasses('tp-nav'))`
   ${({ theme }) => {
+    const { color } = theme.component.walletPicker
+
     return css`
-      color: ${theme.color.base0};
-      font-family: ${theme.typo.info.family};
+      color: ${color.default};
       font-size: 1.125rem;
       margin: 0 0 2rem 0;
     `
@@ -28,6 +31,12 @@ export const StyledTitle = styled.h6.attrs(addClasses('tp-nav'))`
 `
 
 export const BorderedDiv = styled.div`
-  padding-top: 1.5rem;
-  border-top: ${({ theme }) => `0.0625rem solid ${theme.color.base0}33`};
+  ${({ theme }) => {
+    const { border } = theme.component.walletPicker
+
+    return css`
+      padding-top: 1.5rem;
+      border-top: ${border.size}rem solid ${border.color};
+    `
+  }}
 `

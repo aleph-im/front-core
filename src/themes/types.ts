@@ -279,6 +279,7 @@ export type ThemeButtonSchemaSize = 'sm' | 'md' | 'lg'
 
 export type ThemeButtonSchemaVariant = {
   height: Record<ThemeButtonSchemaSize, number>
+  padding: string
   color?: {
     default?: string
     disabled?: string
@@ -479,6 +480,40 @@ export type ThemeNavbar = {
   }
 }
 
+export type ThemeWalletPicker = {
+  color: {
+    default: string
+    disabled: string
+  }
+  background: string
+  shadow: string
+  border: {
+    size: number
+    color: string
+  }
+  button: {
+    kind: (isSelected: boolean) => string
+    variant: (isSelected: boolean) => string
+    color: (isSelected: boolean) => string
+  }
+  button2: {
+    kind: string
+    variant: string
+    color?: string
+    iconColor?: string
+  }
+  button3: {
+    kind: string
+    variant: string
+    color?: string
+  }
+  button4: {
+    kind: string
+    variant: string
+    color?: string
+  }
+}
+
 export type NoisyContainer = {
   default: string
   borderRadius: number
@@ -497,6 +532,7 @@ export type ThemeComponent = {
   sidebar: ThemeSidebar
   navbar: ThemeNavbar
   noisyContainer: NoisyContainer
+  walletPicker: ThemeWalletPicker
 }
 
 // -----------------------------------
