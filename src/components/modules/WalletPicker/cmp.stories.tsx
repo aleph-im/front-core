@@ -20,20 +20,49 @@ const metamaskForETH: WalletProps = {
   provider: () => (window as any)?.ethereum,
 }
 
-const ethereum: NetworkProps = {
-  name: 'Ethereum',
-  icon: 'ethereum',
-  wallets: [metamaskForETH],
-}
-
-const bitcoin: NetworkProps = {
-  name: 'Bitcoin',
-  icon: 'bitcoin',
-  wallets: [],
-}
-
 const defaultArgs: Partial<WalletPickerProps> = {
-  networks: [ethereum, bitcoin],
+  networks: [
+    {
+      name: 'Ethereum',
+      icon: 'ethereum',
+      wallets: [metamaskForETH],
+    },
+    {
+      name: 'Avalanche',
+      icon: 'avalanche',
+      wallets: [],
+    },
+    {
+      name: 'Solana',
+      icon: 'solana',
+      wallets: [],
+    },
+    {
+      name: 'Binance',
+      icon: 'binance',
+      wallets: [],
+    },
+    {
+      name: 'Polygon',
+      icon: 'polygon',
+      wallets: [],
+    },
+    {
+      name: 'Tezos',
+      icon: 'tezos',
+      wallets: [],
+    },
+    {
+      name: 'Cosmos',
+      icon: 'cosmos',
+      wallets: [],
+    },
+    {
+      name: 'Polkadot',
+      icon: 'polkadot',
+      wallets: [],
+    },
+  ],
 }
 
 const defaultParams = {

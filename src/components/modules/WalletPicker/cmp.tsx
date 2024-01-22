@@ -120,7 +120,12 @@ export const WalletPicker = forwardRef(
                             className="fx-noise-base"
                           />
                         )}
-                        <Icon name={network.icon} size="xl" tw="w-6" />
+                        <Icon
+                          name={network.icon}
+                          size="xl"
+                          tw="w-6"
+                          prefix="custom"
+                        />
                       </Button>
                       <div
                         className="fs-10"

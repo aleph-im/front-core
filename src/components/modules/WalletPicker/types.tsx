@@ -5,7 +5,7 @@ import { HTMLAttributes } from 'react'
 export type WalletProps = {
   name: string
   icon: WalletIconName
-  color: string
+  color?: string
   provider: () => any
 }
 
