@@ -4,7 +4,6 @@ import { BreakpointId } from '../../../themes'
 import tw from 'twin.macro'
 import { addClasses } from '../../../utils'
 import NotificationBadge from '../../common/NotificationBadge'
-import { RouterLinkVariant } from './types'
 import Icon, { IconProps } from '../../common/Icon'
 
 // A <li> element, wrapping the links (text only), separated by a slash
@@ -48,7 +47,7 @@ export const StyledNavlink = styled.li<StyledNavlinkProps>`
 
 export type StyledRouterLinkProps = {
   $isActive?: boolean
-  $variant?: RouterLinkVariant
+  $variant?: string
   $disabled?: boolean
   $hasIcon?: boolean
   $hasFlag?: boolean
@@ -57,132 +56,86 @@ export type StyledRouterLinkProps = {
 export const StyledRouterLink = styled.div.attrs(
   addClasses('tp-nav'),
 )<StyledRouterLinkProps>`
-  ${({ theme, $disabled, $isActive, $hasIcon, $hasFlag, $variant = '2' }) => {
-    const routerLink = theme.component.routerLink.variant[$variant]
+  ${({ theme, $disabled, $isActive, $hasIcon, $variant = '2' }) => {
+    const {
+      icon,
+      text: defaultText,
+      background,
+      color,
+      underscore,
+    } = theme.component.routerLink.variant[$variant]
+
+    const text = $hasIcon ? defaultText : icon
 
     return css`
       ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap h-7`}
+      transition: box-shadow ease-in-out 0.25s 0s, background-color ease-in-out 0.25s 0s;
 
-      transition: box-shadow ease-in-out 0.25s 0s;
+      color: ${color?.default};
+      background-color: ${background?.default};
+
+      &:hover {
+        color: ${color?.hover};
+        background-color: ${background?.hover};
+        box-shadow: ${underscore && `inset 0px -1px 0px 0px ${color?.hover}`};
+      }
+
+      && {
+        ${$isActive &&
+        css`
+          ${tw`cursor-default`}
+          color: ${color?.active};
+          background-color: ${background?.active};
+          box-shadow: ${underscore &&
+          `inset 0px -1px 0px 0px ${color?.active}`};
+        `}
+
+        ${$disabled &&
+        css`
+          ${tw`cursor-not-allowed`}
+          color: ${color?.disabled};
+          background-color: ${background?.disabled};
+          box-shadow: none;
+        `}
+      }
+
+      & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+        transition: color ease-in-out 0.25s 0s,
+          background-color ease-in-out 0.25s 0s;
+      }
+
+      &:hover {
+        & ${StyledRouteLinkIcon} {
+          color: ${icon?.color?.hover};
+          background-color: ${icon?.background?.hover};
+        }
+
+        & ${StyledRouteLinkText} {
+          color: ${text?.color?.hover};
+          background-color: ${text?.background?.hover};
+        }
+      }
 
       ${$isActive &&
       css`
-        ${tw`cursor-default`}
+        && ${StyledRouteLinkIcon} {
+          color: ${icon?.color?.active};
+          background-color: ${icon?.background?.active};
+        }
+
+        && ${StyledRouteLinkText} {
+          color: ${icon?.color?.active};
+          background-color: ${icon?.background?.active};
+        }
       `}
 
       ${$disabled &&
       css`
-        ${tw`cursor-not-allowed`}
+        && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
+          color: ${icon?.color?.disabled};
+          background-color: ${icon?.background?.disabled};
+        }
       `}
- 
-    ${$hasFlag &&
-      css`
-        ${tw`pr-4`}
-      `}
-    
-    & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-        transition: color ease-in-out 0.25s 0s;
-      }
-
-      ${$variant === '1'
-        ? css`
-            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              color: ${$isActive
-                ? routerLink.color.active
-                : routerLink.color.default};
-            }
-
-            &:hover {
-              & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                color: ${routerLink.color.hover};
-              }
-            }
-
-            ${$isActive &&
-            css`
-              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-                color: ${routerLink.color.active};
-              }
-            `}
-
-            ${$disabled &&
-            css`
-              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-                color: ${$isActive
-                  ? `${routerLink.color.active}66`
-                  : routerLink.color.disabled};
-              }
-            `}
-          `
-        : $variant === '2'
-        ? css`
-            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              color: ${routerLink.color.default};
-            }
-
-            &:hover {
-              & ${StyledRouteLinkIcon} {
-                color: ${routerLink.color.hover};
-              }
-
-              & ${StyledRouteLinkText} {
-                color: ${!$hasIcon || (routerLink as any).textHover
-                  ? routerLink.color.hover
-                  : routerLink.color.default};
-              }
-            }
-
-            ${$isActive &&
-            css`
-              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-                color: ${routerLink.color.active};
-              }
-            `}
-
-            ${$disabled &&
-            css`
-              && ${StyledRouteLinkIcon}, && ${StyledRouteLinkText} {
-                color: ${$isActive
-                  ? `${routerLink.color.active}66`
-                  : routerLink.color.disabled};
-              }
-            `}
-          `
-        : css`
-            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              color: ${routerLink.color.default};
-            }
-
-            &:hover {
-              & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                color: ${routerLink.color.hover};
-              }
-
-              box-shadow: inset 0px -1px 0px 0px ${routerLink.color.hover};
-            }
-
-            ${$isActive &&
-            css`
-              && {
-                box-shadow: inset 0px -1px 0px 0px ${routerLink.color.active};
-
-                & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                  color: ${routerLink.color.active};
-                }
-              }
-            `}
-
-            ${$disabled &&
-            css`
-              && {
-                box-shadow: inset 0px -1px 0px 0px ${routerLink.color.disabled};
-
-                & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                  color: ${routerLink.color.disabled};
-                }
-              }
-            `}
-          `}
     `
   }}
 `

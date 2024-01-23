@@ -751,14 +751,36 @@ const routerLink: ThemeRouterLink = {
     '2': {
       color: {
         default: color.white,
+        hover: color.white,
+        active: color.main0,
+        disabled: '#92929280',
+      },
+      icon: {
+        color: {
+          default: color.white,
+          hover: color.main0,
+          active: color.main0,
+          disabled: '#92929280',
+        },
+      },
+    },
+    '3': {
+      underscore: true,
+      color: {
+        default: color.white,
         hover: color.main0,
         active: color.main0,
         disabled: '#92929280',
       },
     },
-    '3': {
+    '4': {
+      background: {
+        hover: color.main0,
+        active: color.main0,
+        disabled: 'transparent',
+      },
       color: {
-        default: color.white,
+        default: color.text,
         hover: color.white,
         active: color.white,
         disabled: '#92929280',
@@ -793,6 +815,10 @@ const sidebar: ThemeSidebar = {
 
 const navbar: ThemeNavbar = {
   logoText: false,
+  color: color.text,
+  tablet: {
+    buttonColor: '#ffffff66',
+  },
   mobile: {
     header: {
       css: () => getGlassEffectCss('base2'),

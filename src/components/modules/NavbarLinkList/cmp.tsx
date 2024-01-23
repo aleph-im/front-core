@@ -1,5 +1,10 @@
 import React, { memo, useCallback, useRef, useState } from 'react'
-import { useClickOutside, useResponsiveBetween } from '../../../hooks'
+import {
+  useClickOutside,
+  useFloatPosition,
+  useResponsiveBetween,
+  useTransitionedEnterExit,
+} from '../../../hooks'
 import {
   StyledList,
   StyledContainer,
@@ -8,6 +13,7 @@ import {
 } from './styles'
 import { NavbarLinkListProps } from './types'
 import Icon from '../../common/Icon'
+import { createPortal } from 'react-dom'
 
 export const NavbarLinkList = ({
   children,
@@ -20,6 +26,7 @@ export const NavbarLinkList = ({
   mobileGap: $mobileGap,
   desktopGap: $desktopGap,
   withSlash: $withSlash,
+  containerRef = document.body,
   ...rest
 }: NavbarLinkListProps) => {
   const [open, setOpen] = useState(false)
@@ -34,8 +41,26 @@ export const NavbarLinkList = ({
   }, [])
 
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const containerRef = useRef<HTMLUListElement>(null)
-  useClickOutside(handleClose, [buttonRef, containerRef])
+  const restContainerRef = useRef<HTMLUListElement>(null)
+  const parentContainerRef = useRef<HTMLDivElement>(null)
+
+  useClickOutside(handleClose, [buttonRef, restContainerRef])
+
+  const { position } = useFloatPosition({
+    my: 'top-right',
+    at: 'bottom-right',
+    margin: { x: 0, y: 0 },
+    offset: { x: 0, y: 0 },
+    atRef: parentContainerRef,
+    myRef: restContainerRef,
+    deps: [isCollapsed, open],
+  })
+
+  const { state } = useTransitionedEnterExit({
+    onOff: isCollapsed && open,
+  })
+
+  const restIsOpen = state === 'enter'
 
   return (
     <StyledContainer
@@ -49,6 +74,7 @@ export const NavbarLinkList = ({
         $desktopGap,
         $breakpoint: breakpoint,
         $isCollapsed: isCollapsed,
+        ref: parentContainerRef,
         ...rest,
       }}
     >
@@ -60,10 +86,15 @@ export const NavbarLinkList = ({
           <Icon name="bars" />
         </StyledButton>
       )}
-      {isCollapsed && open && (
-        <StyledRestContainer ref={containerRef}>
+      {createPortal(
+        <StyledRestContainer
+          ref={restContainerRef}
+          $isOpen={restIsOpen}
+          $position={position}
+        >
           {(children as any[]).slice(1)}
-        </StyledRestContainer>
+        </StyledRestContainer>,
+        containerRef,
       )}
     </StyledContainer>
   )

@@ -897,17 +897,46 @@ const routerLink: ThemeRouterLink = {
     '2': {
       color: {
         default: color.white,
-        hover: color.main1,
+        hover: color.white,
         active: color.main1,
         disabled: '#92929280',
       },
+      icon: {
+        color: {
+          default: color.white,
+          hover: color.main1,
+          active: color.main1,
+          disabled: '#92929280',
+        },
+      },
     },
     '3': {
+      underscore: true,
+      color: {
+        default: color.text,
+        hover: color.main0,
+        active: color.main0,
+        disabled: '#92929280',
+      },
+    },
+    '4': {
+      background: {
+        active: color.main1,
+        disabled: 'transparent',
+      },
       color: {
         default: color.white,
         hover: color.white,
-        active: color.white,
+        active: color.text,
         disabled: '#92929280',
+      },
+      icon: {
+        color: {
+          default: color.text,
+          hover: color.main1,
+          active: color.text,
+          disabled: '#92929280',
+        },
       },
     },
   },
@@ -948,6 +977,10 @@ const sidebar: ThemeSidebar = {
 
 const navbar: ThemeNavbar = {
   logoText: true,
+  color: color.text,
+  tablet: {
+    buttonColor: color.text,
+  },
   mobile: {
     header: {
       shadow: shadows.purple0,
@@ -960,10 +993,6 @@ const navbar: ThemeNavbar = {
       child: {
         background: color.dark2,
         radius: pxToRem(0),
-      },
-      active: {
-        color: color.text,
-        background: color.main1,
       },
     },
   },

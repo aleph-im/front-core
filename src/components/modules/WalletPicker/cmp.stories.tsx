@@ -2,7 +2,7 @@ import React from 'react'
 import { StoryFn } from '@storybook/react'
 
 import WalletPicker from './cmp'
-import { WalletPickerProps, NetworkProps, WalletProps } from './types'
+import { WalletPickerProps, WalletProps } from './types'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

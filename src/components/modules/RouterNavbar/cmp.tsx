@@ -12,6 +12,7 @@ import {
 } from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
 import { useTheme } from 'styled-components'
+import { useResponsiveMax } from '../../../hooks'
 
 const Route = (props: RouteProps) => {
   const {
@@ -21,6 +22,7 @@ const Route = (props: RouteProps) => {
     Link,
     level = 0,
     onClick,
+    variant,
     ...rest
   } = props
   const isActive = pathname.indexOf(route.href) >= 0
@@ -39,6 +41,7 @@ const Route = (props: RouteProps) => {
             ...linkProps,
             pathname,
             breakpoint,
+            variant,
             level,
             onClick,
           }}
@@ -48,6 +51,7 @@ const Route = (props: RouteProps) => {
           <StyledRouterLink
             {...{
               ...linkProps,
+              variant,
               isActive,
               onClick,
               $level: level,
@@ -68,6 +72,7 @@ const ParentRoute = (props: ParentRouteProps) => {
     Link,
     level = 0,
     onClick,
+    variant,
     ...rest
   } = props
   const { name, children = [] } = route
@@ -115,6 +120,7 @@ const ParentRoute = (props: ParentRouteProps) => {
                 Link,
                 isActive,
                 $level: level,
+                variant,
                 ...rest,
               }}
               onClick={handleClick}
@@ -144,6 +150,7 @@ export const RouterNavbar = ({
   ...rest
 }: RouterNavbarProps) => {
   const theme = useTheme()
+  const variant = useResponsiveMax(breakpoint) ? '4' : '3'
 
   const handleLinkClick = useCallback(() => {
     onToggle && onToggle(false)
@@ -179,6 +186,7 @@ export const RouterNavbar = ({
               route,
               Link,
               breakpoint,
+              variant,
               pathname,
               onClick: handleLinkClick,
             }}

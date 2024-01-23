@@ -402,21 +402,29 @@ export type ThemeTag = {
   }
 }
 
-export type RouterLinkVariant = {
-  color: {
-    default: string
-    hover: string
-    active: string
-    disabled: string
+export type RouterLinkVariantProps = {
+  background?: {
+    default?: string
+    hover?: string
+    active?: string
+    disabled?: string
+  }
+  color?: {
+    default?: string
+    hover?: string
+    active?: string
+    disabled?: string
   }
 }
 
+export type RouterLinkVariant = RouterLinkVariantProps & {
+  underscore?: boolean
+  icon?: RouterLinkVariantProps
+  text?: RouterLinkVariantProps
+}
+
 export type ThemeRouterLink = {
-  variant: {
-    1: RouterLinkVariant
-    2: RouterLinkVariant
-    3: RouterLinkVariant
-  }
+  variant: Record<string, RouterLinkVariant>
 }
 
 export type ThemeSidebar = {
@@ -454,6 +462,10 @@ export type ThemeSidebar = {
 
 export type ThemeNavbar = {
   logoText: boolean
+  color: string
+  tablet?: {
+    buttonColor?: string
+  }
   mobile: {
     header: {
       background?: string
@@ -471,10 +483,6 @@ export type ThemeNavbar = {
       child: {
         background: string
         radius: number
-      }
-      active?: {
-        color?: string
-        background?: string
       }
     }
   }

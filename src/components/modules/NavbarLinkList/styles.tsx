@@ -3,10 +3,13 @@ import styled, { css } from 'styled-components'
 import { getResponsiveCss } from '../../../styles'
 import Button from '../../common/Button'
 import { BreakpointId } from '../../../themes'
+import { FloatPosition } from '../../../hooks'
 
-export const StyledButton = styled(Button).attrs(() => {
+export const StyledButton = styled(Button).attrs(({ theme }) => {
+  const { tablet } = theme.component.navbar
+
   return {
-    color: '#ffffff66',
+    color: tablet?.buttonColor,
     variant: 'secondary',
     size: 'regular',
   }
@@ -18,13 +21,38 @@ export const StyledList = styled.ul`
   width: 100%;
 `
 
-export const StyledRestContainer = styled.ul`
-  ${tw`flex flex-col absolute left-0 p-6 m-0 w-full`}
-  top: 130%;
-  background-color: #070713a6 !important;
-  backdrop-filter: blur(50px);
-  border-radius: 1.25rem;
-  gap: 1.75rem;
+export type StyledRestContainerProps = {
+  $isOpen: boolean
+  $position: FloatPosition
+}
+
+export const StyledRestContainer = styled.ul<StyledRestContainerProps>`
+  ${({ theme, $isOpen, $position: { x, y } }) => {
+    const { mobile } = theme.component.navbar
+    const { duration, timing } = theme.transition
+
+    return css`
+      ${tw`flex flex-col fixed left-0 top-0 p-6 m-0`}
+      background-color: ${mobile.header.background};
+      backdrop-filter: blur(50px);
+      min-width: 14rem;
+      border-radius: 1.25rem;
+      gap: 1.75rem;
+      transition: all ${timing} ${duration.fast}ms 0s;
+      transition-property: opacity visibility;
+
+      transform: ${`translate3d(${x}px, ${y}px, 0)`};
+
+      opacity: 0;
+      visibility: hidden;
+
+      ${$isOpen &&
+      css`
+        opacity: 1;
+        visibility: inherit;
+      `}
+    `
+  }}
 `
 
 export type StyledContainerProps = {
@@ -41,7 +69,6 @@ export type StyledContainerProps = {
 
 export const StyledContainer = styled.div<StyledContainerProps>`
   ${({
-    theme,
     $breakpoint,
     $isCollapsed,
     $onlyDesktop,
@@ -51,15 +78,18 @@ export const StyledContainer = styled.div<StyledContainerProps>`
     $desktopDirection = 'row',
     $mobileGap = $mobileDirection === 'row',
     $desktopGap = true,
+    theme,
   }) => {
+    const { color } = theme.component.navbar
+
     return css`
       ${tw`relative flex flex-col max-w-full`}
-      gap: ${theme.font.size['28']}rem;
+      gap: 1.75rem;
       ${$onlyDesktop ? 'display: none;' : ''}
 
       & ${StyledList} {
         flex-direction: ${$mobileDirection};
-        gap: ${$mobileGap ? theme.font.size['28'] : 0}rem;
+        gap: ${$mobileGap ? 1.75 : 0}rem;
       }
 
       ${getResponsiveCss(
@@ -79,7 +109,8 @@ export const StyledContainer = styled.div<StyledContainerProps>`
             flex: 0 1 auto;
             align-items: center;
             flex-direction: ${$desktopDirection};
-            gap: ${$desktopGap ? theme.font.size['28'] : 0}rem;
+            gap: ${$desktopGap ? 1.75 : 0}rem;
+            color: ${color};
 
             ${$withSlash &&
             css`
@@ -89,7 +120,7 @@ export const StyledContainer = styled.div<StyledContainerProps>`
                 display: inline-block;
                 padding: 0 1.75rem;
               }
-            `}
+            `};
           }
         `,
       )}

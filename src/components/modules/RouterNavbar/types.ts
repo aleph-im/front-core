@@ -14,6 +14,7 @@ export type RouterNavbarProps = NavbarProps & {
 
 export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
   breakpoint: BreakpointId
+  variant?: string
   level?: number
   pathname: string
 }

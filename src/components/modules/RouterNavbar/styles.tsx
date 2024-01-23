@@ -6,18 +6,11 @@ import { BreakpointId } from '../../../themes'
 import { getResponsiveCss } from '../../../styles'
 import { StyledRouterLink as StyledRouterLinkContent } from '../RouterLink/styles'
 
-export type StyledRouterLinkProps = Omit<RouterLinkProps, 'variant'> & {
+export type StyledRouterLinkProps = RouterLinkProps & {
   $level: number
 }
 
-export const StyledRouterLink = styled(RouterLink).attrs<StyledRouterLinkProps>(
-  (props) => {
-    return {
-      ...props,
-      variant: '2',
-    }
-  },
-)<StyledRouterLinkProps>`
+export const StyledRouterLink = styled(RouterLink)<StyledRouterLinkProps>`
   ${({ $level, route: { icon } }) => {
     return css`
       ${tw`w-full`}

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { StoryFn } from '@storybook/react'
 import RouterLink from './cmp'
 import { RouterLinkProps } from './types'
+import { useTheme } from 'styled-components'
 
 export default {
   title: 'Components/UI/modules/RouterLink',
@@ -89,33 +90,22 @@ const RouterLinkGroup = ({
 const Template: StoryFn<typeof RouterLink> = (args) => {
   const noTextArgs = useMemo(() => withoutTextArgs(args), [args])
   const noIconArgs = useMemo(() => withoutIconArgs(args), [args])
+  const theme = useTheme()
+  const variants = Object.keys(theme.component.routerLink.variant)
 
   return (
     <div tw="flex flex-col gap-10">
-      <RouterLinkGroup
-        {...{
-          defaultArgs: args,
-          noIconArgs,
-          noTextArgs,
-          variant: '1',
-        }}
-      />
-      <RouterLinkGroup
-        {...{
-          defaultArgs: args,
-          noIconArgs,
-          noTextArgs,
-          variant: '2',
-        }}
-      />
-      <RouterLinkGroup
-        {...{
-          defaultArgs: args,
-          noIconArgs,
-          noTextArgs,
-          variant: '3',
-        }}
-      />
+      {variants.map((variant) => (
+        <RouterLinkGroup
+          key={variant}
+          {...{
+            defaultArgs: args,
+            noIconArgs,
+            noTextArgs,
+            variant,
+          }}
+        />
+      ))}
     </div>
   )
 }

@@ -2,11 +2,7 @@ import tw from 'twin.macro'
 import styled, { css } from 'styled-components'
 import { getGlassEffectCss, getResponsiveCss } from '../../../styles'
 import { BreakpointId } from '../../../themes'
-import {
-  StyledRouteLinkIcon,
-  StyledRouteLinkText,
-  StyledRouterLink,
-} from '../RouterLink/styles'
+import { StyledRouterLink } from '../RouterLink/styles'
 
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingContainer = styled.div`
@@ -61,11 +57,9 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
   ${({ theme, $breakpoint, $height, $isOpen }) => {
     const { duration } = theme.transition
     const { mobile } = theme.component.navbar
-    const { color } = theme.component.routerLink.variant['2']
 
     return css`
       ${tw`sticky top-0`}
-
       backdrop-filter: none;
       height: ${$isOpen ? '100vh' : $height};
       transition: ${$isOpen
@@ -95,14 +89,6 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
 
         & ${StyledRouterLink} {
           ${tw`flex h-12`}
-
-          &._active {
-            background-color: ${mobile.content.active?.background};
-
-            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              color: ${mobile.content.active?.color};
-            }
-          }
         }
       }
 
@@ -114,7 +100,7 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
         $breakpoint,
         css`
           ${tw`flex items-center justify-between px-16`}
-          gap: ${theme.font.size['28']}rem;
+          gap: 1.75rem;
           height: ${$height};
           ${getGlassEffectCss('base2')}
 
@@ -134,14 +120,6 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
 
             & ${StyledRouterLink} {
               ${tw`inline-flex`}
-
-              &._active {
-                background-color: transparent;
-
-                & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-                  color: ${color.active};
-                }
-              }
             }
           }
 
