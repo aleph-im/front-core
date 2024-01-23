@@ -147,6 +147,7 @@ export const RouterNavbar = ({
   Link,
   children,
   onToggle,
+  containerRef = document.body,
   ...rest
 }: RouterNavbarProps) => {
   const theme = useTheme()
@@ -178,7 +179,13 @@ export const RouterNavbar = ({
         ...rest,
       }}
     >
-      <NavbarLinkList withSlash collapsible="xl" breakpoint={breakpoint}>
+      <NavbarLinkList
+        withSlash
+        collapsible="xl"
+        breakpoint={breakpoint}
+        containerRef={containerRef}
+        cont
+      >
         {routes.map((route) => (
           <RouteMemo
             key={route.href}
