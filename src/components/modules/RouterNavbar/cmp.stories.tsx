@@ -202,3 +202,124 @@ NestedRoutes.args = {
 NestedRoutes.parameters = {
   controls: { exclude: ['color', 'size'] },
 }
+
+export const NestedExactPath = Template.bind({})
+NestedExactPath.args = {
+  ...defaultArgs,
+  pathname: '/tools/init',
+  routes: [
+    {
+      name: 'Root',
+      href: '/',
+      icon: 'console',
+      children: [
+        {
+          name: 'Nested Root',
+          href: '/',
+          exact: true,
+        },
+        {
+          name: 'Tools',
+          href: '/tools',
+          children: [
+            {
+              name: 'Init tool',
+              href: '/tools/init',
+              external: true,
+              exact: true,
+            },
+            {
+              name: 'Indexing framework',
+              href: 'https://docs.aleph.im/tools/indexer/',
+              external: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Account',
+      icon: 'profile',
+      href: 'https://account.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Explorer',
+      icon: 'explore',
+      href: 'https://explorer.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Swap',
+      icon: 'swap',
+      href: 'https://swap.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+  ],
+}
+NestedExactPath.parameters = {
+  controls: { exclude: ['color', 'size'] },
+}
+
+export const NestedExactFalsePath = Template.bind({})
+NestedExactFalsePath.args = {
+  ...defaultArgs,
+  pathname: '/tools/init',
+  routes: [
+    {
+      name: 'Root',
+      href: '/',
+      icon: 'console',
+      children: [
+        {
+          name: 'Nested Root',
+          href: '/',
+        },
+        {
+          name: 'Tools',
+          href: '/tools',
+          children: [
+            {
+              name: 'Init tool',
+              href: '/tools/init',
+              external: true,
+              exact: true,
+            },
+            {
+              name: 'Indexing framework',
+              href: 'https://docs.aleph.im/tools/indexer/',
+              external: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Account',
+      icon: 'profile',
+      href: 'https://account.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Explorer',
+      icon: 'explore',
+      href: 'https://explorer.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+    {
+      name: 'Swap',
+      icon: 'swap',
+      href: 'https://swap.aleph.im/',
+      target: '_blank',
+      external: true,
+    },
+  ],
+}
+NestedExactFalsePath.parameters = {
+  controls: { exclude: ['color', 'size'] },
+}

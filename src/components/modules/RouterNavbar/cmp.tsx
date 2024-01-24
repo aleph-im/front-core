@@ -46,7 +46,6 @@ const Route = (props: RouteProps) => {
             breakpoint,
             variant,
             level,
-            exact,
             onClick,
           }}
         />
@@ -77,14 +76,12 @@ const ParentRoute = (props: ParentRouteProps) => {
     level = 0,
     onClick,
     variant,
-    exact,
     ...rest
   } = props
   const { name, children = [] } = route
 
-  const isActive = exact
-    ? pathname === route.href
-    : pathname.indexOf(route.href) >= 0
+  const isActive = pathname.indexOf(route.href) >= 0
+
   const [active, setActive] = useState(isActive)
 
   const handleClick = useCallback((e: MouseEvent) => {
@@ -108,6 +105,7 @@ const ParentRoute = (props: ParentRouteProps) => {
             breakpoint,
             pathname,
             level: newLevel,
+            exact: route.exact,
             onClick,
             ...rest,
           }}
@@ -154,7 +152,6 @@ export const RouterNavbar = ({
   Link,
   children,
   onToggle,
-  containerRef = document.body,
   ...rest
 }: RouterNavbarProps) => {
   const theme = useTheme()
@@ -186,13 +183,7 @@ export const RouterNavbar = ({
         ...rest,
       }}
     >
-      <NavbarLinkList
-        withSlash
-        collapsible="xl"
-        breakpoint={breakpoint}
-        containerRef={containerRef}
-        cont
-      >
+      <NavbarLinkList withSlash collapsible="xl" breakpoint={breakpoint}>
         {routes.map((route) => (
           <RouteMemo
             key={route.href}
