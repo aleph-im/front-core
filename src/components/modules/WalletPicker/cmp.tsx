@@ -153,7 +153,7 @@ export const WalletPicker = forwardRef(
                         <div tw="block text-center">
                           <Button
                             onClick={() =>
-                              onConnect(wallet.name, wallet.provider())
+                              onConnect(currentNetwork.name, wallet.provider())
                             }
                             as="button"
                             size="md"
