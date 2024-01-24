@@ -9,6 +9,7 @@ export type RouterNavbarProps = NavbarProps & {
   breakpoint: BreakpointId
   pathname: string
   Link: LinkComponent
+  containerRef?: Element | DocumentFragment
   children?: ReactNode
 }
 
