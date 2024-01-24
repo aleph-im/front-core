@@ -7,7 +7,7 @@ export const StyledPicker = styled.div`
 
     return css`
       position: relative;
-      width: 20rem;
+      min-width: 20rem;
       border-radius: 1.875rem;
       background: ${background};
       z-index: 1;
