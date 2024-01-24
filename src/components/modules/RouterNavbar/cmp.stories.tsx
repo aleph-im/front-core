@@ -267,33 +267,26 @@ NestedExactPath.parameters = {
 export const NestedExactFalsePath = Template.bind({})
 NestedExactFalsePath.args = {
   ...defaultArgs,
-  pathname: '/tools/init',
+  pathname: '/tools',
   routes: [
     {
       name: 'Root',
       href: '/',
       icon: 'console',
+      exact: true,
+    },
+    {
+      name: 'Tools',
+      href: '/tools',
       children: [
         {
-          name: 'Nested Root',
-          href: '/',
+          name: 'Init tool',
+          href: '/tools',
         },
         {
-          name: 'Tools',
-          href: '/tools',
-          children: [
-            {
-              name: 'Init tool',
-              href: '/tools/init',
-              external: true,
-              exact: true,
-            },
-            {
-              name: 'Indexing framework',
-              href: 'https://docs.aleph.im/tools/indexer/',
-              external: true,
-            },
-          ],
+          name: 'Indexing framework',
+          href: 'https://docs.aleph.im/tools/indexer/',
+          external: true,
         },
       ],
     },

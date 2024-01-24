@@ -194,6 +194,7 @@ export const RouterNavbar = ({
               variant,
               pathname,
               onClick: handleLinkClick,
+              exact: route.exact,
             }}
           />
         ))}
