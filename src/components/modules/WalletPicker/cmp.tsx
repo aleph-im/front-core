@@ -2,7 +2,7 @@ import React, { ForwardedRef, forwardRef, memo, useMemo, useState } from 'react'
 import tw from 'twin.macro'
 import { Col, Row } from '../../layout/Grid'
 import { BorderedDiv, StyledPicker, StyledTitle } from './styles'
-import { NetworkProps, WalletPickerProps } from './types'
+import { NetworkProps, WalletPickerProps, WalletProps } from './types'
 import { Logo } from '../../common/Logo'
 import WalletIcon from './icons'
 import Button from '../../common/Button'
@@ -147,31 +147,27 @@ export const WalletPicker = forwardRef(
               <BorderedDiv>
                 <StyledTitle>2. Connect your wallet</StyledTitle>
                 <Row count={1}>
-                  {currentNetwork?.wallets?.map(
-                    (wallet: { [key: string]: any }) => (
-                      <Col key={wallet.name}>
-                        <div tw="block text-center">
-                          <Button
-                            onClick={() =>
-                              onConnect(currentNetwork.name, wallet.provider())
-                            }
-                            as="button"
-                            size="md"
-                            kind={button2.kind}
-                            variant={button2.variant}
-                            color={button2.color}
-                          >
-                            {wallet.name}
-                            <WalletIcon
-                              tw="ml-2.5"
-                              name={wallet.icon}
-                              color={button2.iconColor || wallet.color}
-                            />
-                          </Button>
-                        </div>
-                      </Col>
-                    ),
-                  )}
+                  {currentNetwork?.wallets?.map((wallet: WalletProps) => (
+                    <Col key={wallet.name}>
+                      <div tw="block text-center">
+                        <Button
+                          onClick={() => onConnect(wallet, currentNetwork)}
+                          as="button"
+                          size="md"
+                          kind={button2.kind}
+                          variant={button2.variant}
+                          color={button2.color}
+                        >
+                          {wallet.name}
+                          <WalletIcon
+                            tw="ml-2.5"
+                            name={wallet.icon}
+                            color={button2.iconColor || wallet.color}
+                          />
+                        </Button>
+                      </div>
+                    </Col>
+                  ))}
                 </Row>
               </BorderedDiv>
             </ToggleContainer>
