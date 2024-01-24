@@ -12,5 +12,5 @@ export type NavbarLinkListProps = HTMLAttributes<HTMLDivElement> & {
   desktopGap?: boolean
   breakpoint?: BreakpointId
   collapsible?: BreakpointId
-  containerRef?: Element | DocumentFragment
+  containerRef?: HTMLElement | undefined
 }

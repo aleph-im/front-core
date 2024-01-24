@@ -23,9 +23,12 @@ const Route = (props: RouteProps) => {
     level = 0,
     onClick,
     variant,
+    exact,
     ...rest
   } = props
-  const isActive = pathname.indexOf(route.href) >= 0
+  const isActive = exact
+    ? pathname === route.href
+    : pathname.indexOf(route.href) >= 0
 
   const linkProps = {
     route,
@@ -43,6 +46,7 @@ const Route = (props: RouteProps) => {
             breakpoint,
             variant,
             level,
+            exact,
             onClick,
           }}
         />
@@ -73,11 +77,14 @@ const ParentRoute = (props: ParentRouteProps) => {
     level = 0,
     onClick,
     variant,
+    exact,
     ...rest
   } = props
   const { name, children = [] } = route
 
-  const isActive = pathname.indexOf(route.href) >= 0
+  const isActive = exact
+    ? pathname === route.href
+    : pathname.indexOf(route.href) >= 0
   const [active, setActive] = useState(isActive)
 
   const handleClick = useCallback((e: MouseEvent) => {

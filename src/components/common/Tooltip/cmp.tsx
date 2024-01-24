@@ -87,6 +87,7 @@ export const Tooltip = ({
   return (
     <>
       {shouldMount &&
+        typeof window === 'object' &&
         createPortal(
           <StyledContainer
             {...{

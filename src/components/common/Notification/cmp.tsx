@@ -99,28 +99,33 @@ export const Notification = ({
   return (
     <NotificationContext.Provider value={contextValue}>
       {children}
-      {createPortal(
-        <StyledContainer onMouseOver={stopTimeout} onMouseOut={resetTimeout}>
-          <StyledNotificationContainer>
-            {notifications.sort().map((noti) => (
-              <NotificationCard
-                key={noti.id}
-                onClose={() => contextValue.remove(noti.id)}
-                tw="mt-4"
-                {...noti}
-              />
-            ))}
-          </StyledNotificationContainer>
-          {notifications.length > 2 && (
-            <div tw="mt-4">
-              <StyledClearButton onClick={clearAll}>
-                Clear all <StyledClearIcon tw="ml-2" />
-              </StyledClearButton>
-            </div>
-          )}
-        </StyledContainer>,
-        containerRef,
-      )}
+      {typeof window === 'object'
+        ? createPortal(
+            <StyledContainer
+              onMouseOver={stopTimeout}
+              onMouseOut={resetTimeout}
+            >
+              <StyledNotificationContainer>
+                {notifications.sort().map((noti) => (
+                  <NotificationCard
+                    key={noti.id}
+                    onClose={() => contextValue.remove(noti.id)}
+                    tw="mt-4"
+                    {...noti}
+                  />
+                ))}
+              </StyledNotificationContainer>
+              {notifications.length > 2 && (
+                <div tw="mt-4">
+                  <StyledClearButton onClick={clearAll}>
+                    Clear all <StyledClearIcon tw="ml-2" />
+                  </StyledClearButton>
+                </div>
+              )}
+            </StyledContainer>,
+            containerRef,
+          )
+        : null}
     </NotificationContext.Provider>
   )
 }

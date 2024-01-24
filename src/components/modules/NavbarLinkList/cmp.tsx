@@ -86,16 +86,18 @@ export const NavbarLinkList = ({
           <Icon name="bars" />
         </StyledButton>
       )}
-      {createPortal(
-        <StyledRestContainer
-          ref={restContainerRef}
-          $isOpen={restIsOpen}
-          $position={position}
-        >
-          {(children as any[]).slice(1)}
-        </StyledRestContainer>,
-        containerRef,
-      )}
+      {typeof window === 'object'
+        ? createPortal(
+            <StyledRestContainer
+              ref={restContainerRef}
+              $isOpen={restIsOpen}
+              $position={position}
+            >
+              {(children as any[]).slice(1)}
+            </StyledRestContainer>,
+            containerRef,
+          )
+        : null}
     </StyledContainer>
   )
 }

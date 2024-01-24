@@ -7,6 +7,17 @@ export type ObjectId =
   | 'Object6'
   | 'Object7'
   | 'Object8'
+  | 'Object9'
+  | 'Object10'
+  | 'Object11'
+  | 'Object12'
+  | 'Object13'
+  | 'Object14'
+  | 'Object15'
+  | 'Object16'
+  | 'Object17'
+  | 'Object18'
+  | 'Object19'
 
 export type ObjectImgProps = {
   id: ObjectId

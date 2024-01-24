@@ -9,7 +9,7 @@ export type RouterNavbarProps = NavbarProps & {
   breakpoint: BreakpointId
   pathname: string
   Link: LinkComponent
-  containerRef?: Element | DocumentFragment
+  containerRef?: HTMLElement | undefined
   children?: ReactNode
 }
 
@@ -18,6 +18,7 @@ export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
   variant?: string
   level?: number
   pathname: string
+  exact?: boolean
 }
 
 export type ParentRouteProps = RouteProps
