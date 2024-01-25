@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import tw from 'twin.macro'
 import { addClasses } from '../../../utils'
 import Button from '../../common/Button'
-import Icon from '../../common/Icon'
 
 export type StyledContainerProps = {
   $maxWidth?: string

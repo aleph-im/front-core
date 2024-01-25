@@ -51,7 +51,7 @@ export const Footer = ({
             <ul tw="w-full flex-auto md:flex-1 h-full flex flex-col gap-6 md:flex-row md:items-center lg:justify-center">
               {mainLinks.map((l) => (
                 <li key={l.label}>
-                  <StyledLink target="_blank" href={l.href}>
+                  <StyledLink target="_blank" href={l.href} className="fs-18">
                     {l.label}
                     <Icon size="lg" name="external-link-square-alt" />
                   </StyledLink>
@@ -64,7 +64,7 @@ export const Footer = ({
                 .filter((m) => m.small)
                 .map((m) => (
                   <li key={m.name}>
-                    <StyledLink target="_blank" href={m.href}>
+                    <StyledLink target="_blank" href={m.href} className="fs-18">
                       <Icon size="lg" name={m.icon} />
                       {m.label}
                     </StyledLink>
@@ -77,7 +77,7 @@ export const Footer = ({
             <div tw="mb-12">
               <Logo size={55} text />
             </div>
-            <nav tw="m-0 flex flex-wrap gap-6 justify-between">
+            <nav tw="m-0 flex flex-wrap gap-10 justify-between">
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
                 {buttons.map((b) => (
                   <StyledButton key={b.href} href={b.href}>
@@ -86,18 +86,18 @@ export const Footer = ({
                 ))}
               </div>
 
-              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
+              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
                 <FooterLinks links={links.slice(0, links.length / 2)} />
               </div>
 
-              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
+              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
                 <FooterLinks links={links.slice(links.length / 2)} />
               </div>
 
               <ul tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
                 {media.map((m) => (
                   <li key={m.name}>
-                    <StyledLink target="_blank" href={m.href}>
+                    <StyledLink target="_blank" href={m.href} className="fs-18">
                       <Icon size="lg" name={m.icon} />
                       {m.label}
                     </StyledLink>
