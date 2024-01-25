@@ -3,6 +3,7 @@ export type LogoProps = {
   size?: number | string
   color?: string
   text?: boolean | string
+  bgColor?: string
 }
 
 export type StyledLogoProps = {
@@ -12,4 +13,5 @@ export type StyledLogoProps = {
 
 export type StyledLogoSvgProps = {
   color: string
+  bgColor?: string
 }
