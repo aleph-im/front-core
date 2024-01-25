@@ -75,7 +75,6 @@ export function getGlassEffectCss(color: string, opts?: GlassOpts) {
         }
         const bss = calculateBoxShadowPossition(bs, opts)
 
-        const c = theme.gradient.main0.colors
         const bg = `
           background-clip: border-box;
           background-origin: border-box;
@@ -83,34 +82,41 @@ export function getGlassEffectCss(color: string, opts?: GlassOpts) {
         `
 
         switch (color) {
-          case 'base0':
+          case 'base0': {
             return css`
               ${bg}
               background-image:
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(84.86deg, #2260FF0C 65.23%, #1859FF00 99.89%);
             `
-          case 'base1':
+          }
+          case 'base1': {
             return css`
               ${bg}
               background-image:
                 linear-gradient(90.96deg, #1D1C3780 54.81%, #1D1C3700 103.58%);
             `
-          case 'base2':
+          }
+          case 'base2': {
             return css`
               ${bg}
               background: ${theme.color.main0}03;
               box-shadow: inset ${bss.s1} #deefff05, inset ${bss.s2} #5e9dd705;
               backdrop-filter: blur(50px);
             `
-          case 'colored0':
+          }
+          case 'colored0': {
+            const c = theme.gradient.main0.colors
+
             return css`
               ${bg}
+
               background: 
                 linear-gradient(91.23deg, #FFFFFF11 11.38%, #FFFFFF00 96.5%),
                 linear-gradient(342.74deg, #2D113A66 22.13%, #43125900 67.01%),
                 linear-gradient(107.53deg, ${c[0]}4D 16.25%, ${c[1]}4D 82.42%);
             `
+          }
         }
       }
     }}

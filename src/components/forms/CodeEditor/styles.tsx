@@ -9,7 +9,8 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
     const { onFocus, onBlur, ...rest } = props
 
     return {
-      ...addClasses('fx-glass-base0 fx-glass-border-base0 tp-form')(rest),
+      ...addClasses('tp-form')(rest),
+
       height: '100%',
       width: '100%',
       theme: 'vs-dark',
@@ -35,6 +36,13 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
     width: 100%;
     height: 14rem;
     min-height: 3.25rem;
+
+    background-clip: border-box;
+    background-origin: border-box;
+    background-position: 0 0;
+    background: linear-gradient(91.23deg, #ffffff11 11.38%, #ffffff00 96.5%),
+      linear-gradient(84.86deg, #2260ff0c 65.23%, #1859ff00 99.89%), #141327;
+    border: 0.0625rem solid #ffffff1a;
 
     &::placeholder {
       mix-blend-mode: normal;
