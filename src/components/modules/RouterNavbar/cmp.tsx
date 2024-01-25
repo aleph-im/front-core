@@ -12,7 +12,7 @@ import {
 } from './styles'
 import ToggleContainer from '../../layout/ToggleContainer'
 import { useTheme } from 'styled-components'
-import { useResponsiveMax } from '../../../hooks'
+import { useResponsiveMin } from '../../../hooks'
 
 const Route = (props: RouteProps) => {
   const {
@@ -155,7 +155,7 @@ export const RouterNavbar = ({
   ...rest
 }: RouterNavbarProps) => {
   const theme = useTheme()
-  const variant = useResponsiveMax(breakpoint) ? '4' : '3'
+  const variant = useResponsiveMin(breakpoint) ? '3' : '4'
 
   const handleLinkClick = useCallback(() => {
     onToggle && onToggle(false)

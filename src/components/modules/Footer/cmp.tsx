@@ -29,6 +29,7 @@ export const FooterLinks = ({ links }: { links: FooterLinkList[] }) => {
     </>
   )
 }
+FooterLinks.displayName = 'FooterLinks'
 
 export const Footer = ({
   small = false,
@@ -87,11 +88,11 @@ export const Footer = ({
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinks links={links.slice(0, links.length / 2)} />
+                <FooterLinksMemo links={links.slice(0, links.length / 2)} />
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinks links={links.slice(links.length / 2)} />
+                <FooterLinksMemo links={links.slice(links.length / 2)} />
               </div>
 
               <ul tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
@@ -113,4 +114,5 @@ export const Footer = ({
 }
 Footer.displayName = 'Footer'
 
+export const FooterLinksMemo = memo(FooterLinks) as typeof FooterLinks
 export default memo(Footer) as typeof Footer

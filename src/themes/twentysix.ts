@@ -1060,7 +1060,7 @@ const noisyContainer: ThemeNoisyContainer = {
 }
 
 const footer: ThemeFooter = {
-  background: color.base1,
+  background: color.white,
   color: color.text,
   link: {
     gradient: gradient.main0,

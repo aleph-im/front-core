@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useState } from 'react'
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react'
 import {
   useClickOutside,
   useFloatPosition,
@@ -45,6 +45,28 @@ export const NavbarLinkList = ({
 
   useClickOutside(handleClose, [buttonRef, restContainerRef])
 
+  const restItems = useMemo(
+    () =>
+      isCollapsed && Array.isArray(children) && children.length > 1
+        ? children.slice(1)
+        : undefined,
+    [children, isCollapsed],
+  )
+
+  const items = useMemo(
+    () =>
+      isCollapsed && Array.isArray(children) && children.length > 1
+        ? children.slice(0, 1)
+        : children,
+    [children, isCollapsed],
+  )
+
+  const { state, shouldMount } = useTransitionedEnterExit({
+    onOff: isCollapsed && !!restItems && open,
+  })
+
+  const restIsOpen = state === 'enter'
+
   const { position } = useFloatPosition({
     my: 'top-right',
     at: 'bottom-right',
@@ -52,14 +74,8 @@ export const NavbarLinkList = ({
     offset: { x: 0, y: 0 },
     atRef: parentContainerRef,
     myRef: restContainerRef,
-    deps: [isCollapsed, open],
+    deps: [shouldMount],
   })
-
-  const { state } = useTransitionedEnterExit({
-    onOff: isCollapsed && open,
-  })
-
-  const restIsOpen = state === 'enter'
 
   return (
     <StyledContainer
@@ -77,22 +93,20 @@ export const NavbarLinkList = ({
         ...rest,
       }}
     >
-      <StyledList>
-        {isCollapsed ? children && (children as any[]).slice(0, 1) : children}
-      </StyledList>
+      <StyledList>{items}</StyledList>
       {isCollapsed && (
         <StyledButton onClick={handleToggleOpen} ref={buttonRef}>
           <Icon name="bars" />
         </StyledButton>
       )}
-      {typeof window === 'object' && document
+      {shouldMount && typeof window === 'object' && document
         ? createPortal(
             <StyledRestContainer
               ref={restContainerRef}
               $isOpen={restIsOpen}
               $position={position}
             >
-              {(children as any[]).slice(1)}
+              {restItems}
             </StyledRestContainer>,
             document.body,
           )
