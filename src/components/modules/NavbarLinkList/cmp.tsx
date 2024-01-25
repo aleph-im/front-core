@@ -99,18 +99,18 @@ export const NavbarLinkList = ({
           <Icon name="bars" />
         </StyledButton>
       )}
-      {shouldMount && typeof window === 'object' && document
-        ? createPortal(
-            <StyledRestContainer
-              ref={restContainerRef}
-              $isOpen={restIsOpen}
-              $position={position}
-            >
-              {restItems}
-            </StyledRestContainer>,
-            document.body,
-          )
-        : null}
+      {shouldMount &&
+        typeof window === 'object' &&
+        createPortal(
+          <StyledRestContainer
+            ref={restContainerRef}
+            $isOpen={restIsOpen}
+            $position={position}
+          >
+            {restItems}
+          </StyledRestContainer>,
+          window.document.body,
+        )}
     </StyledContainer>
   )
 }

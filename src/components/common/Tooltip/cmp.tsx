@@ -24,7 +24,6 @@ export const Tooltip = ({
   onClose,
   onCloseClick,
   closeDelay = 200,
-  containerRef = document.body,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<any>()
@@ -104,7 +103,7 @@ export const Tooltip = ({
             )}
             <StyledContentContainer>{content}</StyledContentContainer>
           </StyledContainer>,
-          containerRef,
+          window.document.body,
         )}
       {children && (
         <span style={{ display: 'inline-block' }} ref={targetRef}>

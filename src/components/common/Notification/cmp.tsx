@@ -25,7 +25,6 @@ export const Notification = ({
   max = 10,
   timeout = 2000,
   children,
-  containerRef = document.body,
 }: NotificationProps) => {
   const [notifications, setNotifications] = useState<NotificationInfo[]>([])
   const timeoutIdRef = useRef<NodeJS.Timeout | undefined>()
@@ -123,7 +122,7 @@ export const Notification = ({
                 </div>
               )}
             </StyledContainer>,
-            containerRef,
+            window.document.body,
           )
         : null}
     </NotificationContext.Provider>
