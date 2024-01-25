@@ -26,7 +26,6 @@ export const NavbarLinkList = ({
   mobileGap: $mobileGap,
   desktopGap: $desktopGap,
   withSlash: $withSlash,
-  containerRef = document.body,
   ...rest
 }: NavbarLinkListProps) => {
   const [open, setOpen] = useState(false)
@@ -86,7 +85,7 @@ export const NavbarLinkList = ({
           <Icon name="bars" />
         </StyledButton>
       )}
-      {typeof window === 'object'
+      {typeof window === 'object' && document
         ? createPortal(
             <StyledRestContainer
               ref={restContainerRef}
@@ -95,7 +94,7 @@ export const NavbarLinkList = ({
             >
               {(children as any[]).slice(1)}
             </StyledRestContainer>,
-            containerRef,
+            document.body,
           )
         : null}
     </StyledContainer>
