@@ -132,6 +132,31 @@ const gradient: ThemeGradient = {
     deg: 90,
     fn: 'linear-gradient(90deg, #81818F1A 0%, #81818F0A 90.62%)',
   },
+
+  info2: {
+    colors: ['#C8ADF01A', '#5100CD1A'],
+    stops: [22.66, 244.27],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #C8ADF01A 22.66%, #5100CD1A 244.27%)',
+  },
+  success2: {
+    colors: ['#38EC491A', '#47FF591A'],
+    stops: [0, 100],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #38EC491A 0%, #47FF591A 100%)',
+  },
+  warning2: {
+    colors: ['#FFE8141A', '#FBAE181A'],
+    stops: [0, 100],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #FFE8141A 0%, #FBAE181A 100%)',
+  },
+  error2: {
+    colors: ['#FFAC891A', '#DE36681A'],
+    stops: [0, 90.62],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #FFAC891A 0%, #DE36681A 90.62%)',
+  },
 }
 
 const shadows = {
@@ -719,10 +744,9 @@ const secondaryFunctionalButton: ThemeButtonSchemaVariant = {
       filter: drop-shadow(0px 4px 24px ${color.main0}46);
     `,
   },
-  transparency: '10',
   background: {
     ...defaultButton.background,
-    default: color.text,
+    default: color.base1,
     disabled: 'transparent',
   },
   border: {
@@ -741,10 +765,9 @@ const errorFunctionalButton: ThemeButtonSchemaVariant = {
       filter: drop-shadow(0px 4px 24px ${color.error}80);
     `,
   },
-  transparency: '10',
-  background: {
-    ...defaultButton.background,
-    default: color.error,
+  gradient: {
+    ...defaultButton.gradient,
+    default: gradient.error2,
     disabled: 'transparent',
   },
   outline: {
@@ -771,9 +794,9 @@ const warningFunctionalButton: ThemeButtonSchemaVariant = {
       filter: drop-shadow(0px 4px 24px ${color.warning}80);
     `,
   },
-  background: {
-    ...errorFunctionalButton.background,
-    default: color.warning,
+  gradient: {
+    ...errorFunctionalButton.gradient,
+    default: gradient.warning2,
   },
   border: {
     ...errorFunctionalButton.border,
