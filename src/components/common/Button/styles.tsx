@@ -125,7 +125,7 @@ const defaultVariants = (props: StyledButtonProps) => {
         background-clip: content-box;
         border-radius: 0;
         top: 50%;
-        margin-top: 0.48em;
+        margin-top: 0.6em;
       `}
     }
   `

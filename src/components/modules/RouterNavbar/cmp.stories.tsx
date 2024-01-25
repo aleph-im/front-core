@@ -15,28 +15,35 @@ const defaultArgs: Partial<RouterNavbarProps> = {
   pathname: '/earn/staking',
   routes: [
     {
-      name: 'Earn',
-      href: '/earn',
+      name: 'Account',
+      href: '/',
       icon: 'earn',
-      flag: 6,
       children: [
         {
-          name: 'Staking',
-          href: '/earn/staking',
+          name: 'Earn',
+          href: '/earn',
           icon: 'earn',
-          flag: 1,
-        },
-        {
-          name: 'Core nodes',
-          href: '/earn/ccn',
-          icon: 'ccn',
-          flag: 2,
-        },
-        {
-          name: 'Compute nodes',
-          href: '/earn/crn',
-          icon: 'crn',
-          flag: 3,
+          flag: 6,
+          children: [
+            {
+              name: 'Staking',
+              href: '/earn/staking',
+              icon: 'earn',
+              flag: 1,
+            },
+            {
+              name: 'Core nodes',
+              href: '/earn/ccn',
+              icon: 'ccn',
+              flag: 2,
+            },
+            {
+              name: 'Compute nodes',
+              href: '/earn/crn',
+              icon: 'crn',
+              flag: 3,
+            },
+          ],
         },
       ],
     },

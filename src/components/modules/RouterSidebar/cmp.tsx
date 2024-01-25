@@ -38,7 +38,11 @@ const Route = (props: RouteProps) => {
         <>
           {route.children ? (
             <>
-              {route.name && <StyledNav2Title>{route.name}</StyledNav2Title>}
+              {route.name && (
+                <div tw="relative">
+                  <StyledNav2Title>{route.name}</StyledNav2Title>
+                </div>
+              )}
               {route?.children?.map((route) => (
                 <RouteMemo
                   key={route.href}

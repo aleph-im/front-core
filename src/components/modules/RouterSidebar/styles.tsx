@@ -98,7 +98,7 @@ export const StyledNav2Title = styled.div.attrs(addClasses('tp-nav'))`
 
     return css`
       ${tw`h-12 px-6`}
-      ${tw`flex items-center w-auto max-w-full uppercase`}
+      ${tw`inline-flex items-center w-auto max-w-full uppercase`}
       color: ${title?.color};
     `
   }}
@@ -417,9 +417,9 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width linear 0s ${0.45 / $speed}s;
           }
 
-          /* & ${StyledNav1Container} {
+          & ${StyledNav1Container} {
             width: ${nav1CloseSize}rem;
-          } */
+          }
 
           & ${StyledNav2Container} {
             width: ${nav2CloseSize}rem;
@@ -427,7 +427,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
-            ${tw`relative left-1/2 -translate-x-1/2 gap-0`}
+            ${tw`relative left-1/2 -translate-x-1/2 gap-4`}
 
             transition: left linear 0s ${0.45 / $speed}s,
               transform linear 0s ${0.45 / $speed}s,
@@ -447,7 +447,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNotificationBadge} {
-            ${tw`left-0`}
+            ${tw`-left-8`}
             transition: all linear 0s ${0.45 / $speed}s;
             transition-property: left;
           }
