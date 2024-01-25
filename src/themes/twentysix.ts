@@ -29,10 +29,11 @@ import {
   ThemeSidebar,
   ThemeRouterLink,
   ThemeNavbar,
-  NoisyContainer,
+  ThemeNoisyContainer,
   ThemeButtonSchemaVariant,
   ThemeButtonSchema,
   ThemeWalletPicker,
+  ThemeFooter,
 } from './types'
 import { getGlassEffectCss } from '../styles'
 
@@ -1053,9 +1054,17 @@ const walletPicker: ThemeWalletPicker = {
   },
 }
 
-const noisyContainer: NoisyContainer = {
+const noisyContainer: ThemeNoisyContainer = {
   default: 'grain-3',
   borderRadius: pxToRem(0),
+}
+
+const footer: ThemeFooter = {
+  background: color.base1,
+  color: color.text,
+  link: {
+    gradient: gradient.main0,
+  },
 }
 
 const component: ThemeComponent = {
@@ -1070,8 +1079,9 @@ const component: ThemeComponent = {
   routerLink,
   sidebar,
   navbar,
-  noisyContainer,
   walletPicker,
+  noisyContainer,
+  footer,
 }
 
 const theme: DefaultTheme = {

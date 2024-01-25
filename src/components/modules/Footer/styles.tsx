@@ -19,10 +19,16 @@ export const StyledContainer = styled.div<StyledContainerProps>`
 `
 
 export const StyledFooter = styled.footer`
-  ${tw`py-12 md:py-12`}
-  background-color: #00000033;
-  box-sizing: border-box;
-  width: 100%;
+  ${({ theme }) => {
+    const { background } = theme.component.footer
+
+    return css`
+      ${tw`py-12 md:py-12`}
+      background: ${background};
+      box-sizing: border-box;
+      width: 100%;
+    `
+  }}
 `
 
 export const StyledButton = styled(Button).attrs((props) => {
@@ -31,40 +37,70 @@ export const StyledButton = styled(Button).attrs((props) => {
     variant: 'tertiary',
     color: 'main0',
     size: 'big',
+    forwardedAs: 'a',
   }
-})(() => [tw`!block !mb-6 last:!mb-0`])
+})``
+
+const underscoreCss = css`
+  ${({ theme }) => {
+    const { duration, timing } = theme.transition
+    const { link } = theme.component.footer
+
+    return css`
+      position: relative;
+
+      &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        bottom: -0.1875rem;
+        left: 0;
+        width: 100%;
+        height: 0.1875rem;
+        background-clip: content-box;
+        background-image: ${link.gradient.fn};
+
+        transition: all ${timing} ${duration.fast}ms 0s;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      &:hover::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    `
+  }}
+`
+
+export const StyledLinkTitle = styled.h6.attrs(addClasses('tp-nav fs-24'))`
+  ${tw`inline-block self-start m-0`}
+  ${underscoreCss}
+
+  &::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: 0;
+  }
+`
 
 export const StyledLink = styled.a.attrs((props) => {
   return {
-    ...addClasses('tp-nav')(props),
+    ...addClasses('tp-nav fs-14')(props),
     href: props.href || '#',
   }
 })`
-  ${({ theme }) => css`
-    display: block;
-    cursor: pointer;
-    font-weight: 700;
-    white-space: nowrap;
+  ${({ theme }) => {
+    const { color } = theme.component.footer
 
-    color: ${theme.color.text};
-    text-decoration: none;
+    return css`
+      ${tw`inline-flex items-center gap-2.5 cursor-pointer whitespace-nowrap`}
+      font-weight: 700;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-  `}
+      color: ${color};
+      text-decoration: none;
+
+      ${underscoreCss}
+    `
+  }}
 `
-
-export const StyledIcon = styled(Icon).attrs((props) => {
-  return {
-    ...props,
-    size: 'lg',
-  }
-})(() => [tw`mr-2.5`])
-
-export const StyledIcon2 = styled(Icon).attrs((props) => {
-  return {
-    ...props,
-    size: 'lg',
-  }
-})(() => [tw`ml-2.5`])

@@ -522,9 +522,17 @@ export type ThemeWalletPicker = {
   }
 }
 
-export type NoisyContainer = {
+export type ThemeNoisyContainer = {
   default: string
   borderRadius: number
+}
+
+export type ThemeFooter = {
+  background: string
+  color: string
+  link: {
+    gradient: Gradient
+  }
 }
 
 export type ThemeComponent = {
@@ -539,8 +547,9 @@ export type ThemeComponent = {
   routerLink: ThemeRouterLink
   sidebar: ThemeSidebar
   navbar: ThemeNavbar
-  noisyContainer: NoisyContainer
   walletPicker: ThemeWalletPicker
+  noisyContainer: ThemeNoisyContainer
+  footer: ThemeFooter
 }
 
 // -----------------------------------

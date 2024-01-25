@@ -3,142 +3,109 @@ import {
   StyledLink,
   StyledButton,
   StyledFooter,
-  StyledIcon,
-  StyledIcon2,
   StyledContainer,
+  StyledLinkTitle,
 } from './styles'
-import { FooterProps } from './types'
-import { Col, Row } from '../../layout/Grid'
+import { FooterLinkList, FooterProps } from './types'
 import Logo from '../../common/Logo'
+import Icon from '../../common/Icon'
 
-export const Footer = ({ small = false, maxWidth, ...rest }: FooterProps) => {
+export const FooterLinks = ({ links }: { links: FooterLinkList[] }) => {
+  return (
+    <>
+      {links.map((l, i) => (
+        <div key={l.title || i} tw="flex flex-col gap-4">
+          {l.title && <StyledLinkTitle>{l.title}</StyledLinkTitle>}
+
+          <ul tw="flex flex-col gap-3">
+            {l.links.map((ll) => (
+              <li key={ll.href}>
+                <StyledLink href={ll.href}>{ll.label}</StyledLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </>
+  )
+}
+
+export const Footer = ({
+  small = false,
+  maxWidth,
+  buttons,
+  media,
+  mainLinks,
+  links,
+  ...rest
+}: FooterProps) => {
   return (
     <StyledFooter {...rest}>
       <StyledContainer $maxWidth={maxWidth}>
         {small ? (
-          <Row xs={1} md={2} lg={3} xsGap="3rem" lgGap="0">
-            <Col xs={1} md={2} lg={1}>
-              <div tw="h-full flex items-center lg:justify-start">
-                <Logo size={28} />
-              </div>
-            </Col>
-            <Col>
-              <ul tw="h-full flex flex-col gap-6 md:flex-row md:items-center lg:justify-center">
-                <li>
-                  <StyledLink target="_blank" href="https://docs.aleph.im">
-                    Documentation
-                    <StyledIcon2 name="external-link-square-alt" />
-                  </StyledLink>
-                </li>
-                <li>
-                  <StyledLink target="_blank" href="https://t.me/alephim">
-                    Telegram Developers
-                    <StyledIcon2 name="external-link-square-alt" />
-                  </StyledLink>
-                </li>
-              </ul>
-            </Col>
-            <Col>
-              <ul tw="h-full flex items-center gap-6 md:justify-end">
-                <li>
-                  <StyledLink
-                    target="_blank"
-                    href="https://twitter.com/aleph_im"
-                  >
-                    <StyledIcon name="twitter" />
-                    Twitter
-                  </StyledLink>
-                </li>
-                <li>
-                  <StyledLink
-                    target="_blank"
-                    href="https://medium.com/aleph-im"
-                  >
-                    <StyledIcon name="medium" />
-                    Medium
-                  </StyledLink>
-                </li>
-              </ul>
-            </Col>
-          </Row>
-        ) : (
-          <>
-            <div tw="mb-12">
-              <Logo size={55} />
+          <div tw="flex items-center justify-between flex-wrap gap-10">
+            <div tw="w-full flex-auto lg:flex-1">
+              <Logo size={28} text />
             </div>
-            <nav tw="m-0">
-              <Row xs={1} md={2} lg={4} xsGap="3rem" mdGap="1.5rem">
-                <Col>
-                  <StyledButton>Work with us</StyledButton>
-                  <StyledButton>Try our dApps</StyledButton>
-                  <StyledButton>Start a project</StyledButton>
-                </Col>
-                <Col>
-                  <ul>
-                    <li tw="mb-6">
-                      <StyledLink>Solutions</StyledLink>
-                    </li>
-                    <li tw="mb-6">
-                      <StyledLink>Roadmap</StyledLink>
-                    </li>
-                    <li tw="mb-6">
-                      <StyledLink>Indexing</StyledLink>
-                    </li>
-                    <li tw="mb-6">
-                      <StyledLink>Demo&apos;s</StyledLink>
-                    </li>
-                    <li tw="mb-6">
-                      <StyledLink>Team</StyledLink>
-                    </li>
-                    <li tw="mb-0">
-                      <StyledLink>Developers</StyledLink>
-                    </li>
-                  </ul>
-                </Col>
-                <Col>
-                  <ul>
-                    <li tw="mb-6">
-                      <StyledLink>Jobs</StyledLink>
-                    </li>
-                    <li tw="mb-6">
-                      <StyledLink>Whitepaper</StyledLink>
-                    </li>
-                    <li tw="mb-0">
-                      <StyledLink>Token</StyledLink>
-                    </li>
-                  </ul>
-                </Col>
-                <Col>
-                  <ul>
-                    <li tw="mb-6">
-                      <StyledLink
-                        target="_blank"
-                        href="https://twitter.com/aleph_im"
-                      >
-                        <StyledIcon name="twitter" />
-                        Twitter
-                      </StyledLink>
-                    </li>
-                    <li tw="mb-6">
-                      <StyledLink target="_blank" href="https://t.me/alephim">
-                        <StyledIcon name="telegram" />
-                        Telegram
-                      </StyledLink>
-                    </li>
-                    <li tw="mb-0">
-                      <StyledLink
-                        target="_blank"
-                        href="https://medium.com/aleph-im"
-                      >
-                        <StyledIcon name="medium" />
-                        Medium
-                      </StyledLink>
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
+
+            <ul tw="w-full flex-auto md:flex-1 h-full flex flex-col gap-6 md:flex-row md:items-center lg:justify-center">
+              {mainLinks.map((l) => (
+                <li key={l.label}>
+                  <StyledLink target="_blank" href={l.href}>
+                    {l.label}
+                    <Icon size="lg" name="external-link-square-alt" />
+                  </StyledLink>
+                </li>
+              ))}
+            </ul>
+
+            <ul tw="w-full flex-auto md:flex-1 flex-1 h-full flex items-center gap-6 md:justify-end">
+              {media
+                .filter((m) => m.small)
+                .map((m) => (
+                  <li key={m.name}>
+                    <StyledLink target="_blank" href={m.href}>
+                      <Icon size="lg" name={m.icon} />
+                      {m.label}
+                    </StyledLink>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <div tw="mb-12">
+              <Logo size={55} text />
+            </div>
+            <nav tw="m-0 flex flex-wrap gap-6 justify-between">
+              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
+                {buttons.map((b) => (
+                  <StyledButton key={b.href} href={b.href}>
+                    {b.label}
+                  </StyledButton>
+                ))}
+              </div>
+
+              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
+                <FooterLinks links={links.slice(0, links.length / 2)} />
+              </div>
+
+              <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
+                <FooterLinks links={links.slice(links.length / 2)} />
+              </div>
+
+              <ul tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
+                {media.map((m) => (
+                  <li key={m.name}>
+                    <StyledLink target="_blank" href={m.href}>
+                      <Icon size="lg" name={m.icon} />
+                      {m.label}
+                    </StyledLink>
+                  </li>
+                ))}
+              </ul>
             </nav>
-          </>
+          </div>
         )}
       </StyledContainer>
     </StyledFooter>
