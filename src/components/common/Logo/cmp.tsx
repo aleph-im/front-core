@@ -9,6 +9,7 @@ export const Logo = ({
   img,
   text = false,
   color = 'text',
+  bgColor = 'main1',
   size,
   ...rest
 }: LogoProps) => {
@@ -19,11 +20,12 @@ export const Logo = ({
 
   const logoGradient = theme.gradient[color]?.colors[!text ? 1 : 0]
   const logoColor = logoGradient || theme.color[color] || color
+  const logoBgColor = theme.color[bgColor] || bgColor
   text = typeof text === 'boolean' ? text && logo.text : text || logo.text
 
   return (
     <StyledLogoContainer {...{ size, text, ...rest }}>
-      <LogoSvg color={logoColor} />
+      <LogoSvg color={logoColor} bgColor={logoBgColor} />
       {text && (
         <TextGradient type="logo" color={color}>
           {text}
