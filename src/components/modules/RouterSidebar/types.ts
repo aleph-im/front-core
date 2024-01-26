@@ -12,6 +12,7 @@ export type RouterSidebarProps = {
   }
   Link: LinkComponent
   open?: boolean
+  logoHref?: string
   onToggle?: (open?: boolean) => void
 }
 

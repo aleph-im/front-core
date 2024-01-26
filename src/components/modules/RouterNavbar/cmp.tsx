@@ -155,6 +155,7 @@ export const RouterNavbar = ({
   Link,
   children,
   onToggle,
+  logoHref = '/',
   ...rest
 }: RouterNavbarProps) => {
   const theme = useTheme()
@@ -170,11 +171,11 @@ export const RouterNavbar = ({
 
   const logo = useMemo(
     () => (
-      <Link href="/" route={{ href: '/' }}>
+      <Link href={logoHref} route={{ href: logoHref }}>
         <Logo text={logoText} />
       </Link>
     ),
-    [Link, logoText],
+    [Link, logoHref, logoText],
   )
 
   return (

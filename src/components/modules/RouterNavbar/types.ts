@@ -11,6 +11,7 @@ export type RouterNavbarProps = NavbarProps & {
   Link: LinkComponent
   containerRef?: HTMLElement | undefined
   children?: ReactNode
+  logoHref?: string
 }
 
 export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
