@@ -7,17 +7,20 @@ export type FooterMedia = {
   name: string
   label: string
   href: string
+  target?: string
   small?: boolean
 }
 
 export type FooterButton = {
   label: string
   href: string
+  target?: string
 }
 
 export type FooterLink = {
   label: string
   href: string
+  target?: string
 }
 
 export type FooterLinkList = {
