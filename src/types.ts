@@ -9,6 +9,7 @@ export type Route = {
   icon?: IconName
   flag?: number
   exact?: boolean
+  disabled?: boolean
   children?: Route[]
 }
 

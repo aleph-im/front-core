@@ -39,6 +39,7 @@ const defaultArgs: Partial<RouterSidebarProps> = {
               href: '/earn/crn',
               icon: 'crn',
               flag: 3,
+              disabled: true,
             },
           ],
         },

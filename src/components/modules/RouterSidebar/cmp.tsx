@@ -25,8 +25,6 @@ const Route = (props: RouteProps) => {
     ? pathname === route.href
     : pathname.indexOf(route.href) >= 0
 
-  console.log('route', route.href, 'exact', route.exact, 'isActive', isActive)
-
   const linkProps = {
     route,
     Link,
@@ -55,6 +53,7 @@ const Route = (props: RouteProps) => {
                     Link,
                     pathname,
                     exact: route.exact,
+                    disabled: route.disabled,
                     level: 1,
                   }}
                 />
@@ -159,6 +158,7 @@ export const RouterSidebar = ({
                 Link,
                 pathname,
                 exact: route.exact,
+                disabled: route.disabled,
                 level: 0,
               }}
             />
@@ -184,6 +184,7 @@ export const RouterSidebar = ({
                   Link,
                   pathname,
                   exact: route.exact,
+                  disabled: route.disabled,
                   level: 1,
                 }}
               />
