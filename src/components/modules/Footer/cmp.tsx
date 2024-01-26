@@ -40,15 +40,16 @@ export const Footer = ({
   links,
   Link,
   logoHref = '/',
+  logoTarget,
   ...rest
 }: FooterProps) => {
   const logo = useMemo(
     () => (
-      <Link href={logoHref} route={{ href: logoHref }}>
+      <Link href={logoHref} target={logoTarget} route={{ href: logoHref }}>
         <Logo size={28} text />
       </Link>
     ),
-    [Link, logoHref],
+    [Link, logoHref, logoTarget],
   )
 
   return (

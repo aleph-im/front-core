@@ -79,6 +79,7 @@ export const RouterSidebar = ({
   breakpoint: $breakpoint = 'md',
   open,
   logoHref = '/',
+  logoTarget,
   onToggle,
 }: RouterSidebarProps) => {
   const [hover, setHover] = useState<boolean | undefined>(false)
@@ -128,11 +129,11 @@ export const RouterSidebar = ({
 
   const logo = useMemo(
     () => (
-      <Link href={logoHref} route={{ href: logoHref }}>
+      <Link href={logoHref} target={logoTarget} route={{ href: logoHref }}>
         <StyledLogo />
       </Link>
     ),
-    [Link, logoHref],
+    [Link, logoHref, logoTarget],
   )
 
   // -----------------------------------------

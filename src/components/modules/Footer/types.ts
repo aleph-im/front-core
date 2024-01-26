@@ -34,4 +34,5 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   mainLinks: FooterLink[]
   Link: LinkComponent
   logoHref?: string
+  logoTarget?: string
 }
