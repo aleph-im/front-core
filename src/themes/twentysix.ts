@@ -771,6 +771,10 @@ const errorFunctionalButton: ThemeButtonSchemaVariant = {
     default: gradient.error2,
     disabled: 'transparent',
   },
+  background: {
+    ...defaultButton.background,
+    default: '#FAF6FF',
+  },
   outline: {
     ...defaultButton.outline,
     color: {
