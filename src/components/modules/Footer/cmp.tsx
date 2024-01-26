@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import {
   StyledLink,
   StyledButton,
@@ -38,16 +38,25 @@ export const Footer = ({
   media,
   mainLinks,
   links,
+  Link,
+  logoHref = '/',
   ...rest
 }: FooterProps) => {
+  const logo = useMemo(
+    () => (
+      <Link href={logoHref} route={{ href: logoHref }}>
+        <Logo size={28} text />
+      </Link>
+    ),
+    [Link, logoHref],
+  )
+
   return (
     <StyledFooter {...rest}>
       <StyledContainer $maxWidth={maxWidth}>
         {small ? (
           <div tw="flex items-center justify-between flex-wrap gap-10">
-            <div tw="w-full flex-auto lg:flex-1">
-              <Logo size={28} text />
-            </div>
+            <div tw="w-full flex-auto lg:flex-1">{logo}</div>
 
             <ul tw="w-full flex-auto md:flex-1 h-full flex flex-col gap-6 md:flex-row md:items-center lg:justify-center">
               {mainLinks.map((l) => (

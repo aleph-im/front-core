@@ -1,5 +1,6 @@
 import { HTMLAttributes } from 'react'
 import { IconName } from '../../common/Icon'
+import { LinkComponent } from '../../../types'
 
 export type FooterMedia = {
   icon: IconName
@@ -31,4 +32,6 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   media: FooterMedia[]
   links: FooterLinkList[]
   mainLinks: FooterLink[]
+  Link: LinkComponent
+  logoHref?: string
 }
