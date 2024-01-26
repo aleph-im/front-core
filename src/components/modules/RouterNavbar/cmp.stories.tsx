@@ -189,6 +189,7 @@ NestedRoutes.args = {
       href: 'https://account.aleph.im/',
       target: '_blank',
       external: true,
+      disabled: true,
     },
     {
       name: 'Explorer',
@@ -239,6 +240,7 @@ NestedExactPath.args = {
               name: 'Indexing framework',
               href: 'https://docs.aleph.im/tools/indexer/',
               external: true,
+              disabled: true,
             },
           ],
         },

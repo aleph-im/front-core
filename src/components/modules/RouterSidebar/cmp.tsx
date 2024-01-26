@@ -21,7 +21,9 @@ import { RouteProps, RouterSidebarProps } from './types'
 
 const Route = (props: RouteProps) => {
   const { pathname, route, level = 0, Link, ...rest } = props
-  const isActive = pathname.indexOf(route.href) >= 0
+  const isActive = route.exact
+    ? pathname === route.href
+    : pathname.indexOf(route.href) >= 0
 
   const linkProps = {
     route,
@@ -50,6 +52,8 @@ const Route = (props: RouteProps) => {
                     route,
                     Link,
                     pathname,
+                    exact: route.exact,
+                    disabled: route.disabled,
                     level: 1,
                   }}
                 />
@@ -153,6 +157,8 @@ export const RouterSidebar = ({
                 route,
                 Link,
                 pathname,
+                exact: route.exact,
+                disabled: route.disabled,
                 level: 0,
               }}
             />
@@ -177,6 +183,8 @@ export const RouterSidebar = ({
                   route,
                   Link,
                   pathname,
+                  exact: route.exact,
+                  disabled: route.disabled,
                   level: 1,
                 }}
               />

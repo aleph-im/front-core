@@ -24,6 +24,7 @@ const Route = (props: RouteProps) => {
     onClick,
     variant,
     exact,
+    disabled,
     ...rest
   } = props
   const isActive = exact
@@ -58,6 +59,7 @@ const Route = (props: RouteProps) => {
               isActive,
               onClick,
               $level: level,
+              disabled,
             }}
           />
         </NavbarLink>
@@ -106,6 +108,7 @@ const ParentRoute = (props: ParentRouteProps) => {
             pathname,
             level: newLevel,
             exact: route.exact,
+            disabled: route.disabled,
             onClick,
             ...rest,
           }}
@@ -195,6 +198,7 @@ export const RouterNavbar = ({
               pathname,
               onClick: handleLinkClick,
               exact: route.exact,
+              disabled: route.disabled,
             }}
           />
         ))}

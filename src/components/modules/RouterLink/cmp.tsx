@@ -17,23 +17,32 @@ export const RouterLink = ({
 }: RouterLinkProps) => {
   const { name, icon, flag, href, target } = route
 
-  return (
-    <Link {...{ route, href, target, ...rest }}>
-      <StyledRouterLink
-        {...{
-          $variant,
-          $isActive,
-          $disabled,
-          $hasIcon: !!icon,
-          $hasFlag: !!flag,
-          className: $isActive ? '_active' : '',
-        }}
-      >
-        {!!icon && <StyledRouteLinkIcon name={icon} />}
-        {!!name && <StyledRouteLinkText>{name}</StyledRouteLinkText>}
-        {!!flag && <StyledNotificationBadge>{flag}</StyledNotificationBadge>}
-      </StyledRouterLink>
-    </Link>
+  const content = (
+    <StyledRouterLink
+      {...{
+        $variant,
+        $isActive,
+        $disabled,
+        $hasIcon: !!icon,
+        $hasFlag: !!flag,
+        className: $isActive ? '_active' : '',
+      }}
+    >
+      {!!icon && <StyledRouteLinkIcon name={icon} />}
+      {!!name && <StyledRouteLinkText>{name}</StyledRouteLinkText>}
+      {!!flag && <StyledNotificationBadge>{flag}</StyledNotificationBadge>}
+    </StyledRouterLink>
+  )
+
+  return $disabled ? (
+    <span
+      tw="flex flex-col items-start !cursor-auto w-full overflow-auto"
+      {...rest}
+    >
+      {content}
+    </span>
+  ) : (
+    <Link {...{ route, href, target, ...rest }}>{content}</Link>
   )
 }
 RouterLink.displayName = 'RouterLink'
