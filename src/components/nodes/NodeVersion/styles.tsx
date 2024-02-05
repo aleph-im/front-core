@@ -7,12 +7,12 @@ export const StyledVersionIcon = styled(ColorDot).attrs<StyledVersionIconProps>(
   ({ theme, $status, ...rest }) => {
     const $color =
       $status >= 0.8
-        ? 'main1'
+        ? theme.color.success
         : $status >= 0.5
-        ? 'main0'
+        ? theme.color.info
         : $status >= 0
-        ? 'error'
-        : `${theme.color.base0}20`
+        ? theme.color.error
+        : theme.color.disabled2
 
     return {
       $color,

@@ -4,8 +4,13 @@ import ColorDot from '../ColorDot'
 export type StyledScoreIconProps = { $score: number }
 
 export const StyledScoreIcon = styled(ColorDot).attrs<StyledScoreIconProps>(
-  ({ $score, ...rest }) => {
-    const $color = $score >= 0.8 ? 'main1' : $score >= 0.5 ? 'main0' : 'error'
+  ({ theme, $score, ...rest }) => {
+    const $color =
+      $score >= 0.8
+        ? theme.color.success
+        : $score >= 0.5
+        ? theme.color.info
+        : theme.color.error
 
     return {
       $color,

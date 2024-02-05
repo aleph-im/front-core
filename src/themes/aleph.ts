@@ -64,11 +64,12 @@ const color: ThemeColor = {
   main2: '#FECD17',
 
   info: '#029AFF',
-  success: '#7CFF79',
-  warning: '#FFD179',
+  success: '#5CFFB1',
+  warning: '#FECD17',
   error: '#D92446',
   disabled: '#FFFFFF1A',
-  disabled2: '#FFFFFF33',
+  disabled2: '#FFFFFF20',
+  disabled3: '#FFFFFF33',
 
   background: '#141327',
   contentBackground: '#141327',
@@ -727,7 +728,7 @@ const tab: ThemeTab = {
   color: {
     default: color.base0,
     active: color.main0,
-    disabled: color.disabled2,
+    disabled: color.disabled3,
   },
 }
 
@@ -847,7 +848,7 @@ const walletPicker: ThemeWalletPicker = {
   shadow: shadows.black0,
   border: {
     size: pxToRem(3),
-    color: color.disabled2,
+    color: color.disabled3,
   },
   button: {
     kind: (s) => (s ? 'default' : 'flat'),

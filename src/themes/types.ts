@@ -88,6 +88,7 @@ export type ThemeColor = {
   warning: string
   error: string
   disabled: string
+  disabled2: string
 
   background: string
   contentBackground: string

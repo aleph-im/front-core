@@ -77,6 +77,7 @@ const color: ThemeColor = {
   warning: '#FECD17',
   error: '#D9245A',
   disabled: '#81818F',
+  disabled2: '#FFFFFF20',
 
   background: '#F9F4FF',
   contentBackground: '#F9F4FF',
