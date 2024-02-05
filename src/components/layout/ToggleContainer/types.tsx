@@ -7,4 +7,5 @@ export type ToggleContainerProps = HTMLAttributes<HTMLDivElement> & {
   open: boolean
   duration?: number
   variant?: ToggleContainerVariant
+  shouldUnmount?: boolean
 }
