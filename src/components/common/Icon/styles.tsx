@@ -47,7 +47,7 @@ export const StyledIconSizeCss = css<StyledIconProps>`
         }
         default: {
           return css`
-            font-size: ${$iconSize}rem;
+            font-size: ${$iconSize};
           `
         }
       }
