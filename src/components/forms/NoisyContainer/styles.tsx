@@ -11,12 +11,22 @@ export const StyledContainer = styled.div.attrs<NoisyContainerProps>(
     return addClasses(`fx-${$type}`)(props)
   },
 )<NoisyContainerProps>`
-  ${({ theme }) => {
+  ${({ theme, $animation = 50000 }) => {
     const { borderRadius } = theme.component.noisyContainer
 
     return css`
       ${tw`p-6`}
       border-radius: ${borderRadius}rem;
+
+      &&::after {
+        ${$animation
+          ? css`
+              animation-duration: ${$animation}ms;
+            `
+          : css`
+              animation: none;
+            `}
+      }
     `
   }}
 `

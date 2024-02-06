@@ -11,5 +11,6 @@ export type NoisyContainerProps = {
     | 'grain-3'
     | 'grain-4'
     | 'grain-5'
+  $animation?: number | false
   children: ReactNode
 }
