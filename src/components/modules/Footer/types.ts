@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react'
 import { IconName } from '../../common/Icon'
 import { LinkComponent } from '../../../types'
+import { BreakpointId } from '../../../themes'
 
 export type FooterMedia = {
   icon: IconName
@@ -38,4 +39,5 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   Link: LinkComponent
   logoHref?: string
   logoTarget?: string
+  breakpoint?: BreakpointId
 }

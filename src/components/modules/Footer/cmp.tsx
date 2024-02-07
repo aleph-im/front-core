@@ -35,7 +35,6 @@ FooterLinks.displayName = 'FooterLinks'
 
 export const Footer = ({
   small = false,
-  maxWidth,
   buttons,
   media,
   mainLinks,
@@ -43,11 +42,13 @@ export const Footer = ({
   Link,
   logoHref = '/',
   logoTarget,
+  maxWidth: $maxWidth,
+  breakpoint: $breakpoint = 'md',
   ...rest
 }: FooterProps) => {
   return (
     <StyledFooter {...rest}>
-      <StyledContainer $maxWidth={maxWidth}>
+      <StyledContainer {...{ $maxWidth, $breakpoint }}>
         {small ? (
           <div tw="flex items-center justify-between flex-wrap gap-10">
             <div tw="w-full flex-auto lg:flex-1">

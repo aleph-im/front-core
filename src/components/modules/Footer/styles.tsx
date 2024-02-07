@@ -2,18 +2,27 @@ import styled, { css } from 'styled-components'
 import tw from 'twin.macro'
 import { addClasses } from '../../../utils'
 import Button from '../../common/Button'
+import { BreakpointId } from '../../../themes'
+import { getResponsiveCss } from '../../../styles'
 
 export type StyledContainerProps = {
   $maxWidth?: string
+  $breakpoint: BreakpointId
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  ${({ theme, $maxWidth = `${theme.breakpoint['2xl'] + 12.5}rem` }) => css`
-    ${tw`px-6 md:px-16`}
+  ${({
+    theme,
+    $breakpoint,
+    $maxWidth = `${theme.breakpoint['2xl'] + 12.5}rem`,
+  }) => css`
+    ${tw`px-6`}
     box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
     max-width: ${$maxWidth};
+
+    ${getResponsiveCss($breakpoint, tw`px-16`)}
   `}
 `
 
@@ -22,7 +31,7 @@ export const StyledFooter = styled.footer`
     const { background } = theme.component.footer
 
     return css`
-      ${tw`py-12 md:py-12`}
+      ${tw`py-12`}
       background: ${background};
       box-sizing: border-box;
       width: 100%;
