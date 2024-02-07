@@ -18,12 +18,15 @@ export function useWindowScroll(
     }
 
     function debouncedUpdate() {
+      if (!debounceDelay) return update()
+
       timmerId && clearTimeout(timmerId)
       timmerId = setTimeout(update, debounceDelay)
     }
 
-    update()
     window.addEventListener('scroll', debouncedUpdate)
+
+    update()
 
     return () => {
       timmerId && clearTimeout(timmerId)
