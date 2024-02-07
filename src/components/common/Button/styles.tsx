@@ -243,7 +243,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
           ${activeVariantsCss}
         }
 
-        &:disabled {
+        &:disabled,
+        &[disabled],
+        &._disabled {
           ${disableVariantsCss}
         }
     `
