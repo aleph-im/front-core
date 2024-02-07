@@ -19,7 +19,7 @@ export const StyledContainer = styled.div.attrs(
     const [g0, g1] = theme.gradient.main0.colors
 
     return css`
-      ${tw`fixed inline-flex flex-col items-stretch justify-start gap-4 p-6 inset-6 z-50`}
+      ${tw`fixed inline-flex flex-col items-stretch justify-start gap-4 p-6 inset-6 z-10`}
 
       will-change: transform;
       border-radius: 1.5rem;

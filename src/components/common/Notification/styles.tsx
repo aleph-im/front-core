@@ -4,7 +4,7 @@ import Icon from '../Icon'
 import tw from 'twin.macro'
 
 export const StyledContainer = styled.div`
-  ${tw`fixed bottom-0 right-0 flex flex-col justify-start items-end p-4 overflow-auto max-h-full max-w-full`}
+  ${tw`fixed bottom-0 right-0 flex flex-col justify-start items-end p-4 overflow-auto max-h-full max-w-full z-30`}
 `
 
 export const StyledNotificationContainer = styled.div`
