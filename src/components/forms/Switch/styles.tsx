@@ -48,10 +48,11 @@ export const StyledInput = styled.input.attrs(addClasses('fx-glass-base0'))`
       }
 
       &:disabled {
+        cursor: not-allowed;
+
         ${disabledType === 'opacity'
           ? css`
               border-color: #ffffff0f;
-              cursor: not-allowed;
 
               &:checked {
                 border-color: ${border.checked.color}1A;
