@@ -33,7 +33,7 @@ export const StyledContainer = styled.div<{
           transition: ${`all ease-in-out ${$duration1}ms ${
             $isOpen ? $duration2 : '0'
           }ms`};
-          transition-property: visibility opacity;
+          transition-property: visibility, opacity;
         `}
       }
     `

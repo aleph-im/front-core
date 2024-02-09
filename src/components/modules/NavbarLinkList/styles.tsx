@@ -39,7 +39,7 @@ export const StyledRestContainer = styled.ul<StyledRestContainerProps>`
       border-radius: 1.25rem;
       gap: 1.75rem;
       transition: all ${timing} ${duration.fast}ms 0s;
-      transition-property: opacity visibility;
+      transition-property: opacity, visibility;
 
       transform: ${`translate3d(${x}px, ${y}px, 0)`};
 

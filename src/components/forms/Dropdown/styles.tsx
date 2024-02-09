@@ -97,7 +97,7 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
       z-index: 999;
       box-shadow: ${shadow};
       transition: all ${timing} ${duration.fast}ms 0ms;
-      transition-property: opacity visiblility top;
+      transition-property: opacity, visiblility, top;
 
       & {
         ${isOpen &&
