@@ -16,7 +16,9 @@ const defaultArgs: Partial<TagProps> = {
   children: 'tagg',
 }
 
-const defaultParams = {}
+const defaultParams = {
+  controls: { exclude: ['size', 'color'], hideNoControlsWarning: true },
+}
 
 // ---
 
@@ -32,5 +34,15 @@ Default.args = {
 }
 Default.parameters = {
   ...defaultParams,
-  controls: { include: ['children'], hideNoControlsWarning: true },
+}
+
+// ---
+
+export const Variant = Template.bind({})
+Variant.args = {
+  ...defaultArgs,
+  variant: 'accent',
+}
+Variant.parameters = {
+  ...defaultParams,
 }

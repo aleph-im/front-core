@@ -739,10 +739,14 @@ const tab: ThemeTab = {
 }
 
 const tag: ThemeTag = {
-  color: {
-    text: color.text,
-    background: 'transparent',
-    border: color.disabled,
+  variant: {
+    default: {
+      color: {
+        text: color.text,
+        background: 'transparent',
+        border: color.disabled,
+      },
+    },
   },
 }
 

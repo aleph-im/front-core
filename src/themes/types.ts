@@ -402,11 +402,16 @@ export type ThemeTab = {
 }
 
 export type ThemeTag = {
-  color: {
-    border: string
-    text: string
-    background: string
-  }
+  variant: Record<
+    string,
+    {
+      color: {
+        border: string
+        text: string
+        background: string
+      }
+    }
+  >
 }
 
 export type RouterLinkVariantProps = {

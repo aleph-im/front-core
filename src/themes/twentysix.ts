@@ -912,10 +912,21 @@ const tab: ThemeTab = {
 }
 
 const tag: ThemeTag = {
-  color: {
-    text: color.text,
-    background: color.purple3,
-    border: color.purple2,
+  variant: {
+    default: {
+      color: {
+        text: color.text,
+        background: color.purple3,
+        border: '#EBDAFF',
+      },
+    },
+    accent: {
+      color: {
+        text: color.white,
+        background: color.main0,
+        border: '#EBDAFF',
+      },
+    },
   },
 }
 
