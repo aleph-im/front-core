@@ -15,6 +15,7 @@ import {
 export type StyledOuterContainerProps = {
   $hasButton?: boolean
   $buttonStyle?: ButtonStyle
+  $dataView?: number
 }
 
 export const StyledOuterContainer = styled.div<StyledOuterContainerProps>`
@@ -23,6 +24,7 @@ export const StyledOuterContainer = styled.div<StyledOuterContainerProps>`
 
     return css`
       ${tw`flex items-stretch`}
+
       ${StyledContainer} {
         ${tw`flex-auto`}
       }
@@ -30,11 +32,11 @@ export const StyledOuterContainer = styled.div<StyledOuterContainerProps>`
       ${$buttonStyle === 'stuck' &&
       css`
         && {
-          background: ${background};
+          background: ${background.default};
           border-radius: 1.875rem;
 
-          & > a,
-          & > button {
+          && > a,
+          && > button {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
 
@@ -58,10 +60,11 @@ export type StyledContainerProps = {
   error?: FormError
   disabled?: boolean
   $hasButton?: boolean
+  $dataView?: number
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  ${({ theme, $hasButton }) => {
+  ${({ theme, $hasButton, $dataView }) => {
     const { background, shadow, border } = theme.form.input
     const { duration, timing } = theme.transition
 
@@ -77,7 +80,7 @@ export const StyledContainer = styled.div<StyledContainerProps>`
 
     return css`
       ${tw`flex items-center gap-2.5 relative`}
-      background: ${background};
+      background: ${background.default};
       box-shadow: ${shadow};
       border: ${borderSize}rem solid transparent;
       transition: border ${timing} ${duration.fast}ms 0ms;
@@ -93,12 +96,25 @@ export const StyledContainer = styled.div<StyledContainerProps>`
       ${fieldDisabledCss}
 
       ${fieldErrorCss}
+
+      ${$dataView &&
+      css`
+        opacity: 1;
+        background: ${background.data};
+      `}
     `
   }}
 `
 
-export const StyledInput = styled.input.attrs(addClasses('tp-form'))`
-  ${({ theme }) => {
+export type StyledInputProps = {
+  disabled?: boolean
+  $dataView?: number
+}
+
+export const StyledInput = styled.input.attrs(
+  addClasses('tp-form'),
+)<StyledInputProps>`
+  ${({ theme, $dataView }) => {
     const { color } = theme.form.input
 
     return css`
@@ -106,7 +122,7 @@ export const StyledInput = styled.input.attrs(addClasses('tp-form'))`
       outline: 0;
       border: 0;
       background: transparent;
-      color: ${color};
+      color: ${color.default};
       min-height: 1.625rem;
       width: 100%;
       opacity: 1;
@@ -114,6 +130,16 @@ export const StyledInput = styled.input.attrs(addClasses('tp-form'))`
       ${fieldPlaceholderCss}
 
       ${fieldDisabledCss}
+
+      ${$dataView &&
+      css`
+        && {
+          opacity: ${$dataView === 1 ? 0.6 : 1};
+          color: ${color.data};
+          font-weight: 700;
+          pointer-events: none;
+        }
+      `}
 
     /* Remove Arrows/Spinners */
     

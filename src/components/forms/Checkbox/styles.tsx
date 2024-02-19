@@ -67,7 +67,6 @@ export const StyledInput = styled.input<{
       margin: 0;
       ${borderRadiusStyles}
       transition: all ease-out ${duration.fast}ms 0s;
-      transition-property: border, box-shadow;
 
       &:checked {
         box-shadow: ${check.checked.shadow?.($size)};

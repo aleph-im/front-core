@@ -51,7 +51,6 @@ export const StyledInput = styled.input`
       height: 100%;
       margin: 0;
       transition: all ease-out ${duration.fast}ms 0s;
-      transition-property: border;
 
       &:checked {
         border-color: ${border.checked.color};

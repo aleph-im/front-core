@@ -143,8 +143,14 @@ export type ThemeStorybookConfig = {
 
 export type ThemeFormInput = {
   shadow: string
-  color: string
-  background: string
+  color: {
+    default: string
+    data: string
+  }
+  background: {
+    default: string
+    data: string
+  }
   border: {
     color: string
     size: number

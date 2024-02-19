@@ -35,8 +35,8 @@ export const StyledDropdown = styled.div<StyledDropdownProps>`
       width: 100%;
       max-width: 100%;
       cursor: pointer;
-      background: ${background};
-      color: ${color};
+      background: ${background.default};
+      color: ${color.default};
       box-shadow: ${shadow};
       border: ${borderSize}rem solid transparent;
       transition: border ${timing} ${duration.fast}ms 0ms;
@@ -97,7 +97,6 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
       z-index: 999;
       box-shadow: ${shadow};
       transition: all ${timing} ${duration.fast}ms 0ms;
-      transition-property: opacity, visiblility, top;
 
       & {
         ${isOpen &&

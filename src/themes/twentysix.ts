@@ -326,8 +326,14 @@ const storybook: ThemeStorybookConfig = {
 
 const input: ThemeFormInput = {
   shadow: shadows.purple0,
-  color: color.text,
-  background: color.base0,
+  color: {
+    default: color.text,
+    data: color.main0,
+  },
+  background: {
+    default: color.base0,
+    data: color.purple3,
+  },
   border: {
     color: color.text,
     size: 0,

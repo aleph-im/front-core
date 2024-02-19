@@ -33,8 +33,8 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       max-width: 100%;
       appearance: none;
       outline: 0;
-      background: ${background};
-      color: ${color};
+      background: ${background.default};
+      color: ${color.default};
       box-shadow: ${shadow};
       border: ${borderSize}rem solid transparent;
       transition: border ${timing} ${duration.fast}ms 0ms;

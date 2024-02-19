@@ -137,6 +137,19 @@ Disabled.parameters = {
 
 // ---
 
+export const DataView = Template.bind({})
+DataView.args = {
+  ...defaultArgs,
+  value: 'Data View mode',
+  dataView: true,
+  disabled: false,
+}
+DataView.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
 export const WithIcon = Template.bind({})
 WithIcon.args = {
   ...defaultArgs,

@@ -29,14 +29,15 @@ export const TextInput = forwardRef(
       className,
       focus,
       error,
-      disabled,
       button,
       buttonStyle = 'wrapped',
       placeholder = name,
+      disabled: disabledProp,
       onFocus: onFocusProp,
       onBlur: onBlurProp,
       required,
       icon,
+      dataView,
       ...rest
     }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -70,6 +71,9 @@ export const TextInput = forwardRef(
       [isFocusClass, className],
     )
 
+    const disabled = dataView ? true : disabledProp
+    const $dataView = dataView ? (disabledProp ? 1 : 2) : undefined
+
     const buttonComponent =
       button &&
       (isValidElement(button) && button.type === Button
@@ -90,6 +94,7 @@ export const TextInput = forwardRef(
             {...{
               $hasButton: !!button,
               className: isFocusClass,
+              $dataView,
               error,
               disabled,
             }}
@@ -114,6 +119,7 @@ export const TextInput = forwardRef(
                 name,
                 disabled,
                 required,
+                $dataView,
                 ...rest,
                 onFocus: handleFocus,
                 onBlur: handleBlur,

@@ -340,8 +340,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
 
           & ${StyledNotificationBadge} {
             ${tw`-left-0.5`}
-            transition: all linear 0s ${0.45 / $speed}s;
-            transition-property: left;
+            transition: left linear 0s ${0.45 / $speed}s;
           }
 
           & ${StyledToggleButton} {
@@ -448,8 +447,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
 
           & ${StyledNotificationBadge} {
             ${tw`-left-8`}
-            transition: all linear 0s ${0.45 / $speed}s;
-            transition-property: left;
+            transition: left linear 0s ${0.45 / $speed}s;
           }
 
           & ${StyledToggleButton} {

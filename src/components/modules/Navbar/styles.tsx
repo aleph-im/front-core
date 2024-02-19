@@ -85,7 +85,6 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
         opacity: ${$isOpen ? '1' : '0'};
         visibility: ${$isOpen ? 'inherit' : 'hidden'};
         transition: all ease-in-out ${duration.fast}ms 0s;
-        transition-property: opacity, visibility;
 
         & ${StyledRouterLink} {
           ${tw`flex h-12`}

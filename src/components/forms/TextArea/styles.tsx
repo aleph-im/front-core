@@ -49,7 +49,7 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
       // Text input styles
       ${$variant === 'default' &&
       css`
-        background: ${background};
+        background: ${background.default};
         box-shadow: ${shadow};
         border: ${borderSize}rem solid transparent;
         border-radius: 1.875rem;
