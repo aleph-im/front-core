@@ -19,6 +19,7 @@ export const StyledTag = styled.span.attrs(
       border: 0.0625rem solid ${color.border};
       margin: 0 auto;
       border-radius: 0.5rem;
+      white-space: nowrap;
     `
   }}
 `
