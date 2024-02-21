@@ -21,8 +21,8 @@ export type NotificationContextValue = {
   notifications: Record<string, NotificationInfo>
   notificationList: NotificationInfo[]
   add: (el: AddNotificationInfo) => string | undefined
-  set: (id: string, el: SetNotificationInfo) => boolean
-  del: (id: string) => boolean
+  set: (id: string, el: SetNotificationInfo) => void
+  del: (id: string) => void
 }
 
 export const NotificationContext = React.createContext<

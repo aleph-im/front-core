@@ -71,9 +71,6 @@ export const Notification = ({
         return id
       },
       set(id: string, info: SetNotificationInfo) {
-        const prevNotification = notifications[id]
-        if (!prevNotification) return false
-
         setNotifications((prev) => {
           const notification: NotificationInfo = {
             ...prev[id],
@@ -92,9 +89,6 @@ export const Notification = ({
         return true
       },
       del(id: string) {
-        const prevNotification = notifications[id]
-        if (!prevNotification) return false
-
         setNotifications((prev) => {
           const { [id]: _, ...rest } = prev
           return rest
