@@ -4,18 +4,18 @@ import { addClasses } from '../../../utils'
 import Icon from '../Icon'
 import { TooltipPosition } from './types'
 import tw from 'twin.macro'
-import { TransitionedState } from '../../../hooks/useTransitionedEnterExit'
 import { getResponsiveCss } from '../../../styles'
+import { Stage } from 'transition-hook'
 
 export type StyledContainerProps = {
   $position: TooltipPosition
-  $state: TransitionedState
+  $stage: Stage
 } & HTMLAttributes<HTMLDivElement>
 
 export const StyledContainer = styled.div.attrs(
   addClasses('fx-glass-base2'),
 )<StyledContainerProps>`
-  ${({ theme, $state, $position: { x = 0, y = 0 } }) => {
+  ${({ theme, $stage, $position: { x = 0, y = 0 } }) => {
     const [g0, g1] = theme.gradient.main0.colors
 
     return css`
@@ -26,8 +26,8 @@ export const StyledContainer = styled.div.attrs(
       backdrop-filter: blur(50px);
       color: ${theme.color.text};
       will-change: opacity translate3d;
-      transition: opacity ease-in-out 0.25s 0s;
-      opacity: ${$state === 'enter' ? 1 : 0};
+      transition: opacity ease-in-out ${theme.transition.duration.fast}ms 0s;
+      opacity: ${$stage === 'enter' ? 1 : 0};
 
       ${getResponsiveCss(
         'md',

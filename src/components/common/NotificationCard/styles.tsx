@@ -31,6 +31,7 @@ export const StyledContainer = styled.div<NotificationVariantProps>`
 `
 
 export const StyledHeaderContainer = styled.div.attrs(addClasses('tp-h7'))`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -54,6 +55,49 @@ export const StyledHeaderIcon = styled(Icon).attrs<
   }
 })<NotificationVariantProps>(() => [tw`mr-4`])
 
+export const StyledHeaderActions = styled.div`
+  ${tw`absolute flex items-center justify-center top-0 right-0`}
+  width: 2.25rem;
+  height: 2.25rem;
+`
+
+export type StyledHeaderCloseProgressProps = {
+  $progress: number
+}
+
+export const StyledHeaderCloseProgress = styled.div.attrs<StyledHeaderCloseProgressProps>(
+  ({ $progress, theme, ...props }) => {
+    const color = theme.component.notification.color
+    const deg = ($progress * 360).toFixed(4)
+
+    const background = `conic-gradient(
+      ${color} 0deg ${deg}deg,
+      transparent ${deg}deg 360deg
+    )`
+
+    const min = 0.1
+    const max = 0.9
+    const opacity = min + (max - min) * $progress
+
+    props.style = {
+      ...props.style,
+      background,
+      opacity,
+    }
+
+    return props
+  },
+)<StyledHeaderCloseProgressProps>`
+  position: absolute;
+  inset: 0;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all ease-in-out 200ms 0s;
+`
+
 export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
   return {
     ...props,
@@ -62,16 +106,9 @@ export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
   }
 })`
   && {
-    top: 0;
-    right: 0;
-    width: 1.5rem;
-    height: 1.5rem;
     font-size: 1.5rem;
-    padding: 0.375rem;
     cursor: pointer;
-    margin-left: auto;
-    align-self: flex-start;
-    flex: 0 0 auto;
+    z-index: 1;
   }
 `
 

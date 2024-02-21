@@ -94,7 +94,8 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "transition-hook": "^1.5.2"
   },
   "babelMacros": {
     "twin": {

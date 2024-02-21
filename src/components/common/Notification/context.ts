@@ -3,17 +3,26 @@ import { NotificationCardProps } from '../NotificationCard'
 
 export type AddNotificationInfo = Omit<NotificationCardProps, 'onClose'> & {
   id?: string
+  timeout?: number
+}
+
+export type SetNotificationInfo = Omit<NotificationCardProps, 'onClose'> & {
+  timeout?: number
 }
 
 export type NotificationInfo = AddNotificationInfo & {
   id: string
   timestamp: number
+  timeout: number
+  pending: number
 }
 
 export type NotificationContextValue = {
-  notifications: NotificationInfo[]
-  add: (el: AddNotificationInfo) => void
-  remove: (id: string) => void
+  notifications: Record<string, NotificationInfo>
+  notificationList: NotificationInfo[]
+  add: (el: AddNotificationInfo) => string | undefined
+  set: (id: string, el: SetNotificationInfo) => boolean
+  del: (id: string) => boolean
 }
 
 export const NotificationContext = React.createContext<

@@ -3,7 +3,7 @@ import {
   useClickOutside,
   useFloatPosition,
   useResponsiveBetween,
-  useTransitionedEnterExit,
+  useTransition,
 } from '../../../hooks'
 import {
   StyledList,
@@ -14,6 +14,7 @@ import {
 import { NavbarLinkListProps } from './types'
 import Icon from '../../common/Icon'
 import { createPortal } from 'react-dom'
+import { useTheme } from 'styled-components'
 
 export const NavbarLinkList = ({
   children,
@@ -61,11 +62,14 @@ export const NavbarLinkList = ({
     [children, isCollapsed],
   )
 
-  const { state, shouldMount } = useTransitionedEnterExit({
-    onOff: isCollapsed && !!restItems && open,
-  })
+  const theme = useTheme()
 
-  const restIsOpen = state === 'enter'
+  const { shouldMount, stage } = useTransition(
+    isCollapsed && !!restItems && open,
+    theme.transition.duration.fast,
+  )
+
+  const restIsOpen = stage === 'enter'
 
   const { position } = useFloatPosition({
     my: 'top-right',

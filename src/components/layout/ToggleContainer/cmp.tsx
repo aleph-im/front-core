@@ -1,33 +1,27 @@
 import React, { ForwardedRef, forwardRef, memo } from 'react'
 import { StyledContainer, StyledContent } from './styles'
 import { ToggleContainerProps } from './types'
-import { useForwardRef, useTransitionedEnterExit } from '../../../hooks'
+import { useTransition } from '../../../hooks'
 
 export const ToggleContainer = forwardRef(
   (
     {
       children,
       open,
-      duration,
       variant: $variant,
       shouldUnmount = false,
+      duration: $duration = 700,
       ...rest
     }: ToggleContainerProps,
-    fRef: ForwardedRef<HTMLDivElement>,
+    ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const ref = useForwardRef(fRef)
-
-    const { shouldMount, state } = useTransitionedEnterExit({
-      onOff: open,
-      duration,
-      ref,
-    })
+    const { shouldMount, stage } = useTransition(open, $duration)
 
     const mount = !shouldUnmount || shouldMount
-    const $isOpen = state === 'enter'
+    const $isOpen = stage === 'enter'
 
     return (
-      <StyledContainer {...{ $isOpen, $duration: duration, $variant }}>
+      <StyledContainer {...{ $isOpen, $duration, $variant }}>
         {mount && (
           <StyledContent ref={ref} {...rest}>
             {children}

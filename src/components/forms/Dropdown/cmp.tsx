@@ -10,7 +10,7 @@ import React, {
 import {
   useBounds,
   useForwardRef,
-  useTransitionedEnterExit,
+  useTransition,
   useWindowSize,
 } from '../../../hooks'
 import { useClickOutside } from '../../../hooks/useClickOutside'
@@ -25,6 +25,7 @@ import { DropdownProps } from './types'
 import FormLabel from '../FormLabel'
 import FormError from '../FormError'
 import { useWindowScroll } from '../../../hooks/useWindowScroll'
+import { useTheme } from 'styled-components'
 
 export const Dropdown = forwardRef(
   (
@@ -124,15 +125,14 @@ export const Dropdown = forwardRef(
       }
     }, [valueSet, onChange, multiple])
 
-    const {
-      ref: optionsRef,
-      shouldMount,
-      state: optionsState,
-    } = useTransitionedEnterExit<HTMLDivElement>({
-      onOff: isOpen,
-    })
+    const theme = useTheme()
 
-    const optionsIsOpen = optionsState === 'enter'
+    const { shouldMount, stage } = useTransition(
+      isOpen,
+      theme.transition.duration.fast,
+    )
+
+    const optionsIsOpen = stage === 'enter'
 
     return (
       <DropdownContext.Provider value={contextValue}>
@@ -145,11 +145,7 @@ export const Dropdown = forwardRef(
             {selectedText}
             <StyledDropdownIcon />
             {shouldMount && (
-              <StyledDropdownOptionMenu
-                isOpen={optionsIsOpen}
-                size={size}
-                ref={optionsRef}
-              >
+              <StyledDropdownOptionMenu isOpen={optionsIsOpen} size={size}>
                 {children}
               </StyledDropdownOptionMenu>
             )}

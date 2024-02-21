@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import { useHover, useResponsiveMax } from '../../../hooks'
+import { useHover, useResponsiveMax, useTransition } from '../../../hooks'
 import {
   StyledContentContainer,
   StyledContainer,
@@ -8,7 +8,7 @@ import {
 import { TooltipProps } from './types'
 import { createPortal } from 'react-dom'
 import { useFloatPosition } from '../../../hooks/useFloatPosition'
-import { useTransitionedEnterExit } from '../../../hooks/useTransitionedEnterExit'
+import { useTheme } from 'styled-components'
 
 export const Tooltip = ({
   open: openProp,
@@ -33,10 +33,12 @@ export const Tooltip = ({
   const [openState, setOpenState] = useState(openProp || false)
   const isOpen = openProp !== undefined ? openProp : openState
 
-  const { shouldMount, state } = useTransitionedEnterExit({
-    onOff: isOpen,
-    ref: tooltipRef,
-  })
+  const theme = useTheme()
+
+  const { shouldMount, stage } = useTransition(
+    isOpen,
+    theme.transition.duration.fast,
+  )
 
   const { position } = useFloatPosition({
     my,
@@ -51,7 +53,7 @@ export const Tooltip = ({
   const { isHover: isHoverTarget } = useHover({ ref: targetRef })
   const { isHover: isHoverTooltip } = useHover({
     ref: tooltipRef,
-    deps: [state],
+    deps: [stage],
   })
 
   const timerRef = useRef<NodeJS.Timeout>()
@@ -92,7 +94,7 @@ export const Tooltip = ({
             {...{
               ref: tooltipRef,
               $position: position,
-              $state: state,
+              $stage: stage,
               ...rest,
             }}
           >

@@ -6,6 +6,8 @@ import {
   StyledContainer,
   StyledHeaderIcon,
   StyledHeaderCloseIcon,
+  StyledHeaderCloseProgress,
+  StyledHeaderActions,
 } from './styles'
 import { NotificationCardProps } from './types'
 
@@ -18,6 +20,7 @@ export const NotificationCard = ({
   content,
   footer,
   onClose,
+  progress = 0,
   ...rest
 }: NotificationCardProps) => {
   return (
@@ -29,7 +32,10 @@ export const NotificationCard = ({
             {title}
           </>
         )}
-        <StyledHeaderCloseIcon onClick={onClose} />
+        <StyledHeaderActions>
+          <StyledHeaderCloseProgress $progress={progress} />
+          <StyledHeaderCloseIcon onClick={onClose} />
+        </StyledHeaderActions>
       </StyledHeaderContainer>
       <StyledContentContainer {...{ variant }}>
         {content || text}

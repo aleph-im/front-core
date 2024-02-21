@@ -7,114 +7,178 @@ import React, {
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
-import NotificationCard from '../NotificationCard'
 import {
   AddNotificationInfo,
   NotificationContext,
   NotificationInfo,
+  SetNotificationInfo,
 } from './context'
 import {
   StyledClearButton,
   StyledClearIcon,
   StyledContainer,
+  StyledNotificationCard,
   StyledNotificationContainer,
 } from './styles'
 import { NotificationProps } from './types'
+import { useListTransition } from 'transition-hook'
+import { useTheme } from 'styled-components'
 
 export const Notification = ({
   max = 10,
-  timeout = 2000,
+  timeout: timeoutProp = 2000,
   children,
 }: NotificationProps) => {
-  const [notifications, setNotifications] = useState<NotificationInfo[]>([])
-  const timeoutIdRef = useRef<NodeJS.Timeout | undefined>()
+  const [notifications, setNotifications] = useState<
+    Record<string, NotificationInfo>
+  >({})
+
+  const notificationList = useMemo(
+    () =>
+      Object.values(notifications).sort((a, b) => a.timestamp - b.timestamp),
+    [notifications],
+  )
+
+  const timerIdRef = useRef<NodeJS.Timeout | undefined>()
+  const lastCheckRef = useRef<number>(Number.MAX_SAFE_INTEGER)
 
   const contextValue = useMemo(
     () => ({
       notifications,
+      notificationList,
       add(info: AddNotificationInfo) {
-        if (notifications.length >= max) return
+        if (notificationList.length >= max) return
 
-        const now = Date.now()
+        const timestamp = Date.now()
+        const id = info.id || `${timestamp}-${notificationList.length}`
+        const timeout =
+          info.timeout === 0
+            ? Number.MAX_SAFE_INTEGER
+            : info.timeout || timeoutProp
+        const pending = timeout
+
         const notification: NotificationInfo = {
           ...info,
-          id: info.id || `${now}-${notifications.length}`,
-          timestamp: now,
+          id,
+          timestamp,
+          timeout,
+          pending,
         }
-        setNotifications([...notifications, notification])
+
+        setNotifications((prev) => ({ ...prev, [id]: notification }))
+
+        return id
       },
-      remove(id: string) {
-        setNotifications(notifications.filter((noti) => noti.id !== id))
+      set(id: string, info: SetNotificationInfo) {
+        const prevNotification = notifications[id]
+        if (!prevNotification) return false
+
+        setNotifications((prev) => {
+          const notification: NotificationInfo = {
+            ...prev[id],
+            ...info,
+          }
+
+          notification.timeout =
+            notification.timeout === 0
+              ? Number.MAX_SAFE_INTEGER
+              : notification.timeout || timeoutProp
+          notification.pending = notification.pending || notification.timeout
+
+          return { ...prev, [id]: notification }
+        })
+
+        return true
+      },
+      del(id: string) {
+        const prevNotification = notifications[id]
+        if (!prevNotification) return false
+
+        setNotifications((prev) => {
+          const { [id]: _, ...rest } = prev
+          return rest
+        })
+
+        return true
       },
     }),
-    [max, notifications],
+    [notifications, notificationList, max, timeoutProp],
   )
 
-  const firstTimestamp = useMemo(
-    () =>
-      notifications.reduce(
-        (acc, curr) => Math.min(acc, curr.timestamp),
-        Number.MAX_SAFE_INTEGER,
-      ),
-    [notifications],
-  )
-
-  const disposeNotifications = useCallback(() => {
-    timeoutIdRef.current = undefined
-    setNotifications(
-      notifications.filter((noti) => Date.now() < noti.timestamp + timeout),
-    )
-  }, [notifications, timeout])
-
-  const stopTimeout = useCallback(() => {
-    if (!timeoutIdRef.current) return
-    clearTimeout(timeoutIdRef.current)
-    timeoutIdRef.current = undefined
+  const stopTimer = useCallback(() => {
+    if (!timerIdRef.current) return
+    clearInterval(timerIdRef.current)
+    timerIdRef.current = undefined
   }, [])
 
-  const resetTimeout = useCallback(() => {
-    if (notifications.length === 0) return
-    stopTimeout()
-    const ms = Math.max(firstTimestamp + timeout - Date.now(), 0)
-    timeoutIdRef.current = setTimeout(disposeNotifications, ms)
-  }, [
-    notifications,
-    stopTimeout,
-    firstTimestamp,
-    timeout,
-    disposeNotifications,
-  ])
+  const resetTimer = useCallback(() => {
+    stopTimer()
+
+    const now = Date.now()
+    lastCheckRef.current = now
+
+    timerIdRef.current = setInterval(() => {
+      const now = Date.now()
+      const elapsed = Math.max(now - lastCheckRef.current, 0)
+      lastCheckRef.current = now
+
+      setNotifications((prev) => {
+        return Object.values(prev)
+          .map((noti) => {
+            noti.pending = Math.max(noti.pending - elapsed, 0)
+            return noti
+          })
+          .filter((noti) => noti.pending > 0)
+          .reduce((ac, cv) => {
+            ac[cv.id] = cv
+            return ac
+          }, {} as Record<string, NotificationInfo>)
+      })
+    }, 0)
+  }, [stopTimer])
 
   const clearAll = useCallback(() => {
-    stopTimeout()
-    setNotifications([])
-  }, [stopTimeout, setNotifications])
+    stopTimer()
+    setNotifications({})
+  }, [stopTimer])
 
   useEffect(() => {
-    resetTimeout()
-    return stopTimeout
-  }, [notifications, resetTimeout, stopTimeout])
+    if (notificationList.length) resetTimer()
+    return stopTimer
+  }, [notificationList.length, resetTimer, stopTimer])
+
+  const theme = useTheme()
+
+  const list = useListTransition(
+    notificationList,
+    theme.transition.duration.fast,
+  )
 
   return (
     <NotificationContext.Provider value={contextValue}>
       {children}
       {typeof window === 'object'
         ? createPortal(
-            <StyledContainer
-              onMouseOver={stopTimeout}
-              onMouseOut={resetTimeout}
-            >
+            <StyledContainer onMouseOver={stopTimer} onMouseOut={resetTimer}>
               <StyledNotificationContainer>
-                {notifications.sort().map((noti) => (
-                  <NotificationCard
-                    key={noti.id}
-                    onClose={() => contextValue.remove(noti.id)}
-                    tw="mt-4"
-                    {...noti}
-                  />
+                {list((item, $stage) => (
+                  <>
+                    <StyledNotificationCard
+                      key={item.id}
+                      {...{
+                        onClose: () => contextValue.del(item.id),
+                        $stage,
+                        progress: Math.min(
+                          (item.timeout - item.pending) / item.timeout,
+                          1,
+                        ),
+                        ...item,
+                      }}
+                    />
+                  </>
                 ))}
               </StyledNotificationContainer>
-              {notifications.length > 2 && (
+              {notificationList.length > 2 && (
                 <div tw="mt-4">
                   <StyledClearButton onClick={clearAll}>
                     Clear all <StyledClearIcon tw="ml-2" />

@@ -11,6 +11,7 @@ export type NotificationCardProps = Omit<
   text?: string
   detail?: string
   onClose?: () => void
+  progress?: number
 
   header?: ReactNode
   content?: ReactNode

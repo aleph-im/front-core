@@ -3,10 +3,10 @@ import { ToggleContainerVariant } from './types'
 
 export const StyledContainer = styled.div<{
   $isOpen: boolean
-  $duration?: number
+  $duration: number
   $variant?: ToggleContainerVariant
 }>`
-  ${({ $isOpen, $duration = 700, $variant = '2' }) => {
+  ${({ $isOpen, $duration, $variant = '2' }) => {
     const $duration1 = $duration * (2 / 3)
     const $duration2 = $duration * (1 / 3)
 
