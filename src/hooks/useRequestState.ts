@@ -69,8 +69,8 @@ export function useRequestState<T>({
 
       function defaultErrorHandler(error: Error) {
         const text = error.message
-        const cause = (error as any)?.cause
-        const detail = cause || (cause as Error)?.message
+        const cause = (error as any)?.cause as string | Error | undefined
+        const detail = typeof cause === 'string' ? cause : cause?.message
 
         noti &&
           noti.add({
