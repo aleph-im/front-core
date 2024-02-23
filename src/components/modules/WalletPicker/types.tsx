@@ -20,6 +20,10 @@ export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
   networks: NetworkProps[]
   address?: string
   balance?: number
+  rewards?: {
+    amount: number
+    days: number
+  }
   onDisconnect: () => void
   onConnect: (wallet: WalletProps, network: NetworkProps) => void
   addressHref?: string

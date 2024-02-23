@@ -9,6 +9,8 @@ import Button from '../../common/Button'
 import Icon from '../../common/Icon'
 import { useTheme } from 'styled-components'
 import ToggleContainer from '../../layout/ToggleContainer'
+import Price from '../../common/Price'
+import { formatCurrency } from '../../../utils'
 
 export const WalletPicker = forwardRef(
   (
@@ -16,6 +18,7 @@ export const WalletPicker = forwardRef(
       networks,
       address,
       balance,
+      rewards,
       onConnect,
       onDisconnect,
       addressHref,
@@ -28,13 +31,7 @@ export const WalletPicker = forwardRef(
       [address],
     )
 
-    const displayBalance = useMemo(() => {
-      if (!balance) return '0.00'
-      return new Intl.NumberFormat('en-US', {
-        maximumFractionDigits: 2,
-      }).format(balance)
-    }, [balance])
-
+    const displayBalance = useMemo(() => formatCurrency(balance), [balance])
     const [currentNetwork, setCurrentNetwork] = useState<NetworkProps>()
 
     const handleClick = (network: NetworkProps) => {
@@ -63,6 +60,25 @@ export const WalletPicker = forwardRef(
                 </span>
               </div>
             </div>
+
+            {rewards && (
+              <BorderedDiv tw="mt-6 flex items-start justify-between gap-4">
+                <span className="fs-10 tp-body3" tw="opacity-60 mt-1">
+                  EST. REWARDS
+                </span>
+                <div tw="text-right">
+                  <Price
+                    value={rewards.amount}
+                    className="fs-16 tp-body3"
+                    humanReadable={false}
+                    css={{ color: color.rewards }}
+                  />
+                  <div className="fs-12 tp-body1" tw="opacity-60">
+                    Next distribution in {rewards.days} days
+                  </div>
+                </div>
+              </BorderedDiv>
+            )}
 
             <BorderedDiv tw="mt-6 text-center">
               {addressHref ? (

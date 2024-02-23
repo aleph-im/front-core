@@ -21,6 +21,10 @@ const metamaskForETH: WalletProps = {
 }
 
 const defaultArgs: Partial<WalletPickerProps> = {
+  rewards: {
+    amount: 1_000_000,
+    days: 2,
+  },
   networks: [
     {
       name: 'Ethereum',
