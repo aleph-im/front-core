@@ -51,7 +51,9 @@ export const StyledChipRemoveButton = styled.button`
       padding: 0;
       margin: 0;
       margin-left: 0.625rem;
-      transition: all 0.1s ease-in-out;
+      transition-property: transform;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       &:hover {
         transform: scale(1.2);

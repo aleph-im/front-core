@@ -35,7 +35,6 @@ export const StyledInputContainer = styled.div<{ $size?: RadioSize }>`
 
 export const StyledInput = styled.input`
   ${({ theme }) => {
-    const { duration } = theme.transition
     const { background, border, disabledType } = theme.form.radio
 
     return css`
@@ -50,7 +49,9 @@ export const StyledInput = styled.input`
       width: 100%;
       height: 100%;
       margin: 0;
-      transition: all ease-out ${duration.fast}ms 0s;
+      transition-property: border, background;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       &:checked {
         border-color: ${border.checked.color};
@@ -81,7 +82,6 @@ export const StyledInput = styled.input`
 
 export const StyledInputDot = styled.span`
   ${({ theme }) => {
-    const { duration } = theme.transition
     const { dot, disabledType } = theme.form.radio
 
     const { background, backgroundDisabled } = normalizeBackgroundImageColor(
@@ -107,8 +107,10 @@ export const StyledInputDot = styled.span`
         background: ${background};
         visibility: hidden;
         clip-path: circle(0% at 50% 50%);
-        will-change: visibility clip-path;
-        transition: all ease-out ${duration.fast}ms 0s;
+        will-change: visibility, clip-path;
+        transition-property: visibility, clip-path, background;
+        transition-duration: ${theme.transition.duration.fast}ms;
+        transition-timing-function: ${theme.transition.timing};
       }
 
       ${StyledInput}:checked + &:after {

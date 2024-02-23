@@ -51,7 +51,6 @@ export const StyledButton = styled(Button).attrs((props) => {
 
 const underscoreCss = css`
   ${({ theme }) => {
-    const { duration, timing } = theme.transition
     const { link } = theme.component.footer
 
     return css`
@@ -67,10 +66,11 @@ const underscoreCss = css`
         height: 0.1875rem;
         background-clip: content-box;
         background-image: ${link.gradient.fn};
-
-        transition: all ${timing} ${duration.fast}ms 0s;
         opacity: 0;
         visibility: hidden;
+        transition-property: opacity, visibility;
+        transition-duration: ${theme.transition.duration.fast}ms;
+        transition-timing-function: ${theme.transition.timing};
       }
 
       &:hover::after {

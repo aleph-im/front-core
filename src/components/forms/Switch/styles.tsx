@@ -37,6 +37,9 @@ export const StyledInput = styled.input.attrs(addClasses('fx-glass-base0'))`
       height: 100%;
       margin: 0;
       border: ${border.size}rem solid ${border.color};
+      transition-property: border, background;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       &:checked {
         border-color: ${border.checked.color};
@@ -69,7 +72,6 @@ export const StyledInput = styled.input.attrs(addClasses('fx-glass-base0'))`
 
 export const StyledInputDot = styled.span`
   ${({ theme }) => {
-    const { duration } = theme.transition
     const { dot, disabledType } = theme.form.switch
 
     const { background, backgroundDisabled } = normalizeBackgroundImageColor(
@@ -97,11 +99,15 @@ export const StyledInputDot = styled.span`
         background: ${background};
         opacity: 0;
         will-change: opacity;
-        transition: all ease-in-out ${duration.fast}ms 0s;
+        transition-property: opacity, background;
+        transition-duration: ${theme.transition.duration.fast}ms;
+        transition-timing-function: ${theme.transition.timing};
       }
 
       will-change: transform;
-      transition: transform ease-in-out ${duration.fast}ms 0s;
+      transition-property: transform;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       ${StyledInput}:checked + & {
         transform: translateX(100%);

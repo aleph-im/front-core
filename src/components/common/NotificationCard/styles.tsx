@@ -95,7 +95,6 @@ export const StyledHeaderCloseProgress = styled.div.attrs<StyledHeaderCloseProgr
   -webkit-mask-composite: xor;
   padding: 0.25rem;
   border-radius: 50%;
-  transition: all ease-in-out 200ms 0s;
 `
 
 export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {

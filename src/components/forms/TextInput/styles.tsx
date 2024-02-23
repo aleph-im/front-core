@@ -66,7 +66,6 @@ export type StyledContainerProps = {
 export const StyledContainer = styled.div<StyledContainerProps>`
   ${({ theme, $hasButton, $dataView }) => {
     const { background, shadow, border } = theme.form.input
-    const { duration, timing } = theme.transition
 
     const borderSize = Math.max(
       border.size,
@@ -83,13 +82,15 @@ export const StyledContainer = styled.div<StyledContainerProps>`
       background: ${background.default};
       box-shadow: ${shadow};
       border: ${borderSize}rem solid transparent;
-      transition: border ${timing} ${duration.fast}ms 0ms;
       border-radius: 1.875rem;
       padding-top: ${paddingSize}rem;
       padding-bottom: ${paddingSize}rem;
       padding-left: ${paddingLeftSize}rem;
       padding-right: ${paddingRightSize}rem;
       min-height: 2.625rem;
+      transition-property: border, color, opacity, background;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       ${fieldFocusCss}
 

@@ -50,7 +50,6 @@ export const StyledInput = styled.input<{
   $size?: CheckboxSize
 }>`
   ${({ theme, $size }) => {
-    const { duration } = theme.transition
     const { background, border, disabledType, check } = theme.form.checkbox
 
     return css`
@@ -66,7 +65,9 @@ export const StyledInput = styled.input<{
       height: 100%;
       margin: 0;
       ${borderRadiusStyles}
-      transition: all ease-out ${duration.fast}ms 0s;
+      transition-property: box-shadow, background, border;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       &:checked {
         box-shadow: ${check.checked.shadow?.($size)};
@@ -103,7 +104,6 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
   }
 })`
   ${({ theme }) => {
-    const { duration } = theme.transition
     const { border, check, disabledType } = theme.form.checkbox
 
     return css`
@@ -118,8 +118,10 @@ export const StyledCheckIcon = styled(Icon).attrs((props) => {
         z-index: 1;
         visibility: hidden;
         clip-path: circle(0% at 0% 75%);
-        will-change: visibility clip-path;
-        transition: all ease-out ${duration.fast}ms 0s;
+        will-change: visibility, clip-path;
+        transition-property: visibility, clip-path, color;
+        transition-duration: ${theme.transition.duration.fast}ms;
+        transition-timing-function: ${theme.transition.timing};
 
         ${StyledInput}:checked + & {
           visibility: inherit;

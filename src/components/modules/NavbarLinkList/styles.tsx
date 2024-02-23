@@ -29,7 +29,6 @@ export type StyledRestContainerProps = {
 export const StyledRestContainer = styled.ul<StyledRestContainerProps>`
   ${({ theme, $isOpen, $position: { x, y } }) => {
     const { mobile } = theme.component.navbar
-    const { duration, timing } = theme.transition
 
     return css`
       ${tw`flex flex-col fixed left-0 top-0 p-6 m-0`}
@@ -38,12 +37,13 @@ export const StyledRestContainer = styled.ul<StyledRestContainerProps>`
       min-width: 14rem;
       border-radius: 1.25rem;
       gap: 1.75rem;
-      transition: all ${timing} ${duration.fast}ms 0s;
-
       transform: ${`translate3d(${x}px, ${y}px, 0)`};
-
       opacity: 0;
       visibility: hidden;
+
+      transition-property: opacity, visibility;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       ${$isOpen &&
       css`

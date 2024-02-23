@@ -16,7 +16,6 @@ export const StyledContainer = styled.div`
 export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
   ${({ theme }) => {
     const { background, shadow, border, color } = theme.form.input
-    const { duration, timing } = theme.transition
 
     const borderSize = Math.max(
       border.size,
@@ -37,7 +36,6 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       color: ${color.default};
       box-shadow: ${shadow};
       border: ${borderSize}rem solid transparent;
-      transition: border ${timing} ${duration.fast}ms 0ms;
       border-radius: 1.875rem;
       padding: ${paddingYSize}rem ${paddingXSize}rem;
       padding-right: ${paddingXSize * 2}rem;
@@ -45,6 +43,9 @@ export const StyledSelect = styled.select.attrs(addClasses('tp-form'))`
       white-space: nowrap;
       min-height: 2.625rem;
       margin: 0;
+      transition-property: border;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       /* Remove default arrow IE*/
       &::-ms-expand {

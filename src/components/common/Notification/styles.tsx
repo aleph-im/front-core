@@ -49,7 +49,9 @@ export const StyledNotificationCard = styled(
       opacity: ${isOpen ? 1 : 0};
       top: ${isOpen ? 0 : '1.5rem'};
       visibility: ${isOpen ? 'inherit' : 'hidden'};
-      transition: all ease-in-out ${theme.transition.duration.fast}ms 0s;
+      transition-property: top, opacity, visibility;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
     `
   }}
 `

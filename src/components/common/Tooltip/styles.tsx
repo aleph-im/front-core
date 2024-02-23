@@ -21,13 +21,14 @@ export const StyledContainer = styled.div.attrs(
     return css`
       ${tw`fixed inline-flex flex-col items-stretch justify-start gap-4 p-6 inset-6 z-10`}
 
-      will-change: transform;
       border-radius: 1.5rem;
       backdrop-filter: blur(50px);
       color: ${theme.color.text};
-      will-change: opacity translate3d;
-      transition: opacity ease-in-out ${theme.transition.duration.fast}ms 0s;
       opacity: ${$stage === 'enter' ? 1 : 0};
+      will-change: opacity, transform;
+      transition-property: opacity;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       ${getResponsiveCss(
         'md',

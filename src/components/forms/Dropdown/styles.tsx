@@ -15,7 +15,6 @@ export type StyledDropdownOptionMenuProps = StyledDropdownProps & {
 export const StyledDropdown = styled.div<StyledDropdownProps>`
   ${({ theme, isOpen }) => {
     const { background, shadow, border, color } = theme.form.input
-    const { duration, timing } = theme.transition
 
     const borderSize = Math.max(
       border.size,
@@ -39,12 +38,14 @@ export const StyledDropdown = styled.div<StyledDropdownProps>`
       color: ${color.default};
       box-shadow: ${shadow};
       border: ${borderSize}rem solid transparent;
-      transition: border ${timing} ${duration.fast}ms 0ms;
       border-radius: 1.875rem;
       padding: ${paddingYSize}rem ${paddingXSize}rem;
       text-overflow: ellipsis;
       white-space: nowrap;
       min-height: 2.625rem;
+      transition-property: border;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       ${isOpen &&
       css`
@@ -83,7 +84,6 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
   },
 )<StyledDropdownOptionMenuProps>`
   ${({ theme, isOpen }) => {
-    const { duration, timing } = theme.transition
     const { shadow } = theme.form.input
 
     return css`
@@ -96,7 +96,9 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
       backdrop-filter: blur(10px);
       z-index: 999;
       box-shadow: ${shadow};
-      transition: all ${timing} ${duration.fast}ms 0ms;
+      transition-property: opacity, top, visibility;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       & {
         ${isOpen &&

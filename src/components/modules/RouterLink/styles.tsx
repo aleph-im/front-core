@@ -69,7 +69,9 @@ export const StyledRouterLink = styled.div.attrs(
 
     return css`
       ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap h-7`}
-      transition: box-shadow ease-in-out 0.25s 0s, background-color ease-in-out 0.25s 0s;
+      transition-property: box-shadow, background-color;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       color: ${color?.default};
       background-color: ${background?.default};
@@ -100,8 +102,9 @@ export const StyledRouterLink = styled.div.attrs(
       }
 
       & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-        transition: color ease-in-out 0.25s 0s,
-          background-color ease-in-out 0.25s 0s;
+        transition-property: color, background-color;
+        transition-duration: ${theme.transition.duration.fast}ms;
+        transition-timing-function: ${theme.transition.timing};
       }
 
       &:hover {

@@ -76,8 +76,11 @@ const defaultVariants = (props: StyledButtonProps) => {
     transform: transale3d(0, 0, 0);
     text-decoration: none !important;
     z-index: 0;
-    transition: all 0.2s 0s ease-in-out;
     outline-style: solid;
+    transition-property: color, background, box-shadow, outline, filter;
+    transition-duration: ${theme.transition.duration.fast}ms;
+    transition-timing-function: ${theme.transition.timing};
+
     font-family: ${button.font.family};
     font-style: ${button.font.style};
     font-weight: ${button.font.weight};
@@ -116,6 +119,10 @@ const defaultVariants = (props: StyledButtonProps) => {
       padding: ${button.border.size.default}rem;
       background-color: ${borderCl.color};
       background-image: ${borderCl.gradient};
+
+      transition-property: background, padding, height;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       ${button.border.type === 'underscore' &&
       css`

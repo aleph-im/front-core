@@ -23,7 +23,6 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
 )<StyledTextAreaFieldProps>`
   ${({ theme, $variant }) => {
     const { background, shadow, border } = theme.form.input
-    const { duration, timing } = theme.transition
 
     const borderSize = Math.max(
       border.size,
@@ -44,7 +43,9 @@ export const StyledTextAreaField = styled.textarea.attrs<StyledTextAreaFieldProp
       height: 100%;
       width: 100%;
       min-height: 6.25rem;
-      transition: border ${timing} ${duration.fast}ms 0ms;
+      transition-property: border, color, opacity;
+      transition-duration: ${theme.transition.duration.fast}ms;
+      transition-timing-function: ${theme.transition.timing};
 
       // Text input styles
       ${$variant === 'default' &&

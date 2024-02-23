@@ -62,9 +62,9 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
       ${tw`sticky top-0`}
       backdrop-filter: none;
       height: ${$isOpen ? '100vh' : $height};
-      transition: ${$isOpen
-        ? 'height linear 0s 0s'
-        : `height linear 0s ${duration.fast}ms`};
+      transition-property: height;
+      transition-delay: ${$isOpen ? 0 : theme.transition.duration.fast}ms;
+      transition-timing-function: linear;
 
       & ${StyledHeadingContainer} {
         ${mobile.header.css && mobile.header.css()}
@@ -84,7 +84,9 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
         color: ${mobile.content.color};
         opacity: ${$isOpen ? '1' : '0'};
         visibility: ${$isOpen ? 'inherit' : 'hidden'};
-        transition: all ease-in-out ${duration.fast}ms 0s;
+        transition-property: opacity, visibility;
+        transition-duration: ${theme.transition.duration.fast}ms;
+        transition-timing-function: ${theme.transition.timing};
 
         & ${StyledRouterLink} {
           ${tw`flex h-12`}
