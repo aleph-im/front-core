@@ -853,11 +853,12 @@ const walletPicker: ThemeWalletPicker = {
   color: {
     default: color.text,
     disabled: `${color.text}99`,
+    rewards: color.main1,
   },
   background: color.disabled,
   shadow: shadows.black0,
   border: {
-    size: pxToRem(3),
+    size: pxToRem(1),
     color: color.disabled3,
   },
   button: {

@@ -1048,6 +1048,7 @@ const walletPicker: ThemeWalletPicker = {
   color: {
     default: color.text,
     disabled: color.text,
+    rewards: color.main0,
   },
   background: '#FFFFFF05',
   shadow: shadows.purple0,

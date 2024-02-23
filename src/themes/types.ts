@@ -504,6 +504,7 @@ export type ThemeWalletPicker = {
   color: {
     default: string
     disabled: string
+    rewards: string
   }
   background: string
   shadow: string
