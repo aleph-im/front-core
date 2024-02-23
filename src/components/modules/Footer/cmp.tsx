@@ -34,7 +34,7 @@ export const FooterLinks = ({ links }: { links: FooterLinkList[] }) => {
 FooterLinks.displayName = 'FooterLinks'
 
 export const Footer = ({
-  small = false,
+  small: $small = false,
   buttons,
   media,
   mainLinks,
@@ -47,9 +47,9 @@ export const Footer = ({
   ...rest
 }: FooterProps) => {
   return (
-    <StyledFooter {...rest}>
+    <StyledFooter {...{ $small, ...rest }}>
       <StyledContainer {...{ $maxWidth, $breakpoint }}>
-        {small ? (
+        {$small ? (
           <div tw="flex items-center justify-between flex-wrap gap-10">
             <div tw="w-full flex-auto lg:flex-1">
               <Link

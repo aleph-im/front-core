@@ -26,12 +26,16 @@ export const StyledContainer = styled.div<StyledContainerProps>`
   `}
 `
 
-export const StyledFooter = styled.footer`
-  ${({ theme }) => {
+export type StyledFooterProps = {
+  $small?: boolean
+}
+
+export const StyledFooter = styled.footer<StyledFooterProps>`
+  ${({ theme, $small }) => {
     const { background } = theme.component.footer
 
     return css`
-      ${tw`py-12`}
+      padding: ${$small ? 1.5 : 3}rem 0;
       background: ${background};
       box-sizing: border-box;
       width: 100%;
