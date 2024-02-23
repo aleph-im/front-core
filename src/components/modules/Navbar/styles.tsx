@@ -55,7 +55,6 @@ export const disableBackgroundCss = css`
 
 export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
   ${({ theme, $breakpoint, $height, $isOpen }) => {
-    const { duration } = theme.transition
     const { mobile } = theme.component.navbar
 
     return css`
