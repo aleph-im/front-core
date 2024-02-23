@@ -21,6 +21,8 @@ import {
   getGradientNoiseEffectCss,
   getPlainNoiseEffectCss,
   noiseGradient,
+  getNoiseImg1Css,
+  getNoiseImg2Css,
 } from './noise'
 import {
   getBackgroundColorCss,
@@ -31,7 +33,12 @@ import {
 } from './utils'
 import tw, { GlobalStyles as TailwindGlobalStyles } from 'twin.macro'
 import { fontAwesomeCss } from './font'
-import { getPlainGrainEffectCss, grainColor } from './grains'
+import {
+  getGrainImg1Css,
+  getGrainImg2Css,
+  getPlainGrainEffectCss,
+  grainColor,
+} from './grains'
 
 export const GlobalStyles = () => (
   <>
@@ -227,6 +234,18 @@ function alephEffectClasses(theme: DefaultTheme) {
     `,
   )
 
+  const noiseImg1Css = css`
+    ${noisePlainColors.map((color) => `.fx-noise-${color}`).join(', ')} {
+      ${getNoiseImg1Css()}
+    }
+  `
+
+  const noiseImg2Css = css`
+    ${noiseGradientColors.map((color) => `.fx-noise-${color}`).join(', ')} {
+      ${getNoiseImg2Css()}
+    }
+  `
+
   const noisePlainCss = noisePlainColors.flatMap(
     (color) => css`
       .fx-noise-${color} {
@@ -249,6 +268,8 @@ function alephEffectClasses(theme: DefaultTheme) {
     ${glowMaxCss}
     ${glassCss}
     ${darkCss}
+    ${noiseImg1Css}
+    ${noiseImg2Css}
     ${noisePlainCss}
     ${noiseGradientCss}
   `
@@ -258,6 +279,19 @@ function twentysixEffectClasses(theme: DefaultTheme) {
   if (theme.name !== 'twentysix') return
 
   const grainPlainColors = Object.keys(grainColor)
+  const [colors1, ...colors2] = grainPlainColors
+
+  const grainImg1Css = css`
+    ${[colors1].map((color) => `.fx-grain-${color}`).join(', ')} {
+      ${getGrainImg1Css()}
+    }
+  `
+
+  const grainImg2Css = css`
+    ${colors2.map((color) => `.fx-grain-${color}`).join(', ')} {
+      ${getGrainImg2Css()}
+    }
+  `
 
   const grainPlainCss = grainPlainColors.flatMap(
     (color) => css`
@@ -268,6 +302,8 @@ function twentysixEffectClasses(theme: DefaultTheme) {
   )
 
   return css`
+    ${grainImg1Css}
+    ${grainImg2Css}
     ${grainPlainCss}
   `
 }

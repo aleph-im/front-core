@@ -79,12 +79,29 @@ export function getPlainGrainEffectCss(color: string) {
       z-index: -1;
       pointer-events: none;
       opacity: ${opacity};
-      background-image: ${image};
+      /* background-image: ${image}; */
       background-blend-mode: ${blendMode};
       background-repeat: repeat;
       background-size: ${imageWidth}rem ${imageWidth * imageRatio}rem;
       animation: 20s linear 0s infinite ${moveBackground};
       /* background-attachment: fixed; */
+    }
+  `
+}
+
+export function getGrainImg1Css() {
+  return css`
+    &::after {
+      background-image: ${grainImg1},
+        radial-gradient(50% 50% at 50% 50%, #ede4f9 0%, #faf6ff 100%);
+    }
+  `
+}
+
+export function getGrainImg2Css() {
+  return css`
+    &::after {
+      background-image: ${grainImg2};
     }
   `
 }

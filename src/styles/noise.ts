@@ -27,7 +27,7 @@ export function getPlainNoiseEffectCss(color: string) {
 
     &::after {
       content: '';
-      background-image: ${noiseImg};
+      /* background-image: ${noiseImg}; */
       background-size: 20rem;
       opacity: ${noiseColor[color].dotsOpacity};
       position: absolute;
@@ -44,7 +44,21 @@ export function getPlainNoiseEffectCss(color: string) {
 
 export function getGradientNoiseEffectCss(color: string) {
   return css`
-    mask-image: ${noiseImg};
+    /* mask-image: ${noiseImg}; */
     background-image: ${noiseGradient[color]};
+  `
+}
+
+export function getNoiseImg1Css() {
+  return css`
+    &::after {
+      background-image: ${noiseImg};
+    }
+  `
+}
+
+export function getNoiseImg2Css() {
+  return css`
+    mask-image: ${noiseImg};
   `
 }
