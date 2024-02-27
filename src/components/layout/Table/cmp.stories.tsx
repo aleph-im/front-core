@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import Table from './cmp'
 import { TableBorderType, TableColumn, TableProps } from './types'
@@ -181,7 +181,53 @@ Default.parameters = {
   ...defaultParams,
 }
 
+export const EmptyPlaceholder = Template.bind({})
+EmptyPlaceholder.args = {
+  ...defaultArgs,
+  emptyPlaceholder: <div>No data</div>,
+  data: [],
+}
+EmptyPlaceholder.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
 export const StickyTable = Template.bind({})
 StickyTable.args = {
   ...stickyTableArgs,
+}
+
+// ---
+
+const Template2: StoryFn<typeof Table> = (args) => {
+  const [data, setData] = useState(args.data)
+  const infiniteScroll = useMemo(() => data.length <= 100, [data])
+
+  const onLoadMore = useCallback(async () => {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 1000 * 1)
+    })
+
+    setData([...data, ...args.data])
+  }, [data, args.data])
+
+  return (
+    <Table
+      {...{
+        ...args,
+        data,
+        infiniteScroll,
+        onLoadMore,
+      }}
+    />
+  )
+}
+
+export const InfiniteScroll = Template2.bind({})
+InfiniteScroll.args = {
+  ...defaultArgs,
+}
+InfiniteScroll.parameters = {
+  ...defaultParams,
 }

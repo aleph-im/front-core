@@ -8,6 +8,8 @@ import {
 } from './types'
 import tw from 'twin.macro'
 import Icon from '../../common/Icon'
+import { useInfiniteScroll } from 'infinite-scroll-hook'
+import Spinner from '../../common/Spinner'
 
 export function TableRow<R extends Record<string, unknown>>({
   row,
@@ -175,7 +177,15 @@ export function TableHeaderCell<R extends Record<string, unknown>>({
 TableHeaderCell.displayName = 'TableHeaderCell'
 
 export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
-  const { columns, data, rowKey } = props
+  const {
+    columns,
+    data,
+    infiniteScroll,
+    emptyPlaceholder,
+    loadingPlaceholder,
+    rowKey,
+    onLoadMore,
+  } = props
 
   const [sortedColumn, setSortedColumn] = useState({
     column: '',
@@ -223,8 +233,13 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     return keyedData.sort(sortFn)
   }, [keyedData, sortedColumn.column, sortedColumn.asc, targetSortColumn])
 
+  const { containerRef, isLoading } = useInfiniteScroll({
+    onLoadMore,
+    shouldStop: !infiniteScroll,
+  })
+
   return (
-    <StyledTable {...props}>
+    <StyledTable {...props} ref={containerRef}>
       <thead>
         <tr
           css={[
@@ -259,6 +274,18 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
             }}
           />
         ))}
+        {emptyPlaceholder && (
+          <tr>
+            <td colSpan={columns.length}>{emptyPlaceholder}</td>
+          </tr>
+        )}
+        {isLoading && (
+          <tr>
+            <td colSpan={columns.length}>
+              {loadingPlaceholder || <Spinner color="text" tw="mx-auto" />}
+            </td>
+          </tr>
+        )}
       </tbody>
     </StyledTable>
   )

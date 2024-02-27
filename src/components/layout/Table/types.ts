@@ -67,6 +67,10 @@ export type TableProps<R extends Record<string, unknown>> =
       stickyHeader?: boolean
       borderType?: TableBorderType
       rowNoise?: boolean
+      infiniteScroll?: boolean
+      onLoadMore?: () => Promise<void>
+      loadingPlaceholder?: ReactNode
+      emptyPlaceholder?: ReactNode
     }
 
 export type TableRowProps<R extends Record<string, unknown>> =
