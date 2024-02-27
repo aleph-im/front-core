@@ -63,7 +63,7 @@ export type TableProps<R extends Record<string, unknown>> =
   TableHTMLAttributes<HTMLTableElement> &
     TableRow<R> & {
       columns: TableColumn<R>[]
-      data: R[]
+      data?: R[]
       stickyHeader?: boolean
       borderType?: TableBorderType
       rowNoise?: boolean

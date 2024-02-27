@@ -194,14 +194,14 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
 
   const randomId = useId()
 
-  const keyedData: (R & { key: string })[] = useMemo(
-    () =>
-      data.map((row, i) => ({
-        ...row,
-        key: rowKey ? rowKey(row) : `${randomId}${i}`,
-      })),
-    [data, randomId, rowKey],
-  )
+  const keyedData: (R & { key: string })[] | undefined = useMemo(() => {
+    if (!data) return data
+
+    return data.map((row, i) => ({
+      ...row,
+      key: rowKey ? rowKey(row) : `${randomId}${i}`,
+    }))
+  }, [data, randomId, rowKey])
 
   const targetSortColumn = useMemo(() => {
     return columns.find(({ label }) => label === sortedColumn.column)
@@ -209,6 +209,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
 
   const sortedData = useMemo(() => {
     if (!sortedColumn.column) return keyedData
+    if (!keyedData) return keyedData
 
     const getValue =
       targetSortColumn?.sortBy ||
@@ -271,26 +272,27 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
         </tr>
       </thead>
       <tbody>
-        {sortedData.map((row, rowIndex) => (
-          <TableRow
-            key={row.key}
-            {...{
-              row,
-              rowIndex,
-              columns,
-              rowRender: props.rowRender,
-              rowProps: props.rowProps,
-              rowNoise: props.rowNoise,
-            }}
-          />
-        ))}
-        {emptyPlaceholder && (
-          <tr>
+        {sortedData &&
+          sortedData.map((row, rowIndex) => (
+            <TableRow
+              key={row.key}
+              {...{
+                row,
+                rowIndex,
+                columns,
+                rowRender: props.rowRender,
+                rowProps: props.rowProps,
+                rowNoise: props.rowNoise,
+              }}
+            />
+          ))}
+        {(!sortedData || !sortedData.length) && emptyPlaceholder && (
+          <tr className="empty-placeholder">
             <td colSpan={columns.length}>{emptyPlaceholder}</td>
           </tr>
         )}
         {(!!infiniteScroll || isLoading) && (
-          <tr ref={triggerRef}>
+          <tr ref={triggerRef} className="loading-placeholder">
             {isLoading && (
               <td colSpan={columns.length}>
                 {loadingPlaceholder || <Spinner color="text" tw="mx-auto" />}
