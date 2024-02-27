@@ -205,6 +205,7 @@ const Template2: StoryFn<typeof Table> = (args) => {
   const infiniteScroll = useMemo(() => data.length <= 100, [data])
 
   const onLoadMore = useCallback(async () => {
+    console.log('LOADING...')
     await new Promise((resolve) => {
       setTimeout(resolve, 1000 * 1)
     })

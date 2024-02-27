@@ -241,7 +241,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     setIsLoading(false)
   }, [onLoadMore])
 
-  const [triggerRef, { rootRef: containerRef }] = useInfiniteScroll({
+  const [triggerRef] = useInfiniteScroll({
     loading: isLoading,
     hasNextPage: !!infiniteScroll,
     disabled: !infiniteScroll,
@@ -249,7 +249,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
   })
 
   return (
-    <StyledTable {...props} ref={containerRef}>
+    <StyledTable {...props}>
       <thead>
         <tr
           css={[
