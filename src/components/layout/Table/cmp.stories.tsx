@@ -201,7 +201,7 @@ StickyTable.args = {
 // ---
 
 const Template2: StoryFn<typeof Table> = (args) => {
-  const [data, setData] = useState(args.data)
+  const [data, setData] = useState(args.data || [])
   const infiniteScroll = useMemo(() => data.length <= 100, [data])
 
   const onLoadMore = useCallback(async () => {
@@ -210,7 +210,7 @@ const Template2: StoryFn<typeof Table> = (args) => {
       setTimeout(resolve, 1000 * 1)
     })
 
-    setData([...data, ...args.data])
+    setData([...data, ...(args.data || [])])
   }, [data, args.data])
 
   return (
