@@ -1,4 +1,4 @@
-import React, { memo, useId, useMemo, useState } from 'react'
+import React, { memo, useCallback, useId, useMemo, useState } from 'react'
 import { StyledTable } from './styles'
 import {
   TableCellProps,
@@ -8,7 +8,7 @@ import {
 } from './types'
 import tw from 'twin.macro'
 import Icon from '../../common/Icon'
-import { useInfiniteScroll } from 'infinite-scroll-hook'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
 import Spinner from '../../common/Spinner'
 
 export function TableRow<R extends Record<string, unknown>>({
@@ -233,9 +233,19 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     return keyedData.sort(sortFn)
   }, [keyedData, sortedColumn.column, sortedColumn.asc, targetSortColumn])
 
-  const { containerRef, isLoading } = useInfiniteScroll({
-    onLoadMore,
-    shouldStop: !infiniteScroll,
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleLoadMore = useCallback(async () => {
+    setIsLoading(true)
+    onLoadMore && (await onLoadMore())
+    setIsLoading(false)
+  }, [onLoadMore])
+
+  const [triggerRef, { rootRef: containerRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: !!infiniteScroll,
+    disabled: !infiniteScroll,
+    onLoadMore: handleLoadMore,
   })
 
   return (
@@ -279,11 +289,13 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
             <td colSpan={columns.length}>{emptyPlaceholder}</td>
           </tr>
         )}
-        {isLoading && (
-          <tr>
-            <td colSpan={columns.length}>
-              {loadingPlaceholder || <Spinner color="text" tw="mx-auto" />}
-            </td>
+        {(!!infiniteScroll || isLoading) && (
+          <tr ref={triggerRef}>
+            {isLoading && (
+              <td colSpan={columns.length}>
+                {loadingPlaceholder || <Spinner color="text" tw="mx-auto" />}
+              </td>
+            )}
           </tr>
         )}
       </tbody>
