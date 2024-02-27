@@ -9,7 +9,7 @@ export type WalletProps = {
   provider: () => any
 }
 
-export type NetworkProps = {
+export type Network = {
   name: string
   icon: IconName
   wallets: WalletProps[]
@@ -17,14 +17,47 @@ export type NetworkProps = {
 
 export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
   backgroundColor?: string
-  networks: NetworkProps[]
+  networks: Network[]
   address?: string
+  addressHref?: string
   balance?: number
   rewards?: {
     amount: number
     days: number
   }
+  selectedNetwork?: Network
+  onConnect: (wallet: WalletProps, network: Network) => void
+  onSwitchNetwork: (network: Network) => void
   onDisconnect: () => void
-  onConnect: (wallet: WalletProps, network: NetworkProps) => void
+}
+
+export type NetworkProps = {
+  network: Network
+  isSelected: boolean
+  onClick: (network: Network) => void
+}
+
+export type NetworksProps = {
+  networks: Network[]
+  selectedNetwork?: Network
+  onSelectNetwork: (network: Network) => void
+}
+
+export type WalletPickerLoggedOutProps = {
+  networks: Network[]
+  onConnect: (wallet: WalletProps, network: Network) => void
+}
+
+export type WalletPickerLoggedInProps = {
+  networks: Network[]
+  address?: string
   addressHref?: string
+  balance?: number
+  rewards?: {
+    amount: number
+    days: number
+  }
+  selectedNetwork?: Network
+  onSwitchNetwork: (network: Network) => void
+  onDisconnect: () => void
 }
