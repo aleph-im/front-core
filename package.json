@@ -1,6 +1,6 @@
 {
   "name": "@aleph-front/core",
-  "version": "1.15.65",
+  "version": "1.15.66",
   "description": "",
   "publishConfig": {
     "access": "public"
