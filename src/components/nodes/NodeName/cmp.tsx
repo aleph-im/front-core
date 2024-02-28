@@ -29,7 +29,7 @@ export const NodeName = ({
       />
       <div className="fs-10" tw="leading-4">
         <div tw="whitespace-nowrap">ID: {hash.slice(-10)}</div>
-        {name?.substring(0, 30)}
+        <div className="fs-12">{name?.substring(0, 30)}</div>
       </div>
     </div>
   )
