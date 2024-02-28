@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components'
-import { TableProps } from './types'
+import { TableBorderType } from './types'
 
-export const StyledTable = styled.table<TableProps<any>>`
-  ${({ borderType = 'none' }) => {
-    const hasBorder = borderType !== 'none'
+export type StyledTableProps = {
+  $borderType?: TableBorderType
+}
+
+export const StyledTable = styled.table<StyledTableProps>`
+  ${({ $borderType = 'none' }) => {
+    const hasBorder = $borderType !== 'none'
 
     return css`
       width: 100%;
@@ -30,7 +34,7 @@ export const StyledTable = styled.table<TableProps<any>>`
       td {
         ${hasBorder &&
         css`
-          border-bottom: 0.0625rem ${borderType} #ffffff22;
+          border-bottom: 0.0625rem ${$borderType} #ffffff22;
         `}
       }
 

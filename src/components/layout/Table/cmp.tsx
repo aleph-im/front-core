@@ -183,8 +183,10 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     infiniteScroll,
     emptyPlaceholder,
     loadingPlaceholder,
+    borderType: $borderType,
     rowKey,
     onLoadMore,
+    ...rest
   } = props
 
   const [sortedColumn, setSortedColumn] = useState({
@@ -250,7 +252,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
   })
 
   return (
-    <StyledTable {...props}>
+    <StyledTable {...{ $borderType, ...rest }}>
       <thead>
         <tr
           css={[
