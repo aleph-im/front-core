@@ -15,5 +15,6 @@ export * from './useLocalRequest'
 export * from './useRequest'
 export * from './useRequestState'
 export * from './useScroll'
+export * from './usePaginatedList'
 
 export * from 'transition-hook'
