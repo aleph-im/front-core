@@ -13,8 +13,8 @@ import {
 } from './styles'
 import { NavbarLinkListProps } from './types'
 import Icon from '../../common/Icon'
-import { createPortal } from 'react-dom'
 import { useTheme } from 'styled-components'
+import { Portal } from '../../layout/Portal'
 
 export const NavbarLinkList = ({
   children,
@@ -103,18 +103,17 @@ export const NavbarLinkList = ({
           <Icon name="bars" />
         </StyledButton>
       )}
-      {shouldMount &&
-        typeof window === 'object' &&
-        createPortal(
+      {shouldMount && (
+        <Portal>
           <StyledRestContainer
             ref={restContainerRef}
             $isOpen={restIsOpen}
             $position={position}
           >
             {restItems}
-          </StyledRestContainer>,
-          window.document.body,
-        )}
+          </StyledRestContainer>
+        </Portal>
+      )}
     </StyledContainer>
   )
 }

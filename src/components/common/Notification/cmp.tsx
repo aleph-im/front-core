@@ -7,7 +7,6 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { createPortal } from 'react-dom'
 import {
   AddNotificationInfo,
   NotificationContext,
@@ -24,6 +23,7 @@ import {
 import { NotificationProps } from './types'
 import { useListTransition } from 'transition-hook'
 import { useTheme } from 'styled-components'
+import { Portal } from '../../layout/Portal'
 
 export const Notification = ({
   max = 10,
@@ -152,38 +152,35 @@ export const Notification = ({
   return (
     <NotificationContext.Provider value={contextValue}>
       {children}
-      {typeof window === 'object'
-        ? createPortal(
-            <StyledContainer onMouseOver={stopTimer} onMouseOut={resetTimer}>
-              <StyledNotificationContainer>
-                {list((item, $stage) => (
-                  <>
-                    <StyledNotificationCard
-                      key={item.id}
-                      {...{
-                        onClose: () => contextValue.del(item.id),
-                        $stage,
-                        progress: Math.min(
-                          (item.timeout - item.pending) / item.timeout,
-                          1,
-                        ),
-                        ...item,
-                      }}
-                    />
-                  </>
-                ))}
-              </StyledNotificationContainer>
-              {notificationList.length > 2 && (
-                <div tw="mt-4">
-                  <StyledClearButton onClick={clearAll}>
-                    Clear all <StyledClearIcon tw="ml-2" />
-                  </StyledClearButton>
-                </div>
-              )}
-            </StyledContainer>,
-            window.document.body,
-          )
-        : null}
+      <Portal>
+        <StyledContainer onMouseOver={stopTimer} onMouseOut={resetTimer}>
+          <StyledNotificationContainer>
+            {list((item, $stage) => (
+              <>
+                <StyledNotificationCard
+                  key={item.id}
+                  {...{
+                    onClose: () => contextValue.del(item.id),
+                    $stage,
+                    progress: Math.min(
+                      (item.timeout - item.pending) / item.timeout,
+                      1,
+                    ),
+                    ...item,
+                  }}
+                />
+              </>
+            ))}
+          </StyledNotificationContainer>
+          {notificationList.length > 2 && (
+            <div tw="mt-4">
+              <StyledClearButton onClick={clearAll}>
+                Clear all <StyledClearIcon tw="ml-2" />
+              </StyledClearButton>
+            </div>
+          )}
+        </StyledContainer>
+      </Portal>
     </NotificationContext.Provider>
   )
 }

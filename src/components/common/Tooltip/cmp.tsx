@@ -6,9 +6,9 @@ import {
   StyledHeaderCloseIcon,
 } from './styles'
 import { TooltipProps } from './types'
-import { createPortal } from 'react-dom'
 import { useFloatPosition } from '../../../hooks/useFloatPosition'
 import { useTheme } from 'styled-components'
+import { Portal } from '../../layout/Portal'
 
 export const Tooltip = ({
   open: openProp,
@@ -87,9 +87,8 @@ export const Tooltip = ({
 
   return (
     <>
-      {shouldMount &&
-        typeof window === 'object' &&
-        createPortal(
+      {shouldMount && (
+        <Portal>
           <StyledContainer
             {...{
               ref: tooltipRef,
@@ -104,9 +103,9 @@ export const Tooltip = ({
               </div>
             )}
             <StyledContentContainer>{content}</StyledContentContainer>
-          </StyledContainer>,
-          window.document.body,
-        )}
+          </StyledContainer>
+        </Portal>
+      )}
       {children && (
         <span style={{ display: 'inline-block' }} ref={targetRef}>
           {children}
