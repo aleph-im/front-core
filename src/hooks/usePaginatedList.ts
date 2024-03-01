@@ -5,6 +5,7 @@ export type UsePaginatedListProps<T> = {
   itemsPerPage?: number
   delay?: number
   list?: T[]
+  resetDeps?: any[]
 }
 
 export type UsePaginatedListReturn<T> = {
@@ -17,12 +18,14 @@ export function usePaginatedList<T>({
   itemsPerPage = 10,
   delay = 200,
   list,
+  resetDeps = [list],
 }: UsePaginatedListProps<T>): UsePaginatedListReturn<T> {
   const [page, setPage] = useState(0)
 
   useEffect(() => {
     setPage(1)
-  }, [list])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...resetDeps])
 
   const output = useMemo(() => {
     if (!list) return
