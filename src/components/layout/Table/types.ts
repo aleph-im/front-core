@@ -59,6 +59,10 @@ export type TableColumn<R extends Record<string, unknown>> = {
   sortBy?: (row: R) => number | string
 }
 
+export type TableDefaultSortFn<R = unknown> = (
+  data: R[] | undefined,
+) => R[] | undefined
+
 export type TableProps<R extends Record<string, unknown>> =
   TableHTMLAttributes<HTMLTableElement> &
     TableRow<R> & {
@@ -68,9 +72,14 @@ export type TableProps<R extends Record<string, unknown>> =
       borderType?: TableBorderType
       rowNoise?: boolean
       infiniteScroll?: boolean
-      onLoadMore?: () => Promise<void>
       loadingPlaceholder?: ReactNode
       emptyPlaceholder?: ReactNode
+      onLoadMore?: () => Promise<void>
+      onSort?: (
+        defaultSort: TableDefaultSortFn<R>,
+        col: TableColumn<R> | undefined,
+        asc: boolean,
+      ) => void
     }
 
 export type TableRowProps<R extends Record<string, unknown>> =

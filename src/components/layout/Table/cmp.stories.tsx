@@ -1,7 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import Table from './cmp'
-import { TableBorderType, TableColumn, TableProps } from './types'
+import {
+  TableBorderType,
+  TableColumn,
+  TableDefaultSortFn,
+  TableProps,
+} from './types'
 import { data, MockDataRow, Pets } from './fixture/data'
 import Icon from '../../common/Icon'
 
@@ -201,10 +206,16 @@ StickyTable.args = {
 // ---
 
 const Template2: StoryFn<typeof Table> = (args) => {
-  const [data, setData] = useState(args.data || [])
+  const [data, setData] = useState<any[]>(args.data || [])
   const infiniteScroll = useMemo(() => data.length <= 100, [data])
+  const [sortFn, setSortFn] = useState<TableDefaultSortFn>()
 
-  const onLoadMore = useCallback(async () => {
+  const handleSort = useCallback((sortFn: TableDefaultSortFn) => {
+    console.log('SORTING...', sortFn)
+    return setSortFn(() => sortFn)
+  }, [])
+
+  const handleLoadMore = useCallback(async () => {
     console.log('LOADING...')
     await new Promise((resolve) => {
       setTimeout(resolve, 1000 * 1)
@@ -213,15 +224,23 @@ const Template2: StoryFn<typeof Table> = (args) => {
     setData([...data, ...(args.data || [])])
   }, [data, args.data])
 
+  const sortedData = useMemo(() => {
+    if (!sortFn) return data
+    return sortFn(data)
+  }, [data, sortFn])
+
   return (
-    <Table
-      {...{
-        ...args,
-        data,
-        infiniteScroll,
-        onLoadMore,
-      }}
-    />
+    <>
+      <Table
+        {...{
+          ...args,
+          data: sortedData,
+          infiniteScroll,
+          onLoadMore: handleLoadMore,
+          onSort: handleSort,
+        }}
+      />
+    </>
   )
 }
 

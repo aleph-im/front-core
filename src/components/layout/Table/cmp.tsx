@@ -1,10 +1,19 @@
-import React, { memo, useCallback, useId, useMemo, useState } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+} from 'react'
 import { StyledTable } from './styles'
 import {
   TableCellProps,
   TableHeaderCellProps,
   TableRowProps,
   TableProps,
+  TableSortedColumn,
+  TableDefaultSortFn,
 } from './types'
 import tw from 'twin.macro'
 import Icon from '../../common/Icon'
@@ -186,55 +195,71 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     borderType: $borderType,
     rowKey,
     onLoadMore,
+    onSort,
     ...rest
   } = props
 
-  const [sortedColumn, setSortedColumn] = useState({
-    column: '',
-    asc: true,
-  })
-
   const randomId = useId()
 
-  const keyedData: (R & { key: string })[] | undefined = useMemo(() => {
-    if (!data) return data
+  const [sortOptions, setSortOptions] = useState({ column: '', asc: true })
 
-    return data.map((row, i) => ({
+  const targetSortColumn = useMemo(() => {
+    if (!sortOptions.column) return
+    return columns.find(({ label }) => label === sortOptions.column)
+  }, [columns, sortOptions.column])
+
+  const handleSort: TableDefaultSortFn<R> = useCallback(
+    (data) => {
+      if (!data) return data
+      if (!targetSortColumn) return data
+
+      const getValue =
+        targetSortColumn.sortBy ||
+        ((row: R) =>
+          String(targetSortColumn.render(row, targetSortColumn, -1, -1)))
+
+      const sortFn =
+        targetSortColumn.sort ||
+        ((rowA: R, rowB: R) => {
+          const A = getValue(rowA)
+          const B = getValue(rowB)
+
+          if (A < B) {
+            return sortOptions.asc ? -1 : 1
+          } else if (A > B) {
+            return sortOptions.asc ? 1 : -1
+          } else {
+            return 0
+          }
+        })
+
+      return data.slice(0).sort(sortFn)
+    },
+    [sortOptions.asc, targetSortColumn],
+  )
+
+  useEffect(() => {
+    if (!onSort) return
+    onSort(handleSort, targetSortColumn, sortOptions.asc)
+  }, [handleSort, onSort, sortOptions.asc, targetSortColumn])
+
+  const sortedData = useMemo(() => {
+    if (onSort) return data
+    return handleSort(data)
+  }, [data, handleSort, onSort])
+
+  // --------------------
+
+  const rows: (R & { key: string })[] | undefined = useMemo(() => {
+    if (!sortedData) return sortedData
+
+    return sortedData.map((row, i) => ({
       ...row,
       key: rowKey ? rowKey(row) : `${randomId}${i}`,
     }))
-  }, [data, randomId, rowKey])
+  }, [sortedData, randomId, rowKey])
 
-  const targetSortColumn = useMemo(() => {
-    return columns.find(({ label }) => label === sortedColumn.column)
-  }, [columns, sortedColumn.column])
-
-  const sortedData = useMemo(() => {
-    if (!sortedColumn.column) return keyedData
-    if (!keyedData) return keyedData
-
-    const getValue =
-      targetSortColumn?.sortBy ||
-      ((row: R) =>
-        String(targetSortColumn?.render(row, targetSortColumn, -1, -1)))
-
-    const sortFn =
-      targetSortColumn?.sort ||
-      ((rowA: R, rowB: R) => {
-        const A = getValue(rowA)
-        const B = getValue(rowB)
-
-        if (A < B) {
-          return sortedColumn.asc ? -1 : 1
-        } else if (A > B) {
-          return sortedColumn.asc ? 1 : -1
-        } else {
-          return 0
-        }
-      })
-
-    return keyedData.sort(sortFn)
-  }, [keyedData, sortedColumn.column, sortedColumn.asc, targetSortColumn])
+  // --------------------
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -266,16 +291,16 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
               {...{
                 col,
                 colIndex,
-                sortedColumn,
-                setSortedColumn,
+                sortedColumn: sortOptions,
+                setSortedColumn: setSortOptions,
               }}
             />
           ))}
         </tr>
       </thead>
       <tbody>
-        {sortedData &&
-          sortedData.map((row, rowIndex) => (
+        {rows &&
+          rows.map((row, rowIndex) => (
             <TableRow
               key={row.key}
               {...{
@@ -288,7 +313,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
               }}
             />
           ))}
-        {(!sortedData || !sortedData.length) && emptyPlaceholder && (
+        {(!rows || !rows.length) && emptyPlaceholder && (
           <tr className="empty-placeholder">
             <td colSpan={columns.length}>{emptyPlaceholder}</td>
           </tr>
