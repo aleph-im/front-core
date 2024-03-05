@@ -45,10 +45,10 @@ export const StyledFooter = styled.footer<StyledFooterProps>`
 
 export const StyledButton = styled(Button).attrs((props) => {
   return {
-    ...props,
     variant: 'tertiary',
     color: 'main0',
     size: 'big',
+    ...props,
     forwardedAs: 'a',
   }
 })``

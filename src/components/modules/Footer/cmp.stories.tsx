@@ -15,6 +15,9 @@ const defaultArgs: Partial<FooterProps> = {
     {
       label: 'Work with us',
       href: '#',
+      props: {
+        variant: 'primary',
+      },
     },
     {
       label: 'Try our cloud',

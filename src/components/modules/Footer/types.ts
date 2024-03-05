@@ -2,6 +2,7 @@ import { HTMLAttributes } from 'react'
 import { IconName } from '../../common/Icon'
 import { LinkComponent } from '../../../types'
 import { BreakpointId } from '../../../themes'
+import { ButtonProps } from '../../common/Button'
 
 export type FooterMedia = {
   icon: IconName
@@ -16,6 +17,7 @@ export type FooterButton = {
   label: string
   href: string
   target?: string
+  props?: Partial<ButtonProps>
 }
 
 export type FooterLink = {

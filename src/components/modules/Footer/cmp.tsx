@@ -103,7 +103,14 @@ export const Footer = ({
             <nav tw="m-0 flex flex-wrap gap-10 justify-between">
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
                 {buttons.map((b) => (
-                  <StyledButton key={b.href} href={b.href} target={b.target}>
+                  <StyledButton
+                    key={b.href}
+                    {...{
+                      href: b.href,
+                      target: b.target,
+                      ...b.props,
+                    }}
+                  >
                     {b.label}
                   </StyledButton>
                 ))}
