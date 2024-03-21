@@ -1,10 +1,49 @@
 # Aleph.im frontend core package
 
+## Usage
+
+1. Install Styled Components
+
+   ```sh
+   npm i --save-dev styled-components
+   ```
+
+1. Set the desired theme
+
+   ```tsx
+   import { ThemeProvider } from "styled-components";
+   import { themes } from "@aleph-front/core";
+
+   function App() {
+     return (
+       <ThemeProvider theme={themes.aleph}>
+         <div>...</div>
+       <ThemeProvider />
+     );
+   ```
+
+1. Start using the Components
+
+   ```tsx
+   import { ThemeProvider } from "styled-components";
+   import { themes, Logo } from "@aleph-front/core";
+
+   function App() {
+     return (
+       <ThemeProvider theme={themes.aleph}>
+         <Logo text="Node Metrics" />
+       </ThemeProvider>
+     );
+   }
+   ```
+
+   > See all components in the [StoryBook](https://aleph-im.github.io/front-core)
+
 ## Get started as developer
 
 ### Set up font awesome in your local environment
 
-Before start, obtain a valid package token and set the env var `FONTAWESOME_NPM_AUTH_TOKEN` 
+Before start, obtain a valid package token and set the env var `FONTAWESOME_NPM_AUTH_TOKEN`
 Follow [this guide](https://fontawesome.com/docs/web/setup/packages#set-up-npm-token-for-all-projects) for configuring your local npm config
 
 ### Known issues and workarounds
