@@ -22,6 +22,7 @@ export type CustomIconName =
   | 'solana'
   | 'swap'
   | 'tezos'
+  | 'walletConnect'
 
 export type IconName = CustomIconName | FAIconName
 

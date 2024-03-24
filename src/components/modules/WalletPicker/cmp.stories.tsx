@@ -20,6 +20,13 @@ const metamaskForETH: WalletProps = {
   provider: () => (window as any)?.ethereum,
 }
 
+const walletConnectForETH: WalletProps = {
+  name: 'Wallet Connect',
+  icon: 'walletConnect',
+  color: 'main0',
+  provider: () => (window as any)?.ethereum,
+}
+
 const defaultArgs: Partial<WalletPickerProps> = {
   rewards: {
     amount: 1_000_000,
@@ -29,7 +36,7 @@ const defaultArgs: Partial<WalletPickerProps> = {
     {
       name: 'Ethereum',
       icon: 'ethereum',
-      wallets: [metamaskForETH],
+      wallets: [metamaskForETH, walletConnectForETH],
     },
     {
       name: 'Avalanche',
