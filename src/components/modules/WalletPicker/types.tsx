@@ -6,7 +6,6 @@ export type WalletProps = {
   name: string
   icon: WalletIconName
   color?: string
-  provider: () => any
 }
 
 export type Network = {
