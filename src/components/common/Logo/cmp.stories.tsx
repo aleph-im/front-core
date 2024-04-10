@@ -32,7 +32,6 @@ export const OnlyIcon = Template.bind({})
 OnlyIcon.args = {
   ...defaultArgs,
   text: false,
-  byAleph: false,
 }
 OnlyIcon.parameters = {
   ...defaultParams,
@@ -44,6 +43,7 @@ export const WithText = Template.bind({})
 WithText.args = {
   ...defaultArgs,
   text: true,
+  byAleph: false,
 }
 WithText.parameters = {
   ...defaultParams,
@@ -56,7 +56,6 @@ WithColor.args = {
   ...defaultArgs,
   color: 'main0',
   size: '100px',
-  byAleph: false,
 }
 WithColor.parameters = {
   ...defaultParams,
@@ -68,7 +67,6 @@ export const CustomSize = Template.bind({})
 CustomSize.args = {
   ...defaultArgs,
   size: '4rem',
-  byAleph: false,
 }
 CustomSize.parameters = {
   ...defaultParams,
@@ -76,20 +74,13 @@ CustomSize.parameters = {
 
 // ---
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-const TemplateWithLink: StoryFn<typeof Logo> = (args) => (
-  <a href="https://twentysix.cloud/">
-    <Logo {...args} />
-  </a>
-)
-
-export const WithLink = TemplateWithLink.bind({})
+export const WithLink = Template.bind({})
 WithLink.args = {
   ...defaultArgs,
   size: '2rem',
   text: true,
   byAleph: true,
+  href: 'https://twentysix.cloud',
 }
 WithLink.parameters = {
   ...defaultParams,

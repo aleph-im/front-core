@@ -7,7 +7,7 @@ import { StyledRouterLink } from '../RouterLink/styles'
 // A wrapper for the logo and burger icon (heading in mobile)
 export const StyledHeadingContainer = styled.div`
   ${tw`px-6`}
-  flex: 0 0 0px;
+  /* flex: 0 0 0px; */
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -9,8 +9,15 @@ import {
 import { FooterLinkList, FooterProps } from './types'
 import Logo from '../../common/Logo'
 import Icon from '../../common/Icon'
+import { LinkComponent } from '../../../types'
 
-export const FooterLinks = ({ links }: { links: FooterLinkList[] }) => {
+export const FooterLinks = ({
+  Link,
+  links,
+}: {
+  Link: LinkComponent
+  links: FooterLinkList[]
+}) => {
   return (
     <>
       {links.map((l, i) => (
@@ -20,9 +27,13 @@ export const FooterLinks = ({ links }: { links: FooterLinkList[] }) => {
           <ul tw="flex flex-col gap-3">
             {l.links.map((ll) => (
               <li key={ll.href}>
-                <StyledLink href={ll.href} target={ll.target}>
-                  {ll.label}
-                </StyledLink>
+                <Link
+                  href={ll.href}
+                  target={ll.target}
+                  route={{ href: ll.href }}
+                >
+                  <StyledLink>{ll.label}</StyledLink>
+                </Link>
               </li>
             ))}
           </ul>
@@ -39,7 +50,7 @@ export const Footer = ({
   media,
   mainLinks,
   links,
-  Link,
+  Link = 'a' as unknown as LinkComponent,
   logoHref = '/',
   logoTarget,
   maxWidth: $maxWidth,
@@ -52,22 +63,28 @@ export const Footer = ({
         {$small ? (
           <div tw="flex items-center justify-between flex-wrap gap-10">
             <div tw="w-full flex-auto lg:flex-1">
-              <Link
+              <Logo
+                size={28}
+                text
+                Link={Link}
                 href={logoHref}
                 target={logoTarget}
-                route={{ href: logoHref }}
-              >
-                <Logo size={28} text />
-              </Link>
+              />
             </div>
 
             <ul tw="w-full flex-auto md:flex-1 h-full flex flex-col gap-6 md:flex-row md:items-center lg:justify-center">
               {mainLinks.map((l) => (
                 <li key={l.label}>
-                  <StyledLink href={l.href} target={l.target} className="fs-18">
-                    {l.label}
-                    <Icon size="lg" name="external-link-square-alt" />
-                  </StyledLink>
+                  <Link
+                    href={l.href}
+                    target={l.target}
+                    route={{ href: l.href }}
+                  >
+                    <StyledLink className="fs-18">
+                      {l.label}
+                      <Icon size="lg" name="external-link-square-alt" />
+                    </StyledLink>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -77,14 +94,16 @@ export const Footer = ({
                 .filter((m) => m.small)
                 .map((m) => (
                   <li key={m.name}>
-                    <StyledLink
+                    <Link
                       href={m.href}
                       target={m.target}
-                      className="fs-18"
+                      route={{ href: m.href }}
                     >
-                      <Icon size="lg" name={m.icon} />
-                      {m.label}
-                    </StyledLink>
+                      <StyledLink className="fs-18">
+                        <Icon size="lg" name={m.icon} />
+                        {m.label}
+                      </StyledLink>
+                    </Link>
                   </li>
                 ))}
             </ul>
@@ -92,13 +111,13 @@ export const Footer = ({
         ) : (
           <div>
             <div tw="mb-12">
-              <Link
+              <Logo
+                size={55}
+                text
+                Link={Link}
                 href={logoHref}
                 target={logoTarget}
-                route={{ href: logoHref }}
-              >
-                <Logo size={55} text />
-              </Link>
+              />
             </div>
             <nav tw="m-0 flex flex-wrap gap-10 justify-between">
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
@@ -117,24 +136,32 @@ export const Footer = ({
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinksMemo links={links.slice(0, links.length / 2)} />
+                <FooterLinksMemo
+                  Link={Link}
+                  links={links.slice(0, links.length / 2)}
+                />
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinksMemo links={links.slice(links.length / 2)} />
+                <FooterLinksMemo
+                  Link={Link}
+                  links={links.slice(links.length / 2)}
+                />
               </div>
 
               <ul tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
                 {media.map((m) => (
                   <li key={m.name}>
-                    <StyledLink
+                    <Link
                       href={m.href}
                       target={m.target}
-                      className="fs-18"
+                      route={{ href: m.href }}
                     >
-                      <Icon size="lg" name={m.icon} />
-                      {m.label}
-                    </StyledLink>
+                      <StyledLink className="fs-18">
+                        <Icon size="lg" name={m.icon} />
+                        {m.label}
+                      </StyledLink>
+                    </Link>
                   </li>
                 ))}
               </ul>

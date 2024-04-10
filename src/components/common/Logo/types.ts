@@ -1,3 +1,5 @@
+import { LinkComponent } from '../../../types'
+
 export type LogoProps = {
   img?: string
   size?: number | string
@@ -5,6 +7,9 @@ export type LogoProps = {
   text?: boolean | string
   bgColor?: string
   byAleph?: boolean
+  Link?: LinkComponent
+  href?: string
+  target?: string
 }
 
 export type StyledLogoProps = {

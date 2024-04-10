@@ -172,9 +172,7 @@ export const RouterNavbar = ({
 
   const logo = useMemo(
     () => (
-      <Link href={logoHref} target={logoTarget} route={{ href: logoHref }}>
-        <Logo text={logoText} />
-      </Link>
+      <Logo text={logoText} Link={Link} href={logoHref} target={logoTarget} />
     ),
     [Link, logoHref, logoText, logoTarget],
   )

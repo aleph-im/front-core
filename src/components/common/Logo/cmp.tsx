@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react'
 import { ThemeProvider, useTheme } from 'styled-components'
 import {
-  StyledByAleph,
+  StyledByAlephLink,
   StyledContainer2,
   StyledLogoContainer,
   StyledText,
@@ -9,6 +9,7 @@ import {
 import { LogoProps } from './types'
 import logos from './img'
 import { themes } from '../../../themes'
+import { LinkComponent } from '../../../types'
 
 export const Logo = ({
   img,
@@ -16,6 +17,9 @@ export const Logo = ({
   color = 'text',
   bgColor = 'main1',
   byAleph = true,
+  Link = 'a' as unknown as LinkComponent,
+  target = '_blank',
+  href,
   size,
   ...rest
 }: LogoProps) => {
@@ -28,25 +32,44 @@ export const Logo = ({
   const logoColor = logoGradient || theme.color[color] || color
   const logoBgColor = theme.color[bgColor] || bgColor
   text = typeof text === 'boolean' ? text && logo.text : text || logo.text
+  byAleph = byAleph && !!text
+
+  const linkContent = (
+    <StyledContainer2>
+      <LogoSvg color={logoColor} bgColor={logoBgColor} />
+      {text && (
+        <StyledText type="logo" color={color}>
+          {text}
+        </StyledText>
+      )}
+    </StyledContainer2>
+  )
 
   return (
     <StyledLogoContainer {...{ size, text, ...rest }}>
-      <StyledContainer2>
-        <LogoSvg color={logoColor} bgColor={logoBgColor} />
-        {text && (
-          <StyledText type="logo" color={color}>
-            {text}
-          </StyledText>
-        )}
-      </StyledContainer2>
+      {href ? (
+        <Link
+          href={href}
+          route={{ href }}
+          target={target}
+          style={{ lineHeight: '1em' }}
+        >
+          {linkContent}
+        </Link>
+      ) : (
+        linkContent
+      )}
       {byAleph && logo.by && (
-        <a href="https://aleph.im" target="_blank" rel="noreferrer">
-          <ThemeProvider theme={themes.aleph}>
-            <StyledByAleph $color={logo.by.color}>
-              by <Logo text color={logo.by.color} size="1.5em" />
-            </StyledByAleph>
-          </ThemeProvider>
-        </a>
+        <ThemeProvider theme={themes.aleph}>
+          <StyledByAlephLink
+            href="https://aleph.im"
+            target="_blank"
+            rel="noreferrer"
+            $color={logo.by.color}
+          >
+            by <Logo text color={logo.by.color} size="1.5em" />
+          </StyledByAlephLink>
+        </ThemeProvider>
       )}
     </StyledLogoContainer>
   )

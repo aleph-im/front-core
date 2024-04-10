@@ -96,12 +96,7 @@ export const StyledLinkTitle = styled.h6.attrs(addClasses('tp-nav fs-24'))`
   }
 `
 
-export const StyledLink = styled.a.attrs((props) => {
-  return {
-    ...addClasses('tp-nav fs-14')(props),
-    href: props.href || '#',
-  }
-})`
+export const StyledLink = styled.span.attrs(addClasses('tp-nav fs-14'))`
   ${({ theme }) => {
     const { color } = theme.component.footer
 

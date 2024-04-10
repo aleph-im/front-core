@@ -16,7 +16,7 @@ export const StyledLogoContainer = styled.span<StyledLogoProps>`
       : `1em`
 
     return css`
-      ${tw`inline-flex items-center justify-center flex-wrap`}
+      ${tw`inline-flex items-baseline justify-center flex-wrap`}
 
       font-size: ${logoSize};
       gap: ${logo.gap};
@@ -52,13 +52,14 @@ export type StyledByAlephProps = {
   $color: string
 }
 
-export const StyledByAleph = styled.span.attrs(
+export const StyledByAlephLink = styled.a.attrs(
   addClasses('tp-body2'),
 )<StyledByAlephProps>`
   && {
     ${tw`inline-flex items-center self-end whitespace-nowrap`}
     color: ${({ $color }) => $color};
     font-size: 0.25em;
+    line-height: 0.25em;
     margin-bottom: 0.55em;
     gap: 0.25em;
   }

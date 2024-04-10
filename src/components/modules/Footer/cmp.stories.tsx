@@ -10,7 +10,6 @@ export default {
 
 const defaultArgs: Partial<FooterProps> = {
   small: true,
-  Link: (props) => <a {...props} />,
   buttons: [
     {
       label: 'Work with us',

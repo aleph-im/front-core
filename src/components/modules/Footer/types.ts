@@ -38,7 +38,7 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   media: FooterMedia[]
   links: FooterLinkList[]
   mainLinks: FooterLink[]
-  Link: LinkComponent
+  Link?: LinkComponent
   logoHref?: string
   logoTarget?: string
   breakpoint?: BreakpointId
