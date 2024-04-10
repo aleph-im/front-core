@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components'
 import { StyledLogoProps } from './types'
+import tw from 'twin.macro'
+import TextGradient from '../TextGradient'
+import { addClasses } from '../../../utils'
+import { getTypoCss } from '../../../styles/utils'
 
 export const StyledLogoContainer = styled.span<StyledLogoProps>`
   ${({ theme, size, text }) => {
@@ -12,23 +16,50 @@ export const StyledLogoContainer = styled.span<StyledLogoProps>`
       : `1em`
 
     return css`
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      background-color: transparent;
+      ${tw`inline-flex items-center justify-center flex-wrap`}
+
       font-size: ${logoSize};
       gap: ${logo.gap};
 
-      & > span {
-        font-size: 1em;
-        line-height: normal;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-
-      & > svg {
+      ${StyledContainer2} > svg {
         font-size: ${text ? '0.8em' : '1em'};
       }
     `
   }}
+`
+
+export const StyledContainer2 = styled.span`
+  ${({ theme }) => {
+    const { logo } = theme.component
+
+    return css`
+      ${tw`inline-flex items-center justify-center bg-transparent`}
+      gap: ${logo.gap};
+    `
+  }}
+`
+
+export const StyledText = styled(TextGradient)`
+  && {
+    ${getTypoCss('logo')};
+    ${tw`my-0`}
+    font-size: 1em;
+    line-height: normal;
+  }
+`
+
+export type StyledByAlephProps = {
+  $color: string
+}
+
+export const StyledByAleph = styled.span.attrs(
+  addClasses('tp-body2'),
+)<StyledByAlephProps>`
+  && {
+    ${tw`inline-flex items-center self-end whitespace-nowrap`}
+    color: ${({ $color }) => $color};
+    font-size: 0.25em;
+    margin-bottom: 0.55em;
+    gap: 0.25em;
+  }
 `

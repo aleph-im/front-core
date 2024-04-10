@@ -1,15 +1,21 @@
 import React, { memo, useMemo } from 'react'
-import { useTheme } from 'styled-components'
-import { StyledLogoContainer } from './styles'
+import { ThemeProvider, useTheme } from 'styled-components'
+import {
+  StyledByAleph,
+  StyledContainer2,
+  StyledLogoContainer,
+  StyledText,
+} from './styles'
 import { LogoProps } from './types'
-import TextGradient from '../TextGradient'
 import logos from './img'
+import { themes } from '../../../themes'
 
 export const Logo = ({
   img,
   text = false,
   color = 'text',
   bgColor = 'main1',
+  byAleph = true,
   size,
   ...rest
 }: LogoProps) => {
@@ -25,11 +31,22 @@ export const Logo = ({
 
   return (
     <StyledLogoContainer {...{ size, text, ...rest }}>
-      <LogoSvg color={logoColor} bgColor={logoBgColor} />
-      {text && (
-        <TextGradient type="logo" color={color}>
-          {text}
-        </TextGradient>
+      <StyledContainer2>
+        <LogoSvg color={logoColor} bgColor={logoBgColor} />
+        {text && (
+          <StyledText type="logo" color={color}>
+            {text}
+          </StyledText>
+        )}
+      </StyledContainer2>
+      {byAleph && logo.by && (
+        <a href="https://aleph.im" target="_blank" rel="noreferrer">
+          <ThemeProvider theme={themes.aleph}>
+            <StyledByAleph $color={logo.by.color}>
+              by <Logo text color={logo.by.color} size="1.5em" />
+            </StyledByAleph>
+          </ThemeProvider>
+        </a>
       )}
     </StyledLogoContainer>
   )

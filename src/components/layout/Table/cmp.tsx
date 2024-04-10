@@ -12,7 +12,6 @@ import {
   TableHeaderCellProps,
   TableRowProps,
   TableProps,
-  TableSortedColumn,
   TableDefaultSortFn,
 } from './types'
 import tw from 'twin.macro'

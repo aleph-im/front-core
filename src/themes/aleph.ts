@@ -227,6 +227,8 @@ const typo: ThemeTypo = {
     style: 'italic',
     weight: 600,
     size: pxToRem(34),
+    spacing: 'normal',
+    transform: 'none',
   },
   nav: {
     ...defaultFontTypo,

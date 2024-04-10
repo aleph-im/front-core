@@ -4,6 +4,7 @@ export type LogoProps = {
   color?: string
   text?: boolean | string
   bgColor?: string
+  byAleph?: boolean
 }
 
 export type StyledLogoProps = {

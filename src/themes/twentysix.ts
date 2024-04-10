@@ -893,7 +893,10 @@ const label: ThemeLabel = {
 const logo: ThemeLogo = {
   img: 'twentysix',
   text: 'twentysix',
-  gap: '0',
+  gap: '0.15em',
+  by: {
+    color: color.purple4,
+  },
 }
 
 const notification: ThemeNotification = {

@@ -382,6 +382,9 @@ export type ThemeLogo = {
   img: string
   text: string
   gap?: string
+  by?: {
+    color: string
+  }
 }
 
 export type ThemeNotification = {
