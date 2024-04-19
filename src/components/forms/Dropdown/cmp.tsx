@@ -26,6 +26,7 @@ import FormLabel from '../FormLabel'
 import FormError from '../FormError'
 import { useWindowScroll } from '../../../hooks/useWindowScroll'
 import { useTheme } from 'styled-components'
+import { Portal } from '../../layout/Portal'
 
 export const Dropdown = forwardRef(
   (
@@ -145,9 +146,11 @@ export const Dropdown = forwardRef(
             {selectedText}
             <StyledDropdownIcon />
             {shouldMount && (
-              <StyledDropdownOptionMenu isOpen={optionsIsOpen} size={size}>
-                {children}
-              </StyledDropdownOptionMenu>
+              <Portal>
+                <StyledDropdownOptionMenu isOpen={optionsIsOpen} size={size}>
+                  {children}
+                </StyledDropdownOptionMenu>
+              </Portal>
             )}
           </StyledDropdown>
           {error && <FormError error={error} />}
