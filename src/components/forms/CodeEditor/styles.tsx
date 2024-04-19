@@ -46,7 +46,7 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
 
     &::placeholder {
       mix-blend-mode: normal;
-      color: ${$theme?.color.text};
+      color: ${$theme?.color.white};
       opacity: 0.4;
     }
 
@@ -68,7 +68,7 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
 
       & .view-overlays .current-line {
         display: none;
-        border: 0.0625rem solid ${$theme?.color.text}1A;
+        border: 0.0625rem solid ${$theme?.color.white}1A;
       }
 
       & .margin {
@@ -87,7 +87,7 @@ export const StyledMonacoEditor = styled(Editor).attrs<CodeEditorProps>(
 
     &&._focus,
     &&:focus {
-      border-color: ${$theme?.color.text};
+      border-color: ${$theme?.color.white};
       & .monaco-editor .view-overlays .current-line {
         display: block;
       }

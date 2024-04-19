@@ -1,54 +1,51 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { useNotification } from '../components/common/Notification/context'
 
-export type CopiedValue = string | null
-export type CopyFn = (text: string) => Promise<boolean> // Return success
-export type CopyAndNotifyFn = (text: string) => Promise<void>
+export type UseCopyToClipboardProps = string
 
-export function useCopyToClipboard(): [CopiedValue, CopyFn] {
-  const [copiedText, setCopiedText] = useState<CopiedValue>(null)
+export type UseCopyToClipboardReturn = () => Promise<boolean>
 
-  const copy: CopyFn = async (text) => {
-    if (!navigator?.clipboard) {
-      console.warn('Clipboard not supported')
-      return false
-    }
-
-    // Try to save to clipboard then save it in the state if worked
+export function useCopyToClipboard(
+  text: UseCopyToClipboardProps,
+): UseCopyToClipboardReturn {
+  const handleCopyText = useCallback(async () => {
     try {
+      if (!navigator?.clipboard) throw new Error('Clipboard not supported')
       await navigator.clipboard.writeText(text)
-      setCopiedText(text)
       return true
     } catch (error) {
       console.warn('Copy failed', error)
-      setCopiedText(null)
       return false
     }
-  }
+  }, [text])
 
-  return [copiedText, copy]
+  return handleCopyText
 }
 
-export function useCopyToClipboardAndNotify(): [CopiedValue, CopyAndNotifyFn] {
-  const [copiedText, copyToClipboard] = useCopyToClipboard()
+export type UseCopyToClipboardAndNotifyProps = string
+
+export type UseCopyToClipboardAndNotifyReturn = () => Promise<boolean>
+
+export function useCopyToClipboardAndNotify(
+  text: UseCopyToClipboardAndNotifyProps,
+): UseCopyToClipboardAndNotifyReturn {
   const noti = useNotification()
+  const copy = useCopyToClipboard(text)
 
-  const copyAndNotify = useCallback(
-    async (text: string) => {
-      const success = await copyToClipboard(text)
+  const handleCopyText = useCallback(async () => {
+    const result = await copy()
+    if (!result) return result
 
-      if (!success) return
-      if (!noti) return
+    if (!noti) return result
+    noti.add({
+      variant: 'success',
+      title: 'Copied to clipboard',
+    })
 
-      noti.add({
-        variant: 'success',
-        title: 'Copied to clipboard',
-      })
-    },
-    [copyToClipboard, noti],
-  )
+    return result
+  }, [copy, noti])
 
-  return [copiedText, copyAndNotify]
+  return handleCopyText
 }
 
 export default useCopyToClipboard

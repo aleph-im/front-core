@@ -1,9 +1,10 @@
 import React, { ForwardedRef, forwardRef, memo, useMemo } from 'react'
 import FormError from '../FormError'
 import { StyledInputWrapper } from '../styles.forms'
-import { StyledTextAreaField } from './styles'
+import { StyledContainer, StyledIcon, StyledTextAreaField } from './styles'
 import { TextAreaProps } from './types'
 import FormLabel from '../FormLabel'
+import { useCopyToClipboardAndNotify } from '../../../hooks/useCopyToClipboard'
 
 export const TextArea = forwardRef(
   (
@@ -25,20 +26,27 @@ export const TextArea = forwardRef(
       return [focus ? '_focus' : ''].join(' ') + (className || '')
     }, [focus, className])
 
+    const handleCopy = useCopyToClipboardAndNotify(rest.value + '')
+
     return (
       <StyledInputWrapper>
         {label && <FormLabel {...{ label, error, required }} />}
-        <StyledTextAreaField
-          {...{
-            ref,
-            placeholder,
-            className: classes,
-            $variant: variant,
-            error,
-            required,
-            ...rest,
-          }}
-        />
+        <StyledContainer>
+          {variant === 'code' && rest.value && (
+            <StyledIcon onClick={handleCopy} />
+          )}
+          <StyledTextAreaField
+            {...{
+              ref,
+              placeholder,
+              className: classes,
+              $variant: variant,
+              error,
+              required,
+              ...rest,
+            }}
+          />
+        </StyledContainer>
         {error && <FormError error={error} />}
       </StyledInputWrapper>
     )
