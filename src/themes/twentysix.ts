@@ -34,6 +34,7 @@ import {
   ThemeButtonSchema,
   ThemeWalletPicker,
   ThemeFooter,
+  ThemeModal,
 } from './types'
 import { getGlassEffectCss } from '../styles'
 
@@ -906,6 +907,14 @@ const notification: ThemeNotification = {
   },
 }
 
+const modal: ThemeModal = {
+  color: color.text,
+  background: color.base1,
+  overlay: {
+    background: color.main0 + '1A',
+  },
+}
+
 const tab: ThemeTab = {
   color: {
     default: color.text,
@@ -1100,6 +1109,7 @@ const component: ThemeComponent = {
   label,
   logo,
   notification,
+  modal,
   tab,
   tag,
   routerLink,

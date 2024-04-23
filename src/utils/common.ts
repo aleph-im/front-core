@@ -26,3 +26,12 @@ export const formatCurrency = (value?: number) => {
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+
+export function debounce(cb: () => void, delay: number): () => void {
+  let id: NodeJS.Timeout
+
+  return () => {
+    clearTimeout(id)
+    id = setTimeout(cb, delay)
+  }
+}

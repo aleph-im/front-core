@@ -395,6 +395,14 @@ export type ThemeNotification = {
   }
 }
 
+export type ThemeModal = {
+  color: string
+  background: string
+  overlay: {
+    background: string
+  }
+}
+
 export type ThemeTab = {
   color: {
     default: string
@@ -558,6 +566,7 @@ export type ThemeComponent = {
   label: ThemeLabel
   logo: ThemeLogo
   notification: ThemeNotification
+  modal: ThemeModal
   tab: ThemeTab
   tag: ThemeTag
   routerLink: ThemeRouterLink
