@@ -16,7 +16,7 @@ export const StyledOverlay = styled.div<StyledOverlayProps>`
     const $clip = $isOpen ? 100 : 0
 
     return css`
-      ${tw`fixed inset-0 flex items-center justify-center overflow-hidden w-full h-full z-20`}
+      ${tw`fixed inset-0 p-6 flex items-center justify-center overflow-hidden w-full h-full z-20`}
       background: ${background};
       backdrop-filter: blur(32px);
       opacity: ${$isOpen ? 1 : 0.5};
