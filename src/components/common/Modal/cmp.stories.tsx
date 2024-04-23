@@ -16,7 +16,6 @@ export default {
 export type Args = Partial<ModalProps> & Partial<OpenModalInfo>
 
 const defaultArgs: Args = {
-  max: 5,
   title: 'Title',
   text: 'Content',
 }
