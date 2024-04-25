@@ -36,14 +36,14 @@ export function useHover<E extends HTMLElement>({
       setIsHover(false)
     }
 
-    current.addEventListener('mouseover', handleEnter)
-    current.addEventListener('mouseout', handleLeave)
+    current.addEventListener('mouseenter', handleEnter)
+    current.addEventListener('mouseleave', handleLeave)
 
     return () => {
       if (!current) return
 
-      current.removeEventListener('mouseover', handleEnter)
-      current.removeEventListener('mouseout', handleLeave)
+      current.removeEventListener('mouseenter', handleEnter)
+      current.removeEventListener('mouseleave', handleLeave)
     }
   }, [propagate, ref, ...deps])
 

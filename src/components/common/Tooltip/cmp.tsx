@@ -47,13 +47,17 @@ export const Tooltip = ({
     offset,
     atRef: targetRef,
     myRef: tooltipRef,
-    deps: [shouldMount],
+    deps: [stage],
   })
 
-  const { isHover: isHoverTarget } = useHover({ ref: targetRef })
+  const { isHover: isHoverTarget } = useHover({
+    ref: targetRef,
+    deps: [children],
+  })
+
   const { isHover: isHoverTooltip } = useHover({
     ref: tooltipRef,
-    deps: [stage],
+    deps: [shouldMount],
   })
 
   const timerRef = useRef<NodeJS.Timeout>()
@@ -68,7 +72,6 @@ export const Tooltip = ({
   }, [onCloseClick, onClose])
 
   useEffect(() => {
-    if (timerRef.current) clearTimeout(timerRef.current)
     const isHovered = isHoverTarget || isHoverTooltip
 
     if (isHovered) {
@@ -81,14 +84,18 @@ export const Tooltip = ({
       setOpenState(false)
       onClose && onClose()
     }, closeDelay)
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
   }, [isHoverTarget, isHoverTooltip, closeDelay, onOpen, onClose])
 
   const isMobile = useResponsiveMax('md')
 
   return (
     <>
-      {shouldMount && (
-        <Portal>
+      <Portal>
+        {shouldMount && (
           <StyledContainer
             {...{
               ref: tooltipRef,
@@ -104,8 +111,8 @@ export const Tooltip = ({
             )}
             <StyledContentContainer>{content}</StyledContentContainer>
           </StyledContainer>
-        </Portal>
-      )}
+        )}
+      </Portal>
       {children && (
         <span style={{ display: 'inline-block' }} ref={targetRef}>
           {children}

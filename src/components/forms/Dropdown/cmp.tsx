@@ -145,13 +145,13 @@ export const Dropdown = forwardRef(
           >
             {selectedText}
             <StyledDropdownIcon />
-            {shouldMount && (
-              <Portal>
+            <Portal>
+              {shouldMount && (
                 <StyledDropdownOptionMenu isOpen={optionsIsOpen} size={size}>
                   {children}
                 </StyledDropdownOptionMenu>
-              </Portal>
-            )}
+              )}
+            </Portal>
           </StyledDropdown>
           {error && <FormError error={error} />}
         </StyledInputWrapper>

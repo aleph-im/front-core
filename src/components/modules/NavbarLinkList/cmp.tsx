@@ -103,8 +103,8 @@ export const NavbarLinkList = ({
           <Icon name="bars" />
         </StyledButton>
       )}
-      {shouldMount && (
-        <Portal>
+      <Portal>
+        {shouldMount && (
           <StyledRestContainer
             ref={restContainerRef}
             $isOpen={restIsOpen}
@@ -112,8 +112,8 @@ export const NavbarLinkList = ({
           >
             {restItems}
           </StyledRestContainer>
-        </Portal>
-      )}
+        )}
+      </Portal>
     </StyledContainer>
   )
 }
