@@ -1,9 +1,12 @@
 import { HTMLAttributes, ReactNode } from 'react'
 
-export type ModalCardVariant = 'success' | 'warning' | 'error'
+export type NotificationCardVariant = 'success' | 'warning' | 'error'
 
-export type ModalCardProps = Omit<HTMLAttributes<HTMLDivElement>, 'content'> & {
-  variant: ModalCardVariant
+export type NotificationCardProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'content'
+> & {
+  variant: NotificationCardVariant
   title?: string
   text?: string
   detail?: string
