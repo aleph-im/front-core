@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { RefObject, useEffect, useRef } from 'react'
 
 export function useClickOutside(
   callback: () => void,
   _refs?: RefObject<HTMLElement>[],
+  deps: any[] = [],
 ): RefObject<HTMLElement>[] {
   const defaultRefs = [useRef<HTMLElement>(null)]
   const refs = _refs || defaultRefs
@@ -15,6 +17,7 @@ export function useClickOutside(
         )
       )
         return
+
       callback()
     }
 
@@ -23,7 +26,7 @@ export function useClickOutside(
     return () => {
       document.removeEventListener('mousedown', handleClick)
     }
-  })
+  }, [callback, refs, ...deps])
 
   return refs
 }

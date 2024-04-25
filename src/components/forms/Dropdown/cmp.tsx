@@ -6,6 +6,8 @@ import React, {
   useCallback,
   useMemo,
   memo,
+  MouseEvent,
+  useRef,
 } from 'react'
 import {
   useBounds,
@@ -27,6 +29,7 @@ import FormError from '../FormError'
 import { useWindowScroll } from '../../../hooks/useWindowScroll'
 import { useTheme } from 'styled-components'
 import { Portal } from '../../layout/Portal'
+import { DropdownOption } from '../DropdownOption'
 
 export const Dropdown = forwardRef(
   (
@@ -44,7 +47,8 @@ export const Dropdown = forwardRef(
     }: DropdownProps,
     fRef: ForwardedRef<HTMLDivElement>,
   ) => {
-    const ref = useForwardRef(fRef)
+    const inputRef = useForwardRef(fRef)
+    const menuRef = useRef<HTMLDivElement>(null)
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -79,13 +83,11 @@ export const Dropdown = forwardRef(
       setIsOpen(false)
     }, [setIsOpen])
 
-    useClickOutside(close, [ref])
-
-    const windowSize = useWindowSize(0)
-    const windowScroll = useWindowScroll(0)
+    const windowSize = useWindowSize(100, true, true)
+    const windowScroll = useWindowScroll(100, true)
 
     const { bounds: size } = useBounds<HTMLDivElement>({
-      ref,
+      ref: inputRef,
       deps: [windowSize, windowScroll],
     })
 
@@ -123,8 +125,19 @@ export const Dropdown = forwardRef(
           valueSet.delete(v)
           onChange(valueSet)
         },
+        onClear() {
+          onChange(new Set([]))
+        },
       }
     }, [valueSet, onChange, multiple])
+
+    const handleClear = useCallback(
+      (e: MouseEvent<HTMLLIElement>) => {
+        e.stopPropagation()
+        contextValue.onClear()
+      },
+      [contextValue],
+    )
 
     const theme = useTheme()
 
@@ -135,19 +148,32 @@ export const Dropdown = forwardRef(
 
     const optionsIsOpen = stage === 'enter'
 
+    useClickOutside(close, [inputRef, menuRef], [shouldMount])
+
     return (
       <DropdownContext.Provider value={contextValue}>
         <StyledInputWrapper>
           {label && <FormLabel {...{ label, error, required }} />}
           <StyledDropdown
             tabIndex={-1}
-            {...{ ref, onClick, isOpen, error, disabled, ...rest }}
+            {...{ ref: inputRef, onClick, isOpen, error, disabled, ...rest }}
           >
             {selectedText}
             <StyledDropdownIcon />
             <Portal>
               {shouldMount && (
-                <StyledDropdownOptionMenu isOpen={optionsIsOpen} size={size}>
+                <StyledDropdownOptionMenu
+                  {...{
+                    ref: menuRef,
+                  }}
+                  isOpen={optionsIsOpen}
+                  size={size}
+                >
+                  {!multiple && (
+                    <DropdownOption value="" onClick={handleClear}>
+                      {placeholder}
+                    </DropdownOption>
+                  )}
                   {children}
                 </StyledDropdownOptionMenu>
               )}

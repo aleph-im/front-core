@@ -1,5 +1,11 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import { useHover, useResponsiveMax, useTransition } from '../../../hooks'
+import {
+  useHover,
+  useResponsiveMax,
+  useTransition,
+  useWindowScroll,
+  useWindowSize,
+} from '../../../hooks'
 import {
   StyledContentContainer,
   StyledContainer,
@@ -40,6 +46,9 @@ export const Tooltip = ({
     theme.transition.duration.fast,
   )
 
+  const windowSize = useWindowSize(100, true, true)
+  const windowScroll = useWindowScroll(100, true)
+
   const { position } = useFloatPosition({
     my,
     at,
@@ -47,7 +56,7 @@ export const Tooltip = ({
     offset,
     atRef: targetRef,
     myRef: tooltipRef,
-    deps: [stage],
+    deps: [stage, windowSize, windowScroll],
   })
 
   const { isHover: isHoverTarget } = useHover({

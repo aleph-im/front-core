@@ -22,9 +22,8 @@ const defaultParams = {
 // ---
 
 const StyledContainer = styled.div`
-  position: absolute;
-  top: 200px;
-  left: 200px;
+  position: relative;
+  padding: 10rem;
 `
 
 const StyledBox = styled.div`
@@ -86,5 +85,26 @@ Hover.args = {
   ...defaultArgs,
 }
 Hover.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+const ScrollTemplate: StoryFn<typeof Tooltip> = (args) => {
+  return (
+    <div tw="overflow-auto h-80 bg-black px-6 py-20">
+      <p tw="my-6">Scrollable container...</p>
+      <Template {...args} />
+    </div>
+  )
+}
+
+// ---
+
+export const Scroll = ScrollTemplate.bind({})
+Scroll.args = {
+  ...defaultArgs,
+}
+Scroll.parameters = {
   ...defaultParams,
 }

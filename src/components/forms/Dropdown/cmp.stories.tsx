@@ -99,11 +99,33 @@ Multiselect.parameters = {
 }
 
 // ---
+
 export const Disabled = Template.bind({})
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
 }
 Disabled.parameters = {
+  ...defaultParams,
+}
+
+// -------------------
+
+const ScrollTemplate: StoryFn<typeof Dropdown> = (args) => {
+  return (
+    <div tw="overflow-auto h-80 bg-black px-6 py-20">
+      <p tw="my-6">Scrollable container...</p>
+      <Template {...args} />
+    </div>
+  )
+}
+
+// ---
+
+export const Scroll = ScrollTemplate.bind({})
+Scroll.args = {
+  ...defaultArgs,
+}
+Scroll.parameters = {
   ...defaultParams,
 }
