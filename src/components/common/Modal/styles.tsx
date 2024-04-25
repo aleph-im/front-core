@@ -13,14 +13,12 @@ export const StyledOverlay = styled.div<StyledOverlayProps>`
   ${({ theme, $stage }) => {
     const $isOpen = $stage === 'enter'
     const { background } = theme.component.modal.overlay
-    const $clip = $isOpen ? 100 : 0
 
     return css`
       ${tw`fixed inset-0 p-6 flex items-center justify-center overflow-hidden w-full h-full z-20`}
       background: ${background};
       backdrop-filter: blur(32px);
-      opacity: ${$isOpen ? 1 : 0.5};
-      clip-path: circle(${$clip}%);
+      opacity: ${$isOpen ? 1 : 0};
 
       visibility: ${$isOpen ? 'inherit' : 'hidden'};
       transition-property: clip-path, opacity, visibility;
