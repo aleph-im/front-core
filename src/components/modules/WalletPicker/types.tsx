@@ -54,7 +54,7 @@ export type WalletPickerLoggedInProps = {
   balance?: number
   rewards?: {
     amount: number
-    days: number
+    days?: number
   }
   selectedNetwork?: Network
   onSwitchNetwork: (network: Network) => void
