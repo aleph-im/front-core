@@ -22,7 +22,7 @@ export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
   balance?: number
   rewards?: {
     amount: number
-    days: number
+    days?: number
   }
   selectedNetwork?: Network
   onConnect: (wallet: WalletProps, network: Network) => void
