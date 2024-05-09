@@ -9,7 +9,7 @@ export const StyledScoreIcon = styled(ColorDot).attrs<StyledScoreIconProps>(
       $score >= 0.8
         ? theme.color.success
         : $score >= 0.5
-        ? theme.color.info
+        ? theme.color.warning
         : theme.color.error
 
     return {
