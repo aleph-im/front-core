@@ -4,7 +4,7 @@ import { ImageComponent } from '../../../types'
 
 export type NodeAvatarProps = Pick<HTMLAttributes<HTMLElement>, 'style'> & {
   apiServer?: string
-  Image?: ImageComponent
+  ImageCmp?: ImageComponent
   picture?: string
   src?: string
   size?: 'md' | 'lg'
@@ -14,7 +14,7 @@ export const NodeAvatar = ({
   picture,
   src: srcProp,
   size = 'md',
-  Image = (props) => <img {...props} />,
+  ImageCmp = (props) => <img {...props} />,
   apiServer,
   style,
   ...rest
@@ -43,7 +43,7 @@ export const NodeAvatar = ({
   return (
     <>
       {src ? (
-        <Image
+        <ImageCmp
           {...{
             src,
             alt: 'Node profile image',
