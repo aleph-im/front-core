@@ -31,7 +31,7 @@ export const StyledRestContainer = styled.ul<StyledRestContainerProps>`
     const { mobile } = theme.component.navbar
 
     return css`
-      ${tw`flex flex-col fixed left-0 top-0 p-6 m-0`}
+      ${tw`flex flex-col fixed left-0 top-0 p-6 m-0 z-20`}
       background-color: ${mobile.header.background};
       backdrop-filter: blur(50px);
       min-width: 14rem;
