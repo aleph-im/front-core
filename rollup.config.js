@@ -3,8 +3,12 @@ import process from 'process'
 import * as url from 'url'
 import { readFileSync } from 'node:fs'
 
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import { babel } from '@rollup/plugin-babel'
+import terser from '@rollup/plugin-terser'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import dts from 'rollup-plugin-dts'
-import esbuild from 'rollup-plugin-esbuild'
 
 const __dirname = url.fileURLToPath(new url.URL('.', import.meta.url))
 
@@ -17,12 +21,26 @@ const packageJson = JSON.parse(readFileSync(packagePath))
 const bundle = (config) => ({
   ...config,
   input: 'src/index.ts',
-  external: (id) => !/^[./]/.test(id),
+  external: (id) => !/^[./]/.test(id) && id !== 'src/index.ts',
 })
 
 export default [
   bundle({
-    plugins: [esbuild({ tsconfig, minify: true })],
+    plugins: [
+      peerDepsExternal(),
+      resolve({
+        extensions: ['.ts', '.tsx'],
+        preferBuiltins: true,
+      }),
+      commonjs(),
+      babel({
+        babelHelpers: 'bundled',
+        extensions: ['.ts', '.tsx'],
+        include: ['src/**/*'],
+        exclude: 'node_modules/**',
+      }),
+      terser(),
+    ],
     output: [
       {
         file: packageJson.main,
