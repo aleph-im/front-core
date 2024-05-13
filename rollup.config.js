@@ -26,6 +26,13 @@ const bundle = (config) => ({
 
 export default [
   bundle({
+    plugins: [dts({ tsconfig })],
+    output: {
+      file: packageJson.types,
+      format: 'esm',
+    },
+  }),
+  bundle({
     plugins: [
       peerDepsExternal(),
       resolve({
@@ -53,13 +60,6 @@ export default [
         sourcemap: true,
       },
     ],
-  }),
-  bundle({
-    plugins: [dts({ tsconfig })],
-    output: {
-      file: packageJson.types,
-      format: 'esm',
-    },
   }),
   {
     input: './tailwind.config.js',
