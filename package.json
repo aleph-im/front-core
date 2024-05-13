@@ -33,12 +33,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
     "react-infinite-scroll-hook": "^4.1.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
     "transition-hook": "^1.5.2"
   },
   "devDependencies": {
@@ -51,6 +46,10 @@
     "@fortawesome/pro-regular-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@fortawesome/sharp-solid-svg-icons": "^6.3.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-actions": "^7.0.7",
     "@storybook/addon-essentials": "^7.0.7",
     "@storybook/addon-interactions": "^7.0.7",
@@ -83,6 +82,7 @@
     "react-is": "^18.2.0",
     "rollup": "^3.29.4",
     "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "storybook": "^7.0.7",
     "storybook-dark-mode": "^3.0.0",
     "styled-components": "^5.3.10",
