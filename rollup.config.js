@@ -21,7 +21,7 @@ const packageJson = JSON.parse(readFileSync(packagePath))
 const bundle = (config) => ({
   ...config,
   input: 'src/index.ts',
-  external: (id) => !/^[./]/.test(id) && id !== 'src/index.ts',
+  // external: (id) => !/^[./]/.test(id) && id !== 'src/index.ts',
 })
 
 export default [
