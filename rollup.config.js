@@ -21,28 +21,23 @@ const packageJson = JSON.parse(readFileSync(packagePath))
 const bundle = (config) => ({
   ...config,
   input: 'src/index.ts',
-  // external: (id) => !/^[./]/.test(id) && id !== 'src/index.ts',
+  external: (id) => !/^[./]/.test(id) && id !== 'src/index.ts',
 })
 
+const extensions = ['.ts', '.tsx']
+
 export default [
-  bundle({
-    plugins: [dts({ tsconfig })],
-    output: {
-      file: packageJson.types,
-      format: 'esm',
-    },
-  }),
   bundle({
     plugins: [
       peerDepsExternal(),
       resolve({
-        extensions: ['.ts', '.tsx'],
+        extensions,
         preferBuiltins: true,
       }),
       commonjs(),
       babel({
+        extensions,
         babelHelpers: 'bundled',
-        extensions: ['.ts', '.tsx'],
         include: ['src/**/*'],
         exclude: 'node_modules/**',
       }),
@@ -60,6 +55,13 @@ export default [
         sourcemap: true,
       },
     ],
+  }),
+  bundle({
+    plugins: [dts({ tsconfig })],
+    output: {
+      file: packageJson.types,
+      format: 'esm',
+    },
   }),
   {
     input: './tailwind.config.js',

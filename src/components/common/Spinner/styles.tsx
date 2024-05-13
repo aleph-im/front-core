@@ -1,8 +1,13 @@
 import styled, { css } from 'styled-components'
-import Lottie from 'lottie-react'
 import { StyledLottieProps } from './types'
+import LottieImport from 'lottie-react'
 
-export const StyledLottie = styled(Lottie)<StyledLottieProps>`
+// @note: Quickfix for nextjs
+const Lottie = (LottieImport as any)?.default || LottieImport
+
+export const StyledLottie = styled(
+  (Lottie as any)?.default || Lottie,
+)<StyledLottieProps>`
   ${({ $size }) => {
     const SpinnerSize = $size
       ? !Number.isNaN(Number($size))
