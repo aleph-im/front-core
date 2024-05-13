@@ -43,4 +43,8 @@ export default [
       format: 'esm',
     },
   }),
+  {
+    input: './tailwind.config.js',
+    output: [{ file: 'dist/tailwind.config.js', format: 'cjs' }],
+  },
 ]
