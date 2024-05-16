@@ -27,8 +27,8 @@ export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
     days?: number
   }
   selectedNetwork?: Network
-  onConnect: (wallet: Wallet, network: Network) => void
   onSwitchNetwork: (network: Network) => void
+  onConnect: (wallet: Wallet, network: Network) => void
   onDisconnect: () => void
 }
 
@@ -46,6 +46,8 @@ export type NetworksProps = {
 
 export type WalletPickerLoggedOutProps = {
   networks: Network[]
+  selectedNetwork?: Network
+  onSwitchNetwork: (network: Network) => void
   onConnect: (wallet: Wallet, network: Network) => void
 }
 

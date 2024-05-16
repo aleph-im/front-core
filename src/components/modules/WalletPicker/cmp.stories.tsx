@@ -85,6 +85,7 @@ const defaultArgs: Partial<WalletPickerProps> = {
     days: 2,
   },
   networks,
+  selectedNetwork: networks[0],
 }
 
 const defaultParams = {

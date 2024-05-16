@@ -4,13 +4,11 @@ import React, {
   memo,
   useCallback,
   useMemo,
-  useState,
 } from 'react'
 import tw from 'twin.macro'
 import { Col, Row } from '../../layout/Grid'
 import { BorderedDiv, StyledPicker, StyledTitle } from './styles'
 import {
-  Network,
   Wallet,
   NetworkProps,
   NetworksProps,
@@ -103,12 +101,12 @@ WalletPickerNetworks.displayName = 'WalletPickerNetworks'
 
 const WalletPickerLoggedOut = ({
   networks,
+  selectedNetwork,
+  onSwitchNetwork: onSelectNetwork,
   onConnect,
 }: WalletPickerLoggedOutProps) => {
   const theme = useTheme()
   const { button2 } = theme.component.walletPicker
-
-  const [selectedNetwork, onSelectNetwork] = useState<Network>()
 
   return (
     <div>
@@ -281,6 +279,8 @@ export const WalletPicker = forwardRef(
             {...{
               networks,
               onConnect,
+              selectedNetwork,
+              onSwitchNetwork,
             }}
           />
         )}
