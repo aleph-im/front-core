@@ -2,16 +2,18 @@ import { IconName } from '../../common/Icon'
 import { WalletIconName } from './icons'
 import { HTMLAttributes } from 'react'
 
-export type WalletProps = {
+export type Wallet = {
+  id: string
   name: string
   icon: WalletIconName
   color?: string
 }
 
 export type Network = {
+  id: string
   name: string
   icon: IconName
-  wallets: WalletProps[]
+  wallets: Wallet[]
 }
 
 export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
@@ -25,7 +27,7 @@ export type WalletPickerProps = HTMLAttributes<HTMLDivElement> & {
     days?: number
   }
   selectedNetwork?: Network
-  onConnect: (wallet: WalletProps, network: Network) => void
+  onConnect: (wallet: Wallet, network: Network) => void
   onSwitchNetwork: (network: Network) => void
   onDisconnect: () => void
 }
@@ -44,7 +46,7 @@ export type NetworksProps = {
 
 export type WalletPickerLoggedOutProps = {
   networks: Network[]
-  onConnect: (wallet: WalletProps, network: Network) => void
+  onConnect: (wallet: Wallet, network: Network) => void
 }
 
 export type WalletPickerLoggedInProps = {

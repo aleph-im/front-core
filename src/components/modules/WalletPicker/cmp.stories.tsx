@@ -2,7 +2,7 @@ import React from 'react'
 import { StoryFn } from '@storybook/react'
 
 import WalletPicker from './cmp'
-import { WalletPickerProps, WalletProps } from './types'
+import { Network, Wallet, WalletPickerProps } from './types'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -13,67 +13,78 @@ export default {
   },
 }
 
-const metamaskForETH: WalletProps = {
-  name: 'Metamask',
-  icon: 'metamask',
-  color: 'orange',
-  provider: () => (window as any)?.ethereum,
-}
+const wallets: Wallet[] = [
+  {
+    id: 'metamask',
+    name: 'Metamask',
+    icon: 'metamask',
+    color: 'orange',
+  },
+  {
+    id: 'wallet-connect',
+    name: 'Wallet Connect',
+    icon: 'walletConnect',
+    color: 'main0',
+  },
+]
 
-const walletConnectForETH: WalletProps = {
-  name: 'Wallet Connect',
-  icon: 'walletConnect',
-  color: 'main0',
-  provider: () => (window as any)?.ethereum,
-}
+const networks: Network[] = [
+  {
+    id: 'ethereum',
+    name: 'Ethereum',
+    icon: 'ethereum',
+    wallets,
+  },
+  {
+    id: 'avalanche',
+    name: 'Avalanche',
+    icon: 'avalanche',
+    wallets: [],
+  },
+  {
+    id: 'solana',
+    name: 'Solana',
+    icon: 'solana',
+    wallets: [],
+  },
+  {
+    id: 'binance',
+    name: 'Binance',
+    icon: 'binance',
+    wallets: [],
+  },
+  {
+    id: 'polygon',
+    name: 'Polygon',
+    icon: 'polygon',
+    wallets: [],
+  },
+  {
+    id: 'tezos',
+    name: 'Tezos',
+    icon: 'tezos',
+    wallets: [],
+  },
+  {
+    id: 'cosmos',
+    name: 'Cosmos',
+    icon: 'cosmos',
+    wallets: [],
+  },
+  {
+    id: 'polkadot',
+    name: 'Polkadot',
+    icon: 'polkadot',
+    wallets: [],
+  },
+]
 
 const defaultArgs: Partial<WalletPickerProps> = {
   rewards: {
     amount: 1_000_000,
     days: 2,
   },
-  networks: [
-    {
-      name: 'Ethereum',
-      icon: 'ethereum',
-      wallets: [metamaskForETH, walletConnectForETH],
-    },
-    {
-      name: 'Avalanche',
-      icon: 'avalanche',
-      wallets: [],
-    },
-    {
-      name: 'Solana',
-      icon: 'solana',
-      wallets: [],
-    },
-    {
-      name: 'Binance',
-      icon: 'binance',
-      wallets: [],
-    },
-    {
-      name: 'Polygon',
-      icon: 'polygon',
-      wallets: [],
-    },
-    {
-      name: 'Tezos',
-      icon: 'tezos',
-      wallets: [],
-    },
-    {
-      name: 'Cosmos',
-      icon: 'cosmos',
-      wallets: [],
-    },
-    {
-      name: 'Polkadot',
-      icon: 'polkadot',
-      wallets: [],
-    },
-  ],
+  networks,
 }
 
 const defaultParams = {

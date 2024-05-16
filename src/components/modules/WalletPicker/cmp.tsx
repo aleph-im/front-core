@@ -11,12 +11,12 @@ import { Col, Row } from '../../layout/Grid'
 import { BorderedDiv, StyledPicker, StyledTitle } from './styles'
 import {
   Network,
+  Wallet,
   NetworkProps,
   NetworksProps,
   WalletPickerLoggedInProps,
   WalletPickerLoggedOutProps,
   WalletPickerProps,
-  WalletProps,
 } from './types'
 import { Logo } from '../../common/Logo'
 import WalletIcon from './icons'
@@ -88,7 +88,7 @@ const WalletPickerNetworks = ({
           <WalletPickerNetworkMemo
             {...{
               network,
-              isSelected: selectedNetwork?.name === network.name,
+              isSelected: selectedNetwork?.id === network.id,
               onClick: onSelectNetwork,
             }}
           />
@@ -120,7 +120,7 @@ const WalletPickerLoggedOut = ({
         <BorderedDiv>
           <StyledTitle>2. Connect your wallet</StyledTitle>
           <Row count={1}>
-            {selectedNetwork?.wallets?.map((wallet: WalletProps) => (
+            {selectedNetwork?.wallets?.map((wallet: Wallet) => (
               <Col key={wallet.name}>
                 <div tw="block text-center">
                   <Button
