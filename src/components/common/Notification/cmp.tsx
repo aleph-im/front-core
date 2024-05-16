@@ -43,61 +43,76 @@ export const Notification = ({
   const timerIdRef = useRef<NodeJS.Timeout | undefined>()
   const lastCheckRef = useRef<number>(Number.MAX_SAFE_INTEGER)
 
+  const add = useCallback(
+    (info: AddNotificationInfo) => {
+      const timestamp = Date.now()
+      const id = info.id || `${timestamp}-${Math.ceil(Math.random() * 1000)}`
+
+      const timeout =
+        info.timeout === 0
+          ? Number.MAX_SAFE_INTEGER
+          : info.timeout || timeoutProp
+      const pending = timeout
+
+      const notification: NotificationInfo = {
+        ...info,
+        id,
+        timestamp,
+        timeout,
+        pending,
+      }
+
+      setNotifications((prev) => {
+        const length = Object.values(prev).length
+        if (length >= max) return prev
+        return { ...prev, [id]: notification }
+      })
+
+      return id
+    },
+    [max, timeoutProp],
+  )
+
+  const set = useCallback(
+    (id: string, info: SetNotificationInfo) => {
+      setNotifications((prev) => {
+        const notification: NotificationInfo = {
+          ...prev[id],
+          ...info,
+        }
+
+        notification.timeout =
+          notification.timeout === 0
+            ? Number.MAX_SAFE_INTEGER
+            : notification.timeout || timeoutProp
+        notification.pending = notification.pending || notification.timeout
+
+        return { ...prev, [id]: notification }
+      })
+
+      return true
+    },
+    [timeoutProp],
+  )
+
+  const del = useCallback((id: string) => {
+    setNotifications((prev) => {
+      const { [id]: _, ...rest } = prev
+      return rest
+    })
+
+    return true
+  }, [])
+
   const contextValue = useMemo(
     () => ({
       notifications,
       notificationList,
-      add(info: AddNotificationInfo) {
-        if (notificationList.length >= max) return
-
-        const timestamp = Date.now()
-        const id = info.id || `${timestamp}-${notificationList.length}`
-        const timeout =
-          info.timeout === 0
-            ? Number.MAX_SAFE_INTEGER
-            : info.timeout || timeoutProp
-        const pending = timeout
-
-        const notification: NotificationInfo = {
-          ...info,
-          id,
-          timestamp,
-          timeout,
-          pending,
-        }
-
-        setNotifications((prev) => ({ ...prev, [id]: notification }))
-
-        return id
-      },
-      set(id: string, info: SetNotificationInfo) {
-        setNotifications((prev) => {
-          const notification: NotificationInfo = {
-            ...prev[id],
-            ...info,
-          }
-
-          notification.timeout =
-            notification.timeout === 0
-              ? Number.MAX_SAFE_INTEGER
-              : notification.timeout || timeoutProp
-          notification.pending = notification.pending || notification.timeout
-
-          return { ...prev, [id]: notification }
-        })
-
-        return true
-      },
-      del(id: string) {
-        setNotifications((prev) => {
-          const { [id]: _, ...rest } = prev
-          return rest
-        })
-
-        return true
-      },
+      add,
+      set,
+      del,
     }),
-    [notifications, notificationList, max, timeoutProp],
+    [notifications, notificationList, add, set, del],
   )
 
   const stopTimer = useCallback(() => {
