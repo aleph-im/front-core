@@ -30,11 +30,12 @@ export const StyledTitle = styled.h6.attrs(addClasses('tp-nav'))`
   }}
 `
 
-export const BorderedDiv = styled.div`
+export const StyledLine = styled.div`
   ${({ theme }) => {
     const { border } = theme.component.walletPicker
 
     return css`
+      margin-top: 1.5rem;
       padding-top: 1.5rem;
       border-top: ${border.size}rem solid ${border.color};
     `

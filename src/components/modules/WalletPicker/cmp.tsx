@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import tw from 'twin.macro'
 import { Col, Row } from '../../layout/Grid'
-import { BorderedDiv, StyledPicker, StyledTitle } from './styles'
+import { StyledLine, StyledPicker, StyledTitle } from './styles'
 import {
   Wallet,
   NetworkProps,
@@ -80,7 +80,7 @@ const WalletPickerNetworks = ({
   onSelectNetwork,
 }: NetworksProps) => {
   return (
-    <Row count={4} gap="0.75rem" tw="mb-6">
+    <Row count={4} gap="0.75rem">
       {networks.map((network) => (
         <Col key={network.name}>
           <WalletPickerNetworkMemo
@@ -108,39 +108,48 @@ const WalletPickerLoggedOut = ({
   const theme = useTheme()
   const { button2 } = theme.component.walletPicker
 
+  const oneNetwork = useMemo(
+    () =>
+      networks.length < 2 && networks.some((n) => n.id === selectedNetwork?.id),
+    [networks, selectedNetwork],
+  )
+
   return (
     <div>
-      <StyledTitle>1. Choose your network</StyledTitle>
-      <WalletPickerNetworksMemo
-        {...{ networks, selectedNetwork, onSelectNetwork }}
-      />
+      {!oneNetwork && (
+        <>
+          <StyledTitle>1. Choose your network</StyledTitle>
+          <WalletPickerNetworksMemo
+            {...{ networks, selectedNetwork, onSelectNetwork }}
+          />
+        </>
+      )}
       <ToggleContainer open={!!selectedNetwork?.wallets}>
-        <BorderedDiv>
-          <StyledTitle>2. Connect your wallet</StyledTitle>
-          <Row count={1}>
-            {selectedNetwork?.wallets?.map((wallet: Wallet) => (
-              <Col key={wallet.name}>
-                <div tw="block text-center">
-                  <Button
-                    onClick={() => onConnect(wallet, selectedNetwork)}
-                    as="button"
-                    size="md"
-                    kind={button2.kind}
-                    variant={button2.variant}
-                    color={button2.color}
-                  >
-                    {wallet.name}
-                    <WalletIcon
-                      tw="ml-2.5"
-                      name={wallet.icon}
-                      color={button2.iconColor || wallet.color}
-                    />
-                  </Button>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        </BorderedDiv>
+        {!oneNetwork && <StyledLine />}
+        <StyledTitle>{!oneNetwork && '2. '}Connect your wallet</StyledTitle>
+        <Row count={1}>
+          {selectedNetwork?.wallets?.map((wallet: Wallet) => (
+            <Col key={wallet.name}>
+              <div tw="block text-center">
+                <Button
+                  onClick={() => onConnect(wallet, selectedNetwork)}
+                  as="button"
+                  size="md"
+                  kind={button2.kind}
+                  variant={button2.variant}
+                  color={button2.color}
+                >
+                  {wallet.name}
+                  <WalletIcon
+                    tw="ml-2.5"
+                    name={wallet.icon}
+                    color={button2.iconColor || wallet.color}
+                  />
+                </Button>
+              </div>
+            </Col>
+          ))}
+        </Row>
       </ToggleContainer>
     </div>
   )
@@ -173,8 +182,9 @@ const WalletPickerLoggedIn = ({
       <WalletPickerNetworksMemo
         {...{ networks, selectedNetwork, onSelectNetwork }}
       />
+      <StyledLine />
 
-      <BorderedDiv tw="mt-6 flex items-center gap-4 mb-6">
+      <div tw="flex items-center gap-4">
         <Logo img="aleph" color="text" size="3rem" />
         <div tw="leading-3">
           <div
@@ -187,28 +197,32 @@ const WalletPickerLoggedIn = ({
             ALEPH
           </span>
         </div>
-      </BorderedDiv>
+      </div>
 
       {rewards && (
-        <BorderedDiv tw="mt-6 flex items-start justify-between gap-4">
-          <span className="fs-10 tp-body3" tw="opacity-60 mt-1">
-            EST. REWARDS
-          </span>
-          <div tw="text-right">
-            <Price
-              value={rewards.amount}
-              className="fs-16 tp-body3"
-              humanReadable={false}
-              css={{ color: color.rewards }}
-            />
-            <div className="fs-12 tp-body1" tw="opacity-60">
-              Next distribution in {rewards.days} days
+        <>
+          <StyledLine />
+          <div tw="flex items-start justify-between gap-4">
+            <span className="fs-10 tp-body3" tw="opacity-60 mt-1">
+              EST. REWARDS
+            </span>
+            <div tw="text-right">
+              <Price
+                value={rewards.amount}
+                className="fs-16 tp-body3"
+                humanReadable={false}
+                css={{ color: color.rewards }}
+              />
+              <div className="fs-12 tp-body1" tw="opacity-60">
+                Next distribution in {rewards.days} days
+              </div>
             </div>
           </div>
-        </BorderedDiv>
+        </>
       )}
 
-      <BorderedDiv tw="mt-6 text-center">
+      <StyledLine />
+      <div tw="text-center">
         {addressHref ? (
           <Button
             as="a"
@@ -225,9 +239,10 @@ const WalletPickerLoggedIn = ({
         ) : (
           displayAddress
         )}
-      </BorderedDiv>
+      </div>
 
-      <BorderedDiv tw="mt-6 text-center">
+      <StyledLine />
+      <div tw="text-center">
         <Button
           size="md"
           kind={button4.kind}
@@ -237,7 +252,7 @@ const WalletPickerLoggedIn = ({
         >
           Logout
         </Button>
-      </BorderedDiv>
+      </div>
     </>
   )
 }

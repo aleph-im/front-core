@@ -124,6 +124,23 @@ Default.parameters = {
   ...defaultParams,
 }
 
+export const LoggedOff = Template.bind({})
+LoggedOff.args = {
+  ...defaultArgs,
+}
+LoggedOff.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedOffOneNetwork = Template.bind({})
+LoggedOffOneNetwork.args = {
+  ...LoggedOff.args,
+  networks: [networks[0]],
+}
+LoggedOffOneNetwork.parameters = {
+  ...LoggedOff.parameters,
+}
+
 export const LoggedIn = Template.bind({})
 LoggedIn.args = {
   ...defaultArgs,
@@ -134,4 +151,13 @@ LoggedIn.args = {
 }
 LoggedIn.parameters = {
   ...defaultParams,
+}
+
+export const LoggedInOneNetwork = Template.bind({})
+LoggedInOneNetwork.args = {
+  ...LoggedIn.args,
+  networks: [networks[0]],
+}
+LoggedInOneNetwork.parameters = {
+  ...LoggedIn.parameters,
 }
