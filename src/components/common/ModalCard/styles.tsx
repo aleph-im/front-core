@@ -60,4 +60,4 @@ export const StyledContentContainer = styled.div.attrs(
 
 export const StyledFooterContainer = styled.div.attrs(
   addClasses('tp-code fs-16'),
-)``
+)(() => [tw`w-full`])
