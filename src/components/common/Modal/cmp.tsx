@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useCallback, useMemo, useState } from 'react'
 import { OpenModalInfo, ModalContext, ModalInfo } from './context'
 import { StyledOverlay, StyledModalCard } from './styles'
 import { ModalProps } from './types'
@@ -8,21 +8,26 @@ import { useTheme } from 'styled-components'
 
 export const Modal = ({ children }: ModalProps) => {
   const [modal, setModal] = useState<ModalInfo>()
-  const [open, setOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const open = useCallback((info: OpenModalInfo) => {
+    const modal: ModalInfo = info
+    setModal(modal)
+    setIsOpen(true)
+  }, [])
+
+  const close = useCallback(() => {
+    setIsOpen(false)
+    modal?.onClose && modal?.onClose()
+  }, [modal])
 
   const contextValue = useMemo(
     () => ({
       modal,
-      open(info: OpenModalInfo) {
-        const modal: ModalInfo = { ...info }
-        setModal(modal)
-        setOpen(true)
-      },
-      close() {
-        setOpen(false)
-      },
+      open,
+      close,
     }),
-    [modal],
+    [modal, open, close],
   )
 
   const { close: onClose } = contextValue
@@ -30,7 +35,7 @@ export const Modal = ({ children }: ModalProps) => {
   const theme = useTheme()
 
   const { shouldMount, stage: $stage } = useTransition(
-    open,
+    isOpen,
     theme.transition.duration.normal,
   )
 

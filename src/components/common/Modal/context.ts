@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { ModalCardProps } from '../ModalCard'
 
-export type OpenModalInfo = Omit<ModalCardProps, 'onClose'>
+export type OpenModalInfo = ModalCardProps
 
 export type ModalInfo = OpenModalInfo
 
