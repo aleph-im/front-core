@@ -3,18 +3,22 @@ import { addClasses } from '../../../utils'
 import Icon from '../Icon'
 import tw from 'twin.macro'
 
-export const StyledContainer = styled.div`
-  ${({ theme }) => {
+export type StyledContainerProps = {
+  $width?: string
+}
+
+export const StyledContainer = styled.div<StyledContainerProps>`
+  ${({ theme, $width = 'auto' }) => {
     const { background, color } = theme.component.modal
 
     return css`
-      ${tw`p-6 break-words max-w-full`}
+      ${tw`p-6 break-words max-w-full max-h-full overflow-hidden`}
       word-break: break-word;
       display: inline-flex;
       flex-direction: column;
       align-items: flex-start;
+      width: ${$width};
       gap: 1rem;
-      min-width: 31.25rem;
       border-radius: 1.5rem;
       background: ${background};
       backdrop-filter: blur(50px);
@@ -27,11 +31,7 @@ export const StyledContainer = styled.div`
 `
 
 export const StyledHeaderContainer = styled.div.attrs(addClasses('tp-h7'))`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
+  ${tw`relative flex items-center justify-start w-full pr-14`}
 `
 
 export const StyledHeaderActions = styled.div`
@@ -56,7 +56,7 @@ export const StyledHeaderCloseIcon = styled(Icon).attrs((props) => {
 
 export const StyledContentContainer = styled.div.attrs(
   addClasses('tp-body1 fs-18'),
-)(() => [tw`mb-4`])
+)(() => [tw`w-full overflow-auto`])
 
 export const StyledFooterContainer = styled.div.attrs(
   addClasses('tp-code fs-16'),
