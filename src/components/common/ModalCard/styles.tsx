@@ -14,7 +14,7 @@ export const StyledContainer = styled.div`
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
-      width: 31.25rem;
+      min-width: 31.25rem;
       border-radius: 1.5rem;
       background: ${background};
       backdrop-filter: blur(50px);
