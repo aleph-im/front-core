@@ -1,6 +1,7 @@
 import {
   HTMLAttributes,
   ReactNode,
+  RefObject,
   TableHTMLAttributes,
   TdHTMLAttributes,
 } from 'react'
@@ -72,6 +73,7 @@ export type TableProps<R extends Record<string, unknown>> =
       borderType?: TableBorderType
       rowNoise?: boolean
       infiniteScroll?: boolean
+      infiniteScrollContainerRef?: RefObject<HTMLElement | null>
       loadingPlaceholder?: ReactNode
       emptyPlaceholder?: ReactNode
       onLoadMore?: () => Promise<void>

@@ -189,6 +189,7 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     columns,
     data,
     infiniteScroll,
+    infiniteScrollContainerRef,
     emptyPlaceholder,
     loadingPlaceholder,
     borderType: $borderType,
@@ -268,12 +269,18 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     setIsLoading(false)
   }, [onLoadMore])
 
-  const [triggerRef] = useInfiniteScroll({
+  const [triggerRef, { rootRef }] = useInfiniteScroll({
     loading: isLoading,
     hasNextPage: !!infiniteScroll,
     disabled: !infiniteScroll,
     onLoadMore: handleLoadMore,
+    rootMargin: '1px',
   })
+
+  useEffect(() => {
+    if (!infiniteScrollContainerRef?.current) return
+    rootRef(infiniteScrollContainerRef.current)
+  }, [infiniteScrollContainerRef, rootRef])
 
   return (
     <StyledTable {...{ $borderType, ...rest }}>

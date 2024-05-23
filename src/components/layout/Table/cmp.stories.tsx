@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { StoryFn } from '@storybook/react'
 import Table from './cmp'
 import {
@@ -205,7 +205,7 @@ StickyTable.args = {
 
 // ---
 
-const Template2: StoryFn<typeof Table> = (args) => {
+const useLoadMore = (args: TableProps<any>) => {
   const [data, setData] = useState<any[]>(args.data || [])
   const infiniteScroll = useMemo(() => data.length <= 100, [data])
   const [sortFn, setSortFn] = useState<TableDefaultSortFn>()
@@ -229,17 +229,21 @@ const Template2: StoryFn<typeof Table> = (args) => {
     return sortFn(data)
   }, [data, sortFn])
 
+  return {
+    ...args,
+    data: sortedData,
+    infiniteScroll,
+    onLoadMore: handleLoadMore,
+    onSort: handleSort,
+  }
+}
+
+const Template2: StoryFn<typeof Table> = (args) => {
+  const props = useLoadMore(args)
+
   return (
     <>
-      <Table
-        {...{
-          ...args,
-          data: sortedData,
-          infiniteScroll,
-          onLoadMore: handleLoadMore,
-          onSort: handleSort,
-        }}
-      />
+      <Table {...props} />
     </>
   )
 }
@@ -249,5 +253,33 @@ InfiniteScroll.args = {
   ...defaultArgs,
 }
 InfiniteScroll.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+const Template3: StoryFn<typeof Table> = (args) => {
+  const props = useLoadMore(args)
+  const infiniteScrollContainerRef = useRef(null)
+
+  return (
+    <div tw="p-10">
+      <div tw="h-[20rem] overflow-auto" ref={infiniteScrollContainerRef}>
+        <Table
+          {...{
+            ...props,
+            infiniteScrollContainerRef,
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
+export const InfiniteScrollContainer = Template3.bind({})
+InfiniteScrollContainer.args = {
+  ...defaultArgs,
+}
+InfiniteScrollContainer.parameters = {
   ...defaultParams,
 }
