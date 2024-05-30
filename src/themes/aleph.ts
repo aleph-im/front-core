@@ -35,6 +35,7 @@ import {
   ThemeWalletPicker,
   ThemeFooter,
   ThemeModal,
+  ThemeFormFileInput,
 } from './types'
 import {
   getGlassEffectCss,
@@ -446,6 +447,17 @@ const feedback: ThemeFormFeedback = {
   error: color.error,
 }
 
+const file: ThemeFormFileInput = {
+  color: color.text,
+  background: color.main0,
+  border: `0.2rem dashed ${color.purple4}`,
+  hover: {
+    color: color.text,
+    background: color.main2,
+    border: `0.2rem dashed ${color.main0}`,
+  },
+}
+
 const form: ThemeForm = {
   feedback,
   input,
@@ -454,6 +466,7 @@ const form: ThemeForm = {
   radio,
   checkbox,
   chip,
+  file,
 }
 
 // -------------------------------

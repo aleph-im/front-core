@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, ReactNode } from 'react'
 import { FormError } from '../FormError/types'
 
 export type ChipInputProps = Omit<
@@ -21,6 +21,7 @@ export type ChipInputProps = Omit<
 }
 
 export type ChipItemProps = {
-  tag: string
+  id: string
+  tag: string | ReactNode
   onRemove: (tag: string) => void
 }

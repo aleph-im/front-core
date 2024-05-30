@@ -35,3 +35,96 @@ export function debounce(cb: () => void, delay: number): () => void {
     id = setTimeout(cb, delay)
   }
 }
+
+// ---------------------
+
+export type ByteUnit =
+  | 'B'
+  | 'kB'
+  | 'MB'
+  | 'GB'
+  | 'TB'
+  | 'KiB'
+  | 'MiB'
+  | 'GiB'
+  | 'TiB'
+
+export type ConvertBitUnitOptions<D extends boolean> = {
+  from: ByteUnit
+  to: ByteUnit
+  displayUnit?: D
+}
+type R<D> = D extends true ? string : number
+
+export const byteUnits: Record<ByteUnit, number> = {
+  // byte
+  B: 1,
+  // kilo
+  kB: 10 ** 3,
+  MB: 10 ** 6,
+  GB: 10 ** 9,
+  TB: 10 ** 12,
+  // kibi
+  KiB: 2 ** 10,
+  MiB: 2 ** 20,
+  GiB: 2 ** 30,
+  TiB: 2 ** 40,
+}
+
+export const byteUnitSubfix: Record<ByteUnit, ByteUnit> = {
+  B: 'B',
+  kB: 'kB',
+  MB: 'MB',
+  GB: 'GB',
+  TB: 'TB',
+  // @note: It is wrong and confusing, I know....
+  KiB: 'kB',
+  MiB: 'MB',
+  GiB: 'GB',
+  TiB: 'TB',
+}
+
+export function convertByteUnits<D extends boolean = false>(
+  value: number,
+  {
+    from = 'MiB',
+    to = 'GiB',
+    displayUnit = false as D,
+  }: ConvertBitUnitOptions<D>,
+): R<D> {
+  const result = (value * byteUnits[from]) / byteUnits[to]
+
+  return (
+    displayUnit ? `${result.toFixed(2)} ${byteUnitSubfix[to]}` : result
+  ) as R<D>
+}
+
+function getHumanReadableUnit(
+  value: number,
+  units: ByteUnit[] = ['B', 'KiB', 'MiB', 'GiB', 'TiB'],
+): ByteUnit {
+  let optimalUnit: ByteUnit = 'B'
+
+  for (const unit of units) {
+    if (value < byteUnits[unit]) break
+    optimalUnit = unit
+  }
+
+  return optimalUnit
+}
+
+/**
+ * Converts a number of bytes to a human readable size
+ */
+export function humanReadableSize(
+  value?: number,
+  from: ByteUnit = 'B',
+): string {
+  if (value === Number.POSITIVE_INFINITY) return 'n/a'
+  if (value === undefined) return 'n/a'
+  if (value === 0) return '-'
+
+  const bits = convertByteUnits(value, { from, to: 'B' })
+  const to = getHumanReadableUnit(bits)
+  return convertByteUnits(value, { from, to, displayUnit: true })
+}

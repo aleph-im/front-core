@@ -35,6 +35,7 @@ import {
   ThemeWalletPicker,
   ThemeFooter,
   ThemeModal,
+  ThemeFormFileInput,
 } from './types'
 import { getGlassEffectCss } from '../styles'
 
@@ -431,6 +432,17 @@ const chip: ThemeFormChip = {
   fontWeight: 'bold',
 }
 
+const file: ThemeFormFileInput = {
+  color: color.text,
+  background: gradient.info2.fn,
+  border: `0.2rem dashed ${color.purple4}`,
+  hover: {
+    color: color.text,
+    background: gradient.info.fn,
+    border: `0.2rem dashed ${color.main0}`,
+  },
+}
+
 const feedback: ThemeFormFeedback = {
   required: color.main0,
   warning: color.info,
@@ -445,6 +457,7 @@ const form: ThemeForm = {
   radio,
   checkbox,
   chip,
+  file,
 }
 
 // -------------------------------
@@ -495,7 +508,7 @@ const defaultButton: ThemeButtonSchemaVariant = {
   outline: {
     size: {
       default: pxToRem(0),
-      focus: pxToRem(2),
+      focus: pxToRem(0),
       disabled: pxToRem(0),
     },
     color: {
@@ -785,6 +798,10 @@ const errorFunctionalButton: ThemeButtonSchemaVariant = {
   },
   outline: {
     ...defaultButton.outline,
+    size: {
+      ...defaultButton.outline.size,
+      focus: pxToRem(2),
+    },
     color: {
       ...defaultButton.outline.color,
       focus: color.text,

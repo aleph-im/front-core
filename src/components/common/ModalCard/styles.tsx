@@ -19,7 +19,6 @@ export const StyledContainer = styled.div<StyledContainerProps>`
       align-items: flex-start;
       width: ${$width};
       gap: 1rem;
-      border-radius: 1.5rem;
       background: ${background};
       backdrop-filter: blur(50px);
 

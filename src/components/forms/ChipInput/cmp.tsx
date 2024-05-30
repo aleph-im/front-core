@@ -23,11 +23,11 @@ import FormLabel from '../FormLabel'
 import FormError from '../FormError'
 import Icon from '../../common/Icon'
 
-const ChipItem = ({ tag, onRemove }: ChipItemProps) => {
-  const handleRemove = useCallback(() => onRemove(tag), [tag, onRemove])
+const ChipItem = ({ id, tag, onRemove }: ChipItemProps) => {
+  const handleRemove = useCallback(() => onRemove(id), [id, onRemove])
 
   return (
-    <StyledChip key={tag}>
+    <StyledChip key={id}>
       <StyledChipTag>{tag}</StyledChipTag>
       <StyledChipRemoveButton onClick={handleRemove}>
         <Icon name="xmark" />
@@ -146,7 +146,7 @@ export const ChipInput = forwardRef(
               {value.map((tag) => (
                 <ChipItemMemo
                   key={tag}
-                  {...{ tag, onRemove: handleRemoveTag }}
+                  {...{ id: tag, tag, onRemove: handleRemoveTag }}
                 />
               ))}
             </StyledChipContainer>

@@ -251,6 +251,17 @@ export type ThemeFormChip = {
   fontWeight?: string
 }
 
+export type ThemeFormFileInput = {
+  color: string
+  background: string
+  border: string
+  hover: {
+    color: string
+    background: string
+    border: string
+  }
+}
+
 export type ThemeFormFeedback = {
   required: string
   warning: string
@@ -265,6 +276,7 @@ export type ThemeForm = {
   radio: ThemeFormRadio
   checkbox: ThemeFormCheckbox
   chip: ThemeFormChip
+  file: ThemeFormFileInput
 }
 
 // -----------------------------------
