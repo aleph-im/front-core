@@ -17,11 +17,12 @@ export const ModalCard = ({
   content,
   footer,
   width: $width,
+  height: $height,
   onClose,
   ...rest
 }: ModalCardProps) => {
   return (
-    <StyledContainer {...{ $width, ...rest }}>
+    <StyledContainer {...{ $width, $height, ...rest }}>
       <StyledHeaderContainer>
         {header || <TextGradient type="h6">{title}</TextGradient>}
         <StyledHeaderActions>

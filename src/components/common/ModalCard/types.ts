@@ -5,6 +5,7 @@ export type ModalCardProps = Omit<HTMLAttributes<HTMLDivElement>, 'content'> & {
   text?: string
   onClose?: () => void
   width?: string
+  height?: string
 
   header?: ReactNode
   content?: ReactNode

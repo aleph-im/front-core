@@ -5,10 +5,11 @@ import tw from 'twin.macro'
 
 export type StyledContainerProps = {
   $width?: string
+  $height?: string
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  ${({ theme, $width = 'auto' }) => {
+  ${({ theme, $width = 'auto', $height = 'auto' }) => {
     const { background, color } = theme.component.modal
 
     return css`
@@ -18,6 +19,7 @@ export const StyledContainer = styled.div<StyledContainerProps>`
       flex-direction: column;
       align-items: flex-start;
       width: ${$width};
+      height: ${$height};
       gap: 1rem;
       background: ${background};
       backdrop-filter: blur(50px);
