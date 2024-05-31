@@ -2,15 +2,14 @@ import { FormError } from '../FormError/types'
 
 export type FileInputProps = {
   name?: string
-  multiple?: boolean
   accept?: string
   required?: boolean
-  value?: File[]
-  defaultValue?: string | string[]
-  onChange: (files?: File[]) => void
-
   onlyFolders?: boolean
   onlyFiles?: boolean
+
+  multiple?: boolean
+  value?: File | File[]
+  onChange: (files?: File | File[]) => void
 
   label?: string
   error?: FormError

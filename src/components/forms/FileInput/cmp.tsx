@@ -47,6 +47,7 @@ export const FileInput = forwardRef(
       label,
       onlyFolders,
       onlyFiles,
+      multiple,
       ...rest
     }: FileInputProps,
     ref: ForwardedRef<HTMLDivElement>,
@@ -54,10 +55,10 @@ export const FileInput = forwardRef(
     const inputRef = useRef<HTMLInputElement>(null)
 
     const handleFiles = useCallback(
-      async (files: FileList | null) => {
+      async (files: FileList | File[] | null) => {
         if (!files) return
 
-        if (!rest.multiple && files.length > 1) {
+        if (!multiple && files.length > 1) {
           setDragError(new Error('Only one file at a time'))
           return
         }
@@ -66,9 +67,6 @@ export const FileInput = forwardRef(
 
         const folders = checks.filter((isFile) => !isFile).length
         const notFolders = checks.filter((isFile) => !!isFile).length
-
-        console.log('folders', folders)
-        console.log('notFolders', notFolders)
 
         if (onlyFolders && notFolders > 0) {
           setDragError(new Error('Only folders are supported'))
@@ -80,9 +78,10 @@ export const FileInput = forwardRef(
           return
         }
 
-        onChange([...files])
+        const newValue = files ? (multiple ? [...files] : files[0]) : undefined
+        onChange(newValue)
       },
-      [onChange, onlyFiles, onlyFolders, rest.multiple],
+      [onChange, onlyFiles, onlyFolders, multiple],
     )
 
     const handleClick = useCallback(() => {
@@ -101,7 +100,8 @@ export const FileInput = forwardRef(
           return
         }
 
-        const newValue = value.filter((item) => item.name !== name)
+        const values = Array.isArray(value) ? value : [value]
+        const newValue = values.filter((item) => item.name !== name)
         onChange(newValue)
       },
       [onChange, value],
@@ -229,10 +229,13 @@ export const FileInput = forwardRef(
         )}
         {error && <FormError error={error} />}
         <StyledFileInput
-          type="file"
-          ref={inputRef}
-          onChange={handleChange}
-          {...rest}
+          {...{
+            ...rest,
+            type: 'file',
+            ref: inputRef,
+            onChange: handleChange,
+            multiple,
+          }}
         />
       </div>
     )
