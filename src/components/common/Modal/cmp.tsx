@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useState } from 'react'
+import React, { MouseEvent, memo, useCallback, useMemo, useState } from 'react'
 import { OpenModalInfo, ModalContext, ModalInfo } from './context'
 import { StyledOverlay, StyledModalCard } from './styles'
 import { ModalProps } from './types'
@@ -30,7 +30,12 @@ export const Modal = ({ children }: ModalProps) => {
     [modal, open, close],
   )
 
-  const { close: onClose } = contextValue
+  const { close: handleClose } = contextValue
+
+  const handlePreventDefault = useCallback((e: MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }, [])
 
   const theme = useTheme()
 
@@ -44,12 +49,13 @@ export const Modal = ({ children }: ModalProps) => {
       {children}
       <Portal>
         {shouldMount && (
-          <StyledOverlay {...{ $stage }}>
+          <StyledOverlay {...{ $stage, onClick: handleClose }}>
             <StyledModalCard
               {...{
                 ...modal,
                 $stage,
-                onClose,
+                onClose: handleClose,
+                onClick: handlePreventDefault,
               }}
             />
           </StyledOverlay>
