@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { StoryFn } from '@storybook/react'
 
 import FileInput from './cmp'
