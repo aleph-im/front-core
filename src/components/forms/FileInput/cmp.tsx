@@ -108,7 +108,6 @@ export const FileInput = forwardRef(
         handleDragOff(e)
 
         const files = await getFilesAsync(e.dataTransfer)
-        console.log(files)
         const error = await checkFilesAndDirectories(files, {
           directory,
           multiple,
@@ -151,7 +150,6 @@ export const FileInput = forwardRef(
           file.dirName = (file.webkitRelativePath || file.name).split('/')[0]
           return file
         })
-        console.log(files)
 
         handleFiles(files)
       },

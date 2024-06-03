@@ -128,8 +128,6 @@ export async function checkFilesAndDirectories(
 
   const totalFiles = nFolders + nFiles
 
-  console.log('nFolders', nFolders, 'nFiles', nFiles, 'totalFiles', totalFiles)
-
   if (!multiple && totalFiles > 1) {
     return new Error('Only one file at a time')
   }
