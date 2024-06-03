@@ -54,6 +54,9 @@ export const FileInput = forwardRef(
   ) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
+    const [isDragging, setIsDragging] = useState(false)
+    const [dragError, setDragError] = useState<Error>()
+
     const handleFiles = useCallback(
       async (files: FileList | File[] | null) => {
         if (!files) return
@@ -79,6 +82,8 @@ export const FileInput = forwardRef(
         }
 
         const newValue = files ? (multiple ? [...files] : files[0]) : undefined
+        setDragError(undefined)
+
         onChange(newValue)
       },
       [onChange, onlyFiles, onlyFolders, multiple],
@@ -126,9 +131,6 @@ export const FileInput = forwardRef(
         }
       }
     }, [onlyFolders])
-
-    const [isDragging, setIsDragging] = useState(false)
-    const [dragError, setDragError] = useState<Error>()
 
     const handlePreventDefault = useCallback((e: any) => {
       e.preventDefault()
