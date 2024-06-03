@@ -140,6 +140,13 @@ const gradient: ThemeGradient = {
     deg: 90,
     fn: 'linear-gradient(90deg, #FFFFFF1A 0%, #FFFFFF0A 90.62%)',
   },
+
+  info2: {
+    colors: ['#00D1FF1A', '#0054FF1A'],
+    stops: [0, 100],
+    deg: 90,
+    fn: 'linear-gradient(90deg, #00D1FF1A 0%, #0054FF1A 100%)',
+  },
 }
 
 const shadows = {
@@ -449,11 +456,11 @@ const feedback: ThemeFormFeedback = {
 
 const file: ThemeFormFileInput = {
   color: color.text,
-  background: color.main0,
-  border: `0.2rem dashed ${color.purple4}`,
+  background: gradient.info2.fn,
+  border: `0.2rem dashed ${color.info}`,
   hover: {
     color: color.text,
-    background: color.main2,
+    background: gradient.info.fn,
     border: `0.2rem dashed ${color.main0}`,
   },
 }

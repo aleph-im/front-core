@@ -8,6 +8,8 @@ import React, {
   useMemo,
   useRef,
   useState,
+  ClipboardEvent,
+  DragEvent,
 } from 'react'
 import { FileInputProps } from './types'
 import { StyledContainer, StyledFileInput } from './styles'
@@ -15,28 +17,9 @@ import { ChipItem } from '../ChipInput'
 import Button from '../../common/Button'
 import FormError from '../FormError'
 import FormLabel from '../FormLabel'
-import Icon from '../../common/Icon'
+import Icon, { IconName } from '../../common/Icon'
 import { humanReadableSize } from '../../../utils'
-
-function isFile(maybeFile: File): Promise<boolean> {
-  return new Promise<boolean>((resolve) => {
-    if (maybeFile.type !== '') {
-      return resolve(true)
-    }
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      if (
-        reader.error &&
-        (reader.error.name === 'NotFoundError' ||
-          reader.error.name === 'NotReadableError')
-      ) {
-        return resolve(false)
-      }
-      resolve(true)
-    }
-    reader.readAsArrayBuffer(maybeFile)
-  })
-}
+import { ExtFile, checkFilesAndDirectories, getFilesAsync } from './utils'
 
 export const FileInput = forwardRef(
   (
@@ -45,8 +28,7 @@ export const FileInput = forwardRef(
       value,
       error,
       label,
-      onlyFolders,
-      onlyFiles,
+      directory,
       multiple,
       ...rest
     }: FileInputProps,
@@ -57,72 +39,44 @@ export const FileInput = forwardRef(
     const [isDragging, setIsDragging] = useState(false)
     const [dragError, setDragError] = useState<Error>()
 
+    // @note: Multiple will be true if directory is true sa for directories we return an array of File
+    multiple = directory || multiple
+
     const handleFiles = useCallback(
-      async (files: FileList | File[] | null) => {
-        if (!files) return
-
-        if (!multiple && files.length > 1) {
-          setDragError(new Error('Only one file at a time'))
-          return
-        }
-
-        const checks = await Promise.all(Array.from(files).map(isFile))
-
-        const folders = checks.filter((isFile) => !isFile).length
-        const notFolders = checks.filter((isFile) => !!isFile).length
-
-        if (onlyFolders && notFolders > 0) {
-          setDragError(new Error('Only folders are supported'))
-          return
-        }
-
-        if (onlyFiles && folders > 0) {
-          setDragError(new Error('Folders are not supported'))
-          return
-        }
-
-        const newValue = files ? (multiple ? [...files] : files[0]) : undefined
+      async (files: ExtFile[]) => {
+        if (!files.length) return
         setDragError(undefined)
 
+        const newValue = multiple ? files : files[0]
         onChange(newValue)
       },
-      [onChange, onlyFiles, onlyFolders, multiple],
+      [onChange, multiple],
     )
-
-    const handleClick = useCallback(() => {
-      if (!inputRef.current) return
-      inputRef.current.click()
-    }, [])
 
     const handleRemoveFile = useCallback(
       (name?: string) => {
         if (!inputRef.current) return
         if (!value) return
 
-        if (name === undefined) {
-          inputRef.current.value = ''
+        inputRef.current.value = ''
+
+        if (directory) {
           onChange(undefined)
           return
         }
 
-        const values = Array.isArray(value) ? value : [value]
-        const newValue = values.filter((item) => item.name !== name)
+        const files = Array.isArray(value) ? value : [value]
+        const newFiles = files.filter((item) => item.name !== name)
+        const newValue = newFiles.length ? newFiles : undefined
+
         onChange(newValue)
       },
-      [onChange, value],
-    )
-
-    const handleChange = useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
-        const { files } = e.target as HTMLInputElement
-        handleFiles(files)
-      },
-      [handleFiles],
+      [onChange, directory, value],
     )
 
     useEffect(() => {
       if (inputRef.current) {
-        if (onlyFolders) {
+        if (directory) {
           inputRef.current.setAttribute('directory', '')
           inputRef.current.setAttribute('webkitdirectory', '')
         } else {
@@ -130,73 +84,144 @@ export const FileInput = forwardRef(
           inputRef.current.removeAttribute('webkitdirectory')
         }
       }
-    }, [onlyFolders])
+    }, [directory])
 
-    const handlePreventDefault = useCallback((e: any) => {
+    const handlePreventDefault = useCallback((e: DragEvent) => {
       e.preventDefault()
       e.stopPropagation()
     }, [])
 
-    const handleDragOn = useCallback((e: any) => {
+    const handleDragOn = useCallback((e: DragEvent) => {
       e.preventDefault()
       e.stopPropagation()
       setIsDragging(true)
     }, [])
 
-    const handleDragOff = useCallback((e: any) => {
+    const handleDragOff = useCallback((e: DragEvent) => {
       e.preventDefault()
       e.stopPropagation()
       setIsDragging(false)
     }, [])
 
     const handleDrop = useCallback(
-      (e: any) => {
+      async (e: DragEvent) => {
         handleDragOff(e)
-        handleFiles(e.dataTransfer.files)
+
+        const files = await getFilesAsync(e.dataTransfer)
+        console.log(files)
+        const error = await checkFilesAndDirectories(files, {
+          directory,
+          multiple,
+        })
+
+        setDragError(error)
+        if (error) return
+
+        handleFiles(files)
       },
-      [handleDragOff, handleFiles],
+      [handleDragOff, handleFiles, directory, multiple],
     )
 
-    const values = useMemo(
-      () => (value ? (Array.isArray(value) ? value : [value]) : undefined),
-      [value],
+    const handlePaste = useCallback(
+      async (e: ClipboardEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const files = await getFilesAsync(e.clipboardData)
+        const error = await checkFilesAndDirectories(files, {
+          directory,
+          multiple,
+        })
+
+        setDragError(error)
+        if (error) return
+
+        handleFiles(files)
+      },
+      [handleFiles, directory, multiple],
     )
+
+    const handleChange = useCallback(
+      async (e: ChangeEvent<HTMLInputElement>) => {
+        const { files: fileList } = e.target as HTMLInputElement
+        if (!fileList) return
+
+        const files = ([...fileList] as ExtFile[]).map((file) => {
+          file.level = 0
+          file.dirName = (file.webkitRelativePath || file.name).split('/')[0]
+          return file
+        })
+        console.log(files)
+
+        handleFiles(files)
+      },
+      [handleFiles],
+    )
+
+    const handleClick = useCallback(() => {
+      if (!inputRef.current) return
+      inputRef.current.click()
+    }, [])
+
+    const items = useMemo(() => {
+      const files = value ? (Array.isArray(value) ? value : [value]) : undefined
+      if (!files || !files.length) return []
+
+      const items = files.map((file) => ({
+        id: file.name,
+        name: file.name,
+        size: file.size / 1024 ** 2,
+        icon: 'file' as IconName,
+      }))
+
+      if (!directory) return items
+
+      const [firstFile] = files
+      const name = firstFile.dirName || 'directory'
+      const size = items.reduce((ac, cv) => ac + cv.size, 0)
+
+      return [
+        {
+          id: name,
+          name,
+          size,
+          icon: 'folder' as IconName,
+        },
+      ]
+    }, [directory, value])
 
     error = error || dragError
 
     return (
-      <div tabIndex={-1} ref={ref}>
+      <div>
         {label && <FormLabel label={label} error={error} required />}
-        {!!values?.length && (
+        {!!items?.length && (
           <div tw="flex gap-2 flex-wrap">
-            {values.map((file) => {
-              const name = !onlyFolders
-                ? file.name
-                : file?.webkitRelativePath.split('/')[0]
-
-              const size = file.size / 1024 ** 2
-
+            {items.map((item) => {
               const tag = (
-                <div>
-                  {name}
-                  <span className="fs-12" tw="ml-1 opacity-70">
-                    {humanReadableSize(size, 'MiB')}
+                <div tw="flex items-center gap-2">
+                  <Icon name={item.icon} />
+                  <span>
+                    {item.name}
+                    <span className="fs-12" tw="ml-1 opacity-70">
+                      {humanReadableSize(item.size, 'MiB')}
+                    </span>
                   </span>
                 </div>
               )
 
               return (
                 <ChipItem
-                  key={file.name}
-                  onRemove={() => handleRemoveFile(file.name)}
-                  id={name}
+                  key={item.name}
+                  id={item.name}
                   tag={tag}
+                  onRemove={() => handleRemoveFile(item.name)}
                 />
               )
             })}
           </div>
         )}
-        {!values?.length && (
+        {!items?.length && (
           <StyledContainer
             $isDragging={isDragging}
             onDrag={handlePreventDefault}
@@ -206,10 +231,13 @@ export const FileInput = forwardRef(
             onDragOver={handleDragOn}
             onDragLeave={handleDragOff}
             onDrop={handleDrop}
+            onPaste={handlePaste}
+            tabIndex={0}
+            ref={ref}
           >
             {!isDragging ? (
               <>
-                Drag your {onlyFolders ? 'folder' : 'file'} here or{' '}
+                Drag your {directory ? 'folder' : 'file'} here or{' '}
                 <Button
                   onClick={handleClick}
                   type="button"
@@ -217,13 +245,13 @@ export const FileInput = forwardRef(
                   variant="textOnly"
                   tw="mx-1.5! mt-0.5!"
                 >
-                  Upload {onlyFolders ? 'Folder' : 'File'}
+                  Upload {directory ? 'Folder' : 'File'}
                 </Button>
                 <Icon name="arrow-up" />
               </>
             ) : (
               <>
-                Drop your {onlyFolders ? 'folder' : 'file'} here
+                Drop your {directory ? 'folder' : 'file'} here
                 <Icon name="arrow-down" tw="ml-1.5" />
               </>
             )}

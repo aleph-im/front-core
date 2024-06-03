@@ -1,15 +1,14 @@
 import { FormError } from '../FormError/types'
+import { ExtFile } from './utils'
 
 export type FileInputProps = {
   name?: string
   accept?: string
   required?: boolean
-  onlyFolders?: boolean
-  onlyFiles?: boolean
-
+  directory?: boolean
   multiple?: boolean
-  value?: File | File[]
-  onChange: (files?: File | File[]) => void
+  value?: ExtFile | ExtFile[]
+  onChange: (files?: ExtFile | ExtFile[]) => void
 
   label?: string
   error?: FormError
