@@ -1,54 +1,46 @@
 import { css, keyframes } from 'styled-components'
 
 export const grainImg1 =
-  "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGZpbHRlciBpZD0iZmlsdGVyIj4KCQk8ZmVUdXJidWxlbmNlIAoJCQliYXNlRnJlcXVlbmN5PSIxIgoJCQl0eXBlPSdmcmFjdGFsTm9pc2UnCiAgICAgIG51bU9jdGF2ZXM9JzMnCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KCQk8ZmVDb2xvck1hdHJpeCB2YWx1ZXM9IjAgMCAwIDAgMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDAgMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDAgMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDEwIC03Ii8+Cgk8L2ZpbHRlcj4KCTxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmaWx0ZXIpIi8+Cjwvc3ZnPgoK')"
+  "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDAwIiB3aWR0aD0iNDAwIj4KCTxmaWx0ZXIgaWQ9ImZpbHRlciI+CgkJPGZlVHVyYnVsZW5jZSAKCQkJYmFzZUZyZXF1ZW5jeT0iMSIKCQkJdHlwZT0nZnJhY3RhbE5vaXNlJwogICAgICBudW1PY3RhdmVzPSczJyAvPgoJCTxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAxCgkJCQkJCQkJCQkJCQkgMCAwIDAgMCAxCgkJCQkJCQkJCQkJCQkgMCAwIDAgMCAxCgkJCQkJCQkJCQkJCQkgMCAwIDAgMTAgLTYiLz4KCTwvZmlsdGVyPgoJPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2ZpbHRlcikiLz4KPC9zdmc+Cgo=')"
 
 export const grainImg2 =
-  "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGZpbHRlciBpZD0iZmlsdGVyIj4KCQk8ZmVUdXJidWxlbmNlIAoJCQliYXNlRnJlcXVlbmN5PSIuMjUiCgkJCXR5cGU9J2ZyYWN0YWxOb2lzZScKICAgICAgbnVtT2N0YXZlcz0nMycvPgoJCTxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwLjEKCQkJCQkJCQkJCQkJCSAwIDAgMCAwIDAKCQkJCQkJCQkJCQkJCSAwIDAgMCAwIDAuODAKCQkJCQkJCQkJCQkJCSAwIDAgMCAxMCAtNy4yNSIvPgoJPC9maWx0ZXI+Cgk8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZmlsdGVyKSIvPgo8L3N2Zz4=')"
+  "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDAwIiB3aWR0aD0iNDAwIj4KCTxmaWx0ZXIgaWQ9ImZpbHRlciI+CgkJPGZlVHVyYnVsZW5jZSAKCQkJYmFzZUZyZXF1ZW5jeT0iLjI1IgoJCQl0eXBlPSdmcmFjdGFsTm9pc2UnCiAgICAgIG51bU9jdGF2ZXM9JzMnIC8+CgkJPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAuMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDAgMAoJCQkJCQkJCQkJCQkJIDAgMCAwIDAgMC44MAoJCQkJCQkJCQkJCQkJIDAgMCAwIDEwIC03LjI1Ii8+Cgk8L2ZpbHRlcj4KCTxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmaWx0ZXIpIi8+Cjwvc3ZnPg==')"
 
 export type UniformGrainEffect = {
   opacity: number
-  blendMode?: string
-  image?: string
   background?: string
 }
 
 export const grainColor: Record<string, UniformGrainEffect> = {
   0: {
     opacity: 1,
-    blendMode: 'overlay, normal',
-    image: `${grainImg1}, radial-gradient(50% 50% at 50% 50%, #EDE4F9 0%, #FAF6FF 100%)`,
+    background: `radial-gradient(50% 50% at 50% 50%, #E2CEFA 0%, #FAF6FF 100%)`,
   },
   1: {
     opacity: 1,
-    image: grainImg2,
     background: `radial-gradient(50% 50% at 50% 50%, #E2CEFA 0%, #FAF6FF 100%)`,
   },
   2: {
     opacity: 0.3,
-    image: grainImg2,
     background: `radial-gradient(50% 50% at 50% 50%, #EBDAFF 0%, #F0E4FF 100%)`,
   },
   3: {
     opacity: 0.3,
-    image: grainImg2,
     background: `radial-gradient(50% 50% at 50% 50%, #EBDAFF 0%, #f0e4ff91 100%)`,
   },
   4: {
     opacity: 1,
-    image: grainImg2,
     background: `radial-gradient(50% 50% at 50% 50%, #E1D2F8 0%, #e1d2f80d 100%)`,
   },
   5: {
     opacity: 0.5,
-    image: grainImg2,
     background: `radial-gradient(50% 50% at 50% 50%, #e1d2f866 0%, #e1d2f80d 100%), #F9F4FF`,
   },
 }
 
 const imageWidth = 25
-const imageRatio = 0.5
-const imageHeight = Math.trunc(imageWidth * imageRatio)
+const imageRatio = 1
+const imageHeight = imageWidth * imageRatio
 
 //image ratio is 1.45432756325
 const moveBackground = keyframes` 
@@ -62,13 +54,14 @@ const moveBackground = keyframes`
 `
 
 export function getPlainGrainEffectCss(color: string) {
-  const { image, background, opacity, blendMode } = grainColor[color]
+  const { background, opacity } = grainColor[color]
 
   return css`
     position: relative;
     background: ${background};
     z-index: 0;
     backface-visibility: hidden;
+
     &::after {
       content: '';
       position: absolute;
@@ -80,12 +73,9 @@ export function getPlainGrainEffectCss(color: string) {
       z-index: -1;
       pointer-events: none;
       opacity: ${opacity};
-      /* background-image: ${image}; */
-      background-blend-mode: ${blendMode};
       background-repeat: repeat;
       background-size: ${imageWidth}rem ${imageHeight}rem;
       animation: 20s linear 0s infinite ${moveBackground};
-      /* background-attachment: fixed; */
     }
   `
 }
@@ -93,8 +83,7 @@ export function getPlainGrainEffectCss(color: string) {
 export function getGrainImg1Css() {
   return css`
     &::after {
-      background-image: ${grainImg1},
-        radial-gradient(50% 50% at 50% 50%, #ede4f9 0%, #faf6ff 100%);
+      background-image: ${grainImg1};
     }
   `
 }
