@@ -4,7 +4,7 @@ export const grainImg1 =
   "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGZpbHRlciBpZD0iZmlsdGVyIj4KCQk8ZmVUdXJidWxlbmNlIAoJCQliYXNlRnJlcXVlbmN5PSIxIgoJCQl0eXBlPSdmcmFjdGFsTm9pc2UnCiAgICAgIG51bU9jdGF2ZXM9JzMnCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KCQk8ZmVDb2xvck1hdHJpeCB2YWx1ZXM9IjAgMCAwIDAgMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDAgMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDAgMQoJCQkJCQkJCQkJCQkJIDAgMCAwIDEwIC03Ii8+Cgk8L2ZpbHRlcj4KCTxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmaWx0ZXIpIi8+Cjwvc3ZnPgoK')"
 
 export const grainImg2 =
-  "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGZpbHRlciBpZD0iZmlsdGVyIj4KCQk8ZmVUdXJidWxlbmNlIAoJCQliYXNlRnJlcXVlbmN5PSIuMjUiCgkJCXR5cGU9J2ZyYWN0YWxOb2lzZScKICAgICAgbnVtT2N0YXZlcz0nMycgCiAgICAgIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KCQk8ZmVDb2xvck1hdHJpeCB2YWx1ZXM9IjAgMCAwIDAgMC4xCgkJCQkJCQkJCQkJCQkgMCAwIDAgMCAwCgkJCQkJCQkJCQkJCQkgMCAwIDAgMCAwLjgwCgkJCQkJCQkJCQkJCQkgMCAwIDAgMTAgLTcuMjUiLz4KCTwvZmlsdGVyPgoJPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2ZpbHRlcikiLz4KPC9zdmc+')"
+  "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGZpbHRlciBpZD0iZmlsdGVyIj4KCQk8ZmVUdXJidWxlbmNlIAoJCQliYXNlRnJlcXVlbmN5PSIuMjUiCgkJCXR5cGU9J2ZyYWN0YWxOb2lzZScKICAgICAgbnVtT2N0YXZlcz0nMycvPgoJCTxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwLjEKCQkJCQkJCQkJCQkJCSAwIDAgMCAwIDAKCQkJCQkJCQkJCQkJCSAwIDAgMCAwIDAuODAKCQkJCQkJCQkJCQkJCSAwIDAgMCAxMCAtNy4yNSIvPgoJPC9maWx0ZXI+Cgk8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZmlsdGVyKSIvPgo8L3N2Zz4=')"
 
 export type UniformGrainEffect = {
   opacity: number
@@ -46,8 +46,9 @@ export const grainColor: Record<string, UniformGrainEffect> = {
   },
 }
 
-const imageWidth = 22
-const imageRatio = 0.68760300311
+const imageWidth = 25
+const imageRatio = 0.5
+const imageHeight = Math.trunc(imageWidth * imageRatio)
 
 //image ratio is 1.45432756325
 const moveBackground = keyframes` 
@@ -56,7 +57,7 @@ const moveBackground = keyframes`
   }
 
   100% {
-    background-position: ${imageWidth}rem -${imageWidth * imageRatio}rem;
+    background-position: ${imageWidth}rem -${imageHeight}rem;
   }
 `
 
@@ -67,7 +68,7 @@ export function getPlainGrainEffectCss(color: string) {
     position: relative;
     background: ${background};
     z-index: 0;
-
+    backface-visibility: hidden;
     &::after {
       content: '';
       position: absolute;
@@ -82,7 +83,7 @@ export function getPlainGrainEffectCss(color: string) {
       /* background-image: ${image}; */
       background-blend-mode: ${blendMode};
       background-repeat: repeat;
-      background-size: ${imageWidth}rem ${imageWidth * imageRatio}rem;
+      background-size: ${imageWidth}rem ${imageHeight}rem;
       animation: 20s linear 0s infinite ${moveBackground};
       /* background-attachment: fixed; */
     }
