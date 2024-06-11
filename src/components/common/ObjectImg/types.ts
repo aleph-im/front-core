@@ -24,6 +24,7 @@ export type ObjectImgProps = {
   size?: number | string
   color?: string
   color2?: string
+  shape?: boolean
 }
 
 export type StyledObjectImgProps = {

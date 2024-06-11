@@ -1,6 +1,6 @@
 import React, { FunctionComponent, memo } from 'react'
 import { useTheme } from 'styled-components'
-import { StyledObjectImgContainer } from './styles'
+import { StyledObjectImgContainer, StyledShape } from './styles'
 import { ObjectImgProps, StyledObjectImgSvgProps } from './types'
 import * as objs from './img/index'
 
@@ -9,6 +9,7 @@ export const ObjectImg = ({
   size = 100,
   color = 'base0',
   color2,
+  shape,
   ...rest
 }: ObjectImgProps) => {
   const theme = useTheme()
@@ -20,9 +21,11 @@ export const ObjectImg = ({
     objs as Record<string, FunctionComponent<StyledObjectImgSvgProps>>
   )[id]
 
+  const obj = <Obj color={mainColor} color2={bgColor} />
+
   return (
     <StyledObjectImgContainer {...{ size, ...rest }}>
-      <Obj color={mainColor} color2={bgColor} />
+      {shape ? <StyledShape>{obj}</StyledShape> : obj}
     </StyledObjectImgContainer>
   )
 }

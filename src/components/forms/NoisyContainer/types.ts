@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 export type NoisyContainerProps = {
-  $type?:
+  type?:
     | 'noise-base'
     | 'noise-dark'
     | 'noise-light'
@@ -11,6 +11,6 @@ export type NoisyContainerProps = {
     | 'grain-3'
     | 'grain-4'
     | 'grain-5'
-  $animation?: number | false
+  animation?: number | false
   children: ReactNode
 }

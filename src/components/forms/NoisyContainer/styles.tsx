@@ -3,14 +3,19 @@ import tw from 'twin.macro'
 import { addClasses } from '../../../utils'
 import { NoisyContainerProps } from './types'
 
-export const StyledContainer = styled.div.attrs<NoisyContainerProps>(
+export type StyledContainerProps = {
+  $type: NoisyContainerProps['type']
+  $animation: NoisyContainerProps['animation']
+}
+
+export const StyledContainer = styled.div.attrs<StyledContainerProps>(
   (props) => {
     const theme = useTheme()
     const { $type = theme.component.noisyContainer.default } = props
 
     return addClasses(`fx-${$type}`)(props)
   },
-)<NoisyContainerProps>`
+)<StyledContainerProps>`
   ${({ theme, $animation = 50000 }) => {
     const { borderRadius } = theme.component.noisyContainer
 

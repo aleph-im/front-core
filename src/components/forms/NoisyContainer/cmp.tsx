@@ -2,8 +2,23 @@ import React, { memo } from 'react'
 import StyledContainer from './styles'
 import { NoisyContainerProps } from './types'
 
-export const NoisyContainer = ({ children, ...rest }: NoisyContainerProps) => {
-  return <StyledContainer {...rest}>{children}</StyledContainer>
+export const NoisyContainer = ({
+  children,
+  animation: $animation,
+  type: $type,
+  ...rest
+}: NoisyContainerProps) => {
+  return (
+    <StyledContainer
+      {...{
+        $animation,
+        $type,
+        ...rest,
+      }}
+    >
+      {children}
+    </StyledContainer>
+  )
 }
 NoisyContainer.displayName = 'NoisyContainer'
 

@@ -9,14 +9,15 @@ export default {
   title: 'Components/UI/common/ObjectImg',
   component: ObjectImg,
   argTypes: {
-    size: { control: 'text' },
+    size: { control: 'number' },
     id: { control: 'select' },
   },
 }
 
 const defaultArgs: Partial<ObjectImgProps> = {
   id: 'Object1',
-  size: '100px',
+  size: 100,
+  color: 'main0',
 }
 
 const defaultParams = {}
