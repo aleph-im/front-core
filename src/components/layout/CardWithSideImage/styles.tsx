@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components'
 import tw from 'twin.macro'
 import { Col } from '../Grid'
+import { AlignProps, JustifyProps } from './types'
 
 export const StyledImageCol = styled(Col)<{
   reverseColumnsWhenStacked: boolean
-  alignImage: 'start' | 'center' | 'end'
-  justifyImage: 'start' | 'center' | 'end'
+  alignImage: AlignProps
+  justifyImage: JustifyProps
 }>`
   display: flex;
   ${({ reverseColumnsWhenStacked, alignImage, justifyImage }) => css`
@@ -16,8 +17,8 @@ export const StyledImageCol = styled(Col)<{
 `
 
 export const StyledCardCol = styled(Col)<{
-  alignCard: 'start' | 'center' | 'end'
-  justifyCard: 'start' | 'center' | 'end'
+  alignCard: AlignProps
+  justifyCard: JustifyProps
 }>`
   display: flex;
   ${({ alignCard, justifyCard }) => css`
