@@ -17,6 +17,7 @@ export * from './common/Spinner'
 export * from './common/Label'
 
 export * from './layout/Card'
+export * from './layout/CardWithSideImage'
 export * from './layout/Grid'
 export * from './layout/Table'
 export * from './layout/ToggleContainer'
