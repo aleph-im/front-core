@@ -43,13 +43,13 @@ export type CardWithSideImageProps = {
   children: ReactNode
   imageSrc: string
   imageAlt: string
-  imagePosition: 'left' | 'right'
-  alignCard: AlignProps
-  justifyCard: JustifyProps
-  alignImage: AlignProps
-  justifyImage: JustifyProps
-  cardBackgroundColor: string
-  reverseColumnsWhenStacked: boolean
+  imagePosition?: 'left' | 'right'
+  alignCard?: AlignProps
+  justifyCard?: JustifyProps
+  alignImage?: AlignProps
+  justifyImage?: JustifyProps
+  cardBackgroundColor?: string
+  reverseColumnsWhenStacked?: boolean
 }
 
 export type StyledImageColProps = {
