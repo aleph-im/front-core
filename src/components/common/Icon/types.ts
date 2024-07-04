@@ -23,6 +23,14 @@ export type CustomIconName =
   | 'swap'
   | 'tezos'
   | 'walletConnect'
+  | 'storageSolutions'
+  | 'computeSolutions'
+  | 'web3HostingBox'
+  | 'dashboard'
+  | 'functions'
+  | 'instance'
+  | 'confidential'
+  | 'manageWebsite'
 
 export type IconName = CustomIconName | FAIconName
 
