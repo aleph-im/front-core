@@ -18,6 +18,7 @@ export type ObjectId =
   | 'Object17'
   | 'Object18'
   | 'Object19'
+  | 'Object20'
 
 export type ObjectImgProps = {
   id: ObjectId

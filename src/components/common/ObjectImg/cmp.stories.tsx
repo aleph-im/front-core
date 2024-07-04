@@ -39,7 +39,7 @@ Default.parameters = {
 // ---
 
 const Template2: StoryFn<typeof ObjectImg> = (args) => {
-  const all = Array.from({ length: 19 })
+  const all = Array.from({ length: 20 })
 
   return (
     <>
