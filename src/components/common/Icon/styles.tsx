@@ -7,6 +7,7 @@ import { IconSize } from './types'
 
 export interface StyledIconProps extends FontAwesomeIconProps {
   $iconSize: IconSize
+  $gradientId?: string
 }
 
 export const StyledIconSizeCss = css<StyledIconProps>`
@@ -65,8 +66,28 @@ export const StyledCustomIconCss = css<StyledIconProps & { $color?: string }>`
   vertical-align: -0.125em;
   ${StyledIconSizeCss};
   fill: ${({ $color }) => $color || 'currentColor'};
+
+  ${({ $gradientId }) => {
+    if (!$gradientId) return ''
+
+    return css`
+      & path {
+        fill: url(#${$gradientId});
+      }
+    `
+  }};
 `
 
 export const StyledIcon = styled(FontAwesomeIcon)<StyledIconProps>`
   ${StyledIconSizeCss}
+
+  ${({ $gradientId }) => {
+    if (!$gradientId) return ''
+
+    return css`
+      & path {
+        fill: url(#${$gradientId});
+      }
+    `
+  }};
 `

@@ -30,5 +30,6 @@ export interface IconProps extends Omit<FontAwesomeIconProps, 'icon' | 'size'> {
   name: IconName
   size?: IconSize
   prefix?: IconPrefix
+  gradient?: string
   // className?: string
 }
