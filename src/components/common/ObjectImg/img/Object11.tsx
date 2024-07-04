@@ -1,7 +1,10 @@
 import React from 'react'
 import { StyledObjectImgSvgProps } from '../types'
 
-export const Object11 = ({ color = '#ffffff' }: StyledObjectImgSvgProps) => {
+export const Object11 = ({
+  color = '#ffffff',
+  color2 = 'transparent',
+}: StyledObjectImgSvgProps) => {
   return (
     <svg
       width="100%"
@@ -25,30 +28,35 @@ export const Object11 = ({ color = '#ffffff' }: StyledObjectImgSvgProps) => {
       />
       <path
         d="M50.0002 51.56C68.2422 51.56 83.0302 42.7938 83.0302 31.98C83.0302 21.1663 68.2422 12.4 50.0002 12.4C31.7582 12.4 16.9702 21.1663 16.9702 31.98C16.9702 42.7938 31.7582 51.56 50.0002 51.56Z"
+        fill={color2}
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M60.9005 50.46L55.5405 86.34C55.7905 86.21 56.0205 86.08 56.2405 85.93L63.8805 49.75C62.9105 50.02 61.9205 50.25 60.9105 50.46H60.9005Z"
+        d="M60.9005 50.4601L55.5405 86.3401C55.7905 86.2101 56.0205 86.0801 56.2405 85.9301L63.8805 49.7501C62.9105 50.0201 61.9205 50.2501 60.9105 50.4601H60.9005Z"
+        fill={color2}
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M18.6704 38.1901L41.8404 83.7301C42.5904 85.7001 45.3204 87.2201 48.7304 87.5201L43.5304 51.1701C31.8504 49.8001 22.3804 44.7701 18.6704 38.1801V38.1901Z"
+        fill={color2}
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M51.8906 51.52V87.45C52.9306 87.31 53.9106 87.05 54.7606 86.7L55.5106 51.28C54.3206 51.4 53.1206 51.48 51.8906 51.52Z"
+        fill={color2}
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M75.0103 44.7701L61.0703 78.0001L81.3303 38.2001C79.9503 40.6401 77.7903 42.8601 75.0103 44.7701Z"
+        fill={color2}
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -68,7 +76,7 @@ export const Object11 = ({ color = '#ffffff' }: StyledObjectImgSvgProps) => {
         strokeLinejoin="round"
       />
       <path
-        d="M63.8705 49.75L56.2305 85.93C57.1905 85.29 57.8805 84.51 58.1805 83.64L61.0505 77.99L74.9905 44.76C71.9405 46.86 68.1505 48.56 63.8605 49.74L63.8705 49.75Z"
+        d="M63.8705 49.7501L56.2305 85.9301C57.1905 85.2901 57.8805 84.5101 58.1805 83.6401L61.0505 77.9901L74.9905 44.7601C71.9405 46.8601 68.1505 48.5601 63.8605 49.7401L63.8705 49.7501Z"
         fill={color}
         stroke={color}
         strokeLinecap="round"
