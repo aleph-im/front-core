@@ -7,4 +7,5 @@ export type RouterLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   isActive: boolean
   disabled?: boolean
   variant?: string
+  iconPosition?: 'left' | 'right' | 'top' | 'bottom'
 }

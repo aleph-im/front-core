@@ -21,16 +21,36 @@ const defaultArgs: Partial<RouterLinkProps> = {
 
 // ---
 
-function withFlagArgs(args: RouterLinkProps) {
+function withFlagArgs(args: RouterLinkProps): RouterLinkProps {
   return { ...args, route: { ...args.route, flag: 1 } }
 }
 
-function withoutTextArgs(args: RouterLinkProps) {
+function withLabelArgs(args: RouterLinkProps): RouterLinkProps {
+  return { ...args, route: { ...args.route, label: '(SOON)' } }
+}
+
+function highlightedArgs(args: RouterLinkProps): RouterLinkProps {
+  return { ...args, route: { ...args.route, highlighted: true } }
+}
+
+function withoutTextArgs(args: RouterLinkProps): RouterLinkProps {
   return { ...args, route: { ...args.route, name: undefined } }
 }
 
-function withoutIconArgs(args: RouterLinkProps) {
+function withoutIconArgs(args: RouterLinkProps): RouterLinkProps {
   return { ...args, route: { ...args.route, icon: undefined } }
+}
+
+function iconOnRightArgs(args: RouterLinkProps): RouterLinkProps {
+  return { ...args, iconPosition: 'right' }
+}
+
+function iconOnTopArgs(args: RouterLinkProps): RouterLinkProps {
+  return { ...args, iconPosition: 'top' }
+}
+
+function iconOnBottomArgs(args: RouterLinkProps): RouterLinkProps {
+  return { ...args, iconPosition: 'bottom' }
 }
 
 const RouterLinkVariantGroup = (args: RouterLinkProps) => {
@@ -43,6 +63,9 @@ const RouterLinkVariantGroup = (args: RouterLinkProps) => {
         <RouterLink {...withFlagArgs(args)} />
       </div>
       <div>
+        <RouterLink {...highlightedArgs(args)} />
+      </div>
+      <div>
         <RouterLink {...args} disabled />
       </div>
       <div>
@@ -50,6 +73,9 @@ const RouterLinkVariantGroup = (args: RouterLinkProps) => {
       </div>
       <div>
         <RouterLink {...args} isActive={true} disabled />
+      </div>
+      <div>
+        <RouterLink {...withLabelArgs(args)} disabled />
       </div>
     </>
   )
@@ -59,11 +85,17 @@ const RouterLinkGroup = ({
   defaultArgs,
   noIconArgs,
   noTextArgs,
+  iconRightArgs,
+  iconTopArgs,
+  iconBottomArgs,
   variant,
 }: {
   defaultArgs: RouterLinkProps
   noIconArgs: RouterLinkProps
   noTextArgs: RouterLinkProps
+  iconRightArgs: RouterLinkProps
+  iconTopArgs: RouterLinkProps
+  iconBottomArgs: RouterLinkProps
   variant: RouterLinkProps['variant']
 }) => {
   return (
@@ -82,6 +114,18 @@ const RouterLinkGroup = ({
           <div tw="mb-4">Text only</div>
           <RouterLinkVariantGroup {...noIconArgs} variant={variant} />
         </div>
+        <div>
+          <div tw="mb-4">Icon right</div>
+          <RouterLinkVariantGroup {...iconRightArgs} variant={variant} />
+        </div>
+        <div>
+          <div tw="mb-4">Icon top</div>
+          <RouterLinkVariantGroup {...iconTopArgs} variant={variant} />
+        </div>
+        <div>
+          <div tw="mb-4">Icon bottom</div>
+          <RouterLinkVariantGroup {...iconBottomArgs} variant={variant} />
+        </div>
       </div>
     </div>
   )
@@ -90,6 +134,10 @@ const RouterLinkGroup = ({
 const Template: StoryFn<typeof RouterLink> = (args) => {
   const noTextArgs = useMemo(() => withoutTextArgs(args), [args])
   const noIconArgs = useMemo(() => withoutIconArgs(args), [args])
+  const iconRightArgs = useMemo(() => iconOnRightArgs(args), [args])
+  const iconTopArgs = useMemo(() => iconOnTopArgs(args), [args])
+  const iconBottomArgs = useMemo(() => iconOnBottomArgs(args), [args])
+
   const theme = useTheme()
   const variants = Object.keys(theme.component.routerLink.variant)
 
@@ -102,6 +150,9 @@ const Template: StoryFn<typeof RouterLink> = (args) => {
             defaultArgs: args,
             noIconArgs,
             noTextArgs,
+            iconRightArgs,
+            iconTopArgs,
+            iconBottomArgs,
             variant,
           }}
         />
