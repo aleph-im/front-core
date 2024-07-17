@@ -21,6 +21,7 @@ library.add(far, fab, fass)
 
 const iconPrefixes: IconPrefix[] = ['fass', 'fab', 'far', 'custom']
 
+// @todo: Think about refactoring as we could be rendering the same gradient multiple times
 const GradientDefinition = ({
   gradient,
   id,
