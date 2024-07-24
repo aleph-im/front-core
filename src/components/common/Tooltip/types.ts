@@ -3,6 +3,7 @@ import { FloatPosition, FloatPositionType } from '../../../hooks'
 
 export type TooltipPositionType = FloatPositionType
 export type TooltipPosition = FloatPosition
+export type TooltipVariant = 1 | 2
 
 export type TooltipProps = {
   my: TooltipPositionType
@@ -15,6 +16,7 @@ export type TooltipProps = {
 
   open?: boolean
   content?: ReactNode
+  variant?: TooltipVariant
 
   onOpen?: () => void
   onClose?: () => void

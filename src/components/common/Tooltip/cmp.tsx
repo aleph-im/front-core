@@ -10,6 +10,7 @@ import {
   StyledContentContainer,
   StyledContainer,
   StyledHeaderCloseIcon,
+  StyledChildrenContainer,
 } from './styles'
 import { TooltipProps } from './types'
 import { useFloatPosition } from '../../../hooks/useFloatPosition'
@@ -26,6 +27,7 @@ export const Tooltip = ({
   at = 'top-center',
   margin = { x: 5, y: 5 },
   offset = { x: 0, y: 0 },
+  variant = 1,
   onOpen,
   onClose,
   onCloseClick,
@@ -110,6 +112,7 @@ export const Tooltip = ({
               ref: tooltipRef,
               $position: position,
               $stage: stage,
+              $variant: variant,
               ...rest,
             }}
           >
@@ -118,14 +121,16 @@ export const Tooltip = ({
                 <StyledHeaderCloseIcon onClick={handleCloseClick} />
               </div>
             )}
-            <StyledContentContainer>{content}</StyledContentContainer>
+            <StyledContentContainer $variant={variant}>
+              {content}
+            </StyledContentContainer>
           </StyledContainer>
         )}
       </Portal>
       {children && (
-        <span style={{ display: 'inline-block' }} ref={targetRef}>
+        <StyledChildrenContainer ref={targetRef}>
           {children}
-        </span>
+        </StyledChildrenContainer>
       )}
     </>
   )

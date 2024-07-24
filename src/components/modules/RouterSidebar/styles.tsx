@@ -14,6 +14,8 @@ import {
   StyledDisabledRouterLink,
 } from '../RouterLink/styles'
 import { StyledTextGradientContainer } from '../../common/TextGradient/styles'
+import Tooltip from '../../common/Tooltip'
+import { StyledChildrenContainer as StyledTooltipChildrenContainer } from '../../common/Tooltip/styles'
 
 const nav1OpenSize = 4.5
 const nav1CloseSize = 0.375
@@ -164,6 +166,17 @@ export const StyledRouterLink2 = styled(
   }}
 `
 
+export const StyledTooltip = styled(Tooltip).attrs((props) => {
+  return {
+    ...props,
+    variant: 2,
+    my: 'center-left',
+    at: 'center-left',
+    offset: { x: 63, y: 0 },
+    margin: { x: 5, y: 0 },
+  }
+})``
+
 export const StyledNav2LinkContainer = styled.div`
   ${tw`flex flex-col items-start cursor-auto w-full overflow-auto absolute`}
   margin-top: 6.5rem;
@@ -211,6 +224,10 @@ export const StyledClosedNav2LinkContainer = styled(StyledNav2LinkContainer)`
 
   & ${StyledRouterLink}, & ${StyledDisabledRouterLink} {
     ${tw`flex items-center justify-center text-center`}
+  }
+
+  & ${StyledTooltipChildrenContainer} {
+    ${tw`w-full`}
   }
 
   & ${StyledNotificationBadge} {

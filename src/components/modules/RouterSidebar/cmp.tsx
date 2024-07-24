@@ -22,6 +22,7 @@ import {
   StyledNav2MainTitle,
   StyledOpenedNav2LinkContainer,
   StyledClosedNav2LinkContainer,
+  StyledTooltip,
 } from './styles'
 import { RouteProps, RouterSidebarProps } from './types'
 import { RouterLinkProps } from '../RouterLink'
@@ -178,8 +179,14 @@ const ClosedNav2Route = (props: RouteProps) => {
             />
           ))}
         </>
-      ) : (
+      ) : $route.highlighted ? (
         <StyledRouterLink2 {...linkProps} />
+      ) : (
+        <div tw="w-full flex justify-center items-center">
+          <StyledTooltip content={[route.name, route.label].join(' ')}>
+            <StyledRouterLink2 {...linkProps} />
+          </StyledTooltip>
+        </div>
       )}
     </StyledClosedNav2Link>
   )
