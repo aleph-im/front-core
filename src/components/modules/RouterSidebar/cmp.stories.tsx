@@ -110,70 +110,91 @@ NestedRoutes.args = {
       children: [
         {
           name: 'Solutions',
-          href: '/solutions',
+          href: '/',
+          exact: true,
           children: [
             {
               name: 'Dashboard',
-              href: '/solutions/dashboard',
+              href: '/',
+              exact: true,
+              icon: 'dashboard',
             },
-          ],
-        },
-        {
-          name: 'Computing',
-          href: '/computing',
-          children: [
             {
+              name: 'Settings',
+              href: '/settings',
+              exact: true,
+              icon: 'settings',
+            },
+            {
+              name: 'Web3 Hosting',
+              href: '/hosting',
+              icon: 'web3HostingBox',
+              children: [
+                {
+                  name: 'Manage your website',
+                  href: '/hosting/website',
+                  icon: 'manageWebsite',
+                },
+              ],
+            },
+            {
+              name: 'Computing',
+              href: '/computing',
+              icon: 'computeSolutions',
+              children: [
+                {
+                  name: 'Functions',
+                  href: '/computing/function',
+                  icon: 'functions',
+                },
+                {
+                  name: 'Instances',
+                  href: '/computing/instance',
+                  icon: 'instance',
+                },
+                {
+                  name: 'Confidential',
+                  href: '/computing/confidential',
+                  disabled: true,
+                  label: '(SOON)',
+                  icon: 'confidential',
+                },
+              ],
+            },
+            {
+              name: 'Storage',
+              href: '/storage',
+              icon: 'storageSolutions',
+              children: [
+                {
+                  name: 'Volumes',
+                  href: '/storage',
+                  icon: 'storageSolutions',
+                },
+              ],
+            },
+            {
+              name: 'Tools',
+              href: '#',
               icon: 'console',
-              name: 'Functions',
-              href: '/computing/function',
-            },
-            {
-              name: 'Instances',
-              href: '/computing/instance',
-            },
-            {
-              name: 'Confidential',
-              href: '/computing/confidential',
-            },
-          ],
-        },
-        {
-          name: 'Storage',
-          href: '/storage',
-          children: [
-            {
-              name: 'Inmutable volumes',
-              href: '/storage/volume',
-            },
-          ],
-        },
-        {
-          name: 'Tools',
-          href: '#',
-          children: [
-            {
-              name: 'VRF',
-              href: 'https://medium.com/aleph-im/aleph-im-verifiable-random-function-vrf-b03544a7e904',
-              external: true,
-            },
-            {
-              name: 'Indexing framework',
-              href: 'https://docs.aleph.im/tools/indexer/',
-              external: true,
-            },
-          ],
-        },
-        {
-          name: 'Configure',
-          href: '/configure',
-          children: [
-            {
-              name: 'Secrets',
-              href: '/configure/ssh',
-            },
-            {
-              name: 'Custom domains',
-              href: '/configure/domain',
+              children: [
+                {
+                  name: 'VRF',
+                  href: 'https://medium.com/aleph-im/aleph-im-verifiable-random-function-vrf-b03544a7e904',
+                  external: true,
+                  highlighted: true,
+                  target: '_blank',
+                  icon: 'arrow-up-right-from-square',
+                },
+                {
+                  name: 'Indexer Framework',
+                  href: 'https://docs.aleph.im/tools/indexer/',
+                  external: true,
+                  highlighted: true,
+                  target: '_blank',
+                  icon: 'arrow-up-right-from-square',
+                },
+              ],
             },
           ],
         },

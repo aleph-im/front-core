@@ -4,9 +4,11 @@ import type { IconName } from './components/common/Icon'
 export type Route = {
   href: string
   external?: boolean
+  highlighted?: boolean
   target?: HTMLAnchorElement['target']
   name?: string
   icon?: IconName
+  label?: string
   flag?: number
   exact?: boolean
   disabled?: boolean

@@ -11,16 +11,26 @@ import {
   StyledRouterLink,
   StyledRouteLinkIcon,
   StyledRouteLinkText,
+  StyledDisabledRouterLink,
 } from '../RouterLink/styles'
+import { StyledTextGradientContainer } from '../../common/TextGradient/styles'
 
 const nav1OpenSize = 4.5
 const nav1CloseSize = 0.375
 const nav2OpenSize = 18.75
 const nav2CloseSize = nav1OpenSize
 
-export const StyledLink = styled.div`
+export const StyledNav1Link = styled.div`
   ${tw`w-full`}
 `
+
+export const StyledNav2Link = styled.div`
+  ${tw`w-full`}
+`
+
+export const StyledOpenedNav2Link = styled(StyledNav2Link)``
+
+export const StyledClosedNav2Link = styled(StyledNav2Link)``
 
 export const StyledNav1 = styled.nav`
   ${({ theme }) => {
@@ -48,7 +58,7 @@ export const StyledRouterLink1 = styled(
     variant: '1',
     route: { ...props.route, name: undefined, flag: undefined },
   }
-})`
+})<StyledRouterLink1Props>`
   ${({ theme, isActive }) => {
     const { nav1 } = theme.component.sidebar
 
@@ -92,25 +102,51 @@ export const StyledNav2Container = styled.div`
   ${tw`flex flex-col items-start h-full`}
 `
 
+export const StyledNav2TitleContainer = styled.div`
+  ${tw`py-2`}
+  position: relative;
+`
+
 export const StyledNav2Title = styled.div.attrs(addClasses('tp-nav'))`
   ${({ theme }) => {
     const { title } = theme.component.sidebar.nav2
 
     return css`
-      ${tw`h-12 px-6`}
       ${tw`inline-flex items-center w-auto max-w-full uppercase`}
       color: ${title?.color};
     `
   }}
 `
 
-export const StyledNav2LinkContainer = styled.div`
-  ${tw`flex flex-col items-start cursor-auto w-full overflow-auto`}
-  margin-top: 6.5rem;
+export const StyledNav2MainTitle = styled.div.attrs(addClasses('tp-nav'))`
+  ${({ theme }) => {
+    const { mainTitle } = theme.component.sidebar.nav2
+
+    return css`
+      ${tw`inline-flex items-center w-auto max-w-full uppercase`}
+      color: ${mainTitle?.color};
+    `
+  }}
+`
+
+export const StyledNav2Icon = styled(Icon).attrs((props) => {
+  return {
+    ...props,
+    ...addClasses('tp-nav'),
+    size: '1em',
+  }
+})`
+  ${({ theme }) => {
+    const { title } = theme.component.sidebar.nav2
+    return css`
+      ${tw`inline-flex items-center w-auto max-w-full uppercase text-center`}
+      color: ${title?.color};
+      padding-right: 0.625rem;
+    `
+  }}
 `
 
 export type StyledRouterLink2Props = Omit<RouterLinkProps, 'variant'>
-
 export const StyledRouterLink2 = styled(
   RouterLink,
 ).attrs<StyledRouterLink2Props>((props) => {
@@ -119,15 +155,73 @@ export const StyledRouterLink2 = styled(
     variant: '2',
   }
 })<StyledRouterLink2Props>`
-  ${({ route: { icon } }) => {
+  ${() => {
     return css`
       ${StyledRouterLink} {
-        ${tw`h-12 px-6`}
         ${tw`flex max-w-full overflow-hidden`}
-        padding-left: ${!icon ? 3.125 : 1.5}rem;
       }
     `
   }}
+`
+
+export const StyledNav2LinkContainer = styled.div`
+  ${tw`flex flex-col items-start cursor-auto w-full overflow-auto absolute`}
+  margin-top: 6.5rem;
+`
+
+export const StyledOpenedNav2LinkContainer = styled(StyledNav2LinkContainer)`
+  width: ${nav2OpenSize}rem;
+
+  & ${StyledRouterLink} {
+    ${tw`h-12 px-6`}
+    padding-left: 3.125rem;
+  }
+
+  & ${StyledNav2Title} {
+    ${({ theme }) => {
+      const { title } = theme.component.sidebar.nav2
+
+      return css`
+        ${tw`h-8 mx-5 px-1`}
+        border-bottom: 2px solid ${title?.underline};
+      `
+    }}
+  }
+
+  & ${StyledNav2MainTitle} {
+    ${tw`h-8 mx-5 px-1`}
+  }
+`
+export const StyledClosedNav2LinkContainer = styled(StyledNav2LinkContainer)`
+  width: ${nav2CloseSize}rem;
+
+  & ${StyledNav2Title}, & ${StyledNav2MainTitle} {
+    ${tw`p-0 m-0 border-b-0 flex items-center justify-center text-center`}
+    font-size: 0.6rem;
+    min-height: 1.286rem;
+    padding: 0.5714rem 0;
+  }
+
+  & ${StyledRouterLink} {
+    height: fit-content;
+    min-height: 2.8572rem;
+    padding: 0.5714rem 0;
+    width: 100%;
+  }
+
+  & ${StyledRouterLink}, & ${StyledDisabledRouterLink} {
+    ${tw`flex items-center justify-center text-center`}
+  }
+
+  & ${StyledNotificationBadge} {
+    position: absolute;
+    left: 66%;
+  }
+
+  & ${StyledTextGradientContainer}, & ${StyledDisabledRouterLink} {
+    white-space: pre-wrap;
+    font-size: 0.6rem;
+  }
 `
 
 export const StyledLogoContainer = styled.div`
@@ -204,7 +298,7 @@ export const StyledProgressBar = styled.div<{ $percent: number }>(
   },
 )
 
-const fadeOutIn1 = keyframes` 
+const fadeOutIn1 = keyframes`
   0%, 15%, 90%, 100%  {
     opacity: 1;
   }
@@ -215,7 +309,7 @@ const fadeOutIn1 = keyframes`
 `
 
 // @note: https://stackoverflow.com/a/43575547
-const fadeOutIn1Reverse = keyframes` 
+const fadeOutIn1Reverse = keyframes`
   0%, 10%, 80%, 100% {
     opacity: 1;
   }
@@ -225,7 +319,7 @@ const fadeOutIn1Reverse = keyframes`
   }
 `
 
-const fadeOutIn2 = keyframes` 
+const fadeOutIn2 = keyframes`
   0%, 6%, 80%, 100%  {
     opacity: 1;
   }
@@ -235,7 +329,7 @@ const fadeOutIn2 = keyframes`
   }
 `
 
-const fadeOutIn2Reverse = keyframes` 
+const fadeOutIn2Reverse = keyframes`
   0%, 10%, 70%, 100% {
     opacity: 1;
   }
@@ -250,6 +344,8 @@ export type StyledSidebarProps = {
   $isHover?: boolean
   $speed?: number
   $breakpoint: BreakpointId
+  $showOpened: boolean
+  $showClosed: boolean
 }
 
 export const StyledSidebar = styled.aside<StyledSidebarProps>`
@@ -273,23 +369,17 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width ease-in-out ${0.35 / $speed}s ${0.4 / $speed}s;
           }
 
-          & ${StyledRouterLink1} ${StyledRouteLinkIcon}, & ${StyledLogo} {
+          & ${StyledLogo} {
             ${tw`opacity-100 visible`}
 
             transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 / $speed}s,
-              visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
-              color ease-in-out 0.25s 0s !important;
+            visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
+            color ease-in-out 0.25s 0s !important;
           }
 
           & ${StyledLogoContainer} {
             transition: background-color ease-in-out ${0.7 / $speed}s
               ${0.2 / $speed}s;
-          }
-
-          & ${StyledRouterLink1} ${StyledRouterLink}::after {
-            ${tw`-top-2 opacity-0`}
-            transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
-              top ease-in-out ${0.7 / $speed}s ${0.1 / $speed}s;
           }
 
           & ${StyledNav2} {
@@ -318,31 +408,6 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
-          & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
-            ${tw`relative left-0 translate-x-0 gap-2.5`}
-
-            transition: left linear 0s ${0.5 / $speed}s,
-              transform linear 0s ${0.5 / $speed}s,
-              font-size linear 0s ${0.5 / $speed}s,
-              padding linear 0s ${0.5 / $speed}s,
-              gap linear 0s ${0.5 / $speed}s,
-              background-color ease-in-out 0s ${0.5 / $speed}s,
-              color ease-in-out 0.25s 0s !important;
-          }
-
-          & ${StyledNav2Title} {
-            font-size: 1.125rem;
-          }
-
-          & ${StyledRouteLinkIcon} {
-            transition: color ease-in-out 0.25s 0s !important;
-          }
-
-          & ${StyledNotificationBadge} {
-            ${tw`-left-0.5`}
-            transition: left linear 0s ${0.45 / $speed}s;
-          }
-
           & ${StyledToggleButton} {
             transform: rotateZ(-180deg);
             transition: transform ease-in-out ${0.6 / $speed}s ${0.4 / $speed}s;
@@ -359,13 +424,24 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             }
           }
 
-          & ${StyledRouterLink2} ${StyledRouterLink}._active {
-            background-color: ${theme.component.sidebar.nav2.active
-              ?.background};
+          & ${StyledNav1Link} {
+            & ${StyledRouterLink1} ${StyledRouteLinkIcon} {
+              ${tw`opacity-100 visible`}
 
-            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              color: ${theme.component.sidebar.nav2.active?.color};
-              transition: color ease-in-out 0s ${0.5 / $speed}s !important;
+              transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 /
+              $speed}s,
+                visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
+                color ease-in-out 0.25s 0s !important;
+            }
+
+            & ${StyledRouterLink1} ${StyledRouterLink}::after {
+              ${tw`-top-2 opacity-0`}
+              transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
+                top ease-in-out ${0.7 / $speed}s ${0.1 / $speed}s;
+            }
+
+            & ${StyledRouteLinkIcon} {
+              transition: color ease-in-out 0.25s 0s !important;
             }
           }
         `
@@ -375,24 +451,18 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             transition: width ease-in-out ${0.2 / $speed}s ${0.15 / $speed}s;
           }
 
-          & ${StyledRouterLink1} ${StyledRouteLinkIcon}, & ${StyledLogo} {
+          & ${StyledLogo} {
             ${tw`opacity-0 invisible`}
 
             transition: opacity ease-in-out ${0.2 / $speed}s 0s,
-              visibility linear ${0.2 / $speed}s 0s,
-               color ease-in-out 0.25s 0s !important;
+            visibility linear ${0.2 / $speed}s 0s,
+             color ease-in-out 0.25s 0s !important;
           }
 
           & ${StyledLogoContainer} {
             background-color: transparent;
             transition: background-color ease-in-out ${0.7 / $speed}s
               ${0.2 / $speed}s;
-          }
-
-          & ${StyledRouterLink1} ${StyledRouterLink}::after {
-            ${tw`top-0 opacity-100`}
-            transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
-              top ease-in-out ${0.7 / $speed}s ${0.3 / $speed}s;
           }
 
           & ${StyledNav2} {
@@ -402,14 +472,16 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               padding-left ease-in-out ${0.4 / $speed}s 0s,
               box-shadow ease-in-out ${0.4 / $speed}s 0s;
 
-            ${$isHover &&
-            css`
-              cursor: pointer;
+            ${
+              $isHover &&
+              css`
+                cursor: pointer;
 
-              padding-left: ${nav1CloseSize}rem;
-              box-shadow: ${nav1CloseSize}rem 0px 0px 0px
-                ${theme.component.sidebar.nav2.background};
-            `}
+                padding-left: ${nav1CloseSize}rem;
+                box-shadow: ${nav1CloseSize}rem 0px 0px 0px
+                  ${theme.component.sidebar.nav2.background};
+              `
+            }
           }
 
           & ${StyledNav1Container}, & ${StyledNav2Container} {
@@ -425,34 +497,10 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
           }
 
-          & ${StyledNav2Title}, & ${StyledRouterLink2} ${StyledRouterLink} {
-            ${tw`relative left-1/2 -translate-x-1/2 gap-4`}
-
-            transition: left linear 0s ${0.45 / $speed}s,
-              transform linear 0s ${0.45 / $speed}s,
-              font-size linear 0s ${0.45 / $speed}s,
-              padding linear 0s ${0.45 / $speed}s,
-              background-color ease-in-out 0s ${0.45 / $speed}s,
-              gap linear 0s ${0.45 / $speed}s;
-          }
-
-          & ${StyledNav2Title} {
-            ${tw`px-0`}
-            font-size: 0.75rem;
-          }
-
-          & ${StyledRouteLinkIcon} {
-            transition: color ease-in-out 0.25s 0s !important;
-          }
-
-          & ${StyledNotificationBadge} {
-            ${tw`-left-8`}
-            transition: left linear 0s ${0.45 / $speed}s;
-          }
-
           & ${StyledToggleButton} {
             transform: rotateZ(0deg);
-            transition: transform ease-in-out ${0.6 / $speed}s ${0.25 / $speed}s;
+            transition: transform ease-in-out ${0.6 / $speed}s
+            ${0.25 / $speed}s;
           }
 
           & ${StyledStorageContainer} {
@@ -466,12 +514,67 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             }
           }
 
-          & ${StyledRouterLink2} ${StyledRouterLink}._active {
-            & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
-              transition: color ease-in-out 0s ${0.45 / $speed}s !important;
+          & ${StyledNav1Link} {
+            & ${StyledRouterLink1} ${StyledRouteLinkIcon} {
+              ${tw`opacity-0 invisible`}
+
+              transition: opacity ease-in-out ${0.2 / $speed}s 0s,
+                visibility linear ${0.2 / $speed}s 0s,
+                 color ease-in-out 0.25s 0s !important;
+            }
+
+            & ${StyledRouterLink1} ${StyledRouterLink}::after {
+              ${tw`top-0 opacity-100`}
+              transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
+                top ease-in-out ${0.7 / $speed}s ${0.3 / $speed}s;
+            }
+
+            & ${StyledRouteLinkIcon} {
+              transition: color ease-in-out 0.25s 0s !important;
+            }
+        `};
+
+
+  }
+
+  ${({ theme, $showOpened }) =>
+    $showOpened
+      ? css`
+          & ${StyledOpenedNav2LinkContainer} {
+            & ${StyledRouterLink2} ${StyledRouterLink}._active {
+              background-color: ${theme.component.sidebar.nav2.active
+                ?.background};
+
+              & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+                color: ${theme.component.sidebar.nav2.active?.color};
+                transition: color ease-in-out 0s !important;
+              }
             }
           }
-        `};
+        `
+      : css`
+          & ${StyledOpenedNav2LinkContainer} {
+            position: absolute;
+            visibility: hidden;
+            transition: visibility 500ms;
+
+            & ${StyledRouterLink2} ${StyledRouterLink}._active {
+              & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
+                transition: color ease-in-out 0s !important;
+              }
+            }
+          }
+        `}
+
+  ${({ $showClosed }) =>
+    !$showClosed &&
+    css`
+      & ${StyledClosedNav2LinkContainer} {
+        position: absolute;
+        visibility: hidden;
+        transition: visibility 500ms;
+      }
+    `}
 
   ${({ $isOpen }) =>
     $isOpen === undefined &&
