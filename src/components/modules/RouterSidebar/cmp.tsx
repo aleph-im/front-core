@@ -26,9 +26,9 @@ import {
 } from './styles'
 import { RouteProps, RouterSidebarProps } from './types'
 import { RouterLinkProps } from '../RouterLink'
+import { useTheme } from 'styled-components'
 
-const Nav1Route = (props: RouteProps) => {
-  const { pathname, route, Link, ...rest } = props
+const Nav1Route = ({ pathname, route, Link, ...rest }: RouteProps) => {
   const isActive = route.exact
     ? pathname === route.href
     : pathname.indexOf(route.href) >= 0
@@ -48,23 +48,20 @@ const Nav1Route = (props: RouteProps) => {
 }
 Nav1Route.displayName = 'Nav1Route'
 
-const OpenedNav2Route = (props: RouteProps) => {
-  const { pathname, route, level = 1, Link, ...rest } = props
-
+const OpenedNav2Route = ({
+  pathname,
+  route,
+  level = 1,
+  Link,
+  ...rest
+}: RouteProps) => {
   const isActive = route.exact
     ? pathname === route.href
     : pathname.indexOf(route.href) >= 0
 
-  const routeIcon = (route: any) => {
-    if (route.highlighted) return route.icon
-    if (route.children?.length) return route.icon
-
-    return undefined
-  }
-
   const $route = {
     ...route,
-    icon: routeIcon(route),
+    icon: route.highlighted || route.children?.length ? route.icon : undefined,
   }
 
   const linkProps: RouterLinkProps = {
@@ -91,7 +88,7 @@ const OpenedNav2Route = (props: RouteProps) => {
               )}
             </StyledNav2TitleContainer>
           )}
-          {$route?.children?.map((childrenRoute) => (
+          {$route.children.map((childrenRoute) => (
             <OpenedNav2RouteMemo
               key={childrenRoute.href}
               {...{
@@ -113,31 +110,21 @@ const OpenedNav2Route = (props: RouteProps) => {
 }
 OpenedNav2Route.displayName = 'OpenedNav2Route'
 
-const ClosedNav2Route = (props: RouteProps) => {
-  const { pathname, route, level = 0, Link, ...rest } = props
-
+const ClosedNav2Route = ({
+  pathname,
+  route,
+  level = 0,
+  Link,
+  ...rest
+}: RouteProps) => {
   const isActive = route.exact
     ? pathname === route.href
     : pathname.indexOf(route.href) >= 0
 
-  const routeIcon = (route: any) => {
-    if (route.highlighted) return route.icon
-    if (!route.children?.length) return route.icon
-
-    return undefined
-  }
-
-  const routeName = (route: any) => {
-    if (route.highlighted) return route.name
-    if (route.children?.length) return route.name
-
-    return undefined
-  }
-
   const $route = {
     ...route,
-    icon: routeIcon(route),
-    name: routeName(route),
+    icon: route.highlighted || !route.children?.length ? route.icon : undefined,
+    name: route.highlighted || route.children?.length ? route.name : undefined,
     label: undefined,
   }
 
@@ -165,7 +152,7 @@ const ClosedNav2Route = (props: RouteProps) => {
               )}
             </StyledNav2TitleContainer>
           )}
-          {$route?.children?.map((childrenRoute) => (
+          {$route.children.map((childrenRoute) => (
             <ClosedNav2RouteMemo
               key={childrenRoute.href}
               {...{
@@ -211,27 +198,21 @@ export const RouterSidebar = ({
   const handleToggle = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation()
-      const tagName = e.currentTarget.tagName
+      const tagName = e.currentTarget.tagName.toLowerCase()
       const isOpen = open === undefined || !!open
-      const toggleTo =
-        isOpen && tagName.toLowerCase() !== 'svg' ? open : !isOpen
+      const toggleTo = isOpen && tagName !== 'svg' ? open : !isOpen
 
       onToggle && onToggle(toggleTo)
     },
     [open, onToggle],
   )
 
-  const handleMouseOver = useCallback(() => {
-    setHover(true)
-  }, [])
-
-  const handleMouseOut = useCallback(() => {
-    setHover(false)
-  }, [])
-
-  const handlePreventPropagation = useCallback((e: MouseEvent) => {
-    e.stopPropagation()
-  }, [])
+  const handleMouseOver = useCallback(() => setHover(true), [])
+  const handleMouseOut = useCallback(() => setHover(false), [])
+  const handlePreventPropagation = useCallback(
+    (e: MouseEvent) => e.stopPropagation(),
+    [],
+  )
 
   // -----------------------------------
 
@@ -265,18 +246,19 @@ export const RouterSidebar = ({
   const $isOpen = open
   const $isHover = hover && !!onToggle
   const isOpenState = $isOpen || $isOpen === undefined
+  const theme = useTheme()
 
-  const { shouldMount: $shouldMountOpened, stage: $stageOpened } =
-    useTransition(isOpenState, 500)
-  const { shouldMount: $shouldMountClosed, stage: $stageClosed } =
-    useTransition(!isOpenState, 500)
+  const { shouldMount: $shouldMountOpened } = useTransition(
+    isOpenState,
+    theme.transition.duration.normal,
+  )
+  const { shouldMount: $shouldMountClosed } = useTransition(
+    !isOpenState,
+    theme.transition.duration.normal,
+  )
 
   const $showOpened = $shouldMountOpened && !$shouldMountClosed
   const $showClosed = $shouldMountClosed && !$shouldMountOpened
-
-  console.log('OPENED', $shouldMountOpened, $stageOpened)
-  console.log('CLOSED', $shouldMountClosed, $stageClosed)
-  console.log('\n')
 
   return (
     <StyledSidebar
