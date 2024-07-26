@@ -128,3 +128,17 @@ export function humanReadableSize(
   const to = getHumanReadableUnit(bits)
   return convertByteUnits(value, { from, to, displayUnit: true })
 }
+
+/**
+ * Takes a string and returns a shortened version of it, with the first 6 and last 4 characters separated by '...'
+ *
+ * @param text A text to be shortened
+ * @param start Number of chars to print from the begining
+ * @param end Number of chars to print from the end
+ * @returns A shortened text
+ */
+export const ellipseText = (text: string, start = 10, end = 0) => {
+  if (text.length <= start) return text
+  if (text.length <= end) return text
+  return `${text.slice(0, start)}...${end > 0 ? text.slice(-end) : ''}`
+}
