@@ -1033,8 +1033,12 @@ const sidebar: ThemeSidebar = {
   nav2: {
     color: color.white,
     background: color.dark2,
-    title: {
+    mainTitle: {
       color: color.light1,
+    },
+    title: {
+      color: color.white,
+      underline: color.main0,
     },
     progress: {
       color: color.main1,

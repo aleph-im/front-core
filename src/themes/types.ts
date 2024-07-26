@@ -478,8 +478,12 @@ export type ThemeSidebar = {
   nav2: {
     color: string
     background: string
+    mainTitle?: {
+      color: string
+    }
     title?: {
       color: string
+      underline: string
     }
     progress: {
       color: string

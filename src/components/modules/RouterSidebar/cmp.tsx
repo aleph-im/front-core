@@ -1,6 +1,6 @@
-import { memo, useCallback, useMemo, useState, MouseEvent } from 'react'
+import React, { memo, useCallback, useMemo, useState, MouseEvent } from 'react'
+import { useTransition } from 'transition-hook'
 import {
-  StyledLink,
   StyledLogo,
   StyledNav1,
   StyledRouterLink1,
@@ -14,18 +14,26 @@ import {
   StyledToggleButton,
   StyledLogoContainer,
   StyledNav1Container,
-  StyledNav2LinkContainer,
+  StyledNav2Icon,
+  StyledNav1Link,
+  StyledOpenedNav2Link,
+  StyledClosedNav2Link,
+  StyledNav2TitleContainer,
+  StyledNav2MainTitle,
+  StyledOpenedNav2LinkContainer,
+  StyledClosedNav2LinkContainer,
+  StyledTooltip,
 } from './styles'
-import React from 'react'
 import { RouteProps, RouterSidebarProps } from './types'
+import { RouterLinkProps } from '../RouterLink'
+import { useTheme } from 'styled-components'
 
-const Route = (props: RouteProps) => {
-  const { pathname, route, level = 0, Link, ...rest } = props
+const Nav1Route = ({ pathname, route, Link, ...rest }: RouteProps) => {
   const isActive = route.exact
     ? pathname === route.href
     : pathname.indexOf(route.href) >= 0
 
-  const linkProps = {
+  const linkProps: RouterLinkProps = {
     route,
     Link,
     isActive,
@@ -33,41 +41,144 @@ const Route = (props: RouteProps) => {
   }
 
   return (
-    <StyledLink>
-      {level <= 0 ? (
-        <StyledRouterLink1 {...linkProps} />
-      ) : (
-        <>
-          {route.children ? (
-            <>
-              {route.name && (
-                <div tw="relative">
-                  <StyledNav2Title>{route.name}</StyledNav2Title>
-                </div>
-              )}
-              {route?.children?.map((route) => (
-                <RouteMemo
-                  key={route.href}
-                  {...{
-                    route,
-                    Link,
-                    pathname,
-                    exact: route.exact,
-                    disabled: route.disabled,
-                    level: 1,
-                  }}
-                />
-              ))}
-            </>
-          ) : (
-            <StyledRouterLink2 {...linkProps} />
-          )}
-        </>
-      )}
-    </StyledLink>
+    <StyledNav1Link>
+      <StyledRouterLink1 {...linkProps} />
+    </StyledNav1Link>
   )
 }
-Route.displayName = 'Route'
+Nav1Route.displayName = 'Nav1Route'
+
+const OpenedNav2Route = ({
+  pathname,
+  route,
+  level = 1,
+  Link,
+  ...rest
+}: RouteProps) => {
+  const isActive = route.exact
+    ? pathname === route.href
+    : pathname.indexOf(route.href) >= 0
+
+  const $route = {
+    ...route,
+    icon: route.highlighted || route.children?.length ? route.icon : undefined,
+  }
+
+  const linkProps: RouterLinkProps = {
+    route: $route,
+    Link,
+    isActive,
+    iconPosition: route.highlighted ? 'right' : 'left',
+    ...rest,
+  }
+
+  return (
+    <StyledOpenedNav2Link>
+      {$route.children ? (
+        <>
+          {$route.name && (
+            <StyledNav2TitleContainer>
+              {level > 1 ? (
+                <StyledNav2Title>
+                  {$route.icon && <StyledNav2Icon name={$route.icon} />}
+                  {$route.name}
+                </StyledNav2Title>
+              ) : (
+                <StyledNav2MainTitle>{$route.name}</StyledNav2MainTitle>
+              )}
+            </StyledNav2TitleContainer>
+          )}
+          {$route.children.map((childrenRoute) => (
+            <OpenedNav2RouteMemo
+              key={childrenRoute.href}
+              {...{
+                route: childrenRoute,
+                Link,
+                pathname,
+                exact: childrenRoute.exact,
+                disabled: childrenRoute.disabled,
+                level: level + 1,
+              }}
+            />
+          ))}
+        </>
+      ) : (
+        <StyledRouterLink2 {...linkProps} />
+      )}
+    </StyledOpenedNav2Link>
+  )
+}
+OpenedNav2Route.displayName = 'OpenedNav2Route'
+
+const ClosedNav2Route = ({
+  pathname,
+  route,
+  level = 0,
+  Link,
+  ...rest
+}: RouteProps) => {
+  const isActive = route.exact
+    ? pathname === route.href
+    : pathname.indexOf(route.href) >= 0
+
+  const $route = {
+    ...route,
+    icon: route.highlighted || !route.children?.length ? route.icon : undefined,
+    name: route.highlighted || route.children?.length ? route.name : undefined,
+    label: undefined,
+  }
+
+  const linkProps: RouterLinkProps = {
+    route: $route,
+    Link,
+    isActive,
+    iconPosition: route.highlighted ? 'bottom' : undefined,
+    ...rest,
+  }
+
+  return (
+    <StyledClosedNav2Link>
+      {$route.children ? (
+        <>
+          {$route.name && (
+            <StyledNav2TitleContainer>
+              {level > 1 ? (
+                <StyledNav2Title>
+                  {$route.icon && <StyledNav2Icon name={$route.icon} />}
+                  {$route.name}
+                </StyledNav2Title>
+              ) : (
+                <StyledNav2MainTitle>{$route.name}</StyledNav2MainTitle>
+              )}
+            </StyledNav2TitleContainer>
+          )}
+          {$route.children.map((childrenRoute) => (
+            <ClosedNav2RouteMemo
+              key={childrenRoute.href}
+              {...{
+                route: childrenRoute,
+                Link,
+                pathname,
+                exact: childrenRoute.exact,
+                disabled: childrenRoute.disabled,
+                level: level + 1,
+              }}
+            />
+          ))}
+        </>
+      ) : $route.highlighted ? (
+        <StyledRouterLink2 {...linkProps} />
+      ) : (
+        <div tw="w-full flex justify-center items-center">
+          <StyledTooltip content={[route.name, route.label].join(' ')}>
+            <StyledRouterLink2 {...linkProps} />
+          </StyledTooltip>
+        </div>
+      )}
+    </StyledClosedNav2Link>
+  )
+}
+ClosedNav2Route.displayName = 'ClosedNav2Route'
 
 // -------------------------
 
@@ -87,27 +198,21 @@ export const RouterSidebar = ({
   const handleToggle = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation()
-      const tagName = e.currentTarget.tagName
+      const tagName = e.currentTarget.tagName.toLowerCase()
       const isOpen = open === undefined || !!open
-      const toggleTo =
-        isOpen && tagName.toLowerCase() !== 'svg' ? open : !isOpen
+      const toggleTo = isOpen && tagName !== 'svg' ? open : !isOpen
 
       onToggle && onToggle(toggleTo)
     },
     [open, onToggle],
   )
 
-  const handleMouseOver = useCallback(() => {
-    setHover(true)
-  }, [])
-
-  const handleMouseOut = useCallback(() => {
-    setHover(false)
-  }, [])
-
-  const handlePreventPropagation = useCallback((e: MouseEvent) => {
-    e.stopPropagation()
-  }, [])
+  const handleMouseOver = useCallback(() => setHover(true), [])
+  const handleMouseOut = useCallback(() => setHover(false), [])
+  const handlePreventPropagation = useCallback(
+    (e: MouseEvent) => e.stopPropagation(),
+    [],
+  )
 
   // -----------------------------------
 
@@ -140,6 +245,20 @@ export const RouterSidebar = ({
 
   const $isOpen = open
   const $isHover = hover && !!onToggle
+  const isOpenState = $isOpen || $isOpen === undefined
+  const theme = useTheme()
+
+  const { shouldMount: $shouldMountOpened } = useTransition(
+    isOpenState,
+    theme.transition.duration.normal,
+  )
+  const { shouldMount: $shouldMountClosed } = useTransition(
+    !isOpenState,
+    theme.transition.duration.normal,
+  )
+
+  const $showOpened = $shouldMountOpened && !$shouldMountClosed
+  const $showClosed = $shouldMountClosed && !$shouldMountOpened
 
   return (
     <StyledSidebar
@@ -147,13 +266,15 @@ export const RouterSidebar = ({
         $breakpoint,
         $isOpen,
         $isHover,
+        $showOpened,
+        $showClosed,
       }}
     >
       <StyledNav1>
         <StyledNav1Container>
           <StyledLogoContainer>{logo}</StyledLogoContainer>
           {routes.map((route) => (
-            <RouteMemo
+            <Nav1RouteMemo
               key={route.href}
               {...{
                 route,
@@ -173,13 +294,13 @@ export const RouterSidebar = ({
         onMouseOut={handleMouseOut}
       >
         <StyledNav2Container>
-          <StyledNav2LinkContainer
+          <StyledOpenedNav2LinkContainer
             onClick={handlePreventPropagation}
             onMouseOver={handlePreventPropagation}
             onMouseOut={handlePreventPropagation}
           >
             {currentRoute?.children?.map((route) => (
-              <RouteMemo
+              <OpenedNav2RouteMemo
                 key={route.href}
                 {...{
                   route,
@@ -191,7 +312,26 @@ export const RouterSidebar = ({
                 }}
               />
             ))}
-          </StyledNav2LinkContainer>
+          </StyledOpenedNav2LinkContainer>
+          <StyledClosedNav2LinkContainer
+            onClick={handlePreventPropagation}
+            onMouseOver={handlePreventPropagation}
+            onMouseOut={handlePreventPropagation}
+          >
+            {currentRoute?.children?.map((route) => (
+              <ClosedNav2Route
+                key={route.href}
+                {...{
+                  route,
+                  Link,
+                  pathname,
+                  exact: route.exact,
+                  disabled: route.disabled,
+                  level: 1,
+                }}
+              />
+            ))}
+          </StyledClosedNav2LinkContainer>
           <div tw="flex-1" />
           <div tw="py-12 flex flex-col justify-end h-[14.9375rem] shrink-0 w-full">
             {!!onToggle && (
@@ -217,5 +357,11 @@ export const RouterSidebar = ({
 }
 RouterSidebar.displayName = 'RouterSidebar'
 
-export const RouteMemo = memo(Route) as typeof Route
+export const Nav1RouteMemo = memo(Nav1Route) as typeof Nav1Route
+export const OpenedNav2RouteMemo = memo(
+  OpenedNav2Route,
+) as typeof OpenedNav2Route
+export const ClosedNav2RouteMemo = memo(
+  ClosedNav2Route,
+) as typeof ClosedNav2Route
 export default memo(RouterSidebar) as typeof RouterSidebar

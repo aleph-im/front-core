@@ -68,7 +68,7 @@ export const StyledRouterLink = styled.div.attrs(
     const text = $hasIcon ? defaultText : icon
 
     return css`
-      ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap h-7`}
+      ${tw`inline-flex items-center justify-start w-auto max-w-full relative cursor-pointer p-1 gap-2.5 whitespace-nowrap min-h-[1.75rem]`}
       transition-property: box-shadow, background-color;
       transition-duration: ${theme.transition.duration.fast}ms;
       transition-timing-function: ${theme.transition.timing};
@@ -153,7 +153,7 @@ export const StyledRouteLinkIcon = styled(Icon).attrs<StyledRouteLinkIconProps>(
       prefix: 'custom',
     }
   },
-)`
+)<StyledRouteLinkIconProps>`
   ${tw`relative shrink-0`}
 `
 
@@ -161,6 +161,14 @@ export const StyledRouteLinkText = styled.div`
   ${tw`flex items-center justify-start gap-2.5 whitespace-nowrap max-w-full overflow-hidden`}
 `
 
+export const StyledRouterLinkLabel = styled(StyledRouteLinkText).attrs(
+  addClasses('fs-10'),
+)``
+
 export const StyledNotificationBadge = styled(NotificationBadge)`
   ${tw`relative top-0.5 -left-1 shrink-0 self-start`}
+`
+
+export const StyledDisabledRouterLink = styled.span`
+  ${tw`flex flex-col items-start !cursor-auto w-full overflow-auto`}
 `
