@@ -1,5 +1,4 @@
 import React, { memo } from 'react'
-import { createPortal } from 'react-dom'
 import Button from '../../common/Button'
 import { StyledIcon, StyledLine, StyledPicker, StyledTitle } from './styles'
 import { AccountPickerProps } from './types'
@@ -10,6 +9,7 @@ import { useTheme } from 'styled-components'
 import NetworkSelector from './NetworkSelector'
 import { AccountInformation } from './AccountInformation/cmp'
 import WalletSelector from './WalletSelector'
+import { Portal } from '../../layout/Portal'
 
 export const AccountPicker = ({
   isMobile = false,
@@ -113,9 +113,8 @@ export const AccountPicker = ({
           </Button>
         </>
       )}
-
-      {displayWalletPicker &&
-        createPortal(
+      <Portal>
+        {displayWalletPicker && (
           <StyledPicker
             $isOpen={walletPickerOpen}
             $position={walletPosition}
@@ -138,11 +137,11 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
-          </StyledPicker>,
-          document.body,
+          </StyledPicker>
         )}
-      {displayNetworksPicker &&
-        createPortal(
+      </Portal>
+      <Portal>
+        {displayNetworksPicker && (
           <StyledPicker
             ref={networksPickerRef}
             $isOpen={networksPickerOpen}
@@ -153,11 +152,11 @@ export const AccountPicker = ({
               selectedNetwork={selectedNetwork}
               onSelectNetwork={handleSwitchNetwork}
             />
-          </StyledPicker>,
-          document.body,
+          </StyledPicker>
         )}
-      {displayCondensedPicker &&
-        createPortal(
+      </Portal>
+      <Portal>
+        {displayCondensedPicker && (
           <StyledPicker
             ref={condensedPickerRef}
             $isOpen={condensedPickerOpen}
@@ -195,9 +194,9 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
-          </StyledPicker>,
-          document.body,
+          </StyledPicker>
         )}
+      </Portal>
     </>
   )
 }
