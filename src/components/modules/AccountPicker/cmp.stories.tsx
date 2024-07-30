@@ -1,15 +1,15 @@
 import React from 'react'
 import { StoryFn } from '@storybook/react'
 
-import AccountPickers from './cmp'
-import { AccountPickersProps, Blockchain } from './types'
+import AccountPicker from './cmp'
+import { AccountPickerProps, Blockchain } from './types'
 import { Network } from './NetworkSelector'
 import { Wallet } from './WalletSelector'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/UI/modules/AccountPickers',
-  component: AccountPickers,
+  title: 'Components/UI/modules/AccountPicker',
+  component: AccountPicker,
 }
 
 const wallets: Wallet[] = [
@@ -118,7 +118,7 @@ const handleSwitchNetwork = (network: Network) => {
   alert(`Switch to ${network.name}`)
 }
 
-const defaultArgs: Partial<AccountPickersProps> = {
+const defaultArgs: Partial<AccountPickerProps> = {
   blockchains,
   networks,
   selectedNetwork: networks[0],
@@ -138,12 +138,10 @@ const defaultParams = {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-const Template: StoryFn<typeof AccountPickers> = (
-  props: AccountPickersProps,
-) => {
+const Template: StoryFn<typeof AccountPicker> = (props: AccountPickerProps) => {
   return (
     <div tw="flex justify-end py-6 px-12 mb-[30rem]">
-      <AccountPickers {...props} />
+      <AccountPicker {...props} />
     </div>
   )
 }

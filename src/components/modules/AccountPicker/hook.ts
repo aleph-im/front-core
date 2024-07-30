@@ -7,10 +7,10 @@ import {
   useWindowSize,
 } from '../../../hooks'
 import { Network } from './NetworkSelector'
-import { UseAccountPickersProps, UseAccountPickersReturn } from './types'
+import { UseAccountPickerProps, UseAccountPickerReturn } from './types'
 import { Wallet } from './WalletSelector'
 
-export function useAccountPickers({
+export function useAccountPicker({
   handleConnect: handleConnectProp,
   handleDisconnect: handleDisconnectProp,
   accountAddress,
@@ -18,7 +18,7 @@ export function useAccountPickers({
   networks,
   selectedNetwork,
   ...rest
-}: UseAccountPickersProps): UseAccountPickersReturn {
+}: UseAccountPickerProps): UseAccountPickerReturn {
   const windowSize = useWindowSize(0)
   const windowScroll = useWindowScroll(0)
 

@@ -14,7 +14,7 @@ export type Blockchain = {
   rpcUrl?: string
 }
 
-export type AccountPickersProps = {
+export type AccountPickerProps = {
   isMobile?: boolean
   accountAddress?: string
   accountBalance?: number
@@ -28,8 +28,8 @@ export type AccountPickersProps = {
   handleDisconnect: () => void
 }
 
-export type UseAccountPickersProps = Pick<
-  AccountPickersProps,
+export type UseAccountPickerProps = Pick<
+  AccountPickerProps,
   | 'accountAddress'
   | 'accountBalance'
   | 'ensName'
@@ -42,8 +42,8 @@ export type UseAccountPickersProps = Pick<
   | 'handleDisconnect'
 >
 
-export type UseAccountPickersReturn = Omit<
-  UseAccountPickersProps,
+export type UseAccountPickerReturn = Omit<
+  UseAccountPickerProps,
   'blockchains'
 > & {
   accountAddressHref: string

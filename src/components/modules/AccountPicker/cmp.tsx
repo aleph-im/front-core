@@ -2,8 +2,8 @@ import React, { memo } from 'react'
 import { createPortal } from 'react-dom'
 import Button from '../../common/Button'
 import { StyledIcon, StyledLine, StyledPicker, StyledTitle } from './styles'
-import { AccountPickersProps } from './types'
-import { useAccountPickers } from './hook'
+import { AccountPickerProps } from './types'
+import { useAccountPicker } from './hook'
 import { ellipseText } from '../../../utils'
 import Icon from '../../common/Icon'
 import { useTheme } from 'styled-components'
@@ -11,10 +11,10 @@ import NetworkSelector from './NetworkSelector'
 import { AccountInformation } from './AccountInformation/cmp'
 import WalletSelector from './WalletSelector'
 
-export const AccountPickers = ({
+export const AccountPicker = ({
   isMobile = false,
   ...rest
-}: AccountPickersProps) => {
+}: AccountPickerProps) => {
   const theme = useTheme()
   const { button, button5 } = theme.component.walletPicker
 
@@ -49,7 +49,7 @@ export const AccountPickers = ({
     handleDisplayWalletPicker,
     handleDisplayNetworksPicker,
     handleDisplayCondensedPicker,
-  } = useAccountPickers(rest)
+  } = useAccountPicker(rest)
 
   return (
     <>
@@ -201,6 +201,6 @@ export const AccountPickers = ({
     </>
   )
 }
-AccountPickers.displayName = 'AccountPickers'
+AccountPicker.displayName = 'AccountPicker'
 
-export default memo(AccountPickers) as typeof AccountPickers
+export default memo(AccountPicker) as typeof AccountPicker
