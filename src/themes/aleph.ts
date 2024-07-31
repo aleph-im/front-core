@@ -912,6 +912,11 @@ const walletPicker: ThemeWalletPicker = {
     variant: 'tertiary',
     color: 'main2',
   },
+  button5: {
+    kind: 'neon',
+    variant: 'tertiary',
+    color: 'main0',
+  },
 }
 
 const noisyContainer: ThemeNoisyContainer = {

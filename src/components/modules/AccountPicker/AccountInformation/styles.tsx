@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { addClasses } from '../../../utils'
 
 export const StyledPicker = styled.div`
   ${({ theme }) => {
@@ -14,18 +13,6 @@ export const StyledPicker = styled.div`
       padding: 1.5rem;
       box-shadow: ${shadow};
       backdrop-filter: blur(50px);
-    `
-  }}
-`
-
-export const StyledTitle = styled.h6.attrs(addClasses('tp-nav'))`
-  ${({ theme }) => {
-    const { color } = theme.component.walletPicker
-
-    return css`
-      color: ${color.default};
-      font-size: 1.125rem;
-      margin: 0 0 2rem 0;
     `
   }}
 `

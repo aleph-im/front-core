@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import MetamaskIcon from './metamask'
-import Icon, { IconName } from '../../../common/Icon'
+import Icon, { IconName } from '../../../../common/Icon'
 
 export type WalletIconName = 'metamask' | IconName
 

@@ -560,6 +560,11 @@ export type ThemeWalletPicker = {
     variant: string
     color?: string
   }
+  button5: {
+    kind: string
+    variant: string
+    color?: string
+  }
 }
 
 export type ThemeNoisyContainer = {

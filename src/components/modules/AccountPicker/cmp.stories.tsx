@@ -1,0 +1,235 @@
+import React from 'react'
+import { StoryFn } from '@storybook/react'
+
+import AccountPicker from './cmp'
+import { AccountPickerProps, Blockchain } from './types'
+import { Network } from './NetworkSelector'
+import { Wallet } from './WalletSelector'
+
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+  title: 'Components/UI/modules/AccountPicker',
+  component: AccountPicker,
+}
+
+const wallets: Wallet[] = [
+  {
+    id: 'metamask',
+    name: 'Metamask',
+    icon: 'metamask',
+    color: 'orange',
+  },
+  {
+    id: 'wallet-connect',
+    name: 'Wallet Connect',
+    icon: 'walletConnect',
+    color: 'main0',
+  },
+]
+
+const networks: Network[] = [
+  {
+    id: 'ETH',
+    name: 'Ethereum',
+    icon: 'ethereum',
+    wallets,
+  },
+  {
+    id: 'AVAX',
+    name: 'Avalanche',
+    icon: 'avalanche',
+    wallets,
+  },
+  {
+    id: 'SOL',
+    name: 'Solana',
+    icon: 'solana',
+    wallets: [],
+  },
+  {
+    id: 'binance',
+    name: 'Binance',
+    icon: 'binance',
+    wallets: [],
+  },
+  {
+    id: 'polygon',
+    name: 'Polygon',
+    icon: 'polygon',
+    wallets: [],
+  },
+  {
+    id: 'tezos',
+    name: 'Tezos',
+    icon: 'tezos',
+    wallets: [],
+  },
+  {
+    id: 'cosmos',
+    name: 'Cosmos',
+    icon: 'cosmos',
+    wallets: [],
+  },
+  {
+    id: 'polkadot',
+    name: 'Polkadot',
+    icon: 'polkadot',
+    wallets: [],
+  },
+]
+
+const blockchains: Record<Blockchain['id'], Blockchain> = {
+  ['ETH']: {
+    id: 'ETH',
+    name: 'Ethereum',
+    chainId: 1,
+    eip155: true,
+    currency: 'ETH',
+    explorerUrl: 'https://etherscan.io/',
+    rpcUrl: 'https://eth.drpc.org',
+  },
+  ['AVAX']: {
+    id: 'AVAX',
+    name: 'Avalanche',
+    chainId: 43114,
+    eip155: true,
+    currency: 'AVAX',
+    explorerUrl: 'https://snowtrace.io/',
+    rpcUrl: 'https://avalanche.drpc.org',
+  },
+  ['SOL']: {
+    id: 'SOL',
+    name: 'Solana',
+    chainId: 900,
+    eip155: false,
+    currency: 'SOL',
+  },
+}
+
+const handleConnect = async (wallet: Wallet, network: Network) => {
+  alert(`Connect to ${network.name} via ${wallet.name}`)
+}
+
+const handleDisconnect = async () => {
+  alert(`Disconnect`)
+}
+
+const handleSwitchNetwork = (network: Network) => {
+  alert(`Switch to ${network.name}`)
+}
+
+const defaultArgs: Partial<AccountPickerProps> = {
+  blockchains,
+  networks,
+  selectedNetwork: networks[0],
+  handleConnect,
+  handleDisconnect,
+  handleSwitchNetwork,
+}
+
+const defaultParams = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/qNnjyRzhXcmj6nwbL9XP5K/ALEPH-Cloud-Website?node-id=348-7734&t=IVMIjObqgGYaYXxn-0',
+  },
+}
+
+// ---
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+const Template: StoryFn<typeof AccountPicker> = (props: AccountPickerProps) => {
+  return (
+    <div tw="flex justify-end py-6 px-12 mb-[30rem]">
+      <AccountPicker {...props} />
+    </div>
+  )
+}
+
+export const Default = Template.bind({})
+Default.args = {
+  ...defaultArgs,
+}
+Default.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedOff = Template.bind({})
+LoggedOff.args = {
+  ...defaultArgs,
+}
+LoggedOff.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedOffOneNetwork = Template.bind({})
+LoggedOffOneNetwork.args = {
+  ...defaultArgs,
+  networks: [networks[0]],
+}
+LoggedOffOneNetwork.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedIn = Template.bind({})
+LoggedIn.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountBalance: Math.random() * 10 ** 8,
+}
+LoggedIn.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedInOneNetwork = Template.bind({})
+LoggedInOneNetwork.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountBalance: Math.random() * 10 ** 8,
+  networks: [networks[0]],
+}
+LoggedInOneNetwork.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedOffMobile = Template.bind({})
+LoggedOffMobile.args = {
+  ...defaultArgs,
+  isMobile: true,
+}
+LoggedOffMobile.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedOffMobileOneNetwork = Template.bind({})
+LoggedOffMobileOneNetwork.args = {
+  ...defaultArgs,
+  isMobile: true,
+  networks: [networks[0]],
+}
+LoggedOffMobileOneNetwork.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedInMobile = Template.bind({})
+LoggedInMobile.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountBalance: Math.random() * 10 ** 8,
+  isMobile: true,
+}
+LoggedInMobile.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedInMobileOneNetwork = Template.bind({})
+LoggedInMobileOneNetwork.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountBalance: Math.random() * 10 ** 8,
+  isMobile: true,
+  networks: [networks[0]],
+}
+LoggedInMobileOneNetwork.parameters = {
+  ...defaultParams,
+}

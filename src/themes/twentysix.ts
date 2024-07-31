@@ -1108,6 +1108,11 @@ const walletPicker: ThemeWalletPicker = {
     kind: 'functional',
     variant: 'warning',
   },
+  button5: {
+    kind: 'yellow',
+    variant: 'primary',
+    color: 'main0',
+  },
 }
 
 const noisyContainer: ThemeNoisyContainer = {
