@@ -10,7 +10,7 @@ export const StyledImageCol = styled(Col)<{
 }>`
   display: flex;
   ${({ reverseColumnsWhenStacked, alignImage, justifyImage }) => css`
-    ${reverseColumnsWhenStacked ? tw`order-last md:order-first` : ''}
+    ${reverseColumnsWhenStacked ? tw`order-last md:order-none` : ''}
     align-items: ${alignImage};
     justify-content: ${justifyImage};
   `}
