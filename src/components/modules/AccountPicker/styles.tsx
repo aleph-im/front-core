@@ -18,7 +18,6 @@ export const StyledPicker = styled.div<StyledPickerProps>`
       min-width: 20rem;
       border-radius: 1.875rem;
       background: ${background};
-      z-index: 1;
       padding: 1.5rem;
       box-shadow: ${shadow};
       backdrop-filter: blur(50px);
