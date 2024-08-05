@@ -8,9 +8,7 @@ import {
   StyledRouterLink2,
   StyledNav2Container,
   StyledNav2Title,
-  StyledProgressBar,
   StyledSidebar,
-  StyledStorageContainer,
   StyledToggleButton,
   StyledLogoContainer,
   StyledNav1Container,
@@ -23,6 +21,7 @@ import {
   StyledOpenedNav2LinkContainer,
   StyledClosedNav2LinkContainer,
   StyledTooltip,
+  StyledToggleButtonContainer,
 } from './styles'
 import { RouteProps, RouterSidebarProps } from './types'
 import { RouterLinkProps } from '../RouterLink'
@@ -181,11 +180,23 @@ const ClosedNav2Route = ({
 ClosedNav2Route.displayName = 'ClosedNav2Route'
 
 // -------------------------
+const ToggleButton = ({ isOpen = false, handleToggle, onToggle }: any) => (
+  <StyledToggleButtonContainer>
+    {!!onToggle && (
+      <div tw="px-6">
+        <StyledToggleButton $isOpen={isOpen} onClick={handleToggle} />
+      </div>
+    )}
+  </StyledToggleButtonContainer>
+)
+
+ToggleButton.displayName = 'ToggleButton'
+
+// -------------------------
 
 export const RouterSidebar = ({
   routes,
   pathname,
-  allowanceInfo,
   Link,
   breakpoint: $breakpoint = 'md',
   open,
@@ -223,12 +234,6 @@ export const RouterSidebar = ({
         .find((route) => pathname.indexOf(route.href) === 0),
     [pathname, routes],
   )
-
-  // --------------------------------------------
-
-  const consumedSize = (allowanceInfo?.consumedSize || 0) / 1024
-  const allowedSize = (allowanceInfo?.allowedSize || 0) / 1024
-  const storePercent = allowedSize ? consumedSize / allowedSize : 0
 
   // -----------------------------------------
 
@@ -286,6 +291,8 @@ export const RouterSidebar = ({
               }}
             />
           ))}
+          <div tw="flex-1" />
+          <ToggleButton onToggle={onToggle} handleToggle={handleToggle} />
         </StyledNav1Container>
       </StyledNav1>
       <StyledNav2
@@ -333,23 +340,11 @@ export const RouterSidebar = ({
             ))}
           </StyledClosedNav2LinkContainer>
           <div tw="flex-1" />
-          <div tw="py-12 flex flex-col justify-end h-[14.9375rem] shrink-0 w-full">
-            {!!onToggle && (
-              <div tw="px-6">
-                <StyledToggleButton onClick={handleToggle} />
-              </div>
-            )}
-            <div tw="flex-1" />
-            <StyledStorageContainer>
-              <div tw="mb-4 flex gap-1 flex-wrap">
-                <span tw="whitespace-nowrap">{consumedSize.toFixed(3)} GB</span>
-                <span tw="opacity-60 font-normal whitespace-nowrap">
-                  of {allowedSize.toFixed(3)} GB
-                </span>
-              </div>
-              <StyledProgressBar $percent={storePercent} />
-            </StyledStorageContainer>
-          </div>
+          <ToggleButton
+            isOpen
+            onToggle={onToggle}
+            handleToggle={handleToggle}
+          />
         </StyledNav2Container>
       </StyledNav2>
     </StyledSidebar>

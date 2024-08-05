@@ -6,10 +6,6 @@ export type RouterSidebarProps = {
   routes: Route[]
   pathname: string
   breakpoint: BreakpointId
-  allowanceInfo?: {
-    consumedSize?: number
-    allowedSize?: number
-  }
   Link: LinkComponent
   open?: boolean
   logoHref?: string

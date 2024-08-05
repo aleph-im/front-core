@@ -46,7 +46,7 @@ export const StyledNav1 = styled.nav`
 `
 
 export const StyledNav1Container = styled.div`
-  ${tw`flex flex-col items-start`}
+  ${tw`h-full flex flex-col items-start`}
   width: ${nav1OpenSize}rem;
 `
 
@@ -101,7 +101,7 @@ export const StyledNav2 = styled.nav`
 `
 
 export const StyledNav2Container = styled.div`
-  ${tw`flex flex-col items-start h-full`}
+  ${tw`h-full flex flex-col items-start`}
 `
 
 export const StyledNav2TitleContainer = styled.div`
@@ -265,12 +265,19 @@ export const StyledLogo = styled(Logo).attrs((props) => {
   ${tw`inline-flex items-center justify-center`}
 `
 
-export const StyledToggleButton = styled(Icon).attrs((props) => {
-  return {
+export const StyledToggleButtonContainer = styled.div`
+  ${tw`flex items-center justify-center shrink-0 w-full py-12`}
+`
+
+type StyledToggleButtonProps = {
+  $isOpen: boolean
+}
+export const StyledToggleButton = styled(Icon).attrs(
+  (props: StyledToggleButtonProps) => ({
     ...props,
-    name: 'angle-right', //props.$open ? 'angle-left' : 'angle-right',
-  }
-})`
+    name: props.$isOpen ? 'angle-right' : 'angle-left',
+  }),
+)<StyledToggleButtonProps>`
   ${({ theme }) => {
     const { toggle } = theme.component.sidebar.nav2
 
@@ -280,10 +287,6 @@ export const StyledToggleButton = styled(Icon).attrs((props) => {
       background-color: ${toggle.background};
     `
   }}
-`
-
-export const StyledStorageContainer = styled.div.attrs(addClasses('tp-body3'))`
-  ${tw`w-[10.5rem] max-w-full mx-auto px-1 cursor-auto`}
 `
 
 // https://github.com/aleph-im/aleph-account/blob/8b920e34fab9f4f70e3387eed2bd5839ae923971/src/layouts/MainLayout.vue#L131C14-L131C14
@@ -336,26 +339,6 @@ const fadeOutIn1Reverse = keyframes`
   }
 `
 
-const fadeOutIn2 = keyframes`
-  0%, 6%, 80%, 100%  {
-    opacity: 1;
-  }
-
-  46%, 60% {
-    opacity: 0;
-  }
-`
-
-const fadeOutIn2Reverse = keyframes`
-  0%, 10%, 70%, 100% {
-    opacity: 1;
-  }
-
-  30% {
-    opacity: 0;
-  }
-`
-
 export type StyledSidebarProps = {
   $isOpen?: boolean
   $isHover?: boolean
@@ -367,6 +350,7 @@ export type StyledSidebarProps = {
 
 export const StyledSidebar = styled.aside<StyledSidebarProps>`
   ${tw`hidden items-stretch justify-start h-full`}
+  z-index: 15;
 
   ${({ $breakpoint }) => css`
     /* MOBILE LAYOUT */
@@ -425,20 +409,11 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
-          & ${StyledToggleButton} {
-            transform: rotateZ(-180deg);
-            transition: transform ease-in-out ${0.6 / $speed}s ${0.4 / $speed}s;
-          }
+          & ${StyledNav1} ${StyledToggleButtonContainer} {
+            ${tw`opacity-100 visible`}
 
-          & ${StyledStorageContainer} {
-            font-size: 0.625rem;
-            transition: font-size linear 0s ${0.3 / $speed}s;
-            animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn2Reverse};
-
-            & > :first-child {
-              max-width: 100%;
-              transition: max-width linear 0s ${0.3 / $speed}s;
-            }
+            transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 / $speed}s,
+                color ease-in-out 0.25s 0s !important;
           }
 
           & ${StyledNav1Link} {
@@ -514,21 +489,12 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
             animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
           }
 
-          & ${StyledToggleButton} {
-            transform: rotateZ(0deg);
-            transition: transform ease-in-out ${0.6 / $speed}s
-            ${0.25 / $speed}s;
-          }
+          & ${StyledNav1} ${StyledToggleButtonContainer} {
+            ${tw`opacity-0 invisible`}
 
-          & ${StyledStorageContainer} {
-            font-size: 0.5rem;
-            transition: font-size linear 0s ${0.46 / $speed}s;
-            animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn2};
-
-            & > :first-child {
-              max-width: 0;
-              transition: max-width linear 0s ${0.46 / $speed}s;
-            }
+            transition: opacity ease-in-out ${0.2 / $speed}s 0s,
+                visibility linear ${0.2 / $speed}s 0s,
+                 color ease-in-out 0.25s 0s !important;
           }
 
           & ${StyledNav1Link} {
@@ -550,13 +516,15 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
               transition: color ease-in-out 0.25s 0s !important;
             }
         `};
-
-
   }
 
   ${({ theme, $showOpened }) =>
     $showOpened
       ? css`
+          & ${StyledNav2} ${StyledToggleButtonContainer} {
+            visibility: hidden;
+          }
+
           & ${StyledOpenedNav2LinkContainer} {
             & ${StyledRouterLink2} ${StyledRouterLink}._active {
               background-color: ${theme.component.sidebar.nav2.active
@@ -570,6 +538,10 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
         `
       : css`
+          & ${StyledNav1} ${StyledToggleButtonContainer} {
+            visibility: hidden;
+          }
+
           & ${StyledOpenedNav2LinkContainer} {
             position: absolute;
             visibility: hidden;
@@ -587,7 +559,11 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
     !$showClosed &&
     css`
       & ${StyledClosedNav2LinkContainer} {
-        position: absolute;
+        visibility: hidden;
+        transition: visibility 500ms;
+      }
+
+      & ${StyledNav2} ${StyledToggleButtonContainer} {
         visibility: hidden;
         transition: visibility 500ms;
       }
