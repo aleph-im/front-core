@@ -11,6 +11,8 @@ export type RouterSidebarProps = {
   logoHref?: string
   logoTarget?: string
   onToggle?: (open?: boolean) => void
+  animationSpeed?: number
+  animationSpeedOpeningMultiplier?: number
 }
 
 export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {

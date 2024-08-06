@@ -178,8 +178,17 @@ export const StyledTooltip = styled(Tooltip).attrs((props) => {
 })``
 
 export const StyledNav2LinkContainer = styled.div`
-  ${tw`flex flex-col items-start cursor-auto w-full overflow-auto absolute`}
-  margin-top: 6.5rem;
+  ${tw`flex flex-col items-start cursor-auto w-full overflow-y-scroll h-full`}
+  padding-top: 6.5rem;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `
 
 export const StyledOpenedNav2LinkContainer = styled(StyledNav2LinkContainer)`
@@ -342,13 +351,25 @@ const fadeOutIn1Reverse = keyframes`
 export type StyledSidebarProps = {
   $isOpen?: boolean
   $isHover?: boolean
-  $speed?: number
+  $closingSpeed: number
+  $openingSpeed: number
+  $speedOpeningMultiplier?: number
   $breakpoint: BreakpointId
   $showOpened: boolean
   $showClosed: boolean
 }
 
-export const StyledSidebar = styled.aside<StyledSidebarProps>`
+export type StyledSidebarInternalProps = {
+  $isOpen?: boolean
+  $isHover?: boolean
+  $closingSpeed: number
+  $openingSpeed: number
+  $breakpoint: BreakpointId
+  $showOpened: boolean
+  $showClosed: boolean
+}
+
+export const StyledSidebar = styled.aside<StyledSidebarInternalProps>`
   ${tw`hidden items-stretch justify-start h-full`}
   z-index: 15;
 
@@ -362,33 +383,36 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
     )}
   `}
 
-  ${({ theme, $isOpen, $isHover, $speed = 1 }) =>
-    $isOpen || $isOpen === undefined
+  ${({ theme, $isOpen, $isHover, $openingSpeed, $closingSpeed }) => {
+    return $isOpen || $isOpen === undefined
       ? css`
           & ${StyledNav1} {
             width: ${nav1OpenSize}rem;
-            transition: width ease-in-out ${0.35 / $speed}s ${0.4 / $speed}s;
+            transition: width ease-in-out ${0.35 / $openingSpeed}s
+              ${0.4 / $openingSpeed}s;
           }
 
           & ${StyledLogo} {
             ${tw`opacity-100 visible`}
 
-            transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 / $speed}s,
-            visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
-            color ease-in-out 0.25s 0s !important;
+            transition: opacity ease-in-out ${0.2 / $openingSpeed}s ${0.55 /
+            $openingSpeed}s,
+            visibility linear ${0.2 / $openingSpeed}s ${0.55 / $openingSpeed}s,
+            color ease-in-out ${0.25 / $openingSpeed}s 0s !important;
           }
 
           & ${StyledLogoContainer} {
-            transition: background-color ease-in-out ${0.7 / $speed}s
-              ${0.2 / $speed}s;
+            transition: background-color ease-in-out ${0.7 / $openingSpeed}s
+              ${0.2 / $openingSpeed}s;
           }
 
           & ${StyledNav2} {
             width: ${nav2OpenSize}rem;
 
-            transition: width ease-in-out ${0.5 / $speed}s ${0.1 / $speed}s,
-              padding-left ease-in-out ${0.4 / $speed}s 0s,
-              box-shadow ease-in-out ${0.4 / $speed}s 0s;
+            transition: width ease-in-out ${0.5 / $openingSpeed}s
+                ${0.1 / $openingSpeed}s,
+              padding-left ease-in-out ${0.4 / $openingSpeed}s 0s,
+              box-shadow ease-in-out ${0.4 / $openingSpeed}s 0s;
 
             ${$isHover &&
             css`
@@ -397,7 +421,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNav1Container}, & ${StyledNav2Container} {
-            transition: width linear 0s ${0.5 / $speed}s;
+            transition: width linear 0s ${0.5 / $openingSpeed}s;
           }
 
           & ${StyledNav1Container} {
@@ -406,63 +430,70 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
 
           & ${StyledNav2Container} {
             width: ${nav2OpenSize}rem;
-            animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1Reverse};
+            animation: ${1 / $openingSpeed}s ease-in-out 0s ${fadeOutIn1Reverse};
           }
 
           & ${StyledNav1} ${StyledToggleButtonContainer} {
             ${tw`opacity-100 visible`}
 
-            transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 / $speed}s,
-                color ease-in-out 0.25s 0s !important;
+            transition: opacity ease-in-out ${0.2 / $openingSpeed}s ${0.55 /
+            $openingSpeed}s,
+                color ease-in-out ${0.25 / $openingSpeed}s 0s !important;
           }
 
           & ${StyledNav1Link} {
             & ${StyledRouterLink1} ${StyledRouteLinkIcon} {
               ${tw`opacity-100 visible`}
 
-              transition: opacity ease-in-out ${0.2 / $speed}s ${0.55 /
-              $speed}s,
-                visibility linear ${0.2 / $speed}s ${0.55 / $speed}s,
-                color ease-in-out 0.25s 0s !important;
+              transition: opacity ease-in-out ${0.2 / $openingSpeed}s ${0.55 /
+              $openingSpeed}s,
+                visibility linear ${0.2 / $openingSpeed}s ${0.55 /
+              $openingSpeed}s,
+                color ease-in-out ${0.25 / $openingSpeed}s 0s !important;
             }
 
             & ${StyledRouterLink1} ${StyledRouterLink}::after {
               ${tw`-top-2 opacity-0`}
-              transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
-                top ease-in-out ${0.7 / $speed}s ${0.1 / $speed}s;
+              transition: opacity ease-in-out ${0.7 / $openingSpeed}s ${0.2 /
+              $openingSpeed}s,
+                top ease-in-out ${0.7 / $openingSpeed}s ${0.1 / $openingSpeed}s;
             }
 
             & ${StyledRouteLinkIcon} {
-              transition: color ease-in-out 0.25s 0s !important;
+              transition: color ease-in-out ${0.25 / $openingSpeed}s 0s !important;
             }
           }
         `
       : css`
           & ${StyledNav1} {
             width: ${nav1CloseSize}rem;
-            transition: width ease-in-out ${0.2 / $speed}s ${0.15 / $speed}s;
+            transition: width ease-in-out ${0.2 / $closingSpeed}s ${
+          0.15 / $closingSpeed
+        }s;
           }
 
           & ${StyledLogo} {
             ${tw`opacity-0 invisible`}
 
-            transition: opacity ease-in-out ${0.2 / $speed}s 0s,
-            visibility linear ${0.2 / $speed}s 0s,
-             color ease-in-out 0.25s 0s !important;
+            transition: opacity ease-in-out ${0.2 / $closingSpeed}s 0s,
+            visibility linear ${0.2 / $closingSpeed}s 0s,
+             color ease-in-out ${0.25 / $closingSpeed}s 0s !important;
           }
 
           & ${StyledLogoContainer} {
             background-color: transparent;
-            transition: background-color ease-in-out ${0.7 / $speed}s
-              ${0.2 / $speed}s;
+            transition: background-color ease-in-out ${0.7 / $closingSpeed}s
+              ${0.2 / $closingSpeed}s;
           }
 
           & ${StyledNav2} {
             width: ${nav2CloseSize}rem;
 
-            transition: width ease-in-out ${0.4 / $speed}s ${0.25 / $speed}s,
-              padding-left ease-in-out ${0.4 / $speed}s 0s,
-              box-shadow ease-in-out ${0.4 / $speed}s 0s;
+            transition: width ease-in-out ${0.4 / $closingSpeed}s ${
+          0.25 / $closingSpeed
+        }s,
+              padding-left ease-in-out ${0.4 / $closingSpeed}s 0s,
+              box-shadow ease-in-out ${0.4 / $closingSpeed}s 0s;
 
             ${
               $isHover &&
@@ -477,7 +508,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
 
           & ${StyledNav1Container}, & ${StyledNav2Container} {
-            transition: width linear 0s ${0.45 / $speed}s;
+            transition: width linear 0s ${0.45 / $closingSpeed}s;
           }
 
           & ${StyledNav1Container} {
@@ -486,43 +517,54 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
 
           & ${StyledNav2Container} {
             width: ${nav2CloseSize}rem;
-            animation: ${1 / $speed}s ease-in-out 0s ${fadeOutIn1};
+            animation: ${1 / $closingSpeed}s ease-in-out 0s ${fadeOutIn1};
           }
 
           & ${StyledNav1} ${StyledToggleButtonContainer} {
             ${tw`opacity-0 invisible`}
 
-            transition: opacity ease-in-out ${0.2 / $speed}s 0s,
-                visibility linear ${0.2 / $speed}s 0s,
-                 color ease-in-out 0.25s 0s !important;
+            transition: opacity ease-in-out ${0.2 / $closingSpeed}s 0s,
+                visibility linear ${0.2 / $closingSpeed}s 0s,
+                 color ease-in-out ${0.25 / $closingSpeed}s 0s !important;
           }
 
           & ${StyledNav1Link} {
             & ${StyledRouterLink1} ${StyledRouteLinkIcon} {
               ${tw`opacity-0 invisible`}
 
-              transition: opacity ease-in-out ${0.2 / $speed}s 0s,
-                visibility linear ${0.2 / $speed}s 0s,
-                 color ease-in-out 0.25s 0s !important;
+              transition: opacity ease-in-out ${0.2 / $closingSpeed}s 0s,
+                visibility linear ${0.2 / $closingSpeed}s 0s,
+                 color ease-in-out ${0.25 / $closingSpeed}s 0s !important;
             }
 
             & ${StyledRouterLink1} ${StyledRouterLink}::after {
               ${tw`top-0 opacity-100`}
-              transition: opacity ease-in-out ${0.7 / $speed}s ${0.2 / $speed}s,
-                top ease-in-out ${0.7 / $speed}s ${0.3 / $speed}s;
+              transition: opacity ease-in-out ${0.7 / $closingSpeed}s ${
+          0.2 / $closingSpeed
+        }s,
+                top ease-in-out ${0.7 / $closingSpeed}s ${0.3 / $closingSpeed}s;
             }
 
             & ${StyledRouteLinkIcon} {
-              transition: color ease-in-out 0.25s 0s !important;
+              transition: color ease-in-out ${
+                0.25 / $closingSpeed
+              }s 0s !important;
             }
-        `};
+        `
+  }};
+
   }
 
-  ${({ theme, $showOpened }) =>
+  ${({ theme, $showOpened, $closingSpeed = 1 }) =>
     $showOpened
       ? css`
+          & ${StyledClosedNav2LinkContainer} {
+            position: absolute;
+          }
+
           & ${StyledNav2} ${StyledToggleButtonContainer} {
             visibility: hidden;
+            position: absolute;
           }
 
           & ${StyledOpenedNav2LinkContainer} {
@@ -544,8 +586,11 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
 
           & ${StyledOpenedNav2LinkContainer} {
             position: absolute;
+          }
+
+          & ${StyledOpenedNav2LinkContainer} {
             visibility: hidden;
-            transition: visibility 500ms;
+            transition: visibility ${500 / $closingSpeed}ms;
 
             & ${StyledRouterLink2} ${StyledRouterLink}._active {
               & ${StyledRouteLinkIcon}, & ${StyledRouteLinkText} {
@@ -555,19 +600,24 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>`
           }
         `}
 
-  ${({ $showClosed }) =>
-    !$showClosed &&
-    css`
-      & ${StyledClosedNav2LinkContainer} {
-        visibility: hidden;
-        transition: visibility 500ms;
-      }
+  ${({ $showClosed, $openingSpeed }) =>
+    $showClosed
+      ? css`
+          & ${StyledOpenedNav2LinkContainer} {
+            position: absolute;
+          }
+        `
+      : css`
+          & ${StyledClosedNav2LinkContainer} {
+            visibility: hidden;
+            transition: visibility ${500 / $openingSpeed}ms;
+          }
 
-      & ${StyledNav2} ${StyledToggleButtonContainer} {
-        visibility: hidden;
-        transition: visibility 500ms;
-      }
-    `}
+          & ${StyledNav2} ${StyledToggleButtonContainer} {
+            visibility: hidden;
+            transition: visibility ${500 / $openingSpeed}ms;
+          }
+        `}
 
   ${({ $isOpen }) =>
     $isOpen === undefined &&

@@ -202,6 +202,8 @@ export const RouterSidebar = ({
   open,
   logoHref = '/',
   logoTarget,
+  animationSpeed = 1.5,
+  animationSpeedOpeningMultiplier = 0.8,
   onToggle,
 }: RouterSidebarProps) => {
   const [hover, setHover] = useState<boolean | undefined>(false)
@@ -246,20 +248,21 @@ export const RouterSidebar = ({
     [Link, logoHref, logoTarget],
   )
 
-  // -----------------------------------------
-
+  // --------------------------------------
+  const theme = useTheme()
+  const $closingSpeed = animationSpeed
+  const $openingSpeed = animationSpeed * animationSpeedOpeningMultiplier
   const $isOpen = open
   const $isHover = hover && !!onToggle
   const isOpenState = $isOpen || $isOpen === undefined
-  const theme = useTheme()
 
   const { shouldMount: $shouldMountOpened } = useTransition(
     isOpenState,
-    theme.transition.duration.normal,
+    theme.transition.duration.normal / $closingSpeed,
   )
   const { shouldMount: $shouldMountClosed } = useTransition(
     !isOpenState,
-    theme.transition.duration.normal,
+    theme.transition.duration.normal / $openingSpeed,
   )
 
   const $showOpened = $shouldMountOpened && !$shouldMountClosed
@@ -273,6 +276,8 @@ export const RouterSidebar = ({
         $isHover,
         $showOpened,
         $showClosed,
+        $closingSpeed,
+        $openingSpeed,
       }}
     >
       <StyledNav1>
