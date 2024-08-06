@@ -275,7 +275,7 @@ export const StyledLogo = styled(Logo).attrs((props) => {
 `
 
 export const StyledToggleButtonContainer = styled.div`
-  ${tw`flex items-center justify-center shrink-0 w-full py-12`}
+  ${tw`flex items-center justify-center shrink-0 py-12`}
 `
 
 type StyledToggleButtonProps = {
