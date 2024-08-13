@@ -2,7 +2,7 @@ import { RefObject } from 'react'
 import { Network } from './NetworkSelector'
 import { Wallet } from './WalletSelector'
 import { NetworkSelectorProps } from './NetworkSelector/types'
-import { AccountInformationProps } from './AccountInformation'
+import { AccountInformationProps, Voucher } from './AccountInformation'
 
 export type Blockchain = {
   id: string
@@ -18,6 +18,7 @@ export type AccountPickerProps = {
   isMobile?: boolean
   accountAddress?: string
   accountBalance?: number
+  accountVouchers?: Voucher[]
   ensName?: string
   rewards?: AccountInformationProps['rewards']
   blockchains: Record<Blockchain['id'], Blockchain>

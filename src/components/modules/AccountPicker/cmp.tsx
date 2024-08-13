@@ -13,6 +13,7 @@ import { Portal } from '../../layout/Portal'
 
 export const AccountPicker = ({
   isMobile = false,
+  accountVouchers,
   ...rest
 }: AccountPickerProps) => {
   const theme = useTheme()
@@ -127,6 +128,7 @@ export const AccountPicker = ({
                   accountAddress={accountAddress}
                   accountAddressHref={accountAddressHref}
                   balance={accountBalance}
+                  vouchers={accountVouchers}
                 />
                 <StyledLine />
               </>
@@ -182,6 +184,7 @@ export const AccountPicker = ({
                   accountAddress={accountAddress}
                   accountAddressHref={accountAddressHref}
                   balance={accountBalance}
+                  vouchers={accountVouchers}
                 />
                 <StyledLine />
               </>
