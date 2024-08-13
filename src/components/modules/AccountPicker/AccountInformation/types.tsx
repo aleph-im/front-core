@@ -2,7 +2,6 @@ export type Voucher = {
   name: string
   image: string
   imageAlt: string
-  // externalUrl: string
   amount: number
 }
 
