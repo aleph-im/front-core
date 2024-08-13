@@ -9,6 +9,7 @@ import Price from '../../../common/Price'
 import { formatCurrency } from '../../../../utils'
 
 export const AccountInformation = ({
+  vouchers,
   balance,
   rewards,
   accountAddress,
@@ -62,27 +63,51 @@ export const AccountInformation = ({
         </>
       )}
 
-      <div tw="text-center">
-        {accountAddressHref ? (
-          <>
-            <StyledLine />
-            <Button
-              as="a"
-              target="_blank"
-              size="md"
-              href={accountAddressHref}
-              kind={button3.kind}
-              variant={button3.variant}
-              color={button3.color}
-            >
-              {displayAddress}
-              <Icon name="external-link-square-alt" tw="ml-2.5" />
-            </Button>
-          </>
-        ) : (
-          displayAddress
-        )}
-      </div>
+      {(accountAddressHref || vouchers) && (
+        <>
+          <StyledLine />
+          <div tw="flex flex-col gap-6">
+            {vouchers &&
+              vouchers.map((voucher) => (
+                <div tw="flex items-center justify-between" key={voucher.name}>
+                  <div tw="flex items-center gap-2 max-w-sm ">
+                    <img
+                      src={voucher.image}
+                      alt={voucher.imageAlt}
+                      tw="w-12 h-12"
+                    />
+                    <div className="fs-16 tp-body3" tw="line-clamp-1">
+                      {voucher.name}
+                    </div>
+                  </div>
+                  <div tw="text-right pl-2" className="tp-body">
+                    x{voucher.amount}
+                  </div>
+                </div>
+              ))}
+            <div tw="text-center">
+              {accountAddressHref ? (
+                <>
+                  <Button
+                    as="a"
+                    target="_blank"
+                    size="md"
+                    href={accountAddressHref}
+                    kind={button3.kind}
+                    variant={button3.variant}
+                    color={button3.color}
+                  >
+                    {displayAddress}
+                    <Icon name="external-link-square-alt" tw="ml-2.5" />
+                  </Button>
+                </>
+              ) : (
+                displayAddress
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }

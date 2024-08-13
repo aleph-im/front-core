@@ -5,6 +5,7 @@ import AccountPicker from './cmp'
 import { AccountPickerProps, Blockchain } from './types'
 import { Network } from './NetworkSelector'
 import { Wallet } from './WalletSelector'
+import { Voucher } from './AccountInformation'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -106,6 +107,21 @@ const blockchains: Record<Blockchain['id'], Blockchain> = {
   },
 }
 
+const vouchers: Voucher[] = [
+  {
+    name: 'Web3 Voucher',
+    image: 'https://claim.twentysix.cloud/sbt/cover/web3-hosting.jpg',
+    imageAlt: 'Web3 Hosting',
+    amount: 7,
+  },
+  {
+    name: 'Confidentials Voucher',
+    image: 'https://claim.twentysix.cloud/sbt/cover/confidential-vm.jpg',
+    imageAlt: 'Confidential VM',
+    amount: 3,
+  },
+]
+
 const handleConnect = async (wallet: Wallet, network: Network) => {
   alert(`Connect to ${network.name} via ${wallet.name}`)
 }
@@ -181,6 +197,17 @@ LoggedIn.parameters = {
   ...defaultParams,
 }
 
+export const LoggedInWithVouchers = Template.bind({})
+LoggedInWithVouchers.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountBalance: Math.random() * 10 ** 8,
+  accountVouchers: vouchers,
+}
+LoggedInWithVouchers.parameters = {
+  ...defaultParams,
+}
+
 export const LoggedInOneNetwork = Template.bind({})
 LoggedInOneNetwork.args = {
   ...defaultArgs,
@@ -219,6 +246,18 @@ LoggedInMobile.args = {
   isMobile: true,
 }
 LoggedInMobile.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedInMobileWithVouchers = Template.bind({})
+LoggedInMobileWithVouchers.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountBalance: Math.random() * 10 ** 8,
+  accountVouchers: vouchers,
+  isMobile: true,
+}
+LoggedInMobileWithVouchers.parameters = {
   ...defaultParams,
 }
 

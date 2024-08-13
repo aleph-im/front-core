@@ -1,3 +1,10 @@
+export type Voucher = {
+  name: string
+  image: string
+  imageAlt: string
+  amount: number
+}
+
 export type AccountInformationProps = {
   accountAddress?: string
   accountAddressHref?: string
@@ -6,4 +13,5 @@ export type AccountInformationProps = {
     amount: number
     days?: number
   }
+  vouchers?: Voucher[]
 }

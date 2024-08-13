@@ -1,2 +1,2 @@
 export { default, default as AccountInformation } from './cmp'
-export type { AccountInformationProps } from './types'
+export type { Voucher, AccountInformationProps } from './types'
