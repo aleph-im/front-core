@@ -6,6 +6,7 @@ export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | string
 
 export type CustomIconName =
   | 'avalanche'
+  | 'base'
   | 'binance'
   | 'ccn'
   | 'console'

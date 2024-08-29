@@ -1,4 +1,5 @@
 export { default as avalanche } from './avalanche'
+export { default as base } from './base'
 export { default as binance } from './binance'
 export { default as ccn } from './ccn'
 export { default as console } from './console'
