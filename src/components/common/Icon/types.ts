@@ -16,6 +16,7 @@ export type CustomIconName =
   | 'ethereum'
   | 'explore'
   | 'notification'
+  | 'phantom'
   | 'polkadot'
   | 'polygon'
   | 'profile'
