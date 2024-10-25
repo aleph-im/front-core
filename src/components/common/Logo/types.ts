@@ -1,7 +1,7 @@
 import { LinkComponent } from '../../../types'
 
 export type LogoProps = {
-  img?: string
+  img?: 'aleph' | 'twentysix' | 'accelerator'
   size?: number | string
   color?: string
   text?: boolean | string
@@ -19,5 +19,6 @@ export type StyledLogoProps = {
 
 export type StyledLogoSvgProps = {
   color: string
+  color2?: string
   bgColor?: string
 }
