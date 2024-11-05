@@ -56,14 +56,10 @@ export const AccountPicker = ({
     <>
       {!isMobile ? (
         <div tw="flex gap-4">
-          <Button
+          <div
             ref={networksPickerTriggerRef}
             onClick={handleDisplayNetworksPicker}
             tw="flex items-center gap-2"
-            as="button"
-            kind={button.kind(true)}
-            color={button.color(true)}
-            variant={button.variant(true)}
           >
             <Button
               disabled={oneNetwork}
@@ -76,7 +72,7 @@ export const AccountPicker = ({
               <Icon name={selectedNetwork.icon} size="1.5em" prefix="custom" />
             </Button>
             {!oneNetwork && <Icon name="angle-down" size="1em" />}
-          </Button>
+          </div>
           <Button
             ref={walletPickerTriggerRef}
             as="button"

@@ -59,7 +59,7 @@ export type UseAccountPickerReturn = Omit<
   displayNetworksPicker: boolean
   networksPickerOpen: boolean
   networksPickerRef: RefObject<HTMLDivElement>
-  networksPickerTriggerRef: RefObject<HTMLButtonElement>
+  networksPickerTriggerRef: RefObject<HTMLDivElement>
   networksPosition: { x: number; y: number }
   handleDisplayNetworksPicker: () => void
   displayCondensedPicker: boolean
