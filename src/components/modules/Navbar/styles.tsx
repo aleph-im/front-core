@@ -26,7 +26,7 @@ export const StyledMobileTopContainer = styled.div`
 
 // A <nav> element, wrapping the links (text and buttons)
 export const StyledNavContainer = styled.nav`
-  ${tw`flex gap-7 m-0 p-6`}
+  ${tw`flex gap-7 m-0 p-6 overflow-y-scroll`}
 `
 
 export const StyledLogoContainer = styled.div`
@@ -76,8 +76,9 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
       }
 
       & ${StyledNavContainer} {
-        ${tw`flex-col justify-start h-full`}
+        ${tw`flex-col justify-start`}
         ${mobile.content.css && mobile.content.css()}
+        height: calc(100% - ${$height});
         backdrop-filter: blur(50px);
         background-color: ${mobile.content.background};
         color: ${mobile.content.color};
