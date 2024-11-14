@@ -15,6 +15,7 @@ export const CardWithSideImage = ({
   cardBackgroundColor = 'bg-none',
   reverseColumnsWhenStacked = false,
   cardOccupation = 5,
+  spaceBetween = '1.5rem',
 }: CardWithSideImageProps) => {
   const imagePercentageOccupation = 10 - cardOccupation
 
@@ -42,7 +43,7 @@ export const CardWithSideImage = ({
   )
 
   return (
-    <Row xs={1} md={10} gap={'1.5rem'}>
+    <Row xs={1} md={10} gap={spaceBetween}>
       {imagePosition === 'left' ? [imageCol, cardCol] : [cardCol, imageCol]}
     </Row>
   )

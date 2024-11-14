@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { RowProps } from '../Grid'
 
 export type AlignProps =
   | 'normal'
@@ -51,6 +52,7 @@ export type CardWithSideImageProps = {
   cardBackgroundColor?: string
   reverseColumnsWhenStacked?: boolean
   cardOccupation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+  spaceBetween?: RowProps['gap']
 }
 
 export type StyledImageColProps = {
