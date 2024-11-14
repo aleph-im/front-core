@@ -50,6 +50,7 @@ export type CardWithSideImageProps = {
   justifyImage?: JustifyProps
   cardBackgroundColor?: string
   reverseColumnsWhenStacked?: boolean
+  cardOccupation?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 }
 
 export type StyledImageColProps = {

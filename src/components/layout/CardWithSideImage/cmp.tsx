@@ -14,19 +14,27 @@ export const CardWithSideImage = ({
   justifyImage = 'center',
   cardBackgroundColor = 'bg-none',
   reverseColumnsWhenStacked = false,
+  cardOccupation = 5,
 }: CardWithSideImageProps) => {
+  const imagePercentageOccupation = 10 - cardOccupation
+
   const imageCol = (
     <StyledImageCol
-      reverseColumnsWhenStacked={reverseColumnsWhenStacked}
-      alignImage={alignImage}
-      justifyImage={justifyImage}
+      md={imagePercentageOccupation}
+      $reverseColumnsWhenStacked={reverseColumnsWhenStacked}
+      $alignImage={alignImage}
+      $justifyImage={justifyImage}
     >
       <img src={imageSrc} alt={imageAlt} tw="relative! w-full" />
     </StyledImageCol>
   )
 
   const cardCol = (
-    <StyledCardCol alignCard={alignCard} justifyCard={justifyCard}>
+    <StyledCardCol
+      md={cardOccupation}
+      $alignCard={alignCard}
+      $justifyCard={justifyCard}
+    >
       <div className={cardBackgroundColor} tw="p-6 w-full">
         {children}
       </div>
@@ -34,7 +42,7 @@ export const CardWithSideImage = ({
   )
 
   return (
-    <Row xs={1} md={2} gap="1.5rem">
+    <Row xs={1} md={10} gap={'1.5rem'}>
       {imagePosition === 'left' ? [imageCol, cardCol] : [cardCol, imageCol]}
     </Row>
   )
