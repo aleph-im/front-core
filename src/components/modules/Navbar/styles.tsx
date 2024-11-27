@@ -27,6 +27,15 @@ export const StyledMobileTopContainer = styled.div`
 // A <nav> element, wrapping the links (text and buttons)
 export const StyledNavContainer = styled.nav`
   ${tw`flex gap-7 m-0 p-6 overflow-y-scroll`}
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `
 
 export const StyledLogoContainer = styled.div`
@@ -88,6 +97,13 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
         transition-duration: ${theme.transition.duration.fast}ms;
         transition-timing-function: ${theme.transition.timing};
 
+        ${getResponsiveCss(
+          $breakpoint,
+          css`
+            ${tw`h-full`}
+          `,
+        )}
+
         & ${StyledRouterLink} {
           ${tw`flex h-12`}
         }
@@ -106,7 +122,7 @@ export const StyledNavbarContainer = styled.div<StyledNavbarContainerProps>`
           ${getGlassEffectCss('base2')}
 
           && ${StyledHeadingContainer} {
-            ${tw`w-full px-0`}
+            ${tw`px-0`}
             ${disableBackgroundCss}
           }
 
