@@ -15,6 +15,7 @@ export type CustomIconName =
   | 'earn'
   | 'ethereum'
   | 'explore'
+  | 'gpu'
   | 'notification'
   | 'phantom'
   | 'polkadot'
