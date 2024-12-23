@@ -65,7 +65,6 @@ const defaultVariants = (props: StyledButtonProps) => {
     width: auto;
     min-width: 0;
     max-width: 100%;
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     border: none;
@@ -223,6 +222,55 @@ const disableVariants = (props: StyledButtonProps) => {
   `
 }
 
+const animationVariants = (props: StyledButtonProps) => {
+  switch (props.$animation) {
+    case 'icon-to-right-on-hover':
+      return css`
+        > svg,
+        > img {
+          transition: transform 0.3s ease;
+        }
+
+        &:hover > svg,
+        &._hover > svg,
+        &:hover > img,
+        &._hover > img {
+          transform: translateX(2px);
+        }
+      `
+    case 'icon-to-top-on-hover':
+      return css`
+        > svg,
+        > img {
+          transition: transform 0.3s ease;
+        }
+
+        &:hover > svg,
+        &._hover > svg,
+        &:hover > img,
+        &._hover > img {
+          transform: translateY(-2px);
+        }
+      `
+    case 'icon-to-top-right-on-hover':
+      return css`
+        > svg,
+        > img {
+          transition: transform 0.3s ease;
+        }
+
+        &:hover > svg,
+        &._hover > svg,
+        &:hover > img,
+        &._hover > img {
+          transform: translate(2px, -2px);
+        }
+      `
+    default:
+      return ''
+  }
+}
+
 export const StyledButton = styled.button<StyledButtonProps>`
   ${(props) => {
     const defaultVariantsCss = defaultVariants(props)
@@ -230,6 +278,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     const hoverVariantsCss = hoverVariants(props)
     const activeVariantsCss = activeVariants(props, defaultVariantsCss)
     const disableVariantsCss = disableVariants(props)
+    const animationVariantsCss = animationVariants(props)
 
     return css`
       && {
@@ -255,6 +304,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
         &._disabled {
           ${disableVariantsCss}
         }
+
+        ${animationVariantsCss}
     `
   }}
 `

@@ -14,12 +14,12 @@ export const Button = forwardRef(
       hover,
       active,
       focus,
+      animation,
       className,
       ...rest
     }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
-    // @note: Storybook testing purposes
     const classes = useMemo(() => {
       return (
         [
@@ -41,6 +41,7 @@ export const Button = forwardRef(
           ref,
           as,
           className: classes,
+          $animation: animation,
           ...rest,
         }}
       >
