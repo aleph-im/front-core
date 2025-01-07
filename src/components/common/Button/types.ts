@@ -20,6 +20,11 @@ export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
 
     as?: ButtonTag
     className?: string
+
+    animation?:
+      | 'icon-to-right-on-hover'
+      | 'icon-to-top-right-on-hover'
+      | 'icon-to-top-on-hover'
   }
 
 export type StyledButtonProps = {
@@ -27,4 +32,5 @@ export type StyledButtonProps = {
   $variant: string
   $size: ButtonSize
   $color: string
+  $animation?: ButtonProps['animation']
 } & { theme: DefaultTheme }

@@ -4,6 +4,7 @@ import { StoryFn } from '@storybook/react'
 import Button from './cmp'
 import { ButtonProps, ButtonSize } from './types'
 import { useTheme } from 'styled-components'
+import Icon from '../Icon'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -55,6 +56,28 @@ Forwarded.args = {
   as: 'a',
 }
 Forwarded.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const WithIcon = Template.bind({})
+WithIcon.args = {
+  ...defaultArgs,
+  hover: false,
+  active: false,
+  focus: false,
+  disabled: false,
+  as: 'a',
+  variant: 'textOnly',
+  children: (
+    <>
+      Text
+      <Icon name="square-up-right" size="md" />
+    </>
+  ),
+}
+WithIcon.parameters = {
   ...defaultParams,
 }
 
