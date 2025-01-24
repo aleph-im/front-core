@@ -745,7 +745,7 @@ const label: ThemeLabel = {
 
 const logo: ThemeLogo = {
   img: 'aleph',
-  text: 'Aleph.im',
+  text: 'Aleph Cloud',
   gap: '0.2em',
 }
 
