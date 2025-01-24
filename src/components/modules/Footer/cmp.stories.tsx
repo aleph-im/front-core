@@ -131,7 +131,7 @@ const defaultArgs: Partial<FooterProps> = {
           href: '#',
         },
         {
-          label: 'Aleph.im technology telegram',
+          label: 'Aleph.cloud technology telegram',
           href: '#',
         },
       ],

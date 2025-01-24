@@ -1,4 +1,4 @@
-# Aleph.im frontend core package
+# Aleph Cloud frontend core package
 
 ## Usage
 

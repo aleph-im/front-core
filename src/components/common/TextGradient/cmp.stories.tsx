@@ -14,7 +14,7 @@ export default {
 }
 
 const defaultArgs: Partial<TextGradientProps> = {
-  children: 'Aleph.im',
+  children: 'Aleph Cloud',
   type: 'h1',
   color: 'main0',
   size: undefined,

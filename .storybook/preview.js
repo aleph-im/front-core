@@ -11,7 +11,7 @@ function getThemeColors(theme) {
   const { color } = theme.storybook;
 
   return {
-    brandTitle: 'Aleph.im Components',
+    brandTitle: 'Aleph Cloud Components',
     brandUrl: 'https://aleph.im/',
     brandImage: theme.name.toLowerCase().indexOf('light') !== -1 ? logoLight : logoDark,
     appBg: color.background,
