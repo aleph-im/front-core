@@ -24,6 +24,10 @@ const nav2CloseSize = nav1OpenSize
 
 export const StyledNav1Link = styled.div`
   ${tw`w-full`}
+
+  & ${StyledTooltipChildrenContainer} {
+    ${tw`w-full`}
+  }
 `
 
 export const StyledNav2Link = styled.div`
@@ -175,7 +179,9 @@ export const StyledTooltip = styled(Tooltip).attrs((props) => {
     offset: { x: 72, y: 0 },
     margin: { x: 5, y: 0 },
   }
-})``
+})`
+  z-index: 16;
+`
 
 export const StyledNav2LinkContainer = styled.div`
   ${tw`flex flex-col items-start cursor-auto w-full overflow-y-scroll h-full`}
@@ -442,9 +448,13 @@ export const StyledSidebar = styled.aside<StyledSidebarInternalProps>`
       : css`
           & ${StyledNav1} {
             width: ${nav1CloseSize}rem;
-            transition: width ease-in-out ${0.2 / $closingSpeed}s ${
-          0.15 / $closingSpeed
-        }s;
+            transition: width ease-in-out ${0.2 / $closingSpeed}s
+                        ${0.15 / $closingSpeed}s;
+
+
+            & ${StyledRouterLink} {
+              cursor: initial;
+            }
           }
 
           & ${StyledLogo} {
