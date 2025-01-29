@@ -1,4 +1,11 @@
-import React, { memo, useCallback, useMemo, useState, MouseEvent } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useMemo,
+  useState,
+  MouseEvent,
+  useRef,
+} from 'react'
 import { useTransition } from 'transition-hook'
 import {
   StyledLogo,
@@ -27,21 +34,41 @@ import { RouteProps, RouterSidebarProps } from './types'
 import { RouterLinkProps } from '../RouterLink'
 import { useTheme } from 'styled-components'
 
-const Nav1Route = ({ pathname, route, Link, ...rest }: RouteProps) => {
+const Nav1Route = ({
+  pathname,
+  route,
+  Link,
+  isOpen,
+  ...rest
+}: RouteProps & { isOpen: boolean }) => {
   const isActive = route.exact
     ? pathname === route.href
     : pathname.indexOf(route.href) >= 0
 
   const linkProps: RouterLinkProps = {
-    route,
+    route: {
+      ...route,
+      href: isOpen ? route.href : '#',
+      target: isOpen ? route.target : undefined,
+    },
     Link,
     isActive,
     ...rest,
   }
 
+  const ref = useRef<any>(null)
+
   return (
     <StyledNav1Link>
-      <StyledRouterLink1 {...linkProps} />
+      <div tw="w-full" ref={ref}>
+        <StyledRouterLink1 {...linkProps} />
+      </div>
+      {isOpen && (
+        <StyledTooltip
+          content={[route.name, route.label].join(' ')}
+          targetRef={ref}
+        />
+      )}
     </StyledNav1Link>
   )
 }
@@ -293,6 +320,7 @@ export const RouterSidebar = ({
                 exact: route.exact,
                 disabled: route.disabled,
                 level: 0,
+                isOpen: isOpenState,
               }}
             />
           ))}
