@@ -3,6 +3,7 @@ import { IconName } from '../../common/Icon'
 import { LinkComponent } from '../../../types'
 import { BreakpointId } from '../../../themes'
 import { ButtonProps } from '../../common/Button'
+import { LogoProps } from '../../common/Logo'
 
 export type FooterMedia = {
   icon: IconName
@@ -41,5 +42,7 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   Link?: LinkComponent
   logoHref?: string
   logoTarget?: string
+  logoImg?: LogoProps['img']
+  logoByAleph?: LogoProps['byAleph']
   breakpoint?: BreakpointId
 }

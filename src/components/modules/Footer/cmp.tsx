@@ -53,6 +53,8 @@ export const Footer = ({
   Link = 'a' as unknown as LinkComponent,
   logoHref = '/',
   logoTarget,
+  logoImg,
+  logoByAleph,
   maxWidth: $maxWidth,
   breakpoint: $breakpoint = 'md',
   ...rest
@@ -69,6 +71,8 @@ export const Footer = ({
                 Link={Link}
                 href={logoHref}
                 target={logoTarget}
+                img={logoImg}
+                byAleph={logoByAleph}
               />
             </div>
 
