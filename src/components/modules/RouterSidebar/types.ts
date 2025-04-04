@@ -1,5 +1,6 @@
 import { BreakpointId } from '../../../themes'
 import { LinkComponent, Route } from '../../../types'
+import { LogoProps } from '../../common/Logo'
 import { RouterLinkProps } from '../RouterLink'
 
 export type RouterSidebarProps = {
@@ -10,6 +11,7 @@ export type RouterSidebarProps = {
   open?: boolean
   logoHref?: string
   logoTarget?: string
+  logoImg?: LogoProps['img']
   onToggle?: (open?: boolean) => void
   animationSpeed?: number
   animationSpeedOpeningMultiplier?: number
