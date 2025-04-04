@@ -55,6 +55,7 @@ export const Footer = ({
   logoTarget,
   logoImg,
   logoByAleph,
+  logoText = true,
   maxWidth: $maxWidth,
   breakpoint: $breakpoint = 'md',
   ...rest
@@ -67,7 +68,7 @@ export const Footer = ({
             <div tw="w-full flex-auto lg:flex-1">
               <Logo
                 size={28}
-                text
+                text={logoText}
                 Link={Link}
                 href={logoHref}
                 target={logoTarget}

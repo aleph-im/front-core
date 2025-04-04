@@ -44,5 +44,6 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   logoTarget?: string
   logoImg?: LogoProps['img']
   logoByAleph?: LogoProps['byAleph']
+  logoText?: LogoProps['text']
   breakpoint?: BreakpointId
 }

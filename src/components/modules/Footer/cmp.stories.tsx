@@ -10,6 +10,9 @@ export default {
 
 const defaultArgs: Partial<FooterProps> = {
   small: true,
+  logoImg: 'aleph',
+  logoByAleph: false,
+  logoText: 'Aleph Cloud',
   buttons: [
     {
       label: 'Work with us',
