@@ -3,6 +3,7 @@ import { sleep } from '../utils'
 
 export type UsePaginatedListProps<T> = {
   itemsPerPage?: number
+  numberOfPages?: number
   delay?: number
   list?: T[]
   resetDeps?: any[]
@@ -15,7 +16,8 @@ export type UsePaginatedListReturn<T> = {
 }
 
 export function usePaginatedList<T>({
-  itemsPerPage = 10,
+  itemsPerPage,
+  numberOfPages,
   delay = 200,
   list,
   resetDeps = [list],
@@ -27,10 +29,36 @@ export function usePaginatedList<T>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...resetDeps])
 
+  const calculatedItemsPerPage = useMemo(() => {
+    if (!list) return 10
+
+    // If itemsPerPage is defined, use it as priority
+    if (itemsPerPage) return itemsPerPage
+
+    // If numberOfPages is defined, calculate itemsPerPage
+    if (numberOfPages && numberOfPages > 0) {
+      return Math.ceil(list.length / numberOfPages)
+    }
+
+    // Default value
+    return 10
+  }, [itemsPerPage, numberOfPages, list])
+
   const output = useMemo(() => {
     if (!list) return
-    return list.slice(0, page * itemsPerPage)
-  }, [itemsPerPage, list, page])
+
+    const totalPages =
+      numberOfPages || Math.ceil(list.length / calculatedItemsPerPage)
+    const isLastPage = page >= totalPages
+
+    if (isLastPage) {
+      // On the last page, return all items (including any remainder)
+      return list
+    } else {
+      // Normal paging - show items up to the current page
+      return list.slice(0, page * calculatedItemsPerPage)
+    }
+  }, [calculatedItemsPerPage, list, page, numberOfPages])
 
   const loadItemsDisabled = useMemo(() => {
     if (!list) return true
