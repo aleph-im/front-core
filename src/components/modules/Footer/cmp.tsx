@@ -118,10 +118,12 @@ export const Footer = ({
             <div tw="mb-12">
               <Logo
                 size={55}
-                text
+                text={logoText}
                 Link={Link}
                 href={logoHref}
                 target={logoTarget}
+                img={logoImg}
+                byAleph={logoByAleph}
               />
             </div>
             <nav tw="m-0 flex flex-wrap gap-10 justify-between">
