@@ -76,6 +76,7 @@ export function getPlainGrainEffectCss(color: string) {
       background-repeat: repeat;
       background-size: ${imageWidth}rem ${imageHeight}rem;
       animation: 20s linear 0s infinite ${moveBackground};
+      transform: translateZ(0);
     }
   `
 }
