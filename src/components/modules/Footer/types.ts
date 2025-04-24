@@ -33,11 +33,7 @@ export type FooterLinkList = {
 }
 
 export type FooterCommonProps = HTMLAttributes<HTMLElement> & {
-  small?: boolean
-  maxWidth?: string
-  buttons: FooterButton[]
   media: FooterMedia[]
-  links: FooterLinkList[]
   mainLinks: FooterLink[]
   Link?: LinkComponent
   logoHref?: string
@@ -46,6 +42,7 @@ export type FooterCommonProps = HTMLAttributes<HTMLElement> & {
   logoByAleph?: LogoProps['byAleph']
   logoText?: LogoProps['text']
   breakpoint?: BreakpointId
+  maxWidth?: string
 }
 
 export type FooterProps =
