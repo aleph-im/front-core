@@ -5,6 +5,7 @@ export type IconPrefix = 'fass' | 'far' | 'fab' | 'custom'
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | string
 
 export type CustomIconName =
+  | 'aleph'
   | 'avalanche'
   | 'base'
   | 'binance'
