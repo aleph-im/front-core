@@ -32,7 +32,7 @@ export type FooterLinkList = {
   links: FooterLink[]
 }
 
-export type FooterProps = HTMLAttributes<HTMLElement> & {
+export type FooterCommonProps = HTMLAttributes<HTMLElement> & {
   small?: boolean
   maxWidth?: string
   buttons: FooterButton[]
@@ -47,3 +47,15 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   logoText?: LogoProps['text']
   breakpoint?: BreakpointId
 }
+
+export type FooterProps =
+  | (FooterCommonProps & {
+      small: true
+      buttons?: FooterButton[]
+      links?: FooterLinkList[]
+    })
+  | (FooterCommonProps & {
+      small?: false
+      buttons: FooterButton[]
+      links: FooterLinkList[]
+    })
