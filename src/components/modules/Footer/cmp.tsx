@@ -128,7 +128,7 @@ export const Footer = ({
             </div>
             <nav tw="m-0 flex flex-wrap gap-10 justify-between">
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
-                {buttons.map((b) => (
+                {buttons?.map((b) => (
                   <StyledButton
                     key={b.href}
                     {...{
@@ -143,17 +143,21 @@ export const Footer = ({
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinksMemo
-                  Link={Link}
-                  links={links.slice(0, links.length / 2)}
-                />
+                {links && (
+                  <FooterLinksMemo
+                    Link={Link}
+                    links={links.slice(0, links.length / 2)}
+                  />
+                )}
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinksMemo
-                  Link={Link}
-                  links={links.slice(links.length / 2)}
-                />
+                {links && (
+                  <FooterLinksMemo
+                    Link={Link}
+                    links={links.slice(links.length / 2)}
+                  />
+                )}
               </div>
 
               <ul tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
