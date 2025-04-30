@@ -3,6 +3,7 @@ import { IconName } from '../../common/Icon'
 import { LinkComponent } from '../../../types'
 import { BreakpointId } from '../../../themes'
 import { ButtonProps } from '../../common/Button'
+import { LogoProps } from '../../common/Logo'
 
 export type FooterMedia = {
   icon: IconName
@@ -31,15 +32,27 @@ export type FooterLinkList = {
   links: FooterLink[]
 }
 
-export type FooterProps = HTMLAttributes<HTMLElement> & {
-  small?: boolean
-  maxWidth?: string
-  buttons: FooterButton[]
+export type FooterCommonProps = HTMLAttributes<HTMLElement> & {
   media: FooterMedia[]
-  links: FooterLinkList[]
   mainLinks: FooterLink[]
   Link?: LinkComponent
   logoHref?: string
   logoTarget?: string
+  logoImg?: LogoProps['img']
+  logoByAleph?: LogoProps['byAleph']
+  logoText?: LogoProps['text']
   breakpoint?: BreakpointId
+  maxWidth?: string
 }
+
+export type FooterProps =
+  | (FooterCommonProps & {
+      small: true
+      buttons?: FooterButton[]
+      links?: FooterLinkList[]
+    })
+  | (FooterCommonProps & {
+      small?: false
+      buttons: FooterButton[]
+      links: FooterLinkList[]
+    })

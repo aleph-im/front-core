@@ -274,7 +274,8 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
     hasNextPage: !!infiniteScroll,
     disabled: !infiniteScroll,
     onLoadMore: handleLoadMore,
-    rootMargin: '1px',
+    rootMargin: '100px 0px',
+    delayInMs: 100,
   })
 
   useEffect(() => {
@@ -326,11 +327,13 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
         )}
         {(!!infiniteScroll || isLoading) && (
           <tr ref={triggerRef} className="loading-placeholder">
-            {isLoading && (
-              <td colSpan={columns.length}>
-                {loadingPlaceholder || <Spinner color="text" tw="mx-auto" />}
-              </td>
-            )}
+            <td
+              colSpan={columns.length}
+              style={isLoading ? {} : { height: '1px', padding: 0 }}
+            >
+              {isLoading &&
+                (loadingPlaceholder || <Spinner color="text" tw="mx-auto" />)}
+            </td>
           </tr>
         )}
       </tbody>

@@ -249,7 +249,6 @@ const typo: ThemeTypo = {
     weight: 900,
     size: pxToRem(34),
     spacing: '-0.05em',
-    transform: 'lowercase',
   },
   nav: {
     ...defaultFontTypo,

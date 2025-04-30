@@ -229,6 +229,7 @@ export const RouterSidebar = ({
   open,
   logoHref = '/',
   logoTarget,
+  logoImg,
   animationSpeed = 1.5,
   animationSpeedOpeningMultiplier = 0.8,
   onToggle,
@@ -269,10 +270,10 @@ export const RouterSidebar = ({
   const logo = useMemo(
     () => (
       <Link href={logoHref} target={logoTarget} route={{ href: logoHref }}>
-        <StyledLogo />
+        <StyledLogo img={logoImg} />
       </Link>
     ),
-    [Link, logoHref, logoTarget],
+    [Link, logoHref, logoTarget, logoImg],
   )
 
   // --------------------------------------

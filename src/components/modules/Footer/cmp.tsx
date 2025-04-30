@@ -53,6 +53,9 @@ export const Footer = ({
   Link = 'a' as unknown as LinkComponent,
   logoHref = '/',
   logoTarget,
+  logoImg,
+  logoByAleph,
+  logoText = true,
   maxWidth: $maxWidth,
   breakpoint: $breakpoint = 'md',
   ...rest
@@ -65,10 +68,12 @@ export const Footer = ({
             <div tw="w-full flex-auto lg:flex-1">
               <Logo
                 size={28}
-                text
+                text={logoText}
                 Link={Link}
                 href={logoHref}
                 target={logoTarget}
+                img={logoImg}
+                byAleph={logoByAleph}
               />
             </div>
 
@@ -113,15 +118,17 @@ export const Footer = ({
             <div tw="mb-12">
               <Logo
                 size={55}
-                text
+                text={logoText}
                 Link={Link}
                 href={logoHref}
                 target={logoTarget}
+                img={logoImg}
+                byAleph={logoByAleph}
               />
             </div>
             <nav tw="m-0 flex flex-wrap gap-10 justify-between">
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
-                {buttons.map((b) => (
+                {buttons?.map((b) => (
                   <StyledButton
                     key={b.href}
                     {...{
@@ -136,17 +143,21 @@ export const Footer = ({
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinksMemo
-                  Link={Link}
-                  links={links.slice(0, links.length / 2)}
-                />
+                {links && (
+                  <FooterLinksMemo
+                    Link={Link}
+                    links={links.slice(0, links.length / 2)}
+                  />
+                )}
               </div>
 
               <div tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-10 lg:gap-10 items-start">
-                <FooterLinksMemo
-                  Link={Link}
-                  links={links.slice(links.length / 2)}
-                />
+                {links && (
+                  <FooterLinksMemo
+                    Link={Link}
+                    links={links.slice(links.length / 2)}
+                  />
+                )}
               </div>
 
               <ul tw="flex-auto w-full lg:flex-none lg:w-auto flex flex-col gap-6 items-start">
