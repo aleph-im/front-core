@@ -99,6 +99,7 @@ export const globalTypes = {
       items: [
         { value: 'aleph', title: 'Aleph' },
         { value: 'twentysix', title: 'Twentysix' },
+        { value: 'twentysix-dark', title: 'Twentysix Dark' },
       ],
     },
   },

@@ -275,7 +275,7 @@ function alephEffectClasses(theme: DefaultTheme) {
 }
 
 function twentysixEffectClasses(theme: DefaultTheme) {
-  if (theme.name !== 'twentysix') return
+  if (theme.name !== 'twentysix' && theme.name !== 'twentysix-dark') return
 
   const grainPlainColors = Object.keys(grainColor)
   const [colors1, ...colors2] = grainPlainColors
