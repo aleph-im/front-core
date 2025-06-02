@@ -189,4 +189,3 @@ export const StyledLeftContent = styled.div<StyledLeftContentProps>`
     `
   }}
 `
-

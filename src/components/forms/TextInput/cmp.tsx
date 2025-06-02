@@ -51,14 +51,24 @@ export const TextInput = forwardRef(
     const inputRef = useRef<HTMLInputElement>(null)
 
     // Forward the ref to expose the input element
-    useImperativeHandle(ref, () => inputRef.current!, [])
+    useImperativeHandle(
+      ref,
+      () => {
+        if (!inputRef.current) {
+          throw new Error('Input ref is not available')
+        }
+        return inputRef.current
+      },
+      [],
+    )
 
     // Function to measure text width using Canvas API
     const measureTextWidth = useCallback((text: string): number => {
       if (!inputRef.current) return 0
 
       const canvas = document.createElement('canvas')
-      const context = canvas.getContext('2d')!
+      const context = canvas.getContext('2d')
+      if (!context) return 0
 
       // Get computed styles from the input element
       const computedStyle = window.getComputedStyle(inputRef.current)
