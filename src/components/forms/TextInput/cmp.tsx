@@ -16,10 +16,12 @@ import {
   StyledContainer,
   StyledLeftContent,
   StyledOuterContainer,
+  StyledSpinnerContainer,
 } from './styles'
 import { ButtonProps, TextInputProps } from './types'
 import FormLabel from '../FormLabel'
 import Button from '../../common/Button'
+import Spinner from '../../common/Spinner'
 
 export const TextInput = forwardRef(
   (
@@ -38,6 +40,9 @@ export const TextInput = forwardRef(
       required,
       icon,
       dataView,
+      width,
+      textAlign = 'left',
+      loading,
       ...rest
     }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -88,6 +93,7 @@ export const TextInput = forwardRef(
           {...{
             $hasButton: !!button,
             $buttonStyle: buttonStyle,
+            $width: width,
           }}
         >
           <StyledContainer
@@ -114,17 +120,23 @@ export const TextInput = forwardRef(
                 ref,
                 button,
                 buttonStyle,
-                placeholder,
+                placeholder: loading ? '' : placeholder,
                 className: classes,
                 name,
                 disabled,
                 required,
                 $dataView,
+                $textAlign: textAlign,
                 ...rest,
                 onFocus: handleFocus,
                 onBlur: handleBlur,
               }}
             />
+            {loading && !rest.value && (
+              <StyledSpinnerContainer $hasIcon={!!icon}>
+                <Spinner size="3em" />
+              </StyledSpinnerContainer>
+            )}
             {buttonStyle === 'wrapped' && buttonComponent}
           </StyledContainer>
           {buttonStyle === 'stuck' && buttonComponent}

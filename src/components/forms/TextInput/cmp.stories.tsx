@@ -175,3 +175,119 @@ WithIconAndButton.args = {
 WithIconAndButton.parameters = {
   ...defaultParams,
 }
+
+// ---
+
+export const FixedWidth = () => {
+  const [value1, setValue1] = useState<string>('')
+  const [value2, setValue2] = useState<string>('')
+  const [value3, setValue3] = useState<string>('')
+
+  return (
+    <div tw="space-y-4">
+      <div>
+        <h6 tw="mb-2">Default width (auto)</h6>
+        <TextInput
+          name="default"
+          placeholder="Default width"
+          value={value1}
+          onChange={(e) => setValue1(e.target.value)}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Fixed width: 200px</h6>
+        <TextInput
+          name="fixed-200"
+          placeholder="200px width"
+          width="200px"
+          value={value2}
+          onChange={(e) => setValue2(e.target.value)}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Fixed width: 6rem</h6>
+        <TextInput
+          name="fixed-120"
+          placeholder="6rem width"
+          width={'6rem'}
+          value={value3}
+          onChange={(e) => setValue3(e.target.value)}
+        />
+      </div>
+    </div>
+  )
+}
+FixedWidth.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const TextAlignment = () => {
+  const [value1, setValue1] = useState<string>('Left aligned')
+  const [value2, setValue2] = useState<string>('Center aligned')
+  const [value3, setValue3] = useState<string>('Right aligned')
+
+  return (
+    <div tw="space-y-4">
+      <div>
+        <h6 tw="mb-2">Left aligned (default)</h6>
+        <TextInput
+          name="left"
+          placeholder="Left aligned text"
+          textAlign="left"
+          value={value1}
+          onChange={(e) => setValue1(e.target.value)}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Center aligned</h6>
+        <TextInput
+          name="center"
+          placeholder="Center aligned text"
+          textAlign="center"
+          value={value2}
+          onChange={(e) => setValue2(e.target.value)}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Right aligned</h6>
+        <TextInput
+          name="right"
+          placeholder="Right aligned text"
+          textAlign="right"
+          value={value3}
+          onChange={(e) => setValue3(e.target.value)}
+        />
+      </div>
+    </div>
+  )
+}
+TextAlignment.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const Loading = Template.bind({})
+Loading.args = {
+  ...defaultArgs,
+  loading: true,
+  placeholder: 'Loading...',
+}
+Loading.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const LoadingWithIcon = Template.bind({})
+LoadingWithIcon.args = {
+  ...defaultArgs,
+  loading: true,
+  icon: <Icon name="search" size="lg" />,
+  placeholder: 'Loading overrides icon...',
+}
+LoadingWithIcon.parameters = {
+  ...defaultParams,
+}
