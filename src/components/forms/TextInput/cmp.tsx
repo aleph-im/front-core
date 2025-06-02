@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useMemo,
   useState,
+  useRef,
   useEffect,
 } from 'react'
 import FormError from '../FormError'
@@ -17,6 +18,7 @@ import {
   StyledContainer,
   StyledLeftContent,
   StyledOuterContainer,
+  StyledMeasuringSpan,
 } from './styles'
 import { ButtonProps, TextInputProps } from './types'
 import FormLabel from '../FormLabel'
@@ -45,6 +47,18 @@ export const TextInput = forwardRef(
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [isFocus, setIsFocus] = useState(focus)
+    const [inputWidth, setInputWidth] = useState<number | undefined>(undefined)
+    const measureRef = useRef<HTMLSpanElement>(null)
+
+    // Measure text width for autoWidth
+    useEffect(() => {
+      if (!autoWidth || !measureRef.current) return
+
+      const content = (rest.value as string) || placeholder || ''
+      measureRef.current.textContent = content
+
+      setInputWidth(measureRef.current.offsetWidth) // Add small padding for cursor
+    }, [autoWidth, rest.value, placeholder])
 
     const handleFocus = useCallback(
       (e: FocusEvent<HTMLInputElement>) => {
@@ -62,6 +76,18 @@ export const TextInput = forwardRef(
       [onBlurProp],
     )
 
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (autoWidth && measureRef.current) {
+          measureRef.current.textContent = e.target.value || placeholder || ''
+          const width = measureRef.current.offsetWidth
+          setInputWidth(width + 8) // Add small padding for cursor
+        }
+        rest.onChange && rest.onChange(e)
+      },
+      [autoWidth, placeholder, rest],
+    )
+
     const isFocusClass = useMemo(
       () => (isFocus || focus ? '_focus' : ''),
       [isFocus, focus],
@@ -75,14 +101,6 @@ export const TextInput = forwardRef(
 
     const disabled = dataView ? true : disabledProp
     const $dataView = dataView ? (disabledProp ? 1 : 2) : undefined
-
-    // Calculate input size for autoWidth
-    const inputSize = useMemo(() => {
-      if (!autoWidth) return undefined
-
-      const content = (rest.value as string) || placeholder || ''
-      return Math.max(content.length, 2) // Exact content length, min 2 chars
-    }, [autoWidth, rest.value, placeholder])
 
     const buttonComponent =
       button &&
@@ -132,8 +150,9 @@ export const TextInput = forwardRef(
                 required,
                 $dataView,
                 $autoWidth: autoWidth,
-                size: inputSize,
+                $width: inputWidth,
                 ...rest,
+                onChange: handleChange,
                 onFocus: handleFocus,
                 onBlur: handleBlur,
               }}
@@ -143,6 +162,7 @@ export const TextInput = forwardRef(
           {buttonStyle === 'stuck' && buttonComponent}
         </StyledOuterContainer>
         {error && <FormError error={error} />}
+        {autoWidth && <StyledMeasuringSpan ref={measureRef} />}
       </StyledInputWrapper>
     )
   },

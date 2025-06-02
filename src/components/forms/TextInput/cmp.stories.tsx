@@ -57,7 +57,7 @@ export const WithAutoWidth = Template.bind({})
 WithAutoWidth.args = {
   ...defaultArgs,
   autoWidth: true,
-  placeholder: 'This will size to fit the content',
+  placeholder: 'This will size to fit the content 7gaygsa as7yga s78',
 }
 WithAutoWidth.parameters = {
   ...defaultParams,

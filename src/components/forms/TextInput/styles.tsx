@@ -118,12 +118,13 @@ export type StyledInputProps = {
   disabled?: boolean
   $dataView?: number
   $autoWidth?: boolean
+  $width?: number
 }
 
 export const StyledInput = styled.input.attrs(
   addClasses('tp-form'),
 )<StyledInputProps>`
-  ${({ theme, $dataView, $autoWidth }) => {
+  ${({ theme, $dataView, $autoWidth, $width }) => {
     const { color } = theme.form.input
 
     return css`
@@ -133,7 +134,7 @@ export const StyledInput = styled.input.attrs(
       background: transparent;
       color: ${color.default};
       min-height: 1.625rem;
-      width: 100%;
+      width: ${$autoWidth && $width ? `${$width}px` : '100%'};
       opacity: 1;
 
       ${fieldPlaceholderCss}
@@ -166,8 +167,8 @@ export const StyledInput = styled.input.attrs(
 
       ${$autoWidth &&
       css`
-        width: auto;
         flex: none;
+        min-width: 0;
       `}
     `
   }}
@@ -187,4 +188,20 @@ export const StyledLeftContent = styled.div<StyledLeftContentProps>`
       `}
     `
   }}
+`
+
+export const StyledMeasuringSpan = styled.span`
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: pre;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  top: -9999px;
+  left: -9999px;
 `
