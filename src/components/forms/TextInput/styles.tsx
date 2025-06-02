@@ -190,18 +190,3 @@ export const StyledLeftContent = styled.div<StyledLeftContentProps>`
   }}
 `
 
-export const StyledMeasuringSpan = styled.span`
-  position: absolute;
-  visibility: hidden;
-  pointer-events: none;
-  white-space: pre;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  top: -9999px;
-  left: -9999px;
-`

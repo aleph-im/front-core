@@ -10,6 +10,7 @@ import React, {
   useState,
   useRef,
   useEffect,
+  useImperativeHandle,
 } from 'react'
 import FormError from '../FormError'
 import { StyledInputWrapper } from '../styles.forms'
@@ -18,7 +19,6 @@ import {
   StyledContainer,
   StyledLeftContent,
   StyledOuterContainer,
-  StyledMeasuringSpan,
 } from './styles'
 import { ButtonProps, TextInputProps } from './types'
 import FormLabel from '../FormLabel'
@@ -48,17 +48,34 @@ export const TextInput = forwardRef(
   ) => {
     const [isFocus, setIsFocus] = useState(focus)
     const [inputWidth, setInputWidth] = useState<number | undefined>(undefined)
-    const measureRef = useRef<HTMLSpanElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    // Forward the ref to expose the input element
+    useImperativeHandle(ref, () => inputRef.current!, [])
+
+    // Function to measure text width using Canvas API
+    const measureTextWidth = useCallback((text: string): number => {
+      if (!inputRef.current) return 0
+
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')!
+
+      // Get computed styles from the input element
+      const computedStyle = window.getComputedStyle(inputRef.current)
+      context.font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`
+
+      const metrics = context.measureText(text)
+      return Math.ceil(metrics.width)
+    }, [])
 
     // Measure text width for autoWidth
     useEffect(() => {
-      if (!autoWidth || !measureRef.current) return
+      if (!autoWidth) return
 
       const content = (rest.value as string) || placeholder || ''
-      measureRef.current.textContent = content
-
-      setInputWidth(measureRef.current.offsetWidth) // Add small padding for cursor
-    }, [autoWidth, rest.value, placeholder])
+      const width = measureTextWidth(content)
+      setInputWidth(width) // Add padding for cursor and breathing room
+    }, [autoWidth, rest.value, placeholder, measureTextWidth])
 
     const handleFocus = useCallback(
       (e: FocusEvent<HTMLInputElement>) => {
@@ -78,14 +95,14 @@ export const TextInput = forwardRef(
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (autoWidth && measureRef.current) {
-          measureRef.current.textContent = e.target.value || placeholder || ''
-          const width = measureRef.current.offsetWidth
-          setInputWidth(width + 8) // Add small padding for cursor
+        if (autoWidth) {
+          const content = e.target.value || placeholder || ''
+          const width = measureTextWidth(content)
+          setInputWidth(width + 16) // Add padding for cursor and breathing room
         }
         rest.onChange && rest.onChange(e)
       },
-      [autoWidth, placeholder, rest],
+      [autoWidth, placeholder, measureTextWidth, rest],
     )
 
     const isFocusClass = useMemo(
@@ -140,7 +157,7 @@ export const TextInput = forwardRef(
             )}
             <StyledInput
               {...{
-                ref,
+                ref: inputRef,
                 button,
                 buttonStyle,
                 placeholder,
@@ -162,7 +179,6 @@ export const TextInput = forwardRef(
           {buttonStyle === 'stuck' && buttonComponent}
         </StyledOuterContainer>
         {error && <FormError error={error} />}
-        {autoWidth && <StyledMeasuringSpan ref={measureRef} />}
       </StyledInputWrapper>
     )
   },
