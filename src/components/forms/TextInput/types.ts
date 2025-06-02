@@ -17,6 +17,7 @@ export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   placeholder?: string
   defaultValue?: string
   dataView?: boolean
+  autoWidth?: boolean
 
   label?: string
   error?: FormError

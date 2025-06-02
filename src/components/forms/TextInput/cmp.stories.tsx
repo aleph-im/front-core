@@ -30,7 +30,7 @@ const Template: StoryFn<typeof TextInput> = (args) => {
   const [value, setValue] = useState<string>(args.value as string)
 
   return (
-    <>
+    <div tw="flex flex-col items-start">
       <TextInput
         {...args}
         value={value}
@@ -38,7 +38,7 @@ const Template: StoryFn<typeof TextInput> = (args) => {
       />
       <h6 tw="my-5">value:</h6>
       <pre>{value}</pre>
-    </>
+    </div>
   )
 }
 
@@ -47,6 +47,19 @@ Default.args = {
   ...defaultArgs,
 }
 Default.parameters = {
+  ...defaultParams,
+  controls: { exclude: [...defaultParams.controls.exclude, 'buttonStyle'] },
+}
+
+// ---
+
+export const WithAutoWidth = Template.bind({})
+WithAutoWidth.args = {
+  ...defaultArgs,
+  autoWidth: true,
+  placeholder: 'This will size to fit the content',
+}
+WithAutoWidth.parameters = {
   ...defaultParams,
   controls: { exclude: [...defaultParams.controls.exclude, 'buttonStyle'] },
 }

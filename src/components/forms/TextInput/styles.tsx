@@ -61,10 +61,11 @@ export type StyledContainerProps = {
   disabled?: boolean
   $hasButton?: boolean
   $dataView?: number
+  $autoWidth?: boolean
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  ${({ theme, $hasButton, $dataView }) => {
+  ${({ theme, $hasButton, $dataView, $autoWidth }) => {
     const { background, shadow, border } = theme.form.input
 
     const borderSize = Math.max(
@@ -103,6 +104,12 @@ export const StyledContainer = styled.div<StyledContainerProps>`
         opacity: 1;
         background: ${background.data};
       `}
+
+      ${$autoWidth &&
+      css`
+        width: fit-content;
+        min-width: fit-content;
+      `}
     `
   }}
 `
@@ -110,12 +117,13 @@ export const StyledContainer = styled.div<StyledContainerProps>`
 export type StyledInputProps = {
   disabled?: boolean
   $dataView?: number
+  $autoWidth?: boolean
 }
 
 export const StyledInput = styled.input.attrs(
   addClasses('tp-form'),
 )<StyledInputProps>`
-  ${({ theme, $dataView }) => {
+  ${({ theme, $dataView, $autoWidth }) => {
     const { color } = theme.form.input
 
     return css`
@@ -143,7 +151,7 @@ export const StyledInput = styled.input.attrs(
       `}
 
     /* Remove Arrows/Spinners */
-    
+
     /* Chrome, Safari, Edge, Opera */
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -155,6 +163,12 @@ export const StyledInput = styled.input.attrs(
       &[type='number'] {
         -moz-appearance: textfield;
       }
+
+      ${$autoWidth &&
+      css`
+        width: auto;
+        flex: none;
+      `}
     `
   }}
 `

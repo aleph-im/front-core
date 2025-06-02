@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useMemo,
   useState,
+  useEffect,
 } from 'react'
 import FormError from '../FormError'
 import { StyledInputWrapper } from '../styles.forms'
@@ -38,6 +39,7 @@ export const TextInput = forwardRef(
       required,
       icon,
       dataView,
+      autoWidth,
       ...rest
     }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
@@ -74,6 +76,14 @@ export const TextInput = forwardRef(
     const disabled = dataView ? true : disabledProp
     const $dataView = dataView ? (disabledProp ? 1 : 2) : undefined
 
+    // Calculate input size for autoWidth
+    const inputSize = useMemo(() => {
+      if (!autoWidth) return undefined
+
+      const content = (rest.value as string) || placeholder || ''
+      return Math.max(content.length, 2) // Exact content length, min 2 chars
+    }, [autoWidth, rest.value, placeholder])
+
     const buttonComponent =
       button &&
       (isValidElement(button) && button.type === Button
@@ -95,6 +105,7 @@ export const TextInput = forwardRef(
               $hasButton: !!button,
               className: isFocusClass,
               $dataView,
+              $autoWidth: autoWidth,
               error,
               disabled,
             }}
@@ -120,6 +131,8 @@ export const TextInput = forwardRef(
                 disabled,
                 required,
                 $dataView,
+                $autoWidth: autoWidth,
+                size: inputSize,
                 ...rest,
                 onFocus: handleFocus,
                 onBlur: handleBlur,
