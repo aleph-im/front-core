@@ -86,7 +86,7 @@ export const TextInput = forwardRef(
         : button)
 
     return (
-      <StyledInputWrapper>
+      <StyledInputWrapper $width={width}>
         {label && <FormLabel {...{ label, error, required }} />}
         <></>
         <StyledOuterContainer

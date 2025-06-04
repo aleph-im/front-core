@@ -3,11 +3,24 @@ import { FormError } from './FormError/types'
 
 export type StyledInputWrapperProps = {
   error?: FormError
+  $width?: string | number
+  $minWidth?: string
 }
 
 export const StyledInputWrapper = styled.div<StyledInputWrapperProps>`
   max-width: 100%;
-  min-width: 10rem;
+  ${({ $width, $minWidth }) => {
+    if ($width) {
+      const widthValue = typeof $width === 'number' ? `${$width}px` : $width
+      return css`
+        width: fit-content;
+        min-width: ${widthValue};
+      `
+    }
+    return css`
+      min-width: ${$minWidth || '10rem'};
+    `
+  }}
 `
 
 export const fieldErrorCss = css<{ error?: FormError }>`
