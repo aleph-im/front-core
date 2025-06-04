@@ -76,7 +76,7 @@ export const TextInput = forwardRef(
       [isFocusClass, className],
     )
 
-    const disabled = dataView ? true : disabledProp
+    const disabled = dataView ? true : disabledProp || loading
     const $dataView = dataView ? (disabledProp ? 1 : 2) : undefined
 
     const buttonComponent =
