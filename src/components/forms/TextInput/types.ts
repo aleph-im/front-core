@@ -24,5 +24,10 @@ export type TextInputProps = InputHTMLAttributes<HTMLInputElement> & {
   // Force states
   focus?: boolean
   disabled?: boolean
+  loading?: boolean
+
+  // Layout
+  width?: string | number
+  textAlign?: 'left' | 'center' | 'right'
 } & ButtonProps &
   IconProps

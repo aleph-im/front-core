@@ -16,14 +16,19 @@ export type StyledOuterContainerProps = {
   $hasButton?: boolean
   $buttonStyle?: ButtonStyle
   $dataView?: number
+  $width?: string | number
 }
 
 export const StyledOuterContainer = styled.div<StyledOuterContainerProps>`
-  ${({ theme, $buttonStyle }) => {
+  ${({ theme, $buttonStyle, $width }) => {
     const { background } = theme.form.input
 
     return css`
       ${tw`flex items-stretch`}
+      ${$width &&
+      css`
+        width: ${typeof $width === 'number' ? `${$width}px` : $width};
+      `}
 
       ${StyledContainer} {
         ${tw`flex-auto`}
@@ -74,7 +79,7 @@ export const StyledContainer = styled.div<StyledContainerProps>`
     )
 
     const paddingSize = 0.5 - borderSize
-    const paddingLeftSize = 2 - borderSize
+    const paddingLeftSize = 1.5 - borderSize
     const paddingRightSize = !$hasButton ? paddingLeftSize : paddingSize
 
     return css`
@@ -110,12 +115,13 @@ export const StyledContainer = styled.div<StyledContainerProps>`
 export type StyledInputProps = {
   disabled?: boolean
   $dataView?: number
+  $textAlign?: 'left' | 'center' | 'right'
 }
 
 export const StyledInput = styled.input.attrs(
   addClasses('tp-form'),
 )<StyledInputProps>`
-  ${({ theme, $dataView }) => {
+  ${({ theme, $dataView, $textAlign }) => {
     const { color } = theme.form.input
 
     return css`
@@ -127,6 +133,7 @@ export const StyledInput = styled.input.attrs(
       min-height: 1.625rem;
       width: 100%;
       opacity: 1;
+      text-align: ${$textAlign || 'left'};
 
       ${fieldPlaceholderCss}
 
@@ -143,7 +150,7 @@ export const StyledInput = styled.input.attrs(
       `}
 
     /* Remove Arrows/Spinners */
-    
+
     /* Chrome, Safari, Edge, Opera */
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -170,6 +177,19 @@ export const StyledLeftContent = styled.div<StyledLeftContentProps>`
       css`
         /* disabled + placeholder 0.5 * 0.4 = 0.2 */
         opacity: 0.2;
+      `}
+    `
+  }}
+`
+
+export type StyledSpinnerContainerProps = { $hasIcon: boolean }
+export const StyledSpinnerContainer = styled.div<StyledSpinnerContainerProps>`
+  ${({ $hasIcon }) => {
+    return css`
+      ${tw`absolute inset-0 flex items-center pointer-events-none`}
+      ${$hasIcon &&
+      css`
+        padding-left: 3rem;
       `}
     `
   }}
