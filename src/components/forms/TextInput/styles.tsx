@@ -182,12 +182,28 @@ export const StyledLeftContent = styled.div<StyledLeftContentProps>`
   }}
 `
 
-export type StyledSpinnerContainerProps = { $hasIcon: boolean }
+export type StyledSpinnerContainerProps = {
+  $hasIcon: boolean
+  $textAlign?: 'left' | 'center' | 'right'
+}
 export const StyledSpinnerContainer = styled.div<StyledSpinnerContainerProps>`
-  ${({ $hasIcon }) => {
+  ${({ $hasIcon, $textAlign }) => {
+    const getJustifyContent = () => {
+      switch ($textAlign) {
+        case 'center':
+          return 'center'
+        case 'right':
+          return 'flex-end'
+        default:
+          return 'flex-start'
+      }
+    }
+
     return css`
       ${tw`absolute inset-0 flex items-center pointer-events-none`}
+      justify-content: ${getJustifyContent()};
       ${$hasIcon &&
+      $textAlign !== 'center' &&
       css`
         padding-left: 3rem;
       `}

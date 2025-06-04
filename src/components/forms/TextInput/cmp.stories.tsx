@@ -269,11 +269,44 @@ TextAlignment.parameters = {
 
 // ---
 
-export const Loading = Template.bind({})
-Loading.args = {
-  ...defaultArgs,
-  loading: true,
-  placeholder: 'Loading...',
+export const Loading = () => {
+  return (
+    <div tw="space-y-4">
+      <div>
+        <h6 tw="mb-2">Loading - Left aligned</h6>
+        <TextInput
+          name="loading-left"
+          placeholder="Loading..."
+          textAlign="left"
+          loading={true}
+          value=""
+          onChange={() => {}}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Loading - Center aligned</h6>
+        <TextInput
+          name="loading-center"
+          placeholder="Loading..."
+          textAlign="center"
+          loading={true}
+          value=""
+          onChange={() => {}}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Loading - Right aligned</h6>
+        <TextInput
+          name="loading-right"
+          placeholder="Loading..."
+          textAlign="right"
+          loading={true}
+          value=""
+          onChange={() => {}}
+        />
+      </div>
+    </div>
+  )
 }
 Loading.parameters = {
   ...defaultParams,
@@ -281,12 +314,47 @@ Loading.parameters = {
 
 // ---
 
-export const LoadingWithIcon = Template.bind({})
-LoadingWithIcon.args = {
-  ...defaultArgs,
-  loading: true,
-  icon: <Icon name="search" size="lg" />,
-  placeholder: 'Loading overrides icon...',
+export const LoadingWithIcon = () => {
+  return (
+    <div tw="space-y-4">
+      <div>
+        <h6 tw="mb-2">Loading with Icon - Left aligned</h6>
+        <TextInput
+          name="loading-icon-left"
+          placeholder="Loading..."
+          textAlign="left"
+          loading={true}
+          icon={<Icon name="search" size="lg" />}
+          value=""
+          onChange={() => {}}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Loading with Icon - Center aligned</h6>
+        <TextInput
+          name="loading-icon-center"
+          placeholder="Loading..."
+          textAlign="center"
+          loading={true}
+          icon={<Icon name="search" size="lg" />}
+          value=""
+          onChange={() => {}}
+        />
+      </div>
+      <div>
+        <h6 tw="mb-2">Loading with Icon - Right aligned</h6>
+        <TextInput
+          name="loading-icon-right"
+          placeholder="Loading..."
+          textAlign="right"
+          loading={true}
+          icon={<Icon name="search" size="lg" />}
+          value=""
+          onChange={() => {}}
+        />
+      </div>
+    </div>
+  )
 }
 LoadingWithIcon.parameters = {
   ...defaultParams,

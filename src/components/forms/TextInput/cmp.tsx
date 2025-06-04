@@ -133,8 +133,8 @@ export const TextInput = forwardRef(
               }}
             />
             {loading && !rest.value && (
-              <StyledSpinnerContainer $hasIcon={!!icon}>
-                <Spinner size="3em" />
+              <StyledSpinnerContainer $hasIcon={!!icon} $textAlign={textAlign}>
+                <Spinner size="3em" color="main0" />
               </StyledSpinnerContainer>
             )}
             {buttonStyle === 'wrapped' && buttonComponent}
