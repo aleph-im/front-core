@@ -280,7 +280,6 @@ export const Loading = () => {
           textAlign="left"
           loading={true}
           value=""
-          onChange={() => {}}
         />
       </div>
       <div>
@@ -291,7 +290,6 @@ export const Loading = () => {
           textAlign="center"
           loading={true}
           value=""
-          onChange={() => {}}
         />
       </div>
       <div>
@@ -302,7 +300,6 @@ export const Loading = () => {
           textAlign="right"
           loading={true}
           value=""
-          onChange={() => {}}
         />
       </div>
     </div>
@@ -326,7 +323,6 @@ export const LoadingWithIcon = () => {
           loading={true}
           icon={<Icon name="search" size="lg" />}
           value=""
-          onChange={() => {}}
         />
       </div>
       <div>
@@ -338,7 +334,6 @@ export const LoadingWithIcon = () => {
           loading={true}
           icon={<Icon name="search" size="lg" />}
           value=""
-          onChange={() => {}}
         />
       </div>
       <div>
@@ -350,7 +345,6 @@ export const LoadingWithIcon = () => {
           loading={true}
           icon={<Icon name="search" size="lg" />}
           value=""
-          onChange={() => {}}
         />
       </div>
     </div>
