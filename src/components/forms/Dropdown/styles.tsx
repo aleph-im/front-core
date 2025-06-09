@@ -70,15 +70,61 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
   (props) => {
     const { size } = props
 
-    const y = (size?.y || 0) + (size?.height || 0)
-    const x = size?.x || 0
-    const width = size?.width || 200
+    if (!size) {
+      return {
+        ...props,
+        style: {
+          transform: `translate3d(0px, 0px, 0)`,
+          width: 200,
+        },
+      }
+    }
+
+    const triggerBottom = size.y + size.height
+    const triggerTop = size.y
+    const triggerLeft = size.x
+    const triggerWidth = size.width
+
+    // Calculate available space
+    const viewportHeight = window.innerHeight
+    const spaceBelow = viewportHeight - triggerBottom
+    const spaceAbove = triggerTop
+
+    // Dropdown menu estimated height (max-height is 20rem = 320px)
+    const dropdownMaxHeight = 320
+    const dropdownMargin = 6 // 0.375rem margin
+
+    // Determine positioning
+    const shouldPositionAbove =
+      spaceBelow < dropdownMaxHeight + dropdownMargin && spaceAbove > spaceBelow
+
+    let y: number
+    let maxHeight: number
+
+    if (shouldPositionAbove) {
+      // Position above the trigger
+      const availableHeight = Math.min(
+        dropdownMaxHeight,
+        spaceAbove - dropdownMargin,
+      )
+      y = triggerTop - availableHeight - dropdownMargin
+      maxHeight = availableHeight
+    } else {
+      // Position below the trigger (default)
+      const availableHeight = Math.min(
+        dropdownMaxHeight,
+        spaceBelow - dropdownMargin,
+      )
+      y = triggerBottom
+      maxHeight = availableHeight
+    }
 
     return {
       ...props,
       style: {
-        transform: `translate3d(${x}px, ${y}px, 0)`,
-        width,
+        transform: `translate3d(${triggerLeft}px, ${y}px, 0)`,
+        width: triggerWidth,
+        maxHeight: `${maxHeight}px`,
       },
     }
   },
