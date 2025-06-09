@@ -53,7 +53,7 @@ export const StyledDropdown = styled.div<StyledDropdownProps>`
       `}
 
       ${fieldErrorCss}
-      
+
       ${fieldDisabledCss}
     `
   }}
@@ -107,7 +107,8 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
         dropdownMaxHeight,
         spaceAbove - dropdownMargin,
       )
-      y = triggerTop - availableHeight - dropdownMargin
+      // Position so the dropdown appears above the trigger with margin
+      y = triggerTop - dropdownMargin
       maxHeight = availableHeight
     } else {
       // Position below the trigger (default)
@@ -125,6 +126,7 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
         transform: `translate3d(${triggerLeft}px, ${y}px, 0)`,
         width: triggerWidth,
         maxHeight: `${maxHeight}px`,
+        marginTop: shouldPositionAbove ? '-0.375rem' : '0.375rem',
       },
     }
   },
@@ -135,8 +137,6 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
     return css`
       ${tw`fixed left-0 overflow-auto`}
       ${tw`opacity-0 invisible -top-2`}
-
-      margin-top: 0.375rem;
       border-radius: 1.875rem;
       max-height: 20rem;
       backdrop-filter: blur(10px);
