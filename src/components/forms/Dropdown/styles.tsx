@@ -53,7 +53,7 @@ export const StyledDropdown = styled.div<StyledDropdownProps>`
       `}
 
       ${fieldErrorCss}
-      
+
       ${fieldDisabledCss}
     `
   }}
@@ -74,11 +74,23 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
     const x = size?.x || 0
     const width = size?.width || 200
 
+    // Calculate available space below the trigger
+    const viewportHeight = window.innerHeight
+    const spaceBelow = viewportHeight - y
+    const marginBottom = 20 // Some padding from viewport bottom
+    const availableHeight = Math.max(100, spaceBelow - marginBottom) // Minimum 100px
+    82
+    // Default max-height is 20rem = 320px
+    const defaultMaxHeight = 320
+    const dynamicMaxHeight = Math.min(defaultMaxHeight, availableHeight)
+    86
+
     return {
       ...props,
       style: {
         transform: `translate3d(${x}px, ${y}px, 0)`,
         width,
+        maxHeight: `${dynamicMaxHeight}px`,
       },
     }
   },
