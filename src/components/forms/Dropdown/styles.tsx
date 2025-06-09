@@ -94,9 +94,12 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
     const dropdownMaxHeight = 320
     const dropdownMargin = 6 // 0.375rem margin
 
-    // Determine positioning
+    // Determine positioning - position above if there's insufficient space below
+    // and we have at least some space above to show content
+    const minRequiredSpace = 100 // Minimum pixels needed to show meaningful content
     const shouldPositionAbove =
-      spaceBelow < dropdownMaxHeight + dropdownMargin && spaceAbove > spaceBelow
+      spaceBelow < dropdownMaxHeight + dropdownMargin &&
+      spaceAbove > minRequiredSpace
 
     let y: number
     let maxHeight: number
