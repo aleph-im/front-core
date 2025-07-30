@@ -75,9 +75,9 @@ const color: ThemeColor = {
   light1: '#F9F4FF80',
 
   info: '#5100CD',
-  success: '#47FF59',
-  warning: '#FECD17',
-  error: '#D9245A',
+  success: '#36D846',
+  warning: '#FBAE18',
+  error: '#DE3668',
   disabled: '#81818F',
   disabled2: '#FFFFFF20',
 
@@ -113,10 +113,10 @@ const gradient: ThemeGradient = {
     fn: 'linear-gradient(90deg, #C8ADF0 22.66%, #5100CD 244.27%)',
   },
   success: {
-    colors: ['#38EC49', '#47FF59'],
+    colors: ['#36D846', '#63E570'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #38EC49 0%, #47FF59 100%)',
+    fn: 'linear-gradient(90deg, #36D846 0%, #63E570 100%)',
   },
   warning: {
     colors: ['#FFE814', '#FBAE18'],
@@ -144,10 +144,10 @@ const gradient: ThemeGradient = {
     fn: 'linear-gradient(90deg, #C8ADF01A 22.66%, #5100CD1A 244.27%)',
   },
   success2: {
-    colors: ['#38EC491A', '#47FF591A'],
+    colors: ['#36D8461A', '#63E5701A'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #38EC491A 0%, #47FF591A 100%)',
+    fn: 'linear-gradient(90deg, #36D8461A 0%, #63E5701A 100%)',
   },
   warning2: {
     colors: ['#FFE8141A', '#FBAE181A'],
