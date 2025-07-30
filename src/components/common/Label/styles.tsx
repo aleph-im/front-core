@@ -12,7 +12,12 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
 )<StyledLabelProps>`
   ${({ theme, $variant, $kind }) => {
     const { label } = theme.component
-    const color = $variant
+    const color = $kind === 'secondary' ? `${$variant}2` : $variant
+
+    const border =
+      theme.gradient[$variant]?.fn ||
+      `linear-gradient(90deg, ${color} 0%, ${color} 100%)`
+
     const background =
       theme.gradient[color]?.fn ||
       `linear-gradient(90deg, ${color} 0%, ${color} 100%)`
@@ -29,7 +34,7 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
         ${$kind === 'secondary' &&
         css`
           color: ${label.color.secondary};
-          background-image: none;
+          background: ${background};
 
           /* BORDER */
           &::after {
@@ -44,7 +49,7 @@ export const StyledLabel = styled.span.attrs<StyledLabelProps>(
               linear-gradient(#fff 0 0);
             mask-composite: exclude;
             -webkit-mask-composite: xor;
-            background: ${background};
+            background: ${border};
           }
         `};
     `
