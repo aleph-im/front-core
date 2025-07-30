@@ -19,11 +19,15 @@ import { StyledChildrenContainer as StyledTooltipChildrenContainer } from '../..
 
 const nav1OpenSize = 4.5
 const nav1CloseSize = 0.375
-const nav2OpenSize = 18.75
+const nav2OpenSize = 16
 const nav2CloseSize = nav1OpenSize
 
 export const StyledNav1Link = styled.div`
   ${tw`w-full`}
+
+  & ${StyledTooltipChildrenContainer} {
+    ${tw`w-full`}
+  }
 `
 
 export const StyledNav2Link = styled.div`
@@ -172,10 +176,12 @@ export const StyledTooltip = styled(Tooltip).attrs((props) => {
     variant: 2,
     my: 'center-left',
     at: 'center-left',
-    offset: { x: 63, y: 0 },
+    offset: { x: 72, y: 0 },
     margin: { x: 5, y: 0 },
   }
-})``
+})`
+  z-index: 16;
+`
 
 export const StyledNav2LinkContainer = styled.div`
   ${tw`flex flex-col items-start cursor-auto w-full overflow-y-scroll h-full`}
@@ -194,9 +200,13 @@ export const StyledNav2LinkContainer = styled.div`
 export const StyledOpenedNav2LinkContainer = styled(StyledNav2LinkContainer)`
   width: ${nav2OpenSize}rem;
 
+  .tp-nav {
+    font-size: 1rem;
+  }
+
   & ${StyledRouterLink} {
-    ${tw`h-12 px-6`}
-    padding-left: 3.125rem;
+    ${tw`h-11 px-6`}
+    padding-left: 3rem;
   }
 
   & ${StyledNav2Title} {
@@ -211,7 +221,7 @@ export const StyledOpenedNav2LinkContainer = styled(StyledNav2LinkContainer)`
   }
 
   & ${StyledNav2MainTitle} {
-    ${tw`h-8 mx-5 px-1`}
+    ${tw`h-7 mx-5 px-1`}
   }
 `
 export const StyledClosedNav2LinkContainer = styled(StyledNav2LinkContainer)`
@@ -220,14 +230,14 @@ export const StyledClosedNav2LinkContainer = styled(StyledNav2LinkContainer)`
   & ${StyledNav2Title}, & ${StyledNav2MainTitle} {
     ${tw`p-0 m-0 border-b-0 flex items-center justify-center text-center`}
     font-size: 0.6rem;
-    min-height: 1.286rem;
-    padding: 0.5714rem 0;
+    min-height: 1rem;
+    padding: 0.5rem 0;
   }
 
   & ${StyledRouterLink} {
     height: fit-content;
-    min-height: 2.8572rem;
-    padding: 0.5714rem 0;
+    min-height: 2.5rem;
+    padding: 0.5rem 0;
     width: 100%;
   }
 
@@ -297,35 +307,6 @@ export const StyledToggleButton = styled(Icon).attrs(
     `
   }}
 `
-
-// https://github.com/aleph-im/aleph-account/blob/8b920e34fab9f4f70e3387eed2bd5839ae923971/src/layouts/MainLayout.vue#L131C14-L131C14
-export const StyledProgressBar = styled.div<{ $percent: number }>(
-  ({ theme, $percent }) => {
-    const { color } = theme.component.sidebar.nav2.progress
-
-    // @note: add a min width on the bar if percent is gt 0
-    $percent = $percent > 0 ? Math.max($percent, 0.05) : $percent
-
-    const bgColor = `${theme.color.base0}20`
-
-    return [
-      tw`relative w-full`,
-      css`
-        height: 0.3125rem;
-        background-color: ${bgColor};
-        border-radius: 1rem;
-
-        &:after {
-          ${tw`absolute top-0 left-0 w-full h-full`}
-          content: '';
-          border-radius: 1rem;
-          background: ${color};
-          clip-path: ${`inset(0 ${100 - $percent * 100}% 0 0);`};
-        }
-      `,
-    ]
-  },
-)
 
 const fadeOutIn1 = keyframes`
   0%, 15%, 90%, 100%  {
@@ -467,9 +448,13 @@ export const StyledSidebar = styled.aside<StyledSidebarInternalProps>`
       : css`
           & ${StyledNav1} {
             width: ${nav1CloseSize}rem;
-            transition: width ease-in-out ${0.2 / $closingSpeed}s ${
-          0.15 / $closingSpeed
-        }s;
+            transition: width ease-in-out ${0.2 / $closingSpeed}s
+                        ${0.15 / $closingSpeed}s;
+
+
+            & ${StyledRouterLink} {
+              cursor: initial;
+            }
           }
 
           & ${StyledLogo} {
