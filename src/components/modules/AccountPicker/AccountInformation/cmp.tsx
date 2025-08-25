@@ -2,21 +2,26 @@ import React, { memo, useMemo } from 'react'
 import { StyledLine } from './styles'
 import { AccountInformationProps } from './types'
 import { Logo } from '../../../common/Logo'
-import Button from '../../../common/Button'
-import Icon from '../../../common/Icon'
 import { useTheme } from 'styled-components'
 import Price from '../../../common/Price'
-import { formatCurrency } from '../../../../utils'
+import { ellipseText, formatCurrency } from '../../../../utils'
+import CopyToClipboardIcon from '../../../common/CopyToClipboardIcon'
+import Icon from '../../../common/Icon'
+import Button from '../../../common/Button'
+import ExternalUrl from '../ExternalUrl'
 
 export const AccountInformation = ({
   vouchers,
+  credits,
   balance,
   rewards,
   accountAddress,
   accountAddressHref,
+  externalUrl,
+  Link,
 }: AccountInformationProps) => {
   const theme = useTheme()
-  const { color, button3 } = theme.component.walletPicker
+  const { color } = theme.component.walletPicker
 
   const displayBalance = useMemo(() => formatCurrency(balance), [balance])
   const displayAddress = useMemo(
@@ -26,20 +31,54 @@ export const AccountInformation = ({
 
   return (
     <>
-      <div tw="flex items-center gap-4">
-        <Logo img="aleph" color="text" size="3rem" />
-        <div tw="leading-3">
-          <div
-            className="tp-code1 fs-24"
-            tw="whitespace-nowrap leading-4! mb-3"
-          >
-            {displayBalance}
-          </div>
-          <span className="fs-16 m-0" tw="opacity-40">
-            ALEPH
-          </span>
-        </div>
+      <div className="fs-10 tp-info" tw="mb-2">
+        CREDITS
       </div>
+      <div tw="flex justify-between">
+        <div
+          className="tp-code1 fs-24 text-main0"
+          tw="whitespace-nowrap leading-4! flex items-center gap-2 leading-3"
+        >
+          {credits}
+        </div>
+        <Button kind="yellow" variant="textOnly">
+          Top up
+          <Icon size="lg" name="square-chevron-right" tw="ml-1" />
+        </Button>
+      </div>
+      <StyledLine />
+
+      <div className="fs-10 tp-info" tw="mb-2">
+        WALLET
+      </div>
+      <div
+        className="tp-code1 fs-24 text-main0"
+        tw="whitespace-nowrap leading-4! flex items-center gap-2 leading-3"
+      >
+        {displayBalance}
+        <Logo img="aleph" color="main0" size="1em" />
+      </div>
+      {accountAddressHref ? (
+        <div tw="flex items-center gap-2">
+          {accountAddressHref ? (
+            <Link
+              href={accountAddressHref}
+              target="_blank"
+              route={{ href: accountAddressHref }}
+            >
+              <div tw="flex items-center gap-2 italic">
+                {ellipseText(accountAddress || '', 12, 12)}
+                <Icon size="lg" name="external-link-square-alt" />
+              </div>
+            </Link>
+          ) : (
+            <span tw="flex items-center w-full">{accountAddress}</span>
+          )}
+          <CopyToClipboardIcon text={accountAddress} />
+        </div>
+      ) : (
+        displayAddress
+      )}
 
       {rewards && (
         <>
@@ -63,7 +102,7 @@ export const AccountInformation = ({
         </>
       )}
 
-      {(accountAddressHref || vouchers) && (
+      {vouchers && (
         <>
           <StyledLine />
           <div tw="flex flex-col gap-6">
@@ -85,29 +124,12 @@ export const AccountInformation = ({
                   </div>
                 </div>
               ))}
-            <div tw="text-center">
-              {accountAddressHref ? (
-                <>
-                  <Button
-                    as="a"
-                    target="_blank"
-                    size="md"
-                    href={accountAddressHref}
-                    kind={button3.kind}
-                    variant={button3.variant}
-                    color={button3.color}
-                  >
-                    {displayAddress}
-                    <Icon name="external-link-square-alt" tw="ml-2.5" />
-                  </Button>
-                </>
-              ) : (
-                displayAddress
-              )}
-            </div>
           </div>
         </>
       )}
+
+      <StyledLine />
+      <ExternalUrl Link={Link} text={externalUrl.text} url={externalUrl.url} />
     </>
   )
 }

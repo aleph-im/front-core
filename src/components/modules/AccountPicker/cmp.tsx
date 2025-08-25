@@ -10,10 +10,12 @@ import NetworkSelector from './NetworkSelector'
 import { AccountInformation } from './AccountInformation/cmp'
 import WalletSelector from './WalletSelector'
 import { Portal } from '../../layout/Portal'
+import ExternalUrl from './ExternalUrl'
 
 export const AccountPicker = ({
   isMobile = false,
   accountVouchers,
+  Link = 'a' as unknown as AccountPickerProps['Link'],
   ...rest
 }: AccountPickerProps) => {
   const theme = useTheme()
@@ -21,6 +23,7 @@ export const AccountPicker = ({
 
   const {
     accountAddress,
+    accountCredits,
     accountBalance,
     accountAddressHref,
     ensName,
@@ -44,6 +47,7 @@ export const AccountPicker = ({
     networks,
     oneNetwork,
     isConnected,
+    externalUrl,
     handleSwitchNetwork,
     handleConnect,
     handleDisconnect,
@@ -85,7 +89,7 @@ export const AccountPicker = ({
             <div tw="flex items-center gap-3">
               {accountAddress
                 ? ensName || ellipseText(accountAddress, 6, 4)
-                : 'Connect'}
+                : 'Connect Wallet'}
             </div>
           </Button>
         </div>
@@ -123,8 +127,11 @@ export const AccountPicker = ({
                   rewards={rewards}
                   accountAddress={accountAddress}
                   accountAddressHref={accountAddressHref}
+                  credits={accountCredits}
                   balance={accountBalance}
                   vouchers={accountVouchers}
+                  externalUrl={externalUrl}
+                  Link={Link}
                 />
                 <StyledLine />
               </>
@@ -135,6 +142,16 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
+            {!isConnected && (
+              <>
+                <StyledLine />
+                <ExternalUrl
+                  Link={Link}
+                  text={externalUrl.text}
+                  url={externalUrl.url}
+                />
+              </>
+            )}
           </StyledPicker>
         )}
       </Portal>
@@ -179,8 +196,11 @@ export const AccountPicker = ({
                   rewards={rewards}
                   accountAddress={accountAddress}
                   accountAddressHref={accountAddressHref}
+                  credits={accountCredits}
                   balance={accountBalance}
                   vouchers={accountVouchers}
+                  externalUrl={externalUrl}
+                  Link={Link}
                 />
                 <StyledLine />
               </>
@@ -193,6 +213,16 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
+            {!isConnected && (
+              <>
+                <StyledLine />
+                <ExternalUrl
+                  Link={Link}
+                  text={externalUrl.text}
+                  url={externalUrl.url}
+                />
+              </>
+            )}
           </StyledPicker>
         )}
       </Portal>
