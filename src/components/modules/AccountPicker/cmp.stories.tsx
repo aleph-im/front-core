@@ -138,9 +138,14 @@ const defaultArgs: Partial<AccountPickerProps> = {
   blockchains,
   networks,
   selectedNetwork: networks[0],
+  externalUrl: {
+    text: 'Legacy console',
+    url: 'https://app.aleph.cloud',
+  },
   handleConnect,
   handleDisconnect,
   handleSwitchNetwork,
+  Link: (props) => <a {...props} />,
 }
 
 const defaultParams = {
@@ -191,6 +196,7 @@ export const LoggedIn = Template.bind({})
 LoggedIn.args = {
   ...defaultArgs,
   accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
   accountBalance: Math.random() * 10 ** 8,
 }
 LoggedIn.parameters = {
@@ -201,6 +207,7 @@ export const LoggedInWithVouchers = Template.bind({})
 LoggedInWithVouchers.args = {
   ...defaultArgs,
   accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
   accountBalance: Math.random() * 10 ** 8,
   accountVouchers: vouchers,
 }
@@ -212,6 +219,7 @@ export const LoggedInOneNetwork = Template.bind({})
 LoggedInOneNetwork.args = {
   ...defaultArgs,
   accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
   accountBalance: Math.random() * 10 ** 8,
   networks: [networks[0]],
 }
@@ -242,6 +250,7 @@ export const LoggedInMobile = Template.bind({})
 LoggedInMobile.args = {
   ...defaultArgs,
   accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
   accountBalance: Math.random() * 10 ** 8,
   isMobile: true,
 }
@@ -253,6 +262,7 @@ export const LoggedInMobileWithVouchers = Template.bind({})
 LoggedInMobileWithVouchers.args = {
   ...defaultArgs,
   accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
   accountBalance: Math.random() * 10 ** 8,
   accountVouchers: vouchers,
   isMobile: true,
@@ -265,6 +275,7 @@ export const LoggedInMobileOneNetwork = Template.bind({})
 LoggedInMobileOneNetwork.args = {
   ...defaultArgs,
   accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
   accountBalance: Math.random() * 10 ** 8,
   isMobile: true,
   networks: [networks[0]],

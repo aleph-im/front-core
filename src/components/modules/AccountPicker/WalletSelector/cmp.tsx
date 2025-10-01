@@ -65,7 +65,7 @@ const WalletSelectorConnected = ({
         color={button4.color}
         onClick={onDisconnect}
       >
-        Logout
+        Disconnect
       </Button>
     </div>
   )

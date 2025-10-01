@@ -3,6 +3,7 @@ import { Network } from './NetworkSelector'
 import { Wallet } from './WalletSelector'
 import { NetworkSelectorProps } from './NetworkSelector/types'
 import { AccountInformationProps, Voucher } from './AccountInformation'
+import { LinkComponent } from '../../../types'
 
 export type Blockchain = {
   id: string
@@ -15,8 +16,11 @@ export type Blockchain = {
 }
 
 export type AccountPickerProps = {
+  Link: LinkComponent
   isMobile?: boolean
+  showCredits?: boolean
   accountAddress?: string
+  accountCredits?: number
   accountBalance?: number
   accountVouchers?: Voucher[]
   ensName?: string
@@ -24,6 +28,10 @@ export type AccountPickerProps = {
   blockchains: Record<Blockchain['id'], Blockchain>
   networks: Network[]
   selectedNetwork: Network
+  externalUrl: {
+    text: string
+    url: string
+  }
   handleSwitchNetwork: NetworkSelectorProps['onSelectNetwork']
   handleConnect: (wallet: Wallet, network: Network) => void
   handleDisconnect: () => void
@@ -32,12 +40,14 @@ export type AccountPickerProps = {
 export type UseAccountPickerProps = Pick<
   AccountPickerProps,
   | 'accountAddress'
+  | 'accountCredits'
   | 'accountBalance'
   | 'ensName'
   | 'rewards'
   | 'blockchains'
   | 'networks'
   | 'selectedNetwork'
+  | 'externalUrl'
   | 'handleSwitchNetwork'
   | 'handleConnect'
   | 'handleDisconnect'
