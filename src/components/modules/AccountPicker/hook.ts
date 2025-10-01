@@ -23,7 +23,7 @@ export function useAccountPicker({
   const windowScroll = useWindowScroll(0)
 
   // ----- Wallet picker -----
-  const [displayWalletPicker, setDisplayWalletPicker] = useState(true)
+  const [displayWalletPicker, setDisplayWalletPicker] = useState(false)
 
   const walletPickerElementRef = useRef<HTMLDivElement>(null)
   const walletPickerButtonRef = useRef<HTMLButtonElement>(null)
