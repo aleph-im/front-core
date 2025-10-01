@@ -14,6 +14,7 @@ import ExternalUrl from './ExternalUrl'
 
 export const AccountPicker = ({
   isMobile = false,
+  showCredits = false,
   accountVouchers,
   Link = 'a' as unknown as AccountPickerProps['Link'],
   ...rest
@@ -127,6 +128,7 @@ export const AccountPicker = ({
                   rewards={rewards}
                   accountAddress={accountAddress}
                   accountAddressHref={accountAddressHref}
+                  showCredits={showCredits}
                   credits={accountCredits}
                   balance={accountBalance}
                   vouchers={accountVouchers}
@@ -196,6 +198,7 @@ export const AccountPicker = ({
                   rewards={rewards}
                   accountAddress={accountAddress}
                   accountAddressHref={accountAddressHref}
+                  showCredits={showCredits}
                   credits={accountCredits}
                   balance={accountBalance}
                   vouchers={accountVouchers}

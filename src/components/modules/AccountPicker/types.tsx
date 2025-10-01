@@ -18,6 +18,7 @@ export type Blockchain = {
 export type AccountPickerProps = {
   Link: LinkComponent
   isMobile?: boolean
+  showCredits?: boolean
   accountAddress?: string
   accountCredits?: number
   accountBalance?: number

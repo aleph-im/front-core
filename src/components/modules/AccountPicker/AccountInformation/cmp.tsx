@@ -12,6 +12,7 @@ import ExternalUrl from '../ExternalUrl'
 
 export const AccountInformation = ({
   vouchers,
+  showCredits,
   credits,
   balance,
   rewards,
@@ -31,22 +32,26 @@ export const AccountInformation = ({
 
   return (
     <>
-      <div className="fs-10 tp-info" tw="mb-2">
-        CREDITS
-      </div>
-      <div tw="flex justify-between">
-        <div
-          className="tp-code1 fs-24 text-main0"
-          tw="whitespace-nowrap leading-4! flex items-center gap-2 leading-3"
-        >
-          {credits}
-        </div>
-        <Button kind="yellow" variant="textOnly">
-          Top up
-          <Icon size="lg" name="square-chevron-right" tw="ml-1" />
-        </Button>
-      </div>
-      <StyledLine />
+      {showCredits && (
+        <>
+          <div className="fs-10 tp-info" tw="mb-2">
+            CREDITS
+          </div>
+          <div tw="flex justify-between">
+            <div
+              className="tp-code1 fs-24 text-main0"
+              tw="whitespace-nowrap leading-4! flex items-center gap-2 leading-3"
+            >
+              {credits}
+            </div>
+            <Button kind="yellow" variant="textOnly">
+              Top up
+              <Icon size="lg" name="square-chevron-right" tw="ml-1" />
+            </Button>
+          </div>
+          <StyledLine />
+        </>
+      )}
 
       <div className="fs-10 tp-info" tw="mb-2">
         WALLET
