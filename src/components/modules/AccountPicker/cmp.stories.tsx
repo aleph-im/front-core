@@ -134,13 +134,17 @@ const handleSwitchNetwork = (network: Network) => {
   alert(`Switch to ${network.name}`)
 }
 
+const handleTopUpClick = () => {
+  alert('Top Up clicked')
+}
+
 const defaultArgs: Partial<AccountPickerProps> = {
   blockchains,
   networks,
   selectedNetwork: networks[0],
   externalUrl: {
     text: 'Legacy console',
-    url: 'https://app.aleph.cloud',
+    url: '#',
   },
   handleConnect,
   handleDisconnect,
@@ -215,6 +219,20 @@ LoggedInWithVouchers.parameters = {
   ...defaultParams,
 }
 
+export const LoggedInWithCredits = Template.bind({})
+LoggedInWithCredits.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
+  showCredits: true,
+  accountBalance: Math.random() * 10 ** 8,
+  disabledTopUp: false,
+  handleTopUpClick,
+}
+LoggedInWithCredits.parameters = {
+  ...defaultParams,
+}
+
 export const LoggedInOneNetwork = Template.bind({})
 LoggedInOneNetwork.args = {
   ...defaultArgs,
@@ -268,6 +286,21 @@ LoggedInMobileWithVouchers.args = {
   isMobile: true,
 }
 LoggedInMobileWithVouchers.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedInMobileWithCredits = Template.bind({})
+LoggedInMobileWithCredits.args = {
+  ...defaultArgs,
+  accountAddress: '0x50622138b35883F2e39Bf0C39eB9fa22214433Df',
+  accountCredits: Math.floor(Math.random() * 10 ** 4),
+  accountBalance: Math.random() * 10 ** 8,
+  showCredits: true,
+  disabledTopUp: false,
+  handleTopUpClick,
+  isMobile: true,
+}
+LoggedInMobileWithCredits.parameters = {
   ...defaultParams,
 }
 

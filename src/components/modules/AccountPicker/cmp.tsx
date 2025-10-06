@@ -16,6 +16,8 @@ export const AccountPicker = ({
   isMobile = false,
   showCredits = false,
   accountVouchers,
+  disabledTopUp,
+  handleTopUpClick,
   Link = 'a' as unknown as AccountPickerProps['Link'],
   ...rest
 }: AccountPickerProps) => {
@@ -132,6 +134,8 @@ export const AccountPicker = ({
                   credits={accountCredits}
                   balance={accountBalance}
                   vouchers={accountVouchers}
+                  disabledTopUp={disabledTopUp}
+                  handleTopUpClick={handleTopUpClick}
                   externalUrl={externalUrl}
                   Link={Link}
                 />
@@ -202,6 +206,8 @@ export const AccountPicker = ({
                   credits={accountCredits}
                   balance={accountBalance}
                   vouchers={accountVouchers}
+                  disabledTopUp={disabledTopUp}
+                  handleTopUpClick={handleTopUpClick}
                   externalUrl={externalUrl}
                   Link={Link}
                 />

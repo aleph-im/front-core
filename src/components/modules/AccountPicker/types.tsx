@@ -28,6 +28,8 @@ export type AccountPickerProps = {
   blockchains: Record<Blockchain['id'], Blockchain>
   networks: Network[]
   selectedNetwork: Network
+  disabledTopUp?: boolean
+  handleTopUpClick?: () => void
   externalUrl: {
     text: string
     url: string

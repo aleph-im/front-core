@@ -19,6 +19,8 @@ export type AccountInformationProps = {
     days?: number
   }
   vouchers?: Voucher[]
+  disabledTopUp?: boolean
+  handleTopUpClick?: () => void
   externalUrl: {
     text: string
     url: string

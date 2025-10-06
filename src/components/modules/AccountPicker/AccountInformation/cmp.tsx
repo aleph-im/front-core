@@ -19,6 +19,8 @@ export const AccountInformation = ({
   accountAddress,
   accountAddressHref,
   externalUrl,
+  disabledTopUp,
+  handleTopUpClick,
   Link,
 }: AccountInformationProps) => {
   const theme = useTheme()
@@ -44,7 +46,12 @@ export const AccountInformation = ({
             >
               {credits}
             </div>
-            <Button kind="yellow" variant="textOnly">
+            <Button
+              kind="yellow"
+              variant="textOnly"
+              disabled={disabledTopUp}
+              onClick={handleTopUpClick}
+            >
               Top up
               <Icon size="lg" name="square-chevron-right" tw="ml-1" />
             </Button>
