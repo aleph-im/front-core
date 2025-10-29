@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { ReactNode, RefObject } from 'react'
 import { Network } from './NetworkSelector'
 import { Wallet } from './WalletSelector'
 import { NetworkSelectorProps } from './NetworkSelector/types'
@@ -34,6 +34,7 @@ export type AccountPickerProps = {
     text: string
     url: string
   }
+  settingsContent: ReactNode
   handleSwitchNetwork: NetworkSelectorProps['onSelectNetwork']
   handleConnect: (wallet: Wallet, network: Network) => void
   handleDisconnect: () => void
@@ -71,7 +72,7 @@ export type UseAccountPickerReturn = Omit<
   displayNetworksPicker: boolean
   networksPickerOpen: boolean
   networksPickerRef: RefObject<HTMLDivElement>
-  networksPickerTriggerRef: RefObject<HTMLDivElement>
+  networksPickerTriggerRef: RefObject<HTMLButtonElement>
   networksPosition: { x: number; y: number }
   handleDisplayNetworksPicker: () => void
   displayCondensedPicker: boolean
@@ -80,4 +81,10 @@ export type UseAccountPickerReturn = Omit<
   condensedPickerTriggerRef: RefObject<HTMLButtonElement>
   condensedPosition: { x: number; y: number }
   handleDisplayCondensedPicker: () => void
+  displaySettingsPicker: boolean
+  settingsPickerOpen: boolean
+  settingsPickerRef: RefObject<HTMLDivElement>
+  settingsPickerTriggerRef: RefObject<HTMLButtonElement>
+  settingsPosition: { x: number; y: number }
+  handleDisplaySettingsPicker: () => void
 }

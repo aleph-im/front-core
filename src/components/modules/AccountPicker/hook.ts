@@ -122,6 +122,37 @@ export function useAccountPicker({
     if (displayCondensedPicker) setDisplayCondensedPicker(false)
   }, [condensedPickerRef, condensedPickerTriggerRef])
 
+  // ----- Settings picker -----
+  const [displaySettingsPicker, setDisplaySettingsPicker] = useState(false)
+
+  const settingsPickerElementRef = useRef<HTMLDivElement>(null)
+  const settingsPickerButtonRef = useRef<HTMLButtonElement>(null)
+
+  const handleDisplaySettingsPicker = () => {
+    setDisplaySettingsPicker(!displaySettingsPicker)
+  }
+
+  const { shouldMount: shouldMountSettingsPicker, stage: stageSettingsPicker } =
+    useTransition(displaySettingsPicker, 250)
+
+  const {
+    myRef: settingsPickerRef,
+    atRef: settingsPickerTriggerRef,
+    position: settingsPosition,
+  } = useFloatPosition({
+    my: 'top-right',
+    at: 'bottom-right',
+    myRef: settingsPickerElementRef,
+    atRef: settingsPickerButtonRef,
+    deps: [accountAddress, windowSize, windowScroll, shouldMountSettingsPicker],
+  })
+
+  const settingsPickerOpen = stageSettingsPicker === 'enter'
+
+  useClickOutside(() => {
+    if (displaySettingsPicker) setDisplaySettingsPicker(false)
+  }, [settingsPickerRef, settingsPickerButtonRef])
+
   // ------------------------------
 
   const accountAddressHref = useMemo(
@@ -178,6 +209,12 @@ export function useAccountPicker({
     condensedPickerTriggerRef,
     condensedPosition,
     handleDisplayCondensedPicker,
+    displaySettingsPicker,
+    settingsPickerOpen,
+    settingsPickerRef,
+    settingsPickerTriggerRef,
+    settingsPosition,
+    handleDisplaySettingsPicker,
     handleConnect,
     handleDisconnect,
     ...rest,

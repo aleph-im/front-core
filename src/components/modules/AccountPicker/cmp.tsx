@@ -16,6 +16,7 @@ export const AccountPicker = ({
   isMobile = false,
   showCredits = false,
   accountVouchers,
+  settingsContent,
   disabledTopUp,
   handleTopUpClick,
   Link = 'a' as unknown as AccountPickerProps['Link'],
@@ -25,61 +26,63 @@ export const AccountPicker = ({
   const { button, button5 } = theme.component.walletPicker
 
   const {
-    accountAddress,
-    accountCredits,
-    accountBalance,
-    accountAddressHref,
-    ensName,
+    // Wallet picker
     displayWalletPicker,
     walletPickerOpen,
     walletPickerRef,
     walletPickerTriggerRef,
     walletPosition,
+    handleDisplayWalletPicker,
+
+    // Networks picker
     displayNetworksPicker,
     networksPickerOpen,
     networksPickerRef,
     networksPickerTriggerRef,
     networksPosition,
+    handleDisplayNetworksPicker,
+
+    // Condensed picker
     displayCondensedPicker,
     condensedPickerOpen,
     condensedPickerRef,
     condensedPickerTriggerRef,
     condensedPosition,
-    rewards,
+    handleDisplayCondensedPicker,
+
+    // Settings picker
+    displaySettingsPicker,
+    settingsPickerOpen,
+    settingsPickerRef,
+    settingsPickerTriggerRef,
+    settingsPosition,
+    handleDisplaySettingsPicker,
+
+    // Account
+    accountAddress,
+    accountCredits,
+    accountBalance,
+    accountAddressHref,
+    isConnected,
+    handleConnect,
+    handleDisconnect,
+
+    // Network
     selectedNetwork,
     networks,
     oneNetwork,
-    isConnected,
-    externalUrl,
     handleSwitchNetwork,
-    handleConnect,
-    handleDisconnect,
-    handleDisplayWalletPicker,
-    handleDisplayNetworksPicker,
-    handleDisplayCondensedPicker,
+
+    // Data
+    ensName,
+    rewards,
+    externalUrl,
   } = useAccountPicker(rest)
 
   return (
     <>
       {!isMobile ? (
         <div tw="flex gap-4">
-          <div
-            ref={networksPickerTriggerRef}
-            onClick={handleDisplayNetworksPicker}
-            tw="flex items-center gap-2"
-          >
-            <Button
-              disabled={oneNetwork}
-              as="button"
-              kind={button.kind(true)}
-              color={button.color(true)}
-              variant={button.variant(true)}
-              size="md"
-            >
-              <Icon name={selectedNetwork.icon} size="1.5em" prefix="custom" />
-            </Button>
-            {!oneNetwork && <Icon name="angle-down" size="1em" />}
-          </div>
           <Button
             ref={walletPickerTriggerRef}
             as="button"
@@ -94,6 +97,29 @@ export const AccountPicker = ({
                 ? ensName || ellipseText(accountAddress, 6, 4)
                 : 'Connect Wallet'}
             </div>
+          </Button>
+          <Button
+            ref={networksPickerTriggerRef}
+            disabled={oneNetwork}
+            as="button"
+            kind={button.kind(true)}
+            color={button.color(true)}
+            variant={button.variant(true)}
+            size="md"
+            onClick={handleDisplayNetworksPicker}
+          >
+            <Icon name={selectedNetwork.icon} size="1.5em" prefix="custom" />
+          </Button>
+          <Button
+            ref={settingsPickerTriggerRef}
+            as="button"
+            kind={button.kind(true)}
+            color="base0"
+            variant={button.variant(true)}
+            size="md"
+            onClick={handleDisplaySettingsPicker}
+          >
+            <Icon name="gear" size="1.1em" tw="p-1" prefix="custom" />
           </Button>
         </div>
       ) : (
@@ -232,6 +258,17 @@ export const AccountPicker = ({
                 />
               </>
             )}
+          </StyledPicker>
+        )}
+      </Portal>
+      <Portal>
+        {displaySettingsPicker && (
+          <StyledPicker
+            $isOpen={settingsPickerOpen}
+            $position={settingsPosition}
+            ref={settingsPickerRef}
+          >
+            {settingsContent}
           </StyledPicker>
         )}
       </Portal>
