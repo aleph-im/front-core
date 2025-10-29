@@ -63,23 +63,6 @@ export const AccountPicker = ({
     <>
       {!isMobile ? (
         <div tw="flex gap-4">
-          <div
-            ref={networksPickerTriggerRef}
-            onClick={handleDisplayNetworksPicker}
-            tw="flex items-center gap-2"
-          >
-            <Button
-              disabled={oneNetwork}
-              as="button"
-              kind={button.kind(true)}
-              color={button.color(true)}
-              variant={button.variant(true)}
-              size="md"
-            >
-              <Icon name={selectedNetwork.icon} size="1.5em" prefix="custom" />
-            </Button>
-            {!oneNetwork && <Icon name="angle-down" size="1em" />}
-          </div>
           <Button
             ref={walletPickerTriggerRef}
             as="button"
@@ -95,6 +78,22 @@ export const AccountPicker = ({
                 : 'Connect Wallet'}
             </div>
           </Button>
+          <div
+            ref={networksPickerTriggerRef}
+            onClick={handleDisplayNetworksPicker}
+            tw="flex items-center gap-2"
+          >
+            <Button
+              disabled={oneNetwork}
+              as="button"
+              kind={button.kind(true)}
+              color={button.color(true)}
+              variant={button.variant(true)}
+              size="md"
+            >
+              <Icon name={selectedNetwork.icon} size="1.5em" prefix="custom" />
+            </Button>
+          </div>
         </div>
       ) : (
         <>
