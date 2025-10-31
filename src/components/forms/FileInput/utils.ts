@@ -3,8 +3,14 @@ export type ExtFile = File & {
   level?: number
 }
 
+export type ValidationOptions = {
+  directory?: boolean
+  multiple?: boolean
+}
+
 export async function getFilesAsync(
   dataTransfer: DataTransfer,
+  options?: ValidationOptions,
 ): Promise<ExtFile[]> {
   const items = [...dataTransfer.items].filter((item) => item.kind === 'file')
   if (!items.length) return []
@@ -13,6 +19,13 @@ export async function getFilesAsync(
     const entries = [...items]
       .map((item) => item.webkitGetAsEntry())
       .filter((file): file is FileSystemEntry => !!file)
+
+    // Validate entry types before traversing
+    if (options) {
+      const error = validateEntries(entries, options)
+      if (error) throw error
+    }
+
     const files: ExtFile[] = []
 
     for (const entry of entries) {
@@ -26,6 +39,30 @@ export async function getFilesAsync(
       .map((item) => item.getAsFile())
       .filter((file): file is ExtFile => !!file)
   }
+}
+
+function validateEntries(
+  entries: FileSystemEntry[],
+  { directory, multiple }: ValidationOptions,
+): Error | undefined {
+  const directories = entries.filter((entry) => entry.isDirectory)
+  const files = entries.filter((entry) => entry.isFile)
+
+  const totalItems = entries.length
+
+  if (!multiple && totalItems > 1) {
+    return new Error('Only one file at a time')
+  }
+
+  if (directory && files.length > 0) {
+    return new Error('Only directories are supported')
+  }
+
+  if (directory && directories.length > 1) {
+    return new Error('Only one directory is supported')
+  }
+
+  return undefined
 }
 
 async function readEntry(
@@ -80,68 +117,4 @@ function readEntries(
 
     reader.readEntries((entries) => resolve(entries))
   })
-}
-
-// export function isFile(maybeFile: File): Promise<boolean> {
-//   return new Promise<boolean>((resolve) => {
-//     if (maybeFile.type !== '') {
-//       return resolve(true)
-//     }
-//     const reader = new FileReader()
-//     reader.onloadend = () => {
-//       if (
-//         reader.error &&
-//         (reader.error.name === 'NotFoundError' ||
-//           reader.error.name === 'NotReadableError')
-//       ) {
-//         return resolve(false)
-//       }
-//       resolve(true)
-//     }
-//     reader.readAsArrayBuffer(maybeFile)
-//   })
-// }
-
-export async function checkFilesAndDirectories(
-  files: ExtFile[],
-  {
-    directory,
-    multiple,
-  }: {
-    directory?: boolean
-    multiple?: boolean
-  },
-): Promise<Error | undefined> {
-  const uniqueDirectoriesMap = files
-    .filter((file) => file.level === 1)
-    .reduce((ac, cv) => {
-      if (!cv.dirName) return ac
-      ac[cv.dirName] = true
-      return ac
-    }, {} as Record<string, boolean>)
-
-  const nFolders = Object.keys(uniqueDirectoriesMap).length
-  const nFiles = files.filter(
-    (file) =>
-      !file.dirName ||
-      (file.level === 1 && !uniqueDirectoriesMap[file.dirName]),
-  ).length
-
-  const totalFiles = nFolders + nFiles
-
-  if (!multiple && totalFiles > 1) {
-    return new Error('Only one file at a time')
-  }
-
-  if (directory && nFiles > 0) {
-    return new Error('Only directories are supported')
-  }
-
-  if (directory && nFolders > 1) {
-    return new Error('Only one directory is supported')
-  }
-
-  // if (!directory && nFolders > 0) {
-  //   return new Error('Directories are not supported')
-  // }
 }
