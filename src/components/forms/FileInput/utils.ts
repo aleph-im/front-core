@@ -123,7 +123,8 @@ export async function checkFilesAndDirectories(
   const nFolders = Object.keys(uniqueDirectoriesMap).length
   const nFiles = files.filter(
     (file) =>
-      file.level !== 1 || (file.dirName && !uniqueDirectoriesMap[file.dirName]),
+      !file.dirName ||
+      (file.level === 1 && !uniqueDirectoriesMap[file.dirName]),
   ).length
 
   const totalFiles = nFolders + nFiles
