@@ -66,3 +66,12 @@ Multiple.args = {
 Multiple.parameters = {
   ...defaultParams,
 }
+
+export const Directory = Template.bind({})
+Directory.args = {
+  ...defaultArgs,
+  directory: true,
+}
+Directory.parameters = {
+  ...defaultParams,
+}

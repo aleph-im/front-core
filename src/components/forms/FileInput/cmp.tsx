@@ -19,7 +19,7 @@ import FormError from '../FormError'
 import FormLabel from '../FormLabel'
 import Icon, { IconName } from '../../common/Icon'
 import { humanReadableSize } from '../../../utils'
-import { ExtFile, checkFilesAndDirectories, getFilesAsync } from './utils'
+import { ExtFile, getFilesAsync } from './utils'
 
 export const FileInput = forwardRef(
   (
@@ -107,16 +107,17 @@ export const FileInput = forwardRef(
       async (e: DragEvent) => {
         handleDragOff(e)
 
-        const files = await getFilesAsync(e.dataTransfer)
-        const error = await checkFilesAndDirectories(files, {
-          directory,
-          multiple,
-        })
+        try {
+          const files = await getFilesAsync(e.dataTransfer, {
+            directory,
+            multiple,
+          })
 
-        setDragError(error)
-        if (error) return
-
-        handleFiles(files)
+          setDragError(undefined)
+          handleFiles(files)
+        } catch (error) {
+          setDragError(error as Error)
+        }
       },
       [handleDragOff, handleFiles, directory, multiple],
     )
@@ -126,16 +127,17 @@ export const FileInput = forwardRef(
         e.preventDefault()
         e.stopPropagation()
 
-        const files = await getFilesAsync(e.clipboardData)
-        const error = await checkFilesAndDirectories(files, {
-          directory,
-          multiple,
-        })
+        try {
+          const files = await getFilesAsync(e.clipboardData, {
+            directory,
+            multiple,
+          })
 
-        setDragError(error)
-        if (error) return
-
-        handleFiles(files)
+          setDragError(undefined)
+          handleFiles(files)
+        } catch (error) {
+          setDragError(error as Error)
+        }
       },
       [handleFiles, directory, multiple],
     )
