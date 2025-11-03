@@ -64,6 +64,7 @@ export const AccountPicker = ({
     accountBalance,
     accountAddressHref,
     isConnected,
+    creditsEquivalent,
     handleConnect,
     handleDisconnect,
 
@@ -158,6 +159,7 @@ export const AccountPicker = ({
                   accountAddressHref={accountAddressHref}
                   showCredits={showCredits}
                   credits={accountCredits}
+                  creditsEquivalent={creditsEquivalent}
                   balance={accountBalance}
                   vouchers={accountVouchers}
                   disabledTopUp={disabledTopUp}
@@ -230,6 +232,7 @@ export const AccountPicker = ({
                   accountAddressHref={accountAddressHref}
                   showCredits={showCredits}
                   credits={accountCredits}
+                  creditsEquivalent={creditsEquivalent}
                   balance={accountBalance}
                   vouchers={accountVouchers}
                   disabledTopUp={disabledTopUp}

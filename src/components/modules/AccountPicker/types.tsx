@@ -23,6 +23,7 @@ export type AccountPickerProps = {
   accountCredits?: number
   accountBalance?: number
   accountVouchers?: Voucher[]
+  creditsEquivalent: AccountInformationProps['creditsEquivalent']
   ensName?: string
   rewards?: AccountInformationProps['rewards']
   blockchains: Record<Blockchain['id'], Blockchain>
@@ -45,6 +46,7 @@ export type UseAccountPickerProps = Pick<
   | 'accountAddress'
   | 'accountCredits'
   | 'accountBalance'
+  | 'creditsEquivalent'
   | 'ensName'
   | 'rewards'
   | 'blockchains'

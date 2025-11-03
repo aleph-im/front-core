@@ -14,6 +14,16 @@ export type AccountInformationProps = {
   balance?: number
   showCredits: boolean
   credits?: number
+  creditsEquivalent:
+    | {
+        loading: true
+        currency: string
+      }
+    | {
+        loading: false
+        currency: string
+        amount: number
+      }
   rewards?: {
     amount: number
     days?: number

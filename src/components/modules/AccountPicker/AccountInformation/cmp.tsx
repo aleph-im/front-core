@@ -4,16 +4,22 @@ import { AccountInformationProps } from './types'
 import { Logo } from '../../../common/Logo'
 import { useTheme } from 'styled-components'
 import Price from '../../../common/Price'
-import { ellipseText, formatCurrency } from '../../../../utils'
+import {
+  ellipseText,
+  formatCurrency,
+  humanReadableCurrency,
+} from '../../../../utils'
 import CopyToClipboardIcon from '../../../common/CopyToClipboardIcon'
 import Icon from '../../../common/Icon'
 import Button from '../../../common/Button'
 import ExternalUrl from '../ExternalUrl'
+import Skeleton from '../../../common/Skeleton'
 
 export const AccountInformation = ({
   vouchers,
   showCredits,
   credits,
+  creditsEquivalent = { loading: true, currency: '$' },
   balance,
   rewards,
   accountAddress,
@@ -39,12 +45,25 @@ export const AccountInformation = ({
           <div className="fs-10 tp-info" tw="mb-2">
             CREDITS
           </div>
-          <div tw="flex justify-between">
-            <div
-              className="tp-code1 fs-24 text-main0"
-              tw="whitespace-nowrap leading-4! flex items-center gap-2 leading-3"
-            >
-              {credits}
+          <div tw="flex items-start justify-between">
+            <div>
+              <div
+                className="tp-code1 fs-24 text-main0"
+                tw="whitespace-nowrap flex items-center leading-3"
+              >
+                {credits}
+              </div>
+              <div
+                className="fs-14 tp-body"
+                tw="flex items-center opacity-60 -mt-1.5 -mb-3"
+              >
+                {creditsEquivalent.currency}
+                {creditsEquivalent.loading ? (
+                  <Skeleton width="2rem" />
+                ) : (
+                  humanReadableCurrency(creditsEquivalent.amount)
+                )}
+              </div>
             </div>
             <Button
               kind="yellow"
