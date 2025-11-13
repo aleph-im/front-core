@@ -79,6 +79,26 @@ const networks: Network[] = [
   },
 ]
 
+const oneWalletNetworks: Network[] = [
+  {
+    id: 'ETH',
+    name: 'Ethereum',
+    icon: 'ethereum',
+    wallets: [wallets[0]],
+  },
+  {
+    id: 'AVAX',
+    name: 'Avalanche',
+    icon: 'avalanche',
+    wallets: [wallets[0]],
+  },
+  {
+    id: 'SOL',
+    name: 'Solana',
+    icon: 'solana',
+    wallets: [wallets[0]],
+  },
+]
 const blockchains: Record<Blockchain['id'], Blockchain> = {
   ['ETH']: {
     id: 'ETH',
@@ -193,6 +213,15 @@ LoggedOffOneNetwork.args = {
   networks: [networks[0]],
 }
 LoggedOffOneNetwork.parameters = {
+  ...defaultParams,
+}
+
+export const LoggedOffOneWallet = Template.bind({})
+LoggedOffOneWallet.args = {
+  ...defaultArgs,
+  networks: oneWalletNetworks,
+}
+LoggedOffOneWallet.parameters = {
   ...defaultParams,
 }
 

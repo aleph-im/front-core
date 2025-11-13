@@ -22,15 +22,37 @@ export function useAccountPicker({
   const windowSize = useWindowSize(0)
   const windowScroll = useWindowScroll(0)
 
+  // Helper to get unique wallet across all networks
+  const getUniqueWallet = useCallback(() => {
+    const allWallets = networks.flatMap((network) => network.wallets || [])
+    const uniqueWalletIds = new Set(allWallets.map((w) => w.id))
+    return uniqueWalletIds.size === 1 ? allWallets[0] : null
+  }, [networks])
+
   // ----- Wallet picker -----
   const [displayWalletPicker, setDisplayWalletPicker] = useState(false)
 
   const walletPickerElementRef = useRef<HTMLDivElement>(null)
   const walletPickerButtonRef = useRef<HTMLButtonElement>(null)
 
-  const handleDisplayWalletPicker = () => {
+  const handleDisplayWalletPicker = useCallback(() => {
+    const isUserConnected = !!accountAddress
+    const uniqueWallet = getUniqueWallet()
+
+    // If not connected and there's only one unique wallet across all networks, connect directly
+    if (!isUserConnected && uniqueWallet && selectedNetwork) {
+      handleConnectProp(uniqueWallet, selectedNetwork)
+      return
+    }
+
     setDisplayWalletPicker(!displayWalletPicker)
-  }
+  }, [
+    displayWalletPicker,
+    selectedNetwork,
+    accountAddress,
+    handleConnectProp,
+    getUniqueWallet,
+  ])
 
   const { shouldMount: shouldMountWalletPicker, stage: stageWalletPicker } =
     useTransition(displayWalletPicker, 250)
@@ -90,9 +112,24 @@ export function useAccountPicker({
   const condensedPickerElementRef = useRef<HTMLDivElement>(null)
   const condensedPickerButtonRef = useRef<HTMLButtonElement>(null)
 
-  const handleDisplayCondensedPicker = () => {
+  const handleDisplayCondensedPicker = useCallback(() => {
+    const isUserConnected = !!accountAddress
+    const uniqueWallet = getUniqueWallet()
+
+    // If not connected and there's only one unique wallet across all networks, connect directly
+    if (!isUserConnected && uniqueWallet && selectedNetwork) {
+      handleConnectProp(uniqueWallet, selectedNetwork)
+      return
+    }
+
     setDisplayCondensedPicker(!displayCondensedPicker)
-  }
+  }, [
+    displayCondensedPicker,
+    selectedNetwork,
+    accountAddress,
+    handleConnectProp,
+    getUniqueWallet,
+  ])
 
   const {
     shouldMount: shouldMountCondensedPicker,
@@ -169,6 +206,8 @@ export function useAccountPicker({
     [networks, selectedNetwork],
   )
 
+  const uniqueWallet = useMemo(() => getUniqueWallet(), [getUniqueWallet])
+
   const isConnected = useMemo(() => !!accountAddress, [accountAddress])
 
   const handleConnect = useCallback(
@@ -190,6 +229,7 @@ export function useAccountPicker({
     networks,
     selectedNetwork,
     oneNetwork,
+    uniqueWallet,
     isConnected,
     walletPickerOpen,
     displayWalletPicker: shouldMountWalletPicker,

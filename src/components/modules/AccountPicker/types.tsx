@@ -62,6 +62,7 @@ export type UseAccountPickerReturn = Omit<
 > & {
   accountAddressHref: string
   oneNetwork: boolean
+  uniqueWallet: Wallet | null
   isConnected: boolean
   displayWalletPicker: boolean
   walletPickerOpen: boolean
