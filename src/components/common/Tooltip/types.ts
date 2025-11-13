@@ -1,11 +1,12 @@
 import { ReactNode, RefObject } from 'react'
 import { FloatPosition, FloatPositionType } from '../../../hooks'
+import { WithStyledProps } from '../../../types'
 
 export type TooltipPositionType = FloatPositionType
 export type TooltipPosition = FloatPosition
 export type TooltipVariant = 1 | 2
 
-export type TooltipProps = {
+export type TooltipProps = WithStyledProps & {
   my: TooltipPositionType
   at: TooltipPositionType
   margin?: TooltipPosition
@@ -22,12 +23,12 @@ export type TooltipProps = {
   onClose?: () => void
   onCloseClick?: () => void
 } & (
-  | {
-      children: ReactNode & { ref?: RefObject<any> }
-      targetRef?: RefObject<any>
-    }
-  | {
-      children?: ReactNode & { ref?: RefObject<any> }
-      targetRef: RefObject<any>
-    }
-)
+    | {
+        children: ReactNode & { ref?: RefObject<any> }
+        targetRef?: RefObject<any>
+      }
+    | {
+        children?: ReactNode & { ref?: RefObject<any> }
+        targetRef: RefObject<any>
+      }
+  )

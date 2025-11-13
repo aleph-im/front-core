@@ -11,6 +11,7 @@ export const CompositeTitle = ({
   numberColor = 'text',
   labelColor = 'text',
   label,
+  forwardedAs: _forwardedAs, // eslint-disable-line @typescript-eslint/no-unused-vars
   ...rest
 }: CompositeTitleProps) => {
   return (

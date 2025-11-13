@@ -1,5 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react'
 import { Typo, TypoKind } from '../../../themes/types'
+import { WithStyledProps } from '../../../types'
 
 export type TypeElements =
   | 'h1'
@@ -17,14 +18,14 @@ export type TypeElements =
   | 'span'
   | 'strong'
 
-export type TextGradientProps = HTMLAttributes<HTMLElement> & {
-  children: ReactNode
-  size?: number | string
-  color?: string
-  type?: TypoKind
-  className?: string
-  as?: TypeElements
-}
+export type TextGradientProps = HTMLAttributes<HTMLElement> &
+  WithStyledProps<TypeElements> & {
+    children: ReactNode
+    size?: number | string
+    color?: string
+    type?: TypoKind
+    className?: string
+  }
 
 export type StyledTextGradientProps = {
   size?: number | string

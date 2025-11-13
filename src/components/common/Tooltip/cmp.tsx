@@ -32,6 +32,10 @@ export const Tooltip = ({
   onClose,
   onCloseClick,
   closeDelay = 200,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  forwardedAs: _forwardedAs,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  as: _as,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<any>()

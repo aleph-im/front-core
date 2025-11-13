@@ -1,11 +1,13 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import { DefaultTheme } from 'styled-components'
+import { WithStyledProps } from '../../../types'
 
 export type ButtonSize = 'sm' | 'md' | 'lg'
 export type ButtonTag = 'button' | 'a'
 
 export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
-  ButtonHTMLAttributes<HTMLButtonElement> & {
+  ButtonHTMLAttributes<HTMLButtonElement> &
+  WithStyledProps<ButtonTag> & {
     children: ReactNode
     kind?: string
     variant?: string
@@ -18,7 +20,6 @@ export type ButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> &
     focus?: boolean
     disabled?: boolean
 
-    as?: ButtonTag
     className?: string
 
     animation?:
