@@ -166,6 +166,7 @@ export const AccountPicker = ({
                   vouchers={accountVouchers}
                   disabledTopUp={disabledTopUp}
                   handleTopUpClick={handleTopUpClick}
+                  showExternalUrl={showExternalUrl}
                   externalUrl={externalUrl}
                   Link={Link}
                 />
@@ -178,7 +179,7 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
-            {!isConnected && showExternalUrl && (
+            {!isConnected && showExternalUrl && externalUrl && (
               <>
                 <StyledLine />
                 <ExternalUrl
@@ -238,6 +239,7 @@ export const AccountPicker = ({
                   vouchers={accountVouchers}
                   disabledTopUp={disabledTopUp}
                   handleTopUpClick={handleTopUpClick}
+                  showExternalUrl={showExternalUrl}
                   externalUrl={externalUrl}
                   Link={Link}
                 />
@@ -252,7 +254,7 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
-            {!isConnected && showExternalUrl && (
+            {!isConnected && showExternalUrl && externalUrl && (
               <>
                 <StyledLine />
                 <ExternalUrl

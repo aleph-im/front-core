@@ -18,6 +18,7 @@ export const AccountInformation = ({
   rewards,
   accountAddress,
   accountAddressHref,
+  showExternalUrl,
   externalUrl,
   disabledTopUp,
   handleTopUpClick,
@@ -140,8 +141,17 @@ export const AccountInformation = ({
         </>
       )}
 
-      <StyledLine />
-      <ExternalUrl Link={Link} text={externalUrl.text} url={externalUrl.url} />
+      {showExternalUrl && externalUrl && (
+        <>
+          <StyledLine />
+
+          <ExternalUrl
+            Link={Link}
+            text={externalUrl.text}
+            url={externalUrl.url}
+          />
+        </>
+      )}
     </>
   )
 }

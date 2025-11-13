@@ -32,11 +32,11 @@ export type AccountPickerProps = {
   selectedNetwork: Network
   disabledTopUp?: boolean
   handleTopUpClick?: () => void
-  externalUrl: {
+  externalUrl?: {
     text: string
     url: string
   }
-  settingsContent: ReactNode
+  settingsContent?: ReactNode
   handleSwitchNetwork: NetworkSelectorProps['onSelectNetwork']
   handleConnect: (wallet: Wallet, network: Network) => void
   handleDisconnect: () => void

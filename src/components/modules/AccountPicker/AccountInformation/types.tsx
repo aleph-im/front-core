@@ -21,7 +21,8 @@ export type AccountInformationProps = {
   vouchers?: Voucher[]
   disabledTopUp?: boolean
   handleTopUpClick?: () => void
-  externalUrl: {
+  showExternalUrl: boolean
+  externalUrl?: {
     text: string
     url: string
   }
