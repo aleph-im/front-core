@@ -15,6 +15,8 @@ import ExternalUrl from './ExternalUrl'
 export const AccountPicker = ({
   isMobile = false,
   showCredits = false,
+  showSettings = false,
+  showExternalUrl = false,
   accountVouchers,
   settingsContent,
   disabledTopUp,
@@ -110,17 +112,19 @@ export const AccountPicker = ({
           >
             <Icon name={selectedNetwork.icon} size="1.5em" prefix="custom" />
           </Button>
-          <Button
-            ref={settingsPickerTriggerRef}
-            as="button"
-            kind={button.kind(true)}
-            color="base0"
-            variant={button.variant(true)}
-            size="md"
-            onClick={handleDisplaySettingsPicker}
-          >
-            <Icon name="gear" size="1.1em" tw="p-1" prefix="custom" />
-          </Button>
+          {showSettings && (
+            <Button
+              ref={settingsPickerTriggerRef}
+              as="button"
+              kind={button.kind(true)}
+              color="base0"
+              variant={button.variant(true)}
+              size="md"
+              onClick={handleDisplaySettingsPicker}
+            >
+              <Icon name="gear" size="1.1em" tw="p-1" prefix="custom" />
+            </Button>
+          )}
         </div>
       ) : (
         <>
@@ -174,7 +178,7 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
-            {!isConnected && (
+            {!isConnected && showExternalUrl && (
               <>
                 <StyledLine />
                 <ExternalUrl
@@ -248,7 +252,7 @@ export const AccountPicker = ({
               onDisconnect={handleDisconnect}
               selectedNetwork={selectedNetwork}
             />
-            {!isConnected && (
+            {!isConnected && showExternalUrl && (
               <>
                 <StyledLine />
                 <ExternalUrl

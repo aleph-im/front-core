@@ -19,6 +19,8 @@ export type AccountPickerProps = {
   Link: LinkComponent
   isMobile?: boolean
   showCredits?: boolean
+  showSettings?: boolean
+  showExternalUrl?: boolean
   accountAddress?: string
   accountCredits?: number
   accountBalance?: number
