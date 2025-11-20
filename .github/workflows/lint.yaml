@@ -26,7 +26,7 @@ jobs:
         run: |
           npm config set "@fortawesome:registry" https://npm.fontawesome.com/
           npm config set "//npm.fontawesome.com/:_authToken" FONTAWESOME_NPM_AUTH_TOKEN
-          npm ci
+          npm i --legacy-peer-deps
 
       - name: Run linter
         run: npm run lint
