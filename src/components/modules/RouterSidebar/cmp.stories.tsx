@@ -238,6 +238,31 @@ NestedRoutes.args = {
   ...defaultArgs,
   pathname: '/computing/instance',
   routes: nestedRoutes,
+  footerLinks: {
+    main: {
+      href: 'https://docs.aleph.cloud',
+      label: 'Documentation',
+      icon: 'arrow-up-right-from-square',
+      target: '_blank',
+    },
+    social: [
+      {
+        href: 'https://t.me/alephim/119590',
+        icon: 'telegram',
+        target: '_blank',
+      },
+      {
+        href: 'https://x.com/aleph_im',
+        icon: 'x',
+        target: '_blank',
+      },
+      {
+        href: 'https://www.aleph.cloud/blog',
+        icon: 'globe',
+        target: '_blank',
+      },
+    ],
+  },
 }
 NestedRoutes.parameters = {
   controls: { exclude: ['color', 'size'] },

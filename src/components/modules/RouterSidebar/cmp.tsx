@@ -33,6 +33,7 @@ import {
 import { RouteProps, RouterSidebarProps } from './types'
 import { RouterLinkProps } from '../RouterLink'
 import { useTheme } from 'styled-components'
+import Icon from '../../common/Icon'
 
 const Nav1Route = ({
   pathname,
@@ -233,6 +234,7 @@ export const RouterSidebar = ({
   animationSpeed = 1.5,
   animationSpeedOpeningMultiplier = 0.8,
   onToggle,
+  footerLinks,
 }: RouterSidebarProps) => {
   const [hover, setHover] = useState<boolean | undefined>(false)
 
@@ -353,6 +355,42 @@ export const RouterSidebar = ({
                 }}
               />
             ))}
+            {footerLinks && (footerLinks.main || footerLinks.social) && (
+              <div
+                tw="h-full flex flex-col justify-end gap-4 my-12 mx-6"
+                className="fs-14"
+              >
+                {footerLinks.main && (
+                  <a
+                    tw="flex items-center gap-1 cursor-pointer opacity-60 hover:opacity-80"
+                    href={footerLinks.main.href}
+                    target={footerLinks.main.target || '_blank'}
+                    rel={footerLinks.main.rel || 'noreferrer'}
+                  >
+                    {footerLinks.main.label}
+                    {footerLinks.main.icon && (
+                      <Icon name={footerLinks.main.icon} size="0.9em" />
+                    )}
+                  </a>
+                )}
+                {footerLinks.social && footerLinks.social.length > 0 && (
+                  <div tw="flex flex-wrap gap-x-4 w-full">
+                    {footerLinks.social.map((link, index) => (
+                      <a
+                        key={index}
+                        tw="cursor-pointer opacity-60 hover:opacity-80"
+                        href={link.href}
+                        target={link.target || '_blank'}
+                        rel={link.rel || 'noreferrer'}
+                      >
+                        {link.icon && <Icon name={link.icon} size="1rem" />}
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </StyledOpenedNav2LinkContainer>
           <StyledClosedNav2LinkContainer
             onClick={handlePreventPropagation}

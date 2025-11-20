@@ -2,6 +2,20 @@ import { BreakpointId } from '../../../themes'
 import { LinkComponent, Route } from '../../../types'
 import { LogoProps } from '../../common/Logo'
 import { RouterLinkProps } from '../RouterLink'
+import { IconProps } from '../../common/Icon'
+
+export type FooterLink = {
+  href: string
+  icon?: IconProps['name']
+  label?: string
+  target?: string
+  rel?: string
+}
+
+export type FooterLinks = {
+  main?: FooterLink
+  social?: FooterLink[]
+}
 
 export type RouterSidebarProps = {
   routes: Route[]
@@ -15,6 +29,7 @@ export type RouterSidebarProps = {
   onToggle?: (open?: boolean) => void
   animationSpeed?: number
   animationSpeedOpeningMultiplier?: number
+  footerLinks?: FooterLinks
 }
 
 export type RouteProps = Omit<RouterLinkProps, 'isActive'> & {
