@@ -37,6 +37,12 @@ export const Modal = ({ children }: ModalProps) => {
     e.stopPropagation()
   }, [])
 
+  const handleOverlayClick = useCallback(() => {
+    if (modal?.closeOnClickOutside !== false) {
+      handleClose()
+    }
+  }, [modal?.closeOnClickOutside, handleClose])
+
   const theme = useTheme()
 
   const { shouldMount, stage: $stage } = useTransition(
@@ -49,7 +55,7 @@ export const Modal = ({ children }: ModalProps) => {
       {children}
       <Portal>
         {shouldMount && (
-          <StyledOverlay {...{ $stage, onClick: handleClose }}>
+          <StyledOverlay {...{ $stage, onClick: handleOverlayClick }}>
             <StyledModalCard
               {...{
                 ...modal,

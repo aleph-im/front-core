@@ -19,6 +19,7 @@ export const ModalCard = ({
   width: $width,
   height: $height,
   onClose,
+  closeOnCloseButton = true,
   ...rest
 }: ModalCardProps) => {
   return (
@@ -26,7 +27,11 @@ export const ModalCard = ({
       <StyledHeaderContainer>
         {header || <TextGradient type="h6">{title}</TextGradient>}
         <StyledHeaderActions>
-          <StyledHeaderCloseIcon onClick={onClose} />
+          {closeOnCloseButton && (
+            <StyledHeaderCloseIcon
+              onClick={closeOnCloseButton ? onClose : undefined}
+            />
+          )}
         </StyledHeaderActions>
       </StyledHeaderContainer>
       <StyledContentContainer>{content || text}</StyledContentContainer>
