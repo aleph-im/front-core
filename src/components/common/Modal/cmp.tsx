@@ -33,7 +33,8 @@ export const Modal = ({ children }: ModalProps) => {
   const { close: handleClose } = contextValue
 
   const handlePreventDefault = useCallback((e: MouseEvent) => {
-    e.preventDefault()
+    // @note: Causes issues with form interactions inside modals
+    // e.preventDefault()
     e.stopPropagation()
   }, [])
 
