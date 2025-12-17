@@ -20,6 +20,9 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "type": "module",
+  "repository": {
+    "url": "https://github.com/aleph-im/front-core"
+  },
   "publishConfig": {
     "access": "public"
   },
