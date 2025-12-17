@@ -15,6 +15,7 @@ export * from './common/TextGradient'
 export * from './common/Tooltip'
 export * from './common/Spinner'
 export * from './common/Label'
+export * from './common/Lottie'
 
 export * from './layout/Card'
 export * from './layout/CardWithSideImage'
