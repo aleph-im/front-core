@@ -10,4 +10,7 @@ export type ModalCardProps = Omit<HTMLAttributes<HTMLDivElement>, 'content'> & {
   header?: ReactNode
   content?: ReactNode
   footer?: ReactNode
+
+  closeOnClickOutside?: boolean
+  closeOnCloseButton?: boolean
 }

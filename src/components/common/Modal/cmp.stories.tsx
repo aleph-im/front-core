@@ -5,6 +5,7 @@ import Modal from './cmp'
 import { ModalProps } from './types'
 import ModalCard from '../ModalCard'
 import { OpenModalInfo, useModal } from './context'
+import Button from '../Button'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -66,5 +67,74 @@ Default.args = {
   ...defaultArgs,
 }
 Default.parameters = {
+  ...defaultParams,
+}
+
+const CustomClosingConsumerComponent = ({
+  title,
+  text,
+  closeOnClickOutside,
+  closeOnCloseButton,
+}: Args) => {
+  const modal = useModal()
+
+  const handleClose = useCallback(() => {
+    if (!modal) return
+
+    modal.close()
+  }, [modal])
+
+  const handleOpen = useCallback(() => {
+    if (!modal) return
+
+    modal.open({
+      title,
+      text,
+      footer: <Button onClick={handleClose}>Close Modal</Button>,
+      closeOnClickOutside,
+      closeOnCloseButton,
+    })
+  }, [modal, title, text, closeOnClickOutside, closeOnCloseButton, handleClose])
+
+  return (
+    <div tw="flex flex-col items-start gap-4">
+      <button onClick={handleOpen}>Open Modal</button>
+    </div>
+  )
+}
+
+const CustomClosingTemplate: StoryFn<typeof Modal> = (args) => {
+  return (
+    <Modal {...args}>
+      <CustomClosingConsumerComponent {...args} />
+    </Modal>
+  )
+}
+
+export const DisableClickOutside = CustomClosingTemplate.bind({})
+DisableClickOutside.args = {
+  ...defaultArgs,
+  closeOnClickOutside: false,
+}
+DisableClickOutside.parameters = {
+  ...defaultParams,
+}
+
+export const DisableCloseButton = CustomClosingTemplate.bind({})
+DisableCloseButton.args = {
+  ...defaultArgs,
+  closeOnCloseButton: false,
+}
+DisableCloseButton.parameters = {
+  ...defaultParams,
+}
+
+export const DisableBoth = CustomClosingTemplate.bind({})
+DisableBoth.args = {
+  ...defaultArgs,
+  closeOnClickOutside: false,
+  closeOnCloseButton: false,
+}
+DisableBoth.parameters = {
   ...defaultParams,
 }
