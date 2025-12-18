@@ -99,14 +99,12 @@ export const StyledDropdownOptionMenu = styled.div.attrs<StyledDropdownOptionMen
     const { shadow } = theme.form.input
 
     return css`
-      ${tw`fixed left-0 overflow-auto`}
-      ${tw`opacity-0 invisible -top-2`}
+      ${tw`fixed left-0 overflow-auto opacity-0 invisible -top-2 z-10`}
 
       margin-top: 0.375rem;
       border-radius: 1.875rem;
       max-height: 20rem;
       backdrop-filter: blur(10px);
-      z-index: 999;
       box-shadow: ${shadow};
       transition-property: opacity, top, visibility;
       transition-duration: ${theme.transition.duration.fast}ms;

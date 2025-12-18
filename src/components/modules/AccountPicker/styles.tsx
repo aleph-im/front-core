@@ -14,7 +14,7 @@ export const StyledPicker = styled.div<StyledPickerProps>`
     const { background, shadow } = theme.component.walletPicker
 
     return css`
-      ${tw`fixed top-0 left-0 z-20 mt-4`}
+      ${tw`fixed top-0 left-0 z-10 mt-4`}
       min-width: 20rem;
       border-radius: 1.875rem;
       background: ${background};
