@@ -9,8 +9,8 @@ export function Lottie({ animationData, ...props }: LottieComponentProps) {
     // Dynamic import of lottie-react to handle Next.js + Node > 20 compatibility
     const loadLottie = async () => {
       try {
-        const LottieImport = await import('lottie-react')
-        const Component = (LottieImport as any)?.default || LottieImport
+        const LottieImport: any = await import('lottie-react')
+        const Component = LottieImport?.default?.default || LottieImport?.default || LottieImport
         setLottieComponent(() => Component)
       } catch (error) {
         console.error('Failed to load lottie-react:', error)
