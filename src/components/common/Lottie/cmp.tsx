@@ -1,25 +1,32 @@
-import React, { memo, Suspense, lazy } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { type LottieComponentProps } from 'lottie-react'
-// import LottieImport from 'lottie-react'
-
-// @note: Quickfix for nextjs + Node > 20
-// https://github.com/Gamote/lottie-react/issues/101#issuecomment-1886338635
-const LazyLottieComponent = lazy(() => {
-  const LottieImport = import('lottie-react')
-  return (LottieImport as any)?.default || LottieImport
-})
 
 export function Lottie({ animationData, ...props }: LottieComponentProps) {
-  if (!animationData)
-    return <div style={{ height: props.height, width: props.width }} />
+  const [LottieComponent, setLottieComponent] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  return (
-    <Suspense
-      fallback={<div style={{ height: props.height, width: props.width }} />}
-    >
-      <LazyLottieComponent animationData={animationData} {...props} />
-    </Suspense>
-  )
+  useEffect(() => {
+    // Dynamic import of lottie-react to handle Next.js + Node > 20 compatibility
+    const loadLottie = async () => {
+      try {
+        const LottieImport = await import('lottie-react')
+        const Component = (LottieImport as any)?.default || LottieImport
+        setLottieComponent(() => Component)
+      } catch (error) {
+        console.error('Failed to load lottie-react:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadLottie()
+  }, [])
+
+  if (!animationData || isLoading || !LottieComponent) {
+    return <span style={{ height: props.height, width: props.width }} />
+  }
+
+  return <LottieComponent animationData={animationData} {...props} />
 }
 Lottie.displayName = 'Lottie'
 
