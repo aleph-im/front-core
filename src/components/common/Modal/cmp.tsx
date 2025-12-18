@@ -16,10 +16,12 @@ export const Modal = ({ children }: ModalProps) => {
     setIsOpen(true)
   }, [])
 
+  const modalOnClose = modal?.onClose
+
   const close = useCallback(() => {
     setIsOpen(false)
-    modal?.onClose && modal?.onClose()
-  }, [modal])
+    modalOnClose?.()
+  }, [modalOnClose])
 
   const contextValue = useMemo(
     () => ({
