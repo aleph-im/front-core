@@ -10,7 +10,10 @@ export function Lottie({ animationData, ...props }: LottieComponentProps) {
     const loadLottie = async () => {
       try {
         const LottieImport: any = await import('lottie-react')
-        const Component = LottieImport?.default?.default || LottieImport?.default || LottieImport
+        const Component =
+          LottieImport?.default?.default ||
+          LottieImport?.default ||
+          LottieImport
         setLottieComponent(() => Component)
       } catch (error) {
         console.error('Failed to load lottie-react:', error)
