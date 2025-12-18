@@ -35,6 +35,7 @@ export type CustomIconName =
   | 'instance'
   | 'confidential'
   | 'manageWebsite'
+  | 'usdc'
 
 export type IconName = CustomIconName | FAIconName
 
