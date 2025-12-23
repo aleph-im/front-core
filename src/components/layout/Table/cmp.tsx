@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import { StyledTable } from './styles'
@@ -18,6 +19,7 @@ import tw from 'twin.macro'
 import Icon from '../../common/Icon'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import Spinner from '../../common/Spinner'
+import Tooltip from '../../common/Tooltip'
 
 export function TableRow<R extends Record<string, unknown>>({
   row,
@@ -26,18 +28,27 @@ export function TableRow<R extends Record<string, unknown>>({
   rowRender,
   rowProps,
   rowNoise = false,
+  rowTooltip,
+  rowTooltipMy = 'bottom-center',
+  rowTooltipAt = 'top-center',
 }: TableRowProps<R>) {
+  const rowRef = useRef<HTMLTableRowElement>(null)
+
   const props = useMemo(() => {
     const rProps = rowProps?.(row, rowIndex) || {}
     return { css: {}, ...rProps }
   }, [rowIndex, row, rowProps])
+
+  const tooltipContent = useMemo(() => {
+    return rowTooltip?.(row, rowIndex)
+  }, [row, rowIndex, rowTooltip])
 
   return (
     <>
       {rowRender ? (
         rowRender(row, rowIndex)
       ) : (
-        <tr {...props} css={props.css}>
+        <tr ref={rowRef} {...props} css={props.css}>
           {columns.map((col, colIndex) => (
             <TableCell
               key={colIndex}
@@ -45,6 +56,14 @@ export function TableRow<R extends Record<string, unknown>>({
             />
           ))}
         </tr>
+      )}
+      {tooltipContent && (
+        <Tooltip
+          targetRef={rowRef}
+          content={tooltipContent}
+          my={rowTooltipMy}
+          at={rowTooltipAt}
+        />
       )}
     </>
   )
@@ -317,6 +336,9 @@ export function Table<R extends Record<string, unknown>>(props: TableProps<R>) {
                 rowRender: props.rowRender,
                 rowProps: props.rowProps,
                 rowNoise: props.rowNoise,
+                rowTooltip: props.rowTooltip,
+                rowTooltipMy: props.rowTooltipMy,
+                rowTooltipAt: props.rowTooltipAt,
               }}
             />
           ))}
