@@ -5,10 +5,17 @@ import {
   TableHTMLAttributes,
   TdHTMLAttributes,
 } from 'react'
+import { TooltipPositionType } from '../../common/Tooltip/types'
 
 export type TableBorderType = 'none' | 'dashed' | 'solid'
 export type TableAlignType = 'left' | 'center' | 'right'
 export type TableStickyPosition = 'start' | 'end'
+
+export type TableRowTooltipProps<R extends Record<string, unknown>> = {
+  rowTooltip?: (row: R, rowIndex: number) => ReactNode
+  rowTooltipMy?: TooltipPositionType
+  rowTooltipAt?: TooltipPositionType
+}
 
 export type TableRow<R extends Record<string, unknown>> = {
   rowRender?: (row: R, rowIndex: number) => ReactNode
@@ -66,7 +73,8 @@ export type TableDefaultSortFn<R = unknown> = (
 
 export type TableProps<R extends Record<string, unknown>> =
   TableHTMLAttributes<HTMLTableElement> &
-    TableRow<R> & {
+    TableRow<R> &
+    TableRowTooltipProps<R> & {
       columns: TableColumn<R>[]
       data?: R[]
       stickyHeader?: boolean
@@ -86,7 +94,8 @@ export type TableProps<R extends Record<string, unknown>> =
 
 export type TableRowProps<R extends Record<string, unknown>> =
   HTMLAttributes<HTMLTableRowElement> &
-    TableRow<R> & {
+    TableRow<R> &
+    TableRowTooltipProps<R> & {
       row: R
       columns: TableColumn<R>[]
       rowIndex: number

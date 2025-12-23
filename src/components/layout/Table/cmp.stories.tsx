@@ -283,3 +283,40 @@ InfiniteScrollContainer.args = {
 InfiniteScrollContainer.parameters = {
   ...defaultParams,
 }
+
+// ---
+
+const rowTooltipArgs: TableProps<any> = {
+  borderType: 'dashed' as TableBorderType,
+  rowNoise: true,
+  stickyHeader: false,
+  ...dataArgs,
+  rowTooltip: (row: MockDataRow) => {
+    if (row.age > 25) return
+
+    return (
+      <div tw="p-2">
+        <div tw="font-bold mb-2">{row.name}</div>
+        <div>Age: {row.age}</div>
+        <div>Job: {row.job}</div>
+        <div>
+          Pets:{' '}
+          {Object.entries(row.pets as Pets)
+            .map(([pet, count]) => (count > 0 ? `${pet}: ${count}` : null))
+            .filter(Boolean)
+            .join(', ') || 'None'}
+        </div>
+      </div>
+    )
+  },
+  rowTooltipMy: 'top-center',
+  rowTooltipAt: 'bottom-center',
+}
+
+export const RowTooltip = Template.bind({})
+RowTooltip.args = {
+  ...rowTooltipArgs,
+}
+RowTooltip.parameters = {
+  ...defaultParams,
+}
