@@ -15,7 +15,7 @@ export const StyledOverlay = styled.div<StyledOverlayProps>`
     const { background } = theme.component.modal.overlay
 
     return css`
-      ${tw`fixed inset-0 p-6 flex items-center justify-center overflow-hidden w-full h-full z-20`}
+      ${tw`fixed inset-0 p-6 flex items-center justify-center overflow-hidden w-full h-full z-30`}
       background: ${background};
       backdrop-filter: blur(32px);
       opacity: ${$isOpen ? 1 : 0};
