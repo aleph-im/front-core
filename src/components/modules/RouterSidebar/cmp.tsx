@@ -6,7 +6,7 @@ import React, {
   MouseEvent,
   useRef,
 } from 'react'
-import { useTransition } from 'transition-hook'
+import { useTransition } from '../../../hooks'
 import {
   StyledLogo,
   StyledNav1,

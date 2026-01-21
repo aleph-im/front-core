@@ -3,7 +3,7 @@ import Button from '../Button'
 import Icon from '../Icon'
 import tw from 'twin.macro'
 import NotificationCard from '../NotificationCard'
-import { Stage } from 'transition-hook'
+import { TransitionStage } from '../../../hooks'
 
 export const StyledContainer = styled.div`
   ${tw`fixed bottom-0 right-0 flex flex-col justify-start items-end p-4 overflow-auto max-h-full max-w-full z-40`}
@@ -35,7 +35,7 @@ export const StyledClearIcon = styled(Icon).attrs((props) => {
 `
 
 export type StyledNotificationCardProps = {
-  $stage: Stage
+  $stage: TransitionStage
 }
 
 export const StyledNotificationCard = styled(

@@ -2,7 +2,7 @@ import React, { MouseEvent, memo, useCallback } from 'react'
 import { StyledOverlay, StyledModalCard } from './styles'
 import { ModalProps } from './types'
 import { Portal } from '../../layout/Portal'
-import { useTransition } from 'transition-hook'
+import { useTransition } from '../../../hooks'
 import { useTheme } from 'styled-components'
 
 export const Modal = ({

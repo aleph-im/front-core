@@ -21,7 +21,7 @@ import {
   StyledNotificationContainer,
 } from './styles'
 import { NotificationProps } from './types'
-import { useListTransition } from 'transition-hook'
+import { useListTransition } from '../../../hooks'
 import { useTheme } from 'styled-components'
 import { Portal } from '../../layout/Portal'
 
@@ -171,20 +171,18 @@ export const Notification = ({
         <StyledContainer onMouseOver={stopTimer} onMouseOut={resetTimer}>
           <StyledNotificationContainer>
             {list((item, $stage) => (
-              <>
-                <StyledNotificationCard
-                  key={item.id}
-                  {...{
-                    onClose: () => contextValue.del(item.id),
-                    $stage,
-                    progress: Math.min(
-                      (item.timeout - item.pending) / item.timeout,
-                      1,
-                    ),
-                    ...item,
-                  }}
-                />
-              </>
+              <StyledNotificationCard
+                key={item.id}
+                {...{
+                  onClose: () => contextValue.del(item.id),
+                  $stage,
+                  progress: Math.min(
+                    (item.timeout - item.pending) / item.timeout,
+                    1,
+                  ),
+                  ...item,
+                }}
+              />
             ))}
           </StyledNotificationContainer>
           {notificationList.length > 2 && (

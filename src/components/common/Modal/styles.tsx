@@ -3,10 +3,10 @@ import Button from '../Button'
 import Icon from '../Icon'
 import tw from 'twin.macro'
 import ModalCard from '../ModalCard'
-import { Stage } from 'transition-hook'
+import { TransitionStage } from '../../../hooks'
 
 export type StyledOverlayProps = {
-  $stage: Stage
+  $stage: TransitionStage
 }
 
 export const StyledOverlay = styled.div<StyledOverlayProps>`
@@ -50,7 +50,7 @@ export const StyledClearIcon = styled(Icon).attrs((props) => {
 `
 
 export type StyledModalCardProps = {
-  $stage: Stage
+  $stage: TransitionStage
 }
 
 export const StyledModalCard = styled(ModalCard)<StyledModalCardProps>`

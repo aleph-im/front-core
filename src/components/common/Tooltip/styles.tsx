@@ -5,11 +5,11 @@ import Icon from '../Icon'
 import { TooltipPosition, TooltipVariant } from './types'
 import tw from 'twin.macro'
 import { getResponsiveCss } from '../../../styles'
-import { Stage } from 'transition-hook'
+import { TransitionStage } from '../../../hooks'
 
 export type StyledContainerProps = {
   $position: TooltipPosition
-  $stage: Stage
+  $stage: TransitionStage
   $variant: TooltipVariant
 } & HTMLAttributes<HTMLDivElement>
 
