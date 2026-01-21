@@ -1,5 +1,6 @@
-import { ReactNode } from 'react'
+import { ModalCardProps } from '../ModalCard'
 
-export type ModalProps = {
-  children: ReactNode
+export type ModalProps = ModalCardProps & {
+  open: boolean
+  closeOnClickOutside?: boolean
 }
