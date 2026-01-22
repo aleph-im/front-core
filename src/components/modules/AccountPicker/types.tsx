@@ -22,7 +22,7 @@ export type AccountPickerProps = {
   showSettings?: boolean
   showExternalUrl?: boolean
   accountAddress?: string
-  accountCredits?: number
+  accountCredits?: number | string
   accountBalance?: number
   accountVouchers?: Voucher[]
   ensName?: string

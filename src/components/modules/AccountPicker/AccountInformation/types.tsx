@@ -13,7 +13,7 @@ export type AccountInformationProps = {
   accountAddressHref?: string
   balance?: number
   showCredits: boolean
-  credits?: number
+  credits?: number | string
   rewards?: {
     amount: number
     days?: number
