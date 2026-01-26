@@ -18,6 +18,7 @@ export type CustomIconName =
   | 'explore'
   | 'gpu'
   | 'notification'
+  | 'permissions'
   | 'phantom'
   | 'polkadot'
   | 'polygon'
