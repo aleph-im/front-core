@@ -39,6 +39,7 @@ import {
   getPlainGrainEffectCss,
   grainColor,
 } from './grains'
+import { getThemeFamily } from '../themes/utils'
 
 export const GlobalStyles = () => (
   <>
@@ -172,7 +173,7 @@ function fontUrlImports(theme: DefaultTheme) {
 }
 
 function alephEffectClasses(theme: DefaultTheme) {
-  if (theme.name !== 'aleph') return
+  if (getThemeFamily(theme.name) !== 'aleph') return
 
   const glowColors = ['main0', 'main1', 'main2']
   const glowMaxColors = ['main0', 'main1', 'main2', 'extra0', 'extra1']
@@ -275,7 +276,7 @@ function alephEffectClasses(theme: DefaultTheme) {
 }
 
 function twentysixEffectClasses(theme: DefaultTheme) {
-  if (theme.name !== 'twentysix') return
+  if (getThemeFamily(theme.name) !== 'aleph-cloud') return
 
   const grainPlainColors = Object.keys(grainColor)
   const [colors1, ...colors2] = grainPlainColors
