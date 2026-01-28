@@ -16,5 +16,11 @@ module.exports = {
   },
   docs: {
     autodocs: true
+  },
+  typescript: {
+    // Disable react-docgen-typescript to speed up dev startup (~7s savings).
+    // Trade-off: no auto-generated prop tables in the Docs tab.
+    // The Controls panel and stories themselves are unaffected.
+    reactDocgen: false
   }
 };

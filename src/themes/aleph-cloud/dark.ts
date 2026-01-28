@@ -163,7 +163,7 @@ const shadows = {
 const storybook: ThemeStorybookConfig = {
   color: {
     primary: '#7B3FE4',
-    secondary: '#D4FF00',
+    secondary: '#7B3FE4',
     background: '#0F0E1A',
     contentBackground: '#161525',
     foreground: '#1C1B2E',
@@ -836,14 +836,14 @@ const routerLink: ThemeRouterLink = {
       color: {
         default: color.white,
         hover: color.white,
-        active: color.text,
+        active: color.dark3,
         disabled: '#92929280',
       },
       icon: {
         color: {
           default: color.text,
           hover: color.main1,
-          active: color.text,
+          active: color.dark3,
           disabled: '#92929280',
         },
       },
@@ -882,7 +882,7 @@ const sidebar: ThemeSidebar = {
       background: color.white,
     },
     active: {
-      color: color.text,
+      color: color.dark3,
       background: color.main1,
     },
   },

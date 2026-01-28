@@ -65,11 +65,14 @@ export const parameters = {
   }
 }
 
+export const initialGlobals = {
+  theme: 'aleph-cloud-light',
+}
+
 export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Platform Theme',
-    defaultValue: 'aleph-cloud-light',
     toolbar: {
       icon: 'paintbrush',
       items: [
@@ -81,14 +84,19 @@ export const globalTypes = {
   },
 }
 
-const themingDecorator = (Story, context) => (
-  <>
-    <ThemeProvider theme={themes[context.globals.theme]}>
-      <GlobalStyles />
-      <Story />
-    </ThemeProvider>
-  </>
-)
+const themingDecorator = (Story, context) => {
+  const themeName = context.globals.theme || 'aleph-cloud-light'
+  const theme = themes[themeName] || themes['aleph-cloud-light']
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Story />
+      </ThemeProvider>
+    </>
+  )
+}
 
 export const decorators = [
   themingDecorator
