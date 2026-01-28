@@ -2,6 +2,7 @@ import React from 'react'
 import { StoryFn } from '@storybook/react'
 import styled, { useTheme } from 'styled-components'
 import { StoryBookHeader } from './utils'
+import { getThemeFamily } from '../../themes/utils'
 
 export default {
   title: 'Design/Atoms/Colors',
@@ -60,7 +61,7 @@ const ColorsTemplate: StoryFn<any> = () => {
         <Circle className="gr-extra0"></Circle>
         <Circle className="gr-extra1"></Circle>
       </div>
-      {theme.name === 'aleph' && (
+      {getThemeFamily(theme.name) === 'aleph' && (
         <>
           <StoryBookHeader>Effects</StoryBookHeader>
           <div>
@@ -122,7 +123,7 @@ const ColorsTemplate: StoryFn<any> = () => {
           </div>
         </>
       )}
-      {theme.name === 'twentysix' && (
+      {getThemeFamily(theme.name) === 'aleph-cloud' && (
         <>
           <StoryBookHeader>Effects</StoryBookHeader>
           <div>

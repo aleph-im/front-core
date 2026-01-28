@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components'
+import { getThemeFamily } from '../../themes/utils'
 
 export const StoryBookHeader = styled.h1`
   ${({ theme }) => {
     const font =
-      theme.name === 'aleph' ? theme.font.family.body : theme.font.family.head
-    const color = theme.name === 'aleph' ? theme.color.text : theme.color.main0
+      getThemeFamily(theme.name) === 'aleph' ? theme.font.family.body : theme.font.family.head
+    const color = getThemeFamily(theme.name) === 'aleph' ? theme.color.text : theme.color.main0
 
     return css`
       display: inline-block;
@@ -23,7 +24,7 @@ export const StoryBookHeader = styled.h1`
 export const StoryBookSubheader = styled.h2`
   ${({ theme }) => {
     const font = theme.font.family.head
-    const color = theme.name === 'aleph' ? theme.color.text : theme.color.main0
+    const color = getThemeFamily(theme.name) === 'aleph' ? theme.color.text : theme.color.main0
 
     return css`
       display: inline-block;

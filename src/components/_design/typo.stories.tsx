@@ -1,6 +1,7 @@
 import React from 'react'
 import { StoryFn } from '@storybook/react'
 import { StoryBookHeader, StoryBookSubheader } from './utils'
+import { getThemeFamily } from '../../themes/utils'
 import styled, { useTheme } from 'styled-components'
 import tw from 'twin.macro'
 
@@ -21,7 +22,7 @@ const StyledBlock = styled.div`
 const TypographyTemplate: StoryFn<any> = () => {
   const theme = useTheme()
 
-  const fontName = theme.name === 'aleph' ? 'Rubik' : 'RIGID SQUARE'
+  const fontName = getThemeFamily(theme.name) === 'aleph' ? 'Rubik' : 'RIGID SQUARE'
 
   return (
     <div>
