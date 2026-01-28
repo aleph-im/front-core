@@ -132,7 +132,9 @@ export function AlephThemeProvider({
 export function useThemeSwitch(): ThemeSwitchContextValue {
   const ctx = useContext(ThemeSwitchContext)
   if (!ctx) {
-    throw new Error('useThemeSwitch must be used within an <AlephThemeProvider>')
+    throw new Error(
+      'useThemeSwitch must be used within an <AlephThemeProvider>',
+    )
   }
   return ctx
 }

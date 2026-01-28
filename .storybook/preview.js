@@ -1,19 +1,21 @@
+import { ThemeProvider } from 'styled-components'
+import { themes as theming } from '@storybook/theming'
 
-import { ThemeProvider } from 'styled-components';
-import { themes as theming } from '@storybook/theming';
-
-import { themes } from '../src/themes';
-import { GlobalStyles } from '../src/styles';
-import logoDark from '../assets/img/aleph-dark.svg';
-import logoLight from '../assets/img/aleph-light.svg';
+import { themes } from '../src/themes'
+import { GlobalStyles } from '../src/styles'
+import logoDark from '../assets/img/aleph-dark.svg'
+import logoLight from '../assets/img/aleph-light.svg'
 
 function getThemeColors(theme) {
-  const { color } = theme.storybook;
+  const { color } = theme.storybook
 
   return {
     brandTitle: 'Aleph Cloud Components',
     brandUrl: 'https://aleph.im/',
-    brandImage: theme.name.indexOf('dark') !== -1 || theme.name === 'aleph' ? logoDark : logoLight,
+    brandImage:
+      theme.name.indexOf('dark') !== -1 || theme.name === 'aleph'
+        ? logoDark
+        : logoLight,
     appBg: color.background,
     appContentBg: color.contentBackground,
     barBg: color.foreground,
@@ -21,7 +23,7 @@ function getThemeColors(theme) {
     barSelectedColor: color.secondary,
     colorPrimary: color.primary,
     colorSecondary: color.secondary,
-    brandTarget: '_blank'
+    brandTarget: '_blank',
   }
 }
 
@@ -30,13 +32,15 @@ export const argTypes = {
   color: {
     control: {
       type: 'color',
-      presetColors: Object.entries(themes['aleph-cloud-light'].color).map(([title, color]) => ({ title, color }))
-    }
+      presetColors: Object.entries(themes['aleph-cloud-light'].color).map(
+        ([title, color]) => ({ title, color }),
+      ),
+    },
   },
-};
+}
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -48,21 +52,21 @@ export const parameters = {
     current: 'light',
     dark: {
       ...theming.dark,
-      ...getThemeColors(themes['aleph-cloud-dark'])
+      ...getThemeColors(themes['aleph-cloud-dark']),
     },
     light: {
       ...theming.normal,
-      ...getThemeColors(themes['aleph-cloud-light'])
-    }
+      ...getThemeColors(themes['aleph-cloud-light']),
+    },
   },
   docs: {
     inlineStories: false,
     iframeHeight: 500,
     theme: {
       ...theming.normal,
-      ...getThemeColors(themes['aleph-cloud-light'])
+      ...getThemeColors(themes['aleph-cloud-light']),
     },
-  }
+  },
 }
 
 export const initialGlobals = {
@@ -98,6 +102,4 @@ const themingDecorator = (Story, context) => {
   )
 }
 
-export const decorators = [
-  themingDecorator
-]
+export const decorators = [themingDecorator]

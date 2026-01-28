@@ -32,13 +32,7 @@ import {
   ThemeFormFileInput,
 } from '../types'
 import { getGlassEffectCss } from '../../styles'
-import {
-  breakpoint,
-  font,
-  typo,
-  transition,
-  icon,
-} from './base'
+import { breakpoint, font, typo, transition, icon } from './base'
 
 const color: ThemeColor = {
   white: '#FFFFFF',

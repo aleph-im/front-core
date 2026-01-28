@@ -32,51 +32,45 @@ import {
   ThemeFormFileInput,
 } from '../types'
 import { getGlassEffectCss } from '../../styles'
-import {
-  breakpoint,
-  font,
-  typo,
-  transition,
-  icon,
-} from './base'
+import { breakpoint, font, typo, transition, icon } from './base'
 
 const color: ThemeColor = {
   white: '#FFFFFF',
   black: '#000000',
   translucid: '#FFFFFF0F',
 
-  base0: '#1C1B2E',      // primary surface (cards, inputs)
-  base1: '#0F0E1A',      // background reference
-  base2: '#F0EBF7',      // high contrast text reference
+  base0: '#1C1B2E', // primary surface (cards, inputs)
+  base1: '#0F0E1A', // background reference
+  base2: '#F0EBF7', // high contrast text reference
 
-  main0: '#7B3FE4',      // brand purple — lightened for dark bg visibility
-  main1: '#D4FF00',      // brand lime — unchanged, pops on dark
+  main0: '#7B3FE4', // brand purple — lightened for dark bg visibility
+  main1: '#D4FF00', // brand lime — unchanged, pops on dark
 
-  purple0: '#1A1530',    // subtle purple tint background
-  purple1: '#211A3D',    // slightly more purple
-  purple2: '#2A2049',    // medium purple surface
-  purple3: '#3D2E6B',    // active/hover purple surface
-  purple4: '#5A3FA0',    // strong purple accent (borders, highlights)
+  purple0: '#1A1530', // subtle purple tint background
+  purple1: '#211A3D', // slightly more purple
+  purple2: '#2A2049', // medium purple surface
+  purple3: '#3D2E6B', // active/hover purple surface
+  purple4: '#5A3FA0', // strong purple accent (borders, highlights)
 
-  dark0: '#F0EBF71A',   // translucent text overlay
-  dark1: '#252438',      // subtle dark step
-  dark2: '#1C1B2E',      // matches foreground
-  dark3: '#080811',      // true dark
+  dark0: '#F0EBF71A', // translucent text overlay
+  dark1: '#252438', // subtle dark step
+  dark2: '#1C1B2E', // matches foreground
+  dark3: '#080811', // true dark
 
-  light0: '#F0EBF70D',  // very subtle light overlay
-  light1: '#F0EBF71A',  // light overlay
+  light0: '#F0EBF70D', // very subtle light overlay
+  light1: '#F0EBF71A', // light overlay
 
-  info: '#7B3FE4',       // matches lightened brand purple
-  success: '#3DE64E',    // slightly brighter green for dark
-  warning: '#FFC040',    // slightly brighter amber
-  error: '#F04878',      // slightly brighter red-pink
-  disabled: '#555566',   // muted gray for dark
+  info: '#7B3FE4', // matches lightened brand purple
+  success: '#3DE64E', // slightly brighter green for dark
+  warning: '#FFC040', // slightly brighter amber
+  error: '#F04878', // slightly brighter red-pink
+  disabled: '#555566', // muted gray for dark
   disabled2: '#FFFFFF15', // slightly less visible on dark
 
-  background: '#0F0E1A',          // deep purple-black
-  contentBackground: '#161525',   // slightly lifted from background
-  foreground: '#1C1B2E',          // elevated surfaces
-  text: '#F0EBF7',                // warm off-white with purple tint
+  background: '#0F0E1A', // deep purple-black
+  contentBackground: '#161525', // slightly lifted from background
+  foreground: '#1C1B2E', // elevated surfaces
+  text: '#F0EBF7', // warm off-white with purple tint
 }
 
 const gradient: ThemeGradient = {

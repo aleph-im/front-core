@@ -22,7 +22,8 @@ const StyledBlock = styled.div`
 const TypographyTemplate: StoryFn<any> = () => {
   const theme = useTheme()
 
-  const fontName = getThemeFamily(theme.name) === 'aleph' ? 'Rubik' : 'RIGID SQUARE'
+  const fontName =
+    getThemeFamily(theme.name) === 'aleph' ? 'Rubik' : 'RIGID SQUARE'
 
   return (
     <div>
