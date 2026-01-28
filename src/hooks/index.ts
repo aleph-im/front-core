@@ -19,3 +19,5 @@ export * from './usePaginatedList'
 export * from './useCopyToClipboard'
 
 export * from 'transition-hook'
+
+export { useThemeSwitch } from '../contexts/theme'

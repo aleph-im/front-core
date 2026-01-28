@@ -4,6 +4,7 @@ export * from './styles'
 export * from './hooks'
 export * from './utils'
 export * from './types'
+export * from './contexts'
 
 export * as components from './components'
 export * as hooks from './hooks'
