@@ -45,40 +45,38 @@ const color: ThemeColor = {
   black: '#000000',
   translucid: '#FFFFFF0F',
 
-  base0: '#1F1F31',      // TODO: design review — dark surface (was '#FFFFFF')
-  base1: '#141421',      // TODO: design review — dark background (was '#F9F4FF')
-  base2: '#FFFFFF',      // TODO: design review — light text on dark (was '#141421')
+  base0: '#1C1B2E',      // primary surface (cards, inputs)
+  base1: '#0F0E1A',      // background reference
+  base2: '#F0EBF7',      // high contrast text reference
 
-  main0: '#5100CD',      // brand purple — unchanged
-  main1: '#D4FF00',      // brand lime — unchanged
+  main0: '#7B3FE4',      // brand purple — lightened for dark bg visibility
+  main1: '#D4FF00',      // brand lime — unchanged, pops on dark
 
-  // TODO: design review — dark purple variants
-  purple0: '#2A1A4E',    // was '#F5EDFF'
-  purple1: '#3B2566',    // was '#F1E9FD'
-  purple2: '#4C3080',    // was '#EDE4FB'
-  purple3: '#5D3B99',    // was '#DBC8F6'
-  purple4: '#6E46B3',    // was '#C8ADF0'
+  purple0: '#1A1530',    // subtle purple tint background
+  purple1: '#211A3D',    // slightly more purple
+  purple2: '#2A2049',    // medium purple surface
+  purple3: '#3D2E6B',    // active/hover purple surface
+  purple4: '#5A3FA0',    // strong purple accent (borders, highlights)
 
-  // TODO: design review — dark neutrals
-  dark0: '#FFFFFF1A',    // was '#1414211A'
-  dark1: '#2A2A3D',      // was '#1D1D2A'
-  dark2: '#1F1F31',      // was '#1F1F31' (same)
-  dark3: '#0A0A14',      // was '#000000'
+  dark0: '#F0EBF71A',   // translucent text overlay
+  dark1: '#252438',      // subtle dark step
+  dark2: '#1C1B2E',      // matches foreground
+  dark3: '#080811',      // true dark
 
-  light0: '#FFFFFF0D',   // was '#F9F4FF4D'
-  light1: '#FFFFFF1A',   // was '#F9F4FF80'
+  light0: '#F0EBF70D',  // very subtle light overlay
+  light1: '#F0EBF71A',  // light overlay
 
-  info: '#5100CD',       // unchanged
-  success: '#36D846',    // unchanged
-  warning: '#FBAE18',    // unchanged
-  error: '#DE3668',      // unchanged
-  disabled: '#81818F',   // unchanged
-  disabled2: '#FFFFFF20', // unchanged
+  info: '#7B3FE4',       // matches lightened brand purple
+  success: '#3DE64E',    // slightly brighter green for dark
+  warning: '#FFC040',    // slightly brighter amber
+  error: '#F04878',      // slightly brighter red-pink
+  disabled: '#555566',   // muted gray for dark
+  disabled2: '#FFFFFF15', // slightly less visible on dark
 
-  background: '#141421',          // TODO: design review — dark background (was '#F9F4FF')
-  contentBackground: '#1A1A2E',   // TODO: design review — dark content background (was '#F9F4FF')
-  foreground: '#1F1F31',          // TODO: design review — dark foreground (was '#F9F4FF')
-  text: '#FFFFFF',                // TODO: design review — white text on dark (was '#141421')
+  background: '#0F0E1A',          // deep purple-black
+  contentBackground: '#161525',   // slightly lifted from background
+  foreground: '#1C1B2E',          // elevated surfaces
+  text: '#F0EBF7',                // warm off-white with purple tint
 }
 
 const gradient: ThemeGradient = {
@@ -89,10 +87,10 @@ const gradient: ThemeGradient = {
     fn: 'linear-gradient(90deg, #141421 8.24%, #5100CD 71.81%)',
   },
   main1: {
-    colors: ['#D6FF00', '#F5F7DB'],
+    colors: ['#D6FF00', '#8AAD00'],
     stops: [27.88, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #D6FF00 27.88%, #F5F7DB 100%)',
+    fn: 'linear-gradient(90deg, #D6FF00 27.88%, #8AAD00 100%)',
   },
   extra0: {
     colors: ['#D6FF0066', '#D2CCFB66'],
@@ -101,10 +99,10 @@ const gradient: ThemeGradient = {
     fn: 'linear-gradient(121deg, #D6FF0066 19.1%, #D2CCFB66 106.92%)',
   },
   info: {
-    colors: ['#C8ADF0', '#5100CD'],
+    colors: ['#5A3FA0', '#7B3FE4'],
     stops: [22.66, 244.27],
     deg: 90,
-    fn: 'linear-gradient(90deg, #C8ADF0 22.66%, #5100CD 244.27%)',
+    fn: 'linear-gradient(90deg, #5A3FA0 22.66%, #7B3FE4 244.27%)',
   },
   success: {
     colors: ['#36D846', '#63E570'],
@@ -125,53 +123,51 @@ const gradient: ThemeGradient = {
     fn: 'linear-gradient(90deg, #FFAC89 0%, #DE3668 90.62%)',
   },
   disabled: {
-    colors: ['#81818F1A', '#81818F0A'],
+    colors: ['#55556633', '#55556615'],
     stops: [0, 90.62],
     deg: 90,
-    fn: 'linear-gradient(90deg, #81818F1A 0%, #81818F0A 90.62%)',
+    fn: 'linear-gradient(90deg, #55556633 0%, #55556615 90.62%)',
   },
-
-  // TODO: design review — semi-transparent gradients may need opacity adjustments for dark mode
   info2: {
-    colors: ['#C8ADF01A', '#5100CD1A'],
+    colors: ['#5A3FA033', '#7B3FE433'],
     stops: [22.66, 244.27],
     deg: 90,
-    fn: 'linear-gradient(90deg, #C8ADF01A 22.66%, #5100CD1A 244.27%)',
+    fn: 'linear-gradient(90deg, #5A3FA033 22.66%, #7B3FE433 244.27%)',
   },
   success2: {
-    colors: ['#36D8461A', '#63E5701A'],
+    colors: ['#3DE64E33', '#63E57033'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #36D8461A 0%, #63E5701A 100%)',
+    fn: 'linear-gradient(90deg, #3DE64E33 0%, #63E57033 100%)',
   },
   warning2: {
-    colors: ['#FFE8141A', '#FBAE181A'],
+    colors: ['#FFC04033', '#FBAE1833'],
     stops: [0, 100],
     deg: 90,
-    fn: 'linear-gradient(90deg, #FFE8141A 0%, #FBAE181A 100%)',
+    fn: 'linear-gradient(90deg, #FFC04033 0%, #FBAE1833 100%)',
   },
   error2: {
-    colors: ['#FFAC891A', '#DE36681A'],
+    colors: ['#F0487833', '#DE366833'],
     stops: [0, 90.62],
     deg: 90,
-    fn: 'linear-gradient(90deg, #FFAC891A 0%, #DE36681A 90.62%)',
+    fn: 'linear-gradient(90deg, #F0487833 0%, #DE366833 90.62%)',
   },
 }
 
 const shadows = {
-  purple0: '0px 4px 24px #5100cd40', // TODO: design review — more visible on dark
-  purple1: '0px 4px 24px #5100cd80',
-  purple2: '0px 4px 4px #5100cd40',
+  purple0: '0px 4px 24px #7B3FE433',
+  purple1: '0px 4px 24px #7B3FE466',
+  purple2: '0px 4px 4px #7B3FE433',
 }
 
 const storybook: ThemeStorybookConfig = {
   color: {
-    primary: '#5100CD',
+    primary: '#7B3FE4',
     secondary: '#D4FF00',
-    background: '#141421',
-    contentBackground: '#1A1A2E',
-    foreground: '#1F1F31',
-    text: '#FFFFFF',
+    background: '#0F0E1A',
+    contentBackground: '#161525',
+    foreground: '#1C1B2E',
+    text: '#F0EBF7',
   },
 }
 
@@ -632,7 +628,7 @@ const errorFunctionalButton: ThemeButtonSchemaVariant = {
   },
   background: {
     ...defaultButton.background,
-    default: '#1F1F31', // TODO: design review — was '#FAF6FF' in light
+    default: '#1C1B2E',
   },
   outline: {
     ...defaultButton.outline,
@@ -784,14 +780,14 @@ const tag: ThemeTag = {
       color: {
         text: color.text,
         background: color.purple3,
-        border: '#3B2566', // TODO: design review — was '#EBDAFF' in light
+        border: '#2A2049',
       },
     },
     accent: {
       color: {
         text: color.white,
         background: color.main0,
-        border: '#3B2566', // TODO: design review — was '#EBDAFF' in light
+        border: '#2A2049',
       },
     },
   },
@@ -921,7 +917,7 @@ const walletPicker: ThemeWalletPicker = {
     disabled: color.text,
     rewards: color.main0,
   },
-  background: '#FFFFFF0A', // TODO: design review — slightly more visible on dark (was '#FFFFFF05')
+  background: '#F0EBF70A',
   shadow: shadows.purple0,
   border: {
     size: pxToRem(3),
