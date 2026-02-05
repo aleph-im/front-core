@@ -325,3 +325,12 @@ NestedExactFalsePath.args = {
 NestedExactFalsePath.parameters = {
   controls: { exclude: ['color', 'size'] },
 }
+
+export const OnlyTextLogo = Template.bind({})
+OnlyTextLogo.args = {
+  ...defaultArgs,
+  onlyTextLogo: 'MyApp',
+}
+OnlyTextLogo.parameters = {
+  controls: { exclude: ['color', 'size'] },
+}

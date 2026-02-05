@@ -11,6 +11,7 @@ export default {
   argTypes: {
     size: { control: 'text' },
     text: { control: 'text' },
+    onlyTextLogo: { control: 'text' },
   },
 }
 
@@ -83,5 +84,30 @@ WithLink.args = {
   href: 'https://twentysix.cloud',
 }
 WithLink.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const OnlyTextLogo = Template.bind({})
+OnlyTextLogo.args = {
+  ...defaultArgs,
+  onlyTextLogo: 'MyApp',
+  size: '2rem',
+}
+OnlyTextLogo.parameters = {
+  ...defaultParams,
+}
+
+// ---
+
+export const OnlyTextLogoWithLink = Template.bind({})
+OnlyTextLogoWithLink.args = {
+  ...defaultArgs,
+  onlyTextLogo: 'MyApp',
+  size: '2rem',
+  href: '/',
+}
+OnlyTextLogoWithLink.parameters = {
   ...defaultParams,
 }

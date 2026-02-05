@@ -5,6 +5,7 @@ import {
   StyledContainer2,
   StyledLogoContainer,
   StyledText,
+  StyledTextLogoOnly,
 } from './styles'
 import { LogoProps } from './types'
 import logos from './img'
@@ -21,6 +22,7 @@ export const Logo = ({
   target = '_blank',
   href,
   size,
+  onlyTextLogo,
   ...rest
 }: LogoProps) => {
   const theme = useTheme()
@@ -32,9 +34,17 @@ export const Logo = ({
   const logoColor = logoGradient || theme.color[color] || color
   const logoBgColor = theme.color[bgColor] || bgColor
   text = typeof text === 'boolean' ? text && logo.text : text || logo.text
-  byAleph = byAleph && !!text
+  byAleph = byAleph && !!text && !onlyTextLogo
 
-  const linkContent = (
+  const textLogoColor = onlyTextLogo ? 'main0' : color
+
+  const linkContent = onlyTextLogo ? (
+    <StyledContainer2>
+      <StyledTextLogoOnly type="logo" color={textLogoColor}>
+        {onlyTextLogo}
+      </StyledTextLogoOnly>
+    </StyledContainer2>
+  ) : (
     <StyledContainer2>
       <LogoSvg color={logoColor} bgColor={logoBgColor} />
       {text && (
@@ -46,7 +56,7 @@ export const Logo = ({
   )
 
   return (
-    <StyledLogoContainer {...{ size, text, ...rest }}>
+    <StyledLogoContainer {...{ size, text, onlyTextLogo, ...rest }}>
       {href ? (
         <Link
           href={href}

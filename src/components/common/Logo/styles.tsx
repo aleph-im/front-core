@@ -48,6 +48,16 @@ export const StyledText = styled(TextGradient)`
   }
 `
 
+export const StyledTextLogoOnly = styled(TextGradient)`
+  && {
+    ${getTypoCss('logo')};
+    ${tw`my-0 -mt-1.5 pr-0.5 italic`}
+    font-size: 1.1em;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+`
+
 export type StyledByAlephProps = {
   $color: string
 }

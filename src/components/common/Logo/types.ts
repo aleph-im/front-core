@@ -10,11 +10,13 @@ export type LogoProps = {
   Link?: LinkComponent
   href?: string
   target?: string
+  onlyTextLogo?: string
 }
 
 export type StyledLogoProps = {
   size?: number | string
   text?: boolean | string
+  onlyTextLogo?: string
 }
 
 export type StyledLogoSvgProps = {
